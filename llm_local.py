@@ -91,6 +91,59 @@ def is_gguf(path):
         return False
 
 
+MODEL_TURN = '<|turn>model\n'
+EMPTY_THOUGHT = '<|channel>thought\n<channel|>'     # how the published 26B A4B is told to answer without thinking
+
+
+def gguf_chat_template(path, limit=64 * 2**20):
+    """The chat template stored in a GGUF file's metadata (tokenizer.chat_template), or None. Reads only the header."""
+    import struct
+    sizes = {0: 1, 1: 1, 2: 2, 3: 2, 4: 4, 5: 4, 6: 4, 7: 1, 10: 8, 11: 8, 12: 8}
+    try:
+        with open(path, 'rb') as f:
+            if f.read(4) != b'GGUF':
+                return None
+            _, _, n_kv = struct.unpack('<IQQ', f.read(20))
+
+            def string():
+                n, = struct.unpack('<Q', f.read(8))
+                if n > limit:
+                    raise ValueError('string too long')
+                return f.read(n).decode('utf-8', 'replace')
+            for _ in range(n_kv):
+                key = string()
+                kind, = struct.unpack('<I', f.read(4))
+                if kind == 8:
+                    value = string()
+                    if key == 'tokenizer.chat_template':
+                        return value
+                elif kind == 9:
+                    item, n = struct.unpack('<IQ', f.read(12))
+                    if item == 8:
+                        for _ in range(n):
+                            string()
+                    else:
+                        f.seek(sizes[item] * n, 1)
+                else:
+                    f.seek(sizes[kind], 1)
+                if f.tell() > limit:
+                    return None
+    except (OSError, ValueError, KeyError, struct.error):
+        return None
+    return None
+
+
+def answer_start(path):
+    """Fork: what starts the model's answer with thinking off, as the file's own chat template does it. Gemma 4 E2B and E4B open
+    the turn with '<|turn>model\\n' alone; given an empty thought channel there, E4B writes its reasoning out as plain text
+    ("Here's a thinking process…"), which then shows in Chat. The empty channel is kept only where the template has it."""
+    t = gguf_chat_template(path)
+    if not t or 'add_generation_prompt' not in t:
+        return MODEL_TURN
+    tail = t[t.rindex('add_generation_prompt'):]
+    return MODEL_TURN + EMPTY_THOUGHT if '<channel|>' in tail else MODEL_TURN
+
+
 def custom_path(saved=None):
     """The person's own model file: LASTBOOK_MODEL_FILE, else the one chosen in setup (state.json custom_model), else None."""
     env = os.environ.get('LASTBOOK_MODEL_FILE')
@@ -141,6 +194,7 @@ class Local:
         self.state, self.pct, self.message = 'absent', None, ''
         self.path, self.fit, self.ready_info = None, None, None
         self.custom = False                    # fork: the active file is the person's own (custom_path), not the published one
+        self.answer_start = MODEL_TURN + EMPTY_THOUGHT     # fork: from the file's own chat template when it is the person's own
         self.proc, self.events, self.last_used = None, None, 0
         self.next_id = 0
         self.failed_loads = 0     # loads in a row that ended before the model was ready
@@ -204,9 +258,12 @@ class Local:
                     self.message = f'Your model file {cp.name}: {why}'
                     return
                 self.path, self.custom = cp, True
+                self.answer_start = answer_start(cp)
+            print('local AI: your own model file; its answers start with', json.dumps(self.answer_start), flush=True)
             self._measure()
             return
         self.custom = False
+        self.answer_start = MODEL_TURN + EMPTY_THOUGHT
         found, wrong = None, None
         for folder in places():
             p = folder / FILE
@@ -596,7 +653,7 @@ def declaration(tool):
     return s + '}'
 
 
-def render(msgs, tools):
+def render(msgs, tools, start=None):
     """OpenAI-shaped messages to Gemma 4 segments, as the model's chat template lays them out, with thinking off.
     System messages before the model's first reply in this turn go together at the top, as the evaluation gave them:
     instructions, then the sources, then the question."""
@@ -658,7 +715,7 @@ def render(msgs, tools):
         open_model = False
         i += 1
     if not open_model:
-        seg.append(['<|turn>model\n<|channel>thought\n<channel|>', True])
+        seg.append([start or LOCAL.answer_start, True])     # fork: the active file's own way to start an answer without thinking
     return seg
 
 

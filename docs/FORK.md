@@ -53,6 +53,11 @@ Library and local AI. You can also set `LASTBOOK_MODEL_FILE=/path/to/model.gguf`
   format (`llm_local.py`). Other model families will load but answer badly or not at all.
 - What is checked: the file exists, ends in `.gguf` and starts with the GGUF signature. There is no published SHA-256
   for your own file, so its contents are not checked. Get it from a source you trust.
+- **Thinking off, the file's own way.** Lastbook asks Gemma 4 to answer without thinking. The published 26B A4B gets an
+  empty thought block after `<|turn>model\n`, as upstream tested. A file of your own instead gets whatever its built-in
+  chat template (`tokenizer.chat_template` in the GGUF) puts there. For E2B and E4B that's `<|turn>model\n` alone. With the
+  empty thought block, E4B writes its reasoning out as plain text ("Here's a thinking process…") and Chat shows it
+  (`llm_local.answer_start`). The log says which one is used: `local AI: your own model file; its answers start with …`.
 - llama.cpp still measures whether it fits (`lastbook-llm --measure`), and the memory estimate uses your file's real
   size (`llm_local.judge(fit, model_bytes)`).
 - Where it is saved: `custom_model` in `LastbookData/derived/llm/state.json`. A file chosen during first-run setup waits

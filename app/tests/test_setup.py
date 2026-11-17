@@ -1633,6 +1633,46 @@ class ForkLocalAI(unittest.TestCase):
         self.assertEqual(st['file'], good.name)
         self.assertEqual(st['size'], good.stat().st_size)
 
+    def gguf_with_template(self, name, template):
+        """A GGUF header with a few metadata keys of different kinds, the chat template among them."""
+        import struct
+        s = lambda t: struct.pack('<Q', len(t.encode())) + t.encode()
+        kv = [s('general.name') + struct.pack('<I', 8) + s('test'),
+              s('general.file_type') + struct.pack('<I', 4) + struct.pack('<I', 15),
+              s('tokenizer.ggml.tokens') + struct.pack('<IIQ', 9, 8, 2) + s('<pad>') + s('<bos>'),
+              s('tokenizer.ggml.scores') + struct.pack('<IIQ', 9, 6, 2) + struct.pack('<ff', 0, 0)]
+        if template is not None:
+            kv.append(s('tokenizer.chat_template') + struct.pack('<I', 8) + s(template))
+        p = self.tmp / name
+        p.write_bytes(b'GGUF' + struct.pack('<IQQ', 3, 0, len(kv)) + b''.join(kv))
+        return p
+
+    def test_answer_start_follows_the_files_template(self):
+        L = self.L
+        e4b = ("{%- if add_generation_prompt -%}{%- if ns.prev_message_type != 'tool_response' -%}{{- '<|turn>model\\n' -}}"
+               "{%- elif enable_thinking -%}{{- '<|channel>thought\\n' -}}{%- endif -%}{%- endif -%}")
+        big = "{%- if add_generation_prompt -%}{{- '<|turn>model\\n<|channel>thought\\n<channel|>' -}}{%- endif -%}"
+        self.assertEqual(L.gguf_chat_template(self.gguf_with_template('a.gguf', e4b)), e4b)
+        self.assertEqual(L.answer_start(self.gguf_with_template('e4b.gguf', e4b)), '<|turn>model\n')
+        self.assertEqual(L.answer_start(self.gguf_with_template('big.gguf', big)), '<|turn>model\n<|channel>thought\n<channel|>')
+        self.assertEqual(L.answer_start(self.gguf_with_template('none.gguf', None)), '<|turn>model\n')
+        bad = self.tmp / 'bad.gguf'
+        bad.write_bytes(b'GGUF' + b'\xff' * 30)
+        self.assertEqual(L.answer_start(bad), '<|turn>model\n')
+
+    def test_render_ends_with_the_active_files_start(self):
+        L = self.L
+        msgs = [{'role': 'system', 'content': 's'}, {'role': 'user', 'content': 'q'}]
+        self.assertEqual(L.render(msgs, [], start='<|turn>model\n')[-1][0], '<|turn>model\n')
+        self.assertEqual(L.render(msgs, [])[-1][0], L.LOCAL.answer_start)
+        local = L.Local()
+        self.assertEqual(local.answer_start, '<|turn>model\n<|channel>thought\n<channel|>')     # the published file: as upstream
+        good = self.gguf_with_template('mine.gguf', "{%- if add_generation_prompt -%}{{- '<|turn>model\\n' -}}{%- endif -%}")
+        local.saved, local.runner = {'custom_model': str(good)}, Path(sys.executable)
+        with mock.patch.object(L.Local, '_measure', lambda self: None), mock.patch.dict(os.environ, {'LASTBOOK_MODEL_FILE': ''}):
+            local.discover()
+        self.assertEqual(local.answer_start, '<|turn>model\n')
+
     def test_judge_counts_the_file_it_runs(self):
         fit = {'status': 'fits', 'ram_total': 64 * 2 ** 30, 'device_bytes': 0, 'host_bytes': 2 ** 30, 'memory': []}
         with mock.patch.object(sys, 'platform', 'win32'):     # the mapped file is counted where memory is not shared
