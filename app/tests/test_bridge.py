@@ -771,6 +771,22 @@ class AssistantStaysHere(unittest.TestCase):
         self.assertEqual(assistant.MODEL_URL, 'http://127.0.0.1:9/v1/chat/completions')
 
 
+class ForkSearchWords(unittest.TestCase):
+    """fork: making fire and making water safe searched in the manuals' words (server.PHRASES); docs/FORK.md 3h."""
+
+    def test_making_fire_is_tinder_and_kindling(self):
+        for q in ('i need to start a fire but i have no matches and no gas', 'how do i light a campfire', 'make fire'):
+            self.assertIn(['tinder', 'kindling', 'firecraft'], server.query_groups(q)[1], q)
+        for q in ('there is a building fire next door', 'the fire started in the kitchen', 'how do i put out a fire'):
+            self.assertNotIn(['tinder', 'kindling', 'firecraft'], server.query_groups(q)[1], q)
+
+    def test_making_water_safe_is_disinfecting(self):
+        for q in ('how do i purify water from a creek', 'how do i make the water safe', 'treat water with bleach'):
+            self.assertIn(['water'], server.query_groups(q)[1], q)
+            self.assertTrue(any('disinfect' in g for g in server.query_groups(q)[1]), q)
+        self.assertFalse(any('disinfect' in g for g in server.query_groups('how do i make it safe to go back inside')[1]))
+
+
 class NothingGoesOut(unittest.TestCase):
     """The shells cannot run here on both systems, so what must be gone from them is checked in their source."""
 

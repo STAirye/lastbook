@@ -238,6 +238,73 @@ The three additions, all for your own file only:
 3e's pattern now matches the catalogue's known titles first, with an optional page or time, so titles holding parentheses
 are handled.
 
+### 3h. Keyword search misses everyday wording (upstream)
+
+Found by hand: "i need to start a fire but i have no matches and no gas" was answered with "the library does not contain
+detailed instructions", and "that looks like a... concerning oversight" got an apology. Four manuals in the library cover
+it: ATP 3-50.21 (p. 121–129), FM 21-76 (p. 66–70) and the USMC Summer and Winter handbooks (p. 34–36).
+
+- **Not the model, and not the fork's changes:** the first search (`assistant.hybrid`) returned one useful page. The others
+  were about fireplaces in earthquakes, wind turbines and trail steps. The desktop app searches by keyword only, and every
+  word is required. Fire-*safety* pages mention start, fire, matches and gas, so they win; the survival manuals say
+  tinder, kindling, ignition. Reproduce with `/api/retrieve?q=…`.
+- **Tried and dropped:**
+  - A guard that sent "not found in the library" answers back once to search again: 2 of 8 answers named a method,
+    against 3 of 8 without it. E4B ignored the nudge or searched with poor words.
+  - Searching without the things the person lacks ("no matches", "ran out of formula"): 99 → 88 useful hits on 16
+    prompts. It broke "ran out of baby formula" (7 → 0) and "ran out of insulin" (5 → 1), where the lacked thing is the
+    topic, and didn't help the fire question, because the pages with every word are the fire-safety ones.
+- **Fix (`server.PHRASES`, upstream's own mechanism for everyday wording):**
+  - "start / make / light / build a (camp)fire" searches as fire AND (tinder OR kindling OR firecraft). Not "building
+    fire", which is a building on fire. "ignition" was tried too: it brought welding and hazmat pages back.
+  - "make / keep the water safe", "purify water", "treat water" search as water AND (disinfect OR purify OR treatment OR
+    chlorine). Not "make it safe", which can be about anything.
+- **Measured** with `tools/fork_search_check.py`: 20 everyday prompts, most saying what the person lacks, plus controls
+  (a building fire, a kitchen fire, "no pulse", "no running water"). It counts the top 8 hits whose title or excerpt has a
+  word a useful page would have, before (the committed code, served from a worktree) and after. **109 → 121 of 160**:
+  fire without matches 2 → 7, light a campfire 2 → 8, purify creek water 6 → 7, and every other prompt is unchanged,
+  controls included.
+- **End to end with E4B:** the fire question plus "concerning oversight", 4 runs: 3 of 8 → 6 of 8 answers naming a method
+  with citations (7 of 8 counting one that wrote "Bow & Drill"; the eighth asked what was missing). All four first answers
+  name flint and steel, bow drill or hand drill, with 12–24 keys. The 10-turn test (3g) stays at 20 of 20. Eight single
+  questions (campfire, creek water, no fuel, cooking without power, baby formula, building fire, kitchen fire, no pulse)
+  are all cited and on topic.
+
+This is a change to search, so it applies to every model, the published 26B too. `test_bridge.ForkSearchWords` covers
+the phrases and the controls.
+
+### 3i. Questions in Spanish (and other languages)
+
+Gemma 4 reads and writes Spanish, but the library is in English, and so is its keyword search: "¿cómo purifico agua de un
+estero?" searched as typed finds Spanish FEMA leaflets ("Prepárese", "Ciclones Tropicales") and nothing about purifying
+water. The model's own searches were in Spanish too ("primeros auxilios torniquete") and found the same leaflets.
+
+- **English search words first** (`assistant.english_query`). When a question looks non-English (`needs_english`: words
+  with letters beyond a–z, like ñ, á or 水, and common Spanish, Portuguese and French words outweigh English function
+  words; text is composed (NFC) first, since a phone or Mac may send "niño" as n plus a combining tilde), the local model
+  writes the question as English search words: one short call, thinking off, at most 32 tokens. The first search uses
+  those, falling back to the original wording if they find nothing. For a follow-up, the earlier question goes along so
+  "¿y si el agua está turbia?" becomes "chlorine dosage turbid water", and the joined search (3g) uses the earlier
+  question's English words. English questions skip all of this.
+- The search runs before the model starts. For a non-English question the model now starts first, since it's needed for
+  the answer anyway. Only for your own file (like 3g); off with `LASTBOOK_AI_ENGLISH_SEARCH=0`.
+- **The answer** gets one note: the library was searched in English with these words, search again in English, answer
+  in the question's language. Asking it also to keep the three special headings in English ("Not found in the library:"…)
+  made E4B write its other headings in English too ("Direct Answer"), so that was dropped. Instead `web/chat.js` also
+  knows the headings in Spanish ("No encontrado en la biblioteca", "Las fuentes no coinciden", "Mi propio razonamiento"),
+  only as headings, and starts a sentence at ¿, ¡ and capitals like É or Ñ when it marks uncited sentences.
+- **Measured** with E4B on 8 Spanish questions (fire without matches, creek water, tourniquet, fridge after a 2-day
+  outage, scald, gas leak after an earthquake, bleach for 20 litres, then "¿y si el agua está turbia?"): **8 of 8** answers
+  cited and on topic (survival manuals' fire pages, WHO water notes, tourniquet guides), against **5 of 8** with
+  `LASTBOOK_AI_ENGLISH_SEARCH=0`, whose cited pages were mostly the generic Spanish leaflets. All 16 answers were in
+  Spanish. About 2–3 s more per question (mean 12.6 s against 10.0 s).
+- **Not fixed:** the Spanish documents in the library are no longer what the first search finds for Spanish questions
+  (they rarely answered them). "estero" was rendered "estuarine" (in Chile it's a creek); the results were still right.
+  And see Open: one answer misread a dose table.
+
+`ForkLocalAI.test_english_search_for_other_languages` and `test_chat_steps.SpanishAnswers` cover it, with ñ, ü, ¿, ¡,
+accented capitals and decomposed letters.
+
 ## 4. Running from source on Windows
 
 Running from source needs two things from an upstream release, copied in (both folders are ignored by git):
@@ -258,7 +325,8 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_AI_REUSE=1` | With an older runner, skip the workaround and let it reuse context (upstream's behaviour; see 3d). The fork's runner checks the window itself |
 | `LASTBOOK_AI_REKEY=0` | Send earlier answers' citations as the browser wrote them, "(Title, p. N)", and don't repair the answer's citations (3e, 3g) |
 | `LASTBOOK_AI_FOLLOWUP=0` | Search only the latest message, with no pages carried over from the previous answer (3g) |
-| `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:` |
+| `LASTBOOK_AI_ENGLISH_SEARCH=0` | Search a non-English question as typed, without the model's English search words (3i) |
+| `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
 log says `local AI: your own model file; it thinks (hidden) before answering`.
@@ -276,8 +344,11 @@ then POST `{"messages": [...]}` to `/api/chat`. It answers as server-sent events
 Run the suite from [CONTRIBUTING.md](../CONTRIBUTING.md). The fork's own cases are in `app/tests/test_setup.py`:
 `ForkNoMaps` (no state step, thinning the map), `ForkCustomModel` (choosing, saving and clearing your own file) and
 `ForkLocalAI` (template reading, answer start, thinking, hiding thinking, clearing context unless the runner checks the
-window, history citations rekeyed, answer citations repaired, follow-up hits and carried-over pages, memory estimate). The
+window, history citations rekeyed, answer citations repaired, follow-up hits and carried-over pages, memory estimate,
+English search words for other languages). `app/tests/test_chat_steps.py` has `SpanishAnswers` (3i). The
 model-level stress test is `tools/fork_chat_test.py` (3g), which needs the model and a test server.
+`app/tests/test_bridge.py` has `ForkSearchWords` (3h). `tools/fork_search_check.py` compares the first search on 20
+everyday prompts between two servers (3h); it needs no model.
 
 ## Open
 
@@ -287,10 +358,22 @@ model-level stress test is `tools/fork_chat_test.py` (3g), which needs the model
   `build_llm_windows.sh` (and the Mac and Linux scripts, not yet rebuilt). It's also a candidate pull request upstream.
 - 3g was measured on one topic (stored water), 2 conversations per arm. Other topics, video citations (carry-over handles
   PDF pages only), and the published 26B with these changes (they're off for it) haven't been measured.
+- **Search in the desktop app is keyword-only** (upstream's design: `test_bridge` checks no embedding model is loaded). Its
+  vocabulary gaps (3h) are where it fails. The fork adds two phrases; more gaps surely exist. "he has no pulse" got a thin
+  answer that points to a "No Heartbeat" section without the steps, the same before and after 3h.
+- "we have no fuel to boil water, how else can i make it safe" still finds nothing useful in the first search (0 of 8);
+  the model searches again and answers well (bleach, cited).
 - The follow-up search and carry-over add a little prompt (up to 3 full pages). On a slower computer that's slower reading.
 - Thinking makes answers slower than thinking off. On a slower computer, `LASTBOOK_AI_THINK=0` trades citation reliability
   in follow-ups for speed.
 - Showing the hidden thinking in a collapsible section of the answer (as Chat's "How it searched" does) was suggested; not
   built.
+- **A misread dose table (3i run, not caused by 3i).** Asked "¿cuánto cloro le echo a 20 litros de agua?", E4B answered
+  5 teaspoons of 5% bleach, citing Hesperian's "Water and Sanitation" p. 23 and "Protecting Community Water" p. 36. Those
+  pages say **1/2 teaspoon for 20 litres** and 5 teaspoons for a 200-litre barrel; the PDF text interleaves the table's
+  rows, and the model took the wrong one: ten times the dose. A check for numbers that don't appear next to the same unit
+  in the cited text could catch some of this.
+- 3i was measured once per arm on 8 questions. Portuguese and French are detected but not measured. The UI itself is
+  still English (upstream issue #54).
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
   country from an OpenStreetMap extract, using `tools/build_map.py`, would be a separate piece of work.

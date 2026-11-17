@@ -318,6 +318,12 @@ PHRASES = [  # everyday phrases -> one idea, checked before single words
     (r"(passed|blacked) out|fainted", ['unconscious', 'fainting', 'unresponsive']),
     (r"food (went|gone|is) bad|spoiled food", ['spoilage', 'food safety']),
     (r"can'?t breathe|not breathing|stopped breathing", ['breathing', 'resuscitation', 'airway']),
+    # fork: the manuals teach making fire as tinder, kindling and ignition. "start a fire" alone ranks fire-safety pages
+    # first, and "no matches and no gas" pulls them further up, because those pages warn about matches and gas.
+    # Not "building fire", which is a building on fire.
+    (r"\b(start|make|light|build|starting|making|lighting)( up)?( a| the| my| our)? ?(camp)?fire\b", [['fire', 'fires'], ['tinder', 'kindling', 'firecraft']]),
+    # fork: "make the water safe" in the manuals' words.
+    (r"\b(make|making|get|keep)( the| my| our)? water (safe|drinkable|potable)|purify (the )?water|treat (the )?water", [['water'], ['disinfect', 'disinfection', 'purify', 'purification', 'treatment', 'chlorine']]),
 ]
 
 

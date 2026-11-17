@@ -4,7 +4,7 @@ Used by server.py (/api/retrieve, /api/chat, /api/assistant/status). The model i
 MODEL_URL; clients never see it. Tools can read the public survival library (catalog ids, pages, transcripts, map
 gazetteer) and nothing else: no file paths, URLs or shell input are accepted from the model.
 """
-import base64, json, re, socket, sqlite3, threading, time, urllib.error, urllib.request
+import base64, json, re, socket, sqlite3, threading, time, unicodedata, urllib.error, urllib.request
 import retrieval
 from engine.paths import ro_uri
 
@@ -310,6 +310,71 @@ def followup_hits(own, joined, k=8, first=5):
     for h in own[first:]:
         put(h)
     return out
+
+
+# fork: a question in another language. The library and its keyword search are English ("hervir agua" finds nothing), so the
+# person's own model first writes the question as English search words, and the first search uses those. Only for questions
+# that look non-English: an English one costs nothing extra. Off with LASTBOOK_AI_ENGLISH_SEARCH=0.
+ENGLISH_WORDS = set('the an of to and in is are be for on with as by or that this it from at not can if your you use when should '
+                    'may will have has which all but does how what why where who i my we our need get make without there they '
+                    'she was were been am its into out about after before help'.split())
+OTHER_WORDS = set((  # common Spanish, Portuguese and French words that are not also English words
+    'el la los las del al en y que es un una unos unas por para con sin pero como cómo qué cuál dónde cuándo porque muy '
+    'mi mis tu su sus se lo le les nos yo tú él ella ellos está están estoy tengo tiene necesito puedo hago hacer '
+    'debo si sí este esta esto ese esa eso cuando hasta desde sobre entre también agua fuego niño niña bebé '
+    'não um uma com isso isto você eu tem preciso fazer água '
+    'le les des du et est avec pas je comment pourquoi où vous nous eau').split())
+REWRITE = ("You turn a question into English search words for a library of English manuals. Reply with one line: the "
+           "question's key things in plain English, at most 8 words. No quotes, no explanation. If an earlier question is "
+           "given, use it only to understand what the latest question refers to.")
+REWRITE_TOKENS = 32
+# Asking for the three special headings in English made E4B write its other headings in English too ("Direct Answer"), so
+# it isn't asked: web/chat.js also knows them in Spanish.
+LANGUAGE_NOTE = ('The latest question is not in English. The library is in English and was searched with: {english}. '
+                 'If you call search_library, write the query in English. Answer in the language of the question.')
+_ENGLISH = {}       # question -> its English search words, so a follow-up's joined search can use the earlier one's
+
+
+def needs_english(q):
+    """fork: does this question look like it is not in English? Words with letters beyond a-z (ñ, á, 水) and common words of
+    other languages count against English function words. Composed first: a phone or Mac may send "niño" as n + a combining
+    tilde, which would otherwise split into the plain-letter words "nin" and "o"."""
+    words = re.findall(r'[^\W\d_]+', unicodedata.normalize('NFC', q or '').lower())
+    other = sum(1 for w in words if w in OTHER_WORDS or not w.isascii())
+    return other > sum(1 for w in words if w in ENGLISH_WORDS)
+
+
+def english_words(text):
+    """fork: the first line of what the model wrote, as search words, or None when it is empty or still not English."""
+    import llm_local
+    text = re.sub(r'<\|?[a-z_]+\|?>', ' ', llm_local.hide_thinking(text or ''))
+    line = next((l.strip() for l in text.splitlines() if l.strip()), '')
+    line = re.sub(r'^(english|search( words)?|query|keywords?)\s*:\s*', '', line, flags=re.I).strip(' "\'“”.*`')[:120]
+    return line if line and not needs_english(line) else None
+
+
+def english_query(question, earlier, cancelled):
+    """fork: English search words for a non-English question from the running local model, thinking off; None if it fails."""
+    if question in _ENGLISH:
+        return _ENGLISH[question]
+    import llm_local
+    ask = (f'Earlier question: {earlier[:300]}\n' if earlier else '') + f'Latest question: {question[:300]}'
+    segs = llm_local.render([{'role': 'system', 'content': REWRITE}, {'role': 'user', 'content': ask}], None, think=False)
+    out = ['']
+    try:
+        done = LOCAL.generate(segs, REWRITE_TOKENS, cancelled, lambda t: out.__setitem__(0, out[0] + t))
+    except RuntimeError:
+        return None
+    if done.get('reason') == 'cancel':
+        return None
+    words = english_words(out[0])
+    if os.environ.get('LASTBOOK_AI_DEBUG') == '1':
+        print('local AI english search:', json.dumps({'q': question[:200], 'raw': out[0][:300], 'words': words}, ensure_ascii=False), flush=True)
+    if words:
+        if len(_ENGLISH) > 64:
+            _ENGLISH.clear()
+        _ENGLISH[question] = words
+    return words
 
 
 KEYS_IN_PARENS = re.compile(r'\s?\(\s*([SM]\d+(?:\s*[,;]\s*[SM]\d+)*)\s*\)')
@@ -621,12 +686,46 @@ def chat(messages, about, emit, cancelled):
     question = next((m['content'] for m in reversed(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)), '')
     own_file = local_on() and getattr(LOCAL, 'custom', False)      # fork: the person's own Gemma 4 file
     fork_cites = own_file and os.environ.get('LASTBOOK_AI_REKEY') != '0'
+    answer, first_tok, tool_log, state = '', None, [], [None]
+
+    def set_state(s):
+        if s != state[0]:
+            state[0] = s
+            emit({'type': 'state', 'state': s})
+    shown = [None]
+
+    def loading(pct):   # how far the model has loaded, each time it changes
+        if pct != shown[0]:
+            shown[0] = pct
+            emit({'type': 'state', 'state': 'starting', 'pct': pct})
+
+    def start_model():
+        """Starts the local model; True when it is ready, else the browser has been told why not."""
+        set_state('starting')
+        why = LOCAL.ensure_running(loading, cancelled)
+        if why == 'stopped':
+            emit({'type': 'stopped'})
+        elif why:
+            emit({'type': 'error', 'error': 'model_unavailable', 'text': why})
+        return not why
+    english = None      # fork: the question's English search words (english_query), when it is in another language
     if question and not about:
-        hits = hybrid(question[:300], 8)
         asked = [m['content'] for m in messages if m.get('role') == 'user' and isinstance(m.get('content'), str)]
-        if own_file and len(asked) > 1 and os.environ.get('LASTBOOK_AI_FOLLOWUP') != '0':
+        earlier = asked[-2] if len(asked) > 1 else ''
+        if own_file and os.environ.get('LASTBOOK_AI_ENGLISH_SEARCH') != '0' and needs_english(question):
+            if not start_model():       # the model is needed for the answer anyway; here it is started before the search
+                return
+            set_state('searching')
+            english = english_query(question, earlier, cancelled)
+            if cancelled():
+                emit({'type': 'stopped'})
+                return
+        hits = (hybrid(english, 8) if english else []) or hybrid(question[:300], 8)
+        if own_file and earlier and os.environ.get('LASTBOOK_AI_FOLLOWUP') != '0':
+            before = _ENGLISH.get(earlier, '') if needs_english(earlier) else earlier[:200]
+            joined = (before + ' ' + english) if english else (earlier[:200] + ' ' + question)
             carried = cited_before(messages)      # up to 3, then this message's best 4, the joined search, the rest
-            hits = followup_hits(carried + hits, hybrid((asked[-2][:200] + ' ' + question)[:300], 8), first=len(carried) + 4)
+            hits = followup_hits(carried + hits, hybrid(joined.strip()[:300], 8), first=len(carried) + 4)
         if hits:
             blocks = []
             for n, h in enumerate(hits):
@@ -640,32 +739,16 @@ def chat(messages, about, emit, cancelled):
             msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages to check exact wording):\n\n' + '\n\n'.join(blocks)})
         else:
             msgs.append({'role': 'system', 'content': 'An initial library search for the latest question found nothing. Try other wording once; if still nothing, say the library does not cover it.'})
+        if english:
+            msgs.append({'role': 'system', 'content': LANGUAGE_NOTE.format(english=english)})
         emit({'type': 'found', 'count': len(hits)})
     if sess.sources:
         emit({'type': 'sources', 'sources': list(sess.sources.values())})
-    answer, first_tok, tool_log, state = '', None, [], [None]
-
-    def set_state(s):
-        if s != state[0]:
-            state[0] = s
-            emit({'type': 'state', 'state': s})
     local = local_on()
     tools = [t for t in TOOLS if t['function']['name'] != 'view_page'] if local else TOOLS   # the local model reads text only
     if local:
         msgs[0] = {'role': 'system', 'content': SYSTEM_TEXT_ONLY}
-        set_state('starting')
-        shown = [None]
-
-        def loading(pct):   # how far the model has loaded, each time it changes
-            if pct != shown[0]:
-                shown[0] = pct
-                emit({'type': 'state', 'state': 'starting', 'pct': pct})
-        why = LOCAL.ensure_running(loading, cancelled)
-        if why == 'stopped':
-            emit({'type': 'stopped'})
-            return
-        if why:
-            emit({'type': 'error', 'error': 'model_unavailable', 'text': why})
+        if not start_model():
             return
         fork_cites = getattr(LOCAL, 'custom', False) and os.environ.get('LASTBOOK_AI_REKEY') != '0'   # known for sure once running
         if fork_cites:

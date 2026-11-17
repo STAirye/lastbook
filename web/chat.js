@@ -288,19 +288,24 @@ const Chat = (() => {
     const close = () => { if (list) { out += `</${list}>`; list = null } };
     const mark = raw => {  // wrap sentences that carry no citation (main sections only)
       if (section !== 'main' || m.running) return inline(raw);
-      return raw.split(/(?<=[.!?])\s+(?=[A-Z(“"])/).map(sn => /\[[SM]\d+\]/.test(sn) || sn.replace(/\*|_/g, '').trim().length < 28 || /:$/.test(sn.trim()) ? inline(sn) : `<span class="uncited" title="Not linked to a source">${inline(sn)}</span>`).join(' ');
+      // fork: a sentence also starts at ¿, ¡ or a capital like É or Ñ
+      return raw.split(/(?<=[.!?])\s+(?=[\p{Lu}(“"¿¡])/u).map(sn => /\[[SM]\d+\]/.test(sn) || sn.replace(/\*|_/g, '').trim().length < 28 || /:$/.test(sn.trim()) ? inline(sn) : `<span class="uncited" title="Not linked to a source">${inline(sn)}</span>`).join(' ');
     };
     for (let ln of lines) {
       const t = ln.trim();
       if (!t) { close(); continue }
       const head = /^#{1,4}\s+(.*)$/.exec(t) || /^\*\*([^*]+:)\*\*$/.exec(t) || /^\*\*([^*]+)\*\*:?$/.exec(t);
       const hText = head ? head[1] : '';
-      const sec = /not found in the library/i.test(t) ? 'missing' : /sources disagree/i.test(t) ? 'disagree' : /own reasoning/i.test(t) ? 'reasoning' : null;
+      // fork: an answer in Spanish may translate these headings (assistant.LANGUAGE_NOTE asks it not to); only as a heading
+      const es = head ? (/\bbiblioteca\b/i.test(hText) && /(^|\s)(no|sin|falta\w*|fuera)\s/i.test(hText) ? 'missing'
+        : /fuentes (no coinciden|discrepan|difieren|en desacuerdo)|desacuerdo entre (las )?fuentes/i.test(hText) ? 'disagree'
+        : /propio razonamiento|razonamiento propio/i.test(hText) ? 'reasoning' : null) : null;
+      const sec = /not found in the library/i.test(t) ? 'missing' : /sources disagree/i.test(t) ? 'disagree' : /own reasoning/i.test(t) ? 'reasoning' : es;
       if (sec || head) {
         close();
         if (out.includes('<div class="sec-')) out += '</div>';
         section = sec || (head ? 'main' : section);
-        if (sec) { out += `<div class="sec-${sec}"><h4>${sec === 'missing' ? 'Not found in the library' : sec === 'disagree' ? 'Sources disagree' : 'The model’s own reasoning — not from the library'}</h4>`; const rest = t.replace(/^[#*\s]*(not found in the library|sources disagree|my own reasoning \(not from the library\)|my own reasoning)[:*\s]*/i, ''); if (rest) out += `<p>${inline(rest)}</p>`; continue }
+        if (sec) { out += `<div class="sec-${sec}"><h4>${sec === 'missing' ? 'Not found in the library' : sec === 'disagree' ? 'Sources disagree' : 'The model’s own reasoning — not from the library'}</h4>`; const rest = sec === es ? '' : t.replace(/^[#*\s]*(not found in the library|sources disagree|my own reasoning \(not from the library\)|my own reasoning)[:*\s]*/i, ''); if (rest) out += `<p>${inline(rest)}</p>`; continue }
         out += `<h4>${inline(hText.replace(/:$/, ''))}</h4>`; continue;
       }
       const ul = /^[-*•]\s+(.*)$/.exec(t), ol = /^(\d+)[.)]\s+(.*)$/.exec(t);

@@ -1774,6 +1774,56 @@ class ForkLocalAI(unittest.TestCase):
             for n in fresh:
                 sys.modules.pop(n, None)
 
+    def test_english_search_for_other_languages(self):
+        """A question in another language is searched with English words the model writes, thinking off; English questions,
+        and words with an accent inside an English question, are searched as they are."""
+        fresh = [n for n in ('assistant', 'retrieval') if n not in sys.modules]
+        try:
+            import assistant
+            ne = assistant.needs_english
+            for q in ('¿cómo hiervo agua?', 'necesito hacer fuego sin fósforos', 'mi bebé tiene fiebre', 'qué es la RCP',
+                      'como purificar água', 'comment purifier l\'eau', '怎么生火', 'y si es de noche?',
+                      '¡AUXILIO! ÉL ESTÁ HERIDO', 'el pingüino y el ñandú', 'agüita de güemul', 'NIÑO CON DIARREA',
+                      'ñ', '¿¡qué!?', 'quemadura en la cara',
+                      'niño con fiebre',       # "niño" decomposed, as a phone or Mac may send it
+                      'pingüino herido'):       # "pingüino", decomposed
+                self.assertTrue(ne(q), ascii(q))
+            for q in ('how do i boil water', 'start a fire without matches', 'jalapeño burns on my hand', 'CPR', '',
+                      'what is the piñata safety rule', 'no pulse', 'how to make a café latte without power',
+                      'is my naïve résumé safe', 'the jalapeño burned my hand', '¿?¡!', '12 34'):
+                self.assertFalse(ne(q), ascii(q))
+            ew = assistant.english_words
+            self.assertEqual(ew('start a fire without matches\n'), 'start a fire without matches')
+            self.assertIsNone(ew('cómo hacer fuego sin fósforos'))
+            self.assertIsNone(ew('niño con fiebre'))
+            self.assertEqual(ew('“fever in a child from Ñuble”'), 'fever in a child from Ñuble')    # an odd word in English is kept
+            self.assertEqual(ew('English: "boil water safely."<turn|>'), 'boil water safely')
+            self.assertEqual(ew('<|channel>thought\nhmm<channel|>\n\nbaby fever'), 'baby fever')
+            self.assertIsNone(ew('¿cómo hiervo agua?'))
+            self.assertIsNone(ew('  \n'))
+            sent = []
+
+            def gen(segs, n, cancelled, on_text):
+                sent.append((segs, n))
+                on_text('purify ')
+                on_text('water\n')
+                return {'reason': 'eos'}
+            with mock.patch.object(assistant, 'LOCAL', mock.Mock(generate=gen, think=True, answer_start='<|turn>model\n')), \
+                    mock.patch.object(self.L.LOCAL, 'think', True), mock.patch.dict(assistant._ENGLISH, clear=True):
+                self.assertEqual(assistant.english_query('¿cómo purifico agua?', 'tengo sed', lambda: False), 'purify water')
+                self.assertEqual(assistant.english_query('¿cómo purifico agua?', '', lambda: False), 'purify water')   # kept
+                self.assertEqual(len(sent), 1)
+                prompt = ''.join(s[0] for s in sent[0][0])
+                self.assertNotIn('<|think|>', prompt)
+                self.assertIn('Earlier question: tengo sed', prompt)
+                self.assertEqual(sent[0][1], assistant.REWRITE_TOKENS)
+                failing = mock.Mock(generate=mock.Mock(side_effect=RuntimeError('down')))
+                with mock.patch.object(assistant, 'LOCAL', failing):
+                    self.assertIsNone(assistant.english_query('¿y el fuego?', '', lambda: False))
+        finally:
+            for n in fresh:
+                sys.modules.pop(n, None)
+
     def test_judge_counts_the_file_it_runs(self):
         fit = {'status': 'fits', 'ram_total': 64 * 2 ** 30, 'device_bytes': 0, 'host_bytes': 2 ** 30, 'memory': []}
         with mock.patch.object(sys, 'platform', 'win32'):     # the mapped file is counted where memory is not shared
