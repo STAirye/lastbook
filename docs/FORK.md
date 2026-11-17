@@ -450,7 +450,7 @@ a test server and checks the amount (3j); it needs the model.
   columns there. Tables without a recognised unit (bare numbers, "kcal" rows without one), scanned (OCR) pages and
   tables split across pages aren't handled. The rebuilt tables were checked by eye on a sample of health documents, not
   all 226. 3j was measured on E4B only, 3 runs of 14 questions, and only for the questions' first answer. A candidate
-  pull request upstream (the squash is upstream's; a draft issue is kept outside the repo).
+  pull request upstream (the squash is upstream's): reported as upstream issue #148, with the fix offered.
 - 3i was measured once per arm on 8 questions. Portuguese and French are detected but not measured. The UI itself is
   still English (upstream issue #54).
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
