@@ -12,7 +12,7 @@
 | Detailed map inside a pack (Medium: California, All: whole US) | Kept | Kept by default. **Optional:** remove it after unpacking and keep only the world base map |
 | Local AI model | Only the published Gemma 4 26B A4B file (exact SHA-256) | That file, or **your own Gemma 4 GGUF** (E2B, E4B, any quant), used from where it is |
 
-Everything else (library, guides, search, offline rules, the no-port bridge) is upstream as of commit `387742c`.
+Everything else (library, guides, search, offline rules, the no-port bridge) is upstream as of Lastbook 1.1.11 (commit `256d52f`).
 Design notes, what is and isn't checked, and how to switch back: [docs/FORK.md](docs/FORK.md).
 
 ## Run this fork
