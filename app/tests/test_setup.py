@@ -1722,9 +1722,10 @@ class ForkLocalAI(unittest.TestCase):
         local = L.Local()
         local.proc = mock.Mock(stdin=Pipe())
         local.events, local.state = events, 'ready'
-        for custom, reuse, expect in ((True, '', 2), (False, '', 1), (True, '1', 1)):
+        for custom, reuse, checks, expect in ((True, '', False, 2), (False, '', False, 1), (True, '1', False, 1), (True, '', True, 1)):
             sent.clear()
             local.custom = custom
+            local.ready_info = {'swa_check': True} if checks else {}     # the rebuilt runner checks the window itself
             with mock.patch.dict(os.environ, {'LASTBOOK_AI_REUSE': reuse}):
                 out = []
                 local.generate([['<|turn>user\n', True]], 10, lambda: False, out.append)
@@ -1733,6 +1734,45 @@ class ForkLocalAI(unittest.TestCase):
             if expect == 2:
                 self.assertEqual(sent[0]['segments'], [['\n', False]])
                 self.assertEqual(sent[0]['max_tokens'], 1)
+
+    def test_history_cites_with_this_turns_keys(self):
+        """Earlier answers come back from the browser as "(Title, p. N)". The same page found again becomes this turn's key;
+        a citation of anything else, a known title alone or a video moment, is removed. Other parentheses stay."""
+        fresh = [n for n in ('assistant', 'retrieval') if n not in sys.modules]
+        try:
+            import assistant
+            cat = {'by_id': {'d1': {'title': 'Water and Health'}, 'd2': {'title': 'Are You Ready'}, 'v1': {'title': 'Boiling Video'}}}
+            sources = {'S1': {'key': 'S1', 'title': 'Water and Health', 'page': 12},
+                       'S2': {'key': 'S2', 'title': 'Boiling Video', 't': 75}}
+            msgs = [{'role': 'system', 'content': 'Rules (Water and Health, p. 12)'},
+                    {'role': 'user', 'content': 'boil? (Water and Health, p. 12)'},
+                    {'role': 'assistant', 'content': 'Boil it (Water and Health, p. 12). Glass breaks (Are You Ready, p. 21). '
+                                                     'Watch (Boiling Video, 1:15). See (Are You Ready). Use a pot (any size).'}]
+            with mock.patch.object(assistant, 'S', mock.Mock(catalog=lambda: cat)):
+                out = assistant.rekey_history(msgs, sources)
+            self.assertEqual(out[2]['content'], 'Boil it [S1]. Glass breaks. Watch [S2]. See. Use a pot (any size).')
+            self.assertEqual(out[:2], msgs[:2])     # only the model's own earlier answers change
+            old_keys = [{'role': 'assistant', 'content': 'Boil it (S4). Wait (S2, S3).'}]
+            with mock.patch.object(assistant, 'S', mock.Mock(catalog=lambda: cat)):
+                self.assertEqual(assistant.rekey_history(old_keys, sources)[0]['content'], 'Boil it. Wait.')   # numbered for another question
+                fixed = assistant.repair_cites('Boil it (S1). Wait (S1, S2). Glass [Water and Health, p. 12]. '
+                                               'Bleach [Are You Ready, p. 21]. Pot (any size).', sources)
+            self.assertEqual(fixed, 'Boil it [S1]. Wait [S1][S2]. Glass [S1]. Bleach [Are You Ready, p. 21]. Pot (any size).')
+            own = [{'doc_id': d, 'page': 1} for d in 'abcdef']
+            joined = [{'doc_id': d, 'page': 1} for d in 'xaybz']
+            self.assertEqual([h['doc_id'] for h in assistant.followup_hits(own, joined)], list('abcdexyz'))
+            # a title holding parentheses, and the previous answer's pages as hits
+            cat['by_id']['c1'] = {'id': 'c1', 'kind': 'pdf', 'title': 'CERT Manual (2019)'}
+            pub = lambda r: {'title': r['title'], 'publisher': 'P', 'year': '2019', 'trust': 't', 'pages': 3}
+            fake = mock.Mock(catalog=lambda: cat, public=pub, page_texts=lambda r: ['one', 'two  words', 'three'])
+            with mock.patch.object(assistant, 'S', fake):
+                h = [{'role': 'assistant', 'content': 'Bleach (CERT Manual (2019), p. 2). Again [CERT Manual (2019), p. 2]. Far (CERT Manual (2019), p. 9).'}]
+                self.assertEqual(assistant.rekey_history(h, sources)[0]['content'], 'Bleach. Again. Far.')
+                got = assistant.cited_before(h + [{'role': 'user', 'content': 'and?'}])
+            self.assertEqual([(g['doc_id'], g['page'], g['excerpt']) for g in got], [('c1', 2, 'two words')])   # p. 9 is past the end
+        finally:
+            for n in fresh:
+                sys.modules.pop(n, None)
 
     def test_judge_counts_the_file_it_runs(self):
         fit = {'status': 'fits', 'ram_total': 64 * 2 ** 30, 'device_bytes': 0, 'host_bytes': 2 ** 30, 'memory': []}

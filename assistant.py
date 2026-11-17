@@ -231,6 +231,120 @@ class Session:
         return k
 
 
+def _clock(s):
+    """web/app.js clock(): 75 -> '1:15', 3675 -> '1:01:15'."""
+    s = max(0, round(s or 0))
+    h, m, x = s // 3600, s % 3600 // 60, s % 60
+    return (f'{h}:{m:02d}' if h else str(m)) + f':{x:02d}'
+
+
+def rekey_history(msgs, sources):
+    """fork: the browser sends earlier answers with [S2] turned into "(Title, p. 29)" (web/chat.js history_()), because keys
+    are numbered per question. A small model copies the style of the answers just before its own, so from the third turn
+    on Gemma 4 E4B cited as "(Title, p. 29)" too, which Chat can't link. Where this turn's sources hold the same page (or
+    the same moment of a video), its citation becomes this turn's key; the others are removed. Every earlier answer the
+    model sees then cites the way it must."""
+    by, cite = _title_cites(sources)
+
+    def sub(m):
+        k = by.get(m.group(1))
+        return f' [{k}]' if k else ''
+    def fix(text):      # keys left in an earlier answer, "(S4)", are numbered for that answer's question: removed
+        return KEYS_IN_PARENS.sub('', cite.sub(sub, text))
+    return [dict(m, content=fix(m['content'])) if m['role'] == 'assistant' and isinstance(m.get('content'), str)
+            else m for m in msgs]
+
+
+def cited_before(messages, limit=3):
+    """fork: the pages the previous answer cited, as search hits, so a follow-up ("wait, I meant meters") has them again
+    with this turn's keys. The browser sends that answer with its citations as "(Title, p. 12)" (web/chat.js history_()),
+    and the title is looked up in the catalogue. Measured with E4B on a 10-turn chat: without them, a clarification found
+    nothing to cite and the model cited from memory, sometimes with a made-up title and page. PDF pages only."""
+    last = next((m.get('content') for m in reversed(messages) if m.get('role') == 'assistant' and isinstance(m.get('content'), str)), '')
+    if not last:
+        return []
+    cat = S.catalog()
+    by_title = {}
+    for r in cat['by_id'].values():
+        if r.get('kind') == 'pdf':
+            by_title.setdefault(S.public(r)['title'], r)
+    _, cite = _title_cites({})
+    out, seen = [], set()
+    for m in cite.finditer(last):
+        title, _, page = m.group(1).rpartition(', p. ')
+        r = by_title.get(title)
+        if not r or not page.isdigit() or (r['id'], int(page)) in seen:
+            continue
+        p = int(page)
+        ps = S.page_texts(r)
+        if not 0 < p <= len(ps):
+            continue
+        seen.add((r['id'], p))
+        pub = S.public(r)
+        out.append({'doc_id': r['id'], 'title': pub['title'], 'publisher': pub['publisher'], 'year': pub['year'], 'kind': 'pdf',
+                    'trust': pub['trust'], 'pages': pub['pages'], 'page': p, 't': None, 'duration': None, 'thumb': pub.get('thumb'),
+                    'excerpt': re.sub(r'\s+', ' ', ps[p - 1])[:900], 'found_by': {'earlier answer': 1}, 'score': 0,
+                    'notes': (r.get('notes') or '')[:300], 'imageOnly': (r.get('searchability') or '').startswith('image-only')})
+        if len(out) >= limit:
+            break
+    return out
+
+
+def followup_hits(own, joined, k=8, first=5):
+    """fork: the first search uses only the latest message, and a follow-up such as "wait, I meant 2500 meters" or "give me
+    the steps again" finds little on its own. Measured with E4B on a 10-turn chat, those turns came back with nothing to
+    cite, and once said the library didn't cover what an earlier answer had cited. So for a follow-up a second search runs
+    on the previous question with this one. Keeps the best `first` hits of this message's own search, then the joined
+    search's new ones, then the rest, up to k. More of the earlier pages come back, so rekey_history keeps their keys."""
+    out, seen = [], set()
+
+    def put(h):
+        key = (h.get('doc_id'), h.get('page'), h.get('t'), h.get('kind'))
+        if key not in seen and len(out) < k:
+            seen.add(key)
+            out.append(h)
+    for h in own[:first]:
+        put(h)
+    for h in joined:
+        put(h)
+    for h in own[first:]:
+        put(h)
+    return out
+
+
+KEYS_IN_PARENS = re.compile(r'\s?\(\s*([SM]\d+(?:\s*[,;]\s*[SM]\d+)*)\s*\)')
+
+
+def _title_cites(sources):
+    """fork: citations written with a title, "(Title, p. 12)", "[Title, p. 12]", "(Title, 1:15)" or "(Title)" for a known
+    title. Returns {"Title, p. 12": key} for this turn's sources, and a pattern whose group 1 is the inside."""
+    by = {}
+    for k, s in sources.items():
+        if s.get('title'):
+            where = f", p. {s['page']}" if s.get('page') else (f", {_clock(s['t'])}" if s.get('t') is not None else '')
+            by.setdefault(f"{s['title']}{where}", k)
+    titles = sorted({s['title'] for s in sources.values() if s.get('title')} |
+                    {r.get('title') for r in S.catalog()['by_id'].values() if r.get('title')}, key=len, reverse=True)
+    known = '|'.join(re.escape(t) for t in titles)
+    where = r'(?:, p\. \d+|, \d+:\d\d(?::\d\d)?)'
+    # Known titles first: some hold parentheses, "CERT Basic Training Participant Manual (2019)".
+    inside = (f'(?:{known}){where}?|' if known else '') + r'[^()\[\]]{1,200}?' + where
+    return by, re.compile(r'\s?[(\[]((?:' + inside + r'))[)\]]')
+
+
+def _key_cites(text):
+    """fork: keys in parentheses, "(S4)" or "(S2, S3)", as [S4] and [S2][S3]."""
+    return KEYS_IN_PARENS.sub(lambda m: ' ' + ''.join(f'[{k}]' for k in re.findall(r'[SM]\d+', m.group(1))), text)
+
+
+def repair_cites(answer, sources):
+    """fork: Gemma 4 E4B sometimes cites as "(S4)", "(S2, S3)" or "[Title, p. 12]". Chat links only [S4]. Keys in
+    parentheses become keys; a title citation of a page among this turn's sources becomes its key; anything else stays as
+    written (Chat then shows it as not linked). The keys are validated afterwards like any others."""
+    by, cite = _title_cites(sources)
+    return cite.sub(lambda m: f' [{by[m.group(1)]}]' if m.group(1) in by else m.group(0), _key_cites(answer))
+
+
 def _src_block(key, d, body):
     where = f"page {d['page']}" if d.get('page') else (f"at {int(d['t'] // 60)}:{int(d['t'] % 60):02d}" if d.get('t') is not None else '')
     ids = f" | doc_id={d['doc_id']}" if d.get('doc_id') else ''
@@ -505,8 +619,14 @@ def chat(messages, about, emit, cancelled):
             msgs.append({'role': m['role'], 'content': m['content'][:6000]})
     # Search for the question straight away: the person sees matching pages at once, and the model starts with them.
     question = next((m['content'] for m in reversed(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)), '')
+    own_file = local_on() and getattr(LOCAL, 'custom', False)      # fork: the person's own Gemma 4 file
+    fork_cites = own_file and os.environ.get('LASTBOOK_AI_REKEY') != '0'
     if question and not about:
         hits = hybrid(question[:300], 8)
+        asked = [m['content'] for m in messages if m.get('role') == 'user' and isinstance(m.get('content'), str)]
+        if own_file and len(asked) > 1 and os.environ.get('LASTBOOK_AI_FOLLOWUP') != '0':
+            carried = cited_before(messages)      # up to 3, then this message's best 4, the joined search, the rest
+            hits = followup_hits(carried + hits, hybrid((asked[-2][:200] + ' ' + question)[:300], 8), first=len(carried) + 4)
         if hits:
             blocks = []
             for n, h in enumerate(hits):
@@ -547,6 +667,9 @@ def chat(messages, about, emit, cancelled):
         if why:
             emit({'type': 'error', 'error': 'model_unavailable', 'text': why})
             return
+        fork_cites = getattr(LOCAL, 'custom', False) and os.environ.get('LASTBOOK_AI_REKEY') != '0'   # known for sure once running
+        if fork_cites:
+            msgs = rekey_history(msgs, sess.sources)   # fork: see rekey_history
     first = {'at': None}
 
     def wrote(piece):
@@ -600,6 +723,8 @@ def chat(messages, about, emit, cancelled):
         emit({'type': 'error', 'error': 'empty', 'text': 'The model did not produce an answer. The passages it found are listed below.',
               'sources': list(sess.sources.values())})
         return
+    if fork_cites:
+        answer = repair_cites(answer, sess.sources)     # fork: see repair_cites
     # Validate citations against what the tools actually returned in this turn.
     answer = GROUPED.sub(lambda m: ''.join(f'[{k}]' for k in re.findall(r'[SM]\d+', m.group(0))), answer)   # [S3, S4] -> [S3][S4]
     used = CITE.findall(answer)

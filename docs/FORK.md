@@ -142,10 +142,101 @@ Result (E4B, through the real chat pipeline, `server.py` with the local AI on): 
 correctly; 3 new first questions cited correctly (14, 13 and 22 keys); every round had an intact, hidden thought block
 (10 of 10).
 
-The real fix belongs in the runner: after `llama_memory_seq_rm`, check `llama_memory_seq_pos_min` against the window, as
-llama-server does, and clear the context when it's too short. That needs a rebuild with the toolchain in
-`packaging/llm/build_llm_windows.sh` (llvm-mingw, CMake, Ninja, glslc, Vulkan and SPIR-V headers), and it would make a good
-pull request upstream.
+**The real fix, in the runner (2026-11-17).** Before reusing, `lastbook_llm.cpp` now makes llama-server's check
+(`tools/server/server-context.cpp`, `pos_min_thold`). The first token read next, at position `keep`, looks back `n_swa`
+positions (`llama_model_n_swa`, 512 for E4B; the cache holds 1024 cells). If `llama_memory_seq_pos_min` is at or past
+`keep - n_swa + 2`, the window no longer reaches that far, so the runner clears the context and reads the prompt from the
+start. Otherwise it reuses as before. The fixed runner says `"swa_check": true` in its ready event, and then Lastbook skips
+the workaround (`Local.needs_forget`). An older runner (the release's) still gets the workaround.
+
+Measured with E4B, three-turn chat (3e), 6 runs of the last question plus the two turns before it: 9 of 9 rounds began with
+an intact thought block. 8 rounds started over because the window was too short (`n_reused: 0`). One round reused the whole
+prompt (`n_reused: 4326`): the answer before it was short (494 tokens), so the window still covered it, and that answer came
+out right too. The check and its wording would make a good pull request upstream: the release runner has the bug, and it
+probably affects the 26B in long chats.
+
+### 3e. From the third turn on, citations as "(Title, p. N)" again
+
+Found by hand: the third question of a chat came back citing "(Water and Health, p. 12)", and Chat said "This answer has no
+linked sources". The tests in 3b–3d only covered two turns. Reproduced through the chat pipeline: 3 turns, the last one
+asked 4 times, **0 of 4** cited with keys. With two earlier answers in "(Title, p. N)" style just before its own, E4B copies
+them even while thinking.
+
+Fix (`assistant.rekey_history`, your own file only, after the first search of the turn): in the earlier answers the model
+sees, a citation of a page (or a video moment) that this turn's sources hold again becomes this turn's key, `[S1]`. Every
+other citation is removed. That includes a known title alone, since the catalogue's titles are matched. Other parentheses
+stay. Every example before the new answer then cites the way it must. The browser's own history is unchanged.
+`LASTBOOK_AI_REKEY=0` turns it off.
+
+Result: the same chat, 6 of 6 with keys only and no "(Title, p. N)". The same 6 of 6 with the fixed runner and no
+workaround, and again with default settings.
+
+### 3f. Building the runner on Windows
+
+`packaging/llm/build_llm_windows.sh` needs portable tools in one folder (`TOOLS`). On the fork's test machine they are in
+`D:\buildtools\lastbook-llm\`, downloaded 2026-11-17:
+
+| Tool | From | Checked |
+|---|---|---|
+| `llvm-mingw-20261020-ucrt-x86_64\` | github.com/mstorsjo/llvm-mingw release 20261020 | SHA-256 matches GitHub's and the script's |
+| `cmake-4.4.0-windows-x86_64\` | github.com/Kitware/CMake v4.4.0 | same |
+| `ninja.exe` | github.com/ninja-build/ninja v1.13.2, `ninja-win.zip` | same |
+| `msys\ucrt64\` | repo.msys2.org/mingw/ucrt64: shaderc 2026.3-1, glslang 16.3.0-1, spirv-tools **3~**1.4.350.1-1 (the name has an epoch), gcc-libs 16.2.0-3 | HTTPS only (signatures downloaded but not checked: no MSYS2 keyring here) |
+| `vulkan-headers\`, `spirv-headers\` | git clones at tag `vulkan-sdk-1.4.350.1` | commits `8864cdc8`, `ad9184e7`, as the script says |
+
+The `.pkg.tar.zst` files unpack with Python 3.14's own `compression.zstd` and `tarfile`. Then, in Git Bash:
+
+```bash
+TOOLS='D:\buildtools\lastbook-llm' W='D:\buildtools\lastbook-llm\work' bash packaging/llm/build_llm_windows.sh
+```
+
+Set `W` outside the repo: by default it's `derived/llm`, and the script empties `W/bin-win` first, which is where the app
+runs the runner from. A first build takes about 3 minutes on the 5800X3D, and a rebuild after changing only
+`lastbook_llm.cpp` takes seconds. The script's own checks (no network imports, no folder of this machine inside) passed.
+Copy `W/bin-win` to `derived/llm/bin-win`. The release's runner is kept beside it as `derived/llm/bin-win.release`.
+Smart App Control (see the script's note) is not on this machine.
+
+### 3g. A 10-turn stress test: a confused user
+
+`tools/fork_chat_test.py`: 10 questions about stored water, run through the chat pipeline as the browser runs them. They
+include typos, a unit correction at turn 5 ("wait sorry i meant 2500 meters not feet"), and a **mistake** at turn 6: the
+person says the assistant told them boiling removes chemicals and the water smells of bleach. Turn 7 is "im confused now",
+and turn 10 is "give me the short steps again". Two conversations per arm, 20 answers. "Good" means it has `[Sn]` keys, no
+citation written with a title, and no thinking shown.
+
+| Arm | What's on | Good |
+|---|---|---|
+| B | Fixed runner, no history rewrite (`LASTBOOK_AI_REKEY=0`) | **4 of 20** |
+| A | + history rewrite (3e) | 14 of 20 |
+| A2 | + answer repair and follow-up search (below) | 14 of 20 |
+| A3 | + previous answer's pages carried over (below) | **20 of 20** |
+
+What each run showed:
+- **B:** one conversation switched to "(Title, p. N)" from turn 3 on, and the other to `(S4)`, `(S2, S3)` from turn 2 on.
+  Whatever style slips in once stays, because the history carries it.
+- **A:** no title citations, but turns like 5, 7, 9 and 10 had nothing to cite. The first search uses only the latest
+  message, and "wait sorry i meant 2500 meters" finds little. Turn 5 even said the library didn't cover altitude, although
+  turn 4 had cited the 3-minute rule. One answer cited as `[CERT Basic Training Participant Manual (2019), p. 27]`. That
+  title holds parentheses, so 3e's pattern hadn't matched it in the history.
+- **A2:** turn 5's content was right (3 minutes), but it was cited from memory, once with a made-up title and page.
+- **A3:** every answer cited with keys. Content checked by hand in both conversations: turn 5 says 3 minutes at 2500 m,
+  cited. Turn 6 corrects the person plainly ("No, that is incorrect … Boiling does NOT get rid of toxic chemicals"), cited.
+  Turn 8 gives the library's dose (40 drops, or ½ teaspoon, for 5 gallons). Turn 9 says the library has no child-specific
+  guidance, under "Not found in the library". Answers took 4–12 s.
+
+The three additions, all for your own file only:
+- `assistant.repair_cites`: in the final answer, `(S4)` / `(S2, S3)` become `[S4]` / `[S2][S3]`. "[Title, p. 12]" or
+  "(Title, p. 12)" becomes the key when that page is among this turn's sources. Otherwise it stays as written, and Chat shows
+  it as not linked. The keys are then validated as usual. In the history, keys left in parentheses are removed, because
+  they were numbered for another question. Off with `LASTBOOK_AI_REKEY=0`, together with 3e.
+- `assistant.followup_hits`: for a follow-up, a second search runs on the previous question with this one. This message's
+  best hits come first, then the joined search's new ones, then the rest, 8 in all.
+- `assistant.cited_before`: the PDF pages the previous answer cited (up to 3, taken from its "(Title, p. N)" and looked up in
+  the catalogue) go first among this turn's sources, with their full page text. Then a clarification has the page it's
+  about, with a key. Off with `LASTBOOK_AI_FOLLOWUP=0`, together with the follow-up search.
+
+3e's pattern now matches the catalogue's known titles first, with an optional page or time, so titles holding parentheses
+are handled.
 
 ## 4. Running from source on Windows
 
@@ -164,7 +255,9 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 |---|---|
 | `LASTBOOK_MODEL_FILE` | Use this GGUF, whatever setup saved |
 | `LASTBOOK_AI_THINK=0` | Your own file answers with thinking off (3a's behaviour) |
-| `LASTBOOK_AI_REUSE=1` | Let the runner reuse context (upstream's behaviour; see 3d) |
+| `LASTBOOK_AI_REUSE=1` | With an older runner, skip the workaround and let it reuse context (upstream's behaviour; see 3d). The fork's runner checks the window itself |
+| `LASTBOOK_AI_REKEY=0` | Send earlier answers' citations as the browser wrote them, "(Title, p. N)", and don't repair the answer's citations (3e, 3g) |
+| `LASTBOOK_AI_FOLLOWUP=0` | Search only the latest message, with no pages carried over from the previous answer (3g) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
@@ -182,13 +275,19 @@ then POST `{"messages": [...]}` to `/api/chat`. It answers as server-sent events
 
 Run the suite from [CONTRIBUTING.md](../CONTRIBUTING.md). The fork's own cases are in `app/tests/test_setup.py`:
 `ForkNoMaps` (no state step, thinning the map), `ForkCustomModel` (choosing, saving and clearing your own file) and
-`ForkLocalAI` (template reading, answer start, thinking, hiding thinking, clearing context, memory estimate).
+`ForkLocalAI` (template reading, answer start, thinking, hiding thinking, clearing context unless the runner checks the
+window, history citations rekeyed, answer citations repaired, follow-up hits and carried-over pages, memory estimate). The
+model-level stress test is `tools/fork_chat_test.py` (3g), which needs the model and a test server.
 
 ## Open
 
 - Thinning a real pack's map (1) and the setup screens with no state picker have only been tested by the automated tests,
   not by hand.
-- The runner fix for 3d, plus a rebuild.
+- The runner fix (3d) is built and tested on this machine only. A release of the fork would ship it from
+  `build_llm_windows.sh` (and the Mac and Linux scripts, not yet rebuilt). It's also a candidate pull request upstream.
+- 3g was measured on one topic (stored water), 2 conversations per arm. Other topics, video citations (carry-over handles
+  PDF pages only), and the published 26B with these changes (they're off for it) haven't been measured.
+- The follow-up search and carry-over add a little prompt (up to 3 full pages). On a slower computer that's slower reading.
 - Thinking makes answers slower than thinking off. On a slower computer, `LASTBOOK_AI_THINK=0` trades citation reliability
   in follow-ups for speed.
 - Showing the hidden thinking in a collapsible section of the answer (as Chat's "How it searched" does) was suggested; not

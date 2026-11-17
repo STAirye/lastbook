@@ -247,6 +247,20 @@ static void generate(Engine & e, const json & req) {
         keep--;                            // the last prompt token is decoded again, for its logits
     }
     llama_memory_t mem = llama_get_memory(e.ctx);
+    // Gemma's sliding-window layers keep only the last n_swa positions. The first token read next (at position keep) looks
+    // back n_swa positions, so the window must still reach that far; after a long answer it no longer does, and
+    // llama_memory_seq_rm can succeed anyway, leaving a damaged context the model then carries on from. llama-server makes the
+    // same check (tools/server/server-context.cpp, pos_min_thold) and reprocesses the prompt.
+    if (keep > 0) {
+        const int n_swa = llama_model_n_swa(e.model);
+        const llama_pos pos_min = llama_memory_seq_pos_min(mem, 0);
+        const llama_pos thold = std::max(0, n_swa > 0 ? (int) keep - n_swa + 2 : (int) keep);
+        if (pos_min < 0 || pos_min >= thold) {
+            llama_memory_clear(mem, true);
+            e.cached.clear();
+            keep = 0;
+        }
+    }
     if (keep < e.cached.size()) {
         if (!llama_memory_seq_rm(mem, 0, (llama_pos) keep, -1)) {
             llama_memory_clear(mem, true);   // the sliding-window layers cannot always go back: start over
@@ -499,7 +513,8 @@ int main(int argc, char ** argv) {
     llama_model_desc(e.model, desc, sizeof(desc));
     send({{"ev", "ready"}, {"n_ctx", llama_n_ctx(e.ctx)}, {"desc", desc}, {"threads", llama_n_threads(e.ctx)},
           {"load_ms", (long long) std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - t_load).count()},
-          {"ram_free", ram_free()}});
+          {"ram_free", ram_free()},
+          {"swa_check", true}});   // fork: reuse checks the sliding window (see the gen request); Lastbook then skips its workaround
 
     while (true) {
         json req;

@@ -533,6 +533,13 @@ class Local:
                 self.stop(f'not used for {IDLE_STOP} s')
 
     # -- one model turn ---------------------------------------------------------------------------------------------------
+    def needs_forget(self):
+        """Fork: whether to clear the runner's context before each request (_forget_context). Only for the person's own file,
+        and not when the runner checks the sliding window itself (the fork's rebuilt runner says swa_check in its ready event)."""
+        if not self.custom or os.environ.get('LASTBOOK_AI_REUSE') == '1':
+            return False
+        return not (self.ready_info or {}).get('swa_check')
+
     def _forget_context(self, proc, events, rid):
         """Fork: make the runner read the next prompt from the start instead of reusing what its context holds.
         The runner reuses the longest shared start of the previous prompt and drops the rest with llama_memory_seq_rm, starting
@@ -541,8 +548,9 @@ class Local:
         reads a damaged context: measured with E4B, follow-ups came back starting in the middle of the previous answer's
         thinking, or as a stray fragment. A one-token request whose first token differs from any prompt's ('\\n' against
         '<|turn>') leaves nothing to reuse, so the real request clears the whole context and reads its prompt afresh.
-        Costs reading the prompt again each round. LASTBOOK_AI_REUSE=1 turns this off; the real fix is in the runner
-        (check llama_memory_seq_pos_min, as llama-server does), which needs a rebuild."""
+        Costs reading the prompt again each round. LASTBOOK_AI_REUSE=1 turns this off. The fork's rebuilt runner fixes the
+        cause (it checks llama_memory_seq_pos_min, as llama-server does) and says swa_check, so this runs only with an older
+        runner (needs_forget)."""
         fid = -rid
         try:
             proc.stdin.write((json.dumps({'op': 'gen', 'id': fid, 'segments': [['\n', False]], 'max_tokens': 1, 'temp': 0}) + '\n').encode())
@@ -572,7 +580,7 @@ class Local:
                 self.last_used = time.time()
             while not events.empty():       # anything left from an answer that was stopped
                 events.get_nowait()
-            if self.custom and os.environ.get('LASTBOOK_AI_REUSE') != '1':
+            if self.needs_forget():
                 self._forget_context(proc, events, rid)
             req = {'op': 'gen', 'id': rid, 'segments': segments, 'max_tokens': max_tokens, 'temp': 0.2, 'top_k': 64, 'top_p': 0.95,
                    'min_p': 0.05, 'seed': 1234 + rid, 'stop': ['<|tool_response>']}
