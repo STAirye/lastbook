@@ -177,6 +177,10 @@ class Base(unittest.TestCase):
         F = self.files
         F.data.clear(); F.etag.clear(); F.log.clear(); F.cut_after.clear(); F.corrupt.clear(); F.ignore_range.clear(); F.ignore_once.clear(); F.redirect.clear()
         F.pace = 0
+        env = mock.patch.dict(os.environ)      # a LASTBOOK_MODEL_FILE of the person running the tests would win over everything
+        env.start()
+        self.addCleanup(env.stop)
+        os.environ.pop('LASTBOOK_MODEL_FILE', None)
         self.tmp = shorttemp.mkdtemp('lastbook-setup-')
         self.home = self.tmp / 'home'
         for d in ('Downloads', 'Documents', 'Desktop'):
@@ -1070,6 +1074,14 @@ class Maps(Base):
 
 
 class AddressIndexes(Maps):
+    """Upstream behaviour, with the fork's map switch on (api.MAPS): a state choice brings that state's address index too."""
+
+    def setUp(self):
+        super().setUp()
+        on = mock.patch.object(api, 'MAPS', True)
+        on.start()
+        self.addCleanup(on.stop)
+
     def address_manifest(self, wrong_path=False):
         mf, maps = self.map_manifest()
         name = 'Lastbook-Addresses-CA.zip'
@@ -1178,6 +1190,487 @@ class AddressIndexes(Maps):
         fetched['address_indexes'][0]['files'][0]['sha256'] = '0' * 64
         merged = manifest.merge(validated, fetched)
         self.assertEqual(merged['address_indexes'][0]['files'], validated['address_indexes'][0]['files'])
+
+
+# ------------------------------------------------------------------------------- fork: no US maps, your own Gemma 4 --
+def make_geo(lib, name='CA'):
+    """A small detailed map set, as real SQLite files shaped like the published ones: low- and high-zoom rows, pins, OSM and
+    non-OSM places, buildings, crops and the atlas. Returns the counts thin_to_base should keep."""
+    import sqlite3
+    geo = Path(lib) / 'derived' / 'geo'
+    geo.mkdir(parents=True, exist_ok=True)
+
+    def feats(db):
+        db.execute('CREATE TABLE feat(id INTEGER PRIMARY KEY, layer TEXT, cls TEXT, name TEXT, minz INTEGER, geom BLOB)')
+        db.execute('CREATE VIRTUAL TABLE feat_idx USING rtree(id, minx, maxx, miny, maxy)')
+        for i, z in enumerate([4, 6, 8, 9, 12, 14], 1):
+            db.execute('INSERT INTO feat VALUES(?,?,?,?,?,?)', (i, 'road', 'primary', f'r{i}', z, b'\0' * 16))
+            db.execute('INSERT INTO feat_idx VALUES(?,?,?,?,?)', (i, -120.0, -119.0, 34.0, 35.0))
+
+    db = sqlite3.connect(geo / 'national.sqlite')
+    feats(db)
+    db.execute('CREATE TABLE poi(id INTEGER PRIMARY KEY, cls TEXT, name TEXT, lon REAL, lat REAL)')
+    db.execute("INSERT INTO poi VALUES(1,'hospital','h',-119.5,34.5)")
+    db.execute('CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT)')
+    db.execute("INSERT INTO meta VALUES('status','{}')")
+    db.commit(); db.close()
+    db = sqlite3.connect(geo / 'water.sqlite')
+    feats(db)
+    db.execute('CREATE TABLE resource(id INTEGER PRIMARY KEY, kind TEXT, name TEXT)')
+    db.execute("INSERT INTO resource VALUES(1,'dam','d')")
+    db.execute('CREATE VIRTUAL TABLE spatial USING rtree(id, minx, maxx, miny, maxy)')
+    db.execute('CREATE TABLE meta(key TEXT, value TEXT)')
+    db.execute("INSERT INTO meta VALUES('source','NID')")
+    db.execute('CREATE VIRTUAL TABLE water_fts USING fts5(name, other)')
+    db.commit(); db.close()
+    db = sqlite3.connect(geo / 'terrain.sqlite')
+    db.execute('CREATE TABLE tile(z INTEGER, x INTEGER, y INTEGER, data BLOB, PRIMARY KEY(z, x, y))')
+    for z in range(4, 13):
+        db.execute('INSERT INTO tile VALUES(?,?,?,?)', (z, 1, 1, b'png'))
+    db.execute('CREATE TABLE meta(key TEXT, value TEXT)')
+    db.execute("INSERT INTO meta VALUES('source','USGS 3DEP (private note)')")
+    db.commit(); db.close()
+    db = sqlite3.connect(geo / 'places.sqlite')
+    db.execute('CREATE TABLE place(id INTEGER PRIMARY KEY, name TEXT, source TEXT, lon REAL, lat REAL)')
+    db.executemany('INSERT INTO place VALUES(?,?,?,?,?)', [(1, 'Town', 'GNIS', 0, 0), (2, 'Street', 'OpenStreetMap', 0, 0), (3, 'County', 'Census', 0, 0)])
+    db.execute("CREATE VIRTUAL TABLE place_fts USING fts5(name, content='place', content_rowid='id')")
+    db.execute("INSERT INTO place_fts(place_fts) VALUES('rebuild')")
+    db.commit(); db.close()
+    db = sqlite3.connect(geo / 'map.sqlite')
+    feats(db)
+    db.execute('CREATE TABLE poi(id INTEGER PRIMARY KEY, cls TEXT, name TEXT, lon REAL, lat REAL)')
+    db.execute('CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT)')
+    db.commit(); db.close()
+    for extra in ('buildings', 'crops'):
+        db = sqlite3.connect(geo / f'{extra}.sqlite')
+        db.execute('CREATE TABLE t(x)')
+        db.execute('INSERT INTO t VALUES(1)')
+        db.commit(); db.close()
+    atlas = Path(lib) / 'library-data/geography/resources/atlas.sqlite'
+    atlas.parent.mkdir(parents=True, exist_ok=True)
+    db = sqlite3.connect(atlas)
+    db.execute('CREATE TABLE resource(id)')
+    db.commit(); db.close()
+    (geo / 'national-status.json').write_text('{"state":"complete"}')
+    (geo / 'socal-cells.json').write_text('[[1,2]]')
+    return {'national_feat': 3, 'water_feat': 4, 'tiles': 4, 'places': 2}
+
+
+def count(db_path, sql):
+    import sqlite3
+    db = sqlite3.connect(db_path)
+    try:
+        return db.execute(sql).fetchone()[0]
+    finally:
+        db.close()
+
+
+class ForkNoMaps(Base):
+    """docs/FORK.md: setup adds no state map on its own; the pack's own detailed map may be thinned to the base map, only when asked."""
+
+    def geo_pack(self):
+        """A pack whose zip carries a detailed California map set, as Medium does."""
+        src = self.tmp / 'geo-src'
+        keep = make_geo(src)
+        files = {'library-data/catalog.json': b'{"records": []}', 'pack.json': b'{"name": "small", "map": "CA"}'}
+        for p in src.rglob('*'):
+            if p.is_file():
+                files[p.relative_to(src).as_posix()] = p.read_bytes()
+        zpath = self.tmp / 'Lastbook-Small.zip'
+        self.installed = make_pack(zpath, files)
+        self.zip = zpath.read_bytes()
+        self.files.data['Lastbook-Small.zip'] = self.zip
+        zpath.unlink()
+        return keep
+
+    def test_thin_to_base_keeps_only_the_base_map(self):
+        src = self.tmp / 'lib'
+        keep = make_geo(src)
+        before = {p: p.stat().st_size for p in src.rglob('*') if p.is_file()}
+        out = install.thin_to_base(src, self.tmp / 'out' / 'LastbookData')
+        geo = out / 'derived/geo'
+        self.assertEqual(count(geo / 'national.sqlite', 'SELECT count(*) FROM feat'), keep['national_feat'])
+        self.assertEqual(count(geo / 'national.sqlite', 'SELECT max(minz) FROM feat'), 8)
+        self.assertEqual(count(geo / 'national.sqlite', 'SELECT count(*) FROM poi'), 0)
+        self.assertEqual(count(geo / 'national.sqlite', 'SELECT count(*) FROM feat_idx'), keep['national_feat'])
+        self.assertEqual(count(geo / 'water.sqlite', 'SELECT count(*) FROM feat'), keep['water_feat'])
+        self.assertEqual(count(geo / 'water.sqlite', 'SELECT count(*) FROM resource'), 0)
+        self.assertEqual(count(geo / 'terrain.sqlite', 'SELECT count(*) FROM tile'), keep['tiles'])
+        self.assertEqual(count(geo / 'terrain.sqlite', "SELECT value FROM meta WHERE key='source'"), 'USGS 3DEP')   # the note is scrubbed
+        self.assertEqual(count(geo / 'places.sqlite', "SELECT count(*) FROM place WHERE source='OpenStreetMap'"), 0)
+        self.assertEqual(count(geo / 'places.sqlite', 'SELECT count(*) FROM place'), keep['places'])
+        self.assertEqual(count(geo / 'places.sqlite', "SELECT count(*) FROM place_fts WHERE place_fts MATCH 'Town'"), 1)
+        self.assertEqual(count(geo / 'map.sqlite', 'SELECT count(*) FROM feat'), 0)
+        for gone in ('derived/geo/buildings.sqlite', 'derived/geo/crops.sqlite', 'library-data/geography/resources/atlas.sqlite'):
+            self.assertFalse((out / gone).exists(), gone)
+        self.assertEqual(install.map_name(out), 'base')
+        install.check_map(out)
+        self.assertEqual(json.loads((geo / 'socal-cells.json').read_text()), [])
+        self.assertEqual({p: p.stat().st_size for p in src.rglob('*') if p.is_file()}, before)     # the source is only read
+
+    def test_thin_refuses_a_library_without_a_map(self):
+        (self.tmp / 'lib' / 'derived/geo').mkdir(parents=True)
+        with self.assertRaises(install.Refused):
+            install.thin_to_base(self.tmp / 'lib', self.tmp / 'out' / 'LastbookData')
+
+    def test_pack_keeps_its_map_unless_asked(self):
+        self.geo_pack()
+        s = self.setup()
+        j = s.start('small')
+        self.assertEqual([i['kind'] for i in j['items']], ['pack'])
+        self.assertEqual(self.wait(s)['state'], 'done')
+        library, _ = api.startup(self.settings)
+        self.assertEqual(install.map_name(library), 'CA')
+        self.assertTrue((library / 'derived/geo/buildings.sqlite').is_file())
+
+    def test_pack_with_thin_map_ends_with_the_base_map(self):
+        keep = self.geo_pack()
+        s = self.setup()
+        j = s.start('small', thin_map=True)
+        self.assertEqual([i['kind'] for i in j['items']], ['pack', 'thin'])
+        self.assertEqual(j['items'][1]['source'], 'found')
+        with s.lock:       # the job runs on its own thread: copy it while it cannot change
+            saved = json.loads(json.dumps(s.job))
+        checked = s._checked_job(saved)
+        self.assertIsNotNone(checked)
+        self.assertTrue(checked['plan']['thin_map'])
+        self.assertEqual(self.wait(s)['state'], 'done', s.public_job())
+        library, _ = api.startup(self.settings)
+        self.assertEqual(install.map_name(library), 'base')
+        self.assertFalse((library / 'derived/geo/buildings.sqlite').exists())
+        self.assertEqual(count(library / 'derived/geo/national.sqlite', 'SELECT count(*) FROM feat'), keep['national_feat'])
+        self.assertTrue(install.is_library(library))
+
+    def manage_library(self):
+        """The California pack installed and opened, as the library manage mode works on."""
+        self.geo_pack()
+        s = self.setup()
+        s.start('small')
+        self.assertEqual(self.wait(s)['state'], 'done', s.public_job())
+        library, _ = api.startup(self.settings)
+        api.opened(self.settings, library, None)
+        return library
+
+    def test_manage_thin_switches_on_restart(self):
+        library = self.manage_library()
+        m = self.setup('manage', current=library)
+        self.assertEqual(m.current_info()['map'], 'CA')
+        j = m.start(thin_map=True)
+        self.assertEqual([i['kind'] for i in j['items']], ['thin'])
+        self.assertEqual(self.wait(m)['state'], 'done', m.public_job())
+        self.assertEqual(install.map_name(library), 'CA')      # the open library is not touched until it restarts
+        library, note = api.startup(self.settings)
+        self.assertFalse((note or {}).get('error'), note)
+        self.assertEqual(install.map_name(library), 'base')
+        self.assertEqual(self.setup('manage', current=library).start(thin_map=True)['code'], 'nothing')   # nothing left to thin
+
+    def test_thin_stopped_midway_is_built_again_after_a_restart(self):
+        library = self.manage_library()
+        m = self.setup('manage', current=library)
+        real = install.thin_to_base
+
+        def pause_after_first_file(src, dest, control=None):
+            control.stop('paused')         # as the Pause button would: noticed once the first map file is built
+            return real(src, dest, control)
+        with mock.patch.object(install, 'thin_to_base', pause_after_first_file):
+            m.start(thin_map=True)
+            self.assertEqual(self.wait(m)['state'], 'paused', m.public_job())
+        staged = Path(m.job['plan']['work']) / 'unpack-map' / api.DATA_NAME
+        self.assertTrue((staged / 'derived/geo/national.sqlite').is_file())      # half built
+        self.assertFalse((staged / 'map-set.json').exists())
+        self.assertNotIn('map_new', m.job['plan'])
+        job = json.loads(api._job_file(self.settings).read_text(encoding='utf-8'))    # the app quit while it was building
+        job['state'] = job['items'][0]['state'] = 'unpacking'
+        api._job_file(self.settings).write_text(json.dumps(job), encoding='utf-8')
+        again = self.setup('manage', current=library)
+        it = again.public_job()['items'][0]
+        self.assertEqual((it['state'], it.get('paused_from'), it['bytes_done'], it['bytes_total']), ('paused', 'unpacking', 0, 0))
+        again.resume()
+        self.assertEqual(self.wait(again)['state'], 'done', again.public_job())
+        self.assertEqual(install.map_name(library), 'CA')
+        library, note = api.startup(self.settings)
+        self.assertFalse((note or {}).get('error'), note)
+        self.assertEqual(install.map_name(library), 'base')
+        install.check_map(library)
+
+    def test_thin_refuses_without_room_for_the_base_map(self):
+        library = self.manage_library()
+        m = self.setup('manage', current=library)
+        it = api._thin_item()
+        m.job = {'state': 'waiting', 'items': [it], 'plan': {'switch': False, 'target': str(library)}}
+        work = self.tmp / 'work'
+        work.mkdir()
+        with mock.patch.object(api.hardware, 'disk_of', return_value=(2 ** 30, 2 ** 40)), self.assertRaises(download.Failed) as e:
+            m._do_thin(it, m.job['plan'], work, Control())
+        self.assertEqual(e.exception.code, 'no_space')
+        self.assertFalse((work / 'unpack-map').exists())
+        self.assertEqual(install.map_name(library), 'CA')
+
+    def test_thin_needs_a_library_first(self):
+        self.assertEqual(self.setup().start(thin_map=True)['code'], 'nothing')
+
+    def test_no_state_address_index_added_on_its_own(self):
+        mf = self.manifest()
+        payload = b'idx' * 100
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, 'w') as z:
+            z.writestr('derived/geo/addresses/CA.sqlite', payload)
+        data = buf.getvalue()
+        self.files.data['Lastbook-Addresses-CA.zip'] = data
+        mf.current['packs'][0]['map'] = 'CA'
+        mf.current['address_indexes'] = [{'id': 'CA', 'title': 'California', 'available': True, 'installed_bytes': len(payload), 'download_bytes': len(data),
+            'files': [{'name': 'Lastbook-Addresses-CA.zip', 'url': f'{self.base}/Lastbook-Addresses-CA.zip', 'size': len(data), 'sha256': sha(data), 'kind': 'zip'}]}]
+        s = self.setup(manifest=mf)
+        j = s.start('small')
+        self.assertEqual([i['kind'] for i in j['items']], ['pack'])
+        s.cancel()
+        with mock.patch.object(api, 'MAPS', True):      # the same manifest does bring the index with the switch on
+            s = self.setup(manifest=mf)
+            j = s.start('small')
+        self.assertEqual([i['kind'] for i in j['items']], ['pack', 'addresses'], j)
+        s.cancel()
+
+
+class FakeLocal:
+    """Stands in for llm_local.LOCAL when the AI is already running: records what setup tells it."""
+
+    def __init__(self, why=None):
+        self.calls, self.why = [], why
+
+    def use_custom(self, path):
+        self.calls.append(('use', path))
+        return self.why
+
+    def clear_custom(self):
+        self.calls.append(('clear',))
+
+
+class ForkCustomModel(Base):
+    """docs/FORK.md: the person's own Gemma 4 GGUF, used where it is, never replaced by the published model."""
+
+    def gguf(self, name='gemma-4-E4B-it-Q4_K_M.gguf', body=b'GGUF' + b'\0' * 1000):
+        p = self.home / 'Documents' / name
+        p.write_bytes(body)
+        return p
+
+    def test_first_run_notes_the_file_and_hands_it_to_the_library(self):
+        p = self.gguf()
+        s = self.setup()
+        r = s.use(str(p))
+        self.assertTrue(r['noted'])
+        self.assertEqual(r['custom_model'], str(p.resolve()))
+        st = s.state()
+        self.assertEqual(st['custom_model']['name'], p.name)
+        self.assertTrue(st['custom_model']['here'])
+        s.start('small')
+        self.assertEqual(self.wait(s)['state'], 'done')
+        library, note = api.startup(self.settings)
+        with mock.patch.dict(sys.modules, {'llm_local': None}):
+            api.opened(self.settings, library, note)
+        d = json.loads((library / 'derived/llm/state.json').read_text())
+        self.assertEqual(d['custom_model'], str(p.resolve()))
+        self.assertNotIn('custom_model', json.loads((self.settings / 'setup.json').read_text()))
+        m = self.setup('manage', current=library)
+        self.assertEqual(m.current_info()['model'], 'custom')
+        self.assertEqual(m.custom_model(), str(p.resolve()))
+
+    def test_not_a_gguf_is_refused(self):
+        p = self.gguf(body=b'not a model')
+        r = self.setup().use(str(p))
+        self.assertEqual(r['code'], 'unknown')
+        self.assertIn('not a GGUF', r['error'])        # the .gguf check said so, not the "not a file Lastbook knows" fallback
+        self.assertIsNone(self.setup().custom_model())
+        other = self.gguf(name='gemma.bin')            # GGUF inside, but not named .gguf: not taken as a model file
+        r = self.setup().use(str(other))
+        self.assertEqual(r['code'], 'unknown')
+        self.assertNotIn('not a GGUF', r['error'])
+        self.assertIsNone(self.setup().custom_model())
+
+    def test_running_ai_is_told_in_manage_mode(self):
+        lib = self.parent / 'LastbookData'
+        (lib / 'library-data').mkdir(parents=True)
+        (lib / 'library-data/catalog.json').write_text('{}')
+        (lib / 'pack.json').write_text('{"name":"small"}')
+        p = self.gguf()
+        self.llm.LOCAL = local = FakeLocal()
+        m = self.setup('manage', current=lib)
+        self.assertTrue(m.use(str(p))['noted'])
+        self.assertEqual(m.clear_custom_model(), {'ok': True})
+        self.assertEqual(local.calls, [('use', str(p.resolve())), ('clear',)])
+        self.assertFalse((lib / 'derived/llm/state.json').exists())      # the AI keeps its own state file
+        local.why = 'That is not a GGUF model file.'
+        self.assertEqual(m.use(str(p)), {'error': local.why, 'code': 'unknown'})
+
+    def test_opened_hands_the_choice_to_an_ai_already_looking(self):
+        p = self.gguf()
+        s = self.setup()
+        s.use(str(p))
+        s.start('small')
+        self.assertEqual(self.wait(s)['state'], 'done')
+        library, note = api.startup(self.settings)
+        fake = mock.Mock(LOCAL=FakeLocal())
+        with mock.patch.dict(sys.modules, {'llm_local': fake}):
+            api.opened(self.settings, library, note)
+        self.assertEqual(fake.LOCAL.calls, [('use', str(p.resolve()))])
+        self.assertNotIn('custom_model', json.loads((self.settings / 'setup.json').read_text()))
+        self.assertFalse((library / 'derived/llm/state.json').exists())
+
+    def test_estimate_and_state_use_the_file(self):
+        p = self.gguf()
+        s = self.setup()
+        s._llm = False          # no measuring thread: the estimate only
+        s.use(str(p))
+        seen = []
+        with mock.patch.object(api.hardware, 'estimate_ai', lambda ram, gpus, unified, memory: seen.append(memory) or {}):
+            s.ai_fit({'ram_bytes': 64 * 2 ** 30, 'gpus': [], 'unified_memory': False})
+        self.assertEqual(seen, [p.stat().st_size + 2 * 2 ** 30])
+        p.unlink()
+        self.assertEqual(s.state()['custom_model'], {'path': str(p.resolve()), 'name': p.name, 'size': None, 'here': False})
+
+    def test_manage_mode_writes_the_library_state_and_clears_it(self):
+        lib = self.parent / 'LastbookData'
+        (lib / 'library-data').mkdir(parents=True)
+        (lib / 'library-data/catalog.json').write_text('{}')
+        (lib / 'pack.json').write_text('{"name":"small"}')
+        p = self.gguf()
+        m = self.setup('manage', current=lib)
+        self.assertTrue(m.use(str(p))['noted'])
+        self.assertEqual(json.loads((lib / 'derived/llm/state.json').read_text())['custom_model'], str(p.resolve()))
+        self.assertEqual(m.current_info()['model'], 'custom')
+        self.assertEqual(m.clear_custom_model(), {'ok': True})
+        self.assertNotIn('custom_model', json.loads((lib / 'derived/llm/state.json').read_text()))
+        self.assertIsNone(m.current_info()['model'])
+
+    def test_repair_never_fetches_the_published_model_over_it(self):
+        files = {'library-data/catalog.json': b'{"records": []}', 'pack.json': b'{"name": "small"}'}
+        rows = ['path\tbytes\tsha256\thow\tchanges'] + [f'{k}\t{len(v)}\t{sha(v)}\tclone\t' for k, v in files.items()]
+        files['pack-manifest.tsv'] = ('\n'.join(rows) + '\n').encode()
+        zpath = self.tmp / 'Lastbook-Small.zip'
+        self.installed = make_pack(zpath, files)
+        self.files.data['Lastbook-Small.zip'] = zpath.read_bytes()
+        lib = install.unpack(zpath, self.parent, self.installed, Control(), lambda d, t: None)
+        m = self.setup('manage', current=lib)
+        m.use(str(self.gguf()))
+        j = m.start(repair=True, ai=True)
+        self.assertEqual([i['kind'] for i in j['items']], ['pack'])
+        self.assertEqual(self.wait(m)['state'], 'done')
+
+    def test_env_variable_wins(self):
+        p, chosen, in_library = self.gguf(), self.gguf('chosen.gguf'), self.gguf('library.gguf')
+        s = self.setup()
+        s.use(str(chosen))                       # first run: noted in setup.json
+        lib = self.parent / 'LastbookData'
+        (lib / 'derived/llm').mkdir(parents=True)
+        (lib / 'derived/llm/state.json').write_text(json.dumps({'custom_model': str(in_library)}))
+        m = self.setup('manage', current=lib)
+        self.assertEqual(s.custom_model(), str(chosen.resolve()))
+        self.assertEqual(m.custom_model(), str(in_library))
+        with mock.patch.dict(os.environ, {'LASTBOOK_MODEL_FILE': str(p)}):
+            self.assertEqual(s.custom_model(), str(p))
+            self.assertEqual(m.custom_model(), str(p))
+
+
+class ForkLocalAI(unittest.TestCase):
+    """llm_local with the person's own file: no checksum, its own size, the published file's rules otherwise unchanged."""
+
+    @classmethod
+    def setUpClass(cls):
+        """Never the real data folder: engine.paths, if this imports it first, and the AI's state file point at a temp folder.
+        What this class imported is dropped again afterwards, so later tests do not find a real llm_local loaded."""
+        cls.data = shorttemp.mkdtemp('lastbook-fork-ai-data-')
+        cls.imported = [n for n in ('llm_local', 'engine.paths') if n not in sys.modules]
+        cls.env = mock.patch.dict(os.environ, {'LASTBOOK_DATA': str(cls.data)})
+        cls.env.start()
+        os.environ.pop('LASTBOOK_MODEL_FILE', None)
+        import llm_local
+        cls.L = llm_local
+        cls.state_file = mock.patch.object(llm_local, 'STATE_FILE', cls.data / 'derived' / 'llm' / 'state.json')
+        cls.state_file.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.state_file.stop()
+        cls.env.stop()
+        for name in cls.imported:
+            sys.modules.pop(name, None)
+            pkg, _, attr = name.rpartition('.')
+            if pkg in sys.modules:
+                vars(sys.modules[pkg]).pop(attr, None)
+        shutil.rmtree(cls.data, ignore_errors=True)
+
+    def setUp(self):
+        self.tmp = shorttemp.mkdtemp('lastbook-fork-ai-')
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+
+    def test_check_and_paths(self):
+        L = self.L
+        good, bad = self.tmp / 'm.gguf', self.tmp / 'x.gguf'
+        good.write_bytes(b'GGUF' + b'\0' * 10)
+        bad.write_bytes(b'nope')
+        self.assertIsNone(L.check_custom(good))
+        self.assertIsNotNone(L.check_custom(bad))
+        self.assertIsNotNone(L.check_custom(self.tmp / 'missing.gguf'))
+        self.assertEqual(L.custom_path({'custom_model': str(good)}), good)
+        self.assertIsNone(L.custom_path({}))
+        with mock.patch.dict(os.environ, {'LASTBOOK_MODEL_FILE': str(bad)}):
+            self.assertEqual(L.custom_path({'custom_model': str(good)}), bad)
+
+    def test_discover_skips_the_checksum_and_measures_the_file(self):
+        L = self.L
+        good = self.tmp / 'gemma-4-E2B.gguf'
+        good.write_bytes(b'GGUF' + b'\0' * 100)
+        local = L.Local()
+        local.saved = {'custom_model': str(good)}
+        local.runner = Path(sys.executable)
+        measured = []
+        with mock.patch.object(L.Local, '_check', side_effect=AssertionError('no checksum for your own file')), \
+             mock.patch.object(L.Local, '_measure', lambda self: measured.append(self.path)), \
+             mock.patch.dict(os.environ, {'LASTBOOK_MODEL_FILE': ''}):
+            local.discover()
+            st = local.status()
+        self.assertEqual(measured, [good])
+        self.assertTrue(st['custom'])
+        self.assertEqual(st['file'], good.name)
+        self.assertEqual(st['size'], good.stat().st_size)
+
+    def test_judge_counts_the_file_it_runs(self):
+        fit = {'status': 'fits', 'ram_total': 64 * 2 ** 30, 'device_bytes': 0, 'host_bytes': 2 ** 30, 'memory': []}
+        with mock.patch.object(sys, 'platform', 'win32'):     # the mapped file is counted where memory is not shared
+            small, big = self.L.judge(fit, 3 * 2 ** 30), self.L.judge(fit)
+        self.assertLess(small['needs'], big['needs'])
+        with mock.patch.object(sys, 'platform', 'darwin'):    # a Mac's one memory: llama.cpp's count already holds it all
+            small, big = self.L.judge(fit, 3 * 2 ** 30), self.L.judge(fit)
+        self.assertEqual(small['needs'], big['needs'])
+
+    def test_use_and_clear_custom(self):
+        L = self.L
+        good, bad = self.tmp / 'm.gguf', self.tmp / 'x.gguf'
+        good.write_bytes(b'GGUF' + b'\0' * 10)
+        bad.write_bytes(b'nope')
+        local = L.Local()
+        local.saved = {}
+        with mock.patch.object(L.Local, 'stop') as stop, mock.patch.object(L.Local, '_rediscover') as again:
+            self.assertEqual(local.use_custom(str(bad)), 'That is not a GGUF model file.')
+            self.assertEqual((stop.call_count, again.call_count), (0, 0))
+            self.assertIsNone(local.use_custom(str(good)))
+            self.assertEqual(local.saved['custom_model'], str(good.resolve()))
+            self.assertEqual(json.loads(L.STATE_FILE.read_text(encoding='utf-8'))['custom_model'], str(good.resolve()))
+            local.custom = True
+            local.clear_custom()
+            self.assertNotIn('custom_model', json.loads(L.STATE_FILE.read_text(encoding='utf-8')))
+            self.assertFalse(local.custom)
+            self.assertEqual((stop.call_count, again.call_count), (2, 2))
+
+    def test_rediscover_waits_for_a_measure_under_way(self):
+        local = self.L.Local()
+        local.state = 'measuring'
+        called = threading.Event()
+        with mock.patch.object(self.L.Local, 'discover', lambda self: called.set()):
+            local._rediscover()
+            self.assertFalse(called.wait(0.8))      # discover() would leave at once while it measures
+            with local.lock:
+                local.state = 'stopped'
+            self.assertTrue(called.wait(5))
 
 
 class ContentRevisions(Base):

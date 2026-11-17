@@ -9,6 +9,9 @@
   const WIN = document.documentElement.classList.contains('plat-win');
   const UNIT = WIN ? 1024 : 1000;   // each system's own way of counting a gigabyte, so the numbers match Finder or Explorer
   const CAN = { removeAi: true, repair: true };   // one switch each, should a build of the engine be without remove-ai or repair
+  /* Fork switch (docs/FORK.md): false = no US state map step and no address-search downloads. The pack's own map stays,
+     and the person may choose to thin it down to the world base map (thin_map). true = the upstream behaviour. */
+  const MAPS = false;
   const MANAGE_ASKED = /manage/.test(location.hash);   // #manage: the bridge allows no ?query on the top page
 
   const ICO = {
@@ -69,11 +72,11 @@
   /* ------------------------------------------------------------ state */
   let S = null;           // GET state
   let view = 'choose';
-  let choice = { pack: null, ai: false, map: null };   // map: the selected state code
+  let choice = { pack: null, ai: false, map: null, thin: false };   // map: the selected state code; thin: remove the pack's detailed map after unpacking
   let folder = '';
   let shortfall = null;   // the answer to a start that had no room: {need_bytes, free_bytes}
   let pollT = 0;
-  let confirmCancel = false, confirmRemove = false, confirmOld = false;
+  let confirmCancel = false, confirmRemove = false, confirmOld = false, confirmThin = false;
   let note = '', noteOk = false;
   let repair = null;      // a repair under way: {fixed} turns true once it had to download something
 
@@ -99,11 +102,12 @@
   const selectedState = () => choice.map || (mapNow() !== 'us' && mapNow()) || ((cur() || {}).address_indexes || [])[0] || '';
   const addresses = () => (S.manifest && S.manifest.address_indexes) || [];
   const addressById = id => addresses().find(a => a.id === id);
-  const addressAdds = () => { const a = addressById(selectedState()); return a && a.available !== false && !((cur() || {}).address_indexes || []).includes(a.id) ? a : null };
-  const mapMissing = () => !selectedState();
-  const mapAdds = () => choice.map && choice.map !== mapNow() && mapNow() !== 'us' ? mapById(choice.map) : null;
+  const addressAdds = () => { if (!MAPS) return null; const a = addressById(selectedState()); return a && a.available !== false && !((cur() || {}).address_indexes || []).includes(a.id) ? a : null };
+  const mapMissing = () => MAPS && !selectedState();
+  const mapAdds = () => MAPS && choice.map &&choice.map !== mapNow() && mapNow() !== 'us' ? mapById(choice.map) : null;
   function packSummary(p) {
     const text = p.summary || '';
+    if (!MAPS) return text;   // the summary as published; the thinning option below the cards says what happens to its map
     if (p.id !== 'medium' || !maps().length) return text;
     // The manifest describes the archive's bundled map. Setup replaces it with the chosen state map.
     const state = selectedState();
@@ -115,6 +119,8 @@
   /* a file already on this computer, of the right size, for a pack or the model: setup uses it instead of downloading */
   const foundFor = (kind, id) => (S.found || []).find(f => f.kind === kind && (f.size_ok !== false) && (kind === 'model' || f.id === id || f.pack === id));
   const aiFits = () => !!(S.hardware && S.hardware.ai && S.hardware.ai.fits);
+  /* fork: the person's own Gemma 4 GGUF, used where it is (docs/FORK.md); then the published model is never downloaded */
+  const custom = () => S.custom_model && S.custom_model.here ? S.custom_model : null;
 
   function diskFor(path) {
     const ds = (S.hardware && S.hardware.disks) || [];
@@ -138,11 +144,12 @@
       if (p.id === c.pack) need += c.map_bytes || 0;
     }
     const m = model();
-    if (choice.ai && m && !c.model && aiFits()) { const got = foundFor('model'); if (!got) { dl += m.size || 0; need += m.size || 0 } else need += m.size || 0 }
+    if (choice.ai && m && !c.model && aiFits() && !custom()) { const got = foundFor('model'); if (!got) { dl += m.size || 0; need += m.size || 0 } else need += m.size || 0 }
     const mp = mapAdds();
     if (mp) { const got = foundFor('map', mp.id); if (!got) dl += packDl(mp); need += (got ? 0 : packDl(mp)) + (mp.installed_bytes || 0) }
     const a = addressAdds();
     if (a) { dl += packDl(a); need += packDl(a) + (a.installed_bytes || 0) }
+    if (need && thinOffered() && choice.thin) need += 1.5 * 1000 ** 3;   // the base map is built beside the detailed one, then they swap
     if (need) need += 2 * 1000 ** 3;
     return { dl, need };
   }
@@ -177,7 +184,7 @@
     else if (view === 'done') doneView();
     if (focus) { const h = main.querySelector('h1'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }) } scrollTo(0, 0) }
   }
-  function go(v) { view = v; confirmCancel = confirmRemove = confirmOld = false; note = ''; render(true) }
+  function go(v) { view = v; confirmCancel = confirmRemove = confirmOld = confirmThin = false; note = ''; render(true) }
 
   /* ---- this computer */
   function computer() {
@@ -211,7 +218,12 @@
         <span class="s-sizes">${off ? 'Not ready to download yet' : here ? 'On this computer' : `<span>${foundFor('pack', p.id) ? 'Already downloaded' : size(packDl(p)) + ' download'}</span><span>${size(p.installed_bytes)} on disk</span>`}</span></span></label>`;
     }).join('');
     let ai = '';
-    if (m && m.available !== false) {
+    const own = custom();
+    if (own) {
+      ai = `<div class="s-opt s-ai" role="group" aria-label="Local AI"><span class="s-opt-in"><span class="s-opt-h"><b>Local AI: your own Gemma 4 file</b><span class="s-badge here">Chosen</span></span>
+          <small>${esc(own.name)}${own.size ? ' · ' + size(own.size) : ''} · used from ${esc(home(own.path))}. ${aiFits() ? 'Nothing to download.' : esc((S.hardware.ai && S.hardware.ai.why) || '')}</small>
+          <span class="s-sizes"><button class="btn plain" id="ownClear">Use the published model instead</button></span></span></div>`;
+    } else if (m && m.available !== false) {
       const has = c && c.model;
       ai = aiFits() || has
         ? `<label class="s-opt s-ai"><input type="checkbox" id="aiBox"${choice.ai || has ? ' checked' : ''}${has ? ' disabled' : ''}>
@@ -234,6 +246,7 @@
       <section id="mapBox" class="s-map-panel" aria-label="Your local map"></section>
       <h2 id="packH">Library</h2>
       <div class="s-opts" role="radiogroup" aria-labelledby="packH">${packCards}</div>
+      <div id="thinBox"></div>
       ${ai ? `<h2>Local AI</h2>${ai}` : ''}
       <section class="s-sum" id="sum" aria-live="polite"></section>
       <div class="s-go">
@@ -244,6 +257,7 @@
       <p class="s-note" id="haveNote" hidden></p>`;
     main.querySelectorAll('input[name=pack]').forEach(r => r.onchange = () => { choice.pack = r.value; shortfall = null; mapSection(); summary() });
     const box = $('#aiBox'); if (box && !box.disabled) box.onchange = () => { choice.ai = box.checked; shortfall = null; summary() };
+    if ($('#ownClear')) $('#ownClear').onclick = async () => { await call('clear-custom', {}).catch(() => { }); S = await call('state').catch(() => S); chooseView() };
     main.querySelectorAll('[data-use]').forEach(b => b.onclick = () => useFile((S.found || [])[+b.dataset.use].path, b));
     $('#start').onclick = start;
     if ($('#toManage')) $('#toManage').onclick = () => go('manage');
@@ -253,9 +267,24 @@
     summary();
   }
   /* Map geometry and address indexes are separate downloads, chosen by state. */
+  /* Fork: the chosen pack carries a detailed map (Medium: California, All: the whole US). The person may have it replaced with
+     the world base map after unpacking. Off unless ticked. */
+  const thinOffered = () => !MAPS && packNeedsInstall(packById(choice.pack)) && !!packMap(choice.pack);
+  function thinSection() {
+    const box = $('#thinBox');
+    if (!box) return;
+    if (!thinOffered()) { box.innerHTML = ''; choice.thin = false; return }
+    const what = packMap(choice.pack) === 'us' ? 'whole-US map' : `${mapName(packMap(choice.pack))} map`;
+    box.innerHTML = `<label class="s-opt s-thin"><input type="checkbox" id="thinBox1"${choice.thin ? ' checked' : ''}>
+      <span class="s-opt-in"><span class="s-opt-h"><b>Remove the bundled ${esc(what)} after unpacking</b><span class="s-badge">Optional</span></span>
+      <small>Saves disk space. The world base map stays. The download is the same size either way.</small></span></label>`;
+    $('#thinBox1').onchange = e => { choice.thin = e.target.checked; summary() };
+  }
   function mapSection() {
+    thinSection();
     const box = $('#mapBox'), now = mapNow();
     if (!box) return;
+    if (!MAPS) { box.remove(); main.querySelectorAll('[data-pack-summary]').forEach(el => { el.textContent = packSummary(packById(el.dataset.packSummary)) }); return }
     main.querySelectorAll('[data-pack-summary]').forEach(el => { el.textContent = packSummary(packById(el.dataset.packSummary)) });
     const selected = selectedState();
     const opts = maps().map(m => {
@@ -332,6 +361,11 @@
     try {
       const r = await call('use', { path });
       if (r && r.error) throw new Error(r.error);
+      if (r && r.noted && r.custom_model) {
+        S = await call('state').catch(() => S); choice.ai = false;
+        if (view === 'manage') { note = 'Your Gemma 4 file will be used from where it is. Chat checks that it fits, then uses it.'; noteOk = true; manageView(); return }
+        chooseView(); const n = $('#haveNote'); n.hidden = false; n.textContent = 'Your Gemma 4 file will be used from where it is. Nothing to download for the local AI.'; return
+      }
       if (r && r.noted) { S = await call('state').catch(() => S); choice.ai = true; chooseView(); const n = $('#haveNote'); n.hidden = false; n.textContent = 'The local AI file will be used. No need to download it.'; return }
       S.job = r; go(r.state === 'done' ? 'done' : 'job'); poll();
     } catch (e) {
@@ -342,7 +376,7 @@
   async function start() {
     if (mapMissing()) { $('#mapSel')?.focus(); return }
     const b = $('#start'); b.disabled = true;
-    const r = await call('start', { pack: packNeedsInstall(packById(choice.pack)) ? choice.pack : null, ai: !!choice.ai && aiFits() && !(cur() || {}).model, map: mapAdds() ? choice.map : null, address_id: addressById(selectedState())?.available !== false && addressById(selectedState()) ? selectedState() : null, folder }).catch(e => ({ error: e.message }));
+    const r = await call('start', { pack: packNeedsInstall(packById(choice.pack)) ? choice.pack : null, ai: !!choice.ai && aiFits() && !(cur() || {}).model && !custom(), map: mapAdds() ? choice.map : null, address_id: MAPS && addressById(selectedState())?.available !== false && addressById(selectedState()) ? selectedState() : null, thin_map: thinOffered() && choice.thin, folder }).catch(e => ({ error: e.message }));
     if (r && r.need_bytes) { shortfall = r; summary(); return }
     if (!r || r.error) { b.disabled = false; const n = $('#haveNote'); n.hidden = false; n.textContent = (r && r.error) || 'Setup could not start.'; return }
     S.job = r; go('job'); poll();
@@ -359,19 +393,39 @@
       <div class="s-have">
         <div class="s-row">${ico('book', 's-ri')}<span><b>${esc(p ? p.title : c.pack || 'Library')} library</b><small>${libraryUpdate ? 'Updated edition available · ' : p ? size(p.installed_bytes) + ' · ' : ''}${esc(home(c.folder))}</small></span>
           ${libraryUpdate ? `<button class="btn" id="libraryUpdate">Update ${esc(p.title)}</button>` : bigger.length ? `<button class="btn" id="upgrade">${ico('up')}Get ${esc(bigger[0].title)}</button>` : later ? `<span class="s-badge later">${esc(later.title)} comes later</span>` : '<span class="s-badge here">The largest</span>'}</div>
-        ${m && m.available !== false ? `<div class="s-row">${ico('ai', 's-ri')}<span><b>Local AI</b><small>${c.model ? 'On this computer · ' + size(m.size) : aiFits() ? 'Not installed · about ' + size(m.size) : esc((S.hardware.ai && S.hardware.ai.why) || 'Not for this computer.')}</small></span>
+        ${c.model === 'custom' && custom() ? `<div class="s-row">${ico('ai', 's-ri')}<span><b>Local AI: your own Gemma 4 file</b><small>${esc(custom().name)}${custom().size ? ' · ' + size(custom().size) : ''} · ${esc(home(custom().path))}</small></span>
+          <span class="s-confirm"><button class="btn plain" id="ownPick">Choose another</button><button class="btn plain" id="ownClear">Use the published model</button></span></div>`
+        : m && m.available !== false ? `<div class="s-row">${ico('ai', 's-ri')}<span><b>Local AI</b><small>${c.model ? 'On this computer · ' + size(m.size) : aiFits() ? 'Not installed · about ' + size(m.size) : esc((S.hardware.ai && S.hardware.ai.why) || 'Not for this computer.')}</small></span>
           ${c.model ? (!CAN.removeAi ? '' : confirmRemove ? `<span class="s-confirm"><button class="btn danger" id="rmYes">Remove</button><button class="btn plain" id="rmNo">Keep</button></span>` : '<button class="btn plain" id="rmAi">Remove</button>') : aiFits() ? `<button class="btn" id="addAi">Add</button>` : ''}</div>` : ''}
-        ${maps().length ? (() => { const mNow = c.map && c.map !== 'base' ? c.map : packMap(c.pack);
+        ${!MAPS ? (() => { const mNow = c.map && c.map !== 'base' ? c.map : packMap(c.pack);   // fork: no state choice; the pack's own detailed map may be removed
+          return `<div class="s-row">${ico('map', 's-ri')}<span><b>${mNow ? 'Detailed map: ' + esc(mapName(mNow)) : 'World base map'}</b><small>${mNow ? 'Came with the library. Removing it keeps the world base map.' : 'Roads, water and relief at country scale.'}</small></span>
+          ${mNow ? (confirmThin ? `<span class="s-confirm"><button class="btn danger" id="thinYes">Remove</button><button class="btn plain" id="thinNo">Keep</button></span>` : '<button class="btn plain" id="thinMap">Remove it</button>') : ''}</div>` })()
+        : maps().length ? (() => { const mNow = c.map && c.map !== 'base' ? c.map : packMap(c.pack);
           return `<div class="s-row">${ico('map', 's-ri')}<span><b>${mNow ? 'Detailed map: ' + esc(mapName(mNow)) : 'Detailed map'}</b><small>${mNow ? (mNow === 'us' ? 'Local streets and terrain everywhere' : 'Local streets, buildings and terrain') : 'None yet. Add one for your state.'}</small></span>
           <button class="btn plain" id="mapCh">${(c.address_indexes || []).length ? 'Choose state' : 'Add address search'}</button></div>` })() : ''}
       </div>
       ${old ? `<div class="s-row s-old">${ico('folder', 's-ri')}<span><b>The old library is still here</b><small>${esc(home(old.path))}${old.bytes ? ' · ' + size(old.bytes) : ''}</small></span>${confirmOld ? `<span class="s-confirm"><span>Delete it for good?</span><button class="btn danger" id="oldYes">Delete</button><button class="btn plain" id="oldNo">Keep</button></span>` : `<button class="btn plain" id="rmOld">${ico('trash')}Delete it</button>`}</div>` : ''}
       ${computer()}
-      ${CAN.repair ? `<div class="s-go left"><button class="btn plain" id="repair">${ico('repair')}Check and repair</button></div>` : ''}
+      <div class="s-go left">${CAN.repair ? `<button class="btn plain" id="repair">${ico('repair')}Check and repair</button>` : ''}
+        ${c.model === 'custom' ? '' : `<button class="btn plain" id="ownPick">${ico('ai')}Use your own Gemma 4 file</button>`}</div>
       <p class="s-note${noteOk ? ' ok' : ''}" id="haveNote"${note ? '' : ' hidden'}>${esc(note)}</p>`;
     if ($('#libraryUpdate')) $('#libraryUpdate').onclick = () => { choice.pack = c.pack; choice.ai = !!c.model; go('choose') };
     if ($('#upgrade')) $('#upgrade').onclick = () => { choice.pack = bigger[0].id; choice.ai = !!c.model; go('choose') };
     if ($('#mapCh')) $('#mapCh').onclick = () => { choice.pack = c.pack; choice.ai = !!c.model; choice.map = null; go('choose'); const m = $('#mapSel'); if (m) m.focus() };
+    if ($('#ownPick')) $('#ownPick').onclick = async () => {
+      const r = await call('pick', { files: true }).catch(() => null);
+      if (r && r.path) return useFile(r.path, $('#ownPick'));
+      if (!r) { note = 'The picker could not open. Try again.'; noteOk = false; manageView() }
+    };
+    if ($('#ownClear')) $('#ownClear').onclick = () => act('clear-custom', 'Lastbook uses the published model again, if it is in the library.');
+    if ($('#thinMap')) $('#thinMap').onclick = () => { confirmThin = true; manageView(); $('#thinNo').focus() };
+    if ($('#thinNo')) $('#thinNo').onclick = () => { confirmThin = false; manageView(); $('#thinMap').focus() };
+    if ($('#thinYes')) $('#thinYes').onclick = async () => {
+      confirmThin = false;
+      const r = await call('start', { thin_map: true }).catch(e => ({ error: e.message }));
+      if (!r || r.error) { note = (r && r.error) || 'Lastbook could not start that.'; noteOk = false; manageView(); return }
+      S.job = r; go('job'); poll();
+    };
     if ($('#addAi')) $('#addAi').onclick = () => { choice.pack = c.pack; choice.ai = true; go('choose') };
     if ($('#rmAi')) $('#rmAi').onclick = () => { confirmRemove = true; manageView(); $('#rmNo').focus() };
     if ($('#rmNo')) $('#rmNo').onclick = () => { confirmRemove = false; manageView(); $('#rmAi').focus() };
@@ -400,6 +454,7 @@
                   model: [['downloading', 'Download'], ['verifying', 'Check'], ['activating', 'Finish']] };
   STEPS.map = [['downloading', 'Download'], ['unpacking', 'Unpack']];   // the engine's map item: waiting, downloading, unpacking, done
   STEPS.addresses = STEPS.map;
+  STEPS.thin = [['unpacking', 'Build base map'], ['activating', 'Finish']];   // fork: nothing to download
   const WORD = { waiting: 'Waiting', downloading: 'Downloading', paused: 'Paused', verifying: 'Checking', unpacking: 'Unpacking', activating: 'Finishing', done: 'Done', failed: 'Stopped' };
   const ACTIVE = new Set(['waiting', 'downloading', 'verifying', 'unpacking', 'activating']);
   let shapeKey = '', lastAct = null;   // lastAct: the button just pressed, so focus lands on what replaced it
@@ -431,13 +486,13 @@
     const at = it.state === 'done' ? steps.length : (it.state === 'waiting' || it.state === 'paused') && !it.bytes_done && !noDownload(it) ? -1 : Math.max(0, steps.findIndex(s => s[0] === st));
     const busy = ['verifying', 'activating'].includes(it.state) || (it.state === 'unpacking' && !it.bytes_total);
     return `<div class="s-item${it.state === 'failed' ? ' bad' : ''}${it.state === 'done' ? ' ok' : ''}" data-item="${esc(it.id)}" data-kind="${esc(it.kind)}">
-      <div class="s-item-h">${ico(it.kind === 'model' ? 'ai' : it.kind === 'map' ? 'map' : 'book', 's-ri')}<b>${esc(itemTitle(it))}</b><span class="s-state" data-f="word">${it.state === 'done' ? ico('ok') : ''}${Object.hasOwn(WORD, it.state) ? WORD[it.state] : ''}</span></div>
+      <div class="s-item-h">${ico(it.kind === 'model' ? 'ai' : it.kind === 'map' || it.kind === 'thin' ? 'map' : 'book', 's-ri')}<b>${esc(itemTitle(it))}</b><span class="s-state" data-f="word">${it.state === 'done' ? ico('ok') : ''}${Object.hasOwn(WORD, it.state) ? WORD[it.state] : ''}</span></div>
       <div class="s-bar new${busy && j.state !== 'paused' ? ' busy' : ''}" role="progressbar" aria-label="${esc(it.title)}" aria-valuemin="0" aria-valuemax="100" data-f="bar"><i></i></div>
       <p class="s-line" data-f="line"></p>
       <ol class="s-steps" aria-label="Steps">${steps.map((s, i) => `<li class="${i < at ? 'done' : i === at && it.state !== 'failed' ? 'now' : i === at ? 'stop' : ''}">${s[1]}</li>`).join('')}</ol>
     </div>`;
   }
-  const itemTitle = it => it.kind === 'model' ? 'Local AI' : it.kind === 'map' ? `${(mapById(it.id) || it).title || it.id} map` : it.kind === 'addresses' ? it.title : it.id === 'library' || it.id === 'repair' || /library/i.test(it.title) ? it.title : it.title + ' library';
+  const itemTitle = it => it.kind === 'thin' ? it.title : it.kind === 'model' ? 'Local AI' : it.kind === 'map' ? `${(mapById(it.id) || it).title || it.id} map` : it.kind === 'addresses' ? it.title : it.id === 'library' || it.id === 'repair' || /library/i.test(it.title) ? it.title : it.title + ' library';
   /* an item that needs nothing from the internet: the person's own file, or one stopped after its download was complete.
      source and paused_from come from the engine (docs/SETUP-API.md); without them, a complete download still counts */
   const noDownload = it => it.source === 'found' || (!!it.paused_from && it.paused_from !== 'downloading') || (it.bytes_total > 0 && it.bytes_done >= it.bytes_total);

@@ -30,6 +30,9 @@ RECOMMEND_MARGIN = 5 * 10 ** 9     # beyond what the install needs, so the disk 
 RECOMMEND_MARGIN_MAX = 20 * 10 ** 9
 MAX_BODY = 64 * 1024
 ACTIVE = ('waiting', 'downloading', 'verifying', 'unpacking', 'activating')
+# Fork switch (docs/FORK.md): False = setup never adds a US state map or address index on its own. A map file the person picks
+# with "Choose a library zip…" still installs. web/setup.js has the matching switch.
+MAPS = False
 
 
 def _now():
@@ -174,7 +177,9 @@ class Setup:
             return None
         if (plan.get('pack') and not pack) or (plan.get('map') and not mp) or (plan.get('model') and not model):
             return None
-        wanted = {('pack', pack['id']) if pack else None, ('map', mp['id']) if mp else None, ('model', model['id']) if model else None, ('addresses', addresses['id']) if addresses else None} - {None}
+        thin = bool(plan.get('thin_map'))
+        wanted = {('pack', pack['id']) if pack else None, ('map', mp['id']) if mp else None, ('model', model['id']) if model else None, ('addresses', addresses['id']) if addresses else None,
+                  ('thin', 'base') if thin else None} - {None}
         if {(i.get('kind'), i.get('id')) for i in items} != wanted:
             return None
         names = ([f['name'] for f in pack['files']] if pack else []) + ([f['name'] for f in mp['files']] if mp else []) + ([f['name'] for f in addresses['files']] if addresses else []) + ([model['file']] if model else [])
@@ -182,7 +187,8 @@ class Setup:
                    if n in names and isinstance(v, str) and Path(v).name == n and Path(v).is_file()}
         switch = bool(plan.get('switch')) and pack is not None
         clean = {'pack': pack, 'model': model, 'map': mp, 'addresses': addresses, 'parent': str(parent), 'target': str(target), 'work': str(work),
-                 'sources': sources, 'explicit': bool(plan.get('explicit')), 'retried': {}, 'switch': switch, 'repair': bool(plan.get('repair'))}
+                 'sources': sources, 'explicit': bool(plan.get('explicit')), 'retried': {}, 'switch': switch, 'repair': bool(plan.get('repair')),
+                 'thin_map': thin}
         if isinstance(plan.get('damaged'), list):
             clean['damaged'] = [str(x) for x in plan['damaged']]
         if plan.get('map_new'):
@@ -196,6 +202,8 @@ class Setup:
 
     def _done_after_restart(self, plan, it, was):
         """(bytes done, bytes total) for an item found mid-run at startup, from what is on disk for the step it was in."""
+        if it['kind'] == 'thin':
+            return 0, 0          # built again from the start on resume
         if was == 'unpacking' and it['kind'] == 'map' and plan.get('map'):
             total = plan['map']['installed_bytes']
             return min(_tree_size(Path(plan['work']) / 'unpack-map'), total), total
@@ -266,6 +274,9 @@ class Setup:
             p = self.current / 'models' / m['file']
             if p.is_file() and p.stat().st_size == m['size']:
                 model = m['id']
+        cm = self.custom_model()
+        if cm and os.path.isfile(cm):
+            model = 'custom'     # fork: the AI uses the person's own file, whether or not the published one is here too
         return {'folder': str(self.current), 'pack': pack, 'content_revision': revision, 'map_bytes': install.map_bytes(self.current), 'model': model, 'map': install.map_name(self.current), 'address_indexes': self.address_indexes(), 'old': self._settings().get('old', [])}
 
     def address_indexes(self):
@@ -332,6 +343,9 @@ class Setup:
         m = self.manifest.model()
         if not m:
             return None
+        cm = self.custom_model()
+        if cm and os.path.isfile(cm):
+            return cm            # fork: measure the person's own file, not the published one
         for f in self.found():
             if f['kind'] == 'model' and f.get('size_ok'):
                 return f['path']
@@ -347,7 +361,11 @@ class Setup:
         if path and not self.measuring and self.llm():
             self.measuring = True
             threading.Thread(target=self._measure, args=(path,), daemon=True, name='setup-measure').start()
-        return hardware.estimate_ai(hw['ram_bytes'], hw['gpus'], hw['unified_memory'], m['memory_bytes'])
+        memory = m['memory_bytes']
+        cm = self.custom_model()
+        if cm and os.path.isfile(cm):      # fork: until it is measured, the file plus room for a 16k context
+            memory = os.path.getsize(cm) + 2 * 2 ** 30
+        return hardware.estimate_ai(hw['ram_bytes'], hw['gpus'], hw['unified_memory'], memory)
 
     def _measure(self, path):
         try:
@@ -413,8 +431,15 @@ class Setup:
     def state(self):
         self.manifest.fetch_once()
         hw = self.hardware()
+        cm = self.custom_model()
+        custom = None
+        if cm:      # fork: the person's own Gemma 4 file
+            try:
+                custom = {'path': cm, 'name': Path(cm).name, 'size': Path(cm).stat().st_size, 'here': True}
+            except OSError:
+                custom = {'path': cm, 'name': Path(cm).name, 'size': None, 'here': False}
         return {'mode': self.mode, 'hardware': hw, 'manifest': self.manifest.public(), 'current': self.current_info(),
-                'found': self.found(), 'recommend': self.recommend(hw), 'job': self.public_job()}
+                'found': self.found(), 'recommend': self.recommend(hw), 'job': self.public_job(), 'custom_model': custom}
 
     def public_job(self):
         with self.lock:
@@ -429,7 +454,9 @@ class Setup:
             return p.parent if p.name == DATA_NAME else p
         return self.current.parent if self.current else self.default_parent
 
-    def start(self, pack_id=None, ai=False, folder=None, sources=None, explicit=False, repair=False, map_id=None, address_id=None):
+    def start(self, pack_id=None, ai=False, folder=None, sources=None, explicit=False, repair=False, map_id=None, address_id=None, thin_map=False):
+        """thin_map (fork): after unpacking, replace the pack's detailed map (California, the whole US) with the world base map.
+        Without a pack, in manage mode: do that to the open library."""
         if repair:
             return self._start_repair(ai)
         with self.lock:
@@ -451,7 +478,7 @@ class Setup:
             if map_id and (not mp or not mp['available']):
                 return {'error': 'That state’s map is not available yet.', 'code': 'unavailable'}
             requested_address = address_id
-            address_id = address_id or map_id or (pack or {}).get('map') or cur.get('map')
+            address_id = address_id or ((map_id or (pack or {}).get('map') or cur.get('map')) if MAPS else None)
             if address_id in ('base', 'us'):
                 address_id = next(iter(cur.get('address_indexes', [])), None)
             addresses = self.manifest.address_index(address_id) if address_id else None
@@ -470,9 +497,10 @@ class Setup:
                 model = None       # already here, and an upgrade in place carries it over
             if mp and not pack and cur.get('map') == mp['id']:
                 mp = None          # this state's map is the one here already
-            if self.mode == 'first-run' and not pack and (model or mp or addresses):
+            thin = bool(thin_map) and not mp and (bool(pack) or (target == self.current and cur.get('map') not in (None, 'base')))
+            if self.mode == 'first-run' and not pack and (model or mp or addresses or thin):
                 return {'error': 'Choose a library first.', 'code': 'nothing'}
-            if not pack and not model and not mp and not addresses:
+            if not pack and not model and not mp and not addresses and not thin:
                 if self.mode == 'first-run':
                     return {'error': 'Choose a library first.', 'code': 'nothing'}
                 return {'error': 'Nothing to add: this library and the local AI are already here.', 'code': 'nothing'}
@@ -498,9 +526,11 @@ class Setup:
             names = ([f['name'] for f in pack['files']] if pack else []) + ([model['file']] if model else []) + ([f['name'] for f in mp['files']] if mp else []) + ([f['name'] for f in addresses['files']] if addresses else [])
             have = set(srcs)
             need = install.need_bytes(pack, model, have) + _map_need(mp, have) + _map_need(addresses, have)
-            preserve_map = bool(pack and cur.get('pack') == pack['id'] and target == self.current and not mp and cur.get('map') not in (None, 'base'))
+            preserve_map = bool(pack and cur.get('pack') == pack['id'] and target == self.current and not mp and not thin and cur.get('map') not in (None, 'base'))
             if preserve_map:
                 need += cur['map_bytes']
+            if thin:
+                need += install.BASE_MAP_BYTES      # the base set is built beside the detailed one before they swap
             for name in names:     # what an earlier run already downloaded is on the disk already
                 if name in have:
                     continue
@@ -520,6 +550,8 @@ class Setup:
             if mp:                 # after the pack: with a pack, the map replaces the pack's own map set in the staged library
                 items.append({'id': mp['id'], 'kind': 'map', 'title': mp['title'], 'state': 'waiting', 'bytes_done': 0,
                               'bytes_total': mp['download_bytes'], 'rate_bps': 0, 'eta_s': None, 'error': None})
+            if thin:               # after the pack's unpack: works on the staged library, or on the open one when there is no pack
+                items.append(_thin_item())
             if addresses:
                 items.append({'id': addresses['id'], 'kind': 'addresses', 'title': addresses['title'] + ' address search', 'state': 'waiting', 'bytes_done': 0,
                               'bytes_total': addresses['download_bytes'], 'rate_bps': 0, 'eta_s': None, 'error': None})
@@ -530,7 +562,7 @@ class Setup:
                         'folder': str(target),
                         'plan': {'pack': pack, 'model': model, 'map': mp, 'addresses': addresses, 'parent': str(parent), 'target': str(target), 'work': str(work),
                                  'sources': {k: v for k, v in srcs.items() if k in names}, 'explicit': explicit,
-                                 'retried': {}, 'switch': bool(pack)}}
+                                 'retried': {}, 'switch': bool(pack), 'thin_map': thin}}
             s = self._settings()
             s['work'] = str(work)
             self._save_settings(s)
@@ -551,7 +583,7 @@ class Setup:
             pack = self.manifest.pack(cur['pack']) if cur['pack'] else None
             if not pack or not pack['available']:
                 return {'error': 'Lastbook cannot tell which library this is, so it cannot repair it. Download a library instead.', 'code': 'unavailable'}
-            model = self.manifest.model() if (ai or cur['model']) else None
+            model = self.manifest.model() if (ai or cur['model']) and cur['model'] != 'custom' else None   # fork: never fetch the published model over the person's own
             parent, target = self.current.parent, self.current
             work = _work_for(target)
             srcs = {f['name']: f['path'] for f in self.found() if f.get('size_ok') and f['kind'] in ('pack', 'model')}
@@ -733,7 +765,66 @@ class Setup:
             if self.mode == 'manage':
                 return self.start(None, True, None, {name: str(p)}, explicit=True)
             return self.public_job() or {'job': None, 'noted': True}
+        if p.suffix.lower() == '.gguf':      # fork: the person's own Gemma 4 file, used where it is
+            return self._use_custom_model(p)
         return {'error': 'That is not a file Lastbook knows. Choose a Lastbook library zip or the model file.', 'code': 'unknown'}
+
+    # ------------------------------------------------------------------------------- fork: your own Gemma 4 GGUF --
+    def custom_model(self):
+        """The person's own model file (docs/FORK.md), or None: LASTBOOK_MODEL_FILE, the open library's AI state, or one chosen
+        during first-run setup and not yet handed to the library."""
+        env = os.environ.get('LASTBOOK_MODEL_FILE')
+        if env:
+            return str(Path(env).expanduser())
+        if self.current:
+            try:
+                d = json.loads((self.current / 'derived' / 'llm' / 'state.json').read_text(encoding='utf-8'))
+                if isinstance(d, dict) and isinstance(d.get('custom_model'), str) and d['custom_model']:
+                    return d['custom_model']
+            except (OSError, ValueError):
+                pass
+        s = self._settings().get('custom_model')
+        return s if isinstance(s, str) and s else None
+
+    def _local(self):
+        llm = self.llm()
+        local = getattr(llm, 'LOCAL', None) if llm else None
+        return local if local is not None and callable(getattr(type(local), 'use_custom', None)) else None
+
+    def _use_custom_model(self, p):
+        try:
+            with open(p, 'rb') as f:
+                gguf = f.read(4) == b'GGUF'
+        except OSError:
+            gguf = False
+        if not gguf:
+            return {'error': 'That is not a GGUF model file.', 'code': 'unknown'}
+        p = p.resolve()
+        local = self._local() if self.mode == 'manage' and self.current else None
+        if local:
+            why = local.use_custom(str(p))
+            if why:
+                return {'error': why, 'code': 'unknown'}
+        elif self.mode == 'manage' and self.current:
+            _merge_json(self.current / 'derived' / 'llm' / 'state.json', {'custom_model': str(p)})
+        else:
+            s = self._settings()
+            s['custom_model'] = str(p)    # first-run: handed to the library when it opens (opened())
+            self._save_settings(s)
+        self.ai_measure = None
+        return self.public_job() or {'job': None, 'noted': True, 'custom_model': str(p)}
+
+    def clear_custom_model(self):
+        local = self._local() if self.current else None
+        if local:
+            local.clear_custom()
+        elif self.current:
+            _merge_json(self.current / 'derived' / 'llm' / 'state.json', {'custom_model': None})
+        s = self._settings()
+        s.pop('custom_model', None)
+        self._save_settings(s)
+        self.ai_measure = None
+        return {'ok': True}
 
     def finish(self):
         with self.lock:
@@ -849,6 +940,8 @@ class Setup:
                     self._do_map(it, plan, work, control)
                 elif it['kind'] == 'addresses':
                     self._do_addresses(it, plan, work, control)
+                elif it['kind'] == 'thin':
+                    self._do_thin(it, plan, work, control)
                 else:
                     self._do_model(it, plan, work, control)
                 with self.lock:
@@ -994,6 +1087,26 @@ class Setup:
             if ours:
                 os.unlink(path)
 
+    def _do_thin(self, it, plan, work, control):
+        """Fork: the detailed map the pack brought (or the open library has) becomes the world base map. With a pack it is done
+        in the staged library at once; on its own it is staged in unpack-map/ and switched in when the app restarts, as a state
+        map is. A library whose map is the base one already is left alone."""
+        src = work / 'unpack' / DATA_NAME if plan['switch'] else Path(self.current or plan['target'])
+        if install.map_name(src) == 'base':
+            return
+        self._set(it, 'unpacking', bytes_done=0, bytes_total=0)
+        free, _ = hardware.disk_of(work)
+        if free < install.BASE_MAP_BYTES + 512 * 2 ** 20:
+            raise download.Failed('no_space', f'Building the base map needs {_gb(install.BASE_MAP_BYTES)} free, and the disk has {_gb(free)}.')
+        staged = work / 'unpack-map'
+        base = install.thin_to_base(src, staged / DATA_NAME, control)
+        self._set(it, 'activating')
+        if plan['switch']:
+            install.replace_map_in(src, base)
+            shutil.rmtree(staged, ignore_errors=True)
+        else:
+            plan['map_new'] = str(base)
+
     def _do_addresses(self, it, plan, work, control):
         entry = plan['addresses']
         relative = 'derived/geo/addresses/' + entry['id'] + '.sqlite'
@@ -1084,10 +1197,34 @@ def path_too_deep(target, windows=None):
     return windows and len(str(target)) + 1 + LONGEST_INSIDE > WINDOWS_MAX_PATH
 
 
+def _merge_json(path, values):
+    """Fork: set (or, with None, drop) keys in a small JSON settings file."""
+    try:
+        d = json.loads(Path(path).read_text(encoding='utf-8'))
+        d = d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        d = {}
+    for k, v in values.items():
+        if v is None:
+            d.pop(k, None)
+        else:
+            d[k] = v
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    install._write_json(Path(path), d)
+
+
+def _thin_item():
+    return {'id': 'base', 'kind': 'thin', 'title': 'Remove the detailed map', 'state': 'waiting', 'bytes_done': 0,
+            'bytes_total': 0, 'rate_bps': 0, 'eta_s': None, 'error': None}
+
+
 def _tag_sources(job):
     """Each item's source: 'found' when all its files are already on this computer (plan.sources), else 'download'."""
     plan = job['plan']
     for it in job['items']:
+        if it['kind'] == 'thin':
+            it['source'] = 'found'      # built from what is here: nothing to download
+            continue
         if it['kind'] == 'pack' and plan.get('pack'):
             names = [f['name'] for f in plan['pack']['files']]
         elif it['kind'] == 'map' and plan.get('map'):
@@ -1174,6 +1311,18 @@ def opened(settings_dir, data, note):
     except (OSError, ValueError):
         s = {}
     work = Path(s['work']) if s.get('work') else None
+    if isinstance(s.get('custom_model'), str) and s['custom_model'] and data:   # fork: the model file chosen during first-run setup
+        try:
+            chosen = s.pop('custom_model')
+            loaded = sys.modules.get('llm_local')     # the engine started first and the AI may be looking already: tell it
+            if loaded is not None and getattr(loaded, 'LOCAL', None) is not None and hasattr(loaded.LOCAL, 'use_custom'):
+                why = loaded.LOCAL.use_custom(chosen)
+                if why:
+                    print('setup: custom model:', why, flush=True)
+            else:
+                _merge_json(Path(data) / 'derived' / 'llm' / 'state.json', {'custom_model': chosen})
+        except OSError as e:
+            print('setup: custom model:', type(e).__name__, e, flush=True)
     if note and note.get('model_file') and note.get('model_sha256') and os.path.isfile(note['model_file']):
         try:
             import llm_local      # imported here, after LASTBOOK_DATA names the library: its state file lives there
@@ -1229,7 +1378,7 @@ def _default():
 ROUTES = {
     ('GET', 'state'): lambda s, b: s.state(),
     ('GET', 'job'): lambda s, b: s.public_job(),
-    ('POST', 'start'): lambda s, b: s.start(b.get('pack'), bool(b.get('ai')), b.get('folder'), repair=bool(b.get('repair')), map_id=b.get('map') or None, address_id=b.get('address_id') or None),
+    ('POST', 'start'): lambda s, b: s.start(b.get('pack'), bool(b.get('ai')), b.get('folder'), repair=bool(b.get('repair')), map_id=b.get('map') or None, address_id=b.get('address_id') or None, thin_map=b.get('thin_map') is True),
     ('POST', 'pause'): lambda s, b: s.pause(),
     ('POST', 'resume'): lambda s, b: s.resume(),
     ('POST', 'cancel'): lambda s, b: s.cancel(),
@@ -1239,6 +1388,7 @@ ROUTES = {
     ('POST', 'pick'): lambda s, b: s.pick(files=b.get('files') is True),
     ('POST', 'delete-old'): lambda s, b: s.delete_old(b.get('path')),
     ('POST', 'remove-ai'): lambda s, b: s.remove_ai(),
+    ('POST', 'clear-custom'): lambda s, b: s.clear_custom_model(),     # fork: back to the published model file
 }
 
 

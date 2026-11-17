@@ -407,6 +407,93 @@ def replace_map_in(staged, new):
         os.replace(new / rel, staged / rel)
 
 
+BASE_MAP_BYTES = int(1.5 * 1000 ** 3)    # about what the world base map set takes once built (pack-spec.json: map_sets.base, 1.4 GB)
+
+
+def thin_to_base(src, dest, control=None):
+    """Fork addition (docs/FORK.md): build the world base map set from a library's detailed one, into dest (a LastbookData
+    holding only map files, with a map-set.json named 'base'). The same rules as packaging/build_packs.py base_set: roads and
+    water at low zoom, relief to zoom 7, places that are not from OpenStreetMap, an empty street map, no buildings, crops or
+    atlas. A state or whole-US set is the base set plus rows inside its box, so this gives the base set back.
+    src is only read. Raises Refused if src has no detailed map to thin."""
+    import sqlite3
+    src, dest = Path(src), Path(dest)
+    geo_src, geo = src / 'derived' / 'geo', dest / 'derived' / 'geo'
+    for name in ('national', 'water', 'terrain', 'places', 'map'):
+        if not (geo_src / f'{name}.sqlite').is_file():
+            raise Refused('unpack', f'The library has no {name}.sqlite to build the base map from.')
+    if dest.exists():
+        shutil.rmtree(dest)
+    geo.mkdir(parents=True)
+
+    def stop_if_asked():
+        if control is not None:
+            control.check()     # pause or cancel between files; a resumed job builds the base set again from the start
+
+    def empty_like(src_db, out, tables):
+        src_db = src_db.resolve()
+        db = sqlite3.connect(out.resolve().as_uri() + '?mode=rwc', uri=True)    # opened as a URI so the ATTACH below may be one too
+        db.execute('PRAGMA journal_mode=DELETE')
+        db.execute('PRAGMA synchronous=OFF')
+        s = sqlite3.connect(src_db.as_uri() + '?immutable=1', uri=True)    # the open library may be reading it: read-only, no locks
+        try:
+            for name, sql in s.execute("SELECT name,sql FROM sqlite_master WHERE type='table' AND sql IS NOT NULL").fetchall():
+                if name in tables:
+                    db.execute(sql)
+            for tbl, sql in s.execute("SELECT tbl_name,sql FROM sqlite_master WHERE type='index' AND sql IS NOT NULL").fetchall():
+                if tbl in tables:
+                    db.execute(sql)
+        finally:
+            s.close()
+        db.execute('ATTACH DATABASE ? AS src', (src_db.as_uri() + '?immutable=1',))
+        return db
+
+    def finish(db):
+        db.commit()
+        db.execute('DETACH DATABASE src')
+        db.close()
+
+    def has(db, table):
+        return db.execute("SELECT 1 FROM src.sqlite_master WHERE name=?", (table,)).fetchone() is not None
+
+    db = empty_like(geo_src / 'national.sqlite', geo / 'national.sqlite', ['feat', 'feat_idx', 'poi', 'meta'])
+    db.execute('INSERT INTO feat SELECT * FROM src.feat WHERE minz<=8')
+    db.execute('INSERT INTO feat_idx SELECT i.* FROM feat f CROSS JOIN src.feat_idx i ON i.id=f.id')
+    features = db.execute('SELECT count(*) FROM feat').fetchone()[0]
+    status = json.dumps({'state': 'complete', 'stage': 'ready', 'features': features})
+    db.execute("INSERT INTO meta VALUES('status',?)", (status,))
+    finish(db)
+    stop_if_asked()
+    db = empty_like(geo_src / 'water.sqlite', geo / 'water.sqlite', ['resource', 'spatial', 'feat', 'feat_idx', 'meta', 'water_fts'])
+    db.execute('INSERT INTO feat SELECT * FROM src.feat WHERE minz<=9')
+    db.execute('INSERT INTO feat_idx SELECT i.* FROM feat f CROSS JOIN src.feat_idx i ON i.id=f.id')
+    if has(db, 'meta'):
+        db.execute('INSERT INTO meta SELECT * FROM src.meta')
+    finish(db)
+    stop_if_asked()
+    db = empty_like(geo_src / 'terrain.sqlite', geo / 'terrain.sqlite', ['tile', 'meta'])
+    db.execute('INSERT INTO tile SELECT * FROM src.tile WHERE z<=7')
+    if has(db, 'meta'):
+        db.execute('INSERT INTO meta SELECT key,value FROM src.meta')
+        db.execute('PRAGMA secure_delete=ON')      # as base_set's scrub_terrain: a note in parentheses after the source goes
+        db.execute("UPDATE meta SET value=trim(substr(value,1,instr(value||'(','(')-1)) WHERE key='source'")
+    finish(db)
+    stop_if_asked()
+    db = empty_like(geo_src / 'places.sqlite', geo / 'places.sqlite', ['place', 'place_fts'])
+    db.execute("INSERT INTO place SELECT * FROM src.place WHERE source<>'OpenStreetMap'")
+    if db.execute("SELECT 1 FROM sqlite_master WHERE name='place_fts'").fetchone():
+        db.execute("INSERT INTO place_fts(place_fts) VALUES('rebuild')")
+    finish(db)
+    db = empty_like(geo_src / 'map.sqlite', geo / 'map.sqlite', ['feat', 'feat_idx', 'poi', 'meta'])
+    finish(db)
+    (geo / 'national-status.json').write_text(status, encoding='utf-8')
+    (geo / 'socal-cells.json').write_text('[]', encoding='utf-8')
+    files = {p.relative_to(dest).as_posix(): p.stat().st_size for p in dest.rglob('*') if p.is_file()}
+    _write_json(dest / 'map-set.json', {'name': 'base', 'files': files, 'bytes': sum(files.values()), 'thinned_from': map_name(src)})
+    check_map(dest)
+    return dest
+
+
 def _apply_map(work, pend, d, target, note):
     """A state map staged for the open library: swap its files in; if the library then does not check out, swap the old ones back."""
     old_dir = Path(work) / 'map-old'

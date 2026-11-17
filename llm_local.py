@@ -79,6 +79,37 @@ def _stamp(p):
     return [str(p), st.st_size, st.st_mtime_ns]
 
 
+# ------------------------------------------------------------------------------------- fork: your own Gemma 4 GGUF --
+# docs/FORK.md. A Gemma 4 GGUF of the person's choosing (E2B, E4B, another quant), used where it is. It is not the published
+# file, so it has no SHA-256 to check: only that it is a GGUF file. llama.cpp still measures whether it fits. It must be a
+# Gemma 4 model: the prompt format below is Gemma 4's.
+def is_gguf(path):
+    try:
+        with open(path, 'rb') as f:
+            return f.read(4) == b'GGUF'
+    except OSError:
+        return False
+
+
+def custom_path(saved=None):
+    """The person's own model file: LASTBOOK_MODEL_FILE, else the one chosen in setup (state.json custom_model), else None."""
+    env = os.environ.get('LASTBOOK_MODEL_FILE')
+    if env:
+        return Path(env).expanduser()
+    p = (saved if saved is not None else LOCAL.saved).get('custom_model')
+    return Path(p) if isinstance(p, str) and p else None
+
+
+def check_custom(path):
+    """None if this file can be used as the person's own model, else a sentence why not."""
+    p = Path(path or '').expanduser()
+    if not p.is_file():
+        return 'Lastbook cannot find that file.'
+    if p.suffix.lower() != '.gguf' or not is_gguf(p):
+        return 'That is not a GGUF model file.'
+    return None
+
+
 def mark_checked(path, sha256):
     """For setup: it has just checked this file's SHA-256 while downloading it, so the AI need not read it again.
     sha256 is the digest setup computed; it must be the published one, or nothing is recorded."""
@@ -109,6 +140,7 @@ class Local:
         self.gen_lock = threading.Lock()       # one answer at a time: the model holds one conversation
         self.state, self.pct, self.message = 'absent', None, ''
         self.path, self.fit, self.ready_info = None, None, None
+        self.custom = False                    # fork: the active file is the person's own (custom_path), not the published one
         self.proc, self.events, self.last_used = None, None, 0
         self.next_id = 0
         self.failed_loads = 0     # loads in a row that ended before the model was ready
@@ -120,7 +152,16 @@ class Local:
     def status(self):
         with self.lock:
             fit = self.fit or {}
-            return {'name': NAME, 'file': FILE, 'size': SIZE, 'state': self.state, 'pct': self.pct, 'message': self.message,
+            cp = custom_path(self.saved)
+            if cp:
+                try:
+                    csize = cp.stat().st_size
+                except OSError:
+                    csize = None
+                name, file, size = f'{cp.stem} (your own Gemma 4 file)', cp.name, csize
+            else:
+                name, file, size = NAME, FILE, SIZE
+            return {'name': name, 'file': file, 'size': size, 'custom': bool(cp), 'custom_path': str(cp) if cp else None, 'state': self.state, 'pct': self.pct, 'message': self.message,
                     'found_at': self.path and _folder_name(self.path), 'enabled': self.enabled(), 'runtime': bool(self.runner),
                     'needs_bytes': fit.get('needs'), 'ram_total': fit.get('ram_total'), 'placement': fit.get('placement'),
                     'load_s': (self.ready_info or {}).get('load_s'), 'places': [_folder_name(p) for p in places()[:6]]}
@@ -154,6 +195,18 @@ class Local:
                 self.state, self.message = 'error', 'This copy of Lastbook has no local AI runtime.'
                 return
             self.state, self.pct, self.message = 'absent', None, ''
+        cp = custom_path(self.saved)
+        if cp:                       # fork: the person's own file, used where it is; no published checksum to compare with
+            why = check_custom(cp)
+            with self.lock:
+                if why:
+                    self.state, self.custom = ('absent' if not cp.is_file() else 'wrong'), True
+                    self.message = f'Your model file {cp.name}: {why}'
+                    return
+                self.path, self.custom = cp, True
+            self._measure()
+            return
+        self.custom = False
         found, wrong = None, None
         for folder in places():
             p = folder / FILE
@@ -226,7 +279,11 @@ class Local:
                 if out is not None:
                     print('local AI: measure output:', out.stdout[-2000:], out.stderr[-3000:], flush=True)
                 return
-            self.fit = judge(fit)
+            try:
+                size = self.path.stat().st_size
+            except OSError:
+                size = SIZE
+            self.fit = judge(fit, size)
             print('local AI: fit', json.dumps(self.fit), flush=True)
             if self.fit['fits']:
                 self.state, self.message = 'stopped', ''
@@ -351,6 +408,41 @@ class Local:
             with self.lock:
                 self.state, self.message = 'off', ''
 
+    def use_custom(self, path):
+        """Fork: use the person's own Gemma 4 GGUF from where it is. Returns None, or a sentence why not."""
+        p = Path(path).expanduser()
+        why = check_custom(p)
+        if why:
+            return why
+        self.stop('another model file was chosen')
+        self.saved['custom_model'] = str(p.resolve())
+        _save(self.saved)
+        with self.lock:
+            self.path, self.fit, self.ready_info = None, None, None
+        self._rediscover()
+        return None
+
+    def clear_custom(self):
+        """Fork: back to the published model file."""
+        self.stop('back to the published model')
+        self.saved.pop('custom_model', None)
+        _save(self.saved)
+        with self.lock:
+            self.path, self.fit, self.ready_info, self.custom = None, None, None, False
+        self._rediscover()
+
+    def _rediscover(self):
+        """Look again once a check or measure already under way has ended (discover() leaves while one runs)."""
+        def go():
+            for _ in range(1200):
+                with self.lock:
+                    busy = self.state in ('checking', 'measuring')
+                if not busy:
+                    break
+                time.sleep(0.5)
+            self.discover()
+        threading.Thread(target=go, daemon=True, name='local-ai-refind').start()
+
     def _idle_watch(self):
         while True:
             time.sleep(min(30, IDLE_STOP / 4))
@@ -408,7 +500,7 @@ class Local:
 LOCAL = Local()
 
 
-def judge(fit):
+def judge(fit, model_bytes=SIZE):
     """Does the whole of it fit this computer? llama.cpp's fit places the model on the graphics memory it finds and counts
     the rest as the computer's own memory, which it takes to be unlimited. So the computer's own memory is checked here:
     on a Mac the two are one memory; on Windows the part placed on the graphics card is not in it."""
@@ -418,7 +510,7 @@ def judge(fit):
     unified = sys.platform == 'darwin'
     # Windows: weights left in the mapped file (not on a graphics card, not repacked) are outside llama.cpp's count, yet in use
     # while answering. Measured with no GPU: the fit said 9.6 GB, the program held 16.5 to 26 GB.
-    mapped = 0 if unified else max(0, SIZE - sum(m.get('model') or 0 for m in fit.get('memory') or []))
+    mapped = 0 if unified else max(0, model_bytes - sum(m.get('model') or 0 for m in fit.get('memory') or []))
     in_ram = dev + host if unified else host + mapped
     needs = in_ram + RESERVE
     placement = [{'device': m.get('desc') or m.get('name'), 'bytes': m['model'] + m['context'] + m['compute'], 'free': m.get('free')} for m in devices]
