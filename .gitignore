@@ -19,3 +19,6 @@ build/
 *.dmg
 *.exe
 *.zip
+
+# Fork: run-from-source files copied from an upstream release (README, "Run this fork")
+/app/webview2/

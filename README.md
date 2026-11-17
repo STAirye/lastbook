@@ -25,6 +25,9 @@ Design notes, what is and isn't checked, and how to switch back: [docs/FORK.md](
    Copy the release's runner folder (on Windows `%LOCALAPPDATA%\Programs\Lastbook\_internal\llm\`) to
    `derived/llm/bin-win/` (`bin-mac/` or `bin-linux/` elsewhere). You can also build it with `packaging/llm/build_llm_*.sh`.
    Without it, Lastbook still works, but Chat only finds pages and doesn't write answers.
+   **Windows also needs the WebView2 SDK DLLs** for its window. Copy `Microsoft.Web.WebView2.Core.dll`,
+   `Microsoft.Web.WebView2.WinForms.dll` and `WebView2Loader.dll` from the release's `_internal\webview2\` to `app\webview2\`.
+   Without them you get "Lastbook could not load the files it needs to show its window". git ignores both folders.
 3. **A library** (data folder). Use one you already have, or let setup download one on first run.
 4. **Your Gemma 4 GGUF** (optional). Download any Gemma 4 GGUF, for example a Q4_K_M quant of E4B or E2B from Hugging
    Face. An SSD makes it load faster.
