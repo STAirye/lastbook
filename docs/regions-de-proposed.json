@@ -1,0 +1,933 @@
+{
+  "about": "Proposed region definitions for detailed maps of Germany: 16 states (Länder), one region each. See docs/REGIONS-DE.md.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "ISO 3166-2:DE codes, DE-BW to DE-TH.",
+    "why": "A bare DE already means Delaware in STATE_CODES (engine/address_search.py). None of the 16 two-letter state parts is a US code.",
+    "verified": "The ISO 3166-2 codes were not checked against the ISO site in this change."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "dams": "water.sqlite (nid part today)",
+    "crops": "crops.sqlite",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite"
+  },
+  "licences": {
+    "dl-de-by-2.0": {
+      "name": "Datenlizenz Deutschland - Namensnennung - Version 2.0",
+      "url": "https://www.govdata.de/dl-de/by-2-0",
+      "attribution": "Name the provider, note changes, link the licence. BKG: \"© BKG (year of last download) dl-de/by-2-0\" plus a link to https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf",
+      "share_alike": false,
+      "verified": "BKG VG250 terms opened 2026-11-17; licence text itself not reopened"
+    },
+    "dl-de-zero-2.0": {
+      "name": "Datenlizenz Deutschland - Zero - Version 2.0",
+      "url": "https://www.govdata.de/dl-de/zero-2-0",
+      "attribution": "none required",
+      "share_alike": false,
+      "verified": "named on Berlin's and North Rhine-Westphalia's records, opened 2026-11-17; licence text not reopened"
+    },
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Credit the publisher, link the licence, say if changed.",
+      "share_alike": false,
+      "verified": "licence text not reopened"
+    },
+    "CC-BY-SA-4.0": {
+      "name": "Creative Commons Attribution-ShareAlike 4.0 International",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Credit, link, note changes; share adaptations under the same licence.",
+      "share_alike": true,
+      "verified": "named in Rhineland-Palatinate's site footer only; which products it covers is not stated"
+    },
+    "ODbL-1.0": {
+      "name": "Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\"",
+      "share_alike": true,
+      "verified": "as for the US map"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "url": "see docs/regions-proposed.json",
+      "attribution": "see docs/regions-proposed.json",
+      "share_alike": false,
+      "verified": "as in docs/regions-proposed.json"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "State DGM1 models (see state_sources)",
+        "publisher": "the 16 state surveying agencies",
+        "url": null,
+        "licence": "per state",
+        "verified": "see state_sources",
+        "role": "primary",
+        "notes": "Bare-earth laser-scan models; resample to about 30 m, the size of the US 1 arc-second terrain."
+      },
+      {
+        "dataset": "Copernicus DEM GLO-30 Public",
+        "publisher": "ESA / Airbus",
+        "url": "https://registry.opendata.aws/copernicus-dem/",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "AWS page opened; licence text not checked",
+        "role": "fallback",
+        "notes": "Surface model. For DE-RP and DE-SL, which have no bulk DGM1 download. Germany tile completeness not checked."
+      },
+      {
+        "dataset": "DGM200 (200 m)",
+        "publisher": "BKG",
+        "url": "https://gdz.bkg.bund.de/index.php/default/digitales-gelandemodell-gitterweite-200-m-dgm200.html",
+        "licence": "dl-de-by-2.0",
+        "verified": "2026-11-17",
+        "role": "coarse national"
+      }
+    ],
+    "water": [
+      {
+        "dataset": "OSM waterways and water areas (Geofabrik Germany extract)",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/europe/germany.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "germany-latest.osm.pbf, 4,884,969,326 bytes on 2026-11-17."
+      },
+      {
+        "dataset": "DLM250 (water features)",
+        "publisher": "BKG",
+        "url": "https://gdz.bkg.bund.de/index.php/default/open-data/digitales-landschaftsmodell-1-250-000-ebenen-dlm250-ebenen.html",
+        "licence": "dl-de-by-2.0",
+        "verified": "2026-11-17",
+        "role": "cross-check",
+        "notes": "Layer names for water not confirmed."
+      }
+    ],
+    "dams": [
+      {
+        "dataset": "OSM waterway=dam and reservoir areas",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://wiki.openstreetmap.org/wiki/Tag:waterway%3Ddam",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "No open German dam inventory found."
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "Agricultural land use (raster) 2024, v302",
+        "publisher": "Thünen-Institut",
+        "url": "https://zenodo.org/records/17197830",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Class list in legend files not read; data URL 'available on request'."
+      },
+      {
+        "dataset": "CORINE Land Cover 5 ha 2018 (CLC5-2018)",
+        "publisher": "BKG",
+        "url": "https://gdz.bkg.bund.de/index.php/default/open-data/corine-land-cover-5-ha-stand-2018-clc5-2018.html",
+        "licence": "dl-de-by-2.0",
+        "verified": "2026-11-17",
+        "role": "fallback",
+        "notes": "CORINE nomenclature generally has vineyards and fruit trees and berry plantations; not confirmed in BKG's documentation."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "OSM buildings / Overture buildings",
+        "publisher": "OpenStreetMap contributors; Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/attribution",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary"
+      },
+      {
+        "dataset": "State building outlines (Hausumringe) where published in bulk",
+        "publisher": "the state surveying agencies",
+        "url": null,
+        "licence": "per state",
+        "verified": "see state_sources",
+        "role": "alternative"
+      }
+    ],
+    "places": [
+      {
+        "dataset": "Geographische Namen 1:250 000 (GN250)",
+        "publisher": "BKG",
+        "url": "https://gdz.bkg.bund.de/index.php/default/open-data/geographische-namen-1-250-000-gn250.html",
+        "licence": "dl-de-by-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "About 170,000 names, data as of 31 Dec 2024."
+      },
+      {
+        "dataset": "Verwaltungsgebiete 1:250 000 (VG250), municipalities",
+        "publisher": "BKG",
+        "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+        "licence": "dl-de-by-2.0",
+        "verified": "2026-11-17",
+        "role": "primary"
+      },
+      {
+        "dataset": "GeoNames postal codes, Germany (DE.zip)",
+        "publisher": "GeoNames",
+        "url": "https://download.geonames.org/export/zip/DE.zip",
+        "licence": "CC-BY-4.0",
+        "verified": "search only (licence as stated by suche-postleitzahl.org)",
+        "role": "supplement"
+      },
+      {
+        "dataset": "OSM named places",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/europe/germany.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "supplement"
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "Overture addresses",
+        "publisher": "Overture Maps Foundation, from the states through OpenAddresses",
+        "url": "https://docs.overturemaps.org/attribution",
+        "licence": "per state",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "15 of 16 states; Bavaria not listed. Guide gives about 19.3 million German addresses, 'partial coverage'."
+      },
+      {
+        "dataset": "OSM addr:*",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/europe/germany.html",
+        "licence": "ODbL-1.0",
+        "verified": "coverage not measured",
+        "role": "gap filler for DE-BY"
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OSM amenities as the US map uses them",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://taginfo.geofabrik.de/europe:germany/",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "counts_as_of": "2026-11-16T21:22Z",
+        "counts": {
+          "amenity=pharmacy": 17141,
+          "amenity=fire_station": 29226,
+          "amenity=police": 3895,
+          "amenity=hospital": 2347,
+          "amenity=drinking_water": 9160,
+          "man_made=water_well": 15967,
+          "emergency=water_tank": 7887,
+          "emergency=drinking_water": 1952
+        }
+      },
+      {
+        "dataset": "Emergency drinking water wells, OSM emergency=drinking_water",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://wiki.openstreetmap.org/wiki/DE:Tag:emergency=drinking_water",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "proposed new kind",
+        "notes": "1,952 nodes, mostly Berlin. No published national list."
+      },
+      {
+        "dataset": "Krankenhausverzeichnis 2024",
+        "publisher": "Statistische Ämter des Bundes und der Länder",
+        "url": "https://www.statistikportal.de/de/veroeffentlichungen/krankenhausverzeichnis",
+        "licence": null,
+        "verified": "2026-11-17",
+        "role": "cross-check",
+        "notes": "XLSX, reuse with source note; no coordinates."
+      }
+    ]
+  },
+  "not_open_nationwide": [
+    "BKG DGM25",
+    "BKG DGM5",
+    "BKG DGM1",
+    "HU-DE",
+    "LoD1-DE",
+    "LoD2-DE",
+    "HK-DE",
+    "GA"
+  ],
+  "addressing": {
+    "postal_code": {
+      "format": "Five digits; leading zeros are common (01xxx in Saxony).",
+      "example_pattern": "00000"
+    },
+    "order": "Street, then house number, then postcode and town (\"Hauptstraße 5, 10115 Berlin\").",
+    "notes": "normalize() and norm() keep only a-z and 0-9 (\"Müllerstraße\" becomes \"m llerstra e\"); is_address_query() needs a number first; _parts() reads a postcode only as the last word; tools/build_addresses.py keeps only country = 'US' and two letters of the region. Checked in this repository on 2026-11-17."
+  },
+  "regions": [
+    {
+      "code": "DE-SH",
+      "name": "Schleswig-Holstein",
+      "name_en": "Schleswig-Holstein",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "01",
+      "bbox": {
+        "west": 7.8691,
+        "south": 53.3598,
+        "east": 11.3129,
+        "north": 55.0588,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          7.71,
+          53.2,
+          11.47,
+          55.21
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1, DGM2",
+        "buildings": "Hausumringe, LoD1, LoD2",
+        "addresses": "Hauskoordinaten",
+        "licence": "CC-BY-4.0",
+        "attribution": "© GeoBasis-DE/LVermGeo SH/CC-BY 4.0",
+        "bulk": "portal refused its certificate",
+        "url": "https://www.schleswig-holstein.de/DE/landesregierung/ministerien-behoerden/LVERMGEOSH/Downloads/downloadsTestdaten_mehrLesen",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": "CC-BY-4.0"
+      }
+    },
+    {
+      "code": "DE-HH",
+      "name": "Hamburg",
+      "name_en": "Hamburg",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "city-state",
+      "ags": "02",
+      "bbox": {
+        "west": 8.4199,
+        "south": 53.3951,
+        "east": 10.326,
+        "north": 53.9644,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          8.26,
+          53.24,
+          10.48,
+          54.12
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "LoD2, ALKIS selected data",
+        "addresses": "only a 2014/15 archive",
+        "licence": "dl-de-by-2.0",
+        "attribution": "Freie und Hansestadt Hamburg, Landesbetrieb Geoinformation und Vermessung (LGV)",
+        "bulk": "whole-city ZIPs",
+        "url": "https://transparenz.hamburg.de/dataset/digitales-hoehenmodell-hamburg-dgm-16",
+        "verified": "2026-11-17",
+        "notes": "Elevation dataset to be moved to MetaVer.",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    },
+    {
+      "code": "DE-NI",
+      "name": "Niedersachsen",
+      "name_en": "Lower Saxony",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "03",
+      "bbox": {
+        "west": 6.6393,
+        "south": 51.2952,
+        "east": 11.5981,
+        "north": 53.8923,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          6.48,
+          51.14,
+          11.75,
+          54.05
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe, LoD1, LoD2",
+        "addresses": "Hauskoordinaten, openness not confirmed",
+        "licence": "CC-BY-4.0",
+        "bulk": "bulk tool, GeoPackage per district",
+        "url": "https://opengeodata.lgln.niedersachsen.de/",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": "CC-BY-4.0"
+      },
+      "contains": [
+        "DE-HB"
+      ]
+    },
+    {
+      "code": "DE-HB",
+      "name": "Bremen",
+      "name_en": "Bremen",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "city-state",
+      "ags": "04",
+      "bbox": {
+        "west": 8.4817,
+        "south": 53.011,
+        "east": 8.9909,
+        "north": 53.6101,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          8.33,
+          52.86,
+          9.15,
+          53.77
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1, DGM5",
+        "buildings": "Hausumringe, LoD1, LoD2",
+        "addresses": "Hauskoordinaten without postcode",
+        "licence": "CC-BY-4.0",
+        "bulk": "through MetaVer; format not confirmed",
+        "url": "https://www.geo.bremen.de/produkte/open-data-produktuebersicht-15654",
+        "verified": "2026-11-17",
+        "notes": "Decree of 22 May 2024 says CC BY 4.0; site footer says CC non-commercial, no derivatives unless otherwise stated. Confirm with Bremen.",
+        "overture_addresses_licence": "CC-BY-4.0"
+      }
+    },
+    {
+      "code": "DE-NW",
+      "name": "Nordrhein-Westfalen",
+      "name_en": "North Rhine-Westphalia",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "05",
+      "bbox": {
+        "west": 5.8663,
+        "south": 50.323,
+        "east": 9.4615,
+        "north": 52.5314,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          5.71,
+          50.17,
+          9.62,
+          52.69
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1 GeoTIFF tiles",
+        "buildings": "simplified ground plans (GeoPackage), LoD1, LoD2",
+        "addresses": "gebref building reference",
+        "licence": "dl-de-zero-2.0",
+        "bulk": "plain file directories",
+        "url": "https://www.opengeodata.nrw.de/produkte/geobasis/",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": "dl-de-zero-2.0"
+      }
+    },
+    {
+      "code": "DE-HE",
+      "name": "Hessen",
+      "name_en": "Hesse",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "06",
+      "bbox": {
+        "west": 7.7725,
+        "south": 49.3954,
+        "east": 10.236,
+        "north": 51.6575,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          7.62,
+          49.24,
+          10.39,
+          51.81
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "LoD2 (Hausumringe not found)",
+        "addresses": "Hauskoordinaten (search only)",
+        "licence": null,
+        "bulk": "self-service download centre; registration may be needed",
+        "url": "https://gds.hessen.de",
+        "verified": "2026-11-17",
+        "notes": "Shop says free of cost and licence; Overture lists dl-de/zero-2.0.",
+        "overture_addresses_licence": "dl-de-zero-2.0"
+      }
+    },
+    {
+      "code": "DE-RP",
+      "name": "Rheinland-Pfalz",
+      "name_en": "Rhineland-Palatinate",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "07",
+      "bbox": {
+        "west": 6.1124,
+        "south": 48.9666,
+        "east": 8.5084,
+        "north": 50.9423,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          5.96,
+          48.81,
+          8.66,
+          51.1
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe, 3D model",
+        "addresses": "building reference",
+        "licence": "dl-de-by-2.0",
+        "bulk": "none; shop and viewer only",
+        "url": "https://geoshop.rlp.de/opendata-dgm1.html",
+        "verified": "search only",
+        "notes": "Site footer also names CC BY-SA 4.0.",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    },
+    {
+      "code": "DE-BW",
+      "name": "Baden-Württemberg",
+      "name_en": "Baden-Württemberg",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "08",
+      "bbox": {
+        "west": 7.5119,
+        "south": 47.5324,
+        "east": 10.4957,
+        "north": 49.7915,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          7.36,
+          47.38,
+          10.65,
+          49.95
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe, LoD1, LoD2",
+        "addresses": "Hauskoordinaten without postal data",
+        "licence": "dl-de-by-2.0",
+        "attribution": "Datenquelle: LGL, www.lgl-bw.de, dl-de/by-2-0",
+        "bulk": "portal is a JavaScript app; bulk not confirmed",
+        "url": "https://www.lgl-bw.de/Produkte/Open-Data/",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    },
+    {
+      "code": "DE-BY",
+      "name": "Bayern",
+      "name_en": "Bavaria",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "09",
+      "bbox": {
+        "west": 8.9759,
+        "south": 47.2701,
+        "east": 13.8396,
+        "north": 50.5642,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          8.82,
+          47.12,
+          13.99,
+          50.72
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1 (resolution search only)",
+        "buildings": "Hausumringe, LoD2",
+        "addresses": "Hauskoordinaten still paid",
+        "licence": "CC-BY-4.0",
+        "attribution": "Bayerische Vermessungsverwaltung - www.geodaten.bayern.de",
+        "bulk": "Metalink by polygon or municipality",
+        "url": "https://www.geodaten.bayern.de/odd/m/3/html/faq.html",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": null
+      }
+    },
+    {
+      "code": "DE-SL",
+      "name": "Saarland",
+      "name_en": "Saarland",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "10",
+      "bbox": {
+        "west": 6.3569,
+        "south": 49.1119,
+        "east": 7.4038,
+        "north": 49.6394,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          6.2,
+          48.96,
+          7.56,
+          49.79
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1 (DGM5 paid)",
+        "buildings": "Hausumringe as WFS only; LoD2 restricted",
+        "addresses": "Hauskoordinaten as WFS",
+        "licence": "dl-de-by-2.0",
+        "bulk": "none; services only",
+        "url": "https://geoportal.saarland.de/article/INSPIRE_Dienste/",
+        "verified": "search only",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    },
+    {
+      "code": "DE-BE",
+      "name": "Berlin",
+      "name_en": "Berlin",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "city-state",
+      "ags": "11",
+      "bbox": {
+        "west": 13.0883,
+        "south": 52.3382,
+        "east": 13.7605,
+        "north": 52.6754,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          12.93,
+          52.18,
+          13.92,
+          52.83
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "INSPIRE buildings, LoD2",
+        "addresses": "INSPIRE addresses",
+        "licence": "dl-de-zero-2.0",
+        "bulk": "Atom feeds",
+        "url": "https://gdi.berlin.de/data/dgm1/atom",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": "dl-de-zero-2.0"
+      }
+    },
+    {
+      "code": "DE-BB",
+      "name": "Brandenburg",
+      "name_en": "Brandenburg",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "12",
+      "bbox": {
+        "west": 11.2657,
+        "south": 51.359,
+        "east": 14.7657,
+        "north": 53.5587,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          11.11,
+          51.2,
+          14.92,
+          53.71
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe",
+        "addresses": "Georeferenzierte Adresse",
+        "licence": "dl-de-by-2.0",
+        "attribution": "© GeoBasis-DE/LGB, dl-de/by-2-0",
+        "bulk": "GEOBROKER; registration not confirmed",
+        "url": "https://geobasis-bb.de/lgb/de/geodaten/liegenschaftskataster/hausumringe/",
+        "verified": "2026-11-17",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      },
+      "contains": [
+        "DE-BE"
+      ]
+    },
+    {
+      "code": "DE-MV",
+      "name": "Mecklenburg-Vorpommern",
+      "name_en": "Mecklenburg-Vorpommern",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "13",
+      "bbox": {
+        "west": 10.5937,
+        "south": 53.1103,
+        "east": 14.4124,
+        "north": 54.685,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          10.44,
+          52.96,
+          14.57,
+          54.84
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe, ALKIS stock, LoD2",
+        "addresses": "contradictory",
+        "licence": "CC-BY-4.0",
+        "bulk": "Atom feeds and a state ZIP",
+        "url": "https://www.laiv-mv.de/Geoinformation/Blickpunkte/2026_02_18_Weitere_OpenData_Angebote_im_LAiV",
+        "verified": "2026-11-17",
+        "notes": "CC BY 4.0 opened for buildings; elevation licence search only.",
+        "overture_addresses_licence": "CC-BY-4.0"
+      }
+    },
+    {
+      "code": "DE-SN",
+      "name": "Sachsen",
+      "name_en": "Saxony",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "14",
+      "bbox": {
+        "west": 11.8715,
+        "south": 50.1715,
+        "east": 15.0418,
+        "north": 51.685,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          11.72,
+          50.02,
+          15.2,
+          51.84
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe",
+        "addresses": "Hauskoordinaten CSV, quarterly",
+        "licence": "dl-de-by-2.0",
+        "bulk": "yes",
+        "url": "https://www.geodaten.sachsen.de/downloadbereich-hauskoordinaten-4172.html",
+        "verified": "search only",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    },
+    {
+      "code": "DE-ST",
+      "name": "Sachsen-Anhalt",
+      "name_en": "Saxony-Anhalt",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "15",
+      "bbox": {
+        "west": 10.5612,
+        "south": 50.938,
+        "east": 13.1871,
+        "north": 53.0418,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          10.41,
+          50.78,
+          13.34,
+          53.2
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe, LoD1, LoD2",
+        "addresses": "Hauskoordinaten as WMS only",
+        "licence": "dl-de-by-2.0",
+        "attribution": "© GeoBasis-DE / LVermGeo ST",
+        "bulk": "yes for elevation and buildings",
+        "url": "https://www.lvermgeo.sachsen-anhalt.de/de/datei/anzeigen/id/3567,501/nutzungsbedingungen_b.pdf",
+        "verified": "terms opened; products search only",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    },
+    {
+      "code": "DE-TH",
+      "name": "Thüringen",
+      "name_en": "Thuringia",
+      "country": "Germany",
+      "country_iso": "DE",
+      "admin_level": "state",
+      "ags": "16",
+      "bbox": {
+        "west": 9.877,
+        "south": 50.2048,
+        "east": 12.6541,
+        "north": 51.649,
+        "source": {
+          "dataset": "VG250 (Verwaltungsgebiete 1:250 000), layer VG250_LAN, as of 2026-01-01, land areas only (GF = 4)",
+          "publisher": "BKG",
+          "licence": "dl-de-by-2.0",
+          "url": "https://gdz.bkg.bund.de/index.php/default/open-data/verwaltungsgebiete-1-250-000-stand-01-01-vg250-01-01.html",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          9.72,
+          50.05,
+          12.81,
+          51.8
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "elevation": "DGM1",
+        "buildings": "Hausumringe, LoD1, LoD2",
+        "addresses": "Hauskoordinaten without postal data",
+        "licence": "dl-de-by-2.0",
+        "bulk": "yes per a 2022 talk",
+        "url": "https://geoportal.thueringen.de/",
+        "verified": "talk opened; geoportal behind a CAPTCHA",
+        "overture_addresses_licence": "dl-de-by-2.0"
+      }
+    }
+  ]
+}

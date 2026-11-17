@@ -1,0 +1,71 @@
+{
+  "about": "Proposed region definition for a detailed map of Sri Lanka, as one region for the whole island. A proposal for discussion (docs/REGIONS-LK.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "LK for the whole island.",
+    "why": "A bare LK collides with no US code in STATE_CODES (engine/address_search.py).",
+    "alternative": "ISO 3166-2:LK provinces LK-1 to LK-9, if finer regions are wanted.",
+    "verified": "The ISO 3166-2 codes were not checked against the ISO site."
+  },
+  "regions": [
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "country": "Sri Lanka",
+      "level": "country",
+      "box": { "west": 79.1642, "south": 5.6213, "east": 82.6461, "north": 10.0715 },
+      "box_with_margin_0_15": { "west": 79.01, "south": 5.47, "east": 82.80, "north": 10.22 },
+      "box_source": {
+        "dataset": "Geofabrik sri-lanka.poly (extract clipping polygon, 9 distinct vertices)",
+        "url": "https://download.geofabrik.de/asia/sri-lanka.poly",
+        "verified": "2026-11-17",
+        "caveat": "Loose: includes sea around the island. Recompute a tight box from OCHA COD-AB level 0 when it can be opened."
+      }
+    }
+  ],
+  "layers": {
+    "base_map_and_poi": {
+      "dataset": "OSM extract sri-lanka-latest.osm.pbf (137 MB); gpkg.zip is 357 MB",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "url": "https://download.geofabrik.de/asia/sri-lanka.html",
+      "licence": "ODbL-1.0",
+      "verified": "2026-11-17",
+      "data_up_to": "2026-11-16T21:22:36Z"
+    },
+    "places": {
+      "dataset": "OSM named places; OCHA COD-AB (levels 0 to 4, Survey Department of Sri Lanka source, updated 2022-08-02)",
+      "url": "https://data.humdata.org/dataset/cod-ab-lka",
+      "licence": "not checked (HDX returned HTTP 403)",
+      "verified": "search only"
+    },
+    "terrain": {
+      "dataset": "Copernicus DEM GLO-30",
+      "licence": "Copernicus-WorldDEM-30",
+      "verified": "as in docs/regions-proposed.json"
+    },
+    "water": {
+      "dataset": "OSM reservoirs and dams for a first build",
+      "licence": "ODbL-1.0",
+      "gap": "No government dam or tank inventory with a known licence found; data.gov.lk lists most datasets as License Not Specified (search only)."
+    },
+    "crops": {
+      "dataset": "ESA WorldCover 2021 (land cover, not crop types)",
+      "licence": "CC-BY-4.0",
+      "verified": "as in docs/regions-proposed.json"
+    },
+    "buildings": {
+      "dataset": "Microsoft Global ML Building Footprints or Overture buildings",
+      "verified": "not checked for Sri Lanka"
+    },
+    "addresses": {
+      "dataset": null,
+      "gap": "Overture's address theme lists 41 countries and Sri Lanka is not among them.",
+      "url": "https://docs.overturemaps.org/guides/addresses/",
+      "verified": "2026-11-17"
+    }
+  },
+  "related": {
+    "pr_35": "Adds a Colombo box cut from the same Geofabrik extract."
+  }
+}

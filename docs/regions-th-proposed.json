@@ -1,0 +1,2002 @@
+{
+  "about": "Proposed region definitions for detailed maps of Thailand: 76 provinces and Bangkok, with Bangkok and its five neighbouring provinces as the worked example. A proposal for discussion (docs/REGIONS-TH.md); no code reads this file, and it does not ship. Sources are national or global, so they are listed once under country_layers, and each region points there.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "ISO 3166-2:TH codes, TH-10 to TH-96.",
+    "why": "The two digits are the Ministry of Interior province code that Thai datasets already use, and no bare two-letter code is needed, so nothing collides with a US state in STATE_CODES (engine/address_search.py).",
+    "verified": "Read from Wikipedia's copy and from the shapeISO field of geoBoundaries' province file. The ISO site refused automated reading and was not checked."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "crops": "crops.sqlite (land cover, since no usable crop map was found)",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "roads": "base map (OSM today)",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite"
+  },
+  "licences": {
+    "ODbL-1.0": {
+      "name": "Open Data Commons Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\"; a database built from it is offered under the ODbL.",
+      "share_alike": true,
+      "verified": "as in REGIONS.md"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "url": "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM",
+      "attribution": "Notice beginning \"© DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS\"; changed data must say \"produced using Copernicus WorldDEM-30\".",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Credit the publisher, link the licence, say if changed.",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "CDLA-Permissive-2.0": {
+      "name": "Community Data License Agreement Permissive 2.0",
+      "url": "https://cdla.dev/permissive-2-0/",
+      "attribution": "As Microsoft's README states; Overture's attribution page lists the same source under ODbL.",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "CC-BY-IGO": {
+      "name": "Creative Commons Attribution for Intergovernmental Organisations",
+      "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "Credit OCHA and its source, the Royal Thai Survey Department.",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "DGA-OGL-1.0": {
+      "name": "DGA Open Government License 1.0 (10 June 2021)",
+      "url": "https://data.go.th/pages/dga-open-government-license",
+      "attribution": "State the source at all times; do not change substantive definitions so that the data misleads.",
+      "share_alike": false,
+      "conditions": "Excludes logos, military insignia and third-party rights; no warranty. Only 5 of 44,567 data.go.th datasets carry this label.",
+      "verified": "2026-11-17"
+    },
+    "TH-label-CC-Attributions": {
+      "name": "\"Creative Commons Attributions\" (portal label, no version or link)",
+      "url": null,
+      "attribution": "Read here as credit required.",
+      "share_alike": false,
+      "conditions": "Unversioned label; needs the maintainers' decision.",
+      "verified": "2026-11-17"
+    },
+    "TH-label-Open-Data-Common": {
+      "name": "\"Open Data Common\" (portal label, no version or link)",
+      "url": null,
+      "attribution": "Unclear which Open Data Commons licence is meant.",
+      "share_alike": null,
+      "conditions": "Treated as unclear; needs the maintainers' decision.",
+      "verified": "2026-11-17"
+    },
+    "not-specified": {
+      "name": "No licence stated",
+      "url": null,
+      "attribution": null,
+      "share_alike": null,
+      "conditions": "Treated as not yet usable.",
+      "verified": "2026-11-17"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "Copernicus DEM GLO-30",
+        "publisher": "European Space Agency / Airbus Defence and Space",
+        "url": "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "30 m surface model. No open national elevation model was found."
+      }
+    ],
+    "water": [
+      {
+        "dataset": "OpenStreetMap, Thailand extract",
+        "publisher": "Geofabrik / OSM contributors",
+        "url": "https://download.geofabrik.de/asia/thailand.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "315 MB .osm.pbf, 718 MB GeoPackage on 16 November 2026."
+      },
+      {
+        "dataset": "Water layers (natural water bodies, reservoirs, weirs, dams, flood areas, gauging stations)",
+        "publisher": "Department of Water Resources",
+        "url": "https://data.go.th/dataset/item_60fac91a-01c5-43da-b429-19e145a1ce7a",
+        "licence": "TH-label-CC-Attributions",
+        "verified": "file lists read; attributes not read",
+        "role": "candidate",
+        "notes": "Shapefiles dated September 2018; the dam layer has about 1,087 points, worked out from the index file's size."
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "ESA WorldCover 2021 (10 m)",
+        "publisher": "ESA WorldCover consortium",
+        "url": "https://esa-worldcover.org/en/data-access",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Land cover, not crop types."
+      },
+      {
+        "dataset": "Present land use, 1:25,000",
+        "publisher": "Land Development Department",
+        "url": "https://data.go.th/dataset/ldd_21_01",
+        "licence": "CC BY-NC-ND (portal label)",
+        "verified": "record opened; files not opened",
+        "role": "not usable as labelled",
+        "notes": "No-derivatives conflicts with making tiles."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "Open Buildings v3",
+        "publisher": "Google",
+        "url": "https://sites.research.google/gr/open-buildings/",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Also offered under ODbL. Thailand is in the country list; no count read."
+      },
+      {
+        "dataset": "Global ML Building Footprints",
+        "publisher": "Microsoft",
+        "url": "https://github.com/microsoft/GlobalMLBuildingFootprints",
+        "licence": "CDLA-Permissive-2.0",
+        "verified": "2026-11-17",
+        "role": "gap filler",
+        "notes": "142 Thailand files in the index of 13 August 2026, about 1.84 GB compressed."
+      }
+    ],
+    "places": [
+      {
+        "dataset": "Subdistrict centre points with Thai and romanised names",
+        "publisher": "Department of Provincial Administration",
+        "url": "https://data.go.th/dataset/item_c6d42e1b-3219-47e1-b6b7-dfe914f27910",
+        "licence": "TH-label-CC-Attributions",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "7,769 rows with visible duplicates; record last modified 2021."
+      },
+      {
+        "dataset": "COD-AB Thailand (provinces, districts, subdistricts)",
+        "publisher": "OCHA, from the Royal Thai Survey Department",
+        "url": "https://data.humdata.org/dataset/cod-ab-tha",
+        "licence": "CC-BY-IGO",
+        "verified": "read through the HDX API",
+        "role": "boundaries",
+        "notes": "77 provinces, 928 districts, 7,425 subdistricts; reviewed 30 October 2025."
+      },
+      {
+        "dataset": "OpenStreetMap named places",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/asia/thailand.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "supplement"
+      }
+    ],
+    "roads": [
+      {
+        "dataset": "OpenStreetMap, Thailand extract",
+        "publisher": "Geofabrik / OSM contributors",
+        "url": "https://download.geofabrik.de/asia/thailand.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary"
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "none found",
+        "publisher": "",
+        "url": "https://docs.overturemaps.org/guides/addresses/",
+        "licence": "n/a",
+        "verified": "2026-11-17",
+        "role": "gap",
+        "notes": "Overture's address theme covers 41 countries and not Thailand; data.go.th has no address points; OSM has 70,470 objects with a house number in Thailand."
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OpenStreetMap",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/asia/thailand.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary"
+      },
+      {
+        "dataset": "Shelter list",
+        "publisher": "Department of Disaster Prevention and Mitigation",
+        "url": "https://catalog.disaster.go.th/dataset/dpm-gd002",
+        "licence": "TH-label-Open-Data-Common",
+        "verified": "header read through the API",
+        "role": "candidate",
+        "notes": "About 10,976 rows with coordinates, capacity, power, water and toilets; Bangkok coverage not checked."
+      },
+      {
+        "dataset": "CITIZENinfo state hospitals",
+        "publisher": "Digital Government Development Agency",
+        "url": "https://data.go.th/dataset/health-citizeninfo",
+        "licence": "TH-label-CC-Attributions",
+        "verified": "header read through the API",
+        "role": "candidate",
+        "notes": "Has coordinates, some blank; record dated 2021."
+      },
+      {
+        "dataset": "Thailand healthsites",
+        "publisher": "healthsites.io on HDX",
+        "url": "https://data.humdata.org/dataset/thailand-healthsites",
+        "licence": "ODbL-1.0",
+        "verified": "read through the HDX API",
+        "role": "candidate"
+      },
+      {
+        "dataset": "Bangkok hospitals, fire stations, police stations, schools, pumping stations, floodgates, flood risk points",
+        "publisher": "Bangkok Metropolitan Administration",
+        "url": "https://data.bangkok.go.th",
+        "licence": "not-specified",
+        "verified": "headers read through the API",
+        "role": "blocked by licence",
+        "notes": "All have coordinates; none states a licence."
+      }
+    ]
+  },
+  "addressing": {
+    "levels": "Province (changwat); district (amphoe, or khet in Bangkok); subdistrict (tambon, or khwaeng in Bangkok); village number (moo) in rural areas.",
+    "order": "House number and road, then subdistrict and district, then province and postcode (\"491 Rangsit-Nakhon Nayok 4 Road, Prachathipat / Amphoe Tanyaburi, Pathumthani / 12130\").",
+    "postal_code": {
+      "format": "Five digits after the province; the leading part stands for the province, the rest for the post office",
+      "example_pattern": "00000",
+      "source": {
+        "dataset": "Addressing sheet for Thailand (09/2017)",
+        "publisher": "Universal Postal Union",
+        "url": "https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/thaEn.pdf",
+        "licence": "n/a",
+        "verified": "2026-11-17"
+      }
+    },
+    "notes": "House numbers can hold a slash (10/42). Addresses are written in Thai script or in Latin letters with inconsistent spelling. Years in datasets are in the Buddhist era (subtract 543). engine/address_search.py already reads a five-digit postcode and a number before the street; it would need the slash, Thai script, and the soi and moo words."
+  },
+  "bbox_source": {
+    "dataset": "geoBoundaries gbOpen THA ADM1",
+    "publisher": "William & Mary geoLab (from OpenStreetMap)",
+    "url": "https://www.geoboundaries.org/api/current/gbOpen/THA/ADM1/",
+    "licence": "ODbL-1.0",
+    "verified": "2026-11-17",
+    "method": "Extent of every vertex of the province polygon in the full-resolution GeoJSON; margin is 0.15 degrees, rounded outward to 0.01."
+  },
+  "grouped": [
+    {
+      "code": "TH-BMR",
+      "name": "Bangkok and Vicinities",
+      "members": [
+        "TH-10",
+        "TH-11",
+        "TH-12",
+        "TH-13",
+        "TH-73",
+        "TH-74"
+      ],
+      "bbox": {
+        "west": 99.8069,
+        "south": 13.4282,
+        "east": 100.9639,
+        "north": 14.276
+      },
+      "bbox_with_margin": {
+        "west": 99.65,
+        "south": 13.27,
+        "east": 101.12,
+        "north": 14.43
+      }
+    }
+  ],
+  "regions": [
+    {
+      "code": "TH-10",
+      "name": "Bangkok",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "special administrative area",
+      "province_code": "10",
+      "in_bangkok_and_vicinities": true,
+      "bbox": {
+        "west": 100.3279,
+        "south": 13.4934,
+        "east": 100.9384,
+        "north": 13.9552
+      },
+      "bbox_with_margin": {
+        "west": 100.17,
+        "south": 13.34,
+        "east": 101.09,
+        "north": 14.11
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-11",
+      "name": "Samut Prakan",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "11",
+      "in_bangkok_and_vicinities": true,
+      "bbox": {
+        "west": 100.4448,
+        "south": 13.4791,
+        "east": 100.9639,
+        "north": 13.7185
+      },
+      "bbox_with_margin": {
+        "west": 100.29,
+        "south": 13.32,
+        "east": 101.12,
+        "north": 13.87
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-12",
+      "name": "Nonthaburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "12",
+      "in_bangkok_and_vicinities": true,
+      "bbox": {
+        "west": 100.2624,
+        "south": 13.7892,
+        "east": 100.5676,
+        "north": 14.1408
+      },
+      "bbox_with_margin": {
+        "west": 100.11,
+        "south": 13.63,
+        "east": 100.72,
+        "north": 14.3
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-13",
+      "name": "Pathum Thani",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "13",
+      "in_bangkok_and_vicinities": true,
+      "bbox": {
+        "west": 100.3316,
+        "south": 13.9163,
+        "east": 100.9521,
+        "north": 14.276
+      },
+      "bbox_with_margin": {
+        "west": 100.18,
+        "south": 13.76,
+        "east": 101.11,
+        "north": 14.43
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-14",
+      "name": "Phra Nakhon Si Ayutthaya",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "14",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.221,
+        "south": 14.1094,
+        "east": 100.8231,
+        "north": 14.6858
+      },
+      "bbox_with_margin": {
+        "west": 100.07,
+        "south": 13.95,
+        "east": 100.98,
+        "north": 14.84
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-15",
+      "name": "Ang Thong",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "15",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.195,
+        "south": 14.4381,
+        "east": 100.5181,
+        "north": 14.7992
+      },
+      "bbox_with_margin": {
+        "west": 100.04,
+        "south": 14.28,
+        "east": 100.67,
+        "north": 14.95
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-16",
+      "name": "Lopburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "16",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.4327,
+        "south": 14.6558,
+        "east": 101.4098,
+        "north": 15.4975
+      },
+      "bbox_with_margin": {
+        "west": 100.28,
+        "south": 14.5,
+        "east": 101.56,
+        "north": 15.65
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-17",
+      "name": "Sing Buri",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "17",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.1914,
+        "south": 14.7248,
+        "east": 100.4936,
+        "north": 15.1675
+      },
+      "bbox_with_margin": {
+        "west": 100.04,
+        "south": 14.57,
+        "east": 100.65,
+        "north": 15.32
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-18",
+      "name": "Chai Nat",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "18",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.7161,
+        "south": 14.9072,
+        "east": 100.3091,
+        "north": 15.4203
+      },
+      "bbox_with_margin": {
+        "west": 99.56,
+        "south": 14.75,
+        "east": 100.46,
+        "north": 15.58
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-19",
+      "name": "Saraburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "19",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.5711,
+        "south": 14.2434,
+        "east": 101.4553,
+        "north": 15.0
+      },
+      "bbox_with_margin": {
+        "west": 100.42,
+        "south": 14.09,
+        "east": 101.61,
+        "north": 15.15
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-20",
+      "name": "Chon Buri",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "20",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.663,
+        "south": 12.5082,
+        "east": 101.7178,
+        "north": 13.5908
+      },
+      "bbox_with_margin": {
+        "west": 100.51,
+        "south": 12.35,
+        "east": 101.87,
+        "north": 13.75
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-21",
+      "name": "Rayong",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "21",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.9842,
+        "south": 12.5217,
+        "east": 101.8306,
+        "north": 13.1542
+      },
+      "bbox_with_margin": {
+        "west": 100.83,
+        "south": 12.37,
+        "east": 101.99,
+        "north": 13.31
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-22",
+      "name": "Chanthaburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "22",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.685,
+        "south": 12.297,
+        "east": 102.5359,
+        "north": 13.3362
+      },
+      "bbox_with_margin": {
+        "west": 101.53,
+        "south": 12.14,
+        "east": 102.69,
+        "north": 13.49
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-23",
+      "name": "Trat",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "23",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 102.2496,
+        "south": 11.5615,
+        "east": 102.9142,
+        "north": 12.7513
+      },
+      "bbox_with_margin": {
+        "west": 102.09,
+        "south": 11.41,
+        "east": 103.07,
+        "north": 12.91
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-24",
+      "name": "Chachoengsao",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "24",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.849,
+        "south": 13.1716,
+        "east": 101.9989,
+        "north": 13.9766
+      },
+      "bbox_with_margin": {
+        "west": 100.69,
+        "south": 13.02,
+        "east": 102.15,
+        "north": 14.13
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-25",
+      "name": "Prachin Buri",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "25",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.1327,
+        "south": 13.5814,
+        "east": 102.1197,
+        "north": 14.4617
+      },
+      "bbox_with_margin": {
+        "west": 100.98,
+        "south": 13.43,
+        "east": 102.27,
+        "north": 14.62
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-26",
+      "name": "Nakhon Nayok",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "26",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.9136,
+        "south": 13.9612,
+        "east": 101.5155,
+        "north": 14.5061
+      },
+      "bbox_with_margin": {
+        "west": 100.76,
+        "south": 13.81,
+        "east": 101.67,
+        "north": 14.66
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-27",
+      "name": "Sa Kaeo",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "27",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.9439,
+        "south": 13.1578,
+        "east": 102.941,
+        "north": 14.1881
+      },
+      "bbox_with_margin": {
+        "west": 101.79,
+        "south": 13.0,
+        "east": 103.1,
+        "north": 14.34
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-30",
+      "name": "Nakhon Ratchasima",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "30",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.185,
+        "south": 14.0867,
+        "east": 103.0196,
+        "north": 15.8086
+      },
+      "bbox_with_margin": {
+        "west": 101.03,
+        "south": 13.93,
+        "east": 103.17,
+        "north": 15.96
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-31",
+      "name": "Buri Ram",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "31",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 102.4355,
+        "south": 14.1317,
+        "east": 103.5054,
+        "north": 15.7892
+      },
+      "bbox_with_margin": {
+        "west": 102.28,
+        "south": 13.98,
+        "east": 103.66,
+        "north": 15.94
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-32",
+      "name": "Surin",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "32",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.0896,
+        "south": 14.3302,
+        "east": 104.0797,
+        "north": 15.4829
+      },
+      "bbox_with_margin": {
+        "west": 102.93,
+        "south": 14.18,
+        "east": 104.23,
+        "north": 15.64
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-33",
+      "name": "Si Sa Ket",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "33",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.915,
+        "south": 14.3411,
+        "east": 104.9175,
+        "north": 15.5645
+      },
+      "bbox_with_margin": {
+        "west": 103.76,
+        "south": 14.19,
+        "east": 105.07,
+        "north": 15.72
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-34",
+      "name": "Ubon Ratchathani",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "34",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 104.3839,
+        "south": 14.2096,
+        "east": 105.6368,
+        "north": 16.0979
+      },
+      "bbox_with_margin": {
+        "west": 104.23,
+        "south": 14.05,
+        "east": 105.79,
+        "north": 16.25
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-35",
+      "name": "Yasothon",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "35",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.9976,
+        "south": 15.2847,
+        "east": 104.8128,
+        "north": 16.3453
+      },
+      "bbox_with_margin": {
+        "west": 103.84,
+        "south": 15.13,
+        "east": 104.97,
+        "north": 16.5
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-36",
+      "name": "Chaiyaphum",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "36",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.3002,
+        "south": 15.2133,
+        "east": 102.4614,
+        "north": 16.705
+      },
+      "bbox_with_margin": {
+        "west": 101.15,
+        "south": 15.06,
+        "east": 102.62,
+        "north": 16.86
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-37",
+      "name": "Amnat Charoen",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "37",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 104.4241,
+        "south": 15.5502,
+        "east": 105.06,
+        "north": 16.2793
+      },
+      "bbox_with_margin": {
+        "west": 104.27,
+        "south": 15.4,
+        "east": 105.21,
+        "north": 16.43
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-38",
+      "name": "Bueng Kan",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "38",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.2433,
+        "south": 17.7653,
+        "east": 104.1879,
+        "north": 18.4486
+      },
+      "bbox_with_margin": {
+        "west": 103.09,
+        "south": 17.61,
+        "east": 104.34,
+        "north": 18.6
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-39",
+      "name": "Nong Bua Lam Phu",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "39",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.945,
+        "south": 16.7597,
+        "east": 102.6884,
+        "north": 17.6809
+      },
+      "bbox_with_margin": {
+        "west": 101.79,
+        "south": 16.6,
+        "east": 102.84,
+        "north": 17.84
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-40",
+      "name": "Khon Kaen",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "40",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.7499,
+        "south": 15.6206,
+        "east": 103.1947,
+        "north": 17.0764
+      },
+      "bbox_with_margin": {
+        "west": 101.59,
+        "south": 15.47,
+        "east": 103.35,
+        "north": 17.23
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-41",
+      "name": "Udon Thani",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "41",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 102.0219,
+        "south": 16.8247,
+        "east": 103.6586,
+        "north": 18.0882
+      },
+      "bbox_with_margin": {
+        "west": 101.87,
+        "south": 16.67,
+        "east": 103.81,
+        "north": 18.24
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-42",
+      "name": "Loei",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "42",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.8817,
+        "south": 16.7544,
+        "east": 102.1539,
+        "north": 18.2203
+      },
+      "bbox_with_margin": {
+        "west": 100.73,
+        "south": 16.6,
+        "east": 102.31,
+        "north": 18.38
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-43",
+      "name": "Nong Khai",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "43",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 102.0583,
+        "south": 17.5908,
+        "east": 103.4094,
+        "north": 18.304
+      },
+      "bbox_with_margin": {
+        "west": 101.9,
+        "south": 17.44,
+        "east": 103.56,
+        "north": 18.46
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-44",
+      "name": "Maha Sarakham",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "44",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 102.8483,
+        "south": 15.4059,
+        "east": 103.5111,
+        "north": 16.6434
+      },
+      "bbox_with_margin": {
+        "west": 102.69,
+        "south": 15.25,
+        "east": 103.67,
+        "north": 16.8
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-45",
+      "name": "Roi Et",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "45",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.2953,
+        "south": 15.4034,
+        "east": 104.3559,
+        "north": 16.4728
+      },
+      "bbox_with_margin": {
+        "west": 103.14,
+        "south": 15.25,
+        "east": 104.51,
+        "north": 16.63
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-46",
+      "name": "Kalasin",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "46",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.113,
+        "south": 16.1867,
+        "east": 104.2461,
+        "north": 17.1011
+      },
+      "bbox_with_margin": {
+        "west": 102.96,
+        "south": 16.03,
+        "east": 104.4,
+        "north": 17.26
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-47",
+      "name": "Sakon Nakhon",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "47",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.2455,
+        "south": 16.7761,
+        "east": 104.4447,
+        "north": 18.0647
+      },
+      "bbox_with_margin": {
+        "west": 103.09,
+        "south": 16.62,
+        "east": 104.6,
+        "north": 18.22
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-48",
+      "name": "Nakhon Phanom",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "48",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 103.9864,
+        "south": 16.8054,
+        "east": 104.8066,
+        "north": 18.0248
+      },
+      "bbox_with_margin": {
+        "west": 103.83,
+        "south": 16.65,
+        "east": 104.96,
+        "north": 18.18
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-49",
+      "name": "Mukdahan",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "49",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 104.0722,
+        "south": 16.1897,
+        "east": 104.9777,
+        "north": 16.8989
+      },
+      "bbox_with_margin": {
+        "west": 103.92,
+        "south": 16.03,
+        "east": 105.13,
+        "north": 17.05
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-50",
+      "name": "Chiang Mai",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "50",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.0808,
+        "south": 17.2483,
+        "east": 99.5917,
+        "north": 20.1476
+      },
+      "bbox_with_margin": {
+        "west": 97.93,
+        "south": 17.09,
+        "east": 99.75,
+        "north": 20.3
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-51",
+      "name": "Lamphun",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "51",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.6676,
+        "south": 17.4238,
+        "east": 99.3153,
+        "north": 18.7072
+      },
+      "bbox_with_margin": {
+        "west": 98.51,
+        "south": 17.27,
+        "east": 99.47,
+        "north": 18.86
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-52",
+      "name": "Lampang",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "52",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.8795,
+        "south": 17.2019,
+        "east": 100.1255,
+        "north": 19.5089
+      },
+      "bbox_with_margin": {
+        "west": 98.72,
+        "south": 17.05,
+        "east": 100.28,
+        "north": 19.66
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-53",
+      "name": "Uttaradit",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "53",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.8964,
+        "south": 17.1617,
+        "east": 101.1927,
+        "north": 18.3813
+      },
+      "bbox_with_margin": {
+        "west": 99.74,
+        "south": 17.01,
+        "east": 101.35,
+        "north": 18.54
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-54",
+      "name": "Phrae",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "54",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.3103,
+        "south": 17.6764,
+        "east": 100.5422,
+        "north": 18.8346
+      },
+      "bbox_with_margin": {
+        "west": 99.16,
+        "south": 17.52,
+        "east": 100.7,
+        "north": 18.99
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-55",
+      "name": "Nan",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "55",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.3359,
+        "south": 18.0125,
+        "east": 101.3572,
+        "north": 19.6341
+      },
+      "bbox_with_margin": {
+        "west": 100.18,
+        "south": 17.86,
+        "east": 101.51,
+        "north": 19.79
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-56",
+      "name": "Phayao",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "56",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.6872,
+        "south": 18.8066,
+        "east": 100.6342,
+        "north": 19.7355
+      },
+      "bbox_with_margin": {
+        "west": 99.53,
+        "south": 18.65,
+        "east": 100.79,
+        "north": 19.89
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-57",
+      "name": "Chiang Rai",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "57",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.2597,
+        "south": 19.0,
+        "east": 100.5785,
+        "north": 20.4648
+      },
+      "bbox_with_margin": {
+        "west": 99.1,
+        "south": 18.85,
+        "east": 100.73,
+        "north": 20.62
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-58",
+      "name": "Mae Hong Son",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "58",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 97.3438,
+        "south": 17.5668,
+        "east": 98.6553,
+        "north": 19.8143
+      },
+      "bbox_with_margin": {
+        "west": 97.19,
+        "south": 17.41,
+        "east": 98.81,
+        "north": 19.97
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-60",
+      "name": "Nakhon Sawan",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "60",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.088,
+        "south": 15.0603,
+        "east": 100.835,
+        "north": 16.3381
+      },
+      "bbox_with_margin": {
+        "west": 98.93,
+        "south": 14.91,
+        "east": 100.99,
+        "north": 16.49
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-61",
+      "name": "Uthai Thani",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "61",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.9853,
+        "south": 14.9379,
+        "east": 100.0723,
+        "north": 15.7828
+      },
+      "bbox_with_margin": {
+        "west": 98.83,
+        "south": 14.78,
+        "east": 100.23,
+        "north": 15.94
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-62",
+      "name": "Kamphaeng Phet",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "62",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.9844,
+        "south": 15.7825,
+        "east": 100.0331,
+        "north": 16.8889
+      },
+      "bbox_with_margin": {
+        "west": 98.83,
+        "south": 15.63,
+        "east": 100.19,
+        "north": 17.04
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-63",
+      "name": "Tak",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "63",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 97.91,
+        "south": 15.1808,
+        "east": 99.3458,
+        "north": 17.7519
+      },
+      "bbox_with_margin": {
+        "west": 97.76,
+        "south": 15.03,
+        "east": 99.5,
+        "north": 17.91
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-64",
+      "name": "Sukhothai",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "64",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.2669,
+        "south": 16.688,
+        "east": 100.1322,
+        "north": 17.8172
+      },
+      "bbox_with_margin": {
+        "west": 99.11,
+        "south": 16.53,
+        "east": 100.29,
+        "north": 17.97
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-65",
+      "name": "Phitsanulok",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "65",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.8853,
+        "south": 16.3471,
+        "east": 101.0953,
+        "north": 17.7481
+      },
+      "bbox_with_margin": {
+        "west": 99.73,
+        "south": 16.19,
+        "east": 101.25,
+        "north": 17.9
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-66",
+      "name": "Phichit",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "66",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.9761,
+        "south": 15.9089,
+        "east": 100.773,
+        "north": 16.5987
+      },
+      "bbox_with_margin": {
+        "west": 99.82,
+        "south": 15.75,
+        "east": 100.93,
+        "north": 16.75
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-67",
+      "name": "Phetchabun",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "67",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.6272,
+        "south": 15.302,
+        "east": 101.7964,
+        "north": 17.1172
+      },
+      "bbox_with_margin": {
+        "west": 100.47,
+        "south": 15.15,
+        "east": 101.95,
+        "north": 17.27
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-70",
+      "name": "Ratchaburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "70",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.1636,
+        "south": 13.1417,
+        "east": 100.0783,
+        "north": 13.9444
+      },
+      "bbox_with_margin": {
+        "west": 99.01,
+        "south": 12.99,
+        "east": 100.23,
+        "north": 14.1
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-71",
+      "name": "Kanchanaburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "71",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.1817,
+        "south": 13.7261,
+        "east": 99.8922,
+        "north": 15.663
+      },
+      "bbox_with_margin": {
+        "west": 98.03,
+        "south": 13.57,
+        "east": 100.05,
+        "north": 15.82
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-72",
+      "name": "Suphan Buri",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "72",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.2726,
+        "south": 14.0603,
+        "east": 100.2841,
+        "north": 15.0758
+      },
+      "bbox_with_margin": {
+        "west": 99.12,
+        "south": 13.91,
+        "east": 100.44,
+        "north": 15.23
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-73",
+      "name": "Nakhon Pathom",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "73",
+      "in_bangkok_and_vicinities": true,
+      "bbox": {
+        "west": 99.8069,
+        "south": 13.6491,
+        "east": 100.3376,
+        "north": 14.1778
+      },
+      "bbox_with_margin": {
+        "west": 99.65,
+        "south": 13.49,
+        "east": 100.49,
+        "north": 14.33
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-74",
+      "name": "Samut Sakhon",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "74",
+      "in_bangkok_and_vicinities": true,
+      "bbox": {
+        "west": 100.0347,
+        "south": 13.4282,
+        "east": 100.4203,
+        "north": 13.7211
+      },
+      "bbox_with_margin": {
+        "west": 99.88,
+        "south": 13.27,
+        "east": 100.58,
+        "north": 13.88
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-75",
+      "name": "Samut Songkhram",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "75",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.8542,
+        "south": 13.2367,
+        "east": 100.0881,
+        "north": 13.5122
+      },
+      "bbox_with_margin": {
+        "west": 99.7,
+        "south": 13.08,
+        "east": 100.24,
+        "north": 13.67
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-76",
+      "name": "Phetchaburi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "76",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.0994,
+        "south": 12.5425,
+        "east": 100.1061,
+        "north": 13.3333
+      },
+      "bbox_with_margin": {
+        "west": 98.94,
+        "south": 12.39,
+        "east": 100.26,
+        "north": 13.49
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-77",
+      "name": "Prachuap Khiri Khan",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "77",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.1434,
+        "south": 10.9536,
+        "east": 100.02,
+        "north": 12.6348
+      },
+      "bbox_with_margin": {
+        "west": 98.99,
+        "south": 10.8,
+        "east": 100.17,
+        "north": 12.79
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-80",
+      "name": "Nakhon Si Thammarat",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "80",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.2397,
+        "south": 7.8011,
+        "east": 100.3361,
+        "north": 9.3231
+      },
+      "bbox_with_margin": {
+        "west": 99.08,
+        "south": 7.65,
+        "east": 100.49,
+        "north": 9.48
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-81",
+      "name": "Krabi",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "81",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.6245,
+        "south": 7.3997,
+        "east": 99.3475,
+        "north": 8.675
+      },
+      "bbox_with_margin": {
+        "west": 98.47,
+        "south": 7.24,
+        "east": 99.5,
+        "north": 8.83
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-82",
+      "name": "Phangnga",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "82",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 97.6374,
+        "south": 7.8876,
+        "east": 98.7133,
+        "north": 9.4636
+      },
+      "bbox_with_margin": {
+        "west": 97.48,
+        "south": 7.73,
+        "east": 98.87,
+        "north": 9.62
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-83",
+      "name": "Phuket",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "83",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.258,
+        "south": 7.4887,
+        "east": 98.4727,
+        "north": 8.2003
+      },
+      "bbox_with_margin": {
+        "west": 98.1,
+        "south": 7.33,
+        "east": 98.63,
+        "north": 8.36
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-84",
+      "name": "Surat Thani",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "84",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.4533,
+        "south": 8.3089,
+        "east": 100.0904,
+        "north": 10.1269
+      },
+      "bbox_with_margin": {
+        "west": 98.3,
+        "south": 8.15,
+        "east": 100.25,
+        "north": 10.28
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-85",
+      "name": "Ranong",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "85",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.3791,
+        "south": 9.3061,
+        "east": 98.9783,
+        "north": 10.7886
+      },
+      "bbox_with_margin": {
+        "west": 98.22,
+        "south": 9.15,
+        "east": 99.13,
+        "north": 10.94
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-86",
+      "name": "Chumphon",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "86",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 98.6287,
+        "south": 9.6011,
+        "east": 99.52,
+        "north": 11.0313
+      },
+      "bbox_with_margin": {
+        "west": 98.47,
+        "south": 9.45,
+        "east": 99.67,
+        "north": 11.19
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-90",
+      "name": "Songkhla",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "90",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.0305,
+        "south": 6.2894,
+        "east": 101.1091,
+        "north": 7.9362
+      },
+      "bbox_with_margin": {
+        "west": 99.88,
+        "south": 6.13,
+        "east": 101.26,
+        "north": 8.09
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-91",
+      "name": "Satun",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "91",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.1538,
+        "south": 6.4227,
+        "east": 100.2203,
+        "north": 7.1467
+      },
+      "bbox_with_margin": {
+        "west": 99.0,
+        "south": 6.27,
+        "east": 100.38,
+        "north": 7.3
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-92",
+      "name": "Trang",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "92",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.2327,
+        "south": 7.0556,
+        "east": 100.0464,
+        "north": 7.9933
+      },
+      "bbox_with_margin": {
+        "west": 99.08,
+        "south": 6.9,
+        "east": 100.2,
+        "north": 8.15
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-93",
+      "name": "Phatthalung",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "93",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 99.7442,
+        "south": 7.0916,
+        "east": 100.4286,
+        "north": 7.9056
+      },
+      "bbox_with_margin": {
+        "west": 99.59,
+        "south": 6.94,
+        "east": 100.58,
+        "north": 8.06
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-94",
+      "name": "Pattani",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "94",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.0361,
+        "south": 6.5419,
+        "east": 101.7266,
+        "north": 6.9521
+      },
+      "bbox_with_margin": {
+        "west": 100.88,
+        "south": 6.39,
+        "east": 101.88,
+        "north": 7.11
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-95",
+      "name": "Yala",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "95",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 100.8347,
+        "south": 5.6129,
+        "east": 101.6169,
+        "north": 6.68
+      },
+      "bbox_with_margin": {
+        "west": 100.68,
+        "south": 5.46,
+        "east": 101.77,
+        "north": 6.83
+      },
+      "layers": "country_layers"
+    },
+    {
+      "code": "TH-96",
+      "name": "Narathiwat",
+      "country": "Thailand",
+      "country_iso": "TH",
+      "admin_level": "province",
+      "province_code": "96",
+      "in_bangkok_and_vicinities": false,
+      "bbox": {
+        "west": 101.3791,
+        "south": 5.7329,
+        "east": 102.0933,
+        "north": 6.6365
+      },
+      "bbox_with_margin": {
+        "west": 101.22,
+        "south": 5.58,
+        "east": 102.25,
+        "north": 6.79
+      },
+      "layers": "country_layers"
+    }
+  ]
+}

@@ -16,9 +16,12 @@
   "cooking",
   "camp stove",
   "grill",
+  "barbecue",
+  "BBQ",
   "generator",
   "carbon monoxide",
   "canned food",
+  "tinned food",
   "emergency food",
   "baby formula",
   "flood",
@@ -108,7 +111,7 @@
   {
    "id": "cook",
    "label": "Cooking without power or gas",
-   "hint": "Camp stove, grill, fireplace, canned food",
+   "hint": "Camp stove, grill, fireplace, canned or tinned food",
    "read": [
     {
      "doc": "18bf4604bf28c4",

@@ -43,6 +43,7 @@ process.stdout.write(JSON.stringify({
   segmenter: W.hasSegmenter(),
   fold: (cases.fold || []).map(s => W.fold(s)),
   words: (cases.words || []).map(q => safe(() => W.queryWords(q, stop))),
+  tops: (cases.tops || []).map(q => safe(() => W.rankTopics(q, cases.topics, stop).map(o => [o.t.id, o.c ? o.c.id : null]))),
   match: (cases.match || []).map(([text, w]) => safe(() => W.matcher(text)(w))),
   rank: (cases.rank || []).map(q => ({ q, now: safe(() => brief(W.rankTopics(q, cases.topics, stop))), before: brief(before(q, cases.topics)) })),
   rankOwn: (cases.rankOwn || []).map(([q, topics]) => safe(() => brief(W.rankTopics(q, topics, stop)))),

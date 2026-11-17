@@ -17,9 +17,12 @@ import hashlib, html, json, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://lastbook.org"
 R2 = "https://downloads.lastbook.org"
-MAC = R2 + "/Lastbook-1.1.10-mac.dmg"
-WIN = R2 + "/Lastbook-1.1.8-Setup.exe"
-LINUX = R2 + "/Lastbook_1.1.9_amd64.deb"
+MAC = R2 + "/Lastbook-1.1.11-mac.dmg"
+WIN = R2 + "/Lastbook-1.1.11-Setup.exe"
+# One Linux entry point: the home page links to the Linux install card, which offers the package for each Ubuntu release.
+LINUX = "/download/#linux"
+DEB_2404 = R2 + "/Lastbook_1.1.11_amd64.deb"
+DEB_2604 = R2 + "/Lastbook_1.1.11_ubuntu26.04_amd64.deb"
 LIB = R2 + "/Lastbook-Small-20261113.zip"
 DATE = "13 November 2026"
 
@@ -33,6 +36,14 @@ JS = "/os.js?v=" + h("os.js")
 CROWD = "/crowd.js?v=" + h("crowd.js")
 FONT = "/fonts/Nunito-Variable.woff2"
 WORDMARK = (ROOT / "tools/art/wordmark.svg").read_text().strip()
+GITHUB = "https://github.com/Immortal-Protocols/lastbook"
+# A build-time snapshot: no visitor-side GitHub request or tracking.
+GITHUB_STATS = json.loads((ROOT / "data/github-stats.json").read_text())
+if GITHUB_STATS.get("repository") != "Immortal-Protocols/lastbook":
+    raise ValueError("GitHub stats must refer to Lastbook")
+GITHUB_STARS = GITHUB_STATS["stars"]
+if type(GITHUB_STARS) is not int or GITHUB_STARS < 0:
+    raise ValueError("GitHub stars must be a nonnegative integer")
 
 APPLE = ('<svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1ZM13.9 5c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.5Z"/></svg>')
 WINDOWS = ('<svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M2 4.3 10 3.2v7.7H2Zm9-1.2L22 1.5v9.4H11ZM2 12h8v7.8l-8-1.1Zm9 0h11v9.5l-11-1.5Z"/></svg>')
@@ -93,6 +104,8 @@ def bar(current, over=False):
     for href, label in NAV[1:]:
         cur = ' aria-current="page"' if href == current else ""
         links.append(f'<a href="{href}"{cur}>{label}</a>')
+    if over:
+        links.append(f'<a class="open-source-nav" href="{GITHUB}" target="_blank" rel="noopener">Open source <span aria-hidden="true">↗</span></a>')
     cur = ' aria-current="page"' if current == "/download/" else ""
     return f"""<header class="bar{' bar-over' if over else ''}">
   <div class="bar-in">
@@ -140,9 +153,11 @@ def pic(stem, w, h, alt, widths=(720, 1280), sizes="92vw", fallback=None, eager=
     </picture>"""
 
 
-MAC_BTN = btn(MAC, APPLE, "Download for Mac", "Lastbook 1.1.10 · 28.5 MB")
-WIN_BTN = btn(WIN, WINDOWS, "Download for Windows", "Lastbook 1.1.8 · 105 MB")
-LINUX_BTN = btn(LINUX, BOX, "Download for Linux", "Lastbook 1.1.9 · 29.9 MB")
+MAC_BTN = btn(MAC, APPLE, "Download for Mac", "Lastbook 1.1.11 · 28.4 MB")
+WIN_BTN = btn(WIN, WINDOWS, "Download for Windows", "Lastbook 1.1.11 · 105 MB")
+LINUX_BTN = btn(LINUX, BOX, "Download for Linux", "Lastbook 1.1.11 · Ubuntu 24.04 or 26.04")
+DEB_2404_BTN = btn(DEB_2404, BOX, "Ubuntu 24.04", "Lastbook 1.1.11 · 29.9 MB")
+DEB_2604_BTN = btn(DEB_2604, BOX, "Ubuntu 26.04", "Lastbook 1.1.11 · 30.0 MB", "btn-2")
 LIB_BTN = btn(LIB, BOX, "Download the library", "Small · 7.7 GB", "btn-2")
 LIB_BTN_SHORT = btn(LIB, BOX, "Download the library", "Small · 7.7 GB", "btn-2")
 MAC_FINE = "Free · Apple M1 or newer · macOS 14 or newer"
@@ -176,7 +191,7 @@ AGAIN = f"""<section class="band band-lamp" aria-labelledby="again-h">
       <a class="btn-2 dl-win" href="{WIN}">Download for Windows</a>
       <a class="btn-2 dl-linux" href="{LINUX}">Download for Linux</a>
     </p>
-    <p class="fine">Mac 1.1.10 · 28.5 MB · Windows 1.1.8 · 105 MB · Linux 1.1.9 · 29.9 MB</p>
+    <p class="fine">Mac 1.1.11 · 28.4 MB · Windows 1.1.11 · 105 MB · Linux 1.1.11 · 29.9 MB</p>
   </div>
 </section>
 """
@@ -220,9 +235,18 @@ def home():
     </h1>
     <p class="lead">Everything you need to survive and rebuild society.<br>Free, local, offline and private.<span class="phone-note"> It’s for Mac, Windows and Linux computers, not iPhone, iPad or Android. <strong>Open lastbook.org on your computer.</strong></span></p>
     <div class="dl">
-      <div class="dl-item dl-mac"><a class="btn" href="{MAC}">{APPLE}<span>Download for Mac</span></a><p class="cap">28.5 MB · Apple M1 or newer · macOS 14+</p></div>
+      <div class="dl-item dl-mac"><a class="btn" href="{MAC}">{APPLE}<span>Download for Mac</span></a><p class="cap">28.4 MB · Apple M1 or newer · macOS 14+</p></div>
       <div class="dl-item dl-win"><a class="btn-2" href="{WIN}">{WINDOWS}<span>Download for Windows</span></a><p class="cap">105 MB · Windows 10 or 11, 64-bit</p></div>
-      <div class="dl-item dl-linux"><a class="btn-2" href="{LINUX}">{BOX}<span>Download for Linux</span></a><p class="cap">29.9 MB · Ubuntu 24.04 · Intel/AMD 64-bit</p></div>
+      <div class="dl-item dl-linux"><a class="btn-2" href="{LINUX}">{BOX}<span>Download for Linux</span></a><p class="cap">Ubuntu 24.04 or 26.04 · Intel/AMD 64-bit</p></div>
+    </div>
+    <div class="hero-community">
+      <p>Open source. Built by the community.</p>
+      <a class="hero-github" href="{GITHUB}" target="_blank" rel="noopener" aria-label="Build with us on GitHub, {GITHUB_STARS:,} stars">
+        <img src="/img/github-mark.png" alt="" width="20" height="20">
+        <span class="hero-github-label">Build with us on GitHub</span>
+        <span class="hero-stars"><span aria-hidden="true">☆</span> {GITHUB_STARS:,}<span class="vh"> stars</span></span>
+        <span aria-hidden="true">↗</span>
+      </a>
     </div>
   </div>
 
@@ -322,21 +346,21 @@ def download():
 {page_head("Download Lastbook", "Install the app, then choose your library, local map and optional AI.", "fig-laptop")}
 {PHONE}
 <ul class="files" id="need">
-<li class="card file dl-mac"><h2>Mac</h2><p class="file-name">Lastbook 1.1.8 · 28.5 MB</p><p class="req">Apple Silicon (M1 or newer) · macOS 14 or newer</p>{MAC_BTN}<p>Setup checks your storage and downloads your library and optional local AI.</p></li>
-<li class="card file dl-win"><h2>Windows</h2><p class="file-name">Lastbook 1.1.8 · 105 MB</p><p class="req">Windows 10 or 11 · 64-bit</p>{WIN_BTN}<p>Setup lets you choose your library size, local map and optional local AI.</p></li>
-<li class="card file dl-linux"><h2>Linux</h2><p class="file-name">Lastbook 1.1.9 · 29.9 MB</p><p class="req">Ubuntu 24.04 · Intel/AMD 64-bit</p>{LINUX_BTN}<p>Choose your library, state map and optional local AI during setup.</p></li>
+<li class="card file dl-mac"><h2>Mac</h2><p class="file-name">Lastbook 1.1.11 · 28.4 MB</p><p class="req">Apple Silicon (M1 or newer) · macOS 14 or newer</p>{MAC_BTN}<p>Setup checks your storage and downloads your library and optional local AI.</p></li>
+<li class="card file dl-win"><h2>Windows</h2><p class="file-name">Lastbook 1.1.11 · 105 MB</p><p class="req">Windows 10 or 11 · 64-bit</p>{WIN_BTN}<p>Setup lets you choose your library size, local map and optional local AI.</p></li>
+<li class="card file dl-linux" id="linux"><h2>Linux</h2><p class="file-name">Lastbook 1.1.11 · 29.9 MB</p><p class="req">Ubuntu 24.04 or 26.04 · Intel/AMD 64-bit</p>{DEB_2404_BTN}{DEB_2604_BTN}<p>Choose your library, state map and optional local AI during setup.</p></li>
 </ul>
 <div class="os">
 <section class="card os-card dl-mac" id="mac" aria-labelledby="mac-h">
 <h2 id="mac-h">{APPLE} Install on Mac</h2>
-<ol class="list"><li>Open <b>Lastbook-1.1.10-mac.dmg</b>.</li><li>Drag <b>Lastbook</b> to <b>Applications</b>.</li><li>Open <b>Lastbook</b> from Applications.</li><li>Choose your state for a detailed local map, then your library size and optional local AI. Setup shows the space needed.</li><li>Click <b>Install</b> and keep your internet connection on until setup finishes.</li></ol>
-<details class="ver" id="why"><summary>Apple security checks</summary><div><p>Lastbook 1.1.10 is signed with our Developer ID and notarized by Apple. On first launch, macOS may ask you to confirm opening an app downloaded from the internet.</p></div></details>
+<ol class="list"><li>Open <b>Lastbook-1.1.11-mac.dmg</b>.</li><li>Drag <b>Lastbook</b> to <b>Applications</b>.</li><li>Open <b>Lastbook</b> from Applications.</li><li>Choose your state for a detailed local map, then your library size and optional local AI. Setup shows the space needed.</li><li>Click <b>Install</b> and keep your internet connection on until setup finishes.</li></ol>
+<details class="ver" id="why"><summary>Apple security checks</summary><div><p>Lastbook 1.1.11 is signed with our Developer ID and notarized by Apple. On first launch, macOS may ask you to confirm opening an app downloaded from the internet.</p></div></details>
 <p>Once setup finishes, the library and AI work offline.</p>
 </section>
-<section class="card os-card dl-win" id="windows" aria-labelledby="win-h"><h2 id="win-h">{WINDOWS} Install on Windows</h2><ol class="list"><li>Download and run <b>Lastbook-1.1.8-Setup.exe</b>.</li><li>Follow the installer, then open Lastbook.</li><li>Choose your library size, state map and optional local AI in setup.</li></ol><p>If Windows blocks the installer, contact <a href="mailto:hello@lastbook.org">hello@lastbook.org</a> with the message you see.</p></section>
-<section class="card os-card dl-linux" id="linux" aria-labelledby="linux-h"><h2 id="linux-h">Install on Linux</h2><ol class="list"><li>Download the Ubuntu package.</li><li>In the folder containing it, run <code>sudo apt install ./Lastbook_1.1.9_amd64.deb</code>.</li><li>Open Lastbook from your applications menu and choose your library, state map and optional local AI.</li></ol><p>Ubuntu 24.04 on Intel/AMD 64-bit computers. Setup downloads the content; Videos, Map and Chat work offline afterwards.</p></section>
+<section class="card os-card dl-win" id="windows" aria-labelledby="win-h"><h2 id="win-h">{WINDOWS} Install on Windows</h2><ol class="list"><li>Download and run <b>Lastbook-1.1.11-Setup.exe</b>.</li><li>Follow the installer, then open Lastbook.</li><li>Choose your library size, state map and optional local AI in setup.</li></ol><p>If Windows blocks the installer, contact <a href="mailto:hello@lastbook.org">hello@lastbook.org</a> with the message you see.</p></section>
+<section class="card os-card dl-linux" id="linux-install" aria-labelledby="linux-h"><h2 id="linux-h">Install on Linux</h2><ol class="list"><li>Download the package for your Ubuntu: <a href="{DEB_2404}">Ubuntu 24.04</a> or <a href="{DEB_2604}">Ubuntu 26.04</a>. To check which you have, run <code>lsb_release -rs</code>.</li><li>In the folder containing it, run <code>sudo apt install ./Lastbook_1.1.11_amd64.deb</code> on Ubuntu 24.04, or <code>sudo apt install ./Lastbook_1.1.11_ubuntu26.04_amd64.deb</code> on Ubuntu 26.04.</li><li>Open Lastbook from your applications menu and choose your library, state map and optional local AI.</li></ol><p>Ubuntu 24.04 or 26.04 on Intel/AMD 64-bit computers. Setup downloads the content; Videos, Map and Chat work offline afterwards.</p></section>
 </div>
-<section class="card plain" id="check"><h2>Check your download</h2><p>Mac 1.1.10 SHA-256</p><p><code style="overflow-wrap:anywhere">4e5dd37c9ef40af35ea3b896bc3ea85c8d752e962b32100ba967569d82ca1346</code></p><p><a href="/SHA256SUMS.txt">All published checksums</a></p></section>
+<section class="card plain" id="check"><h2>Check your download</h2><p>Mac 1.1.11 SHA-256</p><p><code style="overflow-wrap:anywhere">0b53850fc1123b7e964087537fcd88bb48418c2ee29cc7b735cacffd8f77a12b</code></p><p><a href="/SHA256SUMS.txt">All published checksums</a></p></section>
 </div></main>
 """ + FOOT
 
