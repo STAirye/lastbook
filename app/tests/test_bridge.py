@@ -791,6 +791,13 @@ class ForkSearchWords(unittest.TestCase):
                   'how do i treat the water heater before winter'):    # ("purify" alone still means disinfect: upstream's SYN)
             self.assertFalse(any('disinfect' in g for g in server.query_groups(q)[1]), q)
 
+    def test_water_damage_is_a_flooded_home(self):
+        for q in ('how do i treat water damage in my house', 'fix the water-damaged wall', 'water damage'):
+            groups = server.query_groups(q)[1]
+            self.assertIn('mold', groups[0], q)
+            self.assertNotIn(['treat'], groups, q)        # the verb goes with the phrase: no page has to say "treat"
+        self.assertNotIn('mold', [w for g in server.query_groups('our basement has flood damage')[1] for w in g])
+
 
 class NothingGoesOut(unittest.TestCase):
     """The shells cannot run here on both systems, so what must be gone from them is checked in their source."""

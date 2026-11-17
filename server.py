@@ -324,6 +324,9 @@ PHRASES = [  # everyday phrases -> one idea, checked before single words
     # Unless the question is about a fire that is an emergency: one in a kitchen or a building, by accident, spreading.
     (r"\b(start|make|light|build|starting|making|lighting)( up)?( a| the| my| our)? ?(camp)?fire\b", [['fire', 'fires'], ['tinder', 'kindling', 'firecraft']],
      r"\b(kitchen|building|apartment|garage|accident(al|ally)?|by mistake|arson|spread(s|ing)?|evacuat\w*)\b|\bin (the|my|our|a) (house|home)\b"),
+    # fork: water damage is a flooded home, not drinking water. The verb goes with it: a "treat" left behind has to be on the page.
+    # Not "flood damage": flood questions already find flood pages, and these words pulled garden pages in ("mold").
+    (r"\b((treat|fix|repair|clean( up)?|deal with|dry( out)?)( the| my| our)? )?water[- ]damage[ds]?\b", ['water damage', 'flood damage', 'flooding', 'mold', 'mould']),
     # fork: "make the water safe" in the manuals' words. Not water damage or a water heater.
     (r"\b(make|making|get|keep)( the| my| our)? water (safe|drinkable|potable)|purify (the )?water|treat (the )?water", [['water'], ['disinfect', 'disinfection', 'purify', 'purification', 'treatment', 'chlorine']],
      r"\bwater (damage[ds]?|heaters?)\b"),
