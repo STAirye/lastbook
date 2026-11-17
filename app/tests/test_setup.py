@@ -1664,7 +1664,8 @@ class ForkLocalAI(unittest.TestCase):
         L = self.L
         msgs = [{'role': 'system', 'content': 's'}, {'role': 'user', 'content': 'q'}]
         self.assertEqual(L.render(msgs, [], start='<|turn>model\n')[-1][0], '<|turn>model\n')
-        self.assertEqual(L.render(msgs, [])[-1][0], L.LOCAL.answer_start)
+        with mock.patch.object(L.LOCAL, 'answer_start', '<sentinel>'):    # without start=: the running file's own start
+            self.assertEqual(L.render(msgs, [])[-1][0], '<sentinel>')
         local = L.Local()
         self.assertEqual(local.answer_start, '<|turn>model\n<|channel>thought\n<channel|>')     # the published file: as upstream
         good = self.gguf_with_template('mine.gguf', "{%- if add_generation_prompt -%}{{- '<|turn>model\\n' -}}{%- endif -%}")
@@ -1735,95 +1736,99 @@ class ForkLocalAI(unittest.TestCase):
                 self.assertEqual(sent[0]['segments'], [['\n', False]])
                 self.assertEqual(sent[0]['max_tokens'], 1)
 
+    def assistant(self):
+        """assistant.py, imported for this test only: it and every module it brought in are dropped again afterwards."""
+        before = set(sys.modules)
+        import assistant
+        self.addCleanup(lambda: [sys.modules.pop(n, None) for n in set(sys.modules) - before])
+        return assistant
+
     def test_history_cites_with_this_turns_keys(self):
         """Earlier answers come back from the browser as "(Title, p. N)". The same page found again becomes this turn's key;
         a citation of anything else, a known title alone or a video moment, is removed. Other parentheses stay."""
-        fresh = [n for n in ('assistant', 'retrieval') if n not in sys.modules]
-        try:
-            import assistant
-            cat = {'by_id': {'d1': {'title': 'Water and Health'}, 'd2': {'title': 'Are You Ready'}, 'v1': {'title': 'Boiling Video'}}}
-            sources = {'S1': {'key': 'S1', 'title': 'Water and Health', 'page': 12},
-                       'S2': {'key': 'S2', 'title': 'Boiling Video', 't': 75}}
-            msgs = [{'role': 'system', 'content': 'Rules (Water and Health, p. 12)'},
-                    {'role': 'user', 'content': 'boil? (Water and Health, p. 12)'},
-                    {'role': 'assistant', 'content': 'Boil it (Water and Health, p. 12). Glass breaks (Are You Ready, p. 21). '
-                                                     'Watch (Boiling Video, 1:15). See (Are You Ready). Use a pot (any size).'}]
-            with mock.patch.object(assistant, 'S', mock.Mock(catalog=lambda: cat)):
-                out = assistant.rekey_history(msgs, sources)
-            self.assertEqual(out[2]['content'], 'Boil it [S1]. Glass breaks. Watch [S2]. See. Use a pot (any size).')
-            self.assertEqual(out[:2], msgs[:2])     # only the model's own earlier answers change
-            old_keys = [{'role': 'assistant', 'content': 'Boil it (S4). Wait (S2, S3).'}]
-            with mock.patch.object(assistant, 'S', mock.Mock(catalog=lambda: cat)):
-                self.assertEqual(assistant.rekey_history(old_keys, sources)[0]['content'], 'Boil it. Wait.')   # numbered for another question
-                fixed = assistant.repair_cites('Boil it (S1). Wait (S1, S2). Glass [Water and Health, p. 12]. '
-                                               'Bleach [Are You Ready, p. 21]. Pot (any size).', sources)
-            self.assertEqual(fixed, 'Boil it [S1]. Wait [S1][S2]. Glass [S1]. Bleach [Are You Ready, p. 21]. Pot (any size).')
-            own = [{'doc_id': d, 'page': 1} for d in 'abcdef']
-            joined = [{'doc_id': d, 'page': 1} for d in 'xaybz']
-            self.assertEqual([h['doc_id'] for h in assistant.followup_hits(own, joined)], list('abcdexyz'))
-            # a title holding parentheses, and the previous answer's pages as hits
-            cat['by_id']['c1'] = {'id': 'c1', 'kind': 'pdf', 'title': 'CERT Manual (2019)'}
-            pub = lambda r: {'title': r['title'], 'publisher': 'P', 'year': '2019', 'trust': 't', 'pages': 3}
-            fake = mock.Mock(catalog=lambda: cat, public=pub, page_texts=lambda r: ['one', 'two  words', 'three'])
-            with mock.patch.object(assistant, 'S', fake):
-                h = [{'role': 'assistant', 'content': 'Bleach (CERT Manual (2019), p. 2). Again [CERT Manual (2019), p. 2]. Far (CERT Manual (2019), p. 9).'}]
-                self.assertEqual(assistant.rekey_history(h, sources)[0]['content'], 'Bleach. Again. Far.')
-                got = assistant.cited_before(h + [{'role': 'user', 'content': 'and?'}])
-            self.assertEqual([(g['doc_id'], g['page'], g['excerpt']) for g in got], [('c1', 2, 'two words')])   # p. 9 is past the end
-        finally:
-            for n in fresh:
-                sys.modules.pop(n, None)
+        assistant = self.assistant()
+        cat = {'by_id': {'d1': {'title': 'Water and Health'}, 'd2': {'title': 'Are You Ready'}, 'v1': {'title': 'Boiling Video'}}}
+        sources = {'S1': {'key': 'S1', 'title': 'Water and Health', 'page': 12},
+                   'S2': {'key': 'S2', 'title': 'Boiling Video', 't': 75}}
+        msgs = [{'role': 'system', 'content': 'Rules (Water and Health, p. 12)'},
+                {'role': 'user', 'content': 'boil? (Water and Health, p. 12)'},
+                {'role': 'assistant', 'content': 'Boil it (Water and Health, p. 12). Glass breaks (Are You Ready, p. 21). '
+                                                 'Watch (Boiling Video, 1:15). See (Are You Ready). Use a pot (any size).'}]
+        with mock.patch.object(assistant, 'S', mock.Mock(catalog=lambda: cat)):
+            out = assistant.rekey_history(msgs, sources)
+        self.assertEqual(out[2]['content'], 'Boil it [S1]. Glass breaks. Watch [S2]. See. Use a pot (any size).')
+        self.assertEqual(out[:2], msgs[:2])     # only the model's own earlier answers change
+        old_keys = [{'role': 'assistant', 'content': 'Boil it (S4). Wait (S2, S3).'}]
+        with mock.patch.object(assistant, 'S', mock.Mock(catalog=lambda: cat)):
+            self.assertEqual(assistant.rekey_history(old_keys, sources)[0]['content'], 'Boil it. Wait.')   # numbered for another question
+            fixed = assistant.repair_cites('Boil it (S1). Wait (S1, S2). Glass [Water and Health, p. 12]. '
+                                           'Bleach [Are You Ready, p. 21]. Pot (any size).', sources)
+        self.assertEqual(fixed, 'Boil it [S1]. Wait [S1][S2]. Glass [S1]. Bleach [Are You Ready, p. 21]. Pot (any size).')
+        own = [{'doc_id': d, 'page': 1} for d in 'abcdef']
+        joined = [{'doc_id': d, 'page': 1} for d in 'xaybz']
+        self.assertEqual([h['doc_id'] for h in assistant.followup_hits(own, joined)], list('abcdexyz'))
+        # a title holding parentheses, and the previous answer's pages as hits
+        cat['by_id']['c1'] = {'id': 'c1', 'kind': 'pdf', 'title': 'CERT Manual (2019)'}
+        pub = lambda r: {'title': r['title'], 'publisher': 'P', 'year': '2019', 'trust': 't', 'pages': 3}
+        fake = mock.Mock(catalog=lambda: cat, public=pub, page_texts=lambda r: ['one', 'two  words', 'three'])
+        with mock.patch.object(assistant, 'S', fake):
+            h = [{'role': 'assistant', 'content': 'Bleach (CERT Manual (2019), p. 2). Again [CERT Manual (2019), p. 2]. Far (CERT Manual (2019), p. 9).'}]
+            self.assertEqual(assistant.rekey_history(h, sources)[0]['content'], 'Bleach. Again. Far.')
+            got = assistant.cited_before(h + [{'role': 'user', 'content': 'and?'}])
+        self.assertEqual([(g['doc_id'], g['page'], g['excerpt']) for g in got], [('c1', 2, 'two words')])   # p. 9 is past the end
 
     def test_english_search_for_other_languages(self):
         """A question in another language is searched with English words the model writes, thinking off; English questions,
         and words with an accent inside an English question, are searched as they are."""
-        fresh = [n for n in ('assistant', 'retrieval') if n not in sys.modules]
-        try:
-            import assistant
-            ne = assistant.needs_english
-            for q in ('¿cómo hiervo agua?', 'necesito hacer fuego sin fósforos', 'mi bebé tiene fiebre', 'qué es la RCP',
-                      'como purificar água', 'comment purifier l\'eau', '怎么生火', 'y si es de noche?',
-                      '¡AUXILIO! ÉL ESTÁ HERIDO', 'el pingüino y el ñandú', 'agüita de güemul', 'NIÑO CON DIARREA',
-                      'ñ', '¿¡qué!?', 'quemadura en la cara',
-                      'niño con fiebre',       # "niño" decomposed, as a phone or Mac may send it
-                      'pingüino herido'):       # "pingüino", decomposed
-                self.assertTrue(ne(q), ascii(q))
-            for q in ('how do i boil water', 'start a fire without matches', 'jalapeño burns on my hand', 'CPR', '',
-                      'what is the piñata safety rule', 'no pulse', 'how to make a café latte without power',
-                      'is my naïve résumé safe', 'the jalapeño burned my hand', '¿?¡!', '12 34'):
-                self.assertFalse(ne(q), ascii(q))
-            ew = assistant.english_words
-            self.assertEqual(ew('start a fire without matches\n'), 'start a fire without matches')
-            self.assertIsNone(ew('cómo hacer fuego sin fósforos'))
-            self.assertIsNone(ew('niño con fiebre'))
-            self.assertEqual(ew('“fever in a child from Ñuble”'), 'fever in a child from Ñuble')    # an odd word in English is kept
-            self.assertEqual(ew('English: "boil water safely."<turn|>'), 'boil water safely')
-            self.assertEqual(ew('<|channel>thought\nhmm<channel|>\n\nbaby fever'), 'baby fever')
-            self.assertIsNone(ew('¿cómo hiervo agua?'))
-            self.assertIsNone(ew('  \n'))
-            sent = []
+        assistant = self.assistant()
+        ne = assistant.needs_english
+        for q in ('¿cómo hiervo agua?', 'necesito hacer fuego sin fósforos', 'mi bebé tiene fiebre', 'qué es la RCP',
+                  'como purificar água', 'comment purifier l\'eau', '怎么生火', 'y si es de noche?',
+                  '¡AUXILIO! ÉL ESTÁ HERIDO', 'el pingüino y el ñandú', 'agüita de güemul', 'NIÑO CON DIARREA',
+                  'ñ', '¿¡qué!?', 'quemadura en la cara',
+                  'niño con fiebre',       # "niño" decomposed, as a phone or Mac may send it
+                  'pingüino herido'):       # "pingüino", decomposed
+            self.assertTrue(ne(q), ascii(q))
+        for q in ('how do i boil water', 'start a fire without matches', 'jalapeño burns on my hand', 'CPR', '',
+                  'what is the piñata safety rule', 'no pulse', 'how to make a café latte without power',
+                  'is my naïve résumé safe', 'the jalapeño burned my hand', '¿?¡!', '12 34'):
+            self.assertFalse(ne(q), ascii(q))
+        ew = assistant.english_words
+        self.assertEqual(ew('start a fire without matches\n'), 'start a fire without matches')
+        self.assertIsNone(ew('cómo hacer fuego sin fósforos'))
+        self.assertIsNone(ew('niño con fiebre'))
+        self.assertEqual(ew('“fever in a child from Ñuble”'), 'fever in a child from Ñuble')    # an odd word in English is kept
+        self.assertEqual(ew('English: "boil water safely."<turn|>'), 'boil water safely')
+        self.assertEqual(ew('<|channel>thought\nhmm<channel|>\n\nbaby fever'), 'baby fever')
+        self.assertIsNone(ew('¿cómo hiervo agua?'))
+        self.assertIsNone(ew('  \n'))
+        sent = []
 
-            def gen(segs, n, cancelled, on_text):
-                sent.append((segs, n))
-                on_text('purify ')
-                on_text('water\n')
-                return {'reason': 'eos'}
-            with mock.patch.object(assistant, 'LOCAL', mock.Mock(generate=gen, think=True, answer_start='<|turn>model\n')), \
-                    mock.patch.object(self.L.LOCAL, 'think', True), mock.patch.dict(assistant._ENGLISH, clear=True):
-                self.assertEqual(assistant.english_query('¿cómo purifico agua?', 'tengo sed', lambda: False), 'purify water')
-                self.assertEqual(assistant.english_query('¿cómo purifico agua?', '', lambda: False), 'purify water')   # kept
-                self.assertEqual(len(sent), 1)
-                prompt = ''.join(s[0] for s in sent[0][0])
-                self.assertNotIn('<|think|>', prompt)
-                self.assertIn('Earlier question: tengo sed\nLatest question: ¿cómo purifico agua?', prompt)
-                self.assertIn('every word', prompt)         # the rules (assistant.REWRITE) go first
-                self.assertEqual(sent[0][1], assistant.REWRITE_TOKENS)
-                failing = mock.Mock(generate=mock.Mock(side_effect=RuntimeError('down')))
-                with mock.patch.object(assistant, 'LOCAL', failing):
-                    self.assertIsNone(assistant.english_query('¿y el fuego?', '', lambda: False))
-        finally:
-            for n in fresh:
-                sys.modules.pop(n, None)
+        def gen(segs, n, cancelled, on_text):
+            sent.append((segs, n))
+            on_text('purify ')
+            on_text('water\n')
+            return {'reason': 'eos'}
+        with mock.patch.object(assistant, 'LOCAL', mock.Mock(generate=gen, think=True, answer_start='<|turn>model\n')), \
+                mock.patch.object(self.L.LOCAL, 'think', True), mock.patch.dict(assistant._ENGLISH, clear=True), \
+                mock.patch.dict(assistant._ENGLISH_OF, clear=True):
+            self.assertEqual(assistant.english_query('¿cómo purifico agua?', 'tengo sed', lambda: False), 'purify water')
+            self.assertEqual(assistant.english_query('¿cómo purifico agua?', 'tengo sed', lambda: False), 'purify water')   # kept
+            self.assertEqual(len(sent), 1)
+            self.assertEqual(assistant._ENGLISH_OF['¿cómo purifico agua?'], 'purify water')   # for the next follow-up's joined search
+            prompt = ''.join(s[0] for s in sent[0][0])
+            self.assertNotIn('<|think|>', prompt)
+            self.assertIn('Earlier question: tengo sed\nLatest question: ¿cómo purifico agua?', prompt)
+            self.assertIn('every word', prompt)         # the rules (assistant.REWRITE) go first
+            self.assertEqual(sent[0][1], assistant.REWRITE_TOKENS)
+            # the same follow-up after another question is asked again: "¿y si es de noche?" after fire is not after water
+            assistant.english_query('¿y si es de noche?', '¿cómo hago fuego?', lambda: False)
+            assistant.english_query('¿y si es de noche?', '¿cómo purifico agua?', lambda: False)
+            self.assertEqual(len(sent), 3)
+            self.assertIn('Earlier question: ¿cómo purifico agua?', ''.join(s[0] for s in sent[2][0]))
+            failing = mock.Mock(generate=mock.Mock(side_effect=RuntimeError('down')))
+            with mock.patch.object(assistant, 'LOCAL', failing):
+                self.assertIsNone(assistant.english_query('¿y el fuego?', '', lambda: False))
 
     def test_judge_counts_the_file_it_runs(self):
         fit = {'status': 'fits', 'ram_total': 64 * 2 ** 30, 'device_bytes': 0, 'host_bytes': 2 ** 30, 'memory': []}
@@ -1964,39 +1969,34 @@ class ForkLocalAI(unittest.TestCase):
     def test_page_body_caps_and_switch(self):
         """read_pages and the first search's pages go through page_body: tables by row, cut at the old length (the spaces
         kept in a printed table don't count). LASTBOOK_AI_TABLES=0 gives the old squashed text."""
-        fresh = [n for n in ('assistant', 'retrieval') if n not in sys.modules]
-        try:
-            import assistant
-            from engine import page_tables as T
-            page = '\n'.join(self.BLEACH_CENTRED)
-            rec = {'id': 'hes', 'kind': 'pdf', 'notes': ''}
-            S = mock.Mock(catalog=lambda: {'by_id': {'hes': rec}}, page_texts=lambda r: ['intro', page],
-                          public=lambda r: {'title': 'Protecting Community Water', 'publisher': 'Hesperian', 'year': '2011',
-                                            'trust': 'reviewed', 'pages': 2})
-            sess = assistant.Session()
-            with mock.patch.object(assistant, 'S', S, create=True), mock.patch.dict(os.environ, {'LASTBOOK_AI_TABLES': ''}):
-                out, info = assistant.run_tool('read_pages', {'doc_id': 'hes', 'pages': [2]}, sess, [])
-                self.assertIn('For 5 gallons or 20 liters | 1/2 teaspoon', out)
-                os.environ['LASTBOOK_AI_TABLES'] = '0'
-                out, _ = assistant.run_tool('read_pages', {'doc_id': 'hes', 'pages': [2]}, sess, [])
-                self.assertNotIn('Table (', out)
-                self.assertIn('For 5 gallons or\n 1/2 teaspoon\n 20 liters', out)
-                hit = {'doc_id': 'hes', 'kind': 'pdf', 'page': 2, 'excerpt': 'For 5 gallons or 1/2 teaspoon 20 liters For a 200 liter'}
-                self.assertEqual(assistant.excerpt_body(hit), hit['excerpt'])        # the switch: as before
-                os.environ['LASTBOOK_AI_TABLES'] = ''
-                ex = assistant.excerpt_body(hit)
-                self.assertTrue(ex.startswith(hit['excerpt']))
-                self.assertIn('\nFor 5 gallons or 20 liters | 1/2 teaspoon\n', ex)
-                self.assertEqual(assistant.excerpt_body(dict(hit, page=1)), hit['excerpt'])   # no table on that page
-                self.assertEqual(assistant.excerpt_body(dict(hit, kind='video', page=None)), hit['excerpt'])
-            long = 'word ' * 900 + '\n' + '\n'.join(self.BLEACH_CENTRED)
-            self.assertLessEqual(len(T._squash(assistant.page_body(long, 3200))), 3200)
-            self.assertEqual(T.clip('abc\ndef', 100), 'abc\ndef')
-            wide = 'a' + ' ' * 50 + 'b\n' + 'c' * 10
-            self.assertEqual(T.clip(wide, 4), 'a' + ' ' * 50 + 'b')       # 50 spaces count as one
-        finally:
-            for n in fresh:
-                sys.modules.pop(n, None)
+        assistant = self.assistant()
+        from engine import page_tables as T
+        page = '\n'.join(self.BLEACH_CENTRED)
+        rec = {'id': 'hes', 'kind': 'pdf', 'notes': ''}
+        S = mock.Mock(catalog=lambda: {'by_id': {'hes': rec}}, page_texts=lambda r: ['intro', page],
+                      public=lambda r: {'title': 'Protecting Community Water', 'publisher': 'Hesperian', 'year': '2011',
+                                        'trust': 'reviewed', 'pages': 2})
+        sess = assistant.Session()
+        with mock.patch.object(assistant, 'S', S), mock.patch.dict(os.environ, {'LASTBOOK_AI_TABLES': ''}):
+            out, info = assistant.run_tool('read_pages', {'doc_id': 'hes', 'pages': [2]}, sess, [])
+            self.assertIn('For 5 gallons or 20 liters | 1/2 teaspoon', out)
+            os.environ['LASTBOOK_AI_TABLES'] = '0'
+            out, _ = assistant.run_tool('read_pages', {'doc_id': 'hes', 'pages': [2]}, sess, [])
+            self.assertNotIn('Table (', out)
+            self.assertIn('For 5 gallons or\n 1/2 teaspoon\n 20 liters', out)
+            hit = {'doc_id': 'hes', 'kind': 'pdf', 'page': 2, 'excerpt': 'For 5 gallons or 1/2 teaspoon 20 liters For a 200 liter'}
+            self.assertEqual(assistant.excerpt_body(hit), hit['excerpt'])        # the switch: as before
+            os.environ['LASTBOOK_AI_TABLES'] = ''
+            ex = assistant.excerpt_body(hit)
+            self.assertTrue(ex.startswith(hit['excerpt']))
+            self.assertIn('\nFor 5 gallons or 20 liters | 1/2 teaspoon\n', ex)
+            self.assertEqual(assistant.excerpt_body(dict(hit, page=1)), hit['excerpt'])   # no table on that page
+            self.assertEqual(assistant.excerpt_body(dict(hit, kind='video', page=None)), hit['excerpt'])
+        long = 'word ' * 900 + '\n' + '\n'.join(self.BLEACH_CENTRED)
+        self.assertLessEqual(len(T._squash(assistant.page_body(long, 3200))), 3200)
+        self.assertEqual(T.clip('abc\ndef', 100), 'abc\ndef')
+        wide = 'a' + ' ' * 50 + 'b\n' + 'c' * 10
+        self.assertEqual(T.clip(wide, 4), 'a' + ' ' * 50 + 'b')       # 50 spaces count as one
 
 
 class ContentRevisions(Base):

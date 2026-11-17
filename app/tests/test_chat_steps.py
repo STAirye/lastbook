@@ -22,8 +22,10 @@ MD = r"""
 const fs = require('fs');
 const chat = fs.readFileSync(process.argv[1], 'utf8').replace(/\r/g, ''), app = fs.readFileSync(process.argv[2], 'utf8');
 const esc = app.split('\n').find(l => /^const esc\s*=/.test(l));
-const i = chat.indexOf('function md('), j = chat.indexOf('\n  }\n', i) + 4;     // its closing brace (a Windows checkout has CRLF)
-const md = new Function(esc + '\n' + chat.slice(i, j) + '\nreturn md;')();
+const i = chat.indexOf('function md('), end = i < 0 ? -1 : chat.indexOf('\n  }\n', i);   // its closing brace (CRs removed above)
+if (!esc || end < 0) throw new Error('test_chat_steps: could not find ' + (esc ? 'md() and its closing "  }" in web/chat.js' : 'const esc in web/app.js'));
+const md = new Function(esc + '\n' + chat.slice(i, end + 4) + '\nreturn md;')();
+if (typeof md !== 'function') throw new Error('test_chat_steps: md() from web/chat.js did not come out as a function');
 process.stdout.write(JSON.stringify(md(process.argv[3], {sources: [{key: 'S1'}], cited: [{key: 'S1'}]})));
 """
 
@@ -65,7 +67,8 @@ class SpanishAnswers(unittest.TestCase):
         uncited = re.findall(r'<span class="uncited"[^>]*>(.*?)</span>', got)
         self.assertIn('¡Ojo con el vapor caliente en la cara del niño!', uncited)
         self.assertIn('Ñuble queda lejos de aquí, a dos horas.', uncited)
-        self.assertIn('Fíltrala con un paño limpio antes de hervirla.', uncited)   # "¿Está turbia?" is too short to mark
+        self.assertIn('Fíltrala con un paño limpio antes de hervirla.', uncited)
+        self.assertFalse(any('¿Está turbia?' in u for u in uncited))      # too short to mark
         self.assertFalse(any('[S1]' in u or 'cite' in u for u in uncited))
         self.assertNotIn('Él dice que sí', ' '.join(uncited))     # cited, so not marked
 

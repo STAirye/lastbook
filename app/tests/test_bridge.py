@@ -777,14 +777,19 @@ class ForkSearchWords(unittest.TestCase):
     def test_making_fire_is_tinder_and_kindling(self):
         for q in ('i need to start a fire but i have no matches and no gas', 'how do i light a campfire', 'make fire'):
             self.assertIn(['tinder', 'kindling', 'firecraft'], server.query_groups(q)[1], q)
-        for q in ('there is a building fire next door', 'the fire started in the kitchen', 'how do i put out a fire'):
+        for q in ('there is a building fire next door', 'the fire started in the kitchen', 'how do i put out a fire',
+                  'start a fire in the kitchen by accident', 'someone tried to light a fire in the building',
+                  'i accidentally started a fire', 'my kid lit a fire in the house', 'how do i stop a fire spreading'):
             self.assertNotIn(['tinder', 'kindling', 'firecraft'], server.query_groups(q)[1], q)
+            self.assertIn('fire', [g[0] for g in server.query_groups(q)[1]], q)    # still searched as a fire
 
     def test_making_water_safe_is_disinfecting(self):
         for q in ('how do i purify water from a creek', 'how do i make the water safe', 'treat water with bleach'):
             self.assertIn(['water'], server.query_groups(q)[1], q)
             self.assertTrue(any('disinfect' in g for g in server.query_groups(q)[1]), q)
-        self.assertFalse(any('disinfect' in g for g in server.query_groups('how do i make it safe to go back inside')[1]))
+        for q in ('how do i make it safe to go back inside', 'how do i treat water damage in my house', 'treat water damaged drywall',
+                  'how do i treat the water heater before winter'):    # ("purify" alone still means disinfect: upstream's SYN)
+            self.assertFalse(any('disinfect' in g for g in server.query_groups(q)[1]), q)
 
 
 class NothingGoesOut(unittest.TestCase):

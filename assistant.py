@@ -350,7 +350,8 @@ REWRITE_TOKENS = 32
 # it isn't asked: web/chat.js also knows them in Spanish.
 LANGUAGE_NOTE = ('The latest question is not in English. The library is in English and was searched with: {english}. '
                  'If you call search_library, write the query in English. Answer in the language of the question.')
-_ENGLISH = {}       # question -> its English search words, so a follow-up's joined search can use the earlier one's
+_ENGLISH = {}       # (earlier question, question) -> English search words: the earlier question is in the prompt, so it is in the key
+_ENGLISH_OF = {}    # question -> the English search words it was last given, so a follow-up's joined search can use the earlier one's
 
 
 def needs_english(q):
@@ -373,10 +374,12 @@ def english_words(text):
 
 def english_query(question, earlier, cancelled):
     """fork: English search words for a non-English question from the running local model, thinking off; None if it fails."""
-    if question in _ENGLISH:
-        return _ENGLISH[question]
+    key = ((earlier or '')[:300], question[:300])      # what the prompt holds: "¿y de noche?" after fire is not after water
+    if key in _ENGLISH:
+        _ENGLISH_OF[question] = _ENGLISH[key]
+        return _ENGLISH[key]
     import llm_local
-    ask = (f'Earlier question: {earlier[:300]}\n' if earlier else '') + f'Latest question: {question[:300]}'
+    ask = (f'Earlier question: {key[0]}\n' if key[0] else '') + f'Latest question: {key[1]}'
     segs = llm_local.render([{'role': 'system', 'content': REWRITE}, {'role': 'user', 'content': ask}], None, think=False)
     out = ['']
     try:
@@ -391,7 +394,8 @@ def english_query(question, earlier, cancelled):
     if words:
         if len(_ENGLISH) > 64:
             _ENGLISH.clear()
-        _ENGLISH[question] = words
+            _ENGLISH_OF.clear()
+        _ENGLISH[key] = _ENGLISH_OF[question] = words
     return words
 
 
@@ -775,7 +779,7 @@ def chat(messages, about, emit, cancelled):
                 return
         hits = (hybrid(english, 8) if english else []) or hybrid(question[:300], 8)
         if own_file and earlier and os.environ.get('LASTBOOK_AI_FOLLOWUP') != '0':
-            before = _ENGLISH.get(earlier, '') if needs_english(earlier) else earlier[:200]
+            before = _ENGLISH_OF.get(earlier, '') if needs_english(earlier) else earlier[:200]
             joined = (before + ' ' + english) if english else (earlier[:200] + ' ' + question)
             carried = cited_before(messages)      # up to 3, then this message's best 4, the joined search, the rest
             hits = followup_hits(carried + hits, hybrid(joined.strip()[:300], 8), first=len(carried) + 4)

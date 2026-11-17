@@ -321,17 +321,20 @@ PHRASES = [  # everyday phrases -> one idea, checked before single words
     # fork: the manuals teach making fire as tinder, kindling and firecraft. "start a fire" alone ranks fire-safety pages
     # first, and "no matches and no gas" pulls them further up, because those pages warn about matches and gas.
     # Not "building fire", which is a building on fire. Not "ignition": it brought welding and hazmat pages back.
-    (r"\b(start|make|light|build|starting|making|lighting)( up)?( a| the| my| our)? ?(camp)?fire\b", [['fire', 'fires'], ['tinder', 'kindling', 'firecraft']]),
-    # fork: "make the water safe" in the manuals' words.
-    (r"\b(make|making|get|keep)( the| my| our)? water (safe|drinkable|potable)|purify (the )?water|treat (the )?water", [['water'], ['disinfect', 'disinfection', 'purify', 'purification', 'treatment', 'chlorine']]),
+    # Unless the question is about a fire that is an emergency: one in a kitchen or a building, by accident, spreading.
+    (r"\b(start|make|light|build|starting|making|lighting)( up)?( a| the| my| our)? ?(camp)?fire\b", [['fire', 'fires'], ['tinder', 'kindling', 'firecraft']],
+     r"\b(kitchen|building|apartment|garage|accident(al|ally)?|by mistake|arson|spread(s|ing)?|evacuat\w*)\b|\bin (the|my|our|a) (house|home)\b"),
+    # fork: "make the water safe" in the manuals' words. Not water damage or a water heater.
+    (r"\b(make|making|get|keep)( the| my| our)? water (safe|drinkable|potable)|purify (the )?water|treat (the )?water", [['water'], ['disinfect', 'disinfection', 'purify', 'purification', 'treatment', 'chlorine']],
+     r"\bwater (damage[ds]?|heaters?)\b"),
 ]
 
 
 def query_groups(q):
     q = q.lower().replace('\u2019', "'")
     phrase_groups = []
-    for rx, g in PHRASES:
-        if re.search(rx, q):
+    for rx, g, *unless in PHRASES:        # fork: an optional third regex; when it is found in the question, the phrase is not used
+        if re.search(rx, q) and not (unless and re.search(unless[0], q)):
             phrase_groups += g if isinstance(g[0], list) else [g]
             q = re.sub(rx, ' ', q)
     words = [w.lower() for w in re.findall(r"[\w'-]+", q)]
