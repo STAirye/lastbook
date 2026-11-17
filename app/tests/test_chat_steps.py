@@ -22,7 +22,7 @@ process.stdout.write(JSON.stringify(out));
 class Steps(unittest.TestCase):
     def text(self, steps):
         r = subprocess.run([NODE, '-e', RUN, str(ROOT / 'web/chat.js'), str(ROOT / 'web/app.js'), json.dumps(steps)],
-                           capture_output=True, text=True, check=True)
+                           capture_output=True, text=True, encoding='utf-8', check=True)   # Node writes UTF-8; Windows would read cp1252
         return json.loads(r.stdout)
 
     def test_read_pages_is_escaped_whatever_the_model_sent(self):
