@@ -57,6 +57,10 @@ def _parts(query):
     number, remainder = query.strip().split(None, 1)
     number = number.upper()
     remainder = re.sub(r'[^a-z0-9 ]+', ' ', remainder.lower()).split()
+    # A ZIP+4 ("62704-1234", or "62704 1234" once the hyphen is gone) is the same place as its five-digit ZIP, which the
+    # index keeps: drop the four extra digits so the ZIP and the state before it are still read.
+    if len(remainder) > 1 and re.fullmatch(r'\d{4}', remainder[-1]) and re.fullmatch(r'\d{5}', remainder[-2]):
+        remainder.pop()
     postcode = ''
     if remainder and re.fullmatch(r'\d{5}', remainder[-1]):
         postcode = remainder.pop()

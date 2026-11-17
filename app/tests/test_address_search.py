@@ -56,6 +56,14 @@ class AddressSearchTests(unittest.TestCase):
         self.assertEqual(find_addresses('18001 nine mile Wrongtown MI', self.geo), [])
         self.assertEqual(find_addresses('18001 nine mile MI 99999', self.geo), [])
 
+    def test_zip_plus_four_uses_its_five_digit_zip(self):
+        for query in ('18001 nine mile Novi MI 48375-1234', '18001 nine mile Novi MI 48375 1234'):
+            with self.subTest(query=query):
+                result = find_addresses(query, self.geo)
+                self.assertEqual(len(result), 1)
+                self.assertEqual(result[0]['name'], '18001 W Nine Mile Road')
+        self.assertEqual(find_addresses('18001 nine mile Novi MI 99999-1234', self.geo), [])
+
     def test_state_uses_only_that_index(self):
         result = find_addresses('18001 nine mile CA', self.geo)
         self.assertEqual(len(result), 1)
