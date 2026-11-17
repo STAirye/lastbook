@@ -1864,6 +1864,140 @@ class ForkLocalAI(unittest.TestCase):
                 local.state = 'stopped'
             self.assertTrue(called.wait(5))
 
+    # Two printings of Hesperian's bleach table, as `pdftotext -layout` gives them (docs/FORK.md, 3j). In the first a column
+    # of prose runs beside it; in the second each amount sits between the two lines of its label.
+    BLEACH_BESIDE_PROSE = [
+        '    If the water is cloudy or                     Water                 Add Bleach (5%)',
+        'has a lot of solid matter in it,',
+        '                                       For 1 liter or',
+        'filter the water before adding                                                 2 drops',
+        '                                         1 quart',
+        'chlorine.',
+        '   After adding the right              For 1 gallon or',
+        'amount of chlorine, stir well              4 liters                            8 drops',
+        'and wait at least 30 minutes',
+        'before drinking. If the water',
+        '                                       For 5 gallons or                     1/2 teaspoon',
+        'does not smell or taste just               20 liters',
+        'slightly of chlorine after',
+        'adding the amount listed, add',
+        'the same amount again. Stir            For a 200 liter',
+        '                                                                            5 teaspoons',
+        '                                           barrel',
+        'and wait before drinking.']
+    BLEACH_CENTRED = [
+        'water is cloudy, use twice as much bleach as what is shown in the chart below.', '',
+        '                            Water                   5% Chlorine Bleach', '',
+        '                For 1 liter or',
+        '                1 quart                                        2 drops', '', '',
+        '                For 1 gallon or',
+        '                4 liters                                       8 drops', '', '',
+        '                For 5 gallons or',
+        '                                                               1/2 teaspoon',
+        '                20 liters', '', '', '',
+        '                For a 200 liter',
+        '                                                               5 teaspoons',
+        '                barrel', '',
+        '   Add these amounts of bleach to filtered or settled water and wait at least 30 minutes']
+    ROWS = ['For 1 liter or 1 quart | 2 drops', 'For 1 gallon or 4 liters | 8 drops',
+            'For 5 gallons or 20 liters | 1/2 teaspoon', 'For a 200 liter barrel | 5 teaspoons']
+
+    def test_tables_are_read_by_row(self):
+        """The old reading, every run of spaces squashed, put "20 liters" next to "5 teaspoons"; a small model gave ten
+        times the dose. The table now reads one row per line, and the prose beside it stays whole."""
+        from engine import page_tables as T
+        old = T._squash('\n'.join(self.BLEACH_BESIDE_PROSE))
+        self.assertIn('just 20 liters\nslightly of chlorine after\nadding the amount listed, add\nthe same amount again. Stir For a 200 liter\n 5 teaspoons', old)
+        for page, head in ((self.BLEACH_BESIDE_PROSE, 'Water | Add Bleach (5%)'), (self.BLEACH_CENTRED, 'Water | 5% Chlorine Bleach')):
+            text = T.for_model('\n'.join(page))
+            lines = text.split('\n')
+            at = lines.index('Table (one row per line, columns split by |):')
+            self.assertEqual(lines[at + 1:at + 6], [head] + self.ROWS, text)
+            for amount in ('2 drops', '8 drops', '1/2 teaspoon', '5 teaspoons', '20 liters'):   # once, in its row
+                self.assertEqual(text.count(amount), 1, amount)
+        prose = T.for_model('\n'.join(self.BLEACH_BESIDE_PROSE))
+        self.assertIn('If the water is cloudy or\nhas a lot of solid matter in it,\nfilter the water before adding\nchlorine.', prose)
+        self.assertTrue(prose.rstrip().endswith('and wait before drinking.'))
+        found = T.tables('\n'.join(self.BLEACH_CENTRED))
+        self.assertEqual((len(found), found[0]['sure'], found[0]['mixed']), (1, True, 2))
+
+    def test_tables_that_cannot_be_split_stay_as_printed(self):
+        """When cells wrap in several columns, rows can't be told apart by the nearest amount: the table keeps its printed
+        columns (blank columns dropped) instead of being squashed line by line. Pages with no table read as before."""
+        import re
+        from engine import page_tables as T
+        page = ['     Name of medicine              Age                   Dose                  How to take',
+                '         Metronidazole          1 to 2 years      50 mg, 3 times a day       By mouth for 5 to 7',
+                '                                                                                   days.',
+                '                                3 to 6 years      100 mg, 2 times a day',
+                '                                                                            Do not give to people',
+                '                                7 to 9 years      100 mg, 3 times a day       during the first 3',
+                '                                                                            months of pregnancy.',
+                '                               10 to 17 years     250 mg, 3 times a day', '',
+                '                            18 years and older    500 mg, 3 times a day', '',
+                'Once the area is clean and the infection is controlled, take out any teeth that']
+        text = T.for_model('\n'.join(page))
+        self.assertIn('Table as printed', text)
+        lines = text.split('\n')
+        dose = [l.index(m) for l in lines for m in re.findall(r'\d+ mg, \d times a day', l)]
+        self.assertEqual(len(set(dose)), 1, text)                   # the dose column still lines up
+        self.assertLess(max(map(len, lines)), max(map(len, page)))  # with less space
+        self.assertTrue(text.rstrip().endswith('take out any teeth that'))
+        across = ['      Weight          4 kg        5 kg             6 kg       7 kg        8 kg         9 kg',
+                  '      Dosage in',
+                  '                      2 mg        2.5 mg           3 mg       3.5 mg      4 mg         4.5 mg',
+                  '      mg',
+                  '      Epinephrine',
+                  '      (1 mg/mL        2 mL        2.5 mL           3 mL       3.5 mL      4 mL         4.5 mL',
+                  '      ampoule)',
+                  '      0.9% NaCl',
+                  '      to add',
+                  '                      2 mL        2 mL             1 mL       1 mL               -            -']
+        down = T._down(T._segments(across))   # weights across: also read down each column
+        self.assertIn('Column 4: 7 kg, 3.5 mg, 3.5 mL, 1 mL', down)
+        self.assertIn('Column 3: 6 kg, 3 mg, 3 mL, 1 mL', down)
+        self.assertEqual(T._down(T._segments(page)), [])   # rows of a few columns: not this
+        plain = 'Boil the water   for 1 minute.\n  Let it cool,   then 2 drops\n\nstore covered.'
+        self.assertEqual(T.for_model(plain), T._squash(plain))
+        self.assertEqual(T.for_model(''), '')
+
+    def test_page_body_caps_and_switch(self):
+        """read_pages and the first search's pages go through page_body: tables by row, cut at the old length (the spaces
+        kept in a printed table don't count). LASTBOOK_AI_TABLES=0 gives the old squashed text."""
+        fresh = [n for n in ('assistant', 'retrieval') if n not in sys.modules]
+        try:
+            import assistant
+            from engine import page_tables as T
+            page = '\n'.join(self.BLEACH_CENTRED)
+            rec = {'id': 'hes', 'kind': 'pdf', 'notes': ''}
+            S = mock.Mock(catalog=lambda: {'by_id': {'hes': rec}}, page_texts=lambda r: ['intro', page],
+                          public=lambda r: {'title': 'Protecting Community Water', 'publisher': 'Hesperian', 'year': '2011',
+                                            'trust': 'reviewed', 'pages': 2})
+            sess = assistant.Session()
+            with mock.patch.object(assistant, 'S', S, create=True), mock.patch.dict(os.environ, {'LASTBOOK_AI_TABLES': ''}):
+                out, info = assistant.run_tool('read_pages', {'doc_id': 'hes', 'pages': [2]}, sess, [])
+                self.assertIn('For 5 gallons or 20 liters | 1/2 teaspoon', out)
+                os.environ['LASTBOOK_AI_TABLES'] = '0'
+                out, _ = assistant.run_tool('read_pages', {'doc_id': 'hes', 'pages': [2]}, sess, [])
+                self.assertNotIn('Table (', out)
+                self.assertIn('For 5 gallons or\n 1/2 teaspoon\n 20 liters', out)
+                hit = {'doc_id': 'hes', 'kind': 'pdf', 'page': 2, 'excerpt': 'For 5 gallons or 1/2 teaspoon 20 liters For a 200 liter'}
+                self.assertEqual(assistant.excerpt_body(hit), hit['excerpt'])        # the switch: as before
+                os.environ['LASTBOOK_AI_TABLES'] = ''
+                ex = assistant.excerpt_body(hit)
+                self.assertTrue(ex.startswith(hit['excerpt']))
+                self.assertIn('\nFor 5 gallons or 20 liters | 1/2 teaspoon\n', ex)
+                self.assertEqual(assistant.excerpt_body(dict(hit, page=1)), hit['excerpt'])   # no table on that page
+                self.assertEqual(assistant.excerpt_body(dict(hit, kind='video', page=None)), hit['excerpt'])
+            long = 'word ' * 900 + '\n' + '\n'.join(self.BLEACH_CENTRED)
+            self.assertLessEqual(len(T._squash(assistant.page_body(long, 3200))), 3200)
+            self.assertEqual(T.clip('abc\ndef', 100), 'abc\ndef')
+            wide = 'a' + ' ' * 50 + 'b\n' + 'c' * 10
+            self.assertEqual(T.clip(wide, 4), 'a' + ' ' * 50 + 'b')       # 50 spaces count as one
+        finally:
+            for n in fresh:
+                sys.modules.pop(n, None)
+
 
 class ContentRevisions(Base):
     def revised_manifest(self, revision='2026-11-13-small-v2', actual_revision=None):

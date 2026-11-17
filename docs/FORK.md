@@ -313,10 +313,71 @@ water. The model's own searches were in Spanish too ("primeros auxilios tornique
   "5 galones" still gave "sodium hypochlorite 5%"); no measurable change.
 - **Not fixed:** the Spanish documents in the library are no longer what the first search finds for Spanish questions
   (they rarely answered them). "estero" was rendered "estuarine" (in Chile it's a creek); the results were still right.
-  And see Open: one answer misread a dose table.
+  One answer misread a dose table; that is 3j.
 
 `ForkLocalAI.test_english_search_for_other_languages` and `test_chat_steps.SpanishAnswers` cover it, with ñ, ü, ¿, ¡,
 accented capitals and decomposed letters.
+
+### 3j. Tables read row by row (upstream)
+
+Found by hand: "¿cuánto cloro le echo a 20 litros de agua?" got **5 teaspoons** of 5% bleach, 3 runs of 3, citing
+Hesperian's "Water and Sanitation: Keys to Staying Healthy" p. 23 and "Protecting Community Water" p. 36. Both say
+**1/2 teaspoon for 20 litres**; 5 teaspoons is the 200-litre barrel. Ten times the dose.
+
+- **Not the model, and not the library text.** The text is `pdftotext -layout`, so tables keep their columns as runs of
+  spaces. `assistant.py` squashed every run to one before the model read a page (`read_pages`, the first search's best
+  pages, "ask about this page"; upstream code). That reads a page line by line, and when a row's label takes two lines
+  with its amount between them, or prose runs beside the table, the rows interleave:
+  `For 5 gallons or / 1/2 teaspoon / 20 liters / For a 200 liter / 5 teaspoons / barrel`. It applies to every model,
+  the published 26B too.
+- **How common:** of 136,796 PDF pages, 783 have a column of amounts (a number and a unit) beside labels; on 617 of
+  them the old reading runs rows together (2,878 of 6,264 rows; judged from the rebuilt table, so an estimate). 174 of
+  those pages are in health and water documents (40 documents: Hesperian, MSF, WHO, ICRC). Sized with
+  `engine/page_tables.tables` over the library, no model.
+- **Fix (`engine/page_tables.py`, used through `assistant.page_body`):**
+  - Find columns of amounts that stand apart, take the columns beside them (a column of prose beside a table is
+    recognised and left as prose), let each amount start a row and attach each label line to the nearest amount. The
+    table is written one row per line: `For 5 gallons or 20 liters | 1/2 teaspoon`.
+  - Only when that is clearly right: few empty cells, no cell over 3 lines, no row taking a label line that doesn't touch
+    it, no unrecognised value between rows, no cell holding two amounts. Otherwise, if the old reading ran its rows
+    together, the table is kept **as printed** (blank columns dropped, so columns still line up). A table laid across
+    (weights as columns, as MSF prints nebulised epinephrine) is also given read down each column: "Column 4: 4 to,
+    6 months, 7 kg, 3.5 mg, 3.5 mL, 1 mL". Pages with no such table read exactly as before.
+  - Page caps (3,200 / 3,500 / 4,000 characters) count the text as the old squash would, so kept spaces don't push
+    content out.
+  - A search excerpt (FTS snippet) of a table page runs rows together too: it's followed by the table, one row per line,
+    or a pointer to `read_pages` (`assistant.excerpt_body`).
+  - One line in the system prompt: tables come as `|` rows or as printed; take an amount only from the matching row or
+    column, say which, and don't work out a new amount. Measured neutral (below), kept as a statement of rule 2 for
+    tables.
+  - `LASTBOOK_AI_TABLES=0` gives the old reading, and no prompt line.
+- **Considered, not built** (not measured with the model): keeping every page's spaces (no squash at all) still leaves
+  the bleach table's amount between its two label lines, the same ambiguity, on every table page. Re-extracting the PDFs wasn't needed: the
+  layout is already in the shipped text. An answer check (an amount not next to the asked quantity in the cited text)
+  wasn't built: after the fix the remaining misses are in one table, and such a check would need the quantity parsed
+  from the question.
+- **Measured** with `tools/fork_table_test.py`, E4B, 14 questions whose answer is one table row (bleach for 1, 4, 20
+  and 200 litres; ferrous sulfate for a 5-year-old; vitamin D for 6 months; nebulised epinephrine for 7 kg; each in
+  English and Spanish), 3 runs each:
+
+  | | Right | Wrong | Other |
+  |---|---|---|---|
+  | Old reading (`LASTBOOK_AI_TABLES=0`) | 32 of 42 | 9 | 1 |
+  | Rows only | 39 | 2 | 1 |
+  | Rows, printed tables completed, excerpts | 36 | 1 | 5 |
+  | + prompt line | 37 | 2 | 3 |
+  | + read down each column (final) | **41** | **0** | 1 |
+
+  Bleach for 20 litres: **1 of 6 → 6 of 6** in every arm with the fix (the old reading said 5 teaspoons, or 8 drops).
+  "Other" is mostly answers giving the right amount with other rows beside it (bleach per litre from the US Army water
+  manual's table, which lists several volumes) or an amount from elsewhere on the page (vitamin D's after-treatment
+  dose). Ferrous sulfate and vitamin D (a table the old reading already got right) stayed right. Nebulised epinephrine
+  for 7 kg, a table laid across: 1 of 6 right with the old reading, 2–4 of 6 with rows only, **5 of 6** with read down
+  each column; the sixth gave 3.5 mL from one MSF printing and 3 mL (the 6 kg column) from the other. Each arm is one
+  set of 3 runs, so differences of one or two answers between the middle arms are noise.
+
+`ForkLocalAI.test_tables_are_read_by_row`, `test_tables_that_cannot_be_split_stay_as_printed` and
+`test_page_body_caps_and_switch` cover it, with both printings of the bleach table.
 
 ## 4. Running from source on Windows
 
@@ -339,6 +400,7 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_AI_REKEY=0` | Send earlier answers' citations as the browser wrote them, "(Title, p. N)", and don't repair the answer's citations (3e, 3g) |
 | `LASTBOOK_AI_FOLLOWUP=0` | Search only the latest message, with no pages carried over from the previous answer (3g) |
 | `LASTBOOK_AI_ENGLISH_SEARCH=0` | Search a non-English question as typed, without the model's English search words (3i) |
+| `LASTBOOK_AI_TABLES=0` | Give the model pages with every run of spaces squashed, tables line by line, as upstream does (3j) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
@@ -358,10 +420,12 @@ Run the suite from [CONTRIBUTING.md](../CONTRIBUTING.md). The fork's own cases a
 `ForkNoMaps` (no state step, thinning the map), `ForkCustomModel` (choosing, saving and clearing your own file) and
 `ForkLocalAI` (template reading, answer start, thinking, hiding thinking, clearing context unless the runner checks the
 window, history citations rekeyed, answer citations repaired, follow-up hits and carried-over pages, memory estimate,
-English search words for other languages). `app/tests/test_chat_steps.py` has `SpanishAnswers` (3i). The
+English search words for other languages, tables read by row, as printed and down columns, page caps and the
+`LASTBOOK_AI_TABLES` switch). `app/tests/test_chat_steps.py` has `SpanishAnswers` (3i). The
 model-level stress test is `tools/fork_chat_test.py` (3g), which needs the model and a test server.
 `app/tests/test_bridge.py` has `ForkSearchWords` (3h). `tools/fork_search_check.py` compares the first search on 20
-everyday prompts between two servers (3h); it needs no model.
+everyday prompts between two servers (3h); it needs no model. `tools/fork_table_test.py` asks 14 table questions against
+a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
@@ -381,16 +445,12 @@ everyday prompts between two servers (3h); it needs no model.
   in follow-ups for speed.
 - Showing the hidden thinking in a collapsible section of the answer (as Chat's "How it searched" does) was suggested; not
   built.
-- **A misread dose table: reproducible, and 3i makes it likelier to be reached.** Asked "¿cuánto cloro le echo a 20
-  litros de agua?", E4B answers **5 teaspoons** of 5% bleach (3 of 3 runs), citing Hesperian's "Water and Sanitation"
-  p. 23 and "Protecting Community Water" p. 36. Those pages say **1/2 teaspoon for 20 litres** and 5 teaspoons for a
-  200-litre barrel: ten times the dose. The cause is the page text the model reads. Every row is label, then amount
-  ("For 1 gallon or 4 liters 8 drops"), except this one, where the amount lands inside the label:
-  "For 5 gallons or / 1/2 teaspoon / 20 liters / For a 200 liter / 5 teaspoons / barrel". The model pairs "20 liters"
-  with the next amount. Upstream's library text, so every model and language is exposed, English too. Possible fixes:
-  re-extracting table pages with their layout kept, or a check that flags an amount in an answer that doesn't sit next
-  to the same quantity in the cited text. Before the prompt was tuned, the same question in a conversation about 5
-  gallons got FEMA's 16 drops per gallon (80 drops), which agrees with the table.
+- **Tables (3j).** Tables laid across are still the weakest: 1 of 6 epinephrine answers also gave the neighbouring
+  column's 3 mL. About 560 tables can only be shown as printed; a small model may still misread
+  columns there. Tables without a recognised unit (bare numbers, "kcal" rows without one), scanned (OCR) pages and
+  tables split across pages aren't handled. The rebuilt tables were checked by eye on a sample of health documents, not
+  all 226. 3j was measured on E4B only, 3 runs of 14 questions, and only for the questions' first answer. A candidate
+  pull request upstream (the squash is upstream's; a draft issue is kept outside the repo).
 - 3i was measured once per arm on 8 questions. Portuguese and French are detected but not measured. The UI itself is
   still English (upstream issue #54).
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another

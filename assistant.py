@@ -7,6 +7,7 @@ gazetteer) and nothing else: no file paths, URLs or shell input are accepted fro
 import base64, json, re, socket, sqlite3, threading, time, unicodedata, urllib.error, urllib.request
 import retrieval
 from engine.paths import ro_uri
+from engine import page_tables
 
 import os
 LOOPBACK = re.compile(r'http://(127\.0\.0\.1|\[::1\]):\d+(/[^\s]*)?')
@@ -427,6 +428,36 @@ def repair_cites(answer, sources):
     return cite.sub(lambda m: f' [{by[m.group(1)]}]' if m.group(1) in by else m.group(0), _key_cites(answer))
 
 
+def page_body(text, cap):
+    """fork: a page's text as the model reads it, tables one row per line (engine/page_tables.py, docs/FORK.md 3j). With
+    LASTBOOK_AI_TABLES=0, every run of spaces squashed to one, as upstream does."""
+    if os.environ.get('LASTBOOK_AI_TABLES') == '0':
+        return re.sub(r'[ \t]{2,}', ' ', text).strip()[:cap]
+    return page_tables.clip(page_tables.for_model(text).strip(), cap)
+
+
+def excerpt_body(h):
+    """fork: a search hit's excerpt as the model reads it. A keyword excerpt of a table page runs the rows together like
+    the old page text did, so the table follows it, one row per line, or a pointer to read_pages when the table can only
+    be shown as printed."""
+    ex = h.get('excerpt') or ''
+    if os.environ.get('LASTBOOK_AI_TABLES') == '0' or h.get('kind') != 'pdf' or not h.get('page'):
+        return ex
+    r = S.catalog()['by_id'].get(h.get('doc_id'))
+    ps = S.page_texts(r) if r else []
+    if not 0 < h['page'] <= len(ps):
+        return ex
+    found = [t for t in page_tables.tables(ps[h['page'] - 1]) if t['sure'] or t['mixed']]
+    if not found:
+        return ex
+    rows = [row for t in found if t['sure'] for row in t['rows']]
+    note = ('\nThe excerpt above may run this page\'s table rows together. The table, one row per line:\n' + '\n'.join(rows)
+            if rows else '')
+    if any(not t['sure'] for t in found):
+        note += '\nThis page has a table the excerpt runs together; read_pages shows it as printed.'
+    return ex + page_tables.clip(note, 1200)
+
+
 def _src_block(key, d, body):
     where = f"page {d['page']}" if d.get('page') else (f"at {int(d['t'] // 60)}:{int(d['t'] % 60):02d}" if d.get('t') is not None else '')
     ids = f" | doc_id={d['doc_id']}" if d.get('doc_id') else ''
@@ -448,7 +479,7 @@ def run_tool(name, args, sess, extra_msgs):
         blocks = []
         for it in items:
             k = sess.add(it)
-            blocks.append(_src_block(k, it, it['excerpt']))
+            blocks.append(_src_block(k, it, excerpt_body(it)))
         return '\n\n'.join(blocks), {'query': q, 'count': len(items)}
     if name == 'read_pages':
         d = str(args.get('doc_id', ''))
@@ -463,7 +494,7 @@ def run_tool(name, args, sess, extra_msgs):
             if not 1 <= p <= max(1, len(texts)):
                 out.append(f'(page {p} does not exist; the document has {len(texts)} pages)')
                 continue
-            body = re.sub(r'[ \t]{2,}', ' ', texts[p - 1]).strip()[:3500] or '(no text on this page — it may be a picture; use view_page)'
+            body = page_body(texts[p - 1], 3500) or '(no text on this page — it may be a picture; use view_page)'
             src = {'doc_id': d, 'title': pub['title'], 'publisher': pub['publisher'], 'year': pub['year'], 'kind': r['kind'], 'trust': pub['trust'],
                    'pages': pub['pages'], 'page': p if r['kind'] == 'pdf' else None, 't': None, 'excerpt': re.sub(r'\s+', ' ', body)[:600], 'notes': (r.get('notes') or '')[:300]}
             out.append(_src_block(sess.add(src), src, body))
@@ -548,7 +579,7 @@ def context_for(about, sess):
             return None
         texts, pub = S.page_texts(r), S.public(r)
         p = int(p or 1)
-        body = re.sub(r'[ \t]{2,}', ' ', texts[p - 1]).strip()[:4000] if 0 < p <= len(texts) else ''
+        body = page_body(texts[p - 1], 4000) if 0 < p <= len(texts) else ''
         src = {'doc_id': d, 'title': pub['title'], 'publisher': pub['publisher'], 'year': pub['year'], 'kind': r['kind'], 'trust': pub['trust'],
                'pages': pub['pages'], 'page': p if r['kind'] == 'pdf' else None, 't': None, 'excerpt': re.sub(r'\s+', ' ', body)[:600], 'notes': (r.get('notes') or '')[:300]}
         k = sess.add(src)
@@ -589,6 +620,11 @@ GROUPED = re.compile(r'\[\s*[SM]\d+(?:\s*[,;]\s*[SM]\d+)+\s*\]')   # how Gemma o
 SYSTEM_TEXT_ONLY = SYSTEM.replace(', view_page when a diagram or table matters', '').replace(
     'scanned pages without text (unless you view the page image)', 'pictures, diagrams or scanned pages without text')
 ROUND_TOKENS = 1800
+# fork: how page tables reach the model (page_body, docs/FORK.md 3j)
+TABLE_RULE = ('\n\nTables in sources are written one row per line with columns split by |, or kept as printed (columns by '
+              'position). Take an amount only from the row or column that matches the person\'s quantity, weight or age, and '
+              'say which one you used (for example "for 20 liters: 1/2 teaspoon"). If none matches exactly, give the nearest '
+              'rows as written and say so; do not work out a new amount.')
 
 
 def _http_round(msgs, tools, cancelled, wrote, set_state):
@@ -746,12 +782,13 @@ def chat(messages, about, emit, cancelled):
         if hits:
             blocks = []
             for n, h in enumerate(hits):
-                body = h['excerpt']
+                body = None
                 if n < 4 and h['kind'] == 'pdf' and h.get('page'):  # whole page for the best few, so a second read is rarely needed
                     r = S.catalog()['by_id'][h['doc_id']]
                     ps = S.page_texts(r)
                     if 0 < h['page'] <= len(ps):
-                        body = re.sub(r'[ \t]{2,}', ' ', ps[h['page'] - 1]).strip()[:3200]
+                        body = page_body(ps[h['page'] - 1], 3200)
+                body = body if body is not None else excerpt_body(h)
                 blocks.append(_src_block(sess.add(h), h, body))
             msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages to check exact wording):\n\n' + '\n\n'.join(blocks)})
         else:
@@ -765,6 +802,9 @@ def chat(messages, about, emit, cancelled):
     tools = [t for t in TOOLS if t['function']['name'] != 'view_page'] if local else TOOLS   # the local model reads text only
     if local:
         msgs[0] = {'role': 'system', 'content': SYSTEM_TEXT_ONLY}
+    if os.environ.get('LASTBOOK_AI_TABLES') != '0':
+        msgs[0] = {'role': 'system', 'content': msgs[0]['content'] + TABLE_RULE}
+    if local:
         if not start_model():
             return
         fork_cites = getattr(LOCAL, 'custom', False) and os.environ.get('LASTBOOK_AI_REKEY') != '0'   # known for sure once running
