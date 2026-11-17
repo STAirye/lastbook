@@ -1673,6 +1673,67 @@ class ForkLocalAI(unittest.TestCase):
             local.discover()
         self.assertEqual(local.answer_start, '<|turn>model\n')
 
+    def test_thinking_follows_the_template_and_the_switch(self):
+        L = self.L
+        can = self.gguf_with_template('think.gguf', "{%- if enable_thinking -%}{{- '<|think|>\\n' -}}{%- endif -%}{%- if add_generation_prompt -%}{{- '<|turn>model\\n' -}}{%- endif -%}")
+        cannot = self.gguf_with_template('plain.gguf', "{%- if add_generation_prompt -%}{{- '<|turn>model\\n' -}}{%- endif -%}")
+        with mock.patch.dict(os.environ, {'LASTBOOK_AI_THINK': ''}):
+            self.assertTrue(L.thinks(can))
+            self.assertFalse(L.thinks(cannot))
+        with mock.patch.dict(os.environ, {'LASTBOOK_AI_THINK': '0'}):
+            self.assertFalse(L.thinks(can))
+
+    def test_render_with_thinking(self):
+        L = self.L
+        msgs = [{'role': 'system', 'content': 's'}, {'role': 'user', 'content': 'q'}]
+        segs = L.render(msgs, [], think=True)
+        self.assertEqual(segs[0][0], '<|turn>system\n<|think|>\n')
+        self.assertEqual(segs[-1][0], '<|turn>model\n')
+        self.assertEqual(L.render(msgs, [], think=False)[0][0], '<|turn>system\n')
+        tools = [{'type': 'function', 'function': {'name': 'search_library', 'description': 'd', 'parameters': {'type': 'object', 'properties': {}}}}]
+        after_tool = msgs + [{'role': 'assistant', 'content': '', 'tool_calls': [{'id': 'c0', 'function': {'name': 'search_library', 'arguments': '{}'}}]},
+                             {'role': 'tool', 'tool_call_id': 'c0', 'content': 'results'}]
+        self.assertEqual(L.render(after_tool, tools, think=True)[-1][0], '<|channel>thought\n')     # the template reopens the channel
+
+    def test_hide_thinking(self):
+        L = self.L
+        self.assertEqual(L.hide_thinking('<|channel>thought\nplan [S1]<channel|>Boil it [S2].'), 'Boil it [S2].')
+        self.assertEqual(L.hide_thinking('<|channel>thought\nstill planning'), '')          # open: nothing shows yet
+        self.assertEqual(L.hide_thinking('Answer <|channel>thought\nmore'), 'Answer ')
+        self.assertEqual(L.hide_thinking('No thinking at all.'), 'No thinking at all.')
+
+    def test_own_file_forgets_the_context_before_each_answer(self):
+        """The runner's reuse of a shared prompt start is unsafe with Gemma 4's sliding window: a one-token request whose first token
+        differs goes first, so the real prompt is read from the start."""
+        import queue
+        L = self.L
+        sent, events = [], queue.Queue()
+
+        class Pipe:
+            def write(self, b):
+                req = json.loads(b)
+                sent.append(req)
+                if req['id'] < 0:
+                    events.put({'ev': 'done', 'id': req['id'], 'reason': 'length'})
+                else:
+                    events.put({'ev': 'tok', 'id': req['id'], 't': 'Hi'})
+                    events.put({'ev': 'done', 'id': req['id'], 'reason': 'eog'})
+
+        local = L.Local()
+        local.proc = mock.Mock(stdin=Pipe())
+        local.events, local.state = events, 'ready'
+        for custom, reuse, expect in ((True, '', 2), (False, '', 1), (True, '1', 1)):
+            sent.clear()
+            local.custom = custom
+            with mock.patch.dict(os.environ, {'LASTBOOK_AI_REUSE': reuse}):
+                out = []
+                local.generate([['<|turn>user\n', True]], 10, lambda: False, out.append)
+            self.assertEqual(len(sent), expect, (custom, reuse))
+            self.assertEqual(out, ['Hi'])
+            if expect == 2:
+                self.assertEqual(sent[0]['segments'], [['\n', False]])
+                self.assertEqual(sent[0]['max_tokens'], 1)
+
     def test_judge_counts_the_file_it_runs(self):
         fit = {'status': 'fits', 'ram_total': 64 * 2 ** 30, 'device_bytes': 0, 'host_bytes': 2 ** 30, 'memory': []}
         with mock.patch.object(sys, 'platform', 'win32'):     # the mapped file is counted where memory is not shared

@@ -144,6 +144,26 @@ def answer_start(path):
     return MODEL_TURN + EMPTY_THOUGHT if '<channel|>' in tail else MODEL_TURN
 
 
+THINK_TOKENS = 1500     # fork: extra room in a round for the model's hidden thinking
+
+
+def thinks(path):
+    """Fork: let this file think (hidden) before it answers? Yes when its own chat template can switch thinking on ('<|think|>'),
+    unless LASTBOOK_AI_THINK=0. Measured with Gemma 4 E4B: with thinking off, follow-up questions came back without source keys
+    or as a stray fragment about two times in three; with thinking on, it plans, checks the sources and cites them."""
+    if os.environ.get('LASTBOOK_AI_THINK', '').strip() == '0':
+        return False
+    t = gguf_chat_template(path)
+    return bool(t and '<|think|>' in t)
+
+
+def hide_thinking(text):
+    """The text without the model's thought channel: closed blocks go, and an open one hides everything after it."""
+    text = re.sub(r'<\|channel>.*?<channel\|>', '', text, flags=re.S)
+    cut = text.find('<|channel>')
+    return text if cut < 0 else text[:cut]
+
+
 def custom_path(saved=None):
     """The person's own model file: LASTBOOK_MODEL_FILE, else the one chosen in setup (state.json custom_model), else None."""
     env = os.environ.get('LASTBOOK_MODEL_FILE')
@@ -195,6 +215,7 @@ class Local:
         self.path, self.fit, self.ready_info = None, None, None
         self.custom = False                    # fork: the active file is the person's own (custom_path), not the published one
         self.answer_start = MODEL_TURN + EMPTY_THOUGHT     # fork: from the file's own chat template when it is the person's own
+        self.think = False                     # fork: the person's own file thinks, hidden, before it answers (thinks())
         self.proc, self.events, self.last_used = None, None, 0
         self.next_id = 0
         self.failed_loads = 0     # loads in a row that ended before the model was ready
@@ -258,11 +279,14 @@ class Local:
                     self.message = f'Your model file {cp.name}: {why}'
                     return
                 self.path, self.custom = cp, True
-                self.answer_start = answer_start(cp)
-            print('local AI: your own model file; its answers start with', json.dumps(self.answer_start), flush=True)
+                self.think = thinks(cp)
+                self.answer_start = MODEL_TURN if self.think else answer_start(cp)
+            print('local AI: your own model file;', 'it thinks (hidden) before answering' if self.think else
+                  'answers start with ' + json.dumps(self.answer_start), flush=True)
             self._measure()
             return
         self.custom = False
+        self.think = False
         self.answer_start = MODEL_TURN + EMPTY_THOUGHT
         found, wrong = None, None
         for folder in places():
@@ -509,6 +533,33 @@ class Local:
                 self.stop(f'not used for {IDLE_STOP} s')
 
     # -- one model turn ---------------------------------------------------------------------------------------------------
+    def _forget_context(self, proc, events, rid):
+        """Fork: make the runner read the next prompt from the start instead of reusing what its context holds.
+        The runner reuses the longest shared start of the previous prompt and drops the rest with llama_memory_seq_rm, starting
+        over only if that call fails. Gemma 4's sliding-window layers keep about the last 1024 positions, so after a long answer
+        the window no longer holds what lies just before the shared start, yet the call can still succeed. The model then
+        reads a damaged context: measured with E4B, follow-ups came back starting in the middle of the previous answer's
+        thinking, or as a stray fragment. A one-token request whose first token differs from any prompt's ('\\n' against
+        '<|turn>') leaves nothing to reuse, so the real request clears the whole context and reads its prompt afresh.
+        Costs reading the prompt again each round. LASTBOOK_AI_REUSE=1 turns this off; the real fix is in the runner
+        (check llama_memory_seq_pos_min, as llama-server does), which needs a rebuild."""
+        fid = -rid
+        try:
+            proc.stdin.write((json.dumps({'op': 'gen', 'id': fid, 'segments': [['\n', False]], 'max_tokens': 1, 'temp': 0}) + '\n').encode())
+        except OSError:
+            raise RuntimeError('The local AI stopped unexpectedly. Ask again to restart it.')
+        import queue
+        t0 = time.time()
+        while time.time() - t0 < 30:
+            try:
+                ev = events.get(timeout=0.2)
+            except queue.Empty:
+                continue
+            if ev.get('ev') == 'exit':
+                raise RuntimeError('The local AI stopped unexpectedly. Ask again to restart it.')
+            if ev.get('id') == fid and ev.get('ev') in ('done', 'error'):
+                return
+
     def generate(self, segments, max_tokens, cancelled, on_text):
         """Streams one answer. on_text(piece). Returns the 'done' event, or raises RuntimeError with a plain sentence."""
         with self.gen_lock:
@@ -521,6 +572,8 @@ class Local:
                 self.last_used = time.time()
             while not events.empty():       # anything left from an answer that was stopped
                 events.get_nowait()
+            if self.custom and os.environ.get('LASTBOOK_AI_REUSE') != '1':
+                self._forget_context(proc, events, rid)
             req = {'op': 'gen', 'id': rid, 'segments': segments, 'max_tokens': max_tokens, 'temp': 0.2, 'top_k': 64, 'top_p': 0.95,
                    'min_p': 0.05, 'seed': 1234 + rid, 'stop': ['<|tool_response>']}
             try:
@@ -653,7 +706,7 @@ def declaration(tool):
     return s + '}'
 
 
-def render(msgs, tools, start=None):
+def render(msgs, tools, start=None, think=None):
     """OpenAI-shaped messages to Gemma 4 segments, as the model's chat template lays them out, with thinking off.
     System messages before the model's first reply in this turn go together at the top, as the evaluation gave them:
     instructions, then the sources, then the question."""
@@ -661,7 +714,8 @@ def render(msgs, tools, start=None):
     first_reply = next((i for i, m in enumerate(msgs) if i > last_user and m['role'] in ('assistant', 'tool')), len(msgs))
     top = [m for i, m in enumerate(msgs) if m['role'] == 'system' and i < first_reply]
     rest = [m for i, m in enumerate(msgs) if not (m['role'] == 'system' and i < first_reply)]
-    seg = [['<|turn>system\n', True]]
+    think = LOCAL.think if think is None else think
+    seg = [['<|turn>system\n' + ('<|think|>\n' if think else ''), True]]     # fork: thinking on, as the template switches it on
     seg.append(['\n\n'.join(_text(m).strip() for m in top), False])
     for t in tools or []:
         seg += [['<|tool>', True], [declaration(t), True], ['<tool|>', True]]
@@ -715,7 +769,9 @@ def render(msgs, tools, start=None):
         open_model = False
         i += 1
     if not open_model:
-        seg.append([start or LOCAL.answer_start, True])     # fork: the active file's own way to start an answer without thinking
+        seg.append([start or (MODEL_TURN if think else LOCAL.answer_start), True])     # fork: the active file's own way to start
+    elif think:
+        seg.append(['<|channel>thought\n', True])     # after tool results the template reopens the thought channel
     return seg
 
 

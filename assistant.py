@@ -445,21 +445,28 @@ def _local_round(msgs, tools, cancelled, wrote, set_state):
     segs = _fit_prompt(msgs, tools, llm_local)
     if segs is None:
         return 'The question and its sources were too long for the local AI. Start a new chat or ask a shorter question.'
-    text, sent = [''], [0]
+    # fork: a model that thinks (llm_local.thinks) writes a thought channel first; it is never shown. A prompt that ends inside
+    # the channel (after tool results) has its opening mark in the prompt, so it is put back in front of what the model writes.
+    think = getattr(LOCAL, 'think', False)
+    text, sent, pieces = ['<|channel>' if segs[-1][0].endswith('<|channel>thought\n') else ''], [0], [0]
 
     def piece(t):   # the person sees the answer as it is written, up to the first tool call, which is markup
+        pieces[0] += 1
         text[0] += t
-        visible = text[0].split('<|tool_call>', 1)[0].lstrip()
+        visible = llm_local.hide_thinking(text[0]).split('<|tool_call>', 1)[0].lstrip()
         if len(visible) > sent[0]:
             wrote(visible[sent[0]:])
             sent[0] = len(visible)
     try:
-        done = LOCAL.generate(segs, ROUND_TOKENS, cancelled, piece)
+        done = LOCAL.generate(segs, ROUND_TOKENS + (llm_local.THINK_TOKENS if think else 0), cancelled, piece)
     except RuntimeError as e:
         return str(e)
     if done.get('reason') == 'cancel':
         return 'stopped'
-    content, found = llm_local.parse_calls(text[0])
+    if os.environ.get('LASTBOOK_AI_DEBUG') == '1':     # fork: what the model wrote, thinking and markup included, for the log only
+        print('local AI raw:', json.dumps(text[0][:6000], ensure_ascii=False), flush=True)
+        print('local AI done:', json.dumps({k: done.get(k) for k in ('reason', 'n_gen', 'n_prompt', 'n_reused')}), 'pieces', pieces[0], flush=True)
+    content, found = llm_local.parse_calls(llm_local.hide_thinking(text[0]))
     calls = {i: {'id': f'call_{i}', 'name': name, 'args': json.dumps(args)} for i, (name, args) in enumerate(found)} if tools else {}
     return content.strip(), calls
 
@@ -467,7 +474,7 @@ def _local_round(msgs, tools, cancelled, wrote, set_state):
 def _fit_prompt(msgs, tools, llm_local):
     """The prompt in Gemma's segments, short enough to leave room for the answer: the oldest past questions and answers go
     first, then the longest tool results are shortened. None if even that is too long."""
-    room = llm_local.CTX - ROUND_TOKENS - 64
+    room = llm_local.CTX - ROUND_TOKENS - 64 - (llm_local.THINK_TOKENS if getattr(LOCAL, 'think', False) else 0)
     work = [dict(m) for m in msgs]
     while True:
         segs = llm_local.render(work, tools)
