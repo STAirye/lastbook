@@ -298,6 +298,19 @@ water. The model's own searches were in Spanish too ("primeros auxilios tornique
   cited and on topic (survival manuals' fire pages, WHO water notes, tourniquet guides), against **5 of 8** with
   `LASTBOOK_AI_ENGLISH_SEARCH=0`, whose cited pages were mostly the generic Spanish leaflets. All 16 answers were in
   Spanish. About 2–3 s more per question (mean 12.6 s against 10.0 s).
+- **The rewrite prompt, tuned** (`assistant.REWRITE`). Keyword search needs every word on the page, and the first
+  prompt ("key things, at most 8 words") gave words no manual uses: "Disinfecting non-potable water **methods**",
+  "Earthquake gas leak check **procedure manual**", and after a question about caustic soda, "Sodium hypochlorite **vs**
+  caustic soda **comparison**". None of them finds Hesperian's bleach table. The prompt now says the search needs every
+  word, asks for 2 to 5 words a page with the answer would contain (things, symptoms, products, amounts with units, the
+  product rather than the brand), names the words to leave out, says to search for what the person needs now, and gives
+  three examples. On 14 Spanish questions (the 8 above, a follow-up about boiling time, a baby's diarrhoea in Chilean
+  Spanish, a recluse spider bite, water for 4 people, insulin run out), counting the first search's top 8 hits whose title
+  or excerpt fits the question: **0** searched as typed, **74** with the first prompt, **97.5** with this one, of 112
+  (2 rounds; a rerun gave 95). "¿cuánto cloro le echo a 20 litros?" now searches "bleach 20 liters" and finds the table
+  first. Each rewrite takes 0.1–0.4 s with E4B; the 2–3 s measured above was mostly starting the model sooner.
+  Tried and dropped: a rule and example for carrying an amount from the earlier question ("tengo clorox al 5%" after
+  "5 galones" still gave "sodium hypochlorite 5%"); no measurable change.
 - **Not fixed:** the Spanish documents in the library are no longer what the first search finds for Spanish questions
   (they rarely answered them). "estero" was rendered "estuarine" (in Chile it's a creek); the results were still right.
   And see Open: one answer misread a dose table.
@@ -368,11 +381,16 @@ everyday prompts between two servers (3h); it needs no model.
   in follow-ups for speed.
 - Showing the hidden thinking in a collapsible section of the answer (as Chat's "How it searched" does) was suggested; not
   built.
-- **A misread dose table (3i run, not caused by 3i).** Asked "¿cuánto cloro le echo a 20 litros de agua?", E4B answered
-  5 teaspoons of 5% bleach, citing Hesperian's "Water and Sanitation" p. 23 and "Protecting Community Water" p. 36. Those
-  pages say **1/2 teaspoon for 20 litres** and 5 teaspoons for a 200-litre barrel; the PDF text interleaves the table's
-  rows, and the model took the wrong one: ten times the dose. A check for numbers that don't appear next to the same unit
-  in the cited text could catch some of this.
+- **A misread dose table: reproducible, and 3i makes it likelier to be reached.** Asked "¿cuánto cloro le echo a 20
+  litros de agua?", E4B answers **5 teaspoons** of 5% bleach (3 of 3 runs), citing Hesperian's "Water and Sanitation"
+  p. 23 and "Protecting Community Water" p. 36. Those pages say **1/2 teaspoon for 20 litres** and 5 teaspoons for a
+  200-litre barrel: ten times the dose. The cause is the page text the model reads. Every row is label, then amount
+  ("For 1 gallon or 4 liters 8 drops"), except this one, where the amount lands inside the label:
+  "For 5 gallons or / 1/2 teaspoon / 20 liters / For a 200 liter / 5 teaspoons / barrel". The model pairs "20 liters"
+  with the next amount. Upstream's library text, so every model and language is exposed, English too. Possible fixes:
+  re-extracting table pages with their layout kept, or a check that flags an amount in an answer that doesn't sit next
+  to the same quantity in the cited text. Before the prompt was tuned, the same question in a conversation about 5
+  gallons got FEMA's 16 drops per gallon (80 drops), which agrees with the table.
 - 3i was measured once per arm on 8 questions. Portuguese and French are detected but not measured. The UI itself is
   still English (upstream issue #54).
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another

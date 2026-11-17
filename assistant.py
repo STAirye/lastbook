@@ -324,9 +324,26 @@ OTHER_WORDS = set((  # common Spanish, Portuguese and French words that are not 
     'debo si sí este esta esto ese esa eso cuando hasta desde sobre entre también agua fuego niño niña bebé '
     'não um uma com isso isto você eu tem preciso fazer água '
     'le les des du et est avec pas je comment pourquoi où vous nous eau').split())
-REWRITE = ("You turn a question into English search words for a library of English manuals. Reply with one line: the "
-           "question's key things in plain English, at most 8 words. No quotes, no explanation. If an earlier question is "
-           "given, use it only to understand what the latest question refers to.")
+# Keyword search finds only pages holding every word (server.query_groups, fts_expr), so the words must be ones the page
+# itself would use. An earlier, looser prompt ("key things, at most 8 words") gave "Disinfecting non-potable water methods"
+# and, after a question about caustic soda, "Sodium hypochlorite vs caustic soda comparison": neither finds the bleach
+# table. Measured on 14 Spanish questions (docs/FORK.md, 3i): 74 -> 97.5 useful hits of 112.
+REWRITE = """You write keyword searches for a library of English manuals. A search finds only the pages that contain every word you write, so:
+- Write 2 to 5 English words that a page with the answer would contain: the things, body parts, symptoms, products and amounts in the question.
+- Keep numbers with their units (5 gallons, 20 liters). Name the product, not the brand (bleach, not Clorox).
+- Leave out question words and words a manual would not use for this, such as methods, procedure, dosage, comparison, options, tips.
+- Search for what the person needs now. An earlier question, if given, only fills in what the latest one leaves out, such as what "it" is.
+Reply with the words only, on one line.
+
+Examples:
+Latest question: me mordió un perro en la pierna
+dog bite leg
+Earlier question: mi hijo se quemó la mano con aceite
+Latest question: ¿y si le sale una ampolla?
+burn blister
+Earlier question: se nos acabó el gas para cocinar
+Latest question: tengo una parrilla de carbón, ¿la puedo usar adentro?
+charcoal grill indoors"""
 REWRITE_TOKENS = 32
 # Asking for the three special headings in English made E4B write its other headings in English too ("Direct Answer"), so
 # it isn't asked: web/chat.js also knows them in Spanish.

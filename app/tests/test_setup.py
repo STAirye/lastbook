@@ -1815,7 +1815,8 @@ class ForkLocalAI(unittest.TestCase):
                 self.assertEqual(len(sent), 1)
                 prompt = ''.join(s[0] for s in sent[0][0])
                 self.assertNotIn('<|think|>', prompt)
-                self.assertIn('Earlier question: tengo sed', prompt)
+                self.assertIn('Earlier question: tengo sed\nLatest question: ¿cómo purifico agua?', prompt)
+                self.assertIn('every word', prompt)         # the rules (assistant.REWRITE) go first
                 self.assertEqual(sent[0][1], assistant.REWRITE_TOKENS)
                 failing = mock.Mock(generate=mock.Mock(side_effect=RuntimeError('down')))
                 with mock.patch.object(assistant, 'LOCAL', failing):
