@@ -229,6 +229,9 @@ const Chat = (() => {
     if (m.content) h += `<div class="answer">${md(m.content, m)}</div>`;
     if (running && found.length) h += `<div class="prefound"><p class="small muted">Pages found so far — you can open them while the answer is written:</p>${srcCards(found.slice(0, 6), true)}</div>`;
     if (m.fallback) h += srcCards(m.fallback, true);
+    // fork: after noise or a weak search inside a conversation the server offers what the message may be about (assistant.turn_hits)
+    if (!running && (m.suggest || []).length && i === cur.messages.length - 1)
+      h += `<div class="suggest"><p class="small muted">Is this about something else?</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
     if (!running && m.content) {
       const cited = m.cited || [];
       if ((m.invalid || []).length) h += `<p class="small" style="color:var(--stop)">The model referred to sources that don’t exist (${m.invalid.join(', ')}); those markers were removed.</p>`;
@@ -332,6 +335,7 @@ const Chat = (() => {
       if (b.dataset.act === 'export') exportChat(cur);
       if (b.dataset.act === 'retry') { const q = cur.messages[cur.messages.length - 2]?.content; cur.messages.splice(-2, 2); send(q) }
     });
+    $$('[data-say]', el).forEach(b => b.onclick = () => { if (busy()) return; if (b.dataset.say) send(b.dataset.say); else $('#chatIn')?.focus() });
     // citation chips scroll to their card instead of changing the route
     $$('a.cite', el).forEach(a => a.onclick = e => { e.preventDefault(); const c = $('#src-' + a.dataset.key, el.closest('.msg') || el); if (c) { c.scrollIntoView({ block: 'center', behavior: 'smooth' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1200) } });
   }
@@ -417,6 +421,7 @@ const Chat = (() => {
     else if (ev.type === 'sources') m.sources = ev.sources;
     else if (ev.type === 'delta') m.content += ev.text;
     else if (ev.type === 'reset') m.content = '';
+    else if (ev.type === 'suggest') m.suggest = Array.isArray(ev.choices) ? ev.choices.slice(0, 8) : null;
     else if (ev.type === 'done') { m.content = ev.answer; m.cited = ev.sources; m.consulted = ev.consulted; m.invalid = ev.invalid; m.latency = ev.latency; m.content = m.content.replace(/\[([SM]\d+)\]/g, (x, k) => (ev.invalid || []).includes(k) ? '' : x) }
     else if (ev.type === 'error') {
       if (ev.error === 'model_unavailable') { m.offline = true; m.error = ev.text; fallback(m, (cur.messages[cur.messages.length - 2] || {}).content || '') }
