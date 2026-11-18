@@ -822,6 +822,20 @@ class ForkSearchWords(unittest.TestCase):
             typos._state['memo'] = {}
 
 
+    def test_retrieve_says_how_sure_it_is(self):
+        """fork: /api/retrieve gives engine/confidence.py's estimate for its results; LASTBOOK_CONF=0 leaves it out."""
+        b = B.Bridge(MOD, 'buffer', OR['buffer'], tmpdir=str(TMP), log=lambda *a: None)
+        try:
+            c = json.loads(call(b, 'GET', '/api/retrieve?q=boil%20water').body)['confidence']
+            self.assertIn(c['mode'], ('keyword', 'hybrid'))
+            self.assertTrue(0 <= c['p'] <= 1)
+            self.assertIn(c['level'], ('sure', 'buttons', 'unsure'))
+            os.environ['LASTBOOK_CONF'] = '0'
+            self.assertIsNone(json.loads(call(b, 'GET', '/api/retrieve?q=boil%20water%20now').body)['confidence'])
+        finally:
+            os.environ.pop('LASTBOOK_CONF', None)
+
+
 class NothingGoesOut(unittest.TestCase):
     """The shells cannot run here on both systems, so what must be gone from them is checked in their source."""
 

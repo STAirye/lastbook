@@ -4,11 +4,12 @@ Used by server.py (/api/retrieve, /api/chat, /api/assistant/status). The model i
 MODEL_URL; clients never see it. Tools can read the public survival library (catalog ids, pages, transcripts, map
 gazetteer) and nothing else: no file paths, URLs or shell input are accepted from the model.
 """
-import base64, json, re, socket, sqlite3, threading, time, unicodedata, urllib.error, urllib.request
+import base64, inspect, json, re, socket, sqlite3, threading, time, unicodedata, urllib.error, urllib.request
 import retrieval
 from engine.paths import ro_uri
 from engine import page_tables, sections
 from engine import typos    # fork: spelling mistakes in search questions
+from engine import confidence    # fork: how likely a search's first page is right
 
 import os
 LOOPBACK = re.compile(r'http://(127\.0\.0\.1|\[::1\]):\d+(/[^\s]*)?')
@@ -90,21 +91,32 @@ def model_status():
 
 
 # --------------------------------------------------------------- retrieval --
-def _fts(q, limit=80, kinds=None):
+def _fts(q, limit=80, kinds=None, trace=None):
+    """(doc_id, page, snippet) rows for q, best first. trace (a dict), when given, gets what engine/confidence.py reads:
+    the query's word groups, how many rows had every word, whether the any-word fallback ran, and each row's bm25."""
     content, groups = S.query_groups(q)
+    if trace is not None:
+        trace.update(groups=[list(g) for g in groups], strict=0, any_word=False, bm25=[])
     if not groups:
         return []
     # fork: long HTML pages are searched in their sections (engine/sections.py)
-    run = lambda m: sections.query(S.library.DB, S.kind_of, "doc_id,page,snippet(pages,6,'','',' … ',40)",
+    run = lambda m: sections.query(S.library.DB, S.kind_of, "doc_id,page,snippet(pages,6,'','',' … ',40),bm25(pages,0,6,1,1,0,0,1)",
                                    'bm25(pages,0,6,1,1,0,0,1)', m, limit)
     rows = []
     try:
         rows = run(S.fts_expr(groups))
+        strict = len(rows)
         if len(rows) < 10 and len(groups) > 1:
             rows += run(' OR '.join('(' + S.fts_expr([g]) + ')' for g in groups))
+            if trace is not None:
+                trace['any_word'] = True
+        if trace is not None:
+            trace['strict'] = strict
     except sqlite3.OperationalError:
         pass
-    return rows
+    if trace is not None:
+        trace['bm25'] = [r[3] for r in rows]
+    return [r[:3] for r in rows]
 
 
 def _allowed(kind):
@@ -113,15 +125,17 @@ def _allowed(kind):
     return lambda d: d in cat and cat[d]['kind'] != 'metadata' and (ok is None or cat[d]['kind'] in ok)
 
 
-def hybrid(q, k=8, kind='any', doc=None):
-    """Best passages for q from keyword and meaning-based search, fused, with provenance."""
+def hybrid(q, k=8, kind='any', doc=None, trace=None):
+    """Best passages for q from keyword and meaning-based search, fused, with provenance. trace (a dict), when given, gets
+    the raw scores of both searches for engine/confidence.py (keyword bm25 per row, meaning-based cosine per passage)."""
     q = typos.correct(q)    # fork: both searches get the misspellings put right (engine/typos.py)
+    kwt = {} if trace is not None else None
     cat = S.catalog()
     allowed = _allowed(kind)
     if doc:
         allowed = (lambda base: (lambda d: d == doc and base(d)))(allowed)
     kw = []
-    for doc_id, page, snip in _fts(q, 120):
+    for doc_id, page, snip in _fts(q, 120, trace=kwt):
         r = cat['by_id'].get(doc_id)
         if not r:
             continue
@@ -140,6 +154,9 @@ def hybrid(q, k=8, kind='any', doc=None):
     qwords = [w for w in re.findall(r'[a-z0-9-]{3,}', q.lower()) if w not in S.STOP]
     models = [w for w in re.findall(r'[a-z0-9-]+', q.lower()) if re.search(r'\d', w) and re.search(r'[a-z]', w) and len(w) >= 3]
     lists = [('keyword', [key(*x[:3]) for x in kw]), ('meaning', [key(*x[:3]) for x in sem_l])]
+    if trace is not None:
+        trace.update(kwt, q=q, semantic=bool(sem_l), cos=[x[4] for x in sem_l],
+                     kw_keys=list(dict.fromkeys(lists[0][1]))[:8], sem_keys=list(dict.fromkeys(lists[1][1]))[:8])
     fused = retrieval.rrf(lists)
     text = {}
     for d, p, t, snip in kw:
@@ -451,6 +468,28 @@ def earlier_question(messages):
     return next((STILL.sub('', q) for q in reversed(asked[:-1]) if not is_noise(q)), '')
 
 
+def _traced(q, k, tr):
+    """hybrid(q, k), filling tr with its raw scores (a test's stand-in for hybrid may take no trace: then tr stays empty)."""
+    if 'trace' in inspect.signature(hybrid).parameters:
+        return hybrid(q, k, trace=tr)
+    return hybrid(q, k)
+
+
+def search_confidence(hits, trace):
+    """fork: engine.confidence's estimate for one search, or None when it is off or the search left no trace."""
+    if not confidence.on() or not trace or 'groups' not in trace:
+        return None
+    return confidence.estimate(hits, trace)
+
+
+def is_danger(msg, english=None):
+    """fork: the message may be about an emergency: a danger sign, one of the danger buttons, or a word of
+    engine.confidence.URGENT (as typed or with its misspellings put right). Its pages are never held back."""
+    msg = msg or ''
+    return (bool(danger_signs(msg + ' ' + (english or ''))) or msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}
+            or confidence.urgent(msg, typos.correct(msg), english))
+
+
 def turn_hits(messages, english=None, followup=True, k=8):
     """fork: the first library search for the newest user message of a conversation -> (hits, info). No model.
     english: the newest message's English search words (english_query), used instead of it. followup False (not the person's
@@ -460,29 +499,52 @@ def turn_hits(messages, english=None, followup=True, k=8):
       correct  correction words stripped; pages shown last time go to the end; no carried pages; then the joined search
       danger   a danger sign the conversation did not have: its own best 5, then the joined search, no carried pages
       follow   the pages the previous answer cited (cited_before), its own best 4, the joined search, the rest
-    info['buttons']: noise, or this message's own search found fewer than 3; info['still']: the last sensible question."""
+    info['buttons']: noise, or this message's own search found fewer than 3; info['still']: the last sensible question.
+    info['danger']: this message or the one it is joined with may be urgent (is_danger). info['confidence']: engine.confidence's
+    estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None."""
     idx = [i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
     question = STILL.sub('', messages[idx[-1]]['content']) if idx else ''
-    info = {'route': 'first', 'buttons': False, 'still': ''}
+    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None}
+    searched = []      # (hits, trace) of this message's own search and the joined one, for the confidence
 
     def own_search(q):
-        return (hybrid(english, k) if english else []) or hybrid(q[:300], k)
+        tr = {}
+        hits = _traced(english, k, tr) if english else []
+        if not hits:
+            tr = {}
+            hits = _traced(q[:300], k, tr)
+        searched.append((hits, tr))
+        return hits
+
+    def joined_search(q):
+        tr = {}
+        hits = _traced(q, k, tr)
+        searched.append((hits, tr))
+        return hits
+
+    def done(hits):
+        ests = [e for e in (search_confidence(h, tr) for h, tr in searched) if e]
+        info['confidence'] = max(ests, key=lambda e: e['p']) if ests else None
+        return hits, info
     if not followup or len(idx) < 2:
-        return own_search(question), info
+        return done(own_search(question))
     j = next((i for i in reversed(idx[:-1]) if not is_noise(messages[i]['content'])), None)
     earlier = STILL.sub('', messages[j]['content']) if j is not None else ''
     info['still'] = earlier
     if is_noise(question):
         info.update(route='noise', buttons=True)
         if j is None:
-            return own_search(question), info
+            return done(own_search(question))
         prev = messages[:j + 1]
         e = _ENGLISH_OF.get(earlier) if needs_english(earlier) else None
-        return turn_hits(prev, e, followup, k)[0], info
+        hits, before_info = turn_hits(prev, e, followup, k)
+        info.update(danger=before_info['danger'], confidence=before_info['confidence'])    # the earlier message's
+        return hits, info
     if j is None:
         hits = own_search(question)
         info['buttons'] = len(hits) < 3
-        return hits, info
+        return done(hits)
+    info['danger'] = info['danger'] or is_danger(earlier, _ENGLISH_OF.get(earlier))
     # joined with the earlier message as chat() always has: its English words next to this one's, else its own words
     before = ((_ENGLISH_OF.get(earlier, '') if needs_english(earlier) else earlier) if english else earlier)[:200]
     if classify(question) == 'correct':
@@ -491,13 +553,13 @@ def turn_hits(messages, english=None, followup=True, k=8):
         # shown last time: what the previous answer cited, and the earlier message's own search, which is most of what the
         # person saw (one more search, only on a correction). The browser sends no list of the pages it showed.
         shown = {_hkey(h) for h in cited_before(messages, limit=8)} | {_hkey(h) for h in hybrid(_search_words(earlier)[:300], k)}
-        joined = hybrid(((before + ' ' + english) if english else (before + ' ' + q)).strip()[:300], k)
+        joined = joined_search(((before + ' ' + english) if english else (before + ' ' + q)).strip()[:300])
         hits = _merge(([h for h in own if _hkey(h) not in shown], k), ([h for h in joined if _hkey(h) not in shown], k), k=k,
                       last=[h for h in own if _hkey(h) in shown])
         info['route'] = 'correct'
     else:
         own = own_search(question)
-        joined = hybrid(((before + ' ' + english) if english else (before + ' ' + question)).strip()[:300], k)
+        joined = joined_search(((before + ' ' + english) if english else (before + ' ' + question)).strip()[:300])
         seen = set()
         for i in idx[:-1]:
             if not is_noise(messages[i]['content']):
@@ -511,7 +573,19 @@ def turn_hits(messages, english=None, followup=True, k=8):
             hits = followup_hits(carried + own, joined, k=k, first=len(carried) + 4)
             info['route'] = 'follow'
     info['buttons'] = len(own) < 3
-    return hits, info
+    return done(hits)
+
+
+# fork: what the chat says when the search is probably wrong (engine/confidence.py), and above its buttons
+UNSURE_TEXT = ("Please help me help you: I can't tell what your question is about from what the library found, so I won't "
+               "guess. Could you say it another way, in a few more words: who it is about, what happened, what you can see? "
+               "Or pick one of the buttons below.")
+UNSURE_DANGER = ("In case this is urgent, here are the pages the library found first, but I'm not sure they fit your "
+                 "question. Please help me help you: say a few more words about what happened and what you can see, or pick "
+                 "one of the buttons below.")
+UNSURE_DANGER_NONE = ("The library found nothing that fits your question. Please help me help you: say a few more words about "
+                      "what happened and what you can see, or pick one of the buttons below.")
+SUGGEST_PROMPT = {'buttons': 'Not sure these pages fit. Is it about one of these?', 'unsure': 'Is it about one of these?'}
 
 
 def suggest_choices(info):
@@ -1008,8 +1082,28 @@ def chat(messages, about, emit, cancelled):
         if english:
             msgs.append({'role': 'system', 'content': LANGUAGE_NOTE.format(english=english)})
         emit({'type': 'found', 'count': len(hits)})
+        # fork: how likely the first page is right (engine/confidence.py). Unsure: buttons. Very unsure: ask for more words
+        # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
+        conf = turn.get('confidence')
+        level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
+        if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and len(asked) > 1)):
+            level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
+        if level != 'sure':
+            turn['buttons'] = True
+        if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:
+            print('local AI confidence:', json.dumps(dict(conf, route=turn['route'], danger=turn.get('danger'))), flush=True)
         if turn['buttons']:     # fork: noise, or a weak search inside a conversation: offer what it may be about
-            emit({'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn)})
+            emit({'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
+                  'prompt': SUGGEST_PROMPT.get(level, '')})
+        if level == 'unsure':
+            found = list(sess.sources.values())
+            emit({'type': 'sources', 'sources': found})
+            danger = bool(turn.get('danger'))
+            text = (UNSURE_DANGER if found else UNSURE_DANGER_NONE) if danger else UNSURE_TEXT
+            emit({'type': 'done', 'answer': text, 'sources': found[:6] if danger else [], 'consulted': [] if danger else found,
+                  'invalid': [], 'tools': [], 'unsure': True, 'confidence': conf,
+                  'latency': {'first_token_s': None, 'total_s': round(time.time() - t0, 2)}})
+            return
     if sess.sources:
         emit({'type': 'sources', 'sources': list(sess.sources.values())})
     local = local_on()

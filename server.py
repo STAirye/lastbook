@@ -2050,8 +2050,11 @@ class Handler(library.Handler):
                 t = transcript(path[16:])
                 return self.send_json(t if t is not None else {'error': 'unknown video'}, 200 if t is not None else 404)
             if path == '/api/retrieve':
-                return self.send_json({'q': qs.get('q', ''), 'results': assistant.hybrid(qs.get('q', '')[:200], min(20, int(qs.get('k', 8))), qs.get('kind', 'any')),
-                                       'semantic': INDEX.status if INDEX else None, **typos.shown(qs.get('q', '')[:200])})
+                q, tr = qs.get('q', '')[:200], {}   # fork: 'confidence', how likely the first result is right (engine/confidence.py)
+                res = assistant.hybrid(q, min(20, int(qs.get('k', 8))), qs.get('kind', 'any'), trace=tr)
+                return self.send_json({'q': qs.get('q', ''), 'results': res, 'semantic': INDEX.status if INDEX else None,
+                                       'confidence': assistant.search_confidence(res, tr),
+                                       **typos.shown(q)})
             if path == '/api/assistant/status':
                 return self.send_json(dict(assistant.model_status(), coverage=coverage()))
             if path == '/api/tools':

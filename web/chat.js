@@ -231,13 +231,14 @@ const Chat = (() => {
     if (m.fallback) h += srcCards(m.fallback, true);
     // fork: after noise or a weak search inside a conversation the server offers what the message may be about (assistant.turn_hits)
     if (!running && (m.suggest || []).length && i === cur.messages.length - 1)
-      h += `<div class="suggest"><p class="small muted">Is this about something else?</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
+      h += `<div class="suggest"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
     if (!running && m.content) {
       const cited = m.cited || [];
       if ((m.invalid || []).length) h += `<p class="small" style="color:var(--stop)">The model referred to sources that don’t exist (${m.invalid.join(', ')}); those markers were removed.</p>`;
-      h += `<div class="legend small"><span><span class="lg-c">1</span> linked to a page or video</span><span><span class="lg-u">dotted</span> the model’s own wording, not linked to a source</span></div>`;
+      // fork: a "please say more" reply (engine/confidence.py) is not an answer: no legend, no unverified-answer notice
+      if (!m.unsure) h += `<div class="legend small"><span><span class="lg-c">1</span> linked to a page or video</span><span><span class="lg-u">dotted</span> the model’s own wording, not linked to a source</span></div>`;
       if (cited.length) h += `<h3 class="srch">Sources (${cited.length})</h3>${srcCards(cited, false)}`;
-      else h += `<p class="notice small">This answer has no linked sources. Treat it as unverified.</p>`;
+      else if (!m.unsure) h += `<p class="notice small">This answer has no linked sources. Treat it as unverified.</p>`;
       const other = (m.consulted || []).filter(s => s.kind !== 'place');
       if (other.length) h += `<details class="also"><summary>Also looked at (${other.length}, not used)</summary>${srcCards(other.slice(0, 10), true)}</details>`;
       if ((m.steps || []).length) h += `<details class="also"><summary>How it searched (${m.steps.length} ${m.steps.length === 1 ? 'step' : 'steps'}${m.latency ? `, ${m.latency.total_s}s` : ''})</summary><ul class="steps">${steps}</ul></details>`;
@@ -421,8 +422,8 @@ const Chat = (() => {
     else if (ev.type === 'sources') m.sources = ev.sources;
     else if (ev.type === 'delta') m.content += ev.text;
     else if (ev.type === 'reset') m.content = '';
-    else if (ev.type === 'suggest') m.suggest = Array.isArray(ev.choices) ? ev.choices.slice(0, 8) : null;
-    else if (ev.type === 'done') { m.content = ev.answer; m.cited = ev.sources; m.consulted = ev.consulted; m.invalid = ev.invalid; m.latency = ev.latency; m.content = m.content.replace(/\[([SM]\d+)\]/g, (x, k) => (ev.invalid || []).includes(k) ? '' : x) }
+    else if (ev.type === 'suggest') { m.suggest = Array.isArray(ev.choices) ? ev.choices.slice(0, 8) : null; m.suggestPrompt = typeof ev.prompt === 'string' ? ev.prompt.slice(0, 120) : '' }
+    else if (ev.type === 'done') { m.unsure = !!ev.unsure; m.content = ev.answer; m.cited = ev.sources; m.consulted = ev.consulted; m.invalid = ev.invalid; m.latency = ev.latency; m.content = m.content.replace(/\[([SM]\d+)\]/g, (x, k) => (ev.invalid || []).includes(k) ? '' : x) }
     else if (ev.type === 'error') {
       if (ev.error === 'model_unavailable') { m.offline = true; m.error = ev.text; fallback(m, (cur.messages[cur.messages.length - 2] || {}).content || '') }
       else { m.error = ev.text; if (ev.sources) m.fallback = ev.sources.slice(0, 8) }
