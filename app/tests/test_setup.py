@@ -1995,6 +1995,8 @@ class ForkLocalAI(unittest.TestCase):
         long = 'word ' * 900 + '\n' + '\n'.join(self.BLEACH_CENTRED)
         self.assertLessEqual(len(T._squash(assistant.page_body(long, 3200))), 3200)
         self.assertEqual(T.clip('abc\ndef', 100), 'abc\ndef')
+        prose = ('Boil the water   for 1 minute.\n  Let it cool,   then store it covered.\n' * 120)   # no table: cut where
+        self.assertEqual(assistant.page_body(prose, 3200), T._squash(prose).strip()[:3200])   # it was
         wide = 'a' + ' ' * 50 + 'b\n' + 'c' * 10
         self.assertEqual(T.clip(wide, 4), 'a' + ' ' * 50 + 'b')       # 50 spaces count as one
 

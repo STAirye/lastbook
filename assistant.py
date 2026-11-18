@@ -437,7 +437,7 @@ def page_body(text, cap):
     LASTBOOK_AI_TABLES=0, every run of spaces squashed to one, as upstream does."""
     if os.environ.get('LASTBOOK_AI_TABLES') == '0':
         return re.sub(r'[ \t]{2,}', ' ', text).strip()[:cap]
-    return page_tables.clip(page_tables.for_model(text).strip(), cap)
+    return page_tables.page_text(text, cap)
 
 
 def excerpt_body(h):

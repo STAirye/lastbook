@@ -285,3 +285,12 @@ def for_model(text):
             out.extend(block)
             out.append('')
     return re.sub(r'\n{3,}', '\n\n', '\n'.join(out))
+
+
+def page_text(text, n):
+    """A page as the model reads it, at most n characters. A page with no table to rebuild is exactly the old squashed
+    text cut at n (as in upstream PR #178)."""
+    body = for_model(text)
+    if body == _squash(text):
+        return body.strip()[:n]
+    return clip(body.strip(), n)
