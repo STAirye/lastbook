@@ -1086,15 +1086,23 @@ def chat(messages, about, emit, cancelled):
         # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
         conf = turn.get('confidence')
         level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
+        # fork: an everyday question (not is_danger) gets buttons only when the search is very unsure, and smaller ones
+        everyday = not turn.get('danger')      # after noise: the earlier message's (turn_hits)
+        if everyday and conf and turn['route'] != 'noise':
+            level = confidence.everyday_level(conf['p'])
+            conf = dict(conf, level=level, everyday=True)
         if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and len(asked) > 1)):
             level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
         if level != 'sure':
             turn['buttons'] = True
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:
             print('local AI confidence:', json.dumps(dict(conf, route=turn['route'], danger=turn.get('danger'))), flush=True)
-        if turn['buttons']:     # fork: noise, or a weak search inside a conversation: offer what it may be about
-            emit({'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
-                  'prompt': SUGGEST_PROMPT.get(level, '')})
+        if turn['buttons']:     # fork: noise, a weak search, or an unsure one: offer what it may be about
+            ev = {'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
+                  'prompt': SUGGEST_PROMPT.get(level, '')}
+            if everyday:
+                ev['style'] = 'compact'     # the same buttons, drawn smaller (web/chat.js)
+            emit(ev)
         if level == 'unsure':
             found = list(sess.sources.values())
             emit({'type': 'sources', 'sources': found})

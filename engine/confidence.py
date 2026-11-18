@@ -13,8 +13,9 @@ ranks them no better (.claude/drafts/triage/conf_top3.py).
 
 The chat uses it (assistant.chat): below BUTTONS it offers buttons; below UNSURE, on a conversation's own new question, it
 asks the person to say more instead of answering from pages that are probably wrong. A question that may be an emergency
-(urgent()) gets the pages all the same. LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS and LASTBOOK_CONF_UNSURE
-move the thresholds (0 to 1).
+(urgent()) gets the pages all the same. An everyday question (one that may not be urgent) gets buttons only below
+EVERYDAY_BUTTONS, much lower, and smaller ones (everyday_level()). LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS,
+LASTBOOK_CONF_UNSURE and LASTBOOK_CONF_BUTTONS_EVERYDAY move the thresholds (0 to 1).
 """
 import math
 import os
@@ -24,6 +25,8 @@ from engine import typos
 
 BUTTONS = 0.60      # below this, the chat offers buttons (0.75 put them on 68 % of keyword-only questions)
 UNSURE = 0.25       # below this, the chat asks the person to say more (and still gives the pages if it may be urgent)
+EVERYDAY_BUTTONS = 0.30   # an everyday question gets (smaller) buttons only below this; 4 % of the test set's everyday
+                          # questions keyword-only, none whose first page was right (0.35: 10 %, 2 right ones)
 
 # Coefficients on the raw signals of features(): p = 1 / (1 + exp(-(bias + sum(w * signal)))).
 MODELS = {
@@ -72,6 +75,18 @@ def _env(name, default):
 def thresholds():
     """(buttons, unsure): the cut-offs in use, from the environment when set there."""
     return _env('LASTBOOK_CONF_BUTTONS', BUTTONS), _env('LASTBOOK_CONF_UNSURE', UNSURE)
+
+
+def everyday_cut():
+    """The buttons cut for an everyday question, from the environment when set there."""
+    return _env('LASTBOOK_CONF_BUTTONS_EVERYDAY', EVERYDAY_BUTTONS)
+
+
+def everyday_level(p):
+    """'sure' | 'buttons' | 'unsure' for an everyday question of probability p: buttons below everyday_cut(), and the
+    request to say more below UNSURE only where that is under the buttons cut too (never without the buttons)."""
+    cut, unsure = everyday_cut(), thresholds()[1]
+    return 'unsure' if p < min(unsure, cut) else 'buttons' if p < cut else 'sure'
 
 
 def urgent(*texts):

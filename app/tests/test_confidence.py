@@ -8,7 +8,9 @@ and chat() runs with a stand-in model round. Checked: the signals and the probab
 above weak ones), the thresholds and their environment overrides, the switch, turn_hits' confidence (the better of its
 own and the joined search; noise keeps the earlier one's; none from a stand-in without a trace), and the chat: sure
 answers as before, unsure offers buttons, very unsure asks for more words without the model and without the pages,
-except when the question may be urgent, when the pages are given too. Never packaged."""
+except when the question may be urgent, when the pages are given too. Everyday questions (not urgent): buttons only
+below the much lower everyday cut, the same buttons drawn smaller (style 'compact'), and the request to say more never
+above that cut. Never packaged."""
 import os, sys, unittest
 from pathlib import Path
 from unittest import mock
@@ -41,7 +43,7 @@ class Signals(unittest.TestCase):
         p = mock.patch.object(confidence, '_words', lambda: (V, max(V.values())))
         p.start()
         self.addCleanup(p.stop)
-        for k in ('LASTBOOK_CONF', 'LASTBOOK_CONF_BUTTONS', 'LASTBOOK_CONF_UNSURE'):
+        for k in ('LASTBOOK_CONF', 'LASTBOOK_CONF_BUTTONS', 'LASTBOOK_CONF_UNSURE', 'LASTBOOK_CONF_BUTTONS_EVERYDAY'):
             self.addCleanup(os.environ.pop, k, None)
             os.environ.pop(k, None)
 
@@ -88,6 +90,23 @@ class Signals(unittest.TestCase):
         with mock.patch.object(confidence, 'probability', lambda f, m: 0.59):
             os.environ.pop('LASTBOOK_CONF_BUTTONS')
             self.assertEqual(confidence.estimate(*STRONG)['level'], 'buttons')
+
+    def test_everyday_cut_and_its_override(self):
+        self.assertEqual((confidence.EVERYDAY_BUTTONS, confidence.everyday_cut()), (0.3, 0.3))
+        self.assertLess(confidence.EVERYDAY_BUTTONS, confidence.BUTTONS)
+        self.assertEqual([confidence.everyday_level(p) for p in (0.1, 0.24, 0.25, 0.29, 0.3, 0.5, 0.59, 0.9)],
+                         ['unsure', 'unsure', 'buttons', 'buttons', 'sure', 'sure', 'sure', 'sure'])
+        os.environ['LASTBOOK_CONF_BUTTONS_EVERYDAY'] = '0.15'
+        self.assertEqual(confidence.everyday_cut(), 0.15)
+        # below the unsure cut: the request to say more only where there are buttons too, never above them
+        self.assertEqual([confidence.everyday_level(p) for p in (0.1, 0.15, 0.2)], ['unsure', 'sure', 'sure'])
+        os.environ['LASTBOOK_CONF_BUTTONS_EVERYDAY'] = '0.6'
+        self.assertEqual([confidence.everyday_level(p) for p in (0.2, 0.5)], ['unsure', 'buttons'])
+        os.environ['LASTBOOK_CONF_BUTTONS_EVERYDAY'] = 'many'
+        self.assertEqual(confidence.everyday_cut(), 0.3)                       # not a share: the default
+        os.environ['LASTBOOK_CONF_BUTTONS_EVERYDAY'] = '0'
+        self.assertEqual(confidence.everyday_level(0.01), 'sure')              # 0: never buttons on an everyday question
+        self.assertEqual(confidence.thresholds(), (0.6, 0.25))                 # the urgent cuts are untouched
 
     def test_urgent_words(self):
         for q in ("my son isn't breathing", 'she cant breath wheezing bad', 'fell off the roof cant move legs',
@@ -179,9 +198,10 @@ class ChatConfidence(unittest.TestCase):
             self.addCleanup(p.stop)
         self.hits = [hit('w1', 'Purify Water', 'boil it')]
 
-    def run_chat(self, question, level, route='first', danger=False):
+    def run_chat(self, question, level, route='first', danger=False, p=None):
+        p = {'sure': 0.9, 'buttons': 0.5, 'unsure': 0.1}[level] if p is None else p
         info = {'route': route, 'buttons': False, 'still': '', 'danger': danger,
-                'confidence': {'p': {'sure': 0.9, 'buttons': 0.5, 'unsure': 0.1}[level], 'mode': 'keyword', 'level': level}}
+                'confidence': {'p': p, 'mode': 'keyword', 'level': level}}
         events = []
         with mock.patch.object(self.a, 'turn_hits', lambda *a, **k: (self.hits, dict(info))):
             self.a.chat([{'role': 'user', 'content': question}], None, events.append, lambda: False)
@@ -194,10 +214,46 @@ class ChatConfidence(unittest.TestCase):
         self.assertEqual(ev['done']['answer'], 'Boil it [S1].')
 
     def test_unsure_offers_buttons_and_answers(self):
-        ev, _ = self.run_chat('how do i purify water', 'buttons')
+        ev, _ = self.run_chat('he is bleeding from the arm', 'buttons', danger=True)      # may be urgent: as before
         self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['buttons'])
         self.assertIn('Not breathing', [c['label'] for c in ev['suggest']['choices']])
         self.assertEqual(ev['suggest']['confidence']['level'], 'buttons')
+        self.assertNotIn('style', ev['suggest'])                             # the emergency buttons' own look
+        self.assertEqual(len(self.rounds), 1)
+
+    def test_urgent_cuts_are_unchanged(self):
+        for p, buttons in ((0.59, True), (0.3, True), (0.61, False)):
+            self.rounds.clear()
+            level = 'buttons' if p < 0.6 else 'sure'
+            ev, _ = self.run_chat('he is bleeding from the arm', level, danger=True, p=p)
+            self.assertEqual('suggest' in ev, buttons, p)
+            self.assertEqual(len(self.rounds), 1)
+
+    def test_everyday_unsure_answers_without_buttons(self):
+        ev, _ = self.run_chat('how do i build a goat fence', 'buttons', p=0.5)
+        self.assertNotIn('suggest', ev)                                     # 0.5 is under 0.60 but over the everyday cut
+        self.assertEqual(len(self.rounds), 1)
+        self.assertEqual(ev['done']['answer'], 'Boil it [S1].')
+
+    def test_everyday_very_unsure_gets_the_same_buttons_smaller(self):
+        ev, _ = self.run_chat('how do i build a goat fence', 'buttons', p=0.27)
+        self.assertEqual(ev['suggest']['style'], 'compact')
+        self.assertEqual(ev['suggest']['choices'], self.a.suggest_choices({}))   # the same choices as an urgent question's
+        self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['buttons'])
+        self.assertEqual(ev['suggest']['confidence']['level'], 'buttons')
+        self.assertTrue(ev['suggest']['confidence']['everyday'])
+        self.assertEqual(len(self.rounds), 1)                               # 0.25-0.30: buttons and the answer
+
+    def test_everyday_cut_from_the_environment(self):
+        self.addCleanup(os.environ.pop, 'LASTBOOK_CONF_BUTTONS_EVERYDAY', None)
+        os.environ['LASTBOOK_CONF_BUTTONS_EVERYDAY'] = '0.55'
+        ev, _ = self.run_chat('how do i build a goat fence', 'buttons', p=0.5)
+        self.assertEqual(ev['suggest']['style'], 'compact')
+        os.environ['LASTBOOK_CONF_BUTTONS_EVERYDAY'] = '0.2'
+        self.rounds.clear()
+        ev, _ = self.run_chat('how do i build a goat fence', 'unsure', p=0.22)
+        self.assertNotIn('suggest', ev)                                     # no request to say more above the buttons cut
+        self.assertNotIn('unsure', ev['done'])
         self.assertEqual(len(self.rounds), 1)
 
     def test_very_unsure_asks_without_the_model(self):
@@ -205,6 +261,7 @@ class ChatConfidence(unittest.TestCase):
         self.assertEqual(self.rounds, [])                                   # the model is never asked
         self.assertIn('suggest', ev)
         self.assertEqual(ev['done']['answer'], self.a.UNSURE_TEXT)
+        self.assertEqual(ev['suggest']['style'], 'compact')                 # everyday: below both cuts, smaller buttons
         self.assertTrue(ev['done']['unsure'])
         self.assertEqual(ev['done']['sources'], [])                         # no pages offered as the answer's
         self.assertEqual([s['doc_id'] for s in ev['done']['consulted']], ['w1'])
@@ -216,6 +273,7 @@ class ChatConfidence(unittest.TestCase):
         self.assertEqual(ev['done']['answer'], self.a.UNSURE_DANGER)
         self.assertEqual([s['doc_id'] for s in ev['done']['sources']], ['w1'])
         self.assertIn('suggest', ev)
+        self.assertNotIn('style', ev['suggest'])
 
     def test_very_unsure_in_a_follow_up_is_only_buttons(self):
         ev, _ = self.run_chat('and at night?', 'unsure', route='follow')
