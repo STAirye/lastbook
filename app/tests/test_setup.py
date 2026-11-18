@@ -1925,6 +1925,12 @@ class ForkLocalAI(unittest.TestCase):
         self.assertTrue(prose.rstrip().endswith('and wait before drinking.'))
         found = T.tables('\n'.join(self.BLEACH_CENTRED))
         self.assertEqual((len(found), found[0]['sure'], found[0]['mixed']), (1, True, 2))
+        # each label wholly above its amount (upstream PR #178 review): not paired one row off, kept as printed
+        crates = '\n'.join(['    Crate                     Quantity'] + [l for n, q in (('First', 1), ('Second', 2), ('Third', 3))
+                           for l in (f'    {n} crate', '    packed', f'                                      {q} kg')])
+        self.assertFalse(T.tables(crates)[0]['sure'])
+        self.assertNotIn('Second crate | 1 kg', T.for_model(crates).replace('packed ', ''))
+        self.assertIn('Table as printed', T.for_model(crates))
 
     def test_tables_that_cannot_be_split_stay_as_printed(self):
         """When cells wrap in several columns, rows can't be told apart by the nearest amount: the table keeps its printed

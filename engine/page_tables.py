@@ -147,13 +147,18 @@ def _table(lines, segs, col):
             got = {s[0] for s in r['cells'].get(id(b), [])}
             if b is not anchor and got & mine and got - mine:
                 stray += any(not ({i - 1, i + 1} & (got | mine)) for i in got - mine) or len(got - mine) > 1
+    # a label entirely above or entirely below its amount, not on the amount's line or around it: the nearest-line rule can
+    # pair it with the next row's amount ("First crate / packed" over "1 kg" gave "packed Second crate | 1 kg")
+    offside = any(got and not got & set(range(r['a'], r['b'] + 1)) and not (min(got) < r['a'] and max(got) > r['b'])
+                  for r in rows for b in table if b is not anchor
+                  for got in [{s[0] for s in r['cells'].get(id(b), [])}])
     merged = any(len({s[0] for s in b['segs']}) < len(b['segs']) for b in table)   # two cells of one line in one column
     # a cell of the amount column between rows that isn't an amount: a row whose value wasn't recognised, now merged
     # into its neighbour; or one cell holding amounts from two lines (two rows in one)
     unread = any((s[0], s[1]) not in used for s in anchor['segs'] if rows[0]['a'] < s[0] < rows[-1]['b'])
     doubled = any(len({s[0] for s in c if AMOUNT.match(s[3])}) > 1 for r in rows for c in r['cells'].values())
     sure = (empty <= 0.1 * len(rows) * len(table) and tall <= 3   # else cells wrap in ways nearest-amount can't follow
-            and not stray and not merged and not unread and not doubled)
+            and not stray and not offside and not merged and not unread and not doubled)
     first, last = min(i for i, _ in used), max(i for i, _ in used)
     # how many rows the old line-by-line reading got wrong: the row's pieces were not one run ending in its amount
     order = [(i, x0) for i, row in enumerate(segs) for (x0, _, _) in row]
