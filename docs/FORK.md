@@ -450,7 +450,15 @@ a test server and checks the amount (3j); it needs the model.
   columns there. Tables without a recognised unit (bare numbers, "kcal" rows without one), scanned (OCR) pages and
   tables split across pages aren't handled. The rebuilt tables were checked by eye on a sample of health documents, not
   all 226. 3j was measured on E4B only, 3 runs of 14 questions, and only for the questions' first answer. A candidate
-  pull request upstream (the squash is upstream's): reported as upstream issue #148, with the fix offered.
+  pull request upstream (the squash is upstream's): reported as upstream issue #148, and sent as PR #178
+  (branch `table-rows`, without the excerpt rows and the prompt line). From its review: a label wholly above its amount
+  was paired one row off and called sure; such tables are now kept as printed (19 of 226 sure tables, each one flawed).
+  Rotated tables: `pdftotext -layout` turns a rotated page upright; a rotated table on a page of upright text comes out
+  as a "staircase" (amounts in one block, labels in another) that isn't rebuilt, but the library has only 2 with
+  amounts, neither a dose. **Tables that are pictures are a separate problem**: they have no text, so neither this nor
+  the local model (text only, no view_page) can read them. 3,474 PDF pages have no text at all and 108 documents are
+  almost all scanned (none in health); pictures of tables on pages that do have text haven't been counted. Options:
+  OCR when a pack is built, or page images for a local model that accepts them (not checked for E4B or the runner).
 - 3i was measured once per arm on 8 questions. Portuguese and French are detected but not measured. The UI itself is
   still English (upstream issue #54).
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
