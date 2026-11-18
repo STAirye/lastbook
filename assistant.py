@@ -8,6 +8,7 @@ import base64, json, re, socket, sqlite3, threading, time, unicodedata, urllib.e
 import retrieval
 from engine.paths import ro_uri
 from engine import page_tables
+from engine import typos    # fork: spelling mistakes in search questions
 
 import os
 LOOPBACK = re.compile(r'http://(127\.0\.0\.1|\[::1\]):\d+(/[^\s]*)?')
@@ -115,6 +116,7 @@ def _allowed(kind):
 
 def hybrid(q, k=8, kind='any', doc=None):
     """Best passages for q from keyword and meaning-based search, fused, with provenance."""
+    q = typos.correct(q)    # fork: both searches get the misspellings put right (engine/typos.py)
     cat = S.catalog()
     allowed = _allowed(kind)
     if doc:
