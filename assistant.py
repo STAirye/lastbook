@@ -313,6 +313,212 @@ def followup_hits(own, joined, k=8, first=5):
     return out
 
 
+# fork: what the newest message is to the conversation, without a model, so its first search does not bring back the wrong
+# pages. Measured on 52 invented conversations (first result right, hybrid search): following the message just before, with
+# the previous answer's pages first, gave follow-ups 86% but corrections 29% (the rejected pages came back first), a new
+# emergency 0% ("THE KITCHEN IS ON FIRE" after a water question got water pages) and 75% after a noise message, which was
+# then joined with the next one. With the routes below: 86 / 58 / 50 / 60 / 67, 64% overall against 56%, and never worse
+# than both that and searching the newest message alone. The classifier was written alongside those conversations, so its
+# accuracy there is optimistic: it misses gibberish made of real words ("the duck is a mint").
+NOISE_PHRASE = re.compile(r"^\s*(sorry,? )?(wrong (chat|window|person|number)|ignore (that|this)|never ?mind|nvm|oops|lol( sorry)?"
+                          r"|ok(ay)?|k|wait|sorry|hm+|test)\s*[.!]*\s*$", re.I)
+CORRECT = re.compile(r"^\s*(no+\b[\s,!.]*)+|\b(i mean[t]?|not that|that'?s not|thats not|wrong one|not me|not him|not her|instead)\b", re.I)
+CORRECT_STRIP = re.compile(r"^\s*(no+\b[\s,!.]*)+|\b(i mean[t]?|not that|that'?s not it|thats not it|wrong one)\b[\s,]*", re.I)
+STILL = re.compile(r'^\s*still about:\s*', re.I)     # the "Still about: …" button sends its label
+# Danger signs: one that the conversation did not have yet makes the message a new emergency. Sources: [P] server.PHRASES
+# (everyday emergency phrases), [S] server.SYN keys that are ABCDE danger words, [H] a short hand list (ABCDE, fire, gas,
+# flood). content/topics/*.json has no "urgent" phrases to take from.
+_POISON = (r"(bleach|poison\w*|pills|tablets|medicine|detergent|cleaner|chemicals?|kerosene|paraffin|petrol|gasoline|antifreeze"
+           r"|lye|drain cleaner|rat poison|pesticide|weed ?killer)")
+DANGER = {k: re.compile(v, re.I) for k, v in {
+    'heart attack': r"heart attack",                                                        # [P]
+    'passed out': r"(passed|blacked) out|faint(ed|ing)",                                    # [P]
+    'not breathing': r"can'?t breathe|cannot breathe|not breathing|stopped breathing",      # [P], [H]
+    'choking': r"\bchok(e|es|ed|ing)\b",                                                   # [S], [H]
+    'unconscious': r"unconscious|unresponsive|won'?t wake( up)?|collapsed",                 # [S], [H]
+    'cpr': r"\bcpr\b|no pulse",                                                            # [S]
+    'bleeding a lot': r"bleeding (a lot|badly|heavily|everywhere)|won'?t stop bleeding|heavy bleeding|lots of blood"
+                      r"|blood everywhere|spurting",                                       # [H]
+    'seizure': r"seizures?|convuls\w*|fitting",                                             # [H]
+    'chest pain': r"chest pains?|pain in (his|her|my|the) chest",                           # [H]
+    'on fire': r"on fire|caught fire|in flames",                                            # [H]
+    'smell gas': r"smell(s|ing)? (of )?gas|gas leak",                                       # [H]
+    'snake bit': r"snake ?bit(e|ten)?|bitten by a snake|snake .{0,12}\bbit\b",              # [H]
+    'poison': r"(swallow\w*|drank|drunk|drink\w*|ate|eaten|ingest\w*) .{0,30}" + _POISON + r"|poison(ed|ing)",   # [H]
+    'stuck in water': r"(stuck|trapped|swept( away)?|drowning) (in|into|by) (the )?(water|river|flood\w*|pool|sea|current)"
+                      r"|\bdrowning\b",                                                    # [H]
+    'trapped': r"\btrapped\b|pinned (under|down)|buried (under|alive)",                     # [H]
+}.items()}
+# Buttons offered after noise or a weak search. Each sends its label as the next message; "Something else" only opens the box.
+DANGER_CHOICES = ('Not breathing', 'Heavy bleeding', 'Burn', 'Poison', 'Fire')
+_SHORT = set('a an and are as at be but by can do does for from get got have help how i if in into is it its me my need no '
+             'not of on or our please should so some that the their them then there these they this to up us was we what when '
+             'where which who why will with without you your he she him her his hers oh yes'.split())
+_NO_APOS = {'isnt', 'cant', 'wont', 'dont', 'doesnt', 'hes', 'shes', 'im', 'didnt', 'wasnt', 'someones', 'thats'}
+_VOCAB = {'words': None, 'seconds': None}
+
+
+def _vocab():
+    """fork: the library's own words, every keyword-index term on 20 or more pages, read once per process from the read-only
+    search database (about 0.7 s and 34,000 words on the full library). An empty set if it can't be read: then is_noise
+    falls back to how a word looks."""
+    if _VOCAB['words'] is None:
+        t0, words = time.time(), set()
+        try:
+            con = sqlite3.connect(ro_uri(S.library.DB), uri=True)
+            try:
+                con.execute('CREATE VIRTUAL TABLE temp.v USING fts5vocab(main, pages, row)')
+                words = {t for (t,) in con.execute('SELECT term FROM temp.v WHERE doc >= 20') if t.isascii() and t.isalpha()}
+            finally:
+                con.close()
+        except Exception:
+            words = set()
+        _VOCAB.update(words=words, seconds=round(time.time() - t0, 2))
+    return _VOCAB['words']
+
+
+def _looks_like_word(w):
+    """Without the library's words: a vowel, no letter three times running, no five consonants running."""
+    return bool(re.search(r'[aeiouy]', w)) and not re.search(r'(.)\1\1', w) and not re.search(r'[^aeiouy]{5}', w)
+
+
+def _known(w, V):
+    if w in _SHORT or w in _NO_APOS or w in ENGLISH_WORDS:
+        return True
+    if not V:
+        return _looks_like_word(w)
+    if w in V or len(w) < 3:
+        return w in V or w in _SHORT
+    s = [(w[:i], w[i:]) for i in range(len(w) + 1)]     # one letter dropped, swapped, changed or added: a typo is still a word
+    return any(x in V for x in ({a + b[1:] for a, b in s if b} | {a + b[1] + b[0] + b[2:] for a, b in s if len(b) > 1} |
+                                {a + c + b[1:] for a, b in s if b for c in 'abcdefghijklmnopqrstuvwxyz'} |
+                                {a + c + b for a, b in s for c in 'abcdefghijklmnopqrstuvwxyz'}))
+
+
+def is_noise(msg):
+    """fork: a stock phrase ("sorry wrong chat", "ok", "wait"), no letters at all ("😭😭😭"), or mostly not words ("jdjdk").
+    A message in another language is never noise by its words: they are not the library's."""
+    msg = STILL.sub('', msg or '')
+    if msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}:
+        return False
+    if NOISE_PHRASE.match(msg) or not re.search(r'[^\W\d_]', msg):
+        return True
+    if needs_english(msg):
+        return False
+    words = [w.split("'")[0] for w in re.findall(r"[a-z']+", msg.lower().replace('’', "'")) if w.strip("'")]
+    words = [w for w in words if w]
+    V = _vocab()
+    return not words or sum(1 for w in words if _known(w, V)) / len(words) < 0.5
+
+
+def classify(msg):
+    """fork: 'noise', 'correct' (replaces what the message before asked: "no no I mean the smoke") or 'other'."""
+    if is_noise(msg):
+        return 'noise'
+    return 'correct' if CORRECT.search(msg) else 'other'
+
+
+def danger_signs(msg):
+    m = (msg or '').lower().replace('’', "'")
+    return {k for k, rx in DANGER.items() if rx.search(m)}
+
+
+def _hkey(h):
+    return (h.get('doc_id'), h.get('page'), h.get('t'))
+
+
+def _merge(*parts, k=8, last=()):
+    """parts: (hits, how many) in order, then `last` at the very end; each page once, up to k."""
+    out, seen = [], set()
+    for hits, n in list(parts) + [(last, k)]:
+        for h in list(hits)[:n]:
+            if _hkey(h) not in seen and len(out) < k:
+                seen.add(_hkey(h))
+                out.append(h)
+    return out
+
+
+def _search_words(q):
+    """The words a question was searched with: its English words if it was not in English (english_query), else itself."""
+    return (_ENGLISH_OF.get(q) or q) if needs_english(q) else q
+
+
+def earlier_question(messages):
+    """fork: the last user message before the newest that is not noise, or ''. Noise never becomes "earlier"."""
+    asked = [m['content'] for m in messages if m.get('role') == 'user' and isinstance(m.get('content'), str)]
+    return next((STILL.sub('', q) for q in reversed(asked[:-1]) if not is_noise(q)), '')
+
+
+def turn_hits(messages, english=None, followup=True, k=8):
+    """fork: the first library search for the newest user message of a conversation -> (hits, info). No model.
+    english: the newest message's English search words (english_query), used instead of it. followup False (not the person's
+    own Gemma, or LASTBOOK_AI_FOLLOWUP=0): this message alone, as upstream. info['route']:
+      first    one message, or no sensible one before it: its own search
+      noise    no new search: the last sensible message's results again, and buttons
+      correct  correction words stripped; pages shown last time go to the end; no carried pages; then the joined search
+      danger   a danger sign the conversation did not have: its own best 5, then the joined search, no carried pages
+      follow   the pages the previous answer cited (cited_before), its own best 4, the joined search, the rest
+    info['buttons']: noise, or this message's own search found fewer than 3; info['still']: the last sensible question."""
+    idx = [i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
+    question = STILL.sub('', messages[idx[-1]]['content']) if idx else ''
+    info = {'route': 'first', 'buttons': False, 'still': ''}
+
+    def own_search(q):
+        return (hybrid(english, k) if english else []) or hybrid(q[:300], k)
+    if not followup or len(idx) < 2:
+        return own_search(question), info
+    j = next((i for i in reversed(idx[:-1]) if not is_noise(messages[i]['content'])), None)
+    earlier = STILL.sub('', messages[j]['content']) if j is not None else ''
+    info['still'] = earlier
+    if is_noise(question):
+        info.update(route='noise', buttons=True)
+        if j is None:
+            return own_search(question), info
+        prev = messages[:j + 1]
+        e = _ENGLISH_OF.get(earlier) if needs_english(earlier) else None
+        return turn_hits(prev, e, followup, k)[0], info
+    if j is None:
+        hits = own_search(question)
+        info['buttons'] = len(hits) < 3
+        return hits, info
+    # joined with the earlier message as chat() always has: its English words next to this one's, else its own words
+    before = ((_ENGLISH_OF.get(earlier, '') if needs_english(earlier) else earlier) if english else earlier)[:200]
+    if classify(question) == 'correct':
+        q = CORRECT_STRIP.sub(' ', question).strip() or question
+        own = own_search(q)
+        # shown last time: what the previous answer cited, and the earlier message's own search, which is most of what the
+        # person saw (one more search, only on a correction). The browser sends no list of the pages it showed.
+        shown = {_hkey(h) for h in cited_before(messages, limit=8)} | {_hkey(h) for h in hybrid(_search_words(earlier)[:300], k)}
+        joined = hybrid(((before + ' ' + english) if english else (before + ' ' + q)).strip()[:300], k)
+        hits = _merge(([h for h in own if _hkey(h) not in shown], k), ([h for h in joined if _hkey(h) not in shown], k), k=k,
+                      last=[h for h in own if _hkey(h) in shown])
+        info['route'] = 'correct'
+    else:
+        own = own_search(question)
+        joined = hybrid(((before + ' ' + english) if english else (before + ' ' + question)).strip()[:300], k)
+        seen = set()
+        for i in idx[:-1]:
+            if not is_noise(messages[i]['content']):
+                seen |= danger_signs(messages[i]['content'] + ' ' + _search_words(messages[i]['content']))
+        new = danger_signs(question + ' ' + (english or '')) - seen
+        if new or question.strip().lower() in {c.lower() for c in DANGER_CHOICES}:   # a button is a new emergency too
+            hits = _merge((own, 5), (joined, k), (own, k), k=k)
+            info['route'] = 'danger'
+        else:
+            carried = cited_before(messages)
+            hits = followup_hits(carried + own, joined, k=k, first=len(carried) + 4)
+            info['route'] = 'follow'
+    info['buttons'] = len(own) < 3
+    return hits, info
+
+
+def suggest_choices(info):
+    """fork: the buttons for info['buttons']: the last sensible question, the commonest emergencies, and Something else
+    (text '': the box only gets the focus)."""
+    out = [{'label': 'Still about: ' + info['still'][:80], 'text': 'Still about: ' + info['still'][:300]}] if info.get('still') else []
+    return out + [{'label': c, 'text': c} for c in DANGER_CHOICES] + [{'label': 'Something else', 'text': ''}]
+
+
 # fork: a question in another language. The library and its keyword search are English ("hervir agua" finds nothing), so the
 # person's own model first writes the question as English search words, and the first search uses those. Only for questions
 # that look non-English: an English one costs nothing extra. Off with LASTBOOK_AI_ENGLISH_SEARCH=0.
@@ -768,7 +974,8 @@ def chat(messages, about, emit, cancelled):
     english = None      # fork: the question's English search words (english_query), when it is in another language
     if question and not about:
         asked = [m['content'] for m in messages if m.get('role') == 'user' and isinstance(m.get('content'), str)]
-        earlier = asked[-2] if len(asked) > 1 else ''
+        followup = own_file and os.environ.get('LASTBOOK_AI_FOLLOWUP') != '0'
+        earlier = earlier_question(messages) if followup else (asked[-2] if len(asked) > 1 else '')   # fork: never noise
         if own_file and os.environ.get('LASTBOOK_AI_ENGLISH_SEARCH') != '0' and needs_english(question):
             if not start_model():       # the model is needed for the answer anyway; here it is started before the search
                 return
@@ -777,12 +984,10 @@ def chat(messages, about, emit, cancelled):
             if cancelled():
                 emit({'type': 'stopped'})
                 return
-        hits = (hybrid(english, 8) if english else []) or hybrid(question[:300], 8)
-        if own_file and earlier and os.environ.get('LASTBOOK_AI_FOLLOWUP') != '0':
-            before = _ENGLISH_OF.get(earlier, '') if needs_english(earlier) else earlier[:200]
-            joined = (before + ' ' + english) if english else (earlier[:200] + ' ' + question)
-            carried = cited_before(messages)      # up to 3, then this message's best 4, the joined search, the rest
-            hits = followup_hits(carried + hits, hybrid(joined.strip()[:300], 8), first=len(carried) + 4)
+        hits, turn = turn_hits(messages, english, followup)     # fork: see turn_hits
+        if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and turn['route'] != 'first':
+            print('local AI turn:', json.dumps({'q': question[:200], 'route': turn['route'], 'earlier': turn['still'][:200]},
+                                               ensure_ascii=False), flush=True)
         if hits:
             blocks = []
             for n, h in enumerate(hits):
@@ -800,6 +1005,8 @@ def chat(messages, about, emit, cancelled):
         if english:
             msgs.append({'role': 'system', 'content': LANGUAGE_NOTE.format(english=english)})
         emit({'type': 'found', 'count': len(hits)})
+        if turn['buttons']:     # fork: noise, or a weak search inside a conversation: offer what it may be about
+            emit({'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn)})
     if sess.sources:
         emit({'type': 'sources', 'sources': list(sess.sources.values())})
     local = local_on()
