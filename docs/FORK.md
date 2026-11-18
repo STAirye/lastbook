@@ -379,6 +379,45 @@ Hesperian's "Water and Sanitation: Keys to Staying Healthy" p. 23 and "Protectin
 `ForkLocalAI.test_tables_are_read_by_row`, `test_tables_that_cannot_be_split_stay_as_printed` and
 `test_page_body_caps_and_switch` cover it, with both printings of the bleach table.
 
+### 3k. Search as triage: long pages, typos, conversations
+
+Measured on a test set of 362 invented questions over 159 topics (emergency medicine, firefighting, disasters, a little
+security, everyday tasks): 253 clean questions coloured red / yellow / green by urgency, 22 counterexamples ("brake
+bleed" is not bleeding), 109 typed with panicky typos. Each lists the words a useful page must have, and a page that
+must not come first. Plus 52 invented conversations, scored on the last message. The set and scorer live outside the
+repo for now (upstream issue #154 asked for a test-only pull request of them).
+
+- **Long saved web pages in sections** (`engine/sections.py`). 353 saved HTML pages are whole books (over 20,000
+  characters, up to 4.4 MB) and match nearly any question: *Modern Machine-Shop Practice* came up for 26 of the 362.
+  Each is cut at its headings into sections (351 pages → 7,623 sections, 4 s, stored in
+  `derived/index/sections-<hash>.sqlite`, since the pack's `search.sqlite` is checksummed and stays as shipped). The
+  meaning-based passages are relabelled to their section. Search returns the section; the reader opens the page at it
+  and shows "Section N of M". Machine-Shop questions: 26 → 4. Hybrid search on the long pages: 4.95 s → 0.68 s.
+  Tried and dropped: a score penalty for long pages (26 → 19).
+- **Typos** (`engine/typos.py`). Keyword search needs whole words, so "breating" matches nothing. A word not in the
+  library is replaced by the closest library word (edit distance, weighted to words in emergency books, first letter
+  kept, keyboard-neighbour swaps and doubled letters cheaper), before both searches. "my husbnd colapsed and isnt
+  breating" → "my husband collapsed and isn't breathing". 99 of the 109 typo questions changed, 0 of the 253 clean
+  ones. The corrected question is returned as `corrected` by `/api/find` and `/api/retrieve`. `LASTBOOK_TYPO_FIX=0`
+  turns it off.
+- **Conversations** (`assistant.turn_hits`). The newest message is classified without a model: noise ("jdjdk", "sorry
+  wrong chat") → no search, and the chat shows buttons (a `suggest` event); a correction ("no no I mean…") → the
+  correction words are dropped and pages already shown go last, none carried over; a danger sign the conversation
+  didn't have yet → this message's own search first, none carried over; otherwise 3g's follow-up search, joined with
+  the last message that wasn't noise.
+
+| First result right | keyword only, before → after | hybrid, before → after |
+|---|---|---|
+| Red questions | 44% → 44% | 67% → 70% |
+| All clean questions | 58% → 59% | 73% → 76% |
+| Typo questions, useful pages in top 8 | 2.23 → 4.72 | 3.39 → 5.57 |
+| Conversations (with cited replies) | 48% → 54% | 56% → 64% |
+
+On conversations, hybrid: corrections 29% → 57%, new emergencies 0% → 80%, follow-ups 86% → 86%, but additions
+68% → 47% and messages after noise 75% → 58%. 19 single questions got better and 2 worse (hybrid).
+
+`app/tests/test_long_pages.py`, `test_typos.py` and `test_turn_hits.py` cover it.
+
 ## 4. Running from source on Windows
 
 Running from source needs two things from an upstream release, copied in (both folders are ignored by git):
@@ -401,6 +440,7 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_AI_FOLLOWUP=0` | Search only the latest message, with no pages carried over from the previous answer (3g) |
 | `LASTBOOK_AI_ENGLISH_SEARCH=0` | Search a non-English question as typed, without the model's English search words (3i) |
 | `LASTBOOK_AI_TABLES=0` | Give the model pages with every run of spaces squashed, tables line by line, as upstream does (3j) |
+| `LASTBOOK_TYPO_FIX=0` | Search questions as typed, without correcting misspelled words (3k) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
@@ -461,5 +501,12 @@ a test server and checks the amount (3j); it needs the model.
   OCR when a pack is built, or page images for a local model that accepts them (not checked for E4B or the runner).
 - 3i was measured once per arm on 8 questions. Portuguese and French are detected but not measured. The UI itself is
   still English (upstream issue #54).
+- **Triage search (3k).** The sections file is built in the background when the server starts (about 4 s); only a test
+  copy of the library has been through it. The conversation buttons and the reader opening a section haven't been seen in the window. Additions and
+  messages after noise are weaker than 3g alone. 8 red questions still get no useful page (a severed finger, someone
+  trapped under a wall, a mudslide). The iPad port has no typo correction. `packaging/linux/build_app_linux.sh` now
+  copies `page_tables.py`, `sections.py` and `typos.py` (the first was missing since 3j); the Linux build hasn't been
+  run. The classifier and the test set were written together, so its scores are
+  optimistic.
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
   country from an OpenStreetMap extract, using `tools/build_map.py`, would be a separate piece of work.
