@@ -60,6 +60,27 @@ URGENT = re.compile(
     re.I)
 
 
+# fork: the injury words of URGENT, for server.PHRASES. A how-to phrase ("light a fire", "treat water") is not used when the
+# question also names an injury or a danger to the body: "light a fire to keep him warm with hypothermia" is about
+# hypothermia, not firecraft. Not URGENT itself: its fire, smoke, gas, flood, baby and cut would also stop "how do i light a
+# campfire", "make the water safe for a baby's formula" and "cut kindling". A bare "burn" or "smoke" is how a fire is
+# made too ("wood that burns longer", "a fire without smoke"), so only a burn on someone and smoke breathed in count.
+# Added to URGENT's words: lungs, monoxide alone, inhaled, blisters, electrocuted, coughing.
+INJURY = re.compile(
+    r"\b(breath\w*|chok\w*|unconscious|unresponsive|collaps\w*|pass(ed)? out|faint\w*|pulse|cpr|bleed\w*|blood\w*"
+    r"|wound\w*|stab\w*|amputat\w*|drown\w*|submerg\w*|lungs?|cough\w*|electrocut\w*|shock\w*|live wire|lightning"
+    r"|burn(ed|t)|scald\w*|blister\w*|inhal\w*|carbon monoxide|monoxide|fumes|poison\w*|swallow\w*|overdos\w*"
+    r"|bitten|stung|anaphyla\w*|seizure\w*|convuls\w*|hypotherm\w*|frostbit\w*|shiver\w*|heat ?stroke|injur\w*|hurt\w*"
+    r"|fractur\w*|caught fire|on fire|in flames|fell|fallen|dying)\b"
+    r"|\b(a|the|my|his|her|their|bad|first|second|third)[ -](degree )?burns?\b|\bburns? (on|to)\b",
+    re.I)
+
+
+def injury(text):
+    """True when the text names an injury or a danger to the body (INJURY): then server.PHRASES' how-to phrases are not used."""
+    return bool(INJURY.search((text or '').replace('’', "'")))
+
+
 def on():
     return os.environ.get('LASTBOOK_CONF', '1') != '0'
 

@@ -273,6 +273,28 @@ it: ATP 3-50.21 (p. 121–129), FM 21-76 (p. 66–70) and the USMC Summer and Wi
 This is a change to search, so it applies to every model, the published 26B too. `test_bridge.ForkSearchWords` covers
 the phrases and the controls.
 
+**Later bug: the phrases inside injury questions** (found by tracing #154's questions). "treat water in the lungs after
+drowning" was searched as water AND (disinfect OR … chlorine) AND lungs AND drowning. No page has all of them, so the
+search relaxed to any of the words, and the six helper words and the title bonus put water-treatment manuals first: 0
+useful of 8 (keyword-only). The same for "light a fire to keep him warm with hypothermia" (0 of 8) and "carbon monoxide
+from making a fire in the tent" (3). Upstream, with no phrases, did better on these.
+
+- **Fix:** the two how-to phrases (making fire, making water safe) are not used when the question names an injury:
+  `engine/confidence.INJURY`, the injury words of the urgent list (breathing, drowning, burned, scald, shock, poison,
+  hypothermia, frostbite, injured, fell, caught fire …) plus lungs, monoxide, inhaled, blisters, electrocuted, coughing.
+  Not the whole urgent list: its fire, smoke, gas, baby and cut would also stop "how do i light a campfire" and "make the
+  water safe for a baby's formula". A bare "burns" or "smoke" doesn't count ("wood that burns longer"). The other phrases
+  (power cut, heart attack, can't breathe …) are unchanged. `LASTBOOK_PHRASE_INJURY=0` turns it off.
+- **Tried and left off:** when every word finds too few pages, search every word again without the phrase's helper words
+  before relaxing (`LASTBOOK_PHRASE_RETRY=1`). It fixes the same questions, but "start a fire with no matches and no gas"
+  fell 7 → 2 useful: without tinder and kindling, fire + matches + gas finds the fire-safety pages again.
+- **Measured** in-process on the 362 labelled questions and #154's 32 (+ typos), four arms, keyword-only and hybrid
+  (`.claude/drafts/triage/AB_PHRASES.md`). Keyword-only, with the fix: first page right 150 → 153 and a right page in the
+  top 3 199 → 204 of 253; #154's count 144 → 168 of 256 (typos 152 → 169). Drowning 0 → 4 useful (first right),
+  hypothermia 0 → 4, carbon monoxide 3 → 8. No question worse. The how-to questions are as before: campfire 8, no matches
+  7, water safe to drink 8, formula 8. Hybrid moves a page or two either way (#154 186 → 189). The confidence buttons:
+  confident misses 18 → 17 and 6 → 4, urgent pages hidden unchanged (none from the phrases).
+
 ### 3i. Questions in Spanish (and other languages)
 
 Gemma 4 reads and writes Spanish, but the library is in English, and so is its keyword search: "¿cómo purifico agua de un
@@ -487,6 +509,8 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_AI_FOLLOWUP=0` | Search only the latest message, with no pages carried over from the previous answer (3g) |
 | `LASTBOOK_AI_ENGLISH_SEARCH=0` | Search a non-English question as typed, without the model's English search words (3i) |
 | `LASTBOOK_AI_TABLES=0` | Give the model pages with every run of spaces squashed, tables line by line, as upstream does (3j) |
+| `LASTBOOK_PHRASE_INJURY=0` | Use the fire and water-safe phrases even when the question names an injury (3h) |
+| `LASTBOOK_PHRASE_RETRY=1` | When every word finds too little, search again without a phrase's helper words before relaxing (3h; off: it lost "no matches and no gas") |
 | `LASTBOOK_TYPO_FIX=0` | Search questions as typed, without correcting misspelled words (3k) |
 | `LASTBOOK_CONF=0` | No confidence estimate: no buttons or request to say more from it (3l). `LASTBOOK_CONF_BUTTONS` / `LASTBOOK_CONF_UNSURE` move the cuts (0.60 / 0.25); `LASTBOOK_CONF_BUTTONS_EVERYDAY` the everyday questions' buttons cut (0.30) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |

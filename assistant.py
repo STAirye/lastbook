@@ -94,7 +94,8 @@ def model_status():
 def _fts(q, limit=80, kinds=None, trace=None):
     """(doc_id, page, snippet) rows for q, best first. trace (a dict), when given, gets what engine/confidence.py reads:
     the query's word groups, how many rows had every word, whether the any-word fallback ran, and each row's bm25."""
-    content, groups = S.query_groups(q)
+    info = {}
+    content, groups = S.query_groups(q, info)
     if trace is not None:
         trace.update(groups=[list(g) for g in groups], strict=0, any_word=False, bm25=[])
     if not groups:
@@ -104,14 +105,11 @@ def _fts(q, limit=80, kinds=None, trace=None):
                                    'bm25(pages,0,6,1,1,0,0,1)', m, limit)
     rows = []
     try:
-        rows = run(S.fts_expr(groups))
-        strict = len(rows)
-        if len(rows) < 10 and len(groups) > 1:
-            rows += run(' OR '.join('(' + S.fts_expr([g]) + ')' for g in groups))
-            if trace is not None:
-                trace['any_word'] = True
+        # fork: as server.find, with a retry without a phrase's helper words before any of the words (docs/FORK.md 3h)
+        tiered, mode, retried = S.keyword_rows(run, groups, info['helpers'], 10)
+        rows = [r for r, _ in tiered]
         if trace is not None:
-            trace['strict'] = strict
+            trace.update(strict=sum(1 for _, t in tiered if t == 0), any_word=mode == 'some words', retry=retried)
     except sqlite3.OperationalError:
         pass
     if trace is not None:
