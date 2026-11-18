@@ -13,6 +13,7 @@ from pathlib import Path
 
 import engine.paths as lastbook_paths
 from engine.paths import ro_uri
+from engine import sections
 HERE = lastbook_paths.DATA  # holds derived/
 if not lastbook_paths.FROZEN and os.name != 'nt' and sys.version_info[:2] == (3, 12):  # Mac binaries that belong to the program, built for 3.12, so they would shadow another Python's numpy; never import code from a data folder
     sys.path.insert(0, str(lastbook_paths.APP / 'derived' / 'pylib'))
@@ -94,7 +95,12 @@ COMMON = set('the a an of to and in is are be for on with as by or that this it 
 
 
 def chunks_of(text):
-    text = norm_ws(text)
+    return [c for _, c in chunk_spans(norm_ws(text))]
+
+
+def chunk_spans(text):
+    """fork: (start offset, passage) of each passage chunks_of keeps from already normalized text, in order (the same
+    loop; the offset says which section of a long page a passage falls in, engine/sections.py)."""
     if len(text) < MINLEN:
         return []
     out, i = [], 0
@@ -103,11 +109,11 @@ def chunks_of(text):
         if j < len(text):  # end at a sentence or word boundary
             k = text.rfind('. ', i + CHUNK // 2, j)
             j = k + 1 if k > 0 else (text.rfind(' ', i + CHUNK // 2, j) if text.rfind(' ', i + CHUNK // 2, j) > 0 else j)
-        out.append(text[i:j].strip())
+        out.append((i, text[i:j].strip()))
         if j >= len(text):
             break
         i = max(j - OVERLAP, i + 1)
-    return [c for c in out if len(c) >= MINLEN and readable(c)]
+    return [(s, c) for s, c in out if len(c) >= MINLEN and readable(c)]
 
 
 def vtt_windows(path, span=45):
@@ -154,8 +160,10 @@ class Index:
         db.executescript('''CREATE TABLE IF NOT EXISTS chunk(id INTEGER PRIMARY KEY, doc_id TEXT, page INTEGER, t REAL, text TEXT, active INTEGER DEFAULT 1);
           CREATE INDEX IF NOT EXISTS chunk_doc ON chunk(doc_id);
           CREATE TABLE IF NOT EXISTS docstate(doc_id TEXT PRIMARY KEY, sig TEXT, nchunks INTEGER, at REAL);
-          CREATE TABLE IF NOT EXISTS gaps(doc_id TEXT PRIMARY KEY, reason TEXT);''')
+          CREATE TABLE IF NOT EXISTS gaps(doc_id TEXT PRIMARY KEY, reason TEXT);
+          CREATE TABLE IF NOT EXISTS fork_sections(doc_id TEXT PRIMARY KEY, sig TEXT, relabelled INTEGER, unmatched INTEGER);''')
         db.close()
+        self._sectioned = set()  # fork: documents whose passages _texts labelled by section in this process
         self.lock = threading.RLock()
         self.emb = Embedder() if AVAILABLE else None
         self.mat = None
@@ -267,11 +275,17 @@ class Index:
             con = sqlite3.connect(ro_uri(self.fts_db), uri=True)
             rows = con.execute('SELECT page, body FROM pages WHERE doc_id=? ORDER BY CAST(page AS INTEGER)', (doc_id,)).fetchall()
             con.close()
+            in_fts = bool(rows)
             if not rows:  # not in the keyword index (yet); fall back to the extracted text file
                 p = LIB / (ref.get('text_path') or f'text/{doc_id}.txt')
                 if p.is_file():
                     t = p.read_text(encoding='utf-8', errors='replace')
                     rows = list(enumerate(t.split('\n\f\n') if '\n\f\n' in t else t.split('\f'), 1))
+            if in_fts and ref.get('kind') == 'html' and len(rows) == 1 and len(rows[0][1] or '') > sections.LONG:
+                # fork: a whole book saved as one page is read in sections, each passage labelled with its section
+                # (engine/sections.py, which makes the same choice); keyword search and the reader use the same numbering
+                self._sectioned.add(doc_id)
+                return [(n, None, c) for n, (_, s) in enumerate(sections.cut(norm_ws(rows[0][1])), 1) for c in chunks_of(s)]
             return [(int(p), None, c) for p, b in rows for c in chunks_of(b)]
         if kind == 'vtt':
             return [(None, t, txt) for t, txt in vtt_windows(LIB / ref)]
@@ -294,6 +308,10 @@ class Index:
             try:
                 self._reconcile(db)
                 self._load(truncate=True, db=db)
+                try:
+                    self.relabel_sections(db)
+                except Exception as e:  # fork: never stops indexing; passages keep their whole-page label
+                    print(f'semantic index: relabelling sections failed: {e}', file=sys.stderr, flush=True)
             finally:
                 db.close()
             return self._update(budget_s, batch)
@@ -319,6 +337,59 @@ class Index:
         self.status['repaired'] = {'rows_without_vectors': rows - vec_rows, 'documents_requeued': docs[:20],
                                    'at': time.strftime('%Y-%m-%dT%H:%M:%S')}
         return rows - vec_rows
+
+    def kind_of(self):
+        by = self.catalog_fn()['by_id']
+        return lambda d: (by.get(d) or {}).get('kind')
+
+    def relabel_sections(self, db):
+        """fork: passages embedded before long HTML pages were read in sections (engine/sections.py) carry the whole
+        page's number. Give each the number of the section its start falls in, once per document and signature, without
+        re-embedding: the stored passages are matched in order against chunk_spans of the same normalized text, which
+        are the same passages with their offsets. A passage that matches nothing keeps its label (counted)."""
+        path = sections.ensure(self.fts_db, self.kind_of())
+        if not path:
+            return None
+        done = dict(db.execute('SELECT doc_id, sig FROM fork_sections').fetchall())
+        state = dict(db.execute('SELECT doc_id, sig FROM docstate').fetchall())
+        report = {'documents': 0, 'relabelled': 0, 'unmatched': 0}
+        main = sqlite3.connect(ro_uri(self.fts_db), uri=True)
+        try:
+            for rowid, doc, page in sections.long_rows(path):
+                sig = state.get(doc)
+                if sig is None or done.get(doc) == sig:  # not embedded yet (it will be, by section), or done
+                    continue
+                row = main.execute('SELECT body FROM pages WHERE rowid=?', (rowid,)).fetchone()
+                if not row:
+                    continue
+                starts = sections.starts(path, doc)
+                computed = chunk_spans(norm_ws(row[0]))
+                stored = db.execute('SELECT id, text FROM chunk WHERE doc_id=? AND page=? AND active=1 ORDER BY id', (doc, page)).fetchall()
+                moves, unmatched, ci = [], 0, 0
+                for cid, ctext in stored:  # both lists are in text order; the stored text is the computed text
+                    at = next((i for i in range(ci, len(computed)) if computed[i][1] == ctext), None)
+                    if at is None:
+                        at = next((i for i in range(0, ci) if computed[i][1] == ctext), None)
+                    if at is None:
+                        unmatched += 1
+                        continue
+                    sec = sections.section_of(starts, computed[at][0])
+                    if sec != page:
+                        moves.append((sec, cid))
+                    ci = at + 1
+
+                def w(db, doc=doc, sig=sig, moves=moves, n=len(stored) - unmatched, unmatched=unmatched):
+                    db.executemany('UPDATE chunk SET page=? WHERE id=?', moves)
+                    db.execute('INSERT OR REPLACE INTO fork_sections VALUES (?,?,?,?)', (doc, sig, n, unmatched))
+                self.tx(db, w)
+                report['documents'] += 1
+                report['relabelled'] += len(stored) - unmatched
+                report['unmatched'] += unmatched
+        finally:
+            main.close()
+        if report['documents']:
+            self.status['sections_relabelled'] = report
+        return report
 
     def _update(self, budget_s, batch):
         db = self._db()
@@ -392,6 +463,8 @@ class Index:
                     else:
                         db.execute('DELETE FROM gaps WHERE doc_id=?', (doc_id,))
                     db.execute('INSERT OR REPLACE INTO docstate VALUES (?,?,?,?)', (doc_id, sig, len(parts), time.time()))
+                    if doc_id in self._sectioned:  # fork: embedded section by section, nothing to relabel
+                        db.execute('INSERT OR REPLACE INTO fork_sections VALUES (?,?,?,?)', (doc_id, sig, len(parts), 0))
                     if parts:  # append vectors last, inside the transaction: a failed write never leaves orphan rows
                         with open(self.vec_path, 'ab') as f:
                             f.write(v.tobytes())

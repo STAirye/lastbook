@@ -33,7 +33,7 @@ if __name__ == '__main__':  # --data must be known before the paths below are wo
 
 import engine.paths as lastbook_paths  # noqa: E402  (data folder and program folder can differ in the packaged app)
 from engine.paths import ro_uri  # noqa: E402
-from engine import saved_pages, address_search  # noqa: E402
+from engine import saved_pages, address_search, sections  # noqa: E402
 from engine.setup import api as setup_api  # noqa: E402  (the one module that may download: only when the person asks)
 HERE = lastbook_paths.DATA  # holds derived/
 APP = lastbook_paths.APP  # holds web/ and content/
@@ -359,19 +359,18 @@ def find(q, kind='all', limit=30):
     content, groups = query_groups(q)
     if not groups:
         return {'q': q, 'results': [], 'expanded': []}
-    con = sqlite3.connect(ro_uri(library.DB), uri=True)
-    sql = ("SELECT doc_id,page,snippet(pages,6,'\u0001','\u0002',' … ',28),bm25(pages,0,6,1,1,0,0,1) "
-           "FROM pages WHERE pages MATCH ? ORDER BY bm25(pages,0,6,1,1,0,0,1) LIMIT 600")
+    # fork: long HTML pages are searched in their sections (engine/sections.py); a section's page is its number
+    run = lambda m: sections.query(library.DB, kind_of, "doc_id,page,snippet(pages,6,'\u0001','\u0002',' … ',28),bm25(pages,0,6,1,1,0,0,1)",
+                                   'bm25(pages,0,6,1,1,0,0,1)', m, 600)
     rows, mode = [], 'all words'
     try:
-        rows = con.execute(sql, (fts_expr(groups),)).fetchall()
+        rows = run(fts_expr(groups))
         if len(rows) < 8 and len(groups) > 1:
             # relax: any of the ideas, rank documents that have more of them higher
             mode = 'some words'
-            rows += con.execute(sql, (' OR '.join('(' + fts_expr([g]) + ')' for g in groups),)).fetchall()
+            rows += run(' OR '.join('(' + fts_expr([g]) + ')' for g in groups))
     except sqlite3.OperationalError:
         rows = []
-    con.close()
     cat = catalog()['by_id']
     docs = {}
     allowed = KIND_FILTERS.get(kind)
@@ -389,7 +388,7 @@ def find(q, kind='all', limit=30):
         if not d:
             d = docs[r['id']] = {'r': r, 'score': 0.0, 'hits': []}
         if len(d['hits']) < 3 and not any(h['page'] == page for h in d['hits']):
-            d['hits'].append({'page': page if r['kind'] == 'pdf' else None, 'snippet': snip})
+            d['hits'].append({'page': page if r['kind'] == 'pdf' or sections.sectioned(r['id']) else None, 'snippet': snip})
         d['n'] = d.get('n', 0) + 1
         if d['n'] == 1:
             d['score'] = -score
@@ -614,6 +613,20 @@ def page_texts(r):
         return []
     t = p.read_text(encoding='utf-8', errors='replace')
     return t.split('\n\f\n') if '\n\f\n' in t else t.split('\f')
+
+
+def kind_of(doc_id):
+    r = catalog()['by_id'].get(doc_id)
+    return r and r['kind']
+
+
+def doc_texts(r):
+    """fork: a document's pages as search numbers them: a long saved web page by section (engine/sections.py)."""
+    if r['kind'] == 'html' and sections.ensure(library.DB, kind_of):
+        t = sections.texts(r['id'])
+        if t:
+            return t
+    return page_texts(r)
 
 
 def png_bytes(rgb):
@@ -2008,6 +2021,8 @@ class Handler(library.Handler):
                 return self.send_json(find(qs.get('q', '')[:200], qs.get('kind', 'all')))
             if path.startswith('/api/doc/'):
                 r = catalog()['by_id'].get(path[9:])
+                if r and r['kind'] == 'html' and sections.ensure(library.DB, kind_of) and sections.sectioned(r['id']):
+                    return self.send_json(dict(public(r, full=True), sections=sections.sectioned(r['id'])))   # fork: read by section
                 return self.send_json(public(r, full=True) if r else {'error': 'This item is not in the library catalog.'}, 200 if r else 404)
             m = re.fullmatch(r'/api/page/([^/]+)/(\d+)(\.png)?', path)
             if m:
@@ -2026,7 +2041,7 @@ class Handler(library.Handler):
                     self.end_headers()
                     self.wfile.write(data)
                     return
-                ps = page_texts(r)
+                ps = doc_texts(r)   # fork: a long web page's sections
                 return self.send_json({'page': n, 'pages': len(ps), 'text': ps[n - 1] if 0 < n <= len(ps) else ''})
             if path.startswith('/api/transcript/'):
                 t = transcript(path[16:])
@@ -2133,6 +2148,7 @@ def init(no_index=False):
     if not no_index:
         threading.Thread(target=INDEX.run_forever, daemon=True).start()
     threading.Thread(target=prewarm_previews, daemon=True).start()
+    threading.Thread(target=lambda: sections.ensure(library.DB, kind_of), daemon=True).start()   # fork: before the first search
 
 
 def serve(port, lan=False):

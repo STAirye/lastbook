@@ -137,7 +137,8 @@ function srcText(s, page) {
   if (!s) return 'Source not found in this library copy';
   const bits = [`<strong>${esc(s.publisher || s.collection || 'Unknown publisher')}</strong>`];
   if (s.year) bits.push(esc(s.year));
-  if (page) bits.push('page ' + page + (s.pages ? ' of ' + s.pages : ''));
+  if (page && s.kind === 'html') { if (page > 1) bits.push('section ' + page) }   // fork: a long web page's section (engine/sections.py)
+  else if (page) bits.push('page ' + page + (s.pages ? ' of ' + s.pages : ''));
   else if (s.kind === 'pdf' && s.pages) bits.push(s.pages + ' pages');
   if (s.duration) bits.push(fmtDur(s.duration) + (s.transcript ? ' · transcript' : ''));
   return bits.join(' · ');
@@ -671,12 +672,58 @@ async function watch(id, t, from) {
 }
 
 /* ------------------------------------------------------------- reader -- */
+/* fork: a whole book saved as one web page is searched in sections (engine/sections.py), and a result opens the page at
+   its section. A URL text fragment (#:~:text=) is not applied inside an iframe, so this page finds the section's first
+   words in the frame itself (the saved page is on this origin) and scrolls the frame there. The words are compared with
+   all whitespace removed: the search text was taken with a break between every piece of the page's text. When they are
+   not found the page stays at its top. "Open the original file" gets the text fragment, for a browser tab. */
+function findWords(doc, words) {
+  const want = words.replace(/\s+/g, '');
+  if (want.length < 12 || !doc || !doc.body) return null;
+  const nodes = [], walk = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+  let flat = '';
+  for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+    if (n.parentElement && /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(n.parentElement.tagName)) continue;
+    const s = n.data.replace(/\s+/g, '');
+    if (s) { nodes.push([n, flat.length]); flat += s }
+  }
+  const at = flat.indexOf(want);
+  if (at < 0) return null;
+  const pos = i => {   // the text node and offset of the i-th non-space character
+    let lo = 0, hi = nodes.length - 1;
+    while (lo < hi) { const m = (lo + hi + 1) >> 1; if (nodes[m][1] <= i) lo = m; else hi = m - 1 }
+    const [n, s] = nodes[lo]; let k = i - s, o = 0;
+    for (; o < n.data.length; o++) if (!/\s/.test(n.data[o])) { if (!k) break; k-- }
+    return [n, o];
+  };
+  const r = doc.createRange(), [a, ao] = pos(at), [b, bo] = pos(at + want.length - 1);
+  r.setStart(a, ao); r.setEnd(b, bo + 1);
+  return r;
+}
+async function openAtSection(frame, id, page) {
+  let words = '';
+  try { words = ((await api(`/api/page/${encodeURIComponent(id)}/${page}`)).text || '').trim().split(/\s+/).slice(0, 8).join(' ') } catch { return }
+  if (!words) return;
+  const o = $('#origLink');
+  if (o) o.href = o.href.split('#')[0] + '#:~:text=' + encodeURIComponent(words).replace(/-/g, '%2D');
+  const go = () => {
+    try {
+      const w = frame.contentWindow, r = findWords(frame.contentDocument, words);
+      if (!r) return;
+      w.scrollTo(0, Math.max(0, r.getBoundingClientRect().top + w.scrollY - 24));
+      const sel = w.getSelection(); sel.removeAllRanges(); sel.addRange(r);   // shows where the passage starts
+    } catch { }   // the frame is not this origin's after all: it stays at its top
+  };
+  if (frame.contentDocument && frame.contentDocument.readyState === 'complete' && frame.contentDocument.URL !== 'about:blank') go();
+  else frame.addEventListener('load', go, { once: true });
+}
 async function reader(id, page, from, view) {
   const d = await api('/api/doc/' + encodeURIComponent(id));
   if (d.kind === 'video') { swap('#/watch/' + encodeURIComponent(id) + (from ? '?from=' + encodeURIComponent(from) : '')); return }
   if (d.kind === 'transcript' && d.videoId) { swap('#/watch/' + encodeURIComponent(d.videoId) + (from ? '?from=' + encodeURIComponent(from) : '')); return }
   setTitle(d.title, [d.publisher, d.year, d.trust].filter(Boolean).join(' · '));
-  const isPdf = d.kind === 'pdf', total = d.pages || 1;
+  const secs = d.kind === 'html' && d.sections > 1 ? d.sections : 0;   // fork: a long web page, searched and cited by section (engine/sections.py)
+  const isPdf = d.kind === 'pdf', total = (isPdf ? d.pages : secs) || 1;
   const isWeb = d.kind === 'html' && /\.x?html?$/i.test(d.path);   // a plain text file, such as a lecture transcript, reads as text in the page itself
   page = Math.min(Math.max(page || 1, 1), total);
   view = isPdf ? view || 'page' : isWeb ? view || 'web' : 'text';
@@ -689,12 +736,12 @@ async function reader(id, page, from, view) {
     <div class="rtop">${backButton(from)}</div>
     <h1 class="rtitle">${esc(d.title)}</h1>
     <div class="rsrc"><b>${esc(d.publisher || '')}</b>${d.year ? ' · ' + esc(d.year) : ''} · ${esc(d.trust)}</div>
-    <div class="rmodes">${views.length ? `<div class="seg dock" role="group" aria-label="How to show it">${views.map(([v, l]) => `<button data-view="${v}" aria-pressed="${v === view}">${l}</button>`).join('')}</div>` : ''}<span class="vactions dock">${askLink('doc:' + id + ':' + (isPdf ? page : 1), 'Ask')}${saveButton({ key, title: d.title + (isPdf ? ' — page ' + page : ''), href: selfHref, sub: d.publisher || d.kindLabel })}<button class="tb-btn insp-btn" data-insp aria-label="Show or hide the source details" title="Details">${ico('insp')}</button></span></div>
+    <div class="rmodes">${views.length ? `<div class="seg dock" role="group" aria-label="How to show it">${views.map(([v, l]) => `<button data-view="${v}" aria-pressed="${v === view}">${l}</button>`).join('')}</div>` : ''}<span class="vactions dock">${askLink('doc:' + id + ':' + (isPdf || secs ? page : 1), 'Ask')}${saveButton({ key, title: d.title + (isPdf ? ' — page ' + page : ''), href: selfHref, sub: d.publisher || d.kindLabel })}<button class="tb-btn insp-btn" data-insp aria-label="Show or hide the source details" title="Details">${ico('insp')}</button></span></div>
     <div id="docbody"></div>
     ${d.imageOnly ? '<div class="notice">This is a scanned document without searchable text, so search and the assistant can’t read it. Use the Page view.</div>' : ''}
-    ${isPdf && view !== 'pdf' ? `<div class="rbar"><a class="btn plain nav" href="${go(page - 1)}" ${page <= 1 ? 'aria-disabled="true" style="opacity:.35;pointer-events:none"' : ''} aria-label="Previous page">${ico('back')}<span>Previous</span></a>
-      <span class="pnum"><label class="sr" for="pg">Page number</label>Page <input id="pg" inputmode="numeric" value="${page}"> of ${total}</span>
-      <a class="btn nav" href="${go(page + 1)}" ${page >= total ? 'aria-disabled="true" style="opacity:.35;pointer-events:none"' : ''} aria-label="Next page"><span>Next</span>${ico('right')}</a></div>` : ''}
+    ${(isPdf && view !== 'pdf') || (secs && view === 'text') ? `<div class="rbar"><a class="btn plain nav" href="${go(page - 1)}" ${page <= 1 ? 'aria-disabled="true" style="opacity:.35;pointer-events:none"' : ''} aria-label="Previous ${isPdf ? 'page' : 'section'}">${ico('back')}<span>Previous</span></a>
+      <span class="pnum"><label class="sr" for="pg">${isPdf ? 'Page' : 'Section'} number</label>${isPdf ? 'Page' : 'Section'} <input id="pg" inputmode="numeric" value="${page}"> of ${total}</span>
+      <a class="btn nav" href="${go(page + 1)}" ${page >= total ? 'aria-disabled="true" style="opacity:.35;pointer-events:none"' : ''} aria-label="Next ${isPdf ? 'page' : 'section'}"><span>Next</span>${ico('right')}</a></div>` : ''}
     <details class="about-src"><summary>About this source</summary><div class="in"><p class="insp-h">${esc(d.title)}</p>
       <dl><dt>Publisher</dt><dd>${esc(d.publisher || '—')}</dd><dt>Kind</dt><dd>${esc(d.trust)} · ${esc(d.kindLabel)}</dd>
       ${d.edition ? `<dt>Edition</dt><dd>${esc(d.edition)}</dd>` : ''}${d.year ? `<dt>Year</dt><dd>${esc(d.year)}</dd>` : ''}
@@ -702,7 +749,7 @@ async function reader(id, page, from, view) {
       ${d.notes ? `<dt>Note</dt><dd>${esc(d.notes)}</dd>` : ''}
       ${d.source_url ? `<dt>Online original</dt><dd>${esc(hostOf(d.source_url))} <span class="muted">(online; not needed to read this copy)</span></dd>` : ''}</dl>
       <p class="small muted">A reference copy, not advice checked for your situation. Check the date; older material can conflict with current guidance.</p>
-      ${isPdf || isWeb || !IN_WINDOW ? `<p><a class="btn ghost" href="${fileUrl(d.path)}${isPdf ? '#page=' + page : ''}" target="_blank" rel="noopener">${ico('ext')}Open the original file</a></p>` : ''}</div></details>`;
+      ${isPdf || isWeb || !IN_WINDOW ? `<p><a class="btn ghost" id="origLink" href="${fileUrl(d.path)}${isPdf ? '#page=' + page : ''}" target="_blank" rel="noopener">${ico('ext')}Open the original file</a></p>` : ''}</div></details>`;
   $$('[data-view]', main).forEach(b => b.addEventListener('click', () => swap(go(page, b.dataset.view))));
   if (innerWidth >= 1060 && !html.classList.contains('insp-off')) $('.about-src', main).open = true;
   const pg = $('#pg'); if (pg) pg.addEventListener('change', () => { const n = parseInt(pg.value, 10); if (n >= 1 && n <= total) location.hash = go(n) });
@@ -722,15 +769,16 @@ async function reader(id, page, from, view) {
   } else if (view === 'web') {
     const own = /(^|\/)documents\/lastbook\//.test(d.path);   // Lastbook's own pages (Sources and permissions) take the window's look from the server (engine/saved_pages.py, OWN_LOOK); an older server's stays a white sheet
     body.innerHTML = `<iframe class="frame${own ? ' own' : ''}" title="${esc(d.title)}" src="${fileUrl(d.path)}"></iframe>`;
+    if (secs && page > 1) openAtSection($('iframe', body), id, page);
   } else {
     body.innerHTML = '<p class="loading">Loading text…</p>';
     try {
-      const t = await api(`/api/page/${encodeURIComponent(id)}/${isPdf ? page : 1}`);
+      const t = await api(`/api/page/${encodeURIComponent(id)}/${isPdf || secs ? page : 1}`);
       const txt = (t.text || '').replace(/[ \t]{2,}/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
       body.innerHTML = `${isPdf || isWeb ? '<div class="notice small">Text pulled out of the original automatically — tables, diagrams and warning boxes can be lost or out of order. Check the Page view for anything important.</div>' : ''}<div class="pagetext">${esc(txt) || '<span class="muted">No text on this page (it may be a picture or blank).</span>'}</div>`;
     } catch (e) { body.innerHTML = errorBox(e, 'Couldn’t load the text.') }
   }
-  main.onkeydown = e => { if (!isPdf || /INPUT/.test(e.target.tagName) || e.altKey || e.metaKey || e.ctrlKey) return; if (e.key === 'ArrowRight' && page < total) location.hash = go(page + 1); if (e.key === 'ArrowLeft' && page > 1) location.hash = go(page - 1) };
+  main.onkeydown = e => { if (!(isPdf || (secs && view === 'text')) || /INPUT/.test(e.target.tagName) || e.altKey || e.metaKey || e.ctrlKey) return; if (e.key === 'ArrowRight' && page < total) location.hash = go(page + 1); if (e.key === 'ArrowLeft' && page > 1) location.hash = go(page - 1) };
 }
 
 /* --------------------------------------------------------------- wiki -- */
@@ -1005,7 +1053,7 @@ function resultCard(r) {
   const base = { src: r };
   return `<article class="result"><h3><a href="${hrefFor({ ...base, page: r.hits[0] && r.hits[0].page })}">${esc(r.title)}</a></h3>
     <div class="rsrc">${srcText(r)} · ${esc(r.trust)}</div>
-    ${r.hits.slice(0, 2).map(h => `<a class="hit" href="${hrefFor({ ...base, page: h.page })}">${h.page ? `<b>Page ${h.page}:</b> ` : ''}${h.snippet}</a>`).join('')}</article>`;
+    ${r.hits.slice(0, 2).map(h => `<a class="hit" href="${hrefFor({ ...base, page: h.page })}">${h.page ? `<b>${r.kind === 'html' ? 'Section' : 'Page'} ${h.page}:</b> ` : ''}${h.snippet}</a>`).join('')}</article>`;
 }
 
 /* ------------------------------------------------------------ library -- */
