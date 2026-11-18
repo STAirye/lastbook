@@ -34,6 +34,7 @@ if __name__ == '__main__':  # --data must be known before the paths below are wo
 import engine.paths as lastbook_paths  # noqa: E402  (data folder and program folder can differ in the packaged app)
 from engine.paths import ro_uri  # noqa: E402
 from engine import saved_pages, address_search, sections  # noqa: E402
+from engine import typos  # noqa: E402  (fork: spelling mistakes in search questions)
 from engine.setup import api as setup_api  # noqa: E402  (the one module that may download: only when the person asks)
 HERE = lastbook_paths.DATA  # holds derived/
 APP = lastbook_paths.APP  # holds web/ and content/
@@ -334,6 +335,7 @@ PHRASES = [  # everyday phrases -> one idea, checked before single words
 
 
 def query_groups(q):
+    q = typos.correct(q)    # fork: misspelled words put right first ("breating" -> breathing), engine/typos.py
     q = q.lower().replace('\u2019', "'")
     phrase_groups = []
     for rx, g, *unless in PHRASES:        # fork: an optional third regex; when it is found in the question, the phrase is not used
@@ -2018,7 +2020,8 @@ class Handler(library.Handler):
             if path == '/api/topics':
                 return self.send_json(topics_resolved())
             if path == '/api/find':
-                return self.send_json(find(qs.get('q', '')[:200], qs.get('kind', 'all')))
+                q = qs.get('q', '')[:200]    # fork: 'corrected', what was searched for, when a misspelling was put right
+                return self.send_json(dict(find(q, qs.get('kind', 'all')), **typos.shown(q)))
             if path.startswith('/api/doc/'):
                 r = catalog()['by_id'].get(path[9:])
                 if r and r['kind'] == 'html' and sections.ensure(library.DB, kind_of) and sections.sectioned(r['id']):
@@ -2048,7 +2051,7 @@ class Handler(library.Handler):
                 return self.send_json(t if t is not None else {'error': 'unknown video'}, 200 if t is not None else 404)
             if path == '/api/retrieve':
                 return self.send_json({'q': qs.get('q', ''), 'results': assistant.hybrid(qs.get('q', '')[:200], min(20, int(qs.get('k', 8))), qs.get('kind', 'any')),
-                                       'semantic': INDEX.status if INDEX else None})
+                                       'semantic': INDEX.status if INDEX else None, **typos.shown(qs.get('q', '')[:200])})
             if path == '/api/assistant/status':
                 return self.send_json(dict(assistant.model_status(), coverage=coverage()))
             if path == '/api/tools':
