@@ -7,6 +7,9 @@ and with meaning-based search the best passage's cosine, how fast the cosines fa
 how many different documents the top 8 come from. Fitted on an invented, labelled test set (362 questions over 159
 topics; grouped cross-validation by topic: AUC 0.78 keyword-only, 0.74 hybrid). One set of coefficients for keyword-only
 search (what the desktop app ships), one for hybrid. The fit lives outside the repo (.claude/drafts/triage/conf_final.py).
+It predicts the first page, not "one of the first 3": a model fitted for the top 3 sits higher (78-90 % of searches have a
+right page there), so at the same cut it lets through 2-4 times as many searches whose first 3 pages are all wrong, and
+ranks them no better (.claude/drafts/triage/conf_top3.py).
 
 The chat uses it (assistant.chat): below BUTTONS it offers buttons; below UNSURE, on a conversation's own new question, it
 asks the person to say more instead of answering from pages that are probably wrong. A question that may be an emergency
@@ -19,7 +22,7 @@ import re
 
 from engine import typos
 
-BUTTONS = 0.75      # below this, the chat offers buttons
+BUTTONS = 0.60      # below this, the chat offers buttons (0.75 put them on 68 % of keyword-only questions)
 UNSURE = 0.25       # below this, the chat asks the person to say more (and still gives the pages if it may be urgent)
 
 # Coefficients on the raw signals of features(): p = 1 / (1 + exp(-(bias + sum(w * signal)))).

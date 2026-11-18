@@ -71,13 +71,23 @@ class Signals(unittest.TestCase):
         self.assertAlmostEqual(est['p'], confidence.probability(confidence.features(STRONG[0], tr), confidence.MODELS['hybrid']), 3)
 
     def test_thresholds_from_the_environment(self):
-        self.assertEqual(confidence.thresholds(), (0.75, 0.25))
-        os.environ.update(LASTBOOK_CONF_BUTTONS='0.6', LASTBOOK_CONF_UNSURE='0.1')
-        self.assertEqual(confidence.thresholds(), (0.6, 0.1))
+        self.assertEqual(confidence.thresholds(), (0.6, 0.25))
+        self.assertEqual((confidence.BUTTONS, confidence.UNSURE), (0.6, 0.25))
+        os.environ.update(LASTBOOK_CONF_BUTTONS='0.75', LASTBOOK_CONF_UNSURE='0.1')
+        self.assertEqual(confidence.thresholds(), (0.75, 0.1))
         os.environ.update(LASTBOOK_CONF_BUTTONS='lots', LASTBOOK_CONF_UNSURE='7')    # not a share: the default
-        self.assertEqual(confidence.thresholds(), (0.75, 0.25))
+        self.assertEqual(confidence.thresholds(), (0.6, 0.25))
         os.environ['LASTBOOK_CONF_UNSURE'] = '0'
         self.assertEqual(confidence.estimate(*WEAK)['level'], 'buttons')      # 0: never "please say more"
+
+    def test_between_the_old_and_new_buttons_cut_is_sure(self):
+        with mock.patch.object(confidence, 'probability', lambda f, m: 0.7):
+            self.assertEqual(confidence.estimate(*STRONG)['level'], 'sure')     # 0.60 by default (was 0.75)
+            os.environ['LASTBOOK_CONF_BUTTONS'] = '0.75'
+            self.assertEqual(confidence.estimate(*STRONG)['level'], 'buttons')
+        with mock.patch.object(confidence, 'probability', lambda f, m: 0.59):
+            os.environ.pop('LASTBOOK_CONF_BUTTONS')
+            self.assertEqual(confidence.estimate(*STRONG)['level'], 'buttons')
 
     def test_urgent_words(self):
         for q in ("my son isn't breathing", 'she cant breath wheezing bad', 'fell off the roof cant move legs',
