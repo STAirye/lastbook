@@ -389,7 +389,8 @@ repo for now (upstream issue #154 asked for a test-only pull request of them).
 
 - **Long saved web pages in sections** (`engine/sections.py`). 353 saved HTML pages are whole books (over 20,000
   characters, up to 4.4 MB) and match nearly any question: *Modern Machine-Shop Practice* came up for 26 of the 362.
-  Each is cut at its headings into sections (351 pages → 7,623 sections, 4 s, stored in
+  Each is cut into sections of about 5,000 characters, after a sentence where possible (the stored text has no
+  headings; 351 pages → 7,623 sections, 4 s, stored in
   `derived/index/sections-<hash>.sqlite`, since the pack's `search.sqlite` is checksummed and stays as shipped). The
   meaning-based passages are relabelled to their section. Search returns the section; the reader opens the page at it
   and shows "Section N of M". Machine-Shop questions: 26 → 4. Hybrid search on the long pages: 4.95 s → 0.68 s.
