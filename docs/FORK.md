@@ -418,6 +418,34 @@ On conversations, hybrid: corrections 29% → 57%, new emergencies 0% → 80%, f
 
 `app/tests/test_long_pages.py`, `test_typos.py` and `test_turn_hits.py` cover it.
 
+### 3l. How sure the search is
+
+Without a model, `engine/confidence.py` estimates the chance that the first page is right, from signals the search
+already has: how many of the question's words (or synonyms) the first page and its title carry, how strong the keyword
+match is for how rare the words are, whether the page is from a first-aid book; with meaning-based search also the best
+cosine, how fast the cosines fall, how far the two searches agree, and how many different books the top 8 come from.
+It is a logistic regression stored as plain numbers, one set for keyword-only search and one for hybrid.
+
+- **How well:** on the 362 test questions of 3k, cross-validated by topic (a topic's clean and typo versions in the
+  same fold), AUC 0.78 keyword-only and 0.74 hybrid, and calibrated: in each 25-point band the predicted and actual
+  rates are within a few points.
+- **What the chat does:** below 0.60 it offers buttons; below 0.25, on a new question, it asks the person to say more
+  instead of answering from bad pages. Keyword-only, buttons on 43% of the test questions and the request on 7%; 5 of
+  216 right first pages get the request. Hybrid: buttons on 18%, the request under 1%. 14 of 362 keyword-only
+  questions (21 hybrid) get no buttons although none of the first 3 pages is right.
+- **A question that may be urgent always gets its pages,** with the buttons and the request. The danger signs alone
+  caught 81 of the 218 red questions ("my son isn't breathing" slipped), so `confidence.urgent()` adds a wide list of
+  urgent words, matched before and after typo correction: 218 of 218. A false match only means pages are shown.
+- **Inside a conversation** it only offers buttons: there the confidence predicts poorly (AUC 0.45–0.65), since the
+  first page is often one the previous answer cited.
+- **Tried and dropped:** buttons below 0.75 (68% of keyword-only questions, 116 false alarms against 70); predicting
+  "one of the first 3 pages is right" instead of the first. Top-3 right is far more common (78% keyword-only, 90%
+  hybrid), so that model is sure almost always and lets 2–4 times as many all-wrong searches through without buttons,
+  and it ranks them no better.
+- `/api/retrieve` returns `confidence`. Settings: `LASTBOOK_CONF=0`, `LASTBOOK_CONF_BUTTONS`, `LASTBOOK_CONF_UNSURE`.
+
+`app/tests/test_confidence.py` covers it.
+
 ## 4. Running from source on Windows
 
 Running from source needs two things from an upstream release, copied in (both folders are ignored by git):
@@ -441,6 +469,7 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_AI_ENGLISH_SEARCH=0` | Search a non-English question as typed, without the model's English search words (3i) |
 | `LASTBOOK_AI_TABLES=0` | Give the model pages with every run of spaces squashed, tables line by line, as upstream does (3j) |
 | `LASTBOOK_TYPO_FIX=0` | Search questions as typed, without correcting misspelled words (3k) |
+| `LASTBOOK_CONF=0` | No confidence estimate: no buttons or request to say more from it (3l). `LASTBOOK_CONF_BUTTONS` / `LASTBOOK_CONF_UNSURE` move the cuts (0.60 / 0.25) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
@@ -507,6 +536,8 @@ a test server and checks the amount (3j); it needs the model.
   trapped under a wall, a mudslide). The iPad port has no typo correction. `packaging/linux/build_app_linux.sh` now
   copies `page_tables.py`, `sections.py` and `typos.py` (the first was missing since 3j); the Linux build hasn't been
   run. The classifier and the test set were written together, so its scores are
-  optimistic.
+  optimistic. The confidence buttons (3l) and the request to say more haven't been seen in the window; the buttons are
+  the emergency set ("Not breathing", "Heavy bleeding" …) even on everyday questions, and the wide urgent-word list
+  shows some everyday questions' pages "in case this is urgent".
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
   country from an OpenStreetMap extract, using `tools/build_map.py`, would be a separate piece of work.
