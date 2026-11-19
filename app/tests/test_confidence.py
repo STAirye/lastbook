@@ -8,7 +8,8 @@ and chat() runs with a stand-in model round. Checked: the signals and the probab
 above weak ones), the thresholds and their environment overrides, the switch, turn_hits' confidence (the better of its
 own and the joined search; noise keeps the earlier one's; none from a stand-in without a trace), and the chat: sure
 answers as before, unsure offers buttons, very unsure asks for more words without the model and without the pages,
-except when the question may be urgent, when the pages are given too. Everyday questions (not urgent): buttons only
+except when the question may be urgent, when the pages are given too, and when it names a body sign ("he has no puls",
+"mybbyisntbreathing"), when the model answers from the pages, with buttons. Everyday questions (not urgent): buttons only
 below the much lower everyday cut, the same buttons drawn smaller (style 'compact'), and the request to say more never
 above that cut. Never packaged."""
 import os, sys, unittest
@@ -144,6 +145,45 @@ class Signals(unittest.TestCase):
             self.assertFalse(confidence.urgent(q), q)
 
 
+class BodySigns(unittest.TestCase):
+    """fork: body signs (confidence.body_signs): named exactly, one or two slips away on a word the library has on fewer
+    than BODY_COMMON pages, or inside a glued run; they count as urgent. LASTBOOK_BODY_SIGNS=0 turns them off."""
+    BV = dict(V, puls=24, pulse=1577, pulses=560, bloom=259, breeding=581, chore=16, chose=359, bleating=12, fit=900)
+
+    def setUp(self):
+        p = mock.patch.object(confidence, '_words', lambda: (self.BV, max(self.BV.values())))
+        p.start()
+        self.addCleanup(p.stop)
+        self.addCleanup(os.environ.pop, 'LASTBOOK_BODY_SIGNS', None)
+        os.environ.pop('LASTBOOK_BODY_SIGNS', None)
+
+    def test_named_and_misspelled(self):
+        for q, want in [('he has no puls what do i do', {'pulse'}), ('he has no pulse', {'pulse'}),
+                        ('mybbyisntbreathing', {'breathing'}), ('hescolapsednotbreathin', {'breathing', 'unconscious'}),
+                        ('his lips are blue', {'blue'}), ('mybabyisblue', {'blue'}), ('she is unconsious', {'unconscious'}),
+                        ('he passed out', {'unconscious'}), ('bledding from the leg', {'bleeding'}),
+                        ('chokin on food', {'choking'}), ('she is having a fit', {'seizure'}),
+                        ('chest hurts and he is sweating', {'chest pain'}), ('the baby is limp and not moving', {'not moving'}),
+                        ('the child is cold and wet', {'cold and clammy'}), ('no heartbeet', {'pulse'})]:
+            self.assertEqual(confidence.body_signs(q), want, q)
+            self.assertTrue(confidence.urgent(q), q)
+        self.assertEqual(confidence.body_signs('', None, 'his lips are blue'), {'blue'})     # any of the texts
+
+    def test_words_of_their_own(self):
+        for q in ('how to cook pulses', 'how to make flowers bloom', 'chicken breeding', 'household chore list',
+                  'she chose the red one', 'how to fit a pipe', 'the sky is blue', 'how to build a root cellar',
+                  'plus size', 'pause'):
+            self.assertEqual(confidence.body_signs(q), set(), q)
+        self.assertFalse(confidence.urgent('how to build a root cellar'))
+
+    def test_switch(self):
+        self.assertTrue(confidence.urgent('he has no puls'))
+        os.environ['LASTBOOK_BODY_SIGNS'] = '0'
+        self.assertEqual(confidence.body_signs('he has no puls', 'mybbyisntbreathing'), set())
+        self.assertFalse(confidence.urgent('he has no puls'))          # URGENT has pulse, not "puls"
+        self.assertTrue(confidence.urgent('he has no pulse'))
+
+
 class TurnHitsConfidence(unittest.TestCase):
     """assistant.turn_hits with a hybrid stand-in that fills its trace."""
 
@@ -204,6 +244,26 @@ class TurnHitsConfidence(unittest.TestCase):
         with mock.patch.object(self.a, 'hybrid', lambda q, k=8, kind='any', doc=None: list(STRONG[0])):
             self.assertIsNone(self.a.turn_hits(self.convo('how do i purify water'))[1]['confidence'])
 
+    def test_body_signs(self):
+        """fork: "he has no puls" (the library's word, not corrected) and a glued "mybbyisntbreathing": urgent, the body
+        sign in info['body'], and chat_level answers with buttons, never only "help me help you"."""
+        self.addCleanup(os.environ.pop, 'LASTBOOK_BODY_SIGNS', None)
+        for q, sign in (('he has no puls what do i do', 'pulse'), ('mybbyisntbreathing', 'breathing')):
+            self.canned[q] = WEAK
+            _, info = self.a.turn_hits(self.convo(q))
+            self.assertEqual((info['route'], info['danger'], info['body']), ('first', True, [sign]), q)
+            self.assertEqual(info['confidence']['level'], 'unsure', q)
+            level, conf, everyday = self.a.chat_level(info)
+            self.assertEqual((level, conf['body'], everyday), ('buttons', True, False), q)
+        _, info = self.a.turn_hits(self.convo('how do i purify water', '', 'mybbyisntbreathing'))
+        self.assertNotEqual(info['route'], 'noise')                         # a body sign is never noise
+        self.assertFalse(self.a.is_noise('mybbyisntbreathing'))
+        self.assertTrue(self.a.is_noise('jdjdjdk'))
+        os.environ['LASTBOOK_BODY_SIGNS'] = '0'
+        _, info = self.a.turn_hits(self.convo('he has no puls what do i do'))
+        self.assertEqual((info['danger'], info['body']), (False, []))
+        self.assertEqual(self.a.chat_level(info)[0], 'unsure')             # as before: the bare "help me help you"
+
     def test_danger_covers_the_earlier_message(self):
         _, info = self.a.turn_hits(self.convo('he is bleeding a lot', '', 'what do i not do'))
         self.assertTrue(info['danger'])
@@ -232,10 +292,10 @@ class ChatConfidence(unittest.TestCase):
             self.addCleanup(p.stop)
         self.hits = [hit('w1', 'Purify Water', 'boil it')]
 
-    def run_chat(self, question, level, route='first', danger=False, p=None, still=''):
+    def run_chat(self, question, level, route='first', danger=False, p=None, still='', body=()):
         p = {'sure': 0.9, 'buttons': 0.5, 'unsure': 0.1}[level] if p is None else p
         info = {'route': route, 'buttons': route == 'noise', 'still': still, 'danger': danger,
-                'confidence': {'p': p, 'mode': 'keyword', 'level': level}}
+                'confidence': {'p': p, 'mode': 'keyword', 'level': level}, 'body': list(body)}
         events = []
         with mock.patch.object(self.a, 'turn_hits', lambda *a, **k: (self.hits, dict(info))):
             self.a.chat([{'role': 'user', 'content': question}], None, events.append, lambda: False)
@@ -308,6 +368,21 @@ class ChatConfidence(unittest.TestCase):
         self.assertEqual([s['doc_id'] for s in ev['done']['sources']], ['w1'])
         self.assertIn('suggest', ev)
         self.assertNotIn('style', ev['suggest'])
+
+    def test_very_unsure_with_a_body_sign_answers(self):
+        """fork: "he has no puls": never only "help me help you" (nor the pages without an answer): the model answers from
+        the pages, with the emergency buttons."""
+        for danger in (True, False):
+            self.rounds.clear()
+            ev, events = self.run_chat('he has no puls what do i do', 'unsure', danger=danger, p=0.22, body=['pulse'])
+            self.assertEqual(len(self.rounds), 1, danger)
+            self.assertEqual(ev['done']['answer'], 'Boil it [S1].')
+            self.assertNotIn('unsure', ev['done'])
+            self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['buttons'])
+            self.assertTrue(ev['suggest']['confidence']['body'])
+            self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
+        ev, _ = self.run_chat('mybbyisntbreathing', 'unsure', danger=True, body=['breathing'])
+        self.assertEqual((len(self.rounds), ev['done']['answer']), (2, 'Boil it [S1].'))
 
     def test_very_unsure_in_a_follow_up_is_only_buttons(self):
         ev, _ = self.run_chat('and at night?', 'unsure', route='follow')

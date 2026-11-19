@@ -360,6 +360,25 @@ def split_word(w, words):
     return list(parts)
 
 
+def body_fix_on():
+    return os.environ.get('LASTBOOK_BODY_FIX', '1') != '0'
+
+
+def body_fix(w, words):
+    """fork: w (lower-case, left as typed by fix_word and split_word) as the body word it is a slip for, or w. Only the body
+    words of engine/confidence.BODY_WORDS, and only where the library has w on fewer than confidence.BODY_COMMON pages:
+    "puls" (24 pages, a real word to fix_word) -> pulse. A glued run with a body stem that could not be split
+    ("mybbyisntbreathing") -> the stem's words ("not breathing"), so the search finds those pages instead of nothing."""
+    from engine import confidence       # here: confidence imports this module
+    if not confidence.body_on() or w in STOP or not w.isalpha():
+        return w
+    b = confidence.body_match(w, words.V)
+    if b and b != w and (w not in words.V or _how(w, b)):   # a word of the library: one plausible slip only
+        return b
+    glued = confidence.glued_body(w, words.V)
+    return ' '.join(x for x, _ in glued) if glued else w
+
+
 def looks_foreign(q):
     """True when the question has letters beyond a-z or more Spanish/Portuguese/French function words than English ones."""
     toks = re.findall(r'[^\W\d_]+', unicodedata.normalize('NFC', q).lower())
@@ -384,6 +403,8 @@ def correct_with(q, words):
             f = ' '.join(parts)
             return f.upper() if t.isupper() else f[0].upper() + f[1:] if t[0].isupper() else f
         f = fix_word(t.lower(), words)
+        if f == t.lower() and body_fix_on():
+            f = body_fix(f, words)
         if f == t.lower():
             return t
         return f.upper() if t.isupper() and len(t) > 1 else f[0].upper() + f[1:] if t[0].isupper() else f

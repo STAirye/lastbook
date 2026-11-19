@@ -295,6 +295,24 @@ from making a fire in the tent" (3). Upstream, with no phrases, did better on th
   7, water safe to drink 8, formula 8. Hybrid moves a page or two either way (#154 186 → 189). The confidence buttons:
   confident misses 18 → 17 and 6 → 4, urgent pages hidden unchanged (none from the phrases).
 
+**Later: the phrases on safety and medical questions** (#128's review, #154). "how do i prevent a generator from starting
+a fire" was searched as firecraft (first page a winter survival handbook), "make a fire escape plan for my family" too
+(the Army survival manual), and "how do i treat water intoxication" as drinking water (wastewater manuals).
+
+- **Fix:** the fire-making phrase is also not used when the question has prevent, avoid, stop, risk, hazard, cause,
+  escape, spread, safety or drill (a fire drill; a bow drill still makes fire). The water-safe phrase is not used for
+  intoxication, poisoning, lungs or overdose. `test_bridge.ForkSearchWords` pairs each how-to with its safety or medical
+  counterpart (start a fire / prevent a generator from starting one, make a fire / a fire escape plan, make the water
+  safe / water intoxication …), as #128's review asked: the how-to keeps the manuals' words, the counterpart its own.
+- **Measured** in-process on every triage set (`.claude/drafts/triage/BODY_SIGNS.md`): only the target questions move.
+  Keyword-only: generator (clean and typo) first page right 0 → 1 (an aircraft manual's fire-prevention page, 2 → 3
+  useful); escape plan ×4 4 → 6–8 useful ("Make a Family Emergency Plan" first instead of the Army manual); water
+  intoxication still has no right page, but its confidence falls 0.66 → 0.28, so it gets buttons instead of a sure
+  answer. On all 599 questions first right 351 → 353 from these, useful +12, nothing worse. Hybrid: water intoxication
+  0 → 1 first right ("Food and Water in an Emergency", clean and typo), the generator question gets the Honda manual
+  first, and the escape plan ×4 scores 1 → 0: "Make A Plan" (a family-plan page) instead of "Mult-Family Home escape
+  routes", which the scorer's escape pattern doesn't count. Nothing else moved.
+
 ### 3i. Questions in Spanish (and other languages)
 
 Gemma 4 reads and writes Spanish, but the library is in English, and so is its keyword search: "¿cómo purifico agua de un
@@ -520,6 +538,32 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
   now gets its own search, the buttons and the request to say more, as an unsure search does (before: answered from
   whatever its search found). Mash as a first message ("jdjdk") gets the same through the rule above. A message whose
   words are mash as typed but the library's words once split ("heschuokinghelkp") is not noise.
+- **Body signs: the answer is never withheld.** "he has no puls what do i do" got p 0.22 and was not urgent ("puls" is on
+  24 pages of the library, so the typo correction leaves it, and the urgent list has "pulse"): the chat gave only "help
+  me help you", to someone with no pulse. "mybbyisntbreathing" (glued, could not be split) the same, with no pages at
+  all. Now `confidence.body_signs` looks for a body sign in the question as typed and as searched: pulse or heartbeat,
+  breathing, blue lips or skin, unconscious (unresponsive, collapsed, passed out, won't wake), choking, bleeding or
+  blood, a seizure (convulsions, having a fit), chest pain, not moving (limp, floppy), cold and clammy (or wet). A word
+  counts one slip away too, or two for a long word, with the first letter kept, but only a word the library has on fewer
+  than 50 pages: "puls" is pulse, while "pulses", "bloom", "breeding" and "chose" are words of their own, and a one-slip
+  match must be a plausible slip (a key next to it, a vowel, a letter dropped, added or swapped), so "chore" is not
+  choke. Inside a glued run the library doesn't hold, a short list of stems is looked for ("breath", "isntbreath",
+  "bleed", "chok", "pulse", …). A question with a body sign counts as urgent, is never noise, and when the search is
+  very unsure the chat answers from its pages with the buttons instead of asking (before, an urgent one got the pages
+  without an answer, `UNSURE_DANGER`). The search gets the body word too (`typos.body_fix`): "puls" → pulse, and the
+  unsplittable glued run → its stem's words ("not breathing"), which finds the CPR pages instead of nothing.
+  `LASTBOOK_BODY_SIGNS=0` turns it all off, `LASTBOOK_BODY_FIX=0` only the search's part.
+
+  Measured on every triage set, keyword-only and hybrid, 9712522 against this (`.claude/drafts/triage/BODY_SIGNS.md`):
+  107 of the 599 questions (cases, #154's with typos, #128's, #241's, the glued set, the 52 conversations' last
+  messages) name a body sign. Those that got only "help me help you": 2 → 0 keyword-only ("no puls", the glued one), 1
+  → 0 hybrid; those that got the pages without an answer: 9 → 0 keyword-only. No question that showed pages before
+  shows fewer now, none urgent before is not now, and the only two newly urgent are those two red ones.
+  "mybbyisntbreathing" now finds resuscitation pages first (0 → 8 useful keyword-only, 0 → 5 hybrid); "he has no
+  puls" is searched as "pulse" (hybrid first right, 0 → 2 useful; keyword-only First Aid p. 7, as the clean question).
+  No clean question's search words changed. Narrowing `urgent()` with this list was measured and not done: the
+  everyday questions it catches are caught by fire, gas, baby, bleach and generator, not by body words, and dropping
+  any of those loses red questions (fire alone 15, for 28 green ones relieved).
 - **Inside a conversation** it only offers buttons: there the confidence predicts poorly (AUC 0.45–0.65), since the
   first page is often one the previous answer cited.
 - **Tried and dropped:** buttons below 0.75 (68% of keyword-only questions, 116 false alarms against 70); predicting
@@ -527,9 +571,11 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
   hybrid), so that model is sure almost always and lets 2–4 times as many all-wrong searches through without buttons,
   and it ranks them no better.
 - `/api/retrieve` returns `confidence` (the urgent cuts). Settings: `LASTBOOK_CONF=0`, `LASTBOOK_CONF_BUTTONS`,
-  `LASTBOOK_CONF_UNSURE`, `LASTBOOK_CONF_BUTTONS_EVERYDAY`, `LASTBOOK_CONF_UNKNOWN=0`.
+  `LASTBOOK_CONF_UNSURE`, `LASTBOOK_CONF_BUTTONS_EVERYDAY`, `LASTBOOK_CONF_UNKNOWN=0`, `LASTBOOK_BODY_SIGNS=0`,
+  `LASTBOOK_BODY_FIX=0`.
 
-`app/tests/test_confidence.py` covers it.
+`app/tests/test_confidence.py` covers it (`BodySigns` and the body-sign chat and turn tests too); `test_typos.BodyWords`
+the search's part.
 
 ## 4. Running from source on Windows
 
@@ -559,6 +605,8 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_TYPO_SPLIT=0` | Don't split words typed with no spaces ("kitchenonfire"); the rest of the correction stays on (3k) |
 | `LASTBOOK_CONF=0` | No confidence estimate: no buttons or request to say more from it (3l). `LASTBOOK_CONF_BUTTONS` / `LASTBOOK_CONF_UNSURE` move the cuts (0.60 / 0.25); `LASTBOOK_CONF_BUTTONS_EVERYDAY` the everyday questions' buttons cut (0.30) |
 | `LASTBOOK_CONF_UNKNOWN=0` | Trust the confidence model even when the question's words aren't the library's (3l) |
+| `LASTBOOK_BODY_SIGNS=0` | Don't look for body signs ("no puls", "mybbyisntbreathing"): a very unsure search with one may again get only the request to say more (3l). Turns `LASTBOOK_BODY_FIX` off too |
+| `LASTBOOK_BODY_FIX=0` | Search a body word's slip ("puls") or a glued run with one as typed; the body signs still count (3l) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the

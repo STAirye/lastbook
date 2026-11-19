@@ -153,6 +153,45 @@ class Glued(unittest.TestCase):
         self.assertEqual(self.fix('kitchne on fire'), 'kitchen on fire')     # the rest of the correction stays on
 
 
+class BodyWords(unittest.TestCase):
+    """fork: body words one slip away that fix_word leaves because the library has the slip as a word ("puls", on 24 pages),
+    and glued runs with a body word that could not be split (typos.body_fix, engine/confidence.BODY_WORDS)."""
+    BV = dict(GV, puls=24, pulse=1577, pulses=560, bloom=259, breeding=581, chore=16, choke=193, chose=359, blood=4372,
+              breath=635, cook=2000, flowers=900, chicken=700, household=800, list=3000, has=50000, no=40000, what=31234)
+    WORDS = typos.Words(BV, dict(GE, pulse=206, blood=955, breath=152, choke=5))
+
+    def setUp(self):
+        for k in ('LASTBOOK_BODY_FIX', 'LASTBOOK_BODY_SIGNS'):
+            self.addCleanup(os.environ.pop, k, None)
+            os.environ.pop(k, None)
+
+    def fix(self, q):
+        return typos.correct_with(q, self.WORDS)
+
+    def test_real_word_slips_for_body_words(self):
+        self.assertEqual(typos.fix_word('puls', self.WORDS), 'puls')        # 24 pages: a real word to fix_word
+        self.assertEqual(self.fix('he has no puls what do i do'), 'he has no pulse what do i do')
+        self.assertEqual(self.fix('He has no Puls'), 'He has no Pulse')
+
+    def test_glued_body_words_that_could_not_be_split(self):
+        self.assertIsNone(typos.split_word('mybbyisntbreathing', self.WORDS))
+        self.assertEqual(self.fix('mybbyisntbreathing'), 'not breathing')
+        self.assertEqual(self.fix('hesnotbreathing'), "he's not breathing")   # split as before
+
+    def test_other_words_unchanged(self):
+        for q in ('how to cook pulses', 'how to make flowers bloom', 'chicken breeding', 'household chore list',
+                  'she chose', 'he has no pulse', "she can't breath", 'my baby is blue', 'kitchenonfire', 'firecraft'):
+            self.assertEqual(self.fix(q), q.replace('kitchenonfire', 'kitchen on fire'), q)
+
+    def test_switches(self):
+        os.environ['LASTBOOK_BODY_FIX'] = '0'
+        self.assertEqual(self.fix('he has no puls'), 'he has no puls')
+        self.assertEqual(self.fix('mybbyisntbreathing'), 'mybbyisntbreathing')
+        os.environ.pop('LASTBOOK_BODY_FIX')
+        os.environ['LASTBOOK_BODY_SIGNS'] = '0'                                 # the body signs off: their correction too
+        self.assertEqual(self.fix('he has no puls'), 'he has no puls')
+
+
 class Switch(unittest.TestCase):
     def setUp(self):
         self.real = typos.words_for

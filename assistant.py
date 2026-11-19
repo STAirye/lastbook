@@ -428,7 +428,7 @@ def is_noise(msg):
         return False
     if stock_noise(msg):
         return True
-    if needs_english(msg):
+    if needs_english(msg) or confidence.body_signs(msg):    # fork: a body sign is never noise ("mybbyisntbreathing")
         return False
     V = _vocab()
 
@@ -513,10 +513,12 @@ def turn_hits(messages, english=None, followup=True, k=8):
       follow   the pages the previous answer cited (cited_before), its own best 4, the joined search, the rest
     info['buttons']: noise, or this message's own search found fewer than 3; info['still']: the last sensible question.
     info['danger']: this message or the one it is joined with may be urgent (is_danger). info['confidence']: engine.confidence's
-    estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None."""
-    idx = [i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
+    estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None.
+    info['body']: the body signs this message names (engine/confidence.body_signs), sorted; then chat_level never only asks."""
+    idx =[i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
     question = STILL.sub('', messages[idx[-1]]['content']) if idx else ''
-    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None}
+    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None,
+            'body': sorted(confidence.body_signs(question, typos.correct(question), english))}
     searched = []      # (hits, trace) of this message's own search and the joined one, for the confidence
 
     def own_search(q):
@@ -602,6 +604,28 @@ UNSURE_DANGER = ("In case this is urgent, here are the pages the library found f
 UNSURE_DANGER_NONE = ("The library found nothing that fits your question. Please help me help you: say a few more words about "
                       "what happened and what you can see, or pick one of the buttons below.")
 SUGGEST_PROMPT = {'buttons': 'Not sure these pages fit. Is it about one of these?', 'unsure': 'Is it about one of these?'}
+
+
+def chat_level(turn, followup=True, asked=1):
+    """fork: what the chat does with turn_hits' info for a message (asked: how many user messages so far) -> (level, the
+    confidence as shown, everyday). level 'sure' answers; 'buttons' answers with buttons; 'unsure' asks the person to say
+    more (with the pages when the question may be urgent). An everyday question (not is_danger) gets buttons only when the
+    search is very unsure, and smaller ones. A question that names a body sign (info['body'], engine/confidence.body_signs)
+    is never only asked to say more: it is answered from its pages, with the buttons."""
+    conf = turn.get('confidence')
+    level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
+    everyday = not turn.get('danger')      # after noise: the earlier message's (turn_hits)
+    if everyday and conf and turn['route'] != 'noise':
+        level = confidence.everyday_level(conf['p'])
+        conf = dict(conf, level=level, everyday=True)
+    if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and asked > 1)):
+        level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
+    if turn['route'] == 'noise' and not turn.get('still'):
+        level = 'unsure'        # fork: noise with no sensible message before it ("ok" first): ask, as unsure does
+    if level == 'unsure' and turn.get('body'):
+        level = 'buttons'       # fork: "he has no puls": the answer from the pages, never only "help me help you"
+        conf = dict(conf, level=level, body=True) if conf else conf
+    return level, conf, everyday
 
 
 def suggest_choices(info):
@@ -1100,17 +1124,7 @@ def chat(messages, about, emit, cancelled):
         emit({'type': 'found', 'count': len(hits)})
         # fork: how likely the first page is right (engine/confidence.py). Unsure: buttons. Very unsure: ask for more words
         # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
-        conf = turn.get('confidence')
-        level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
-        # fork: an everyday question (not is_danger) gets buttons only when the search is very unsure, and smaller ones
-        everyday = not turn.get('danger')      # after noise: the earlier message's (turn_hits)
-        if everyday and conf and turn['route'] != 'noise':
-            level = confidence.everyday_level(conf['p'])
-            conf = dict(conf, level=level, everyday=True)
-        if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and len(asked) > 1)):
-            level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
-        if turn['route'] == 'noise' and not turn.get('still'):
-            level = 'unsure'        # fork: noise with no sensible message before it ("ok" first): ask, as unsure does
+        level, conf, everyday = chat_level(turn, followup, len(asked))
         if level != 'sure':
             turn['buttons'] = True
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:

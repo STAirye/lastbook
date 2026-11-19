@@ -325,14 +325,19 @@ PHRASES = [  # everyday phrases -> one idea, checked before single words
     # first, and "no matches and no gas" pulls them further up, because those pages warn about matches and gas.
     # Not "building fire", which is a building on fire. Not "ignition": it brought welding and hazmat pages back.
     # Unless the question is about a fire that is an emergency: one in a kitchen or a building, by accident, spreading.
+    # fork: or about keeping a fire from starting, or getting away from one (#128's review, #154): "how do i prevent a
+    # generator from starting a fire", "make a fire escape plan for my family", "what causes a fire to start". A fire drill,
+    # but not a bow drill, which is how a fire is made.
     (r"\b(start|make|light|build|starting|making|lighting)( up)?( a| the| my| our)? ?(camp)?fire\b", [['fire', 'fires'], ['tinder', 'kindling', 'firecraft']],
-     r"\b(kitchen|building|apartment|garage|accident(al|ally)?|by mistake|arson|spread(s|ing)?|evacuat\w*)\b|\bin (the|my|our|a) (house|home)\b", HOWTO),
+     r"\b(kitchen|building|apartment|garage|accident(al|ally)?|by mistake|arson|spread(s|ing)?|evacuat\w*)\b|\bin (the|my|our|a) (house|home)\b"
+     r"|\b(prevent\w*|avoid\w*|stop\w*|risk\w*|hazard\w*|caus\w*|escape|spread\w*|safety)\b|(?<!bow )\bdrills?\b", HOWTO),
     # fork: water damage is a flooded home, not drinking water. The verb goes with it: a "treat" left behind has to be on the page.
     # Not "flood damage": flood questions already find flood pages, and these words pulled garden pages in ("mold").
     (r"\b((treat|fix|repair|clean( up)?|deal with|dry( out)?)( the| my| our)? )?water[- ]damage[ds]?\b", ['water damage', 'flood damage', 'flooding', 'mold', 'mould']),
-    # fork: "make the water safe" in the manuals' words. Not water damage or a water heater.
+    # fork: "make the water safe" in the manuals' words. Not water damage or a water heater. Nor too much water in the body
+    # (#128's review: "how do i treat water intoxication" got wastewater manuals), water poisoning, water in the lungs.
     (r"\b(make|making|get|keep)( the| my| our)? water (safe|drinkable|potable)|purify (the )?water|treat (the )?water", [['water'], ['disinfect', 'disinfection', 'purify', 'purification', 'treatment', 'chlorine']],
-     r"\bwater (damage[ds]?|heaters?)\b", HOWTO),
+     r"\bwater (damage[ds]?|heaters?)\b|\b(intoxicat\w*|poison\w*|lungs?|overdos\w*)\b", HOWTO),
 ]
 
 
