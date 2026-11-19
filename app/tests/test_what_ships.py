@@ -157,37 +157,36 @@ class WhatShips(unittest.TestCase):
                 self.assertIn(name, text, rel)
 
     def test_meaning_check_ships_its_manifest_and_bundles_its_files_when_there(self):
-        """fork (docs/FORK.md 3m): every build ships engine/data/meaning_red_manifest.json and bundles the three files of
-        derived/models/meaning-red through packaging/meaning_red_files.py; every scan wants the manifest; the scans that
-        refuse model files let through exactly the meaning check's one."""
+        """fork (docs/FORK.md 3m): every build ships engine/data/meaning_red_manifest.json and bundles the two files of
+        derived/models/meaning-red (a GGUF and the centroids) next to the runner through packaging/meaning_red_files.py; every
+        scan wants the manifest; the Linux scan, which refuses model files, lets through exactly that GGUF. Upstream's rules
+        stay: no onnxruntime or tokenizers in the Mac and Linux builds, and the Mac scan still refuses every .onnx."""
         m = json.loads((ROOT / 'engine' / 'data' / 'meaning_red_manifest.json').read_text(encoding='utf-8'))
-        self.assertEqual([f['name'] for f in m['files']], ['model_int8.onnx', 'tokenizer.json', 'centroids.npz'])
+        self.assertEqual([f['name'] for f in m['files']], ['bge-small-en-v1.5-q8_0.gguf', 'centroids.npz'])
         for rel in ('packaging/build_app_windows.sh', 'packaging/build_app_macos.sh', 'packaging/linux/build_app_linux.sh'):
             self.assertIn('meaning_red_files.py', (ROOT / rel).read_text(encoding='utf-8'), rel)
         for rel in ('packaging/build_app_windows.sh', 'packaging/lastbook_macos.spec', 'packaging/linux/build_app_linux.sh',
                     'packaging/scan_app_package.py', 'packaging/scan_package_macos.py', 'packaging/linux/scan_package_linux.py'):
             self.assertIn('meaning_red_manifest.json', (ROOT / rel).read_text(encoding='utf-8'), rel)
-        import importlib.util
-        for scan, ok, bad in (('scan_package_macos.py', 'Lastbook.app/Contents/Resources/derived/models/meaning-red/model_int8.onnx',
-                               'Lastbook.app/Contents/Resources/derived/models/bge-small-en-v1.5/model.onnx'),
-                              ('linux/scan_package_linux.py', 'opt/lastbook/derived/models/meaning-red/model_int8.onnx',
-                               'opt/lastbook/derived/models/bge-small-en-v1.5/model.onnx')):
-            spec = importlib.util.spec_from_file_location('scan', ROOT / 'packaging' / scan)
-            mod = importlib.util.module_from_spec(spec)
-            try:
-                spec.loader.exec_module(mod)
-            except ImportError:      # the Mac scan needs PyInstaller's reader: check its two patterns from the source instead
-                src = (ROOT / 'packaging' / scan).read_text(encoding='utf-8')
-                mod = types_ns(BAD_FILE=re.compile(re.search(r"BAD_FILE = re.compile\(r'(.*?)', re.I\)", src).group(1), re.I),
-                               MEANING_MODEL=re.compile(re.search(r"MEANING_MODEL = re.compile\(r'(.*?)'\)", src).group(1)))
-            allowed = lambda rel: not (mod.BAD_FILE.search(rel) and not mod.MEANING_MODEL.search(rel))
-            self.assertTrue(allowed(ok), scan)
-            self.assertFalse(allowed(bad), scan)
-
-
-def types_ns(**kw):
-    import types
-    return types.SimpleNamespace(**kw)
+        for rel in ('packaging/build_app_windows.sh', 'packaging/lastbook_macos.spec', 'packaging/linux/build_app_linux.sh'):
+            self.assertIn('meaning-red', (ROOT / rel).read_text(encoding='utf-8'), rel)
+        for rel in ('packaging/requirements_macos.txt', 'packaging/linux/requirements_linux.txt'):
+            txt = (ROOT / rel).read_text(encoding='utf-8')
+            self.assertNotRegex(txt, r'(?m)^(onnxruntime|tokenizers)', rel)
+        src = (ROOT / 'packaging' / 'linux' / 'scan_package_linux.py').read_text(encoding='utf-8')
+        self.assertIn("'onnxruntime'", src.split('BAD_FILE')[0])
+        mac = (ROOT / 'packaging' / 'scan_package_macos.py').read_text(encoding='utf-8')
+        self.assertIn("'onnxruntime', 'tokenizers'", mac)
+        self.assertNotIn('MEANING_MODEL', mac)
+        spec = (ROOT / 'packaging' / 'lastbook_macos.spec').read_text(encoding='utf-8')
+        self.assertIn("'onnxruntime', 'tokenizers',", spec)
+        pat = re.compile(re.search(r"BAD_FILE = re.compile\(r'(.*?)', re.I\)", src).group(1), re.I)
+        ok = re.compile(re.search(r"MEANING_MODEL = re.compile\(r'(.*?)'\)", src).group(1))
+        allowed = lambda rel: not (pat.search(rel) and not ok.search(rel))
+        self.assertTrue(allowed('opt/lastbook/llm/meaning-red/bge-small-en-v1.5-q8_0.gguf'))
+        self.assertFalse(allowed('opt/lastbook/models/gemma-4-E4B-it-Q4_K_M.gguf'))
+        self.assertFalse(allowed('opt/lastbook/llm/meaning-red/other.gguf'))
+        self.assertFalse(allowed('opt/lastbook/derived/models/bge-small-en-v1.5/model.onnx'))
 
 
 if __name__ == '__main__':

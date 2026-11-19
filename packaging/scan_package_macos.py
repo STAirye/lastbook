@@ -19,11 +19,10 @@ from pathlib import Path
 from PyInstaller.archive.readers import CArchiveReader
 
 BAD_SEGMENTS = {'test', 'tests', 'testing', 'pytest', 'unittest', 'doctest', 'PyObjCTest', 'remote_storage', 'webview', 'bottle', 'proxy_tools',
-                'shell_windows', 'clr', 'clr_loader', 'pythonnet', 'lastbook_launcher', 'tkinter', 'PyInstaller',
+                'onnxruntime', 'tokenizers', 'shell_windows', 'clr', 'clr_loader', 'pythonnet', 'lastbook_launcher', 'tkinter', 'PyInstaller',
                 'mac_offscreen', 'mac_driver', 'mac_ui_check', 'mac_main_check', 'mac_package_smoke', 'mac_package_contents', 'mac_ax', 'test_bridge', 'fixture', 'real_data_check',
                 'http_regression', 'win_app', 'win_driver', 'cdp'}
 BAD_FILE = re.compile(r'(^|/)(test_[^/]*|[^/]*_test\.(py|pyc|so)|[^/]*\.onnx)$', re.I)
-MEANING_MODEL = re.compile(r'/derived/models/meaning-red/model_int8\.onnx$')   # fork: the one model allowed (docs/FORK.md 3m)
 TEST_MARKERS = [b'TEST-STUB', b'mac_offscreen', b'stub_chat', b'stub-chat']
 ALLOWED_REMOTE = {'engine.library'}
 SYSTEM = ('/usr/lib/', '/System/', '@rpath/', '@loader_path/', '@executable_path/')
@@ -88,7 +87,7 @@ def main():
     for p in files:
         rel = p.relative_to(a.app).as_posix()
         n_files += 1
-        if bad_name(rel) or (BAD_FILE.search(rel) and not MEANING_MODEL.search(rel)) or p.name in SHIP['never_ship']:
+        if bad_name(rel) or BAD_FILE.search(rel) or p.name in SHIP['never_ship']:
             problems.append(f'file not allowed: {rel}')
         data = p.read_bytes()
         scan_bytes(rel, data)
@@ -138,7 +137,7 @@ def main():
     roots = [a.app / 'Contents' / d / 'engine' / 'setup' / 'roots.pem' for d in ('Resources', 'Frameworks')]
     if not any(r.is_file() for r in roots):    # setup's downloader trusts only these roots; without them it downloads nothing
         problems.append('missing from the package: engine/setup/roots.pem')
-    for name in ('english_words.txt.gz', 'english_words.LICENSE.txt', 'data/meaning_red_manifest.json'):   # fork: typos.py's words, the meaning check's manifest
+    for name in ('english_words.txt.gz', 'english_words.LICENSE.txt', 'data/meaning_red_manifest.json'):   # fork: engine/typos.py's English words
         if not any((a.app / 'Contents' / d / 'engine' / name).is_file() for d in ('Resources', 'Frameworks')):
             problems.append(f'missing from the package: engine/{name}')
     print(f'files {n_files}, native binaries {n_macho}, modules looked inside {n_mods}')

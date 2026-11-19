@@ -77,11 +77,12 @@ PYCHECK
 "$PY" -I -B "$ROOTW\\packaging\\ship_app_files.py" "$OUT\\ship"
 # What setup can install, checked against engine/setup/manifest.validate and download.py's allowed hosts by release_manifest.py
 "$PY" -I -B "$ROOTW\\packaging\\release_manifest.py" --packs "$PACKS" ${SMALL_FROM:+--small-from "$SMALL_FROM"} --out "$OUT\\ship\\setup\\manifest-v1.json"
-# fork: the meaning check's files (docs/FORK.md 3m), when derived\models\meaning-red has them as its manifest says; without
-# them the app still works (the urgent words alone), and setup can download them with the local AI model
+# fork: the meaning check's files (docs/FORK.md 3m: a GGUF and the centroids, for the runner), beside the runner in _internal\llm\meaning-red,
+# when derived\models\meaning-red has them as its manifest says; without them the app still works (the urgent words alone),
+# and setup can download them with the local AI model
 MEANING="$("$PY" -I -B "$ROOTW\\packaging\\meaning_red_files.py")" || { echo "the meaning check's files do not match engine/data/meaning_red_manifest.json" >&2; exit 1; }
 MEANING_DATA=()
-[ -n "$MEANING" ] && MEANING_DATA=(--add-data "$MEANING;derived\\models\\meaning-red")
+[ -n "$MEANING" ] && MEANING_DATA=(--add-data "$MEANING;llm\\meaning-red")
 
 # Release gate: setup's downloader must verify every allowed host through roots.pem alone, and refuse a site outside it.
 "$PY" -I -B "$ROOTW\\packaging\\check_tls_roots.py" || { echo "check_tls_roots.py failed: refresh engine/setup/roots.pem before shipping" >&2; exit 1; }

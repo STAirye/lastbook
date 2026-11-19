@@ -42,13 +42,12 @@ datas += [(str(SHIP / 'setup' / 'manifest-v1.json'), 'setup')]   # what first-ru
 hidden += collect_submodules('engine.setup')
 datas += [(str(ROOT / 'engine' / 'setup' / 'roots.pem'), 'engine/setup')]   # the only roots setup's downloader trusts
 datas += [(str(ROOT / 'engine' / n), 'engine') for n in ('english_words.txt.gz', 'english_words.LICENSE.txt')]   # fork: typos.py's words
-# fork: the meaning check (docs/FORK.md 3m): its manifest always, its three files when build_app_macos.sh found them
+# fork: the meaning check (docs/FORK.md 3m) runs on the runner above: its manifest always, its GGUF and centroids beside the runner
+# when build_app_macos.sh found them
 datas += [(str(ROOT / 'engine' / 'data' / n), 'engine/data') for n in ('meaning_red_manifest.json', 'meaning_red_LICENSE.txt')]
 MEANING = os.environ.get('LASTBOOK_MEANING_RED_DIR')
 if MEANING:
-    datas += [(str(p), 'derived/models/meaning-red') for p in sorted(Path(MEANING).iterdir()) if p.is_file()]
-for package in ('onnxruntime', 'tokenizers'):   # their native libraries; onnxruntime's Python tools and tests stay out (EXCLUDES)
-    binaries += collect_all(package)[1]
+    datas += [(str(p), 'llm/meaning-red') for p in sorted(Path(MEANING).iterdir()) if p.is_file()]
 for package in ('libzim', 'pypdfium2', 'pypdfium2_raw'):   # loaded only when a ZIM or PDF is first opened, and they carry native libraries
     d, b, h = collect_all(package)
     datas += d
@@ -61,7 +60,7 @@ EXCLUDES = [
     'remote_storage',                                    # stays in the library's own tools: no machine names or ssh code in the package
     'shell_windows', 'clr', 'clr_loader', 'pythonnet',   # the Windows window
     'webview', 'bottle', 'proxy_tools',                  # the old window
-    'onnxruntime.tools', 'onnxruntime.quantization', 'onnxruntime.transformers', 'onnxruntime.backend', 'onnxruntime.datasets',   # fork: the runtime only
+    'onnxruntime', 'tokenizers',                         # see requirements_macos.txt
     'numpy._core._multiarray_tests', 'numpy._core._umath_tests', 'numpy._core._operand_flag_tests', 'numpy._core._rational_tests', 'numpy._core._struct_ufunc_tests',
     'PyObjCTest', 'pytest', 'unittest', 'doctest', 'test', 'numpy.testing', 'numpy.tests', 'numpy.f2py', 'pypdfium2_cli',
     'tkinter', 'idlelib', 'lib2to3', 'ensurepip', 'venv', 'setuptools', 'pkg_resources', 'pip', 'PyInstaller',

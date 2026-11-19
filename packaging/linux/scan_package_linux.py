@@ -17,11 +17,11 @@ import sys
 import tempfile
 from pathlib import Path
 
-BAD_SEGMENTS = {'test', 'tests', 'testing', 'pytest', 'unittest', 'doctest', 'remote_storage', 'webview', 'bottle', 'proxy_tools',
-                'shell_windows', 'shell_macos', 'clr', 'clr_loader', 'pythonnet', 'lastbook_launcher', 'tkinter', 'PyInstaller',
+BAD_SEGMENTS = {'test', 'tests', 'testing', 'pytest', 'unittest', 'doctest', 'remote_storage', 'webview', 'bottle', 'proxy_tools', 'onnxruntime',
+                'tokenizers', 'shell_windows', 'shell_macos', 'clr', 'clr_loader', 'pythonnet', 'lastbook_launcher', 'tkinter', 'PyInstaller',
                 'objc', 'AppKit', 'Foundation', 'PyObjCTools', 'vendor-macos', 'fixture', 'real_data_check', 'http_regression', 'cdp', 'f2py', 'pypdfium2_cli'}
-MEANING_MODEL = re.compile(r'^opt/lastbook/derived/models/meaning-red/model_int8\.onnx$')   # fork: the one model allowed (docs/FORK.md 3m)
 BAD_FILE = re.compile(r'(^|/)(test_[^/]*|[^/]*_test\.(py|pyc|so)|[^/]*_tests[^/]*\.so|[^/]*\.onnx|[^/]*\.gguf|mac_[^/]*|win_[^/]*)$', re.I)
+MEANING_MODEL = re.compile(r'^opt/lastbook/llm/meaning-red/bge-small-en-v1\.5-q8_0\.gguf$')   # fork: the one model file allowed, beside the runner (docs/FORK.md 3m)
 TEST_MARKERS = [b'TEST-STUB', b'mac_offscreen', b'stub_chat', b'stub-chat']
 ALLOWED_REMOTE = {'opt/lastbook/engine/library.py'}     # names remote_storage in the code that skips it when packaged
 USER_PATH = re.compile(rb'/Users/[A-Za-z0-9._-]+|/home/(?!runner\b|user\b)[a-z_][a-z0-9_.-]+')

@@ -676,70 +676,97 @@ part, `test_typos.EnglishWords` the English words and the slips, `test_what_ship
 
 The urgent words of 3l miss urgent questions worded in a way they have no word for ("his throat is closing after
 peanuts", "my son says voices are telling him to jump"). `engine/meaning_red.py` adds a check by meaning, from the
-prototype in `.claude/drafts/meaning/` (its `RESULTS.md` has the method and how it was chosen):
+prototype in `.claude/drafts/meaning/` (its `RESULTS.md` has the method and how it was chosen; `LLAMACPP_SMOKE.md` and
+`LLAMACPP_STATS.md` the move to the runner):
 
-- **How:** the question, after `typos.correct` and with no query prefix, is embedded with an int8 copy of
-  bge-small-en-v1.5 (the model hybrid search uses, quantized with `onnxruntime.quantization.quantize_dynamic`, 32 MB)
-  and compared with 31 centroids, one per category of 689 invented examples (`engine/data/meaning_red_examples.jsonl`:
-  20 red categories; yellow and 10 look-alike green ones). Score = closest red centroid minus closest non-red one; it
-  fires above the prototype's "wide" threshold (0.00663, set on the examples only: 10% of green examples out of fold).
+- **How:** the question, after `typos.correct` and with no query prefix, is embedded with bge-small-en-v1.5 (the model
+  hybrid search uses, here a q8_0 GGUF of 37 MB) and compared with 31 centroids, one per category of 689 invented
+  examples (`engine/data/meaning_red_examples.jsonl`: 20 red categories; yellow and 10 look-alike green ones). Score =
+  closest red centroid minus closest non-red one; it fires above the "wide" threshold (0.0084, set on the examples only:
+  10% of green examples out of fold; the "strict" one, 0.0317, is stored but not used).
+- **Where the embedding happens: the runner, not the desktop.** An earlier version ran an int8 ONNX copy inside the
+  desktop process with onnxruntime. That broke upstream's rule that the desktop loads no model and no onnxruntime
+  (`test_bridge.WholeProcess.test_no_listening_socket_and_no_model`), needed onnxruntime and tokenizers in the Mac and
+  Linux builds, and a changed test. This version keeps every one of those rules: the embedding is done by the app's own
+  local-AI program, `lastbook-llm`, started a second time as `lastbook-llm --model bge-small-en-v1.5-q8_0.gguf --embed
+  --cpu-only --threads 2` (`packaging/llm/lastbook_llm.cpp`: `--embed` loads an embedding model with [CLS] pooling and
+  answers `{"op":"embed","id":1,"texts":[...],"max_tokens":320}` with `{"ev":"embedding","id":1,"vectors":[[...]],...}`,
+  unit vectors; it refuses `gen`, and chat mode refuses `embed`; its ready line says `"embed":true`). The pipes are the
+  same as the chat runner's: no socket, no port. The desktop imports neither onnxruntime nor tokenizers for this; it only
+  does the two small matrix products (numpy, already a dependency) with the centroids. The runner uses the llama.cpp
+  tag already shipped (b12032): only the runner program grew (+97 lines), the library's DLLs are the same sources.
 - **Only adds:** `assistant.is_danger` is the words (danger signs, buttons, `confidence.urgent`) **or** the meaning
   check. It can make a question urgent, never take that away; an urgent question's pages are never held back, so a
   false flag costs little. `turn_hits` puts `info['meaning']` (`score`, `fired`, `state`, and what the words said) in
   the turn, and the `local AI confidence:` log line (`LASTBOOK_AI_DEBUG=1`) carries it.
-- **Loading:** `server.init` starts it on a thread of its own and returns at once (init 2 ms with or without it); it is
-  ready about 0.3 s later (the files' SHA-256 checked, the session made, one warm-up). Until then, or when anything
-  fails (a missing or changed file, onnxruntime missing or blocked), the words alone decide, as before, and the log
-  says once `meaning check: off, ...` (or `meaning check: ready in ... s`). onnxruntime is imported as `retrieval.py`
-  does it: `ORT_DISABLE_TELEMETRY`, `engine/quiet_onnx.py` first on Windows, `disable_telemetry_events`. One
-  embedding at a time (a lock), 2 threads.
-- **Files:** `model_int8.onnx`, `tokenizer.json`, `centroids.npz` (31 x 384 float16 and the thresholds). They are not
-  in git: `tools/meaning_red_model.py` makes them from the fp32 model in `DATA/derived/models/bge-small-en-v1.5`
-  (with `LASTBOOK_DATA` set: the examples go through that library's `typos.correct`) into `derived/models/meaning-red/`
-  (ignored by git), prints their SHA-256 and, with `--write-manifest`, writes their sizes and SHA-256 into
-  `engine/data/meaning_red_manifest.json`, the one list every copy is checked against. The int8 file comes out
-  byte-identical to the prototype's (onnx 1.23.2, onnxruntime 1.32.0). The centroids are recomputed with that exact
-  file; they differ slightly from the prototype's (cosine 0.9992 or more) because 9bd116e's `typos.correct` puts the
-  apostrophe back in "isnt", "cant" (100 of the 689 examples change). The thresholds are the prototype's, unchanged.
-- **Where the app finds them:** `APP/derived/models/meaning-red/` (the source tree; in a packaged app, next to the
-  program: the Windows, Mac and Linux builds copy that folder in when `packaging/meaning_red_files.py` finds it complete
-  and matching the manifest, and stop if it is there but different), then `DATA/derived/models/meaning-red/`, where
-  setup downloads them: after the person's own download of the local AI model, `engine/setup/api.py` fetches the three
-  files from the Hugging Face repo in the manifest through `engine/setup/download.py` (HTTPS to huggingface.co only,
+- **The runner process:** `server.init` calls `meaning_red.start()`, which starts a thread and returns at once (0.2 ms).
+  The thread checks the files' SHA-256, starts the runner (`llm_local.runner_path()`, tied to the app with the same job
+  object on Windows; on a Mac or Linux it leaves when its input closes), waits for `ready` (it must say `"embed":true`:
+  an older runner refuses `--embed` and ends, which counts as a failure), warms it with one question, and keeps it for
+  the rest of the run: one long-lived process, one question per request (batching gains nothing: 5.3 ms a question at
+  8, 32 or 128 to a request), one request at a time under a lock. It loads in 0.2 s and stays at 66 MB private memory,
+  no video memory (`--cpu-only`: Vulkan is slower per question and stalls for seconds the first time a size is seen).
+  It is asked from the thread of the question, with a 10 s limit. Until it is ready, or after any failure (runner
+  missing, an old runner, the GGUF or centroids missing or changed, the process ended, an answer that does not come), the
+  words alone decide, as before, and the log says once `meaning check: off, ...`. A runner that ended or stopped
+  answering is closed and started again, at most 3 times in all (`MAX_RESTARTS`), then the words alone for the rest of
+  the run. `atexit` stops it (`{"op":"quit"}`, then a kill after 3 s). It runs beside the chat runner (Gemma) without
+  either noticing: the chat runner is unchanged in chat mode (`swa_check` and all).
+- **Files:** `bge-small-en-v1.5-q8_0.gguf` and `centroids.npz` (31 x 384 float32 and the thresholds). They are not in
+  git: `tools/meaning_red_model.py` makes them from the Hugging Face copy of the model (`DATA/derived/models/
+  bge-small-en-v1.5-hf`) with the runner's own llama.cpp tag (`convert_hf_to_gguf.py --outtype q8_0`; pass `--llama-cpp`
+  a checkout of tag b12032), then embeds the examples through the runner (with `LASTBOOK_DATA` set: they go through that
+  library's `typos.correct`) to make the centroids, into `derived/models/meaning-red/` (ignored by git), prints their
+  SHA-256 and, with `--write-manifest`, writes their sizes and SHA-256 into `engine/data/meaning_red_manifest.json`, the
+  one list every copy is checked against. The GGUF and the centroids come out byte-identical to the prototype's
+  (`LLAMACPP_STATS`), and the out-of-fold thresholds recomputed with `--cv` equal the fixed ones.
+- **Where the app finds them:** `APP/derived/models/meaning-red/` (the source tree), `<runner folder>/meaning-red/` (a
+  packaged app: the Windows, Mac and Linux builds copy `derived/models/meaning-red` in next to the runner, `llm/meaning-red`,
+  when `packaging/meaning_red_files.py` finds it complete and matching the manifest, and stop if it is there but
+  different; the Linux package scan lets through exactly that one GGUF), then `DATA/derived/models/meaning-red/`, where
+  setup downloads them: after the person's own download of the local AI model, `engine/setup/api.py` fetches the files
+  from the Hugging Face repo in the manifest through `engine/setup/download.py` (HTTPS to huggingface.co only,
   SHA-256 checked), unless the app already has them. A failure leaves the words alone; the model's install goes on.
   While the manifest has no `revision` (a commit id), nothing is downloaded at all. The manifest and the licence text
-  (`engine/data/meaning_red_LICENSE.txt`: MIT, BAAI) ship in every build; `THIRD_PARTY_NOTICES.md` lists the model.
-- **Mac and Linux** builds were keyword-only with no onnxruntime at all; they now bundle onnxruntime and tokenizers (the
-  Windows build's pins) for this one model, and their scans let through exactly `derived/models/meaning-red/model_int8.onnx`
-  and no other model file. Search stays keyword-only there.
-- **The desktop's "no model" test changed on purpose:** `test_bridge.WholeProcess.test_no_listening_socket_and_no_model`
-  now allows one model, this one, and still no listening socket, no other model file and never hybrid search's
-  bge-small-en-v1.5. onnxruntime is blocked there, so it also checks that the meaning check stayed off without loading
-  the runtime's DLL; `test_meaning_red.WholeProcess` loads it in a process of its own and checks that no socket listens
-  and `retrieval` is not imported.
+  (`engine/data/meaning_red_LICENSE.txt`: MIT, BAAI) ship in every build; `THIRD_PARTY_NOTICES.md` lists the model as a
+  GGUF file used by the runner.
+- **Upstream's rules are kept:** `test_bridge` is as upstream's (its WholeProcess test is byte-identical to origin/main's
+  and passes: the desktop process has no model file open, no onnxruntime, no listening socket; the runner is a child
+  process). The Mac and Linux builds do not gain onnxruntime or tokenizers (requirements, the Mac spec's excludes and
+  both scans are as before; only the Linux scan allows that one GGUF by name), search stays keyword-only on the
+  desktop, and the chat runner's behaviour is unchanged. `test_meaning_red.WholeProcess` checks, in a process of its own,
+  that no socket listens, that none of onnxruntime, tokenizers, onnx or retrieval is imported, and that the runner is
+  gone after the app exits.
 
-Measured with this code (in-process, read-only, `LASTBOOK_DATA=D:\LastbookData-fork-test`, sections build refused;
-`.claude/drafts/meaning/integrated_eval.py`). The words are 9bd116e's (on these lists they match the prototype's
-exactly). Urgent, count:
+Measured with this code (in-process, read-only, `LASTBOOK_DATA=D:\LastbookData-fork-test`, sections build refused; the
+words are 9bd116e's). Urgent counts, red / yellow / green (the green lines are counterexamples and mild ones):
 
-| | list 1 (690): red / yellow / green | list 2 (606): red / yellow / green |
-|---|---|---|
-| words only | 340/343, 98/104, 76/243 | 230/249, 85/111, 127/246 |
-| meaning only | 294, 56, 62 | 212, 52, 64 |
-| **words OR meaning (this branch)** | **341, 101, 106** | **245 (98.4%), 93, 147** |
-| prototype, int8, wide | 341, 100, 108 | 244, 94, 147 |
-| this code with the prototype's centroids | 341, 101, 106 | 244, 93, 147 |
+| | list 1 (343/104/243) | list 2 (249/111/246) | list 3 (199/78/254) |
+|---|---|---|---|
+| words only | 340 / 98 / 76 | 230 / 85 / 127 | 173 / 55 / 154 |
+| meaning only | 297 / 56 / 60 | 210 / 53 / 62 | 162 / 35 / 75 |
+| **words OR meaning (this branch)** | **341 / 100 / 104** | **243 / 93 / 147** | **188 / 62 / 173** |
+| the int8 ONNX version, for reference | 341 / 101 / 106 | 245 / 93 / 147 | 186 / 65 / 171 |
 
-`assistant.is_danger` itself gives the same counts on both lists. List 2: 15 of the 19 red lines the words miss are
-caught. In-sample triage sets (273 red, 94 yellow, 148 green): words OR meaning 272/273 red, as the words alone (the
-miss, "snakebitmyleg", `is_danger` catches by a danger sign), yellow 75 → 78, green 63 → 69. On all three sets no
-question urgent by the words alone stops being urgent. Cost on this PC (warm file cache): load 0.15–0.3 s on its
-thread, +57 MB memory, `is_danger` 2.5 ms median / 4.1 ms p95 with it, against 0.2 / 1.5 ms without.
+Red caught only by the meaning: 1, 13 and 15. Out-of-fold on the examples (5 folds x 3): red recall 80.3% at 5% green
+false flags and 89.5% at 10% (the int8 version: 81% and 90%). In-sample triage sets (273 red, 94 yellow, 148 green): words
+OR meaning 272 / 79 / 67 against the words alone 272 / 75 / 63, and `is_danger` 273 red as before: no question urgent by the
+words stops being urgent, on any list. The GGUF and the int8 model disagree on about 25 to 30 lines a list, both ways, all
+near the threshold, so the centroids were refit on the GGUF's vectors (they are not the int8 ones).
+
+Cost on this PC (Ryzen 7 5800X3D, 2 runner threads): a question takes 5 to 11 ms through the pipe (5.2 ms median on a quiet
+machine, `LLAMACPP_STATS.md`; 9 ms median, 13 ms p95 and 29 ms max over the 2,342 lines measured later on a busier one, of
+which 4 to 6 ms is the runner computing; the int8 ONNX version took 2.2 ms in process), `is_danger` 9.7 ms median with it
+against 0.3 ms without; the runner adds 66 MB private (68 MB peak) as a second process and the desktop 2 MB; the server's
+start is not slowed (`start()` returns in 0.2 ms; the runner is ready 0.2 s later on its thread). The check runs once per
+message.
 
 `LASTBOOK_MEANING_RED=0` turns it off. `app/tests/test_meaning_red.py` covers it (fires on clear urgent wordings,
-quiet on clear everyday ones, only adds, falls back on a missing or changed file or a blocked runtime, the switch,
-threads, the manifest and no download while unpublished, a process of its own); `test_what_ships` that every build and
-scan carries it.
+quiet on clear everyday ones, only adds, falls back on a missing or changed file, a missing or old runner, a runner that
+ends (started again, then given up) or stops answering, the switch, threads, a real runner killed and restarted, the
+manifest and no download while unpublished, the runner's arguments, a process of its own that opens no socket, loads no
+onnxruntime and leaves no runner behind); `test_what_ships` that every build and scan carries it and that the Mac and
+Linux builds still have no onnxruntime.
 
 ## 4. Running from source on Windows
 
@@ -802,21 +829,24 @@ a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
-- **Meaning check (3m): a third fresh test list is pending** before its numbers are trusted. The threshold was set on
-  the examples only, but list 2's false flags (children's and old people's everyday questions, idioms the examples
-  lack) show where the examples are thin, and adding examples for them now would be tuning on the test list. Also
-  open: the Hugging Face repo (the manifest's `revision` is empty, so setup downloads nothing yet); no packaged build
-  (Windows, Mac, Linux) has been made with it, so the bundling, the Mac and Linux onnxruntime wheels and their scans
-  are untested; English only (a question's English search words, 3i, are not checked); in hybrid mode the loaded fp32
-  `Embedder` is not reused (it would need its own centroids), so the int8 model loads beside it.
+- **Meaning check (3m):** the Hugging Face repo is not uploaded (the manifest's `revision` is empty, so setup downloads
+  nothing yet; upload the two files of `derived/models/meaning-red`, put the commit id in the manifest). The runner's
+  `--embed` mode is built and run on this Windows machine only: the Mac and Linux runner builds (same
+  `lastbook_llm.cpp`, no script change expected) are untested, and so are the three packaged builds with the files
+  bundled in `llm/meaning-red` and the Linux scan's allowance for the GGUF. The check adds one runner process of 66 MB
+  beside the chat one. The threshold was set on the examples only; list 2's and 3's false flags (children's and old people's
+  everyday questions, idioms the examples lack) show where the examples are thin, and adding examples for them now would be
+  tuning on the test lists, so a fresh list is needed before the numbers are trusted further. English only (a question's
+  English search words, 3i, are not checked). In hybrid mode the loaded fp32 `Embedder` is not reused (the runner's
+  `--embed` could serve it too: same model, same 320-token limit, but that is not done).
 - Thinning a real pack's map (1) and the setup screens with no state picker have only been tested by the automated tests,
   not by hand.
 - The runner fix (3d) is built and tested on this machine only. A release of the fork would ship it from
   `build_llm_windows.sh` (and the Mac and Linux scripts, not yet rebuilt). It's also a candidate pull request upstream.
 - 3g was measured on one topic (stored water), 2 conversations per arm. Other topics, video citations (carry-over handles
   PDF pages only), and the published 26B with these changes (they're off for it) haven't been measured.
-- **Search in the desktop app is keyword-only** (upstream's design: `test_bridge` checks no embedding model is loaded but
-  the meaning check's, 3m). Its
+- **Search in the desktop app is keyword-only** (upstream's design: `test_bridge` checks no embedding model is loaded in the
+  desktop process; the meaning check's one is in the runner's process, 3m). Its
   vocabulary gaps (3h) are where it fails. The fork adds two phrases; more gaps surely exist. "he has no pulse" got a thin
   answer that points to a "No Heartbeat" section without the steps, the same before and after 3h.
 - "we have no fuel to boil water, how else can i make it safe" still finds nothing useful in the first search (0 of 8);

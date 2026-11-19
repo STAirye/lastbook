@@ -1,6 +1,5 @@
 # Mac build of the Lastbook app. Same versions the Mac shell was tested with, under CPython 3.11, arm64.
-# fork: onnxruntime and tokenizers for the meaning check only (docs/FORK.md 3m): its one int8 model, in-process, no port. Search
-# stays keyword-only (setup never downloads hybrid search's model). build_app_macos.sh sets ORT_DISABLE_TELEMETRY for the build.
+# No onnxruntime or tokenizers: this build has keyword search only, and building with them would load them on the build Mac.
 # No pywebview: the app has its own shell (app/shell_macos.py).
 pyinstaller==6.22.3
 pyobjc-core==13.0
@@ -12,5 +11,3 @@ libzim==3.13.1
 numpy==2.4.6
 beautifulsoup4==4.15.0
 pypdfium2==5.14.0
-onnxruntime==1.31.1
-tokenizers==0.23.3

@@ -94,8 +94,7 @@ class Run:
         listen = run('/usr/sbin/lsof', '-nP', '-a', '-p', l, '-iTCP', '-sTCP:LISTEN')
         inet = run('/usr/sbin/lsof', '-nP', '-a', '-p', l, '-i')
         files = run('/usr/sbin/lsof', '-nP', '-a', '-p', l)
-        models = [x for x in files.splitlines() if any(s in x.lower() for s in ('onnx', 'bge-small', 'tokenizers', '/models/'))
-                  and '/models/meaning-red/' not in x and not any(s in x.lower() for s in ('onnxruntime', 'tokenizers'))]   # fork: the meaning check (FORK.md 3m)
+        models = [x for x in files.splitlines() if any(s in x.lower() for s in ('onnx', 'bge-small', 'tokenizers', '/models/'))]
         real = [x for x in files.splitlines() if 'survival/library-data' in x or 'video-auth' in x]
         return {'pids': pids, 'listen': listen, 'inet': inet, 'model_files': models, 'real_library_files': real}
 

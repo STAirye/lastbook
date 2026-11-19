@@ -1,28 +1,34 @@
-r"""fork: builds the meaning check's three files (engine/meaning_red.py, docs/FORK.md 3m) from the fp32 bge-small-en-v1.5 that
-hybrid search uses, and prints their sizes and SHA-256.
+r"""fork: builds the meaning check's two files (engine/meaning_red.py, docs/FORK.md 3m) from the fp32 bge-small-en-v1.5 (a
+Hugging Face folder) and prints their sizes and SHA-256.
 
   set LASTBOOK_DATA=D:\LastbookData-fork-test      (its library's words are what typos.correct uses on the examples)
-  python -X utf8 tools/meaning_red_model.py [--src DIR] [--out DIR] [--write-manifest] [--cv] [--compare NPZ]
+  python -X utf8 tools/meaning_red_model.py [--src DIR] [--llama-cpp DIR] [--runner EXE] [--out DIR] [--write-manifest]
+                                            [--cv] [--compare NPZ]
 
-  --src             the fp32 model folder (model.onnx, tokenizer.json). Default DATA/derived/models/bge-small-en-v1.5
+  --src             the Hugging Face model folder (model.safetensors, config.json, tokenizer.json, 1_Pooling/).
+                    Default DATA/derived/models/bge-small-en-v1.5-hf
+  --llama-cpp       a llama.cpp checkout at the tag the runner is built from (packaging/llm/build_llm_windows.sh: b12032,
+                    dde879bc), for its convert_hf_to_gguf.py and gguf-py. Default $LASTBOOK_LLAMA_CPP, else
+                    D:\buildtools\lastbook-llm\work\llama.cpp
+  --runner          the local AI program, with --embed (packaging/llm/lastbook_llm.cpp). Default: the app's own, as found
+                    by llm_local.runner_path
   --out             default derived/models/meaning-red in this checkout (git-ignored); the builds bundle that folder
   --write-manifest  put the files' sizes and SHA-256 in engine/data/meaning_red_manifest.json (the repo, revision unchanged)
   --cv              also recompute the thresholds out of fold, as the prototype did (5-fold x 3, stratified by category; needs
                     scikit-learn), and print them beside the fixed ones. The fixed ones are kept either way.
-  --compare NPZ     print how far the centroids are from another centroid file (the prototype's model_int8.npz)
+  --compare NPZ     print how far the centroids are from another centroid file (the prototype's model_gguf.npz)
 
-model_int8.onnx: onnxruntime.quantization.quantize_dynamic, weights QInt8, nothing else (with onnx 1.23.2 and onnxruntime
-1.32.0 the same bytes as the prototype's copy). centroids.npz: the examples after typos.correct, embedded with that exact
-file (no query prefix, batches of 64 as retrieval.Embedder), one unit mean per category: red (20) and non-red (yellow and
-10 look-alike green categories), float16, with the thresholds. Written with fixed zip times, so the same inputs give the
-same bytes.
+bge-small-en-v1.5-q8_0.gguf: convert_hf_to_gguf.py --outtype q8_0 (the converter quantizes to q8_0 itself; no llama-quantize
+program is needed), about 37 MB, [CLS] pooling read from 1_Pooling. centroids.npz: the examples after typos.correct, embedded with
+that exact file through the runner (no query prefix, 64 to a request), one unit mean per category: red (20) and non-red (yellow and
+10 look-alike green categories), float32, with the thresholds. Written with fixed zip times, so the same inputs give the same bytes.
 """
 import argparse
 import io
 import json
-import shutil
+import os
+import subprocess
 import sys
-import tempfile
 import zipfile
 from pathlib import Path
 
@@ -35,9 +41,10 @@ import engine.paths as lastbook_paths  # noqa: E402
 from engine import meaning_red, typos  # noqa: E402
 
 EXAMPLES = ROOT / 'engine' / 'data' / 'meaning_red_examples.jsonl'
-# The prototype's thresholds for the int8 model (.claude/drafts/meaning/model_int8.json): the out-of-fold score above which
-# 5% (strict) / 10% (wide) of the green examples fall. Set on the examples only; the app uses wide.
-THRESHOLDS = {'strict': 0.024351298809051514, 'wide': 0.006628692150115967}
+# The GGUF prototype's thresholds (.claude/drafts/meaning/model_gguf.npz): the out-of-fold score above which 5% (strict) /
+# 10% (wide) of the green examples fall. Set on the examples only; the app uses wide.
+THRESHOLDS = {'strict': 0.03168658415476481, 'wide': 0.00836634635925293}
+LLAMA_CPP = r'D:\buildtools\lastbook-llm\work\llama.cpp'
 
 
 def read_examples():
@@ -45,8 +52,20 @@ def read_examples():
         return [json.loads(line) for line in f if line.strip()]
 
 
-def embed_all(model, texts):
-    return np.vstack([model.embed(texts[i:i + 64]) for i in range(0, len(texts), 64)])
+def convert(src, llama_cpp, out):
+    """Hugging Face folder to a q8_0 GGUF with the pinned llama.cpp's own converter."""
+    script = Path(llama_cpp) / 'convert_hf_to_gguf.py'
+    if not script.is_file():
+        raise SystemExit(f'no convert_hf_to_gguf.py in {llama_cpp}: give --llama-cpp a checkout of the runner\'s llama.cpp tag')
+    env = dict(os.environ, PYTHONPATH=str(Path(llama_cpp) / 'gguf-py'), PYTHONUTF8='1')
+    r = subprocess.run([sys.executable, '-X', 'utf8', str(script), str(src), '--outfile', str(out), '--outtype', 'q8_0'],
+                       capture_output=True, text=True, encoding='utf-8', env=env)
+    if r.returncode or not out.is_file():
+        raise SystemExit(f'convert_hf_to_gguf.py failed ({r.returncode}):\n{r.stdout[-1500:]}\n{r.stderr[-1500:]}')
+
+
+def embed_all(emb, texts):
+    return np.array([v for i in range(0, len(texts), 64) for v in emb.embed(texts[i:i + 64])], dtype=np.float32)
 
 
 def centroids(X, lab, cat):
@@ -85,7 +104,9 @@ def save_npz(path, arrays):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--src', default=str(lastbook_paths.DATA / 'derived' / 'models' / 'bge-small-en-v1.5'))
+    ap.add_argument('--src', default=str(lastbook_paths.DATA / 'derived' / 'models' / 'bge-small-en-v1.5-hf'))
+    ap.add_argument('--llama-cpp', default=os.environ.get('LASTBOOK_LLAMA_CPP', LLAMA_CPP))
+    ap.add_argument('--runner')
     ap.add_argument('--out', default=str(ROOT / meaning_red.SUBDIR))
     ap.add_argument('--write-manifest', action='store_true')
     ap.add_argument('--cv', action='store_true')
@@ -93,28 +114,30 @@ def main():
     a = ap.parse_args()
     src, out = Path(a.src), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
+    exe = Path(a.runner) if a.runner else meaning_red.runner()
+    if exe is None or not exe.is_file():
+        raise SystemExit('no local AI program (lastbook-llm) to embed with: build it (packaging/llm/build_llm_*.sh) or give --runner')
 
-    from onnxruntime.quantization import QuantType, quantize_dynamic
-    with tempfile.TemporaryDirectory() as tmp:
-        q = Path(tmp) / 'model_int8.onnx'
-        quantize_dynamic(str(src / 'model.onnx'), str(q), weight_type=QuantType.QInt8)
-        shutil.copyfile(q, out / 'model_int8.onnx')
-    shutil.copyfile(src / 'tokenizer.json', out / 'tokenizer.json')
+    gguf = out / meaning_red.GGUF
+    convert(src, a.llama_cpp, gguf)
 
     ex = read_examples()
     lab = np.array([r['label'] for r in ex])
     cat = np.array([r['cat'] for r in ex])
     texts = [typos.correct(r['text']) or r['text'] for r in ex]
-    model = meaning_red.Model(out)          # the exact file just written; no centroids yet
-    X = embed_all(model, texts)
+    emb = meaning_red.Embedder(exe, gguf)          # the exact file just written
+    try:
+        X = embed_all(emb, texts)
+    finally:
+        emb.close()
     (R, red_names), (N, non_names) = centroids(X, lab, cat)
-    save_npz(out / 'centroids.npz', {
-        'red': R.astype(np.float16), 'nonred': N.astype(np.float16),
+    save_npz(out / meaning_red.CENTROIDS, {
+        'red': R.astype(np.float32), 'nonred': N.astype(np.float32),
         'red_categories': np.array(red_names), 'nonred_categories': np.array(non_names),
         'strict': np.float64(THRESHOLDS['strict']), 'wide': np.float64(THRESHOLDS['wide'])})
     print(f'{len(ex)} examples, {len(red_names)} red and {len(non_names)} non-red centroids; thresholds {THRESHOLDS}')
 
-    s = score(X, R.astype(np.float16).astype(np.float32), N.astype(np.float16).astype(np.float32))
+    s = score(X, R, N)
     for l in ('red', 'yellow', 'green'):
         print(f'  in-sample {l}: {int((s[lab == l] > THRESHOLDS["wide"]).sum())}/{int((lab == l).sum())} over wide')
     if a.cv:
@@ -127,7 +150,7 @@ def main():
                 print(f'  {k} centroids vs {a.compare}: max |diff| {np.abs(mine - theirs).max():.5f}, min cosine {cos.min():.6f}')
 
     files = []
-    for name in ('model_int8.onnx', 'tokenizer.json', 'centroids.npz'):
+    for name in (meaning_red.GGUF, meaning_red.CENTROIDS):
         p = out / name
         files.append({'name': name, 'size': p.stat().st_size, 'sha256': meaning_red.sha256_of(p)})
         print(f'{files[-1]["sha256"]}  {files[-1]["size"]:>10}  {p}')

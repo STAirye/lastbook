@@ -1187,7 +1187,7 @@ class Setup:
         self._meaning_red(lib, control)
 
     def _meaning_red(self, lib, control):
-        """fork: with the local AI model, the meaning check's three small files (engine/meaning_red.py), from Hugging Face
+        """fork: with the local AI model, the meaning check's two files (a small GGUF and the centroids) (engine/meaning_red.py), from Hugging Face
         through download.py with their SHA-256, unless the app has them. Only in the product, and only here, after the person
         chose the model. A failure leaves the urgent words alone deciding; the model's install goes on."""
         if self.allowed is not None:     # tests reach a local server only
