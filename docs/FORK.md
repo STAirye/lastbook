@@ -482,6 +482,26 @@ repo for now (upstream issue #154 asked for a test-only pull request of them).
   typed again and again are cut to one or two first, to whichever is a word ("bloooood" → blood, "helpppp" → help,
   "hesss" → he's; "kkkkk" stays mash). `LASTBOOK_TYPO_ENGLISH=0` turns all of this off. Speed on the 690 lines: 0.26 ms
   a question on average (0.33 before), at most 10 ms.
+- **Contractions without the apostrophe** (fork/contractions, found by the second held-out list). Only 14 were known,
+  so the rest were "corrected" one edit away and the negation went: "baby hasnt moved" → "hasn moved", "havent" →
+  haven, "shouldnt" → shouldn, "shouldve" → shoulder, "whos" → whose. All the common n't, 's, 're, 'll, 've and 'd
+  forms are now put back before any other correction (`typos.APOSTROPHES`); real words stay ("were", "well", "ill",
+  "its", "lets", "shell", "hell", "wed", "shed", "id"), and so does "hed" (typed for head on the lists). "im" becomes
+  I'm unless a medicine word is beside it ("give im adrenaline", "iv or im"; IM in capitals stays). The search drops
+  a pronoun with its ending ("i'm", "he's", "there's": `server.STOP`) as it drops the pronoun; the negations stay.
+  A glued run with an apostrophe inside is split too ("he'snotbreathingwhatdoido" → "he's not breathing what do i
+  do", which found no pages; "i'mchoking", "she'sbleedingalot"), from 6 letters and without the "corrected whole"
+  margin; "he's", "grandma's", "o'clock" stay. A hyphenated word is split part by part, never corrected. A word with
+  capitals inside ("ODing", "iPhone") is left as typed, and a few slang, brand and medical words joined the English
+  words ("unalive", "fortnite", "sniffly", "redback", "rennie", "konked", "gouching", "fluey", "doms", "stooling":
+  all from list 2, which is no longer blind for them). Measured against 19c2db2, in-process and read-only. Neither
+  held-out list is blind any more. Urgent, body signs and pages withheld didn't change on any set. On list 2, 7 lines
+  get their negation back and the glued line finds pages (0 → 8, the resuscitation guidelines first). The typo lines
+  went from 18 fixed / 6 wrong to 19 / 5. Red+yellow lines whose first page looks like health: list 1 272 → 278
+  keyword-only and 285 → 284 hybrid; list 2 214 → 213 and 227 → 229. Mixed line by line: "hes blue" now opens a
+  statistics book, while "hes not breathing" opens the resuscitation guidelines instead of the CERT manual.
+  In-sample, right first pages went 354 → 356 keyword-only and 436 → 438 hybrid, of 599. Hybrid top 3 went 524 → 522:
+  "he swallowed pool water and now he's coughing" and its typo version.
 
   On 48 invented glued and gibberish questions (with 3l's unknown-word rule): 20 of 24 glued questions are split right
   (all 6 everyday ones, 14 of 18 emergencies; missed "mysonatebleach" → "my so nate bleach", "hescolapsednotbreathin"

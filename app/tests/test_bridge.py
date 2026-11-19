@@ -784,6 +784,13 @@ class ForkSearchWords(unittest.TestCase):
             self.assertNotIn(['tinder', 'kindling', 'firecraft'], server.query_groups(q)[1], q)
             self.assertIn('fire', [g[0] for g in server.query_groups(q)[1]], q)    # still searched as a fire
 
+    def test_pronoun_contractions_are_not_searched(self):
+        # fork/contractions: "i'm", "he's", "there's" say nothing to search for; the negations stay
+        for q, want in [("i'm bleeding", ['bleeding']), ("he's not breathing and there's blood", ['breathing', 'blood']),
+                        ("what's a normal heart rate", ['normal', 'heart', 'rate'])]:
+            self.assertEqual(server.query_groups(q)[0], want, q)
+        self.assertIn("hasn't", server.query_groups("baby hasn't moved")[0])
+
     def test_making_water_safe_is_disinfecting(self):
         for q in ('how do i purify water from a creek', 'how do i make the water safe', 'treat water with bleach'):
             self.assertIn(['water'], server.query_groups(q)[1], q)

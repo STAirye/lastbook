@@ -371,7 +371,7 @@ DANGER_CHOICES = ('Not breathing', 'Heavy bleeding', 'Burn', 'Poison', 'Fire')
 _SHORT = set('a an and are as at be but by can do does for from get got have help how i if in into is it its me my need no '
              'not of on or our please should so some that the their them then there these they this to up us was we what when '
              'where which who why will with without you your he she him her his hers oh yes'.split())
-_NO_APOS = {'isnt', 'cant', 'wont', 'dont', 'doesnt', 'hes', 'shes', 'im', 'didnt', 'wasnt', 'someones', 'thats'}
+_NO_APOS = set(typos.APOSTROPHES) | {'im'}     # fork: every contraction typed without its apostrophe (engine/typos.py)
 _VOCAB = {'words': None, 'seconds': None}
 
 

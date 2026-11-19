@@ -19,9 +19,13 @@ misspelled word back to a word the library uses, before the keyword search and t
   20 times the pages: "chocking" -> choking, not checking; "stabed" -> stabbed.
 - Words with digits ("EU2200i", "MT07"), apostrophes, hyphens or letters beyond a-z, and questions that look like another
   language ("hervir agua", "niño"), are left as typed. A library too small to tell typos from rare words changes nothing.
+- fork: contractions typed without the apostrophe are put back first (APOSTROPHES: "hasnt" -> hasn't, not hasn; "im" by
+  the words around it), so the negation reaches the search and the checks. A word with capitals inside ("ODing",
+  "iPhone") is a name, not a typo, and stays.
 - fork: words typed with no spaces are split (split_word): "heschuokinghelkp" -> "he's choking help", "kitchenonfire" ->
   "kitchen on fire". Only a word of 8+ letters the index doesn't hold, so "hypothermia", "firecraft" and "Gutenberg"
-  stay; each piece may have one of the slips above. Off with LASTBOOK_TYPO_SPLIT=0.
+  stay; each piece may have one of the slips above. A run typed with an apostrophe inside ("he'snotbreathing",
+  "i'mchoking") is split too, from 6 letters; a hyphenated word only part by part. Off with LASTBOOK_TYPO_SPLIT=0.
 - fork: an ordinary English word is never corrected, split or made a body word (is_english: engine/english_words.txt.gz,
   the hunspell en_US words with every form, 78,238; British spellings through the American one), so "keeled", "puking"
   and "gasps" stay. A short, explicit list of real words that are slips for an emergency word is put right: SLIPS
@@ -47,10 +51,28 @@ LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 STOP = set('a an and are as at be but by can do does for from get got have help how i if in into is it its me my need '
            'no not of on or our please should so some that the their them then there these they this to up us was we '
            'what when where which who why will with without you your'.split())
-# Typed without the apostrophe. Not "im" (intramuscular), "its", "were", "well", "ill" or "lets": those are words.
+# Typed without the apostrophe. Put back before any other correction, or the corrector bends them into another word and
+# the negation goes ("hasnt" -> hasn, "shouldve" -> shoulder, "whos" -> whose). Not "its", "were", "well", "ill", "lets",
+# "shell", "hell", "wed", "shed" or "id": those are words, and common ones in the library (id: 1,477 pages, ID). Not
+# "hed" either: in the held-out lists it was typed for head ("bluding from the hed"), not he'd. "cant"
+# and "wont" are words too, but rare ones (96 and 28 pages): typed in a question they are nearly always can't and won't.
+# "im" only by the words around it (IM_KEPT): "give im adrenaline" is intramuscular.
 APOSTROPHES = {'isnt': "isn't", 'cant': "can't", 'wont': "won't", 'dont': "don't", 'doesnt': "doesn't", 'didnt': "didn't",
                'wasnt': "wasn't", 'arent': "aren't", 'couldnt': "couldn't", 'hes': "he's", 'shes': "she's",
-               'thats': "that's", 'someones': "someone's", 'theyre': "they're"}
+               'thats': "that's", 'someones': "someone's", 'theyre': "they're",
+               # fork: the rest of the common ones
+               'werent': "weren't", 'hasnt': "hasn't", 'havent': "haven't", 'hadnt': "hadn't", 'wouldnt': "wouldn't",
+               'shouldnt': "shouldn't", 'mustnt': "mustn't", 'neednt': "needn't", 'shant': "shan't", 'aint': "ain't",
+               'whats': "what's", 'theres': "there's", 'wheres': "where's", 'heres': "here's", 'whos': "who's",
+               'hows': "how's", 'everyones': "everyone's", 'somebodys': "somebody's", 'youre': "you're",
+               'ive': "i've", 'weve': "we've", 'youve': "you've", 'theyve': "they've", 'couldve': "could've",
+               'wouldve': "would've", 'shouldve': "should've", 'mightve': "might've", 'youll': "you'll",
+               'theyll': "they'll", 'itll': "it'll", 'thatll': "that'll", 'youd': "you'd", 'theyd': "they'd"}
+# "im" is I'm, unless a medicine word is beside it ("give im injection", "im adrenaline", "iv or im"). IM in capitals in
+# a question not all in capitals is kept anyway (correct_with).
+IM_KEPT = re.compile(r"\b(give|given|gave|giving|via|by|an|the|iv|sc|(iv|sc) or)\s+im\b|\bim\s+(injection|injections|inj|injected|"
+                     r"adrenaline|adrenalin|epinephrine|epi|glucagon|dose|doses|route|shot|needle|or|iv|and iv)\b", re.I)
+IM = re.compile(r"\b([Ii])[Mm]\b(?!['’])")
 # Well-known misspellings of emergency words that edits cannot reach, or reach wrongly. Each is used only when the right
 # word is in the library. "asma" is also asthma in Spanish and Portuguese.
 KNOWN = {'asma': 'asthma', 'azma': 'asthma', 'asthama': 'asthma', 'nemonia': 'pneumonia', 'numonia': 'pneumonia',
@@ -110,7 +132,11 @@ ENGLISH_WORDS = STOP | set('am been were has had about after before out'.split()
 # one ("colour", "haemorrhage", "paediatric"), and a few chat words and medicine names the list lacks are added here.
 EXTRA_ENGLISH = set('lol lmao omg pls plz thx idk ok okay yeah yep nope nah gonna wanna gotta kinda dunno aint ya ur '
                     'mum mums mam nan nana nans grandad grandads granny nappy nappies telly bloke paracetamol ibuprofen '
-                    'tylenol advil panadol nurofen calpol xanax valium epipen inhaler inhalers cpr aed defib'.split())
+                    'tylenol advil panadol nurofen calpol xanax valium epipen inhaler inhalers cpr aed defib '
+                    # fork: slang, brand and medical words the list lacks, that the corrector bent into another word
+                    # ("unalive" -> unlike, "fortnite" -> fortunate, "sniffly" -> stiffly, "stooling" -> stooping)
+                    'unalive unalived tbh redback redbacks rennie rennies fortnite sniffly gurgly fluey konked gouching '
+                    'doms stooling'.split())
 BRITISH = (('our', 'or'), ('isation', 'ization'), ('ise', 'ize'), ('yse', 'yze'), ('ae', 'e'), ('oe', 'e'), ('tre', 'ter'),
            ('ogue', 'og'), ('ence', 'ense'), ('lled', 'led'), ('lling', 'ling'))
 _ENGLISH = {'words': None}
@@ -172,6 +198,15 @@ def phrase_slips(q):
         if english_on() and rx.search(q) and not (machine and _MACHINE.search(q)):
             q = rx.sub(new, q)
     return q
+
+
+def restore_im(q, shouting=False):
+    """fork: "im" typed for I'm put back ("im vomiting" -> i'm vomiting), unless a medicine word is beside one (IM_KEPT:
+    "give im adrenaline"). IM in capitals stays unless the whole question is in capitals."""
+    if IM_KEPT.search(q):
+        return q
+    return IM.sub(lambda m: m.group(0) if m.group(0) == 'IM' and not shouting else
+                  m.group(1) + ("'M" if m.group(0)[1] == 'M' else "'m"), q)
 # The library's own first-aid and emergency books, found by title. The financial "first aid kit" is not one.
 EMERGENCY_TITLES = ('title:("first aid" OR "emergency care" OR resuscitation OR "where there is no doctor" OR '
                     '"emergency response guidebook" OR "fire safety" OR "are you ready" OR "cert basic") NOT title:financial')
@@ -330,6 +365,7 @@ def fix_word(w, words):
 
 # fork: words typed with no spaces ("heschuokinghelkp" = he's choking help). See split_word.
 SPLIT_MIN = 8           # a word of fewer letters is never split
+SPLIT_MIN_APOSTROPHE = 6  # fork: a run typed with an apostrophe inside ("he'sfine") is two words at least
 SPLIT_PIECE = 20        # the longest piece tried
 SPLIT_PAGES = MIN_PAGES  # a piece of 3+ letters is a word on at least this many pages, as a replacement in fix_word
 SPLIT_COST = 3.0        # added for each space put in
@@ -410,7 +446,9 @@ def _piece(s, words):
     V = words.V
     rare = lambda w: words.lmax - math.log(V.get(w, 3)) - (SPLIT_SHORT if len(w) <= 2 else 0.0)
     best = None
-    if len(s) <= 2:
+    if s == 'im':                   # fork: in a glued run "im" is I'm ("imchoking"), as rare as "i"
+        best = (rare('i') + SPLIT_APOSTROPHE, "i'm")
+    elif len(s) <= 2:
         best = (rare(s), s) if s in SPLIT_SHORT_WORDS and s in V else None
     else:
         if s in APOSTROPHES:        # "he's" as rare as "he"
@@ -456,7 +494,7 @@ def whole_cost(w, words):
             (2 * SPLIT_EDIT if e is None else (SPLIT_EDIT if e[0] else SPLIT_EDIT_OTHER) - (SPLIT_DOUBLED if e[1] else 0.0)))
 
 
-def split_word(w, words):
+def split_word(w, words, whole=True):
     """fork: w (lower-case, a-z, not a word of the library) as the library's words it was typed for with no spaces, or None.
 
     Every way of cutting w into pieces is weighed at once (dynamic programming over where the spaces go): each piece costs
@@ -466,7 +504,7 @@ def split_word(w, words):
     split. The costs were chosen on glued runs of 2-6 words of the triage questions (clean and with typos) against long
     words with a typo and rare real words (.claude/drafts/triage, docs/FORK.md 3k)."""
     n = len(w)
-    if n < SPLIT_MIN or w in words.V or not w.isascii() or not w.isalpha() or is_english(w):   # fork: "dribbling" stays
+    if n < (SPLIT_MIN if whole else SPLIT_MIN_APOSTROPHE) or w in words.V or not w.isascii() or not w.isalpha() or is_english(w):   # fork: "dribbling" stays
         return None
     best = segment(w, words)
     if best is None or len(best[1]) < 2:
@@ -474,7 +512,7 @@ def split_word(w, words):
     cost, parts = best
     if cost > SPLIT_BASE + SPLIT_PER_SPACE * (len(parts) - 1) + SPLIT_PER_LETTER * n:
         return None
-    whole = whole_cost(w, words)
+    whole = whole_cost(w, words) if whole else None     # fork: not for a run typed with an apostrophe: two words at least
     if whole is not None and cost + SPLIT_MARGIN >= whole:
         return None
     return list(parts)
@@ -513,16 +551,35 @@ def correct_with(q, words):
         return q
     toks = TOKEN.findall(q)
     shouting = sum(t.isupper() for t in toks) > len(toks) / 2
+    q = restore_im(q, shouting)     # fork: "im vomiting" -> i'm, first
+
+    def glued(t, part=False):
+        """fork: a glued run typed with an apostrophe ("he'snotbreathing", "i'mchoking") split as split_word, the
+        apostrophe left out first (the pieces put it back: "hes" -> he's). A word with an ordinary ending ("he's",
+        "grandma's", "mum's") stays as typed. Hyphens: each part only split, never corrected ("help-hesnotbreathing")."""
+        if '-' in t:
+            return '-'.join(glued(p, True) if p else p for p in t.split('-'))
+        low = t.lower().replace('’', "'")
+        m = re.fullmatch(r"([a-z]+)'(s|t|d|m|re|ll|ve)", low)
+        if (not re.fullmatch(r"[a-z']+", low) or ("'" not in low and not part)
+                or (m and (m.group(1) in words.V or is_english(m.group(1)) or m.group(1) + m.group(2) in APOSTROPHES))):
+            return t
+        parts = split_word(low.replace("'", ''), words, whole=False)
+        return case(t, ' '.join(parts)) if parts else t
+
+    def case(t, f):
+        return f.upper() if t.isupper() else f[0].upper() + f[1:] if t[0].isupper() else f
 
     def one(m):
         t = m.group(0)
         if not re.fullmatch(r'[A-Za-z]+', t) or (t.isupper() and len(t) > 1 and not shouting):   # CPR, AED, ERG
+            return glued(t) if split_on() and re.search(r"[A-Za-z]['’-][A-Za-z]", t) else t
+        if not t.isupper() and re.search(r'[a-z][A-Z]|[A-Z]{2}[a-z]', t):     # fork: "ODing", "iPhone": a name, not a typo
             return t
         w = unstretch(t.lower(), words.V)       # fork: "bloooood" -> blood, then as typed so
         parts = split_word(w, words) if split_on() else None
         if parts:       # fork: words typed with no spaces
-            f = ' '.join(parts)
-            return f.upper() if t.isupper() else f[0].upper() + f[1:] if t[0].isupper() else f
+            return case(t, ' '.join(parts))
         f = fix_word(w, words)
         if f == w and body_fix_on():
             f = body_fix(f, words)

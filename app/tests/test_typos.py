@@ -73,6 +73,47 @@ class Corrections(unittest.TestCase):
         self.assertEqual(fix("he isn't breating"), "he isn't breathing")      # typed with the apostrophe: left alone
         self.assertEqual(fix('give im injection'), 'give im injection')        # intramuscular, not "i'm"
 
+    # fork: each of these was bent into another word one edit away, so the negation went ("hasnt" -> hasn)
+    CV = dict(V, hasn=50, haven=300, shouldn=40, wouldn=40, weren=30, hadn=20, shoulder=900, head=3000, here=9000,
+              whose=900, wave=700, young=900, im=1078, id=1477, were=13643, well=21467, shell=959, hell=67, its=26804,
+              lets=572, ill=1361, wed=45, shed=345, moved=800, all=50000, day=9000, vomiting=900, green=800)
+
+    def test_contractions_typed_without_the_apostrophe(self):
+        W = typos.Words(self.CV, E)
+        for q, want in [('baby hasnt moved all day', "baby hasn't moved all day"),
+                        ('i havent pooed in days', "i haven't pooed in days"),
+                        ('you shouldnt swim after eating', "you shouldn't swim after eating"),
+                        ('they werent breathing', "they weren't breathing"), ('it wouldnt stop', "it wouldn't stop"),
+                        ('i shouldve called', "i should've called"), ('he is bleeding from the hed', 'he is bleeding from the head'),
+                        ('heres what happened', "here's what happened"), ('whos there', "who's there"),
+                        ('weve tried', "we've tried"), ('youve got to', "you've got to"), ('ive been sick', "i've been sick"),
+                        ('kid aint breathing', "kid ain't breathing"), ('Hasnt moved', "Hasn't moved"),
+                        ('HE HASNT MOVED', "HE HASN'T MOVED")]:
+            self.assertEqual(typos.correct_with(q, W), want, q)
+        for q in ('we were there', 'not well', 'a sea shell', 'bloody hell', 'its leg', 'lets go', 'he is ill',
+                  'they wed in may', 'the shed', 'photo id', 'id card'):          # words of their own: left as typed
+            self.assertEqual(typos.correct_with(q, W), q, q)
+
+    def test_im_by_the_words_around_it(self):
+        W = typos.Words(self.CV, E)
+        for q, want in [('im vomiting green', "i'm vomiting green"), ('Im 17', "I'm 17"), ('IM DYING', "I'M DYING"),
+                        ('and im bleeding', "and i'm bleeding")]:
+            self.assertEqual(typos.correct_with(q, W), want, q)
+        for q in ('give im adrenaline', 'im injection into the thigh', 'iv or im', 'give IM adrenaline', 'the IM route'):
+            self.assertEqual(typos.correct_with(q, W), q, q)
+
+    def test_negation_reaches_the_checks(self):
+        from engine import confidence
+        W = typos.Words(self.CV, E)
+        for q in ('he isnt breathing', 'she hasnt peed all day', 'mum cant move her arm'):
+            self.assertTrue(confidence.urgent(typos.correct_with(q, W)), q)
+            self.assertNotRegex(typos.correct_with(q, W), r"\b(hasn|isn|can)\b(?!')", q)
+
+    def test_names_with_capitals_inside_and_slang_stay(self):
+        W = typos.Words(dict(self.CV, oring=30, unlike=900, fortunate=300, stiffly=20), E)
+        for q in ('my brother is ODing', 'my iPhone', 'unalive myself', 'fortnite all night', 'sniffly nose'):
+            self.assertEqual(typos.correct_with(q, W), q, q)
+
     def test_short_words_numbers_and_models(self):
         for q in ('ot', 'eu', 'mt', 'EU2200i wont start', 'MT07 chain', '2200 watts', '12v', 'CPR', 'give IM adrenaline'):
             self.assertEqual(fix(q).replace("won't", 'wont'), q, q)
@@ -141,6 +182,16 @@ class Glued(unittest.TestCase):
     def test_clean_questions_unchanged(self):
         for q in ('my baby is blue', "he's not breathing", 'how to purify water', 'kitchen on fire'):
             self.assertEqual(self.fix(q), q, q)
+
+    def test_glued_with_an_apostrophe_inside(self):
+        # fork: the apostrophe kept the run one token that was never split ("he'snotbreathingwhatdoido" found no pages)
+        for q, want in [("he'snotbreathing", "he's not breathing"), ("she'sbleeding", "she's bleeding"),
+                        ("i'mchoking", "i'm choking"), ("i’mchoking", "i'm choking"), ("He'snotbreathing", "He's not breathing"),
+                        ("mybabyisn'tbreathing", "my baby isn't breathing"), ('help-hesnotbreathing', "help-he's not breathing"),
+                        ("he's choking", "he's choking"), ("she's", "she's"), ("o'clock", "o'clock"), ('first-aid', 'first-aid')]:
+            self.assertEqual(self.fix(q), want, q)
+        os.environ['LASTBOOK_TYPO_SPLIT'] = '0'
+        self.assertEqual(self.fix("he'snotbreathing"), "he'snotbreathing")
 
     def test_neighbours_found_as_edits1_finds_them(self):
         for s in ('chuoking', 'helkp', 'bleeeding', 'hypothermai', 'brething', 'kitchne', 'waterr', 'xqzv'):

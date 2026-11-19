@@ -260,6 +260,14 @@ def topics_resolved():
 STOP = set('a an and are as at be but by can do does for from get got have help how i if in into is it its me my need '
            'no not of on or our please should so some that the their them then there these they this to up us was we '
            'what when where which who why will with without you your'.split())
+# fork: a pronoun or question word with its ending ("i'm", "he's", "there's"; engine/typos.py puts the apostrophe back in
+# "im", "hes", "theres") says nothing to search for, as its stop word alone. Not the negations: "isn't", "can't" stay.
+STOP |= {p + "'" + e for p, ends in (('i', 'm ve d ll'), ('he', 's d ll'), ('she', 's d ll'), ('it', 's d ll'),
+                                     ('we', 're ve d ll'), ('you', 're ve d ll'), ('they', 're ve d ll'), ('that', 's d ll'),
+                                     ('there', 's d ll re'), ('here', 's'), ('what', 's re d ll'), ('who', 's d ll re ve'),
+                                     ('where', 's d re'), ('when', 's d'), ('how', 's d re'), ('why', 's d re'), ('let', 's'),
+                                     ('someone', 's'), ('somebody', 's'), ('everyone', 's'))
+         for e in ends.split()}
 # Everyday words -> words the manuals actually use. Each group is OR-ed; groups are AND-ed.
 SYN = {
     'cut': ['wound', 'wounds', 'laceration', 'bleeding'], 'cuts': ['wound', 'wounds', 'laceration'],
