@@ -233,6 +233,7 @@ def main():
             '_internal/webview2/WebView2Loader.dll', '_internal/web/index.html', '_internal/llm/lastbook-llm.exe', '_internal/llm/libllama.dll',
             '_internal/llm/ggml-vulkan.dll', '_internal/llm/ggml-cpu-x64.dll', '_internal/setup/manifest-v1.json',
             '_internal/web/setup.html', '_internal/web/setup.js', '_internal/web/setup.css', '_internal/engine/setup/roots.pem',
+            '_internal/engine/english_words.txt.gz', '_internal/engine/english_words.LICENSE.txt',   # fork: engine/typos.py's English words
             '_internal/zim-9.dll']   # ZIM wikis: PyInstaller leaves libzim out if it fails to load at build time (its .pyd is checked below)
     sq = root / '_internal' / 'sqlite3.dll'      # SQLite 3.50.3 or later (CVE-2025-7709, FTS5; packs bring search databases)
     if not sq.is_file():

@@ -192,6 +192,70 @@ class BodyWords(unittest.TestCase):
         self.assertEqual(self.fix('he has no puls'), 'he has no puls')
 
 
+class EnglishWords(unittest.TestCase):
+    """fork: ordinary English words (engine/english_words.txt.gz) are never "corrected" into a library word; a short explicit
+    list of real-word slips for emergency words is (SLIPS, PHRASE_SLIPS); letters typed again and again are cut first."""
+    EV = dict(V, peeled=300, poking=40, sewing=500, blocked=900, gaps=700, sizes=900, tested=900, stock=2000, poised=60,
+              crust=200, camp=900, brand=800, breathe=900, bleeding=1800, passed=2000, heart=3000, drooping=40, weak=900,
+              blood=4000, help=9000, please=3000, so=20000, much=9000, no=40000, leak=800, gas=3000, hemorrhage=150,
+              unconscious=800, tourniquet=200, poisoned=300, man=5000, my=30000, son=900, having=8000, he=40000, she=30000,
+              was=50000, the=90000, a=90000, lot=3000, car=4000, properly=900, face=2000, arm=1500, **{'from': 60000, 'is': 90000})
+    WORDS = typos.Words(EV, dict(E, breathe=300, bleeding=600, heart=400, blood=900, help=800, leak=40, gas=300))
+
+    def setUp(self):
+        self.addCleanup(os.environ.pop, 'LASTBOOK_TYPO_ENGLISH', None)
+        os.environ.pop('LASTBOOK_TYPO_ENGLISH', None)
+
+    def fix(self, q):
+        return typos.correct_with(q, self.WORDS)
+
+    def test_the_list_ships_and_reads_fast(self):
+        typos._ENGLISH['words'] = None
+        import time
+        t = time.perf_counter()
+        words = typos.english_words()
+        self.assertLess(time.perf_counter() - t, 1.0)
+        self.assertGreater(len(words), 50000)
+        self.assertTrue({'keeled', 'puking', 'gasps', 'seizes', 'breathing'} <= words)
+        self.assertFalse({'strock', 'poisend', 'siezing', 'bleding', 'hlep', 'breating'} & words)
+        self.assertTrue((ROOT / 'engine' / 'english_words.LICENSE.txt').is_file())
+
+    def test_everyday_words_stay(self):
+        for q in ('she keeled over', 'he keeps puking', 'spewing everywhere', 'he blacked out', 'short gasps', 'he seizes',
+                  'she texted me', 'crusty eyes', 'leg cramp', 'colour of the rash', 'the dog is breeding'):
+            self.assertEqual(self.fix(q), q, q)
+        for w in ('keeled', 'colour', 'haemorrhage', 'paracetamol', 'mum'):
+            self.assertTrue(typos.is_english(w), w)
+        self.assertIsNone(typos.split_word('dribbling', self.WORDS))       # a long English word is never split
+
+    def test_typos_are_still_fixed(self):
+        for q, want in [('strock', 'stroke'), ('poisend', 'poisoned'), ('hemmorage', 'hemorrhage'), ('unconshus man', 'unconscious man'),
+                        ('hlep', 'help'), ('brething', 'breathing'), ('chocking', 'choking'), ('brunt', 'burnt')]:
+            self.assertEqual(self.fix(q), want, q)
+
+    def test_real_word_slips(self):
+        for q, want in [('he cant breed', 'he can\'t breathe'), ("hes not braking", "he's not breathing"),
+                        ('she is not breaking', 'she is not breathing'), ('she is breeding a lot from the leg', 'she is bleeding a lot from the leg'),
+                        ('my son is having a sea sure', 'my son is having a seizure'), ('he past out', 'he passed out'),
+                        ('cheat pain', 'chest pain'), ('chest pane', 'chest pain'), ('dad having a hart attack', 'dad having a heart attack'),
+                        ('gas leek', 'gas leak'), ('his face is dropping', 'his face is drooping'), ('my arm feels week', 'my arm feels weak')]:
+            self.assertEqual(self.fix(q), want, q)
+        for q in ('the car is not braking properly', 'we are not breeding the dogs', 'in the past out of the way'):
+            self.assertEqual(self.fix(q), q, q)                              # a machine, an animal, the past
+
+    def test_letters_typed_again_and_again(self):
+        self.assertEqual(self.fix('sooo much bloooood'), 'so much blood')
+        self.assertEqual(self.fix('pleaseeee helpppp my son'), 'please help my son')
+        self.assertEqual(self.fix('kkkkk'), 'kkkkk')                         # mash stays mash
+        self.assertEqual(typos.unstretch('breathing', self.WORDS.V), 'breathing')
+
+    def test_switch(self):
+        os.environ['LASTBOOK_TYPO_ENGLISH'] = '0'
+        self.assertFalse(typos.is_english('keeled'))
+        self.assertNotIn('breathe', self.fix('he cant breed'))              # no real-word slips either
+        self.assertEqual(self.fix('gasps'), 'gaps')                         # as before: bent into the library's word
+
+
 class Switch(unittest.TestCase):
     def setUp(self):
         self.real = typos.words_for

@@ -12,9 +12,10 @@ right page there), so at the same cut it lets through 2-4 times as many searches
 ranks them no better (.claude/drafts/triage/conf_top3.py).
 
 The chat uses it (assistant.chat): below BUTTONS it offers buttons; below UNSURE, on a conversation's own new question, it
-asks the person to say more instead of answering from pages that are probably wrong. A question that may be an emergency
-(urgent()) gets the pages all the same. An everyday question (one that may not be urgent) gets buttons only below
-EVERYDAY_BUTTONS, much lower, and smaller ones (everyday_level()). LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS,
+asks the person to say more instead of answering from pages that are probably wrong, and gives those pages all the same.
+A question that may be an emergency (urgent()) is answered from them instead, with the buttons (assistant.chat_level). An
+everyday question (one that may not be urgent) gets buttons only below EVERYDAY_BUTTONS, much lower, and smaller ones
+(everyday_level()). LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS,
 LASTBOOK_CONF_UNSURE and LASTBOOK_CONF_BUTTONS_EVERYDAY move the thresholds (0 to 1).
 
 fork: when the question's words are not the library's (unknown_words: keyboard mash, a glued question that could not be
@@ -59,8 +60,92 @@ URGENT = re.compile(
     r"|hurricane|labou?r|birth|water broke|pregnan\w*|contractions|newborn|baby|infant|miscarr\w*|suicid\w*"
     r"|kill (him|her|my|them|your)sel\w*|self.harm|live anymore|end (it|my life)|attack\w*|intruder|break(ing)?|braking|riot\w*"
     r"|hostage|bomb|hypotherm\w*|frostbite|shiver\w*|heat ?stroke|stuck|nail|pale|sweaty|accident\w*|injur\w*|hurt\w*"
-    r"|pain\w*|weak\w*|numb|broken|fractur\w*|bone|sleepy|drowsy|vomit\w*|fever\w*|rash|car|crash\w*|vehicle|ambulance|hospital|emergency|dying|dead|help)\b",
+    r"|pain|pains|painful|painkiller\w*|weak\w*|numb|broken|fractur\w*|bone|sleepy|drowsy|vomit\w*|fever\w*|rash|car|crash\w*|vehicle|ambulance|hospital|emergency|dying|dead|help)\b"
+    # fork (docs/FORK.md 3l): the same emergencies in everyday words, where none of the words above is used
+    r"|\b(seiz\w*|siez\w*|fitting|kill\w* (him|her|my|them|your|our)sel\w*|tablets?|capsules?|over ?dos\w*|paracetamol"
+    r"|acetaminophen|tylenol|panadol|ibuprofen|aspirin|opioid\w*|heroin|fentanyl|xanax|valium|slump\w*|keel\w* over"
+    r"|puk(e|ed|es|ing)|throw(ing|n)? up|spew\w*"
+    r"|out cold|rous(e|ed|able)|unrous\w*|gurgl\w*|gasp\w*|agonal|stridor|thunderclap|slurr\w*|gush\w*|palpitat\w*"
+    r"|froth\w*|tourniquet|hemorrhag\w*|haemorrhag\w*|anaphylactic|epi ?pen|suffocat\w*|strangl\w*"
+    r"|hang(ed|ing)? (him|her|my|them)sel\w*|goodbye|disappear (forever|for good)|want to disappear|better off (dead|without)"
+    r"|no reason to live|(want|wants|wanted|wanna|going|gonna) to die|take my (own )?life|ending it|end it all"
+    r"|(pouring|squirting|pumping|soaking|soaked|dripping) (out|from|blood|everywhere|through|all over|a pad|pads|the (pad|towel"
+    r"|bandage|sheets?))|crooked (smile|face|mouth)|(smile|face|mouth) (is |looks |gone |went )?(crooked|lopsided|droopy)"
+    r"|(dribbl\w*|drool\w*) (out |down )?(of |from )?(the )?(side|corner) of|eyes? (are |were |keep |kept |keeps )?roll\w*"
+    r"|(won'?t|wont|not|isn'?t|isnt|doesn'?t|doesnt|can'?t|cant|cannot|stopped|hard to) (answer\w*|respon\w*|react\w*"
+    r"|rous\w*|com(e|ing) (round|to)|open (his|her|their) eyes|wak(e|ing)|stop)"
+    r"|(dropped|went down|fell down|collapsed) like a (stone|rock|sack|log|tree)|face ?down"
+    r"|(lying|lay|laid|collapsed|fallen|fell|found (him|her|them)|is|was|been|still|he'?s|she'?s|hes|shes|lady|man|woman|guy"
+    r"|person|someone|somebody|grandma|grandpa|gran|nan|nana|mum|dad|mom|him|her) on the (floor|ground|pavement|road|street"
+    r"|kitchen floor|bathroom floor)"
+    r"|(took|taken|swallowed|had|ate|eaten|downed|drank) (a |the |his |her |my )?(whole|entire|full) (box|bottle|packet|pack"
+    r"|strip|tub|jar|sheet|blister|pot)|(sleep|sleeping) it off|(really|very|so|too) drunk"
+    r"|(worst|sudden|severe|blinding|exploding) (\w+ )?headache|(funny|strange|weird|odd) turn|came over all"
+    r"|(talk|talking|speak|speaking|say|saying|words?) (\w+ ){0,4}(funny|strange|weird|wrong|right|jumbled|muddled|gibberish"
+    r"|nonsense|properly|slurred)|mixing up (his |her |my )?words"
+    r"|(can'?t|cant|cannot|couldn'?t) (lift|raise|move|feel|use) (his|her|my|their|the|one|an?) ?(left |right )?"
+    r"(arms?|legs?|hands?|feet|toes|side|face|body)|(one|left|right) side of (his|her|my|their|the) (face|body|mouth)"
+    r"|(blind|can'?t see|lost (the )?(sight|vision)) in (one|his|her|my|the) (left |right )?eye"
+    r"|colou?r (is |was )?(like )?(ash|grey|gray|white|purple)|(grey|gray|ashen|mottled) (and|skin|face|lips|colou?r)"
+    r"|(gone|went|turned|turning|looks?|is|was) (grey|gray|ashen|mottled)|venom\w*|firework\w*|sweating|swollen and (hot|red)"
+    r"|(red|hot) and swollen|cellulit\w*|sepsis|septic|gash\w*|sliced (my|his|her|open|deep)|deep cut|leaking (fluid|water)"
+    r"|under (the )?(bath |pool |sea |river |lake )?water|(he'?s|she'?s|hes|shes|is|was|baby|feels?|kid) (frozen|freezing)"
+    r"|(can'?t|cant|cannot|couldn'?t) (stand|walk|put weight|pee|wee|urinate)|hasn'?t (peed|weed)|no (wee|pee|urine)"
+    r"|broke (my|his|her|ur|your|their) (\w+ )?(arm|leg|nose|wrist|ankle|finger|toe|bone|hip|back|neck|ribs?|jaw)"
+    r"|(knocked out|lost) (a |his |her |my )?(tooth|teeth)|(tooth|teeth) (knocked|came|fell) out|in (my|his|her|their) eye"
+    r"|(hit|poked|stabbed|scratched|splashed) in the eye|eyes? (got |was |were )?(hit|poked|stabbed|cut|splashed)"
+    r"|(up|in|into) (his|her|my|their|the) (nose|ear)|(arms?|legs?|side) (feels |feel |is |went |gone )?(heavy|dead|funny)"
+    r"|toes (going|gone|turning|are) (cold|blue|white|numb)|cast (\w+ ){0,2}tight|c(a|o)me over all"
+    r"|(drink\w*|drank|swallow\w*|ate|eaten) (the |some |a )?(cleaning|washing|laundry|dishwasher))\b",
     re.I)
+# fork: everyday phrases that use an emergency word for something else ("bleed the brakes", "blood orange", "a breath of
+# fresh air", "feeling blue"). Cut out of the text before URGENT and the body signs look (not_urgent_text), so the rest of
+# the question still counts: "bad breath and now he can't breathe" is still urgent. Common idioms, not a list of questions.
+NOT_URGENT = re.compile(
+    r"\bbleed(ing)? (the |my |a )?(brakes?|radiators?|valves?|area)\b|\bbleeding edge\b|\bcolou?rs? bleed\w*|\bbleed in print\w*"
+    r"|\bblood (orange|oranges|moon|brothers?|sausages?|pudding|bank|drive|donor|donation)\b|\b(first|fake) blood\b"
+    r"|\bbloody (hell|typical|annoying|ridiculous)\b|\b(bad|fresh|morning) breath\b|\bbreath of fresh air\b"
+    r"|\bbreathing (exercises?|space|room)\b|\blet (the |it )?(wine|dough) breathe\b"
+    r"|\b(fabrics?|material|shoes?|clothes|clothing|jacket) (that )?breath(e|es|able)\b"
+    r"|\bpulses?(?= (lentils|beans|recipes?|setting|button|mode))|\bpulse of the (city|nation|market|music|night|times)\b"
+    r"|\bheart of (the matter|palm|gold|stone)\b|\b(broke|broken|breaks?|breaking) (my |his |her |your |their )?heart\b"
+    r"|\bheart ?(break|broken|breaking|breaker)\w*|\bstroke of (luck|genius|midnight)\b|\bbrush ?strokes?\b"
+    r"|\b(two|four|2|4)[ -]stroke\b|\b(breast|back)stroke\b|\bstroke (a|the|my|his|her) (cat|dog|kitten|puppy|hair|beard)\b"
+    r"|\b(have|having|had|throw|throwing|threw) a (hissy )?fit (about|when|if|over)\b"
+    r"|\b(doesn'?t|don'?t|didn'?t|doesnt|dont|didnt) fit\b|\b(song|track|tune|beat|album|outfit) is (fire|sick)\b"
+    r"|\bburn (a|the) (cd|dvd|disc|disk)\b|\bsick burn\b|\bburning question\b|\bcalories? burn\w*"
+    r"|\bburn(ed|t|ing|s)? (calories|fat|money|bridges)\b|\bdrown\w* in (homework|emails?|work|debt|paperwork|bills)\b"
+    r"|\bdrown (the|it) in\b|\bpoisoned apple\b|\bdying to (know|see|try|hear|meet)\b"
+    r"|\b(phone|battery|laptop|ipad|torch|remote|car battery) (is |was |has |just )?(dead|died)\b|\bdead battery\b"
+    r"|\bchoked up (at|when|during|over|about|a bit)\b|\b(team|we|they) choked in the (final|game|match|semi\w*)\b"
+    r"|\b(engine|motor|carb\w*) (is |was |keeps )?chok\w*|\bchoke (on|of) (a|the|my) (motor\w*|bike|car|engine)\b"
+    r"|\bblue screen\b|\bfeel(ing)? blue\b|\bchest of drawers\b|\bchest (day|press|fly|workout)\b|\bbone broth\b"
+    r"|\bskull and bones\b|\bcut and paste\b|\bthe cut of\b|\bbudget cuts?\b|\bbreak a leg\b"
+    r"|\b(car|van|bike|washing machine) (broke|broken|has broken) down\b|\blabou?r (day|party|market|costs?)\b"
+    r"|\bcontractions in (english|grammar)\b|\bpregnant (with (flavou?r|meaning)|pause)\b"
+    r"|\b(heat ?stroke|frost) on (my |the )?(plants?|tomato\w*|garden)\b|\bsugar (rush|free|cane|beet|syrup)\b"
+    r"|\bhead is spinning with\b|\bfell flat\b|\b(android|ipad|samsung|drawing) tablets?\b|\bkilling it\b"
+    r"|\bseiz\w* (of )?(assets|property|goods)\b|\bseize the (day|moment|opportunity|chance)\b"
+    r"|\b(engine|motor|bolt|nut|screw) (has )?seized\b|\bcollapsed (into|in) (laughter|tears|giggles)\b"
+    r"|\b(tent|cake|souffle|market|economy|deal|talks) (has )?collapsed\b|\b(stock|market|app|computer|game|laptop|server)"
+    r" (crash\w*|keeps crashing)\b|\bstock market crash\b|\bheartbeat monitoring\b|\b(bass|drum) ?line is the heartbeat\b"
+    r"|\bpassed out of the (academy|college|school)\b|\bout cold after (a |my )?(long|night|shift)\w*|\b(?:choking hazards?"
+    r"|overdos\w* on (netflix|tv|television|coffee|caffeine|chocolate|sugar|youtube|tiktok|games?|series|shows?)"
+    r"|(lips?|hands?|tongue|teeth|mouth|fingers?) (are |is |look |looks |went |gone )?(blue|purple|green|black|red) from (the |a |my )?"
+    r"(slushie|slush|blueberr\w*|berr\w*|ice lolly|lolly|lollipop|sweets?|candy|food colou?ring|dye|ink|paint|marker|pen|juice|drink)"
+    r"|lipstick|black pudding|(dough|code|ink|paint|colou?rs?|dye|fabric|shirt|wash|print\w*) (is |are )?bleed\w*"
+    r"|(sourdough|starter|dough|wine|fabric|soil|plant|engine) (\w+ )?(is |isn'?t |isnt |not )?breath\w*"
+    r"|(battery|engine|motor|plant|weeds?) (is |are |was )?chok\w*|heart stopped when"
+    r"|(plants?|flowers?|leaves|lettuce|seedlings?) (\w+ ){0,3}(floppy|limp)|(toast|dinner|rice|cake|pizza|bread|sauce) (is |was )?burn\w*"
+    r"|drown (the |it |them )?(\w+ )?in (dressing|sauce|gravy|butter|oil|syrup|ketchup)|(quit|quitting|stop|stopping|give up|giving up) smoking"
+    r"|(practi[cs]e|practi[cs]ing|training|course|class|certification|certificate|exam|test) (\w+ ){0,3}(cpr|heimlich|first aid)"
+    r"|(cpr|first aid|heimlich) (certification|certificate|course|class|training|exam|test)s?|on a (dummy|manikin|mannequin|doll))\b",
+    re.I)
+
+
+def not_urgent_text(text):
+    """fork: text with NOT_URGENT's everyday phrases cut out, each replaced by a space."""
+    return NOT_URGENT.sub(' ', (text or '').replace('’', "'"))
 
 
 # fork: the injury words of URGENT, for server.PHRASES. A how-to phrase ("light a fire", "treat water") is not used when the
@@ -100,16 +185,40 @@ BODY_WORDS = {
     'bleeding': 'bleeding', 'bleed': 'bleeding', 'blood': 'bleeding',
     'seizure': 'seizure', 'seizures': 'seizure', 'convulsing': 'seizure', 'convulsions': 'seizure',
     'clammy': 'cold and clammy',
+    'cpr': 'pulse', 'heimlich': 'choking',        # fork: "how do i do cpr on a man": what to do for no pulse
 }
 BODY_PHRASES = {
     'blue': r"\b(lips?|skin|face|fingers|he|she|baby) (is |are |was |were |look |looks |gone |going |turned |turning )*"
             r"(blue|grey|gray)\b|\b(turn(ed|ing)?|gone|going|went) (blue|grey|gray)\b|\bblue (lips?|skin|face)\b",
-    'unconscious': r"\b(passed|blacked) out\b|\bwon'?t wake( up)?\b|\bnot waking\b|\bfainted\b",
-    'chest pain': r"\bchest\b.{0,20}\b(pain\w*|hurts?|hurting|tight\w*|pressure|crushing)\b|\b(pain|pressure) in (his|her|my|the) chest\b",
+    'unconscious': r"\b(passed|blacked) out\b|\bwon'?t wake( up)?\b|\bnot waking\b|\bfainted\b"
+                   # fork: the everyday words (docs/FORK.md 3l)
+                   r"|\b(can'?t|cant|cannot|couldn'?t) wake (him|her|them|up)\b|\bhard to (rouse|wake)\b|\bunrous\w*"
+                   r"|\b(won'?t|wont|not|isn'?t|isnt|doesn'?t|doesnt|stopped) (respon\w*|react\w*|rous\w*|com(e|ing) (round|to)"
+                   r"|open(ing)? (his|her|their) eyes)\b|\b(won'?t|wont|not|isn'?t|isnt|doesn'?t|doesnt) answer(ing)? (me|us|when|at all)\b"
+                   r"|\bout cold\b|\bkeel\w* over\b|\bslump(ed|ing)\b|\b(dropped|went down|fell down|collapsed) like a (stone|rock|sack|log|tree)\b"
+                   r"|\bface ?down (in|on)\b",
+    'chest pain': r"\bchest\b.{0,20}\b(pain\w*|hurts?|hurting|tight\w*|pressure|crushing)\b|\b(pain|pressure) in (his|her|my|the) chest\b"
+                  r"|\belephant\b.{0,25}\bchest\b|\b(tight|heavy|crushing|squeezing|tightness in (his|her|my|the)) chest\b"
+                  r"|\b(pain|hurts?|hurting|ache) in (his|her|my|the) heart\b",
     'not moving': r"\b(not|isn'?t|stopped|won'?t|can'?t|cannot) mov(e|ing)\b|\b(limp|floppy)\b",
-    'seizure': r"\b(having|had|has|is|was|keeps?) (a )?fit(s|ting)?\b",
+    'seizure': r"\b(having|had|has|is|was|keeps?) (a )?fit(s|ting)?\b"
+               r"|\b(he'?s|she'?s|hes|shes|they'?re|been|started|still|keeps?|baby|child|kid|son|daughter) fitting\b"
+               r"|\bfitting (and|for|again|won'?t|wont)\b|\beyes (are |were |keep |kept |keeps )?(rolling|rolled)\b"
+               r"|\b(shaking|jerking|twitching) (all over|uncontrollabl\w*|and (won'?t|wont|can'?t|cant) stop|on the floor)"
+               r"|\b(foam\w*|froth\w*) (at|from) (the|his|her) mouth\b|\bseiz(ing|ed|es)\b",
     'cold and clammy': r"\bcold and (wet|clammy|sweaty)\b|\b(wet|sweaty) and cold\b",
 }
+# fork: bleeding without the word, a heart racing or too slow, the snoring or gurgling of someone who has collapsed
+BODY_PHRASES['bleeding'] = (r"\b(pouring|gushing|spurting|squirting|pumping|soaking|soaked) (out|from|blood|everywhere|through"
+                            r"|all over|a pad|pads|the (pad|towel|bandage|sheets?))\b|\b(cut|wound|gash|nosebleed|nose|it|that)"
+                            r" .{0,25}(won'?t|wont|doesn'?t|doesnt|will not|not) stop( bleeding| oozing| pouring)?\b"
+                            r"|\bwon'?t stop (oozing|pouring|dripping|gushing)\b|\bsoaking (a |the |through )?(pads?|towels?|bandages?)\b")
+BODY_PHRASES['pulse'] = (r"\b(heart|pulse) (is |was |keeps |been )?(beating |going )?(really |very |so |too |super )?(fast|slow|hard"
+                         r"|weird|funny|irregular|skipping|fluttering|racing|pounding|thumping|stopped)\b|\b(heart|pulse) racing\b"
+                         r"|\b(can'?t|cant|cannot|couldn'?t) (feel|find|hear) (his|her|a|the|their|my) (heart\w*|pulse)\b")
+BODY_PHRASES['breathing'] = (r"\b(snoring|gurgling|gasping|rattling)\b.{0,40}\b(won'?t|wont|can'?t|cant|not|doesn'?t|doesnt)"
+                             r" (wake|respond|answer)|\b(collapsed|unconscious|on the floor|fell)\b.{0,40}\b(snoring|gurgling|gasping)\b"
+                             r"|\b(she'?s|he'?s|shes|hes|is|baby is) gurgling\b|\bagonal\b")
 BODY_PHRASES = {k: re.compile(v, re.I) for k, v in BODY_PHRASES.items()}
 BODY_COMMON = 50    # a word on this many pages or more is a word of its own: only an exact body word counts
 # Stems looked for inside a glued run (a word of 8+ letters the library doesn't hold), in order, and the words a search
@@ -144,7 +253,8 @@ def body_match(t, V=None):
     """The word of BODY_WORDS that the word t is, or is a slip for (see above), or None."""
     if t in BODY_WORDS:
         return t
-    if len(t) < 4 or not t.isalpha() or (V or {}).get(t, 0) >= BODY_COMMON or t in typos.ENGLISH_WORDS:
+    if (len(t) < 4 or not t.isalpha() or (V or {}).get(t, 0) >= BODY_COMMON or t in typos.ENGLISH_WORDS
+            or typos.is_english(t)):    # fork: "bloom", "chose", "breed" are words of their own, library or not
         return None
     best = None
     for b in BODY_WORDS:
@@ -183,8 +293,8 @@ def body_signs(*texts):
     V, _ = _words()
     out = set()
     for text in texts:
-        text = (text or '').lower().replace('’', "'")
-        if not text:
+        text = not_urgent_text(text).lower()        # fork: "bleed the brakes", "a breath of fresh air"
+        if not text.strip():
             continue
         out |= {k for k, rx in BODY_PHRASES.items() if rx.search(text)}
         for t in re.findall(r"[a-z]+", text.replace("'", '')):
@@ -228,7 +338,7 @@ def everyday_level(p):
 def urgent(*texts):
     """True when any of the texts (the question as typed, as searched, its English words) may be about an emergency: a word
     of URGENT, or a body sign (body_signs: "he has no puls", "mybbyisntbreathing")."""
-    return any(URGENT.search((t or '').replace('’', "'")) for t in texts) or bool(body_signs(*texts))
+    return any(URGENT.search(not_urgent_text(t)) for t in texts) or bool(body_signs(*texts))
 
 
 def _words():
@@ -304,7 +414,8 @@ def unknown_words(q):
     if any(re.search(r'\d', t) for t in toks):
         return False
     content = [t for t in toks if t not in typos.ENGLISH_WORDS and t not in NOT_CONTENT and len(t) > 1]
-    return not content or sum(t not in V for t in content) * 2 > len(content)
+    # fork: an ordinary English word the library lacks (engine/typos.is_english) is not mash either
+    return not content or sum(t not in V and not typos.is_english(t) for t in content) * 2 > len(content)
 
 
 def unknown_on():

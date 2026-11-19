@@ -41,6 +41,7 @@ datas += [(str(LLM / 'LICENSE-llama.cpp.txt'), 'llm')]
 datas += [(str(SHIP / 'setup' / 'manifest-v1.json'), 'setup')]   # what first-run setup can install
 hidden += collect_submodules('engine.setup')
 datas += [(str(ROOT / 'engine' / 'setup' / 'roots.pem'), 'engine/setup')]   # the only roots setup's downloader trusts
+datas += [(str(ROOT / 'engine' / n), 'engine') for n in ('english_words.txt.gz', 'english_words.LICENSE.txt')]   # fork: typos.py's words
 for package in ('libzim', 'pypdfium2', 'pypdfium2_raw'):   # loaded only when a ZIM or PDF is first opened, and they carry native libraries
     d, b, h = collect_all(package)
     datas += d

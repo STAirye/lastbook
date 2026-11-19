@@ -400,7 +400,7 @@ def _looks_like_word(w):
 
 
 def _known(w, V):
-    if w in _SHORT or w in _NO_APOS or w in ENGLISH_WORDS:
+    if w in _SHORT or w in _NO_APOS or w in ENGLISH_WORDS or typos.is_english(w):   # fork: ordinary English is not mash
         return True
     if not V:
         return _looks_like_word(w)
@@ -440,6 +440,23 @@ def is_noise(msg):
     return mostly_unknown(msg) and mostly_unknown(typos.correct(msg))
 
 
+# fork: a bare plea or emergency number as the whole message ("911", "help", "hlep", "HELP ME", "emergency", "sos"): there
+# is nothing to search for, but someone may be in danger. The chat shows the emergency buttons first, full size, and asks
+# what is happening (PLEA_TEXT), with whatever pages the search found.
+PLEA_CORE = {'help', 'hlep', 'halp', 'hepl', 'helo', 'sos', 'mayday', 'emergency', 'urgent', 'ambulance', '911', '999', '112',
+             '000', '111', '119', '110', '100', '108'}
+PLEA_FILL = {'me', 'us', 'please', 'pls', 'plz', 'now', 'someone', 'somebody', 'anyone', 'quick', 'quickly', 'asap', 'call',
+             'an', 'the', 'a', 'i', 'need', 'its', "it's", 'is', 'this', 'god', 'oh', 'omg', 'hello', 'hi', 'there'}
+
+
+def plea(msg):
+    """fork: True when the message is only a plea or an emergency number (PLEA_CORE, with words such as "please", "me",
+    "now" around it): letters typed again and again count once ("helppp"), and so do typos.KNOWN's slips ("hlep")."""
+    toks = re.findall(r"[a-z0-9']+", re.sub(r'([a-z])\1{2,}', r'\1', STILL.sub('', msg or '').lower().replace('’', "'")))
+    toks = [re.sub(r'(.)\1+$', r'\1', t) if t not in PLEA_CORE and t[:-1] in PLEA_CORE else t for t in toks]   # helpp
+    return bool(toks) and len(toks) <= 6 and any(t in PLEA_CORE for t in toks) and all(t in PLEA_CORE | PLEA_FILL for t in toks)
+
+
 def classify(msg):
     """fork: 'noise', 'correct' (replaces what the message before asked: "no no I mean the smoke") or 'other'."""
     if is_noise(msg):
@@ -448,7 +465,7 @@ def classify(msg):
 
 
 def danger_signs(msg):
-    m = (msg or '').lower().replace('’', "'")
+    m = confidence.not_urgent_text(msg).lower()     # fork: "drowning in homework", "collapsed into laughter" are not
     return {k for k, rx in DANGER.items() if rx.search(m)}
 
 
@@ -514,11 +531,14 @@ def turn_hits(messages, english=None, followup=True, k=8):
     info['buttons']: noise, or this message's own search found fewer than 3; info['still']: the last sensible question.
     info['danger']: this message or the one it is joined with may be urgent (is_danger). info['confidence']: engine.confidence's
     estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None.
-    info['body']: the body signs this message names (engine/confidence.body_signs), sorted; then chat_level never only asks."""
+    info['body']: the body signs this message names (engine/confidence.body_signs), sorted; then chat_level never only asks.
+    info['plea']: a first message that is only a plea or an emergency number ("911", "help", plea()); it counts as danger."""
     idx =[i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
     question = STILL.sub('', messages[idx[-1]]['content']) if idx else ''
     info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None,
-            'body': sorted(confidence.body_signs(question, typos.correct(question), english))}
+            'body': sorted(confidence.body_signs(question, typos.correct(question), english)),
+            'plea': len(idx) < 2 and plea(question)}    # fork: "911", "help", "hlep" as a first message
+    info['danger'] = info['danger'] or info['plea']
     searched = []      # (hits, trace) of this message's own search and the joined one, for the confidence
 
     def own_search(q):
@@ -603,15 +623,30 @@ UNSURE_DANGER = ("In case this is urgent, here are the pages the library found f
                  "one of the buttons below.")
 UNSURE_DANGER_NONE = ("The library found nothing that fits your question. Please help me help you: say a few more words about "
                       "what happened and what you can see, or pick one of the buttons below.")
-SUGGEST_PROMPT = {'buttons': 'Not sure these pages fit. Is it about one of these?', 'unsure': 'Is it about one of these?'}
+# fork: the request to say more always comes with the pages found (as sources the person can open): an everyday question's
+# too. Before, it gave them only as "also looked at", so a question the urgent words missed got no page at all.
+UNSURE_PAGES = ("Here are the pages the library found first, but I can't tell if they fit your question, so I won't guess "
+                "an answer. Please help me help you: say it another way, in a few more words (who it is about, what "
+                "happened, what you can see), or pick one of the buttons below.")
+PLEA_TEXT = ("If someone may die or is badly hurt, call your local emergency number now if you can. Then tell me what is "
+             "happening, in a few words (who, what happened, what you can see), or pick what it is below.")
+SUGGEST_PROMPT = {'buttons': 'Not sure these pages fit. Is it about one of these?', 'unsure': 'Is it about one of these?',
+                  'plea': 'What is happening?'}
+
+
+def urgent_answer_on():
+    """fork: a question that may be urgent and whose search is very unsure is answered from its pages, with the buttons
+    (as a body sign's is), instead of getting the pages without an answer. LASTBOOK_CONF_URGENT_ANSWER=0: the pages only."""
+    return os.environ.get('LASTBOOK_CONF_URGENT_ANSWER', '1') != '0'
 
 
 def chat_level(turn, followup=True, asked=1):
     """fork: what the chat does with turn_hits' info for a message (asked: how many user messages so far) -> (level, the
     confidence as shown, everyday). level 'sure' answers; 'buttons' answers with buttons; 'unsure' asks the person to say
-    more (with the pages when the question may be urgent). An everyday question (not is_danger) gets buttons only when the
-    search is very unsure, and smaller ones. A question that names a body sign (info['body'], engine/confidence.body_signs)
-    is never only asked to say more: it is answered from its pages, with the buttons."""
+    more (always with the pages found). An everyday question (not is_danger) gets buttons only when the search is very
+    unsure, and smaller ones. A question that names a body sign (info['body'], engine/confidence.body_signs), or that may
+    be urgent (info['danger'], with urgent_answer_on) and whose words are the library's, is never only asked to say more:
+    it is answered from its pages, with the buttons. A plea ("911", info['plea']) is asked what is happening."""
     conf = turn.get('confidence')
     level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
     everyday = not turn.get('danger')      # after noise: the earlier message's (turn_hits)
@@ -622,10 +657,40 @@ def chat_level(turn, followup=True, asked=1):
         level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
     if turn['route'] == 'noise' and not turn.get('still'):
         level = 'unsure'        # fork: noise with no sensible message before it ("ok" first): ask, as unsure does
+    if turn.get('plea'):
+        return 'unsure', (dict(conf, level='unsure', plea=True) if conf else conf), False
     if level == 'unsure' and turn.get('body'):
         level = 'buttons'       # fork: "he has no puls": the answer from the pages, never only "help me help you"
         conf = dict(conf, level=level, body=True) if conf else conf
+    elif (level == 'unsure' and turn.get('danger') and urgent_answer_on() and turn['route'] in ('first', 'danger')
+          and conf and not conf.get('unknown_words')):
+        level = 'buttons'       # fork: "took 20 of her sleeping tablets": the answer from the pages, with the buttons
+        conf = dict(conf, level=level, urgent=True)
     return level, conf, everyday
+
+
+def chat_reply(turn, found, followup=True, asked=1):
+    """fork: what the chat does for a message, without the model: {'level', 'confidence', 'everyday', 'action', 'text',
+    'style'}. found: how many pages the first search gave. action: 'answer' | 'buttons' | 'compact buttons' (the model
+    answers; buttons above it) | 'ask+pages' (the request to say more, the pages as sources, buttons) | 'ask (nothing
+    found)' | 'plea' (the emergency buttons first, full size, PLEA_TEXT, the pages). text: the reply when the model is not
+    asked; style: the buttons' look ('compact' for an everyday question, 'urgent' for a plea, '' otherwise)."""
+    level, conf, everyday = chat_level(turn, followup, asked)
+    out = {'level': level, 'confidence': conf, 'everyday': everyday, 'text': None,
+           'style': 'urgent' if turn.get('plea') else 'compact' if everyday else ''}
+    if turn.get('plea'):
+        out.update(action='plea', text=PLEA_TEXT)
+    elif level == 'unsure':
+        danger = bool(turn.get('danger'))
+        if not found:
+            out.update(action='ask (nothing found)', text=UNSURE_DANGER_NONE if danger else UNSURE_TEXT)
+        else:
+            out.update(action='ask+pages', text=UNSURE_DANGER if danger else UNSURE_PAGES)
+    elif turn.get('buttons') or level != 'sure':
+        out['action'] = 'compact buttons' if everyday else 'buttons'
+    else:
+        out['action'] = 'answer'
+    return out
 
 
 def suggest_choices(info):
@@ -1131,23 +1196,23 @@ def chat(messages, about, emit, cancelled):
         emit({'type': 'found', 'count': len(hits)})
         # fork: how likely the first page is right (engine/confidence.py). Unsure: buttons. Very unsure: ask for more words
         # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
-        level, conf, everyday = chat_level(turn, followup, len(asked))
+        reply = chat_reply(turn, len(hits), followup, len(asked))      # fork: see chat_reply
+        level, conf = reply['level'], reply['confidence']
         if level != 'sure':
             turn['buttons'] = True
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:
             print('local AI confidence:', json.dumps(dict(conf, route=turn['route'], danger=turn.get('danger'))), flush=True)
         if turn['buttons']:     # fork: noise, a weak search, or an unsure one: offer what it may be about
             ev = {'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
-                  'prompt': SUGGEST_PROMPT.get(level, '')}
-            if everyday:
-                ev['style'] = 'compact'     # the same buttons, drawn smaller (web/chat.js)
+                  'prompt': SUGGEST_PROMPT.get('plea' if turn.get('plea') else level, '')}
+            if reply['style']:
+                ev['style'] = reply['style']    # compact: the same buttons, drawn smaller; urgent: first (web/chat.js)
             emit(ev)
         if level == 'unsure':
+            # fork: the request to say more always gives the pages found as sources the person can open, urgent or not
             found = list(sess.sources.values())
             emit({'type': 'sources', 'sources': found})
-            danger = bool(turn.get('danger'))
-            text = (UNSURE_DANGER if found else UNSURE_DANGER_NONE) if danger else UNSURE_TEXT
-            emit({'type': 'done', 'answer': text, 'sources': found[:6] if danger else [], 'consulted': [] if danger else found,
+            emit({'type': 'done', 'answer': reply['text'], 'sources': found[:6], 'consulted': found[6:],
                   'invalid': [], 'tools': [], 'unsure': True, 'confidence': conf,
                   'latency': {'first_token_s': None, 'total_s': round(time.time() - t0, 2)}})
             return

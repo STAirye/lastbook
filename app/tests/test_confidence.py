@@ -7,11 +7,12 @@ No library and no model: the library's words are given, hybrid() is a stand-in t
 and chat() runs with a stand-in model round. Checked: the signals and the probability (plain numbers, strong searches
 above weak ones), the thresholds and their environment overrides, the switch, turn_hits' confidence (the better of its
 own and the joined search; noise keeps the earlier one's; none from a stand-in without a trace), and the chat: sure
-answers as before, unsure offers buttons, very unsure asks for more words without the model and without the pages,
-except when the question may be urgent, when the pages are given too, and when it names a body sign ("he has no puls",
-"mybbyisntbreathing"), when the model answers from the pages, with buttons. Everyday questions (not urgent): buttons only
-below the much lower everyday cut, the same buttons drawn smaller (style 'compact'), and the request to say more never
-above that cut. Never packaged."""
+answers as before, unsure offers buttons, very unsure asks for more words without the model, always with the pages it
+found as sources (urgent or not); when the question may be urgent or names a body sign ("he has no puls",
+"mybbyisntbreathing") the model answers from the pages, with buttons, instead. A bare plea as a first message ("911",
+"help") gets the emergency buttons first (style 'urgent') and is asked what is happening. Everyday questions (not urgent):
+buttons only below the much lower everyday cut, the same buttons drawn smaller (style 'compact'), and the request to say
+more never above that cut. The urgent words in everyday wording, and everyday idioms that are not urgent. Never packaged."""
 import os, sys, unittest
 from pathlib import Path
 from unittest import mock
@@ -144,6 +145,27 @@ class Signals(unittest.TestCase):
         for q in ('how to build a root cellar', 'how do i purify water', 'best way to store rice'):
             self.assertFalse(confidence.urgent(q), q)
 
+    def test_urgent_in_everyday_words(self):
+        """fork: the emergencies of the held-out list's misses, in other words than its own (docs/FORK.md 3l)."""
+        for q in ('the man in the car park slumped over the wheel', 'my uncle is out cold', 'grandad wont respond to me',
+                  'she keeled over at work', 'he went down like a sack of potatoes', 'found him face down in the bath',
+                  'thunderclap pain in my head', 'worst headache ever', 'his smile looks crooked', 'she is slurring',
+                  "can't lift his left arm", 'took a whole packet of ibuprofen', 'she swallowed 30 tablets',
+                  'he is siezing', 'i am killing myself tonight', 'my friend said goodbye and wants to die',
+                  'his eyes keep rolling back', 'gurgling noise and he wont wake', "SHE CAN'T FEEL HER LEGS",
+                  'colour is grey and ashen', 'blood is pouring out'):
+            self.assertTrue(confidence.urgent(q), q)
+
+    def test_everyday_idioms_are_not_urgent(self):
+        for q in ('how to bleed brakes on a bike', 'blood orange marmalade', 'a breath of fresh air', 'feeling blue lately',
+                  'stroke of luck', 'two stroke oil', 'drowning in paperwork', 'the tent collapsed in the storm',
+                  'he collapsed into laughter', 'my phone is dead', 'this dress doesnt fit', 'cpr certification course',
+                  'brush strokes in oil painting', 'the engine is choking', 'pulse lentils soup', 'heartbroken after the match'):
+            self.assertFalse(confidence.urgent(q), q)
+        for q in ('bad breath and now he cant breathe', 'blood orange juice and now hes bleeding from the nose',
+                  'feeling blue and his lips are blue', 'the tent collapsed on him and he is not breathing'):
+            self.assertTrue(confidence.urgent(q), q)                         # the rest of the question still counts
+
 
 class BodySigns(unittest.TestCase):
     """fork: body signs (confidence.body_signs): named exactly, one or two slips away on a word the library has on fewer
@@ -164,7 +186,13 @@ class BodySigns(unittest.TestCase):
                         ('he passed out', {'unconscious'}), ('bledding from the leg', {'bleeding'}),
                         ('chokin on food', {'choking'}), ('she is having a fit', {'seizure'}),
                         ('chest hurts and he is sweating', {'chest pain'}), ('the baby is limp and not moving', {'not moving'}),
-                        ('the child is cold and wet', {'cold and clammy'}), ('no heartbeet', {'pulse'})]:
+                        ('the child is cold and wet', {'cold and clammy'}), ('no heartbeet', {'pulse'}),
+                        ('he is out cold', {'unconscious'}), ('she wont respond', {'unconscious'}),
+                        ('elephant on my chest', {'chest pain'}), ('tight chest', {'chest pain'}),
+                        ('his heart is racing', {'pulse'}), ('her pulse is very slow', {'pulse'}), ('how to do cpr', {'pulse'}),
+                        ('blood pouring out of the cut', {'bleeding'}), ('the cut wont stop', {'bleeding'}),
+                        ("she's fitting", {'seizure'}), ('his eyes are rolling', {'seizure'}),
+                        ('collapsed and gurgling', {'breathing', 'unconscious'})]:
             self.assertEqual(confidence.body_signs(q), want, q)
             self.assertTrue(confidence.urgent(q), q)
         self.assertEqual(confidence.body_signs('', None, 'his lips are blue'), {'blue'})     # any of the texts
@@ -172,7 +200,8 @@ class BodySigns(unittest.TestCase):
     def test_words_of_their_own(self):
         for q in ('how to cook pulses', 'how to make flowers bloom', 'chicken breeding', 'household chore list',
                   'she chose the red one', 'how to fit a pipe', 'the sky is blue', 'how to build a root cellar',
-                  'plus size', 'pause'):
+                  'plus size', 'pause', 'how to bleed the brakes', 'a breath of fresh air', 'blood orange cake',
+                  'fitting room', 'the plant looks floppy'):
             self.assertEqual(confidence.body_signs(q), set(), q)
         self.assertFalse(confidence.urgent('how to build a root cellar'))
 
@@ -264,6 +293,19 @@ class TurnHitsConfidence(unittest.TestCase):
         self.assertEqual((info['danger'], info['body']), (False, []))
         self.assertEqual(self.a.chat_level(info)[0], 'unsure')             # as before: the bare "help me help you"
 
+    def test_a_bare_plea(self):
+        """fork: "911", "hlep", "HELP ME" as a first message: a plea (danger, the emergency buttons first); later in a
+        conversation it is noise as before."""
+        for q in ('911', 'hlep', 'HELP ME', 'help!!!', 'helppp', 'please help', 'emergency', 'sos', 'help me now please'):
+            self.assertTrue(self.a.plea(q), q)
+        for q in ('help me fix my bike', 'helo my son', 'how can i help', 'call 911 or not', '', 'ok'):
+            self.assertFalse(self.a.plea(q), q)
+        _, info = self.a.turn_hits(self.convo('911'))
+        self.assertEqual((info['route'], info['plea'], info['danger']), ('noise', True, True))
+        self.assertEqual(self.a.chat_level(info)[0], 'unsure')
+        _, info = self.a.turn_hits(self.convo('how do i purify water', '', '911'))
+        self.assertFalse(info['plea'])
+
     def test_danger_covers_the_earlier_message(self):
         _, info = self.a.turn_hits(self.convo('he is bleeding a lot', '', 'what do i not do'))
         self.assertTrue(info['danger'])
@@ -292,10 +334,11 @@ class ChatConfidence(unittest.TestCase):
             self.addCleanup(p.stop)
         self.hits = [hit('w1', 'Purify Water', 'boil it')]
 
-    def run_chat(self, question, level, route='first', danger=False, p=None, still='', body=()):
+    def run_chat(self, question, level, route='first', danger=False, p=None, still='', body=(), plea=False, unknown=False):
         p = {'sure': 0.9, 'buttons': 0.5, 'unsure': 0.1}[level] if p is None else p
-        info = {'route': route, 'buttons': route == 'noise', 'still': still, 'danger': danger,
-                'confidence': {'p': p, 'mode': 'keyword', 'level': level}, 'body': list(body)}
+        info = {'route': route, 'buttons': route == 'noise', 'still': still, 'danger': danger or plea,
+                'confidence': dict({'p': p, 'mode': 'keyword', 'level': level}, **({'unknown_words': True} if unknown else {})),
+                'body': list(body), 'plea': plea}
         events = []
         with mock.patch.object(self.a, 'turn_hits', lambda *a, **k: (self.hits, dict(info))):
             self.a.chat([{'role': 'user', 'content': question}], None, events.append, lambda: False)
@@ -354,20 +397,65 @@ class ChatConfidence(unittest.TestCase):
         ev, events = self.run_chat('zebra cellar tomato', 'unsure')
         self.assertEqual(self.rounds, [])                                   # the model is never asked
         self.assertIn('suggest', ev)
-        self.assertEqual(ev['done']['answer'], self.a.UNSURE_TEXT)
+        self.assertEqual(ev['done']['answer'], self.a.UNSURE_PAGES)
         self.assertEqual(ev['suggest']['style'], 'compact')                 # everyday: below both cuts, smaller buttons
         self.assertTrue(ev['done']['unsure'])
-        self.assertEqual(ev['done']['sources'], [])                         # no pages offered as the answer's
-        self.assertEqual([s['doc_id'] for s in ev['done']['consulted']], ['w1'])
+        self.assertEqual([s['doc_id'] for s in ev['done']['sources']], ['w1'])   # fork: the pages, as pages to open
+        self.assertEqual(ev['done']['consulted'], [])
         self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
 
-    def test_very_unsure_but_urgent_gives_the_pages(self):
-        ev, _ = self.run_chat('my son neary drownd', 'unsure', danger=True)
-        self.assertEqual(self.rounds, [])
-        self.assertEqual(ev['done']['answer'], self.a.UNSURE_DANGER)
-        self.assertEqual([s['doc_id'] for s in ev['done']['sources']], ['w1'])
-        self.assertIn('suggest', ev)
+    def test_very_unsure_with_nothing_found_says_so(self):
+        self.hits = []
+        ev, _ = self.run_chat('zebra cellar tomato', 'unsure')
+        self.assertEqual((ev['done']['answer'], ev['done']['sources']), (self.a.UNSURE_TEXT, []))
+        ev, _ = self.run_chat('my son neary drownd', 'unsure', danger=True, unknown=True)
+        self.assertEqual((ev['done']['answer'], ev['done']['sources']), (self.a.UNSURE_DANGER_NONE, []))
+
+    def test_very_unsure_but_urgent_answers_from_the_pages(self):
+        """fork: "took 20 of her sleeping tablets": answered from its pages with the buttons, as a body sign is (it was
+        the pages without an answer). LASTBOOK_CONF_URGENT_ANSWER=0 gives the pages only, as before; so do words that are
+        not the library's (unknown_words)."""
+        ev, events = self.run_chat('my son neary drownd', 'unsure', danger=True)
+        self.assertEqual(len(self.rounds), 1)
+        self.assertEqual(ev['done']['answer'], 'Boil it [S1].')
+        self.assertTrue(ev['suggest']['confidence']['urgent'])
         self.assertNotIn('style', ev['suggest'])
+        self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
+        self.addCleanup(os.environ.pop, 'LASTBOOK_CONF_URGENT_ANSWER', None)
+        os.environ['LASTBOOK_CONF_URGENT_ANSWER'] = '0'
+        for unknown in (False, True):
+            self.rounds.clear()
+            if unknown:
+                os.environ.pop('LASTBOOK_CONF_URGENT_ANSWER')
+            ev, _ = self.run_chat('my son neary drownd', 'unsure', danger=True, unknown=unknown)
+            self.assertEqual(self.rounds, [], unknown)
+            self.assertEqual(ev['done']['answer'], self.a.UNSURE_DANGER)
+            self.assertEqual([s['doc_id'] for s in ev['done']['sources']], ['w1'])
+            self.assertIn('suggest', ev)
+            self.assertNotIn('style', ev['suggest'])
+
+    def test_a_bare_plea_gets_the_emergency_buttons_first(self):
+        for q, route in (('911', 'noise'), ('hlep', 'first')):
+            self.rounds.clear()
+            ev, events = self.run_chat(q, 'unsure', route=route, plea=True)
+            self.assertEqual(self.rounds, [])
+            self.assertEqual(ev['suggest']['style'], 'urgent')
+            self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['plea'])
+            self.assertIn('Not breathing', [c['label'] for c in ev['suggest']['choices']])
+            self.assertEqual(ev['done']['answer'], self.a.PLEA_TEXT)
+            self.assertEqual([s['doc_id'] for s in ev['done']['sources']], ['w1'])
+            self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
+
+    def test_chat_reply_actions(self):
+        info = lambda **k: dict({'route': 'first', 'buttons': False, 'still': '', 'danger': False, 'body': [], 'plea': False,
+                                 'confidence': {'p': 0.1, 'mode': 'keyword', 'level': 'unsure'}}, **k)
+        act = lambda t, n=1: self.a.chat_reply(t, n)['action']
+        self.assertEqual(act(info()), 'ask+pages')
+        self.assertEqual(act(info(), 0), 'ask (nothing found)')
+        self.assertEqual(act(info(danger=True)), 'buttons')
+        self.assertEqual(act(info(body=['pulse'])), 'compact buttons')
+        self.assertEqual(act(info(plea=True, danger=True, route='noise')), 'plea')
+        self.assertEqual(act(info(confidence={'p': 0.9, 'mode': 'keyword', 'level': 'sure'})), 'answer')
 
     def test_very_unsure_with_a_body_sign_answers(self):
         """fork: "he has no puls": never only "help me help you" (nor the pages without an answer): the model answers from
@@ -411,7 +499,7 @@ class ChatConfidence(unittest.TestCase):
             self.rounds.clear()
             ev, events = self.run_chat('jdjdjdk', level, route='noise')
             self.assertEqual(self.rounds, [])
-            self.assertEqual(ev['done']['answer'], self.a.UNSURE_TEXT)
+            self.assertEqual(ev['done']['answer'], self.a.UNSURE_PAGES)       # with the pages its search found
             self.assertTrue(ev['done']['unsure'])
             self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['unsure'])
             self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
@@ -422,7 +510,7 @@ class ChatConfidence(unittest.TestCase):
     def test_glued_first_message_as_the_chat_sees_it(self):
         ev, _ = self.run_chat('heschuokinghelkp', 'unsure', danger=False)    # split off and not split: unknown words
         self.assertEqual(self.rounds, [])
-        self.assertEqual(ev['done']['answer'], self.a.UNSURE_TEXT)
+        self.assertEqual(ev['done']['answer'], self.a.UNSURE_PAGES)
         self.assertIn('suggest', ev)
 
 

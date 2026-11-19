@@ -461,6 +461,27 @@ repo for now (upstream issue #154 asked for a test-only pull request of them).
   nothing as typed anyway. It costs nothing for a question without such a word, and a few milliseconds for one with it
   (the slips are looked up through the index of words with a letter dropped that the two-edit correction already
   builds). `LASTBOOK_TYPO_SPLIT=0` turns the splitting off.
+- **Ordinary English is left alone** (`typos.is_english`). The correction only knows the library's words, so on a
+  held-out list (3l) it bent everyday words into other words: "keeled" → peeled, "puking" → poking, "spewing" →
+  sewing, "blacked" → blocked, "gasps" → gaps, "seizes" → sizes, "texted" → tested, about 40 lines in 690. Now a word
+  of a general English word list is never corrected, split or made a body word. The list is
+  `engine/english_words.txt.gz` (78,238 lower-case words, 210 KB, read in about 20 ms): every form of the hunspell
+  en_US dictionary, made from SCOWL, with its affixes applied, taken by `tools/english_words.py` from the copy Chrome
+  keeps for spell checking. Its licence is SCOWL's, permissive (use, change and share, also commercially, with the
+  copyright notices): `engine/english_words.LICENSE.txt`, whose notices still have to be replaced by the verbatim
+  README before a release. British spellings count through the American one ("colour", "haemorrhage"), and a few chat
+  words and medicine names are added ("lol", "mum", "paracetamol").
+
+  A few real words are nearly always a slip for an emergency word here, and those are kept in two short, explicit
+  lists: one word alone (`SLIPS`: "chocking" → choking, "brunt" → burnt, "overdoes" → overdose, and "wile" → while, which two typo questions of 3k needed), and by the words
+  around them (`PHRASE_SLIPS`): "he cant breed", "hes not braking", "she is not breaking" → breathe/breathing (not when
+  the question names a car, brakes, an animal, bread …), "breeding a lot from the leg" → bleeding, "sea sure" →
+  seizure, "past out" → passed out, "cheat pain" / "chest pane" → chest pain, "hart attack", "gas leek", "face is
+  dropping" → drooping, "pulse is week" → weak. Some misspellings too far from their word, or one edit from another
+  real word, were added to the known list ("hemmorage", "unconshus", "tournaquet", "strock", "poisend", "hlep"). Letters
+  typed again and again are cut to one or two first, to whichever is a word ("bloooood" → blood, "helpppp" → help,
+  "hesss" → he's; "kkkkk" stays mash). `LASTBOOK_TYPO_ENGLISH=0` turns all of this off. Speed on the 690 lines: 0.26 ms
+  a question on average (0.33 before), at most 10 ms.
 
   On 48 invented glued and gibberish questions (with 3l's unknown-word rule): 20 of 24 glued questions are split right
   (all 6 everyday ones, 14 of 18 emergencies; missed "mysonatebleach" → "my so nate bleach", "hescolapsednotbreathin"
@@ -564,6 +585,59 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
   No clean question's search words changed. Narrowing `urgent()` with this list was measured and not done: the
   everyday questions it catches are caught by fire, gas, baby, bleach and generator, not by body words, and dropping
   any of those loses red questions (fire alone 15, for 28 green ones relieved).
+- **A held-out check, and what it changed.** All the numbers above were measured on questions written together with
+  the code. A list of 690 new lines written by someone who never saw it (343 red, 104 yellow, 243 green, 128 of those
+  counterexamples; `.claude/drafts/independent/`) found the gaps: urgent on 85% of red lines (218 of 218 in-sample),
+  18 red lines keyword-only (4 hybrid) given only "help me help you" with no pages ("took 20 of her sleeping tablets",
+  "he's out cold on the pavement", "911", "worst headache of my life"), 36 more given the pages without an answer, and
+  urgent on 80% of the counterexamples. Three changes followed; **that list is no longer held out**, since they were
+  made against it (a second, unseen list is the next check).
+  - **The pages are never withheld.** The request to say more now always comes with the pages the search found, as
+    pages to open ("Pages the library found"), and with the buttons, urgent or not (`UNSURE_PAGES` for an everyday
+    question). Only a search that found nothing says so.
+  - **An urgent question is answered.** A question that may be urgent whose search is very unsure is answered from its
+    pages, with the buttons, as a body sign's is, instead of the pages without an answer (`UNSURE_DANGER`); not when
+    its words aren't the library's (mash). Measured both ways: on the in-sample sets, of the 35 questions that move
+    (23 red), the first page is right for only 4 but one of the first 3 is right for 23 (66%), and the model reads the
+    first 4 whole and is told to say "Not found in the library" when they don't fit; on the held-out list 58 of the 83
+    red lines in that band have a health page in their first 3. Pages without an answer leave a frightened person to
+    read them alone, so the answer was chosen. `LASTBOOK_CONF_URGENT_ANSWER=0` brings back the pages only.
+  - **A bare plea** as a first message ("911", "help", "hlep", "HELP ME", "emergency", "sos") gets the emergency
+    buttons first, larger, under "What is happening?", a line saying to call the local emergency number if someone may
+    die, and the pages (`assistant.plea`; `'style': 'urgent'` in the `suggest` event). Before, "911" (no letters) was
+    noise and got the bare request.
+  - **Everyday wordings** were added to the urgent words and the body signs: unconsciousness (slumped, out cold, won't
+    answer or respond, hard to rouse, keeled over, dropped like a stone, face down, on the floor), bleeding without the
+    word (pouring, gushing, soaking pads, a cut that won't stop), the chest and heart (an elephant on the chest, a tight
+    chest, a heart racing, pounding or too slow), stroke (a crooked smile, can't lift an arm, slurring, can't feel one
+    side, words coming out wrong, the worst or a thunderclap headache), overdose (tablets, a whole box or packet,
+    medicine names, sleeping it off), seizures (fitting, eyes rolling, shaking that won't stop, foam at the mouth),
+    snoring or gurgling in someone collapsed, CPR named (a body sign: what to do for no pulse), suicide in other words
+    (killing myself, wants to die, saying goodbye), and a few yellow ones (can't pee, something in the eye, a broken
+    nose). Written as general patterns, not the list's sentences.
+  - **Everyday idioms** are cut out before the urgent words and the danger signs look (`confidence.NOT_URGENT`):
+    "bleed the brakes", "blood orange", "a breath of fresh air", "stroke of luck", "drowning in emails", "collapsed
+    into laughter", "my phone is dead", "the engine is choking", "doesn't fit", "CPR certification", "painting" (no
+    longer "pain"). Only the phrase goes: "bad breath and now he can't breathe" is still urgent.
+  - With 3k's English words, in numbers (keyword-only; hybrid is the same where it is a text check):
+
+  | held-out list 1 | 4ea2d9f | now |
+  |---|---|---|
+  | urgent: red / yellow | 293/343 (85%) / 79/104 (76%) | 340/343 (99%) / 98/104 (94%) |
+  | urgent: green / counterexamples / mild | 64% / 80% / 45% | 31% / 17% / 47% |
+  | body sign found, lines with a covered sign (red) | 67% (65%) | 85% (84%) |
+  | body sign on counterexamples | 34% | 7% |
+  | red: bare "help me help you", pages withheld (keyword / hybrid) | 18 / 4 | 0 / 0 |
+  | red: pages without an answer (keyword / hybrid) | 36 / 1 | 0 / 0 |
+  | all lines: pages withheld (keyword / hybrid) | 37 / 5 | 0 / 0 |
+  | typo lines (84) with the meaning word right | 45 fixed, 15 wrong word, 19 left | 71 fixed, 6 wrong, 2 left |
+  | clean lines with an English word bent | 35 | 0 |
+
+  The three red lines still not urgent: "911" (a plea, so it gets the buttons anyway), "myboyiscoking" (split into
+  "cooking") and one in French. In-sample (all six sets, both modes), nothing urgent before stopped being urgent
+  except green ones ("how to bleed the brakes", "the car battery is dead"), the first page changed for one question
+  (better: "dad having a hart attack"), and the pages are now withheld for none (4 keyword-only, 10 hybrid before: glued mash).
+  Right first pages: 354 → 354 keyword-only, 435 → 436 hybrid, of 599.
 - **Inside a conversation** it only offers buttons: there the confidence predicts poorly (AUC 0.45–0.65), since the
   first page is often one the previous answer cited.
 - **Tried and dropped:** buttons below 0.75 (68% of keyword-only questions, 116 false alarms against 70); predicting
@@ -572,10 +646,11 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
   and it ranks them no better.
 - `/api/retrieve` returns `confidence` (the urgent cuts). Settings: `LASTBOOK_CONF=0`, `LASTBOOK_CONF_BUTTONS`,
   `LASTBOOK_CONF_UNSURE`, `LASTBOOK_CONF_BUTTONS_EVERYDAY`, `LASTBOOK_CONF_UNKNOWN=0`, `LASTBOOK_BODY_SIGNS=0`,
-  `LASTBOOK_BODY_FIX=0`.
+  `LASTBOOK_BODY_FIX=0`, `LASTBOOK_CONF_URGENT_ANSWER=0`.
 
-`app/tests/test_confidence.py` covers it (`BodySigns` and the body-sign chat and turn tests too); `test_typos.BodyWords`
-the search's part.
+`app/tests/test_confidence.py` covers it (`BodySigns` and the body-sign chat and turn tests too; the pages with every
+request to say more, the urgent answer, the plea, the everyday wordings and idioms); `test_typos.BodyWords` the search's
+part, `test_typos.EnglishWords` the English words and the slips, `test_what_ships` that the word list ships.
 
 ## 4. Running from source on Windows
 
@@ -603,8 +678,10 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_PHRASE_RETRY=1` | When every word finds too little, search again without a phrase's helper words before relaxing (3h; off: it lost "no matches and no gas") |
 | `LASTBOOK_TYPO_FIX=0` | Search questions as typed, without correcting misspelled words (3k) |
 | `LASTBOOK_TYPO_SPLIT=0` | Don't split words typed with no spaces ("kitchenonfire"); the rest of the correction stays on (3k) |
+| `LASTBOOK_TYPO_ENGLISH=0` | Correct ordinary English words into library words again ("keeled" → peeled), without the real-word slips ("he cant breed") or the cutting of repeated letters (3k) |
 | `LASTBOOK_CONF=0` | No confidence estimate: no buttons or request to say more from it (3l). `LASTBOOK_CONF_BUTTONS` / `LASTBOOK_CONF_UNSURE` move the cuts (0.60 / 0.25); `LASTBOOK_CONF_BUTTONS_EVERYDAY` the everyday questions' buttons cut (0.30) |
 | `LASTBOOK_CONF_UNKNOWN=0` | Trust the confidence model even when the question's words aren't the library's (3l) |
+| `LASTBOOK_CONF_URGENT_ANSWER=0` | A very unsure search for a question that may be urgent gets the pages and the request to say more, without an answer, as before (3l). A body sign is still answered |
 | `LASTBOOK_BODY_SIGNS=0` | Don't look for body signs ("no puls", "mybbyisntbreathing"): a very unsure search with one may again get only the request to say more (3l). Turns `LASTBOOK_BODY_FIX` off too |
 | `LASTBOOK_BODY_FIX=0` | Search a body word's slip ("puls") or a glued run with one as typed; the body signs still count (3l) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
@@ -677,5 +754,10 @@ a test server and checks the amount (3j); it needs the model.
   window; everyday questions get the emergency set ("Not breathing", "Heavy bleeding" …), only smaller and only below
   0.30, and the wide urgent-word list
   shows some everyday questions' pages "in case this is urgent".
+- **Held-out fixes (3k, 3l).** The first held-out list was used to make them, so its numbers are now in-sample; the
+  second list is the real check. `engine/english_words.LICENSE.txt` gives SCOWL's notices from memory: replace them
+  with the verbatim README of Chromium's hunspell en_US before a release. The plea buttons and the "Pages the library
+  found" heading haven't been seen in the window. The wider urgent words make more everyday questions urgent where
+  they name a symptom (mild lines 45% → 47%); the cost is buttons and an answer, never pages withheld.
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
   country from an OpenStreetMap extract, using `tools/build_map.py`, would be a separate piece of work.

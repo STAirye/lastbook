@@ -22,6 +22,12 @@ misspelled word back to a word the library uses, before the keyword search and t
 - fork: words typed with no spaces are split (split_word): "heschuokinghelkp" -> "he's choking help", "kitchenonfire" ->
   "kitchen on fire". Only a word of 8+ letters the index doesn't hold, so "hypothermia", "firecraft" and "Gutenberg"
   stay; each piece may have one of the slips above. Off with LASTBOOK_TYPO_SPLIT=0.
+- fork: an ordinary English word is never corrected, split or made a body word (is_english: engine/english_words.txt.gz,
+  the hunspell en_US words with every form, 78,238; British spellings through the American one), so "keeled", "puking"
+  and "gasps" stay. A short, explicit list of real words that are slips for an emergency word is put right: SLIPS
+  ("chocking", "brunt") and PHRASE_SLIPS, by the words around them ("he cant breed" -> breathe, "breeding a lot from the
+  leg" -> bleeding, "sea sure" -> seizure, "past out", "cheat pain", "hart attack", "gas leek"). Letters typed again and
+  again are cut first ("bloooood" -> blood). Off with LASTBOOK_TYPO_ENGLISH=0 (the word list, the slips and the cutting).
 - Off with LASTBOOK_TYPO_FIX=0.
 """
 import math, os, re, sqlite3, threading, time, unicodedata
@@ -49,13 +55,123 @@ APOSTROPHES = {'isnt': "isn't", 'cant': "can't", 'wont': "won't", 'dont': "don't
 # word is in the library. "asma" is also asthma in Spanish and Portuguese.
 KNOWN = {'asma': 'asthma', 'azma': 'asthma', 'asthama': 'asthma', 'nemonia': 'pneumonia', 'numonia': 'pneumonia',
          'newmonia': 'pneumonia', 'pnemonia': 'pneumonia', 'excema': 'eczema', 'exema': 'eczema',
-         'diarea': 'diarrhea', 'diarrea': 'diarrhea', 'diarhea': 'diarrhea', 'diareah': 'diarrhea', 'diahrea': 'diarrhea'}
+         'diarea': 'diarrhea', 'diarrea': 'diarrhea', 'diarhea': 'diarrhea', 'diareah': 'diarrhea', 'diahrea': 'diarrhea',
+         # fork: three or more edits away, or one edit from another real word ("hemmorage", "strock" -> stock)
+         'hemmorage': 'hemorrhage', 'hemorage': 'hemorrhage', 'hemmorhage': 'hemorrhage', 'hemorhage': 'hemorrhage',
+         'haemorage': 'haemorrhage', 'hemmorrhage': 'hemorrhage', 'unconshus': 'unconscious', 'unconsious': 'unconscious',
+         'unconcious': 'unconscious', 'unconscous': 'unconscious', 'anafilactic': 'anaphylactic',
+         'anafalactic': 'anaphylactic', 'anaphalactic': 'anaphylactic', 'anafilaxis': 'anaphylaxis',
+         'anaphalaxis': 'anaphylaxis', 'tournaquet': 'tourniquet', 'tourniquette': 'tourniquet', 'tornaquet': 'tourniquet',
+         'turniquet': 'tourniquet', 'tourniket': 'tourniquet', 'hlep': 'help', 'halp': 'help', 'hepl': 'help',
+         'siezure': 'seizure', 'seasure': 'seizure', 'seazure': 'seizure', 'siezures': 'seizures', 'strock': 'stroke',
+         'stroak': 'stroke', 'poisend': 'poisoned', 'poisned': 'poisoned', 'posioned': 'poisoned', 'posion': 'poison',
+         'poisen': 'poison', 'brest': 'breast', 'bluding': 'bleeding', 'concusion': 'concussion', 'dady': 'daddy'}
+# fork: real words that are, in a question here, nearly always a slip for an emergency word. Kept small and explicit:
+# every other ordinary English word stays as typed (english_words). Used only when the right word is in the library.
+# "wile" -> while is not an emergency word, but the triage sets' typo questions relied on it.
+SLIPS = {'chocking': 'choking', 'chocked': 'choked', 'overdoes': 'overdose', 'brunt': 'burnt', 'wile': 'while'}
+# Real words that are a slip for a body word only next to certain words ("he cant breed", "she is breeding a lot from
+# the leg", "my son is having a sea sure"). (pattern, replacement), tried on the question before its words, in order.
+_NOT = r"(not|isn'?t|isnt|aren'?t|wasn'?t|can'?t|cant|cannot|couldn'?t|won'?t|wont|stopped|barely|hardly|no longer|trouble|struggling to|hard to)"
+_END = r"(?=\s*($|[.,!?;:]|\b(and|but|properly|right|well|normally|at all|any ?more|now|again|very|so|or|i)\b))"
+_MACHINE = re.compile(r"\b(car|cars|bike|bicycle|brakes?|truck|lorry|van|vehicle|wheels?|pedals?|engine|motor\w*|lock|code|"
+                      r"glass|habit|rules?|law|record|news|dough|bread|loaf|crumbs?|chickens?|dogs?|cats?|rabbits?|"
+                      r"horses?|cattle|sheep|goats?|pigs?|fish|birds?|plants?|seeds?)\b", re.I)
+PHRASE_SLIPS = [(re.compile(rx, re.I), new, machine) for rx, new, machine in (
+    (r"\b" + _NOT + r"\s+(breeding|breading|braking|breaking|breething)" + _END, r"\1 breathing", True),
+    (r"\b" + _NOT + r"\s+(breed|bread|brake|break|breth)" + _END, r"\1 breathe", True),
+    (r"\b(breeding|bleating|bleding)(?=\s+(a lot|alot|heavily|badly|everywhere|from|out of|loads|lots|so much|"
+     r"profusely|non ?stop|again|still|all over)\b)", 'bleeding', False),
+    (r"\b(sea|see|sie) ?sure(s)?\b", r"seizure\2", False),
+    (r"(?<!\bthe )(?<!\bin the )\bpast out\b", 'passed out', False),
+    (r"\b(cheat|chess|chests|chesty) (pain|pains|pane|panes)\b", r"chest \2", False),
+    (r"\bchest panes?\b", 'chest pain', False),
+    (r"\bhart (attack|attach|attak|beat|rate)\b", r"heart \1", False),
+    (r"\b(gas|water|oil|fuel|petrol|chemical|acid) leeks?\b", r"\1 leak", False),
+    (r"\b(heart|asthma|panic) attach\b", r"\1 attack", False),
+    (r"\b(face|mouth|smile|eye|eyelid|lip|side of (his|her|my|the|their) face) (is |was |keeps |has |started |starts )?"
+     r"dropping\b", r"\1 \3drooping", False),
+    (r"\b(pulse|heartbeat|arm|leg|hand|side|legs|arms|feel|feels|feeling|felt|is|so|very|really) (is |are |so |very "
+     r"|really |gone |went )?weeks?\b(?!\s+(old|ago|away|pregnant|later|before|after|of|in|to|now|\d))",
+     r"\1 \2weak", False),
+)]
+# Letters typed again and again ("bloooood", "helpppp", "pleaseeee") are cut to one or two before anything else.
+STRETCH = re.compile(r'(.)\1\1')
 # A question in another language is not corrected into English. Common function words of Spanish, Portuguese and French that
 # are not English words (as in assistant.OTHER_WORDS, which decides when the local AI writes English search words).
 OTHER_WORDS = set('el la los las del al en y que es un una por para con sin pero como muy mi mis tu su sus se lo le les nos '
                   'yo este esta esto cuando tengo tiene necesito puedo hacer agua fuego nao um uma com isso voce tem '
                   'preciso fazer des du et est avec pas je comment pourquoi vous nous eau'.split())
 ENGLISH_WORDS = STOP | set('am been were has had about after before out'.split())
+# fork: ordinary English, not only the library's words. The corrector knows only the library, so it bent everyday words
+# into other words: "keeled" -> peeled, "puking" -> poking, "spewing" -> sewing, "gasps" -> gaps. A word of this list
+# (engine/english_words.txt.gz: every form of the hunspell en_US words, 78,238; licence beside it) is never corrected,
+# split or made a body word, except the slips above (SLIPS, PHRASE_SLIPS). British spellings count through the American
+# one ("colour", "haemorrhage", "paediatric"), and a few chat words and medicine names the list lacks are added here.
+EXTRA_ENGLISH = set('lol lmao omg pls plz thx idk ok okay yeah yep nope nah gonna wanna gotta kinda dunno aint ya ur '
+                    'mum mums mam nan nana nans grandad grandads granny nappy nappies telly bloke paracetamol ibuprofen '
+                    'tylenol advil panadol nurofen calpol xanax valium epipen inhaler inhalers cpr aed defib'.split())
+BRITISH = (('our', 'or'), ('isation', 'ization'), ('ise', 'ize'), ('yse', 'yze'), ('ae', 'e'), ('oe', 'e'), ('tre', 'ter'),
+           ('ogue', 'og'), ('ence', 'ense'), ('lled', 'led'), ('lling', 'ling'))
+_ENGLISH = {'words': None}
+
+
+def english_words():
+    """The set of engine/english_words.txt.gz (beside this file; in the packaged app under engine/ there too), read once
+    (about 10 ms). Empty when the file is missing: then nothing is guarded, as before."""
+    if _ENGLISH['words'] is None:
+        import gzip, sys
+        path = Path(__file__).with_name('english_words.txt.gz')
+        if not path.is_file() and getattr(sys, 'frozen', False):
+            path = Path(getattr(sys, '_MEIPASS', '')) / 'engine' / 'english_words.txt.gz'
+        try:
+            with gzip.open(path, 'rt', encoding='utf-8') as f:
+                _ENGLISH['words'] = frozenset(f.read().split())
+        except OSError:
+            _ENGLISH['words'] = frozenset()
+    return _ENGLISH['words']
+
+
+def english_on():
+    return os.environ.get('LASTBOOK_TYPO_ENGLISH', '1') != '0'
+
+
+def is_english(w):
+    """fork: True when w (any case) is an ordinary English word (english_words, EXTRA_ENGLISH, or a British spelling of
+    one). False when LASTBOOK_TYPO_ENGLISH=0."""
+    if not english_on() or not w:
+        return False
+    w = w.lower()
+    E = english_words()
+    if w in E or w in EXTRA_ENGLISH:
+        return True
+    return any(a in w and w.replace(a, b) in E for a, b in BRITISH)
+
+
+def unstretch(w, V):
+    """fork: w with letters typed three or more times running cut to one or two ("bloooood" -> blood, "helpppp" -> help),
+    the way that is a word (English, the library's on MIN_PAGES pages, or one typed without its apostrophe), the library's
+    commonest first; else cut to two, for the corrector to try. w itself when nothing runs three times."""
+    if not english_on() or not STRETCH.search(w) or len(set(w)) < 2:     # "kkkkk" is mash, not "k"
+        return w
+    import itertools
+    runs = [m.group(0) for m in re.finditer(r'(.)\1*', w)]
+    opts = [[r[0], r[0] * 2] if len(r) >= 3 else [r] for r in runs]
+    if sum(len(o) > 1 for o in opts) > 4:
+        return ''.join(o[-1] for o in opts)
+    cands = [''.join(p) for p in itertools.product(*opts)]
+    known = [c for c in cands if c in APOSTROPHES or is_english(c) or V.get(c, 0) >= MIN_PAGES]
+    return (max(known, key=lambda c: (c in APOSTROPHES, is_english(c), V.get(c, 0))) if known     # "hesss": he's, not Hess
+            else ''.join(o[-1] for o in opts))
+
+
+def phrase_slips(q):
+    """fork: q with PHRASE_SLIPS put right ("he cant breed" -> he cant breathe), unless a breathing slip is about a machine,
+    food or an animal ("the car is not braking", "not breeding the dogs")."""
+    for rx, new, machine in PHRASE_SLIPS:
+        if english_on() and rx.search(q) and not (machine and _MACHINE.search(q)):
+            q = rx.sub(new, q)
+    return q
 # The library's own first-aid and emergency books, found by title. The financial "first aid kit" is not one.
 EMERGENCY_TITLES = ('title:("first aid" OR "emergency care" OR resuscitation OR "where there is no doctor" OR '
                     '"emergency response guidebook" OR "fire safety" OR "are you ready" OR "cert basic") NOT title:financial')
@@ -185,6 +301,10 @@ def fix_word(w, words):
     V, E = words.V, words.E
     if w in KNOWN and V.get(w, 0) < 3 and KNOWN[w] in V:
         return KNOWN[w]
+    if english_on() and w in SLIPS and SLIPS[w] in V and V.get(w, 0) < RARE:   # fork: a real word, slip for an emergency one
+        return SLIPS[w]
+    if is_english(w):       # fork: ordinary English ("keeled", "puking"), not a typo of a library word
+        return w
     own = V.get(w, 0)
     if w in STOP or len(w) < 3 or not (w.isascii() and w.isalpha()) or own >= RARE:
         return w
@@ -346,7 +466,7 @@ def split_word(w, words):
     split. The costs were chosen on glued runs of 2-6 words of the triage questions (clean and with typos) against long
     words with a typo and rare real words (.claude/drafts/triage, docs/FORK.md 3k)."""
     n = len(w)
-    if n < SPLIT_MIN or w in words.V or not w.isascii() or not w.isalpha():
+    if n < SPLIT_MIN or w in words.V or not w.isascii() or not w.isalpha() or is_english(w):   # fork: "dribbling" stays
         return None
     best = segment(w, words)
     if best is None or len(best[1]) < 2:
@@ -370,7 +490,7 @@ def body_fix(w, words):
     "puls" (24 pages, a real word to fix_word) -> pulse. A glued run with a body stem that could not be split
     ("mybbyisntbreathing") -> the stem's words ("not breathing"), so the search finds those pages instead of nothing."""
     from engine import confidence       # here: confidence imports this module
-    if not confidence.body_on() or w in STOP or not w.isalpha():
+    if not confidence.body_on() or w in STOP or not w.isalpha() or (is_english(w) and w not in confidence.BODY_WORDS):
         return w
     b = confidence.body_match(w, words.V)
     if b and b != w and (w not in words.V or _how(w, b)):   # a word of the library: one plausible slip only
@@ -398,17 +518,18 @@ def correct_with(q, words):
         t = m.group(0)
         if not re.fullmatch(r'[A-Za-z]+', t) or (t.isupper() and len(t) > 1 and not shouting):   # CPR, AED, ERG
             return t
-        parts = split_word(t.lower(), words) if split_on() else None
+        w = unstretch(t.lower(), words.V)       # fork: "bloooood" -> blood, then as typed so
+        parts = split_word(w, words) if split_on() else None
         if parts:       # fork: words typed with no spaces
             f = ' '.join(parts)
             return f.upper() if t.isupper() else f[0].upper() + f[1:] if t[0].isupper() else f
-        f = fix_word(t.lower(), words)
-        if f == t.lower() and body_fix_on():
+        f = fix_word(w, words)
+        if f == w and body_fix_on():
             f = body_fix(f, words)
         if f == t.lower():
             return t
         return f.upper() if t.isupper() and len(t) > 1 else f[0].upper() + f[1:] if t[0].isupper() else f
-    return TOKEN.sub(one, q)
+    return TOKEN.sub(one, phrase_slips(q))     # fork: "he cant breed" -> breathe first
 
 
 # ------------------------------------------------------------------ the library's words, kept in memory --

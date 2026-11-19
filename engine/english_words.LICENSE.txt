@@ -1,0 +1,35 @@
+engine/english_words.txt.gz
+===========================
+
+78,238 lower-case English words (plain a-z), one per line: every form of every word of the hunspell en_US
+dictionary as Chromium ships it for spell checking (en-US-10-2.bdic), with the dictionary's affixes applied. Made
+with tools/english_words.py from the copy of that file in a local Chrome install. engine/typos.py uses it so that an
+ordinary English word ("keeled", "puking", "gasps") is not "corrected" into a word of the library.
+
+Licence
+-------
+
+The hunspell en_US dictionary is made from SCOWL (Spell Checker Oriented Word Lists, http://wordlist.aspell.net/)
+by Kevin Atkinson and others. Its licence is permissive (MIT/BSD-like): use, copying, modification and distribution,
+also commercial, are allowed, provided the copyright notices and permission notices travel with the words. Chromium's
+own additions to the dictionary are under Chromium's BSD-style licence (Copyright The Chromium Authors).
+
+The main notice:
+
+  Copyright 2000-2020 by Kevin Atkinson
+
+  Permission to use, copy, modify, distribute and sell these word lists, the associated scripts, the output created
+  from the scripts, and its documentation for any purpose is hereby granted without fee, provided that the above
+  copyright notice appears in all copies and that both that copyright notice and this permission notice appear in
+  supporting documentation. Kevin Atkinson makes no representations about the suitability of this array for any
+  purpose. It is provided "as is" without express or implied warranty.
+
+SCOWL also takes words from other lists, each with its own notice: Alan Beale's (same terms as above), the UK
+Advanced Cryptics Dictionary by J Ross Beresford (its notice must be shown and included verbatim), Ispell's
+English lists by Geoff Kuenning and others (BSD-style), WordNet (Princeton's permissive licence) and the Moby
+lists (public domain).
+
+TO DO before a release: the notices above were written from memory, without downloading anything. Replace this
+section with the full, verbatim copyright section of README_en_US.txt from Chromium's hunspell_dictionaries
+(https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries), which is the licence of the exact words
+this file holds.

@@ -226,23 +226,27 @@ const Chat = (() => {
     let h = '';
     if (running) h += `<div class="working"><b>${esc(STATES[m.state] || 'Working…')}${m.state === 'starting' && m.pct ? ` ${m.pct}%` : ''}</b>${progress(m)}${steps ? `<ul class="steps">${steps}</ul>` : ''}</div>`;
     if (m.error) h += `<div class="ans-error">${ico('warn')}<div><b>${esc(m.error)}</b>${m.offline ? '<p>You can keep browsing and searching. Here are the pages that best match your question:</p>' : ''}</div></div>`;
-    if (m.content) h += `<div class="answer">${md(m.content, m)}</div>`;
-    if (running && found.length) h += `<div class="prefound"><p class="small muted">Pages found so far — you can open them while the answer is written:</p>${srcCards(found.slice(0, 6), true)}</div>`;
-    if (m.fallback) h += srcCards(m.fallback, true);
     // fork: after noise or a weak search inside a conversation the server offers what the message may be about (assistant.turn_hits)
+    let sugg = '';
     if (!running && (m.suggest || []).length && i === cur.messages.length - 1) {
       // fork: coloured so they stand out from the page: the emergency choices red, "Still about…" and "Something else" green
       const sg = c => /^(something else|still about)/i.test(c.label || '') ? 'sg-other' : 'sg-danger';
-      h += m.suggestStyle === 'compact'   // fork: an everyday question gets the same buttons, smaller (engine/confidence.everyday_level)
+      sugg = m.suggestStyle === 'compact'   // fork: an everyday question gets the same buttons, smaller (engine/confidence.everyday_level)
         ? `<div class="suggest compact"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="chips">${m.suggest.map(c => `<button class="chip ${sg(c)}" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`
-        : `<div class="suggest"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain ${sg(c)}" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
+        : `<div class="suggest${m.suggestStyle === 'urgent' ? ' urgent' : ''}"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain ${sg(c)}" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
     }
+    if (m.suggestStyle === 'urgent') h += sugg;   // fork: a bare plea ("911", "help"): the emergency buttons first (assistant.chat_reply)
+    if (m.content) h += `<div class="answer">${md(m.content, m)}</div>`;
+    if (running && found.length) h += `<div class="prefound"><p class="small muted">Pages found so far — you can open them while the answer is written:</p>${srcCards(found.slice(0, 6), true)}</div>`;
+    if (m.fallback) h += srcCards(m.fallback, true);
+    if (m.suggestStyle !== 'urgent') h += sugg;
     if (!running && m.content) {
       const cited = m.cited || [];
       if ((m.invalid || []).length) h += `<p class="small" style="color:var(--stop)">The model referred to sources that don’t exist (${m.invalid.join(', ')}); those markers were removed.</p>`;
       // fork: a "please say more" reply (engine/confidence.py) is not an answer: no legend, no unverified-answer notice
       if (!m.unsure) h += `<div class="legend small"><span><span class="lg-c">1</span> linked to a page or video</span><span><span class="lg-u">dotted</span> the model’s own wording, not linked to a source</span></div>`;
-      if (cited.length) h += `<h3 class="srch">Sources (${cited.length})</h3>${srcCards(cited, false)}`;
+      // fork: a request to say more gives the pages it found too: not an answer's sources, so named for what they are
+      if (cited.length) h += `<h3 class="srch">${m.unsure ? 'Pages the library found' : 'Sources'} (${cited.length})</h3>${srcCards(cited, false)}`;
       else if (!m.unsure) h += `<p class="notice small">This answer has no linked sources. Treat it as unverified.</p>`;
       const other = (m.consulted || []).filter(s => s.kind !== 'place');
       if (other.length) h += `<details class="also"><summary>Also looked at (${other.length}, not used)</summary>${srcCards(other.slice(0, 10), true)}</details>`;
@@ -452,7 +456,7 @@ const Chat = (() => {
     else if (ev.type === 'sources') m.sources = ev.sources;
     else if (ev.type === 'delta') m.content += ev.text;
     else if (ev.type === 'reset') m.content = '';
-    else if (ev.type === 'suggest') { m.suggest = Array.isArray(ev.choices) ? ev.choices.slice(0, 8) : null; m.suggestPrompt = typeof ev.prompt === 'string' ? ev.prompt.slice(0, 120) : ''; m.suggestStyle = ev.style === 'compact' ? 'compact' : '' }
+    else if (ev.type === 'suggest') { m.suggest = Array.isArray(ev.choices) ? ev.choices.slice(0, 8) : null; m.suggestPrompt = typeof ev.prompt === 'string' ? ev.prompt.slice(0, 120) : ''; m.suggestStyle = ev.style === 'compact' || ev.style === 'urgent' ? ev.style : '' }
     else if (ev.type === 'done') { m.unsure = !!ev.unsure; m.content = ev.answer; m.cited = ev.sources; m.consulted = ev.consulted; m.invalid = ev.invalid; m.latency = ev.latency; m.content = m.content.replace(/\[([SM]\d+)\]/g, (x, k) => (ev.invalid || []).includes(k) ? '' : x) }
     else if (ev.type === 'error') {
       if (ev.error === 'model_unavailable') { m.offline = true; m.error = ev.text; fallback(m, (cur.messages[cur.messages.length - 2] || {}).content || '') }

@@ -137,6 +137,9 @@ def main():
     roots = [a.app / 'Contents' / d / 'engine' / 'setup' / 'roots.pem' for d in ('Resources', 'Frameworks')]
     if not any(r.is_file() for r in roots):    # setup's downloader trusts only these roots; without them it downloads nothing
         problems.append('missing from the package: engine/setup/roots.pem')
+    for name in ('english_words.txt.gz', 'english_words.LICENSE.txt'):   # fork: engine/typos.py's English words
+        if not any((a.app / 'Contents' / d / 'engine' / name).is_file() for d in ('Resources', 'Frameworks')):
+            problems.append(f'missing from the package: engine/{name}')
     print(f'files {n_files}, native binaries {n_macho}, modules looked inside {n_mods}')
     print(f'remote_storage string: {remote_hits or "nowhere"} (the module itself is refused above)')
     print(f'/Users/... strings: { {u: w[:3] for u, w in user_paths.items()} or "none"}')
