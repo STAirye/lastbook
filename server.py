@@ -37,6 +37,7 @@ from engine.paths import ro_uri  # noqa: E402
 from engine import saved_pages, address_search, sections  # noqa: E402
 from engine import typos  # noqa: E402  (fork: spelling mistakes in search questions)
 from engine import confidence  # noqa: E402  (fork: its injury words stop the how-to phrases)
+from engine import meaning_red  # noqa: E402  (fork: words OR meaning for urgent questions)
 from engine.setup import api as setup_api  # noqa: E402  (the one module that may download: only when the person asks)
 HERE = lastbook_paths.DATA  # holds derived/
 APP = lastbook_paths.APP  # holds web/ and content/
@@ -2216,6 +2217,7 @@ def init(no_index=False):
         threading.Thread(target=INDEX.run_forever, daemon=True).start()
     threading.Thread(target=prewarm_previews, daemon=True).start()
     threading.Thread(target=lambda: sections.ensure(library.DB, kind_of), daemon=True).start()   # fork: before the first search
+    meaning_red.start()     # fork: the meaning check loads on its own thread; until then the urgent words alone decide
 
 
 def serve(port, lan=False):

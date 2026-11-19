@@ -29,6 +29,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 APP = str(Path(a.app).resolve())
 LOG = Path(a.data) / 'derived/logs/lastbook.log'
 MODEL = re.compile(r'\.onnx|onnxruntime|tokenizers|bge-', re.I)
+MEANING_OK = re.compile(r'/derived/models/meaning-red/|onnxruntime|tokenizers')   # fork: the meaning check's one model and its runtime (docs/FORK.md 3m)
 REAL_LIBRARY = re.compile(r'survival-library|/survival/library-data')
 
 
@@ -109,7 +110,7 @@ else:
         result['samples'] += 1
         result['inet_rows'] += inet
         result['web_inet_rows'] += web_inet
-        result['model_rows'] += [x for x in files + web_files if MODEL.search(x)]
+        result['model_rows'] += [x for x in files + web_files if MODEL.search(x) and not MEANING_OK.search(x)]
         result['real_library_rows'] += [x for x in files + web_files if REAL_LIBRARY.search(x)]
         result['front_changed'] += front != front_before
         samples.write(json.dumps({'t': tick, 'front': front, 'rss_kb': rss, 'web_rss_kb': web_rss, 'windows': win, 'new_web': new, 'inet': len(inet), 'web_inet': len(web_inet), 'files': len(files)}) + '\n')

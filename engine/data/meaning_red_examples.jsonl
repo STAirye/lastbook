@@ -1,0 +1,689 @@
+{"text": "my son isnt breathing", "label": "red", "cat": "not_breathing"}
+{"text": "he stopped breathing what do i do", "label": "red", "cat": "not_breathing"}
+{"text": "she is not breathing and her lips are blue", "label": "red", "cat": "not_breathing"}
+{"text": "baby not breathing please help", "label": "red", "cat": "not_breathing"}
+{"text": "my husband has no pulse", "label": "red", "cat": "not_breathing"}
+{"text": "cant feel a heartbeat on him", "label": "red", "cat": "not_breathing"}
+{"text": "hes not breathing properly just gasping", "label": "red", "cat": "not_breathing"}
+{"text": "grandma making weird gasping noises and wont wake", "label": "red", "cat": "not_breathing"}
+{"text": "he breathes like every 10 seconds and doesnt answer", "label": "red", "cat": "not_breathing"}
+{"text": "no breath coming out of him", "label": "red", "cat": "not_breathing"}
+{"text": "my friend went limp and isnt breathing", "label": "red", "cat": "not_breathing"}
+{"text": "how to do cpr on my dad right now", "label": "red", "cat": "not_breathing"}
+{"text": "she stopped breathin", "label": "red", "cat": "not_breathing"}
+{"text": "he is breating very slow and blue", "label": "red", "cat": "not_breathing"}
+{"text": "my baby turned blue and floppy", "label": "red", "cat": "not_breathing"}
+{"text": "kid cant breathe at all", "label": "red", "cat": "not_breathing"}
+{"text": "he is purple in the face and not breathing", "label": "red", "cat": "not_breathing"}
+{"text": "someone collapsed and has no pulse", "label": "red", "cat": "not_breathing"}
+{"text": "her chest isnt moving", "label": "red", "cat": "not_breathing"}
+{"text": "im doing chest compressions what next", "label": "red", "cat": "not_breathing"}
+{"text": "my wife heart stopped", "label": "red", "cat": "not_breathing"}
+{"text": "i think hes dead he isnt breathing", "label": "red", "cat": "not_breathing"}
+{"text": "cant breath cant breath help", "label": "red", "cat": "not_breathing"}
+{"text": "my throat is closing i cant breathe", "label": "red", "cat": "not_breathing"}
+{"text": "asthma attack inhaler not working cant talk", "label": "red", "cat": "not_breathing"}
+{"text": "he is wheezing and can only say one word at a time", "label": "red", "cat": "not_breathing"}
+{"text": "struggling to breathe lips going grey", "label": "red", "cat": "not_breathing"}
+{"text": "my baby is choking", "label": "red", "cat": "choking"}
+{"text": "he is choking on food and cant talk", "label": "red", "cat": "choking"}
+{"text": "choking cant cough", "label": "red", "cat": "choking"}
+{"text": "she swallowed a coin and cant breathe", "label": "red", "cat": "choking"}
+{"text": "toddler choking on a grape", "label": "red", "cat": "choking"}
+{"text": "something stuck in his throat he is turning blue", "label": "red", "cat": "choking"}
+{"text": "my dad choked on steak and is grabbing his throat", "label": "red", "cat": "choking"}
+{"text": "kid swallowed a marble now gagging and cant breath", "label": "red", "cat": "choking"}
+{"text": "choking on a fish bone cant breathe", "label": "red", "cat": "choking"}
+{"text": "how to do heimlich on a baby now", "label": "red", "cat": "choking"}
+{"text": "chokeing help", "label": "red", "cat": "choking"}
+{"text": "he is chocking and going red then blue", "label": "red", "cat": "choking"}
+{"text": "food went down wrong way and she cant get air", "label": "red", "cat": "choking"}
+{"text": "my 2 year old put a battery in his mouth and swallowed it", "label": "red", "cat": "choking"}
+{"text": "my mom collapsed and wont wake up", "label": "red", "cat": "unconscious"}
+{"text": "he fainted and hasnt come round", "label": "red", "cat": "unconscious"}
+{"text": "found my brother unconscious on the floor", "label": "red", "cat": "unconscious"}
+{"text": "she is unresponsive", "label": "red", "cat": "unconscious"}
+{"text": "dad is on the floor and not answering me", "label": "red", "cat": "unconscious"}
+{"text": "my grandpa wont wake up", "label": "red", "cat": "unconscious"}
+{"text": "he passed out and is snoring strangely", "label": "red", "cat": "unconscious"}
+{"text": "she dropped like a stone in the kitchen", "label": "red", "cat": "unconscious"}
+{"text": "guy on the street out cold not moving", "label": "red", "cat": "unconscious"}
+{"text": "my wife blacked out and hit her head", "label": "red", "cat": "unconscious"}
+{"text": "cant wake him up", "label": "red", "cat": "unconscious"}
+{"text": "he keeled over at the table", "label": "red", "cat": "unconscious"}
+{"text": "she slumped in her chair and wont respond", "label": "red", "cat": "unconscious"}
+{"text": "found him face down in the bath", "label": "red", "cat": "unconscious"}
+{"text": "my roommate is unconscious and wont respond to shaking", "label": "red", "cat": "unconscious"}
+{"text": "he went floppy and his eyes rolled back", "label": "red", "cat": "unconscious"}
+{"text": "she is breathing but wont open her eyes", "label": "red", "cat": "unconscious"}
+{"text": "my friend just collapsed while running", "label": "red", "cat": "unconscious"}
+{"text": "old man fell down in the shop and isnt moving", "label": "red", "cat": "unconscious"}
+{"text": "he is not responding to his name", "label": "red", "cat": "unconscious"}
+{"text": "my son is having a seizure", "label": "red", "cat": "seizure"}
+{"text": "she is fitting and wont stop", "label": "red", "cat": "seizure"}
+{"text": "he is shaking all over and foaming at the mouth", "label": "red", "cat": "seizure"}
+{"text": "seizure lasting more than 5 minutes", "label": "red", "cat": "seizure"}
+{"text": "baby having a fit with a high fever", "label": "red", "cat": "seizure"}
+{"text": "my wife is convulsing on the floor", "label": "red", "cat": "seizure"}
+{"text": "he has had three seizures in a row", "label": "red", "cat": "seizure"}
+{"text": "she is jerking and her eyes are rolling", "label": "red", "cat": "seizure"}
+{"text": "first time seizure in my dad what do i do", "label": "red", "cat": "seizure"}
+{"text": "my daughter is twitching and not responsive", "label": "red", "cat": "seizure"}
+{"text": "epileptic fit wont stop", "label": "red", "cat": "seizure"}
+{"text": "he had a siezure and isnt waking up after", "label": "red", "cat": "seizure"}
+{"text": "bleeding wont stop", "label": "red", "cat": "bleeding"}
+{"text": "he cut his arm and blood is spurting out", "label": "red", "cat": "bleeding"}
+{"text": "my leg is gushing blood", "label": "red", "cat": "bleeding"}
+{"text": "deep cut on the wrist pouring blood", "label": "red", "cat": "bleeding"}
+{"text": "she is bleeding heavily from the head", "label": "red", "cat": "bleeding"}
+{"text": "stab wound in the stomach", "label": "red", "cat": "bleeding"}
+{"text": "he was shot in the leg", "label": "red", "cat": "bleeding"}
+{"text": "blood soaking through the towel", "label": "red", "cat": "bleeding"}
+{"text": "cut an artery i think blood pumping", "label": "red", "cat": "bleeding"}
+{"text": "chainsaw cut his thigh lots of blood", "label": "red", "cat": "bleeding"}
+{"text": "nosebleed for an hour and wont stop", "label": "red", "cat": "bleeding"}
+{"text": "my finger got cut off", "label": "red", "cat": "bleeding"}
+{"text": "his hand was crushed in the machine and bleeding a lot", "label": "red", "cat": "bleeding"}
+{"text": "she is vomiting blood", "label": "red", "cat": "bleeding"}
+{"text": "coughing up lots of blood", "label": "red", "cat": "bleeding"}
+{"text": "throwing up blood and dizzy", "label": "red", "cat": "bleeding"}
+{"text": "bleeding a lot after giving birth", "label": "red", "cat": "bleeding"}
+{"text": "heavy bleeding while pregnant", "label": "red", "cat": "bleeding"}
+{"text": "how to put a tourniquet on fast", "label": "red", "cat": "bleeding"}
+{"text": "glass went into his neck", "label": "red", "cat": "bleeding"}
+{"text": "my friend got stabbed what do i do", "label": "red", "cat": "bleeding"}
+{"text": "bleeding from the ears after he fell", "label": "red", "cat": "bleeding"}
+{"text": "blood everywhere help", "label": "red", "cat": "bleeding"}
+{"text": "hes loosing alot of blood", "label": "red", "cat": "bleeding"}
+{"text": "bleding wont stop from my leg", "label": "red", "cat": "bleeding"}
+{"text": "chest pain spreading to my left arm", "label": "red", "cat": "chest_pain"}
+{"text": "crushing pain in my chest and sweating", "label": "red", "cat": "chest_pain"}
+{"text": "feels like an elephant sitting on my chest", "label": "red", "cat": "chest_pain"}
+{"text": "my dad has chest pain and is pale and sweaty", "label": "red", "cat": "chest_pain"}
+{"text": "i think im having a heart attack", "label": "red", "cat": "chest_pain"}
+{"text": "tight chest and pain going up to my jaw", "label": "red", "cat": "chest_pain"}
+{"text": "sudden chest pain and short of breath", "label": "red", "cat": "chest_pain"}
+{"text": "heart attack symptoms what do i do", "label": "red", "cat": "chest_pain"}
+{"text": "my heart is racing and i feel like im going to pass out", "label": "red", "cat": "chest_pain"}
+{"text": "chest pressure and sick and clammy", "label": "red", "cat": "chest_pain"}
+{"text": "my husband grabbed his chest and fell down", "label": "red", "cat": "chest_pain"}
+{"text": "heart pounding chest pain cant breathe", "label": "red", "cat": "chest_pain"}
+{"text": "pain in my chest like a band squeezing", "label": "red", "cat": "chest_pain"}
+{"text": "sharp chest pain and coughing blood", "label": "red", "cat": "chest_pain"}
+{"text": "my mum says her heart hurts and she is grey", "label": "red", "cat": "chest_pain"}
+{"text": "chest hurting really bad and left arm numb", "label": "red", "cat": "chest_pain"}
+{"text": "her face is drooping on one side", "label": "red", "cat": "stroke"}
+{"text": "he cant lift his right arm and speech is slurred", "label": "red", "cat": "stroke"}
+{"text": "my dad suddenly cant talk properly", "label": "red", "cat": "stroke"}
+{"text": "i think my mum is having a stroke", "label": "red", "cat": "stroke"}
+{"text": "sudden worst headache of my life", "label": "red", "cat": "stroke"}
+{"text": "face crooked and cant smile properly", "label": "red", "cat": "stroke"}
+{"text": "my grandma cant move one side of her body", "label": "red", "cat": "stroke"}
+{"text": "he is talking gibberish all of a sudden", "label": "red", "cat": "stroke"}
+{"text": "sudden confusion and cant understand words", "label": "red", "cat": "stroke"}
+{"text": "one side of her face went numb and droopy", "label": "red", "cat": "stroke"}
+{"text": "lost vision in one eye suddenly and arm weak", "label": "red", "cat": "stroke"}
+{"text": "his words are coming out wrong and his arm is heavy", "label": "red", "cat": "stroke"}
+{"text": "stroke symptoms right now", "label": "red", "cat": "stroke"}
+{"text": "thunderclap headache then vomiting", "label": "red", "cat": "stroke"}
+{"text": "she is dribbling from the side of her mouth and confused", "label": "red", "cat": "stroke"}
+{"text": "my throat is swelling after eating peanuts", "label": "red", "cat": "anaphylaxis"}
+{"text": "allergic reaction lips and tongue swelling", "label": "red", "cat": "anaphylaxis"}
+{"text": "stung by a bee and cant breathe", "label": "red", "cat": "anaphylaxis"}
+{"text": "she ate shrimp and her face is swelling up and wheezing", "label": "red", "cat": "anaphylaxis"}
+{"text": "need to use epipen now", "label": "red", "cat": "anaphylaxis"}
+{"text": "hives all over and throat tight", "label": "red", "cat": "anaphylaxis"}
+{"text": "anaphylaxis what do i do", "label": "red", "cat": "anaphylaxis"}
+{"text": "my son is allergic to nuts and just ate one now he is coughing and swelling", "label": "red", "cat": "anaphylaxis"}
+{"text": "swollen tongue cant swallow", "label": "red", "cat": "anaphylaxis"}
+{"text": "after the injection he went red and cant breathe", "label": "red", "cat": "anaphylaxis"}
+{"text": "wasp sting and now dizzy and swelling everywhere", "label": "red", "cat": "anaphylaxis"}
+{"text": "alergic reaction face swelling help", "label": "red", "cat": "anaphylaxis"}
+{"text": "he took a whole bottle of pills", "label": "red", "cat": "overdose_poisoning"}
+{"text": "my toddler drank bleach", "label": "red", "cat": "overdose_poisoning"}
+{"text": "she swallowed a lot of paracetamol", "label": "red", "cat": "overdose_poisoning"}
+{"text": "overdose on heroin not breathing", "label": "red", "cat": "overdose_poisoning"}
+{"text": "friend took too much and wont wake up", "label": "red", "cat": "overdose_poisoning"}
+{"text": "my son ate his grandma's heart pills", "label": "red", "cat": "overdose_poisoning"}
+{"text": "baby drank dishwasher liquid", "label": "red", "cat": "overdose_poisoning"}
+{"text": "he drank antifreeze", "label": "red", "cat": "overdose_poisoning"}
+{"text": "took 30 tylenol an hour ago", "label": "red", "cat": "overdose_poisoning"}
+{"text": "she mixed alcohol and sleeping pills and is drowsy", "label": "red", "cat": "overdose_poisoning"}
+{"text": "my kid ate some of my medicine", "label": "red", "cat": "overdose_poisoning"}
+{"text": "pinpoint pupils and barely breathing after drugs", "label": "red", "cat": "overdose_poisoning"}
+{"text": "he snorted something and is having a seizure", "label": "red", "cat": "overdose_poisoning"}
+{"text": "fentanyl overdose what do i do", "label": "red", "cat": "overdose_poisoning"}
+{"text": "naloxone how to give overdose now", "label": "red", "cat": "overdose_poisoning"}
+{"text": "my dog ate rat poison", "label": "red", "cat": "overdose_poisoning"}
+{"text": "child swallowed a button battery", "label": "red", "cat": "overdose_poisoning"}
+{"text": "drank weed killer", "label": "red", "cat": "overdose_poisoning"}
+{"text": "my friend is really drunk and passed out and cold", "label": "red", "cat": "overdose_poisoning"}
+{"text": "he cant stop vomiting after drinking all night and is unresponsive", "label": "red", "cat": "overdose_poisoning"}
+{"text": "we all have headaches and feel sick near the heater carbon monoxide", "label": "red", "cat": "overdose_poisoning"}
+{"text": "smell gas and everyone is dizzy", "label": "red", "cat": "overdose_poisoning"}
+{"text": "she breathed in fumes from mixing cleaning products and is coughing", "label": "red", "cat": "overdose_poisoning"}
+{"text": "kid ate mushrooms from the garden and is throwing up", "label": "red", "cat": "overdose_poisoning"}
+{"text": "she drank kerosene", "label": "red", "cat": "overdose_poisoning"}
+{"text": "he swallowed a pack of my antidepressants", "label": "red", "cat": "overdose_poisoning"}
+{"text": "ate the whole packet of iron tablets", "label": "red", "cat": "overdose_poisoning"}
+{"text": "my brother injected something and turned blue", "label": "red", "cat": "overdose_poisoning"}
+{"text": "taken an overdose", "label": "red", "cat": "overdose_poisoning"}
+{"text": "i want to kill myself", "label": "red", "cat": "suicide"}
+{"text": "i dont want to live anymore", "label": "red", "cat": "suicide"}
+{"text": "im going to end it tonight", "label": "red", "cat": "suicide"}
+{"text": "i have the pills ready to take them all", "label": "red", "cat": "suicide"}
+{"text": "my friend says she is going to kill herself", "label": "red", "cat": "suicide"}
+{"text": "he is talking about hanging himself", "label": "red", "cat": "suicide"}
+{"text": "i cut myself deep and cant stop the bleeding", "label": "red", "cat": "suicide"}
+{"text": "thinking about suicide right now", "label": "red", "cat": "suicide"}
+{"text": "i just want to die", "label": "red", "cat": "suicide"}
+{"text": "nobody would miss me i am going to end my life", "label": "red", "cat": "suicide"}
+{"text": "my son wrote a goodbye note", "label": "red", "cat": "suicide"}
+{"text": "she is standing on the bridge", "label": "red", "cat": "suicide"}
+{"text": "i took pills to end it", "label": "red", "cat": "suicide"}
+{"text": "everyone would be better off without me tonight", "label": "red", "cat": "suicide"}
+{"text": "i cant go on anymore i have a plan", "label": "red", "cat": "suicide"}
+{"text": "my dad has a gun and says he will use it on himself", "label": "red", "cat": "suicide"}
+{"text": "i want to disappear forever", "label": "red", "cat": "suicide"}
+{"text": "how many pills to die", "label": "red", "cat": "suicide"}
+{"text": "my son fell in the pool and isnt breathing", "label": "red", "cat": "drowning"}
+{"text": "pulled a kid out of the water not breathing", "label": "red", "cat": "drowning"}
+{"text": "someone is drowning in the river", "label": "red", "cat": "drowning"}
+{"text": "baby was under the bath water", "label": "red", "cat": "drowning"}
+{"text": "he was underwater for a few minutes", "label": "red", "cat": "drowning"}
+{"text": "swept away by the current", "label": "red", "cat": "drowning"}
+{"text": "my friend went under at the lake and hasnt come up", "label": "red", "cat": "drowning"}
+{"text": "child found floating in the pond", "label": "red", "cat": "drowning"}
+{"text": "fell through the ice into the lake", "label": "red", "cat": "drowning"}
+{"text": "car went into the river with people inside", "label": "red", "cat": "drowning"}
+{"text": "my child pulled boiling water onto herself", "label": "red", "cat": "burns"}
+{"text": "he is on fire", "label": "red", "cat": "burns"}
+{"text": "house fire people trapped inside", "label": "red", "cat": "burns"}
+{"text": "burnt his whole arm and its white and leathery", "label": "red", "cat": "burns"}
+{"text": "her clothes caught fire", "label": "red", "cat": "burns"}
+{"text": "chemical burn in the eye", "label": "red", "cat": "burns"}
+{"text": "my face got burned by the explosion", "label": "red", "cat": "burns"}
+{"text": "big burn on his chest blistering everywhere", "label": "red", "cat": "burns"}
+{"text": "burned in a fire and coughing black stuff", "label": "red", "cat": "burns"}
+{"text": "electric shock from a power line he is not moving", "label": "red", "cat": "burns"}
+{"text": "he got electrocuted and is unconscious", "label": "red", "cat": "burns"}
+{"text": "struck by lightning", "label": "red", "cat": "burns"}
+{"text": "grease fire burned her hands and face", "label": "red", "cat": "burns"}
+{"text": "my toddler grabbed the iron and the burn is huge", "label": "red", "cat": "burns"}
+{"text": "smoke inhalation and hoarse voice", "label": "red", "cat": "burns"}
+{"text": "he is freezing and stopped shivering and is confused", "label": "red", "cat": "temperature"}
+{"text": "hypothermia he is not making sense", "label": "red", "cat": "temperature"}
+{"text": "found her outside in the snow barely conscious", "label": "red", "cat": "temperature"}
+{"text": "she is very cold and drowsy and slurring", "label": "red", "cat": "temperature"}
+{"text": "heatstroke he is hot and confused and stopped sweating", "label": "red", "cat": "temperature"}
+{"text": "collapsed in the heat and is burning up", "label": "red", "cat": "temperature"}
+{"text": "my dad was working in the sun now he is confused and very hot", "label": "red", "cat": "temperature"}
+{"text": "baby left in a hot car", "label": "red", "cat": "temperature"}
+{"text": "very high fever and stiff neck and rash that doesnt fade", "label": "red", "cat": "temperature"}
+{"text": "fever of 41 and he is delirious", "label": "red", "cat": "temperature"}
+{"text": "frostbite toes black and he is confused", "label": "red", "cat": "temperature"}
+{"text": "fell off the roof and cant move his legs", "label": "red", "cat": "head_spine"}
+{"text": "he hit his head and is vomiting and confused", "label": "red", "cat": "head_spine"}
+{"text": "car crash she cant feel her legs", "label": "red", "cat": "head_spine"}
+{"text": "head injury and one pupil bigger", "label": "red", "cat": "head_spine"}
+{"text": "fell down the stairs and isnt moving", "label": "red", "cat": "head_spine"}
+{"text": "motorbike accident head bleeding not awake", "label": "red", "cat": "head_spine"}
+{"text": "dove into shallow water and cant move", "label": "red", "cat": "head_spine"}
+{"text": "hit his head and now very sleepy and repeating himself", "label": "red", "cat": "head_spine"}
+{"text": "clear fluid coming from his nose after a head injury", "label": "red", "cat": "head_spine"}
+{"text": "baby fell off the bed and is now floppy and sleepy", "label": "red", "cat": "head_spine"}
+{"text": "neck injury after a fall cant feel arms", "label": "red", "cat": "head_spine"}
+{"text": "skull looks dented after he got hit", "label": "red", "cat": "head_spine"}
+{"text": "he was hit by a car", "label": "red", "cat": "head_spine"}
+{"text": "crushed under a car", "label": "red", "cat": "head_spine"}
+{"text": "trapped under rubble after earthquake", "label": "red", "cat": "head_spine"}
+{"text": "tree fell on him", "label": "red", "cat": "head_spine"}
+{"text": "my water broke and the baby is coming now", "label": "red", "cat": "childbirth"}
+{"text": "baby is coming out what do i do", "label": "red", "cat": "childbirth"}
+{"text": "the cord is coming out first", "label": "red", "cat": "childbirth"}
+{"text": "she is in labour and bleeding a lot", "label": "red", "cat": "childbirth"}
+{"text": "pregnant and very bad stomach pain and bleeding", "label": "red", "cat": "childbirth"}
+{"text": "baby born and not breathing", "label": "red", "cat": "childbirth"}
+{"text": "delivering a baby at home right now", "label": "red", "cat": "childbirth"}
+{"text": "pregnant woman having a seizure", "label": "red", "cat": "childbirth"}
+{"text": "heavy bleeding after the baby came out", "label": "red", "cat": "childbirth"}
+{"text": "pregnant with severe headache and blurry vision and swelling", "label": "red", "cat": "childbirth"}
+{"text": "the baby is coming feet first", "label": "red", "cat": "childbirth"}
+{"text": "newborn is blue and not crying", "label": "red", "cat": "childbirth"}
+{"text": "my baby is very floppy and wont feed", "label": "red", "cat": "child_baby_elderly"}
+{"text": "newborn has a fever and is not waking for feeds", "label": "red", "cat": "child_baby_elderly"}
+{"text": "baby has a rash that doesnt fade under a glass", "label": "red", "cat": "child_baby_elderly"}
+{"text": "my infant is grunting and breathing fast", "label": "red", "cat": "child_baby_elderly"}
+{"text": "my child is very sleepy and hard to wake", "label": "red", "cat": "child_baby_elderly"}
+{"text": "toddler fell into the pool", "label": "red", "cat": "child_baby_elderly"}
+{"text": "my baby has a soft spot bulging and is vomiting", "label": "red", "cat": "child_baby_elderly"}
+{"text": "baby is limp and pale", "label": "red", "cat": "child_baby_elderly"}
+{"text": "child has a high fever and is having a fit", "label": "red", "cat": "child_baby_elderly"}
+{"text": "my grandmother fell and cant get up and is confused", "label": "red", "cat": "child_baby_elderly"}
+{"text": "old dad is suddenly very confused and cant stand", "label": "red", "cat": "child_baby_elderly"}
+{"text": "my baby stopped breathing for a moment and went blue", "label": "red", "cat": "child_baby_elderly"}
+{"text": "baby has not peed all day and is very drowsy", "label": "red", "cat": "child_baby_elderly"}
+{"text": "little one swallowed a magnet", "label": "red", "cat": "child_baby_elderly"}
+{"text": "my newborn is cold and not moving much", "label": "red", "cat": "child_baby_elderly"}
+{"text": "he has a fever and is shivering and confused and his skin is mottled", "label": "red", "cat": "sepsis"}
+{"text": "infection and now she is very drowsy and breathing fast", "label": "red", "cat": "sepsis"}
+{"text": "think he has sepsis", "label": "red", "cat": "sepsis"}
+{"text": "wound is red and spreading and he is feverish and confused", "label": "red", "cat": "sepsis"}
+{"text": "very unwell high temp and skin cold and blotchy", "label": "red", "cat": "sepsis"}
+{"text": "she has not peed and is confused with fever", "label": "red", "cat": "sepsis"}
+{"text": "red streaks up the arm from a cut and fever and dizzy", "label": "red", "cat": "sepsis"}
+{"text": "my diabetic husband is shaking and sweaty and confused", "label": "red", "cat": "diabetic"}
+{"text": "low blood sugar he is not making sense", "label": "red", "cat": "diabetic"}
+{"text": "she is diabetic and wont wake up", "label": "red", "cat": "diabetic"}
+{"text": "hypo and cant swallow", "label": "red", "cat": "diabetic"}
+{"text": "blood sugar is really high and he is vomiting and drowsy", "label": "red", "cat": "diabetic"}
+{"text": "diabetic and breath smells fruity and breathing fast", "label": "red", "cat": "diabetic"}
+{"text": "my son with diabetes is acting drunk and pale", "label": "red", "cat": "diabetic"}
+{"text": "my friend got bitten by a snake", "label": "red", "cat": "trauma_other"}
+{"text": "bitten by a rattlesnake leg swelling fast", "label": "red", "cat": "trauma_other"}
+{"text": "he got attacked by a dog and is bleeding badly", "label": "red", "cat": "trauma_other"}
+{"text": "someone is breaking into my house", "label": "red", "cat": "trauma_other"}
+{"text": "a man with a knife is outside", "label": "red", "cat": "trauma_other"}
+{"text": "shooting near us", "label": "red", "cat": "trauma_other"}
+{"text": "he fell from a ladder and his leg is bent the wrong way and bleeding", "label": "red", "cat": "trauma_other"}
+{"text": "bone sticking out of his leg", "label": "red", "cat": "trauma_other"}
+{"text": "explosion and people hurt", "label": "red", "cat": "trauma_other"}
+{"text": "gas leak and a smell of gas in the house", "label": "red", "cat": "trauma_other"}
+{"text": "stomach pain so bad he cant move and belly is hard", "label": "red", "cat": "trauma_other"}
+{"text": "severe belly pain and vomiting green", "label": "red", "cat": "trauma_other"}
+{"text": "he got hit in the testicles and is in agony and vomiting", "label": "red", "cat": "trauma_other"}
+{"text": "my eye got splashed with acid", "label": "red", "cat": "trauma_other"}
+{"text": "sudden severe pain in the back and he is pale and fainting", "label": "red", "cat": "trauma_other"}
+{"text": "scorpion sting child sweating and drooling", "label": "red", "cat": "trauma_other"}
+{"text": "landslide buried a car", "label": "red", "cat": "trauma_other"}
+{"text": "building collapsed people stuck", "label": "red", "cat": "trauma_other"}
+{"text": "pls help my bro not breathin", "label": "red", "cat": "non_native_slang"}
+{"text": "mi madre no respira i mean my mother not breath", "label": "red", "cat": "non_native_slang"}
+{"text": "she fall and no wake", "label": "red", "cat": "non_native_slang"}
+{"text": "he is dead? no move no breath", "label": "red", "cat": "non_native_slang"}
+{"text": "my baby no breath help please", "label": "red", "cat": "non_native_slang"}
+{"text": "blood not stop come out alot", "label": "red", "cat": "non_native_slang"}
+{"text": "he fell and he not talk", "label": "red", "cat": "non_native_slang"}
+{"text": "heart attak i think", "label": "red", "cat": "non_native_slang"}
+{"text": "wife is collaps", "label": "red", "cat": "non_native_slang"}
+{"text": "he eat poison what i do", "label": "red", "cat": "non_native_slang"}
+{"text": "plz my kid swalow pills", "label": "red", "cat": "non_native_slang"}
+{"text": "yo my dude just dropped and aint waking up", "label": "red", "cat": "non_native_slang"}
+{"text": "bro hes fitting on the floor", "label": "red", "cat": "non_native_slang"}
+{"text": "help my granpa is turning blue", "label": "red", "cat": "non_native_slang"}
+{"text": "emergency someone is hurt bad", "label": "red", "cat": "non_native_slang"}
+{"text": "ambulance now man is dying", "label": "red", "cat": "non_native_slang"}
+{"text": "i cut my finger and it might need stitches", "label": "yellow", "cat": "yellow"}
+{"text": "twisted my ankle and it is swollen", "label": "yellow", "cat": "yellow"}
+{"text": "think i broke my wrist", "label": "yellow", "cat": "yellow"}
+{"text": "burned my hand on the oven small blister", "label": "yellow", "cat": "yellow"}
+{"text": "fever of 39 for two days", "label": "yellow", "cat": "yellow"}
+{"text": "my child has a high temperature but is playing", "label": "yellow", "cat": "yellow"}
+{"text": "vomiting since last night cant keep water down", "label": "yellow", "cat": "yellow"}
+{"text": "ear infection pain", "label": "yellow", "cat": "yellow"}
+{"text": "bad sore throat and fever", "label": "yellow", "cat": "yellow"}
+{"text": "my toddler bumped his head but is acting normal", "label": "yellow", "cat": "yellow"}
+{"text": "dog bite on the hand small puncture", "label": "yellow", "cat": "yellow"}
+{"text": "stung by a bee and the arm is swollen", "label": "yellow", "cat": "yellow"}
+{"text": "rash on the arm spreading slowly", "label": "yellow", "cat": "yellow"}
+{"text": "deep splinter in the foot", "label": "yellow", "cat": "yellow"}
+{"text": "nosebleed that stopped", "label": "yellow", "cat": "yellow"}
+{"text": "sprained my knee playing football", "label": "yellow", "cat": "yellow"}
+{"text": "diarrhea for three days", "label": "yellow", "cat": "yellow"}
+{"text": "painful urination and fever", "label": "yellow", "cat": "yellow"}
+{"text": "tooth knocked out", "label": "yellow", "cat": "yellow"}
+{"text": "cut on the head bleeding a little", "label": "yellow", "cat": "yellow"}
+{"text": "my back hurts after lifting", "label": "yellow", "cat": "yellow"}
+{"text": "burn from boiling water on my hand size of a coin", "label": "yellow", "cat": "yellow"}
+{"text": "broken toe", "label": "yellow", "cat": "yellow"}
+{"text": "mild asthma flare up inhaler helps", "label": "yellow", "cat": "yellow"}
+{"text": "allergic rash but breathing fine", "label": "yellow", "cat": "yellow"}
+{"text": "infected cut red and warm", "label": "yellow", "cat": "yellow"}
+{"text": "migraine like usual", "label": "yellow", "cat": "yellow"}
+{"text": "dizzy when i stand up", "label": "yellow", "cat": "yellow"}
+{"text": "fell off my bike and scraped my knee and elbow", "label": "yellow", "cat": "yellow"}
+{"text": "my kid has an earache and fever", "label": "yellow", "cat": "yellow"}
+{"text": "pink eye", "label": "yellow", "cat": "yellow"}
+{"text": "fish hook stuck in my finger", "label": "yellow", "cat": "yellow"}
+{"text": "sunburn with blisters", "label": "yellow", "cat": "yellow"}
+{"text": "heat exhaustion feel faint and sweaty after a hike", "label": "yellow", "cat": "yellow"}
+{"text": "mild frostbite on fingers", "label": "yellow", "cat": "yellow"}
+{"text": "my baby has a cold and stuffy nose", "label": "yellow", "cat": "yellow"}
+{"text": "stomach bug in the family", "label": "yellow", "cat": "yellow"}
+{"text": "cough for a week", "label": "yellow", "cat": "yellow"}
+{"text": "dehydrated after running", "label": "yellow", "cat": "yellow"}
+{"text": "low grade fever and body aches", "label": "yellow", "cat": "yellow"}
+{"text": "broken arm in a child not bleeding", "label": "yellow", "cat": "yellow"}
+{"text": "dislocated finger", "label": "yellow", "cat": "yellow"}
+{"text": "something in my eye cant get it out", "label": "yellow", "cat": "yellow"}
+{"text": "tick bite how to remove", "label": "yellow", "cat": "yellow"}
+{"text": "spider bite a bit red", "label": "yellow", "cat": "yellow"}
+{"text": "my leg is swollen and painful after a long flight", "label": "yellow", "cat": "yellow"}
+{"text": "painful swollen joint", "label": "yellow", "cat": "yellow"}
+{"text": "kidney stone pain", "label": "yellow", "cat": "yellow"}
+{"text": "blood in my urine", "label": "yellow", "cat": "yellow"}
+{"text": "sprained wrist cant move it much", "label": "yellow", "cat": "yellow"}
+{"text": "cut my foot on glass", "label": "yellow", "cat": "yellow"}
+{"text": "food poisoning since dinner", "label": "yellow", "cat": "yellow"}
+{"text": "i think i have flu", "label": "yellow", "cat": "yellow"}
+{"text": "chickenpox in my daughter", "label": "yellow", "cat": "yellow"}
+{"text": "bad toothache with swelling", "label": "yellow", "cat": "yellow"}
+{"text": "stomach ache and fever on the right side", "label": "yellow", "cat": "yellow"}
+{"text": "my child swallowed a small piece of plastic but is fine", "label": "yellow", "cat": "yellow"}
+{"text": "cracked rib after a fall", "label": "yellow", "cat": "yellow"}
+{"text": "concussion mild headache after a knock", "label": "yellow", "cat": "yellow"}
+{"text": "headache and stiff shoulders", "label": "yellow", "cat": "yellow"}
+{"text": "wound edges wont close", "label": "yellow", "cat": "yellow"}
+{"text": "nail went into my foot", "label": "yellow", "cat": "yellow"}
+{"text": "sore and swollen after a jellyfish sting", "label": "yellow", "cat": "yellow"}
+{"text": "mild burn from a firework", "label": "yellow", "cat": "yellow"}
+{"text": "bruised shin", "label": "yellow", "cat": "yellow"}
+{"text": "pulled a muscle", "label": "yellow", "cat": "yellow"}
+{"text": "hypothermia mild shivering a lot but talking", "label": "yellow", "cat": "yellow"}
+{"text": "my elderly mother has a urine infection", "label": "yellow", "cat": "yellow"}
+{"text": "uti symptoms", "label": "yellow", "cat": "yellow"}
+{"text": "my baby has diarrhea but is drinking", "label": "yellow", "cat": "yellow"}
+{"text": "vomited twice", "label": "yellow", "cat": "yellow"}
+{"text": "pain in my ear after swimming", "label": "yellow", "cat": "yellow"}
+{"text": "nose might be broken after a punch", "label": "yellow", "cat": "yellow"}
+{"text": "cut needs butterfly stitches", "label": "yellow", "cat": "yellow"}
+{"text": "rash after new medicine itchy", "label": "yellow", "cat": "yellow"}
+{"text": "eye is red and painful", "label": "yellow", "cat": "yellow"}
+{"text": "gout flare", "label": "yellow", "cat": "yellow"}
+{"text": "shingles", "label": "yellow", "cat": "yellow"}
+{"text": "high blood pressure reading but feel fine", "label": "yellow", "cat": "yellow"}
+{"text": "my kid fell from a tree and his arm hurts", "label": "yellow", "cat": "yellow"}
+{"text": "ankle is blue and swollen", "label": "yellow", "cat": "yellow"}
+{"text": "stomach cramps after eating", "label": "yellow", "cat": "yellow"}
+{"text": "my foot is numb after sitting", "label": "yellow", "cat": "yellow"}
+{"text": "cant sleep for days", "label": "yellow", "cat": "yellow"}
+{"text": "anxiety attack my heart races but it passes", "label": "yellow", "cat": "yellow"}
+{"text": "panic attack how to calm down", "label": "yellow", "cat": "yellow"}
+{"text": "i feel very depressed lately", "label": "yellow", "cat": "yellow"}
+{"text": "bitten by a cat and it is swelling", "label": "yellow", "cat": "yellow"}
+{"text": "blister on my heel infected", "label": "yellow", "cat": "yellow"}
+{"text": "sore neck after a car bump yesterday", "label": "yellow", "cat": "yellow"}
+{"text": "child has a fever and a mild rash", "label": "yellow", "cat": "yellow"}
+{"text": "baby teething fever", "label": "yellow", "cat": "yellow"}
+{"text": "dog bit my kid on the leg a little bleeding", "label": "yellow", "cat": "yellow"}
+{"text": "whiplash", "label": "yellow", "cat": "yellow"}
+{"text": "broken finger", "label": "yellow", "cat": "yellow"}
+{"text": "cut lip after a fall", "label": "yellow", "cat": "yellow"}
+{"text": "hit my thumb with a hammer", "label": "yellow", "cat": "yellow"}
+{"text": "sprain or fracture how to tell", "label": "yellow", "cat": "yellow"}
+{"text": "burn on my arm from a pan", "label": "yellow", "cat": "yellow"}
+{"text": "fever and chills", "label": "yellow", "cat": "yellow"}
+{"text": "my friend is drunk and sick but talking", "label": "yellow", "cat": "yellow"}
+{"text": "mild allergic reaction itchy eyes", "label": "yellow", "cat": "yellow"}
+{"text": "swallowed a fish bone it scratches", "label": "yellow", "cat": "yellow"}
+{"text": "bad period pain", "label": "yellow", "cat": "yellow"}
+{"text": "morning sickness cant keep food down", "label": "yellow", "cat": "yellow"}
+{"text": "my wound is oozing pus", "label": "yellow", "cat": "yellow"}
+{"text": "bump on the head with a lump", "label": "yellow", "cat": "yellow"}
+{"text": "fell on my wrist it is swollen and bruised", "label": "yellow", "cat": "yellow"}
+{"text": "hand swollen after a bee sting yesterday", "label": "yellow", "cat": "yellow"}
+{"text": "chest cold and cough", "label": "yellow", "cat": "yellow"}
+{"text": "asthma a bit wheezy", "label": "yellow", "cat": "yellow"}
+{"text": "pain on the side when breathing after a cold", "label": "yellow", "cat": "yellow"}
+{"text": "my knee gave way and swelled up", "label": "yellow", "cat": "yellow"}
+{"text": "cut my thumb with a knife bleeding stopped with pressure", "label": "yellow", "cat": "yellow"}
+{"text": "small burn on toddler finger", "label": "yellow", "cat": "yellow"}
+{"text": "shin splints", "label": "yellow", "cat": "yellow"}
+{"text": "lower back pain shooting down my leg", "label": "yellow", "cat": "yellow"}
+{"text": "toothache", "label": "yellow", "cat": "yellow"}
+{"text": "sprained ankle hiking far from the car", "label": "yellow", "cat": "yellow"}
+{"text": "blisters on my feet", "label": "yellow", "cat": "yellow"}
+{"text": "hit my head on a cupboard and have a headache", "label": "yellow", "cat": "yellow"}
+{"text": "coughing up green phlegm", "label": "yellow", "cat": "yellow"}
+{"text": "sinus infection", "label": "yellow", "cat": "yellow"}
+{"text": "vomiting baby once but feeding", "label": "yellow", "cat": "yellow"}
+{"text": "rash after hiking itchy poison ivy", "label": "yellow", "cat": "yellow"}
+{"text": "fever for 4 days in my kid", "label": "yellow", "cat": "yellow"}
+{"text": "earache in the night", "label": "yellow", "cat": "yellow"}
+{"text": "snake bite but it was a harmless snake i think", "label": "yellow", "cat": "yellow"}
+{"text": "stomach pain for a day", "label": "yellow", "cat": "yellow"}
+{"text": "sore wrist after a fall from a skateboard", "label": "yellow", "cat": "yellow"}
+{"text": "burnt tongue on hot tea", "label": "yellow", "cat": "yellow"}
+{"text": "eye scratch from a branch", "label": "yellow", "cat": "yellow"}
+{"text": "my foot got crushed by a box and is bruised", "label": "yellow", "cat": "yellow"}
+{"text": "stitches came open a little", "label": "yellow", "cat": "yellow"}
+{"text": "infected toenail", "label": "yellow", "cat": "yellow"}
+{"text": "hot swollen leg red patch", "label": "yellow", "cat": "yellow"}
+{"text": "dizzy and weak since this morning", "label": "yellow", "cat": "yellow"}
+{"text": "nausea and headache", "label": "yellow", "cat": "yellow"}
+{"text": "i got stung by a jellyfish", "label": "yellow", "cat": "yellow"}
+{"text": "cold sore", "label": "yellow", "cat": "yellow"}
+{"text": "mild dehydration in my toddler", "label": "yellow", "cat": "yellow"}
+{"text": "painful lump in armpit", "label": "yellow", "cat": "yellow"}
+{"text": "bleeding gums", "label": "yellow", "cat": "yellow"}
+{"text": "swollen glands", "label": "yellow", "cat": "yellow"}
+{"text": "my heart stopped when i saw the bill", "label": "green", "cat": "idiom"}
+{"text": "i almost died laughing", "label": "green", "cat": "idiom"}
+{"text": "that joke killed me", "label": "green", "cat": "idiom"}
+{"text": "this traffic is killing me", "label": "green", "cat": "idiom"}
+{"text": "im dying to know the ending", "label": "green", "cat": "idiom"}
+{"text": "she broke my heart", "label": "green", "cat": "idiom"}
+{"text": "i could murder a pizza", "label": "green", "cat": "idiom"}
+{"text": "the deadline is choking me", "label": "green", "cat": "idiom"}
+{"text": "drowning in paperwork this week", "label": "green", "cat": "idiom"}
+{"text": "my head is exploding with all this homework", "label": "green", "cat": "idiom"}
+{"text": "feeling blue today", "label": "green", "cat": "idiom"}
+{"text": "that was a stroke of luck", "label": "green", "cat": "idiom"}
+{"text": "he has a heart of gold", "label": "green", "cat": "idiom"}
+{"text": "i nearly had a heart attack when the cat jumped out", "label": "green", "cat": "idiom"}
+{"text": "my feet are killing me after work", "label": "green", "cat": "idiom"}
+{"text": "im burnt out at work", "label": "green", "cat": "idiom"}
+{"text": "she took my breath away", "label": "green", "cat": "idiom"}
+{"text": "cant breathe from laughing so hard", "label": "green", "cat": "idiom"}
+{"text": "he choked in the final minutes of the game", "label": "green", "cat": "idiom"}
+{"text": "the company bled money last year", "label": "green", "cat": "idiom"}
+{"text": "blood is thicker than water meaning", "label": "green", "cat": "idiom"}
+{"text": "break a leg tonight", "label": "green", "cat": "idiom"}
+{"text": "i am frozen stiff waiting for the bus lol", "label": "green", "cat": "idiom"}
+{"text": "that movie was fire", "label": "green", "cat": "idiom"}
+{"text": "she is drop dead gorgeous", "label": "green", "cat": "idiom"}
+{"text": "we were dead tired after the trip", "label": "green", "cat": "idiom"}
+{"text": "my phone is dead", "label": "green", "cat": "idiom"}
+{"text": "the battery died", "label": "green", "cat": "idiom"}
+{"text": "i passed out on the couch after the party lol", "label": "green", "cat": "idiom"}
+{"text": "the market crashed today", "label": "green", "cat": "idiom"}
+{"text": "my computer keeps crashing", "label": "green", "cat": "tech"}
+{"text": "blue screen of death on windows", "label": "green", "cat": "tech"}
+{"text": "the server is down", "label": "green", "cat": "tech"}
+{"text": "how to kill a process in linux", "label": "green", "cat": "tech"}
+{"text": "the app froze and wont respond", "label": "green", "cat": "tech"}
+{"text": "my laptop is overheating", "label": "green", "cat": "tech"}
+{"text": "fatal error when compiling", "label": "green", "cat": "tech"}
+{"text": "python script hangs and wont stop", "label": "green", "cat": "tech"}
+{"text": "how to bleed edge print in indesign", "label": "green", "cat": "tech"}
+{"text": "my phone wont wake from sleep", "label": "green", "cat": "tech"}
+{"text": "heartbeat monitor for kubernetes pods", "label": "green", "cat": "tech"}
+{"text": "the database connection is dying", "label": "green", "cat": "tech"}
+{"text": "choke point in the network", "label": "green", "cat": "tech"}
+{"text": "burn an iso to a usb stick", "label": "green", "cat": "tech"}
+{"text": "how to resuscitate an old hard drive", "label": "green", "cat": "tech"}
+{"text": "kill switch on my vpn", "label": "green", "cat": "tech"}
+{"text": "wifi keeps dropping", "label": "green", "cat": "tech"}
+{"text": "my game crashed and wont start", "label": "green", "cat": "tech"}
+{"text": "memory leak is killing performance", "label": "green", "cat": "tech"}
+{"text": "cpu temperature too hot", "label": "green", "cat": "tech"}
+{"text": "the website is unresponsive", "label": "green", "cat": "tech"}
+{"text": "how to fix a broken pipe error", "label": "green", "cat": "tech"}
+{"text": "virus on my computer", "label": "green", "cat": "tech"}
+{"text": "stroke width in svg", "label": "green", "cat": "tech"}
+{"text": "reset a frozen iphone", "label": "green", "cat": "tech"}
+{"text": "how long to boil eggs", "label": "green", "cat": "cooking_home"}
+{"text": "my bread didnt rise", "label": "green", "cat": "cooking_home"}
+{"text": "burnt the rice how to fix", "label": "green", "cat": "cooking_home"}
+{"text": "how to bleed a radiator", "label": "green", "cat": "cooking_home"}
+{"text": "blood orange cake recipe", "label": "green", "cat": "cooking_home"}
+{"text": "let the wine breathe before serving", "label": "green", "cat": "cooking_home"}
+{"text": "how to stop pasta boiling over", "label": "green", "cat": "cooking_home"}
+{"text": "cut onions without crying", "label": "green", "cat": "cooking_home"}
+{"text": "the smoke alarm keeps beeping when i cook", "label": "green", "cat": "cooking_home"}
+{"text": "how to put out a candle safely", "label": "green", "cat": "cooking_home"}
+{"text": "how to sharpen a kitchen knife", "label": "green", "cat": "cooking_home"}
+{"text": "best way to defrost chicken", "label": "green", "cat": "cooking_home"}
+{"text": "can i freeze cooked rice", "label": "green", "cat": "cooking_home"}
+{"text": "sourdough starter not breathing bubbles", "label": "green", "cat": "cooking_home"}
+{"text": "black pudding recipe", "label": "green", "cat": "cooking_home"}
+{"text": "how to clean a cast iron pan", "label": "green", "cat": "cooking_home"}
+{"text": "my cake collapsed in the oven", "label": "green", "cat": "cooking_home"}
+{"text": "how to tenderise steak", "label": "green", "cat": "cooking_home"}
+{"text": "how to light a gas stove", "label": "green", "cat": "cooking_home"}
+{"text": "kill weeds in the garden", "label": "green", "cat": "cooking_home"}
+{"text": "my plants are dying", "label": "green", "cat": "cooking_home"}
+{"text": "how to store potatoes for winter", "label": "green", "cat": "cooking_home"}
+{"text": "how to purify water for drinking", "label": "green", "cat": "cooking_home"}
+{"text": "how to build a fire for cooking outdoors", "label": "green", "cat": "cooking_home"}
+{"text": "how to make bone broth", "label": "green", "cat": "cooking_home"}
+{"text": "how to do the backstroke", "label": "green", "cat": "sport_game"}
+{"text": "best chest workout at the gym", "label": "green", "cat": "sport_game"}
+{"text": "how to improve my breathing when running", "label": "green", "cat": "sport_game"}
+{"text": "lung capacity exercises for swimming", "label": "green", "cat": "sport_game"}
+{"text": "how to hold my breath longer underwater for freediving training", "label": "green", "cat": "sport_game"}
+{"text": "my character died in the game how to respawn", "label": "green", "cat": "sport_game"}
+{"text": "how to revive a teammate in fortnite", "label": "green", "cat": "sport_game"}
+{"text": "heal potion recipe minecraft", "label": "green", "cat": "sport_game"}
+{"text": "headshot tips in call of duty", "label": "green", "cat": "sport_game"}
+{"text": "how to choke someone out in jiu jitsu", "label": "green", "cat": "sport_game"}
+{"text": "first blood in league of legends", "label": "green", "cat": "sport_game"}
+{"text": "how to beat the final boss", "label": "green", "cat": "sport_game"}
+{"text": "knockout in boxing scoring rules", "label": "green", "cat": "sport_game"}
+{"text": "how to fall safely in judo", "label": "green", "cat": "sport_game"}
+{"text": "my bike chain broke", "label": "green", "cat": "sport_game"}
+{"text": "how to fix a flat tyre", "label": "green", "cat": "sport_game"}
+{"text": "best hiking boots for winter", "label": "green", "cat": "sport_game"}
+{"text": "how to tie a climbing knot", "label": "green", "cat": "sport_game"}
+{"text": "two stroke engine oil mix", "label": "green", "cat": "sport_game"}
+{"text": "my team got crushed last night", "label": "green", "cat": "sport_game"}
+{"text": "how do you do cpr in general", "label": "green", "cat": "course_question"}
+{"text": "what are the steps of cpr for a first aid course", "label": "green", "cat": "course_question"}
+{"text": "how to do the heimlich manoeuvre for a class", "label": "green", "cat": "course_question"}
+{"text": "first aid course near me", "label": "green", "cat": "course_question"}
+{"text": "what is the recovery position", "label": "green", "cat": "course_question"}
+{"text": "what is the ratio of compressions to breaths in cpr", "label": "green", "cat": "course_question"}
+{"text": "how to recognise a stroke fast acronym", "label": "green", "cat": "course_question"}
+{"text": "what are the signs of a heart attack", "label": "green", "cat": "course_question"}
+{"text": "how to make a first aid kit", "label": "green", "cat": "course_question"}
+{"text": "what should be in a first aid kit for hiking", "label": "green", "cat": "course_question"}
+{"text": "how to treat a minor burn", "label": "green", "cat": "course_question"}
+{"text": "what to do if someone faints in general", "label": "green", "cat": "course_question"}
+{"text": "how long should a tourniquet stay on in theory", "label": "green", "cat": "course_question"}
+{"text": "practicing cpr on a dummy", "label": "green", "cat": "course_question"}
+{"text": "what is anaphylaxis", "label": "green", "cat": "course_question"}
+{"text": "what causes seizures", "label": "green", "cat": "course_question"}
+{"text": "how does an epipen work", "label": "green", "cat": "course_question"}
+{"text": "difference between heat exhaustion and heatstroke", "label": "green", "cat": "course_question"}
+{"text": "how to prevent drowning in children", "label": "green", "cat": "course_question"}
+{"text": "how to prepare for an earthquake", "label": "green", "cat": "course_question"}
+{"text": "how to make an emergency plan for the family", "label": "green", "cat": "course_question"}
+{"text": "how to store water for emergencies", "label": "green", "cat": "course_question"}
+{"text": "what is hypothermia", "label": "green", "cat": "course_question"}
+{"text": "how to treat a snake bite in the wild in theory", "label": "green", "cat": "course_question"}
+{"text": "what is the treatment for burns", "label": "green", "cat": "course_question"}
+{"text": "signs of concussion to watch for", "label": "green", "cat": "course_question"}
+{"text": "how to teach kids to call for help", "label": "green", "cat": "course_question"}
+{"text": "first aid for a nosebleed", "label": "green", "cat": "course_question"}
+{"text": "how to splint a broken arm", "label": "green", "cat": "course_question"}
+{"text": "how to stop bleeding from a small cut", "label": "green", "cat": "course_question"}
+{"text": "i have a mild headache", "label": "green", "cat": "mild_symptom"}
+{"text": "my nose is runny", "label": "green", "cat": "mild_symptom"}
+{"text": "slight cough", "label": "green", "cat": "mild_symptom"}
+{"text": "i feel a bit tired today", "label": "green", "cat": "mild_symptom"}
+{"text": "my muscles ache after the gym", "label": "green", "cat": "mild_symptom"}
+{"text": "a small cut on my finger", "label": "green", "cat": "mild_symptom"}
+{"text": "paper cut", "label": "green", "cat": "mild_symptom"}
+{"text": "i bit my tongue", "label": "green", "cat": "mild_symptom"}
+{"text": "mosquito bite itching", "label": "green", "cat": "mild_symptom"}
+{"text": "hiccups wont stop", "label": "green", "cat": "mild_symptom"}
+{"text": "i have a little sunburn", "label": "green", "cat": "mild_symptom"}
+{"text": "dry skin on my hands", "label": "green", "cat": "mild_symptom"}
+{"text": "my eyes are tired from the screen", "label": "green", "cat": "mild_symptom"}
+{"text": "i stubbed my toe", "label": "green", "cat": "mild_symptom"}
+{"text": "mild sore throat", "label": "green", "cat": "mild_symptom"}
+{"text": "i feel a bit nauseous after the boat", "label": "green", "cat": "mild_symptom"}
+{"text": "my ears popped on the plane", "label": "green", "cat": "mild_symptom"}
+{"text": "a bruise on my arm", "label": "green", "cat": "mild_symptom"}
+{"text": "sneezing a lot from pollen", "label": "green", "cat": "mild_symptom"}
+{"text": "i have a pimple", "label": "green", "cat": "mild_symptom"}
+{"text": "my lips are chapped", "label": "green", "cat": "mild_symptom"}
+{"text": "indigestion after dinner", "label": "green", "cat": "mild_symptom"}
+{"text": "small blister from new shoes", "label": "green", "cat": "mild_symptom"}
+{"text": "my back is a bit stiff", "label": "green", "cat": "mild_symptom"}
+{"text": "i yawn a lot", "label": "green", "cat": "mild_symptom"}
+{"text": "how to tie a tie", "label": "green", "cat": "everyday_howto"}
+{"text": "how to change a tyre", "label": "green", "cat": "everyday_howto"}
+{"text": "how to grow tomatoes", "label": "green", "cat": "everyday_howto"}
+{"text": "how to start a car with a dead battery", "label": "green", "cat": "everyday_howto"}
+{"text": "how to sew a button", "label": "green", "cat": "everyday_howto"}
+{"text": "how to make soap", "label": "green", "cat": "everyday_howto"}
+{"text": "how to catch fish", "label": "green", "cat": "everyday_howto"}
+{"text": "how to build a shelter in the woods", "label": "green", "cat": "everyday_howto"}
+{"text": "how to find north without a compass", "label": "green", "cat": "everyday_howto"}
+{"text": "how to read a map", "label": "green", "cat": "everyday_howto"}
+{"text": "how to fix a leaking tap", "label": "green", "cat": "everyday_howto"}
+{"text": "how to make candles", "label": "green", "cat": "everyday_howto"}
+{"text": "how to keep chickens", "label": "green", "cat": "everyday_howto"}
+{"text": "how to make a water filter", "label": "green", "cat": "everyday_howto"}
+{"text": "how to cut firewood", "label": "green", "cat": "everyday_howto"}
+{"text": "how to sharpen an axe", "label": "green", "cat": "everyday_howto"}
+{"text": "how to knit a scarf", "label": "green", "cat": "everyday_howto"}
+{"text": "what is the capital of france", "label": "green", "cat": "everyday_howto"}
+{"text": "how to write a cv", "label": "green", "cat": "everyday_howto"}
+{"text": "how to learn spanish", "label": "green", "cat": "everyday_howto"}
+{"text": "how to save money", "label": "green", "cat": "everyday_howto"}
+{"text": "how to bake bread", "label": "green", "cat": "everyday_howto"}
+{"text": "how to make jam", "label": "green", "cat": "everyday_howto"}
+{"text": "how to clean mould from a wall", "label": "green", "cat": "everyday_howto"}
+{"text": "how to raise rabbits", "label": "green", "cat": "everyday_howto"}
+{"text": "my car battery is dead", "label": "green", "cat": "lookalike_words"}
+{"text": "my horse is choking on its feed what causes that", "label": "green", "cat": "lookalike_words"}
+{"text": "the dog is panting a lot in the heat", "label": "green", "cat": "lookalike_words"}
+{"text": "how to stroke a cat", "label": "green", "cat": "lookalike_words"}
+{"text": "my fish is floating upside down", "label": "green", "cat": "lookalike_words"}
+{"text": "the chicken stopped laying eggs", "label": "green", "cat": "lookalike_words"}
+{"text": "blood pressure normal range", "label": "green", "cat": "lookalike_words"}
+{"text": "blood type compatibility chart", "label": "green", "cat": "lookalike_words"}
+{"text": "how to donate blood", "label": "green", "cat": "lookalike_words"}
+{"text": "heart rate zones for training", "label": "green", "cat": "lookalike_words"}
+{"text": "how many calories does running burn", "label": "green", "cat": "lookalike_words"}
+{"text": "what does a pulse oximeter measure", "label": "green", "cat": "lookalike_words"}
+{"text": "how to take my own pulse", "label": "green", "cat": "lookalike_words"}
+{"text": "normal breathing rate for adults", "label": "green", "cat": "lookalike_words"}
+{"text": "how to stop a dripping tap", "label": "green", "cat": "lookalike_words"}
+{"text": "pressure cooker safety", "label": "green", "cat": "lookalike_words"}
+{"text": "how to put out a chimney fire safely in theory", "label": "green", "cat": "lookalike_words"}
+{"text": "my tomato plants have blight", "label": "green", "cat": "lookalike_words"}
+{"text": "how to bleed brakes on a bike", "label": "green", "cat": "lookalike_words"}
+{"text": "the patient in my novel has a seizure how should i write it", "label": "green", "cat": "lookalike_words"}
+{"text": "history of the black death", "label": "green", "cat": "lookalike_words"}
+{"text": "who invented cpr", "label": "green", "cat": "lookalike_words"}
+{"text": "book about drowning victims", "label": "green", "cat": "lookalike_words"}
+{"text": "song about a heart attack", "label": "green", "cat": "lookalike_words"}
+{"text": "the poison dart frog facts", "label": "green", "cat": "lookalike_words"}
+{"text": "how venomous are house spiders", "label": "green", "cat": "lookalike_words"}
+{"text": "is it safe to eat raw eggs", "label": "green", "cat": "lookalike_words"}
+{"text": "can dogs eat chocolate", "label": "green", "cat": "lookalike_words"}
+{"text": "how much paracetamol is safe in a day", "label": "green", "cat": "lookalike_words"}
+{"text": "can i take ibuprofen with food", "label": "green", "cat": "lookalike_words"}
+{"text": "i want to kill my brother for eating my snack lol", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "this exam is going to be the death of me", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "if i hear that song one more time ill die", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "my mom will kill me if she sees my grades", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "im so bored i could die", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "killing time at the airport", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "i am so hungry i could die", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "that workout destroyed me", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "i got destroyed in the match", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "we are dead in the water with this project", "label": "green", "cat": "figurative_dark_humour"}
+{"text": "ok thanks", "label": "green", "cat": "nonsense_noise"}
+{"text": "hello", "label": "green", "cat": "nonsense_noise"}
+{"text": "asdfgh", "label": "green", "cat": "nonsense_noise"}
+{"text": "who are you", "label": "green", "cat": "nonsense_noise"}
+{"text": "sorry wrong chat", "label": "green", "cat": "nonsense_noise"}
+{"text": "lol", "label": "green", "cat": "nonsense_noise"}
+{"text": "what can you do", "label": "green", "cat": "nonsense_noise"}
+{"text": "good morning", "label": "green", "cat": "nonsense_noise"}
+{"text": "test test", "label": "green", "cat": "nonsense_noise"}
+{"text": "thanks that helped", "label": "green", "cat": "nonsense_noise"}

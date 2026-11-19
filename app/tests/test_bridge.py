@@ -1547,9 +1547,19 @@ class WholeProcess(unittest.TestCase):
             self.skipTest('no lsof on this system, and not Windows: the process-level socket and file check cannot run here')
         self.assertIn('python', files, 'the process file/module listing came back empty, so this check proved nothing')
         self.assertEqual(out.strip(), '', out)
-        for word in ('onnx', 'bge-small', 'derived/models'):
-            self.assertNotIn(word, files)
-        self.assertNotIn('onnxruntime.', ' '.join(k for k, v in sys.modules.items() if v is not None))
+        # fork, on purpose (docs/FORK.md 3m): the desktop may load ONE model, the meaning check's int8 bge-small in
+        # derived/models/meaning-red (engine/meaning_red.py), and still no listening socket. No other model file, and never
+        # hybrid search's bge-small-en-v1.5. Here onnxruntime is blocked, so the meaning check must have stayed off, quietly,
+        # without loading the runtime's DLL either (it checks the block before engine/quiet_onnx would load it).
+        from engine import meaning_red
+        meaning_red.wait(30)
+        st = meaning_red.status()
+        self.assertEqual(st['state'], 'off', st)
+        self.assertIn('blocked', st['why'] or '', st)
+        lines = [x for x in files.replace('\\', '/').splitlines() if any(w in x for w in ('onnx', 'bge-small', 'derived/models'))]
+        self.assertEqual([x for x in lines if 'derived/models/meaning-red/' not in x and 'onnxruntime' not in x], [], lines)
+        self.assertFalse([x for x in lines if 'bge-small-en-v1.5' in x], lines)
+        self.assertNotIn('onnxruntime.', ' '.join(k for k, v in sys.modules.items() if v is not None))   # blocked here
         OBSERVED[f'{how} for this process'] = 'no rows' if not out.strip() else out
 
     def test_map_info_still_gives_what_the_ui_reads(self):

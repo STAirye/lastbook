@@ -17,9 +17,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-BAD_SEGMENTS = {'test', 'tests', 'testing', 'pytest', 'unittest', 'doctest', 'remote_storage', 'webview', 'bottle', 'proxy_tools', 'onnxruntime',
-                'tokenizers', 'shell_windows', 'shell_macos', 'clr', 'clr_loader', 'pythonnet', 'lastbook_launcher', 'tkinter', 'PyInstaller',
+BAD_SEGMENTS = {'test', 'tests', 'testing', 'pytest', 'unittest', 'doctest', 'remote_storage', 'webview', 'bottle', 'proxy_tools',
+                'shell_windows', 'shell_macos', 'clr', 'clr_loader', 'pythonnet', 'lastbook_launcher', 'tkinter', 'PyInstaller',
                 'objc', 'AppKit', 'Foundation', 'PyObjCTools', 'vendor-macos', 'fixture', 'real_data_check', 'http_regression', 'cdp', 'f2py', 'pypdfium2_cli'}
+MEANING_MODEL = re.compile(r'^opt/lastbook/derived/models/meaning-red/model_int8\.onnx$')   # fork: the one model allowed (docs/FORK.md 3m)
 BAD_FILE = re.compile(r'(^|/)(test_[^/]*|[^/]*_test\.(py|pyc|so)|[^/]*_tests[^/]*\.so|[^/]*\.onnx|[^/]*\.gguf|mac_[^/]*|win_[^/]*)$', re.I)
 TEST_MARKERS = [b'TEST-STUB', b'mac_offscreen', b'stub_chat', b'stub-chat']
 ALLOWED_REMOTE = {'opt/lastbook/engine/library.py'}     # names remote_storage in the code that skips it when packaged
@@ -84,7 +85,7 @@ def main():
             n_files += 1
             if not rel.startswith(('opt/lastbook/', 'usr/bin/lastbook', 'usr/share/applications/lastbook.desktop', 'usr/share/icons/hicolor/', 'usr/share/doc/lastbook/')):
                 problems.append(f'file outside the places the package owns: {rel}')
-            if bad_name(rel.removeprefix('opt/lastbook/')) or BAD_FILE.search(rel) or p.name in ship['never_ship']:
+            if bad_name(rel.removeprefix('opt/lastbook/')) or (BAD_FILE.search(rel) and not MEANING_MODEL.search(rel)) or p.name in ship['never_ship']:
                 problems.append(f'file not allowed: {rel}')
             data = p.read_bytes()
             low = data.lower()
@@ -133,7 +134,7 @@ def main():
             problems.append('missing from the package: opt/lastbook/engine/setup/roots.pem')
         for need in ('opt/lastbook/gst/libgstlastbooksrc.so', 'opt/lastbook/lastbook.py', 'opt/lastbook/app/main.py', 'opt/lastbook/app/shell_linux.py', 'opt/lastbook/web/index.html',
                      'opt/lastbook/setup/manifest-v1.json', 'opt/lastbook/VERSION', 'opt/lastbook/engine/english_words.txt.gz',
-                     'opt/lastbook/engine/english_words.LICENSE.txt', 'usr/bin/lastbook', 'usr/share/applications/lastbook.desktop'):
+                     'opt/lastbook/engine/english_words.LICENSE.txt', 'opt/lastbook/engine/data/meaning_red_manifest.json', 'usr/bin/lastbook', 'usr/share/applications/lastbook.desktop'):
             if need not in packaged:
                 problems.append(f'missing from the package: {need}')
         llm = 'opt/lastbook/llm/lastbook-llm' in packaged

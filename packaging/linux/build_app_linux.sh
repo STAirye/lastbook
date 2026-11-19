@@ -53,6 +53,7 @@ fi
 # The wheels, for this python3, into lib/
 python3 -m venv "$OUT/tools"
 "$OUT/tools/bin/pip" install -q --disable-pip-version-check --only-binary=:all: --no-compile --target "$OPT/lib" -r "$HERE/requirements_linux.txt"
+rm -rf "$OPT/lib/onnxruntime/tools" "$OPT/lib/onnxruntime/quantization" "$OPT/lib/onnxruntime/transformers" "$OPT/lib/onnxruntime/datasets" "$OPT/lib/onnxruntime/backend"   # fork: the runtime only
 rm -rf "$OPT/lib/bin" "$OPT/lib/numpy/tests" "$OPT/lib/numpy/_core/tests" "$OPT/lib/numpy/f2py" "$OPT/lib/numpy/testing" "$OPT/lib/pypdfium2_cli"
 find "$OPT/lib" -depth \( -name tests -o -name testing -o -name __pycache__ \) -type d -exec rm -rf {} +
 find "$OPT/lib" -type f -name '*_tests*' -delete
@@ -61,8 +62,17 @@ find "$OPT/lib" -type f -name '*_tests*' -delete
 mkdir -p "$OPT/app" "$OPT/engine/setup" "$OPT/setup"
 cp "$ROOT/app/main.py" "$ROOT/app/bridge.py" "$ROOT/app/shell_linux.py" "$OPT/app/"
 cp "$ROOT/server.py" "$ROOT/retrieval.py" "$ROOT/assistant.py" "$ROOT/llm_local.py" "$OPT/"
-cp "$ROOT/engine/__init__.py" "$ROOT/engine/paths.py" "$ROOT/engine/library.py" "$ROOT/engine/saved_pages.py" "$ROOT/engine/address_search.py" "$ROOT/engine/update.py" "$ROOT/engine/page_tables.py" "$ROOT/engine/sections.py" "$ROOT/engine/typos.py" "$ROOT/engine/confidence.py" "$ROOT/engine/english_words.txt.gz" "$ROOT/engine/english_words.LICENSE.txt" "$OPT/engine/"
+cp "$ROOT/engine/__init__.py" "$ROOT/engine/paths.py" "$ROOT/engine/library.py" "$ROOT/engine/saved_pages.py" "$ROOT/engine/address_search.py" "$ROOT/engine/update.py" "$ROOT/engine/page_tables.py" "$ROOT/engine/sections.py" "$ROOT/engine/typos.py" "$ROOT/engine/confidence.py" "$ROOT/engine/meaning_red.py" "$ROOT/engine/english_words.txt.gz" "$ROOT/engine/english_words.LICENSE.txt" "$OPT/engine/"
 cp "$ROOT"/engine/setup/*.py "$ROOT/engine/setup/roots.pem" "$OPT/engine/setup/"
+# fork: the meaning check (docs/FORK.md 3m): its manifest always, its three files when derived/models/meaning-red has them as the
+# manifest says (else the urgent words alone decide, and setup can download them with the local AI model)
+mkdir -p "$OPT/engine/data"
+cp "$ROOT/engine/data/meaning_red_manifest.json" "$ROOT/engine/data/meaning_red_LICENSE.txt" "$OPT/engine/data/"
+MEANING="$(python3 -I -B "$ROOT/packaging/meaning_red_files.py")" || { echo "the meaning check's files do not match engine/data/meaning_red_manifest.json" >&2; exit 1; }
+if [ -n "$MEANING" ]; then
+  mkdir -p "$OPT/derived/models/meaning-red"
+  cp "$MEANING"/model_int8.onnx "$MEANING"/tokenizer.json "$MEANING"/centroids.npz "$OPT/derived/models/meaning-red/"
+fi
 cp -R "$OUT/ship/web" "$OUT/ship/content" "$OPT/"
 cp "$OUT/ship/setup/manifest-v1.json" "$OPT/setup/"
 cp "$HERE/lastbook.py" "$OPT/"
@@ -97,7 +107,8 @@ PY
 cat > "$STAGE/usr/share/doc/lastbook/copyright" <<'TXT'
 Lastbook: MIT licence, https://github.com/Immortal-Protocols/lastbook
 Bundled Python packages in /opt/lastbook/lib keep their own licences (see each *.dist-info). The local AI's runner in /opt/lastbook/llm:
-llama.cpp, MIT licence (LICENSE-llama.cpp.txt there).
+llama.cpp, MIT licence (LICENSE-llama.cpp.txt there). The meaning check's model in /opt/lastbook/derived/models/meaning-red, when
+present: BAAI bge-small-en-v1.5, int8, MIT licence (/opt/lastbook/engine/data/meaning_red_LICENSE.txt).
 TXT
 find "$STAGE" -type d -exec chmod 755 {} +
 find "$STAGE" -type f -exec chmod go-w,a+r {} +

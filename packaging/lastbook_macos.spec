@@ -33,7 +33,7 @@ def clean_sysconfig():
 
 datas = files('web', 'web') + files('content', 'content', 'gaps.json') + files('content/topics', 'content/topics', '*.json')
 binaries = []
-hidden = ['server', 'retrieval', 'assistant', 'llm_local', 'engine.paths', 'engine.library', 'engine.saved_pages', 'engine.address_search', 'bridge', 'shell_macos', 'PyObjCTools.AppHelper']
+hidden = ['server', 'retrieval', 'assistant', 'llm_local', 'engine.paths', 'engine.library', 'engine.saved_pages', 'engine.address_search', 'engine.meaning_red', 'bridge', 'shell_macos', 'PyObjCTools.AppHelper']
 # The optional local AI's runner (packaging/llm/build_llm_macos.sh), in Contents/Frameworks/llm/. The model itself never ships.
 LLM = ROOT / 'derived' / 'llm' / 'bin-mac'
 binaries += [(str(LLM / 'lastbook-llm'), 'llm')]
@@ -42,6 +42,13 @@ datas += [(str(SHIP / 'setup' / 'manifest-v1.json'), 'setup')]   # what first-ru
 hidden += collect_submodules('engine.setup')
 datas += [(str(ROOT / 'engine' / 'setup' / 'roots.pem'), 'engine/setup')]   # the only roots setup's downloader trusts
 datas += [(str(ROOT / 'engine' / n), 'engine') for n in ('english_words.txt.gz', 'english_words.LICENSE.txt')]   # fork: typos.py's words
+# fork: the meaning check (docs/FORK.md 3m): its manifest always, its three files when build_app_macos.sh found them
+datas += [(str(ROOT / 'engine' / 'data' / n), 'engine/data') for n in ('meaning_red_manifest.json', 'meaning_red_LICENSE.txt')]
+MEANING = os.environ.get('LASTBOOK_MEANING_RED_DIR')
+if MEANING:
+    datas += [(str(p), 'derived/models/meaning-red') for p in sorted(Path(MEANING).iterdir()) if p.is_file()]
+for package in ('onnxruntime', 'tokenizers'):   # their native libraries; onnxruntime's Python tools and tests stay out (EXCLUDES)
+    binaries += collect_all(package)[1]
 for package in ('libzim', 'pypdfium2', 'pypdfium2_raw'):   # loaded only when a ZIM or PDF is first opened, and they carry native libraries
     d, b, h = collect_all(package)
     datas += d
@@ -54,7 +61,7 @@ EXCLUDES = [
     'remote_storage',                                    # stays in the library's own tools: no machine names or ssh code in the package
     'shell_windows', 'clr', 'clr_loader', 'pythonnet',   # the Windows window
     'webview', 'bottle', 'proxy_tools',                  # the old window
-    'onnxruntime', 'tokenizers',                         # see requirements_macos.txt
+    'onnxruntime.tools', 'onnxruntime.quantization', 'onnxruntime.transformers', 'onnxruntime.backend', 'onnxruntime.datasets',   # fork: the runtime only
     'numpy._core._multiarray_tests', 'numpy._core._umath_tests', 'numpy._core._operand_flag_tests', 'numpy._core._rational_tests', 'numpy._core._struct_ufunc_tests',
     'PyObjCTest', 'pytest', 'unittest', 'doctest', 'test', 'numpy.testing', 'numpy.tests', 'numpy.f2py', 'pypdfium2_cli',
     'tkinter', 'idlelib', 'lib2to3', 'ensurepip', 'venv', 'setuptools', 'pkg_resources', 'pip', 'PyInstaller',

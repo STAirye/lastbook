@@ -10,6 +10,7 @@ from engine.paths import ro_uri
 from engine import page_tables, sections
 from engine import typos    # fork: spelling mistakes in search questions
 from engine import confidence    # fork: how likely a search's first page is right
+from engine import meaning_red    # fork: a meaning-based second opinion on urgent questions (words OR meaning)
 
 import os
 LOOPBACK = re.compile(r'http://(127\.0\.0\.1|\[::1\]):\d+(/[^\s]*)?')
@@ -509,12 +510,20 @@ def search_confidence(hits, trace):
     return confidence.estimate(hits, trace)
 
 
-def is_danger(msg, english=None):
+def is_danger(msg, english=None, meaning=None):
     """fork: the message may be about an emergency: a danger sign, one of the danger buttons, or a word of
-    engine.confidence.URGENT (as typed or with its misspellings put right). Its pages are never held back."""
+    engine.confidence.URGENT (as typed or with its misspellings put right), or else the meaning check
+    (engine/meaning_red: its misspellings put right) says it is close to the urgent examples. The meaning check only adds:
+    what the words call urgent stays urgent. meaning, a dict when given, gets the check's score, fired and state, and
+    words (what the words alone said). Its pages are never held back."""
     msg = msg or ''
-    return (bool(danger_signs(msg + ' ' + (english or ''))) or msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}
-            or confidence.urgent(msg, typos.correct(msg), english))
+    fixed = typos.correct(msg)
+    words = (bool(danger_signs(msg + ' ' + (english or ''))) or msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}
+             or confidence.urgent(msg, fixed, english))
+    m = meaning_red.check(fixed or msg)
+    if meaning is not None:
+        meaning.update(m, words=words)
+    return words or m['fired']
 
 
 def turn_hits(messages, english=None, followup=True, k=8):
@@ -532,13 +541,16 @@ def turn_hits(messages, english=None, followup=True, k=8):
     info['danger']: this message or the one it is joined with may be urgent (is_danger). info['confidence']: engine.confidence's
     estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None.
     info['body']: the body signs this message names (engine/confidence.body_signs), sorted; then chat_level never only asks.
-    info['plea']: a first message that is only a plea or an emergency number ("911", "help", plea()); it counts as danger."""
+    info['plea']: a first message that is only a plea or an emergency number ("911", "help", plea()); it counts as danger.
+    info['meaning']: the meaning check on this message (is_danger's meaning: score, fired, state, and what the words said)."""
     idx =[i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
     question = STILL.sub('', messages[idx[-1]]['content']) if idx else ''
-    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None,
+    meaning = {}
+    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english, meaning), 'confidence': None,
             'body': sorted(confidence.body_signs(question, typos.correct(question), english)),
             'plea': len(idx) < 2 and plea(question)}    # fork: "911", "help", "hlep" as a first message
     info['danger'] = info['danger'] or info['plea']
+    info['meaning'] = meaning     # fork: the meaning check on this message ({'score', 'fired', 'state', 'words'})
     searched = []      # (hits, trace) of this message's own search and the joined one, for the confidence
 
     def own_search(q):
@@ -1201,7 +1213,8 @@ def chat(messages, about, emit, cancelled):
         if level != 'sure':
             turn['buttons'] = True
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:
-            print('local AI confidence:', json.dumps(dict(conf, route=turn['route'], danger=turn.get('danger'))), flush=True)
+            print('local AI confidence:', json.dumps(dict(conf, route=turn['route'], danger=turn.get('danger'),
+                                                          meaning=turn.get('meaning'))), flush=True)
         if turn['buttons']:     # fork: noise, a weak search, or an unsure one: offer what it may be about
             ev = {'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
                   'prompt': SUGGEST_PROMPT.get('plea' if turn.get('plea') else level, '')}

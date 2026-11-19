@@ -672,6 +672,75 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
 request to say more, the urgent answer, the plea, the everyday wordings and idioms); `test_typos.BodyWords` the search's
 part, `test_typos.EnglishWords` the English words and the slips, `test_what_ships` that the word list ships.
 
+### 3m. A meaning-based second opinion on urgent questions
+
+The urgent words of 3l miss urgent questions worded in a way they have no word for ("his throat is closing after
+peanuts", "my son says voices are telling him to jump"). `engine/meaning_red.py` adds a check by meaning, from the
+prototype in `.claude/drafts/meaning/` (its `RESULTS.md` has the method and how it was chosen):
+
+- **How:** the question, after `typos.correct` and with no query prefix, is embedded with an int8 copy of
+  bge-small-en-v1.5 (the model hybrid search uses, quantized with `onnxruntime.quantization.quantize_dynamic`, 32 MB)
+  and compared with 31 centroids, one per category of 689 invented examples (`engine/data/meaning_red_examples.jsonl`:
+  20 red categories; yellow and 10 look-alike green ones). Score = closest red centroid minus closest non-red one; it
+  fires above the prototype's "wide" threshold (0.00663, set on the examples only: 10% of green examples out of fold).
+- **Only adds:** `assistant.is_danger` is the words (danger signs, buttons, `confidence.urgent`) **or** the meaning
+  check. It can make a question urgent, never take that away; an urgent question's pages are never held back, so a
+  false flag costs little. `turn_hits` puts `info['meaning']` (`score`, `fired`, `state`, and what the words said) in
+  the turn, and the `local AI confidence:` log line (`LASTBOOK_AI_DEBUG=1`) carries it.
+- **Loading:** `server.init` starts it on a thread of its own and returns at once (init 2 ms with or without it); it is
+  ready about 0.3 s later (the files' SHA-256 checked, the session made, one warm-up). Until then, or when anything
+  fails (a missing or changed file, onnxruntime missing or blocked), the words alone decide, as before, and the log
+  says once `meaning check: off, ...` (or `meaning check: ready in ... s`). onnxruntime is imported as `retrieval.py`
+  does it: `ORT_DISABLE_TELEMETRY`, `engine/quiet_onnx.py` first on Windows, `disable_telemetry_events`. One
+  embedding at a time (a lock), 2 threads.
+- **Files:** `model_int8.onnx`, `tokenizer.json`, `centroids.npz` (31 x 384 float16 and the thresholds). They are not
+  in git: `tools/meaning_red_model.py` makes them from the fp32 model in `DATA/derived/models/bge-small-en-v1.5`
+  (with `LASTBOOK_DATA` set: the examples go through that library's `typos.correct`) into `derived/models/meaning-red/`
+  (ignored by git), prints their SHA-256 and, with `--write-manifest`, writes their sizes and SHA-256 into
+  `engine/data/meaning_red_manifest.json`, the one list every copy is checked against. The int8 file comes out
+  byte-identical to the prototype's (onnx 1.23.2, onnxruntime 1.32.0). The centroids are recomputed with that exact
+  file; they differ slightly from the prototype's (cosine 0.9992 or more) because 9bd116e's `typos.correct` puts the
+  apostrophe back in "isnt", "cant" (100 of the 689 examples change). The thresholds are the prototype's, unchanged.
+- **Where the app finds them:** `APP/derived/models/meaning-red/` (the source tree; in a packaged app, next to the
+  program: the Windows, Mac and Linux builds copy that folder in when `packaging/meaning_red_files.py` finds it complete
+  and matching the manifest, and stop if it is there but different), then `DATA/derived/models/meaning-red/`, where
+  setup downloads them: after the person's own download of the local AI model, `engine/setup/api.py` fetches the three
+  files from the Hugging Face repo in the manifest through `engine/setup/download.py` (HTTPS to huggingface.co only,
+  SHA-256 checked), unless the app already has them. A failure leaves the words alone; the model's install goes on.
+  While the manifest has no `revision` (a commit id), nothing is downloaded at all. The manifest and the licence text
+  (`engine/data/meaning_red_LICENSE.txt`: MIT, BAAI) ship in every build; `THIRD_PARTY_NOTICES.md` lists the model.
+- **Mac and Linux** builds were keyword-only with no onnxruntime at all; they now bundle onnxruntime and tokenizers (the
+  Windows build's pins) for this one model, and their scans let through exactly `derived/models/meaning-red/model_int8.onnx`
+  and no other model file. Search stays keyword-only there.
+- **The desktop's "no model" test changed on purpose:** `test_bridge.WholeProcess.test_no_listening_socket_and_no_model`
+  now allows one model, this one, and still no listening socket, no other model file and never hybrid search's
+  bge-small-en-v1.5. onnxruntime is blocked there, so it also checks that the meaning check stayed off without loading
+  the runtime's DLL; `test_meaning_red.WholeProcess` loads it in a process of its own and checks that no socket listens
+  and `retrieval` is not imported.
+
+Measured with this code (in-process, read-only, `LASTBOOK_DATA=D:\LastbookData-fork-test`, sections build refused;
+`.claude/drafts/meaning/integrated_eval.py`). The words are 9bd116e's (on these lists they match the prototype's
+exactly). Urgent, count:
+
+| | list 1 (690): red / yellow / green | list 2 (606): red / yellow / green |
+|---|---|---|
+| words only | 340/343, 98/104, 76/243 | 230/249, 85/111, 127/246 |
+| meaning only | 294, 56, 62 | 212, 52, 64 |
+| **words OR meaning (this branch)** | **341, 101, 106** | **245 (98.4%), 93, 147** |
+| prototype, int8, wide | 341, 100, 108 | 244, 94, 147 |
+| this code with the prototype's centroids | 341, 101, 106 | 244, 93, 147 |
+
+`assistant.is_danger` itself gives the same counts on both lists. List 2: 15 of the 19 red lines the words miss are
+caught. In-sample triage sets (273 red, 94 yellow, 148 green): words OR meaning 272/273 red, as the words alone (the
+miss, "snakebitmyleg", `is_danger` catches by a danger sign), yellow 75 → 78, green 63 → 69. On all three sets no
+question urgent by the words alone stops being urgent. Cost on this PC (warm file cache): load 0.15–0.3 s on its
+thread, +57 MB memory, `is_danger` 2.5 ms median / 4.1 ms p95 with it, against 0.2 / 1.5 ms without.
+
+`LASTBOOK_MEANING_RED=0` turns it off. `app/tests/test_meaning_red.py` covers it (fires on clear urgent wordings,
+quiet on clear everyday ones, only adds, falls back on a missing or changed file or a blocked runtime, the switch,
+threads, the manifest and no download while unpublished, a process of its own); `test_what_ships` that every build and
+scan carries it.
+
 ## 4. Running from source on Windows
 
 Running from source needs two things from an upstream release, copied in (both folders are ignored by git):
@@ -704,6 +773,7 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_CONF_URGENT_ANSWER=0` | A very unsure search for a question that may be urgent gets the pages and the request to say more, without an answer, as before (3l). A body sign is still answered |
 | `LASTBOOK_BODY_SIGNS=0` | Don't look for body signs ("no puls", "mybbyisntbreathing"): a very unsure search with one may again get only the request to say more (3l). Turns `LASTBOOK_BODY_FIX` off too |
 | `LASTBOOK_BODY_FIX=0` | Search a body word's slip ("puls") or a glued run with one as typed; the body signs still count (3l) |
+| `LASTBOOK_MEANING_RED=0` | No meaning check: the urgent words alone decide whether a question may be urgent (3m) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
@@ -732,13 +802,21 @@ a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
+- **Meaning check (3m): a third fresh test list is pending** before its numbers are trusted. The threshold was set on
+  the examples only, but list 2's false flags (children's and old people's everyday questions, idioms the examples
+  lack) show where the examples are thin, and adding examples for them now would be tuning on the test list. Also
+  open: the Hugging Face repo (the manifest's `revision` is empty, so setup downloads nothing yet); no packaged build
+  (Windows, Mac, Linux) has been made with it, so the bundling, the Mac and Linux onnxruntime wheels and their scans
+  are untested; English only (a question's English search words, 3i, are not checked); in hybrid mode the loaded fp32
+  `Embedder` is not reused (it would need its own centroids), so the int8 model loads beside it.
 - Thinning a real pack's map (1) and the setup screens with no state picker have only been tested by the automated tests,
   not by hand.
 - The runner fix (3d) is built and tested on this machine only. A release of the fork would ship it from
   `build_llm_windows.sh` (and the Mac and Linux scripts, not yet rebuilt). It's also a candidate pull request upstream.
 - 3g was measured on one topic (stored water), 2 conversations per arm. Other topics, video citations (carry-over handles
   PDF pages only), and the published 26B with these changes (they're off for it) haven't been measured.
-- **Search in the desktop app is keyword-only** (upstream's design: `test_bridge` checks no embedding model is loaded). Its
+- **Search in the desktop app is keyword-only** (upstream's design: `test_bridge` checks no embedding model is loaded but
+  the meaning check's, 3m). Its
   vocabulary gaps (3h) are where it fails. The fork adds two phrases; more gaps surely exist. "he has no pulse" got a thin
   answer that points to a "No Heartbeat" section without the steps, the same before and after 3h.
 - "we have no fuel to boil water, how else can i make it safe" still finds nothing useful in the first search (0 of 8);

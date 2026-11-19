@@ -77,6 +77,11 @@ PYCHECK
 "$PY" -I -B "$ROOTW\\packaging\\ship_app_files.py" "$OUT\\ship"
 # What setup can install, checked against engine/setup/manifest.validate and download.py's allowed hosts by release_manifest.py
 "$PY" -I -B "$ROOTW\\packaging\\release_manifest.py" --packs "$PACKS" ${SMALL_FROM:+--small-from "$SMALL_FROM"} --out "$OUT\\ship\\setup\\manifest-v1.json"
+# fork: the meaning check's files (docs/FORK.md 3m), when derived\models\meaning-red has them as its manifest says; without
+# them the app still works (the urgent words alone), and setup can download them with the local AI model
+MEANING="$("$PY" -I -B "$ROOTW\\packaging\\meaning_red_files.py")" || { echo "the meaning check's files do not match engine/data/meaning_red_manifest.json" >&2; exit 1; }
+MEANING_DATA=()
+[ -n "$MEANING" ] && MEANING_DATA=(--add-data "$MEANING;derived\\models\\meaning-red")
 
 # Release gate: setup's downloader must verify every allowed host through roots.pem alone, and refuse a site outside it.
 "$PY" -I -B "$ROOTW\\packaging\\check_tls_roots.py" || { echo "check_tls_roots.py failed: refresh engine/setup/roots.pem before shipping" >&2; exit 1; }
@@ -102,8 +107,9 @@ VERSIONINFO
   --add-data "$WEBVIEW2\\WebView2Loader.dll;webview2" \
   --add-data "$LLM;llm" --add-data "$OUT\\ship\\setup\\manifest-v1.json;setup" --add-data "$ROOTW\\engine\\setup\\roots.pem;engine\\setup" --collect-submodules engine.setup \
   --add-data "$ROOTW\\engine\\english_words.txt.gz;engine" --add-data "$ROOTW\\engine\\english_words.LICENSE.txt;engine" \
+  --add-data "$ROOTW\\engine\\data\\meaning_red_manifest.json;engine\\data" --add-data "$ROOTW\\engine\\data\\meaning_red_LICENSE.txt;engine\\data" "${MEANING_DATA[@]}" \
   --hidden-import server --hidden-import retrieval --hidden-import assistant --hidden-import llm_local --hidden-import engine.update \
-  --hidden-import engine.paths --hidden-import engine.library --hidden-import engine.saved_pages --hidden-import engine.quiet_onnx \
+  --hidden-import engine.paths --hidden-import engine.library --hidden-import engine.saved_pages --hidden-import engine.quiet_onnx --hidden-import engine.meaning_red \
   --hidden-import bridge --hidden-import shell_windows --hidden-import clr --hidden-import _cffi_backend \
   --exclude-module shell_macos --exclude-module remote_storage --exclude-module tests \
   --exclude-module webview --exclude-module bottle --exclude-module proxy_tools --exclude-module lastbook_launcher \

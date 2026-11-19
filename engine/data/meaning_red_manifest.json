@@ -1,0 +1,22 @@
+{
+ "about": "fork: the meaning check's files (engine/meaning_red.py). Built by tools/meaning_red_model.py from BAAI/bge-small-en-v1.5 (MIT); published on Hugging Face at repo, revision (a commit id; empty until published, and then nothing is downloaded). Sizes and SHA-256 are checked before any use.",
+ "repo": "STAirye/lastbook-meaning-red",
+ "revision": "",
+ "files": [
+  {
+   "name": "model_int8.onnx",
+   "size": 33807386,
+   "sha256": "6c09b0019d2f72058c72f39ca5b4f19e79edd65dbe944921c7395b74ddaeec43"
+  },
+  {
+   "name": "tokenizer.json",
+   "size": 711396,
+   "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+  },
+  {
+   "name": "centroids.npz",
+   "size": 27626,
+   "sha256": "0a10a66bc5baecc6570c46cfb5f4253d4747ae43483d157a8da1ba65525ff62a"
+  }
+ ]
+}

@@ -14,6 +14,7 @@ PYVER=3.11.18   # 3.11.18 or later: earlier 3.11 releases lack the block on the 
 VENV="$BUILD/mac-venv-$PYVER"
 OUT="$BUILD/mac/$(date +%Y%m%d-%H%M%S)"
 export PYTHONDONTWRITEBYTECODE=1
+export ORT_DISABLE_TELEMETRY=1   # fork: the build imports onnxruntime (the meaning check, docs/FORK.md 3m); retrieval.py has the reason
 export PYTHONPYCACHEPREFIX="$BUILD/mac/pycache"
 export PYINSTALLER_CONFIG_DIR="$BUILD/mac/pyinstaller-cache"
 if [ "$(uname -m)" != arm64 ]; then
@@ -30,6 +31,8 @@ uv pip install --python "$VENV/bin/python" -r "$HERE/requirements_macos.txt"
 # Release gate: setup's downloader verifies every download host through engine/setup/roots.pem only (no system trust store)
 "$VENV/bin/python" -I -B "$HERE/check_tls_roots.py" || { echo "TLS roots gate failed: refresh engine/setup/roots.pem (packaging/setup_roots.py)" >&2; exit 1; }
 export LASTBOOK_SHIP="$OUT/ship"
+# fork: the meaning check's files (docs/FORK.md 3m), bundled when derived/models/meaning-red has them as its manifest says
+export LASTBOOK_MEANING_RED_DIR="$("$VENV/bin/python" -I -B "$HERE/meaning_red_files.py")" || { echo "the meaning check's files do not match engine/data/meaning_red_manifest.json" >&2; exit 1; }
 "$VENV/bin/python" -m PyInstaller --noconfirm --distpath "$OUT/dist" --workpath "$OUT/work" "$HERE/lastbook_macos.spec" 2>&1 | tee "$OUT/build.log"
 BUNDLE="$OUT/dist/Lastbook.app"
 "$VENV/bin/python" "$HERE/scan_package_macos.py" "$BUNDLE" --terms-file "$BUILD/scan-terms.txt" | tee "$OUT/scan.txt"

@@ -156,6 +156,39 @@ class WhatShips(unittest.TestCase):
             for name in ('english_words.txt.gz', 'english_words.LICENSE.txt'):
                 self.assertIn(name, text, rel)
 
+    def test_meaning_check_ships_its_manifest_and_bundles_its_files_when_there(self):
+        """fork (docs/FORK.md 3m): every build ships engine/data/meaning_red_manifest.json and bundles the three files of
+        derived/models/meaning-red through packaging/meaning_red_files.py; every scan wants the manifest; the scans that
+        refuse model files let through exactly the meaning check's one."""
+        m = json.loads((ROOT / 'engine' / 'data' / 'meaning_red_manifest.json').read_text(encoding='utf-8'))
+        self.assertEqual([f['name'] for f in m['files']], ['model_int8.onnx', 'tokenizer.json', 'centroids.npz'])
+        for rel in ('packaging/build_app_windows.sh', 'packaging/build_app_macos.sh', 'packaging/linux/build_app_linux.sh'):
+            self.assertIn('meaning_red_files.py', (ROOT / rel).read_text(encoding='utf-8'), rel)
+        for rel in ('packaging/build_app_windows.sh', 'packaging/lastbook_macos.spec', 'packaging/linux/build_app_linux.sh',
+                    'packaging/scan_app_package.py', 'packaging/scan_package_macos.py', 'packaging/linux/scan_package_linux.py'):
+            self.assertIn('meaning_red_manifest.json', (ROOT / rel).read_text(encoding='utf-8'), rel)
+        import importlib.util
+        for scan, ok, bad in (('scan_package_macos.py', 'Lastbook.app/Contents/Resources/derived/models/meaning-red/model_int8.onnx',
+                               'Lastbook.app/Contents/Resources/derived/models/bge-small-en-v1.5/model.onnx'),
+                              ('linux/scan_package_linux.py', 'opt/lastbook/derived/models/meaning-red/model_int8.onnx',
+                               'opt/lastbook/derived/models/bge-small-en-v1.5/model.onnx')):
+            spec = importlib.util.spec_from_file_location('scan', ROOT / 'packaging' / scan)
+            mod = importlib.util.module_from_spec(spec)
+            try:
+                spec.loader.exec_module(mod)
+            except ImportError:      # the Mac scan needs PyInstaller's reader: check its two patterns from the source instead
+                src = (ROOT / 'packaging' / scan).read_text(encoding='utf-8')
+                mod = types_ns(BAD_FILE=re.compile(re.search(r"BAD_FILE = re.compile\(r'(.*?)', re.I\)", src).group(1), re.I),
+                               MEANING_MODEL=re.compile(re.search(r"MEANING_MODEL = re.compile\(r'(.*?)'\)", src).group(1)))
+            allowed = lambda rel: not (mod.BAD_FILE.search(rel) and not mod.MEANING_MODEL.search(rel))
+            self.assertTrue(allowed(ok), scan)
+            self.assertFalse(allowed(bad), scan)
+
+
+def types_ns(**kw):
+    import types
+    return types.SimpleNamespace(**kw)
+
 
 if __name__ == '__main__':
     unittest.main()
