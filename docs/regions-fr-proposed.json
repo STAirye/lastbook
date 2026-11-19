@@ -1,0 +1,1567 @@
+{
+  "about": "Proposed region definitions for detailed maps of France: 18 regions (13 in metropolitan France including Corsica, 5 overseas), one region each. See docs/REGIONS-FR.md, which also reports a local trial build of three départements.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "ISO 3166-2:FR codes: FR-ARA to FR-PAC and FR-20R for metropolitan France; FR-971, FR-972, FR-973, FR-974, FR-976 overseas.",
+    "why": "A bare FR is not a US code, but the parts after the hyphen are three letters, three digits or 20R, while address index ids must match [A-Z]{2} (engine/setup/manifest.py line 72, engine/setup/install.py line 267). None of them is in STATE_CODES (engine/address_search.py). Départements have numeric codes (FR-14, FR-2A).",
+    "verified": "Read from Wikipedia's ISO 3166-2:FR page on 2026-11-17 (secondary source). Then checked on ISO's Online Browsing Platform (entry FR), opened in a browser after accepting its terms: all 18 codes are in its list; its change history dates FR-COR to FR-20R to 2020-11-24 and the deletion of FR-GP, FR-MQ, FR-GF, FR-RE and FR-YT to 2021-11-25; FR-971, FR-974 and FR-976 are filed as \"overseas departmental collectivity\", FR-972 and FR-973 as \"overseas unique territorial collectivity\" (second check)."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "dams": "water.sqlite (nid part today)",
+    "crops": "crops.sqlite",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite"
+  },
+  "licences": {
+    "Licence-Ouverte-2.0": {
+      "name": "Licence Ouverte / Open Licence version 2.0 (Etalab)",
+      "url": "https://www.data.gouv.fr/pages/legal/licences/etalab-2.0",
+      "attribution": "Name the source (at least the licensor) and the date of the last update of the data reused, e.g. \"Source: IGN – BD TOPO®, 2026-09-15\". Insee asks for \"Source : Insee\".",
+      "share_alike": false,
+      "verified": "licence page opened 2026-11-17; states compatibility with licences that require attribution (OGL, CC-BY, ODC-BY)"
+    },
+    "Licence-Ouverte-1.0": {
+      "name": "Licence Ouverte / Open Licence 1.0 (Etalab)",
+      "url": "https://www.data.gouv.fr/pages/legal/licences/",
+      "attribution": "Source and date of last update, as for 2.0.",
+      "share_alike": false,
+      "verified": "named as fr-lo on the data.gouv.fr records for FINESS, gendarmerie units and the service-public directory, 2026-11-17; licence text not checked"
+    },
+    "ODbL-1.0": {
+      "name": "Open Data Commons Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\" linked to https://www.openstreetmap.org/copyright, and a statement that the data is under the ODbL",
+      "share_alike": true,
+      "verified": "licence and OSMF attribution guidelines opened 2026-11-17"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Licence for the use of the Copernicus WorldDEM-30",
+      "url": "https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf",
+      "attribution": "see docs/regions-proposed.json",
+      "share_alike": false,
+      "verified": "licence PDF opened 2026-11-17"
+    },
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Credit GeoNames, link the licence, say if changed.",
+      "share_alike": false,
+      "verified": "named in the GeoNames readme, opened 2026-11-17; legal code not read"
+    },
+    "ODC-BY": {
+      "name": "Open Data Commons Attribution License",
+      "url": "https://opendatacommons.org/licenses/by/",
+      "attribution": "not checked",
+      "share_alike": false,
+      "verified": "not checked: named on the data.gouv.fr record of OSO (last updated 2022)"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "BD ALTI® v2, 25 m grid, one file per département",
+        "publisher": "IGN",
+        "url": "https://data.geopf.fr/telechargement/resource/BDALTI",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "ASCII grid in 7z. Lambert-93 / NGF-IGN69 in metropolitan France; Corsica uses IGN78C heights; each overseas département has its own UTM projection and height datum (download feed titles). A 25 m file is listed for each of the 101 départements in the download feed; only 14, 50 and 61 were tried (93.1 MB of sources, 1,002 tiles). 25 m matches zoom 12 at 49° N."
+      },
+      {
+        "dataset": "RGE ALTI® v2, 5 m and 1 m",
+        "publisher": "IGN",
+        "url": "https://data.geopf.fr/telechargement/resource/RGEALTI",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "optional, finer detail",
+        "notes": "Not needed for zooms 4 to 12."
+      },
+      {
+        "dataset": "Copernicus DEM GLO-30",
+        "publisher": "ESA / Airbus",
+        "url": "https://registry.opendata.aws/copernicus-dem/",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "sizes by HEAD on the AWS mirror 2026-11-17; collection page not re-read",
+        "role": "fallback",
+        "notes": "Surface model. Covers the sea and the Channel Islands, which BD ALTI does not."
+      }
+    ],
+    "water": [
+      {
+        "dataset": "BD TOPO® v3.5, hydrography theme",
+        "publisher": "IGN",
+        "url": "https://data.geopf.fr/telechargement/resource/BDTOPO",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Edition 2026-09-15, GPKG per département or region. detail_hydrographique holds springs (nature Source and Source captée). Tried for 14, 50 and 61."
+      },
+      {
+        "dataset": "BD Topage® 2026",
+        "publisher": "Sandre / OFB, with IGN",
+        "url": "https://services.sandre.eaufrance.fr/telechargement/geo/ETH/BDTopage/2026/",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "alternative",
+        "notes": "One file per territory, not per département. The 2026 folder has a shapefile zip for each of metropolitan France (FXX), Guadeloupe (GLP), Martinique (MTQ), Mayotte (MYT) and La Réunion (REU), and none for Guyane (second check)."
+      },
+      {
+        "dataset": "OpenStreetMap waterways and water areas",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/europe/france.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "fallback"
+      }
+    ],
+    "dams": [
+      {
+        "dataset": "Référentiel des obstacles à l'écoulement (ROE), Métropole",
+        "publisher": "Sandre / OFB",
+        "url": "https://www.data.gouv.fr/datasets/597b4533c751df06dd254d52/",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "WFS ObstEcoul_FXX, filterable by CdDepartement. River obstacles, not a reservoir inventory: no storage and almost no structure heights. Meaning of CdTypeOuvrage codes not checked. Overseas: Sandre's WFS has ObstEcoul_GLP, _MTQ, _GUF, _REU, _MYT and _all beside _FXX; counts on 2026-11-17 (resultType=hits): 120,038 metropolitan, 113 Guadeloupe, 388 Martinique, 741 Guyane, 140 La Réunion, 156 Mayotte, 125,818 in all (second check, measured). The six territory layers sum to 121,576, and the 4,242 more in _all are rows whose status is \"Gelé\" (frozen); the other 121,576 are \"Validé\" (second check, measured)."
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "Registre parcellaire graphique (RPG) 2025, version 4.0, parcels",
+        "publisher": "IGN (distribution), ASP (data)",
+        "url": "https://data.geopf.fr/telechargement/resource/RPG",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Vector parcels, one file per region (no per-département file). A 2025 file is listed for each of the 18 regions in the download feed (R11 to R94, R01 to R06); only R28 was tried. Overseas files use local UTM projections. Crop codes per REF_CULTURES_GROUPES_CULTURES_2025.csv. No apple-specific code."
+      },
+      {
+        "dataset": "OSO land cover",
+        "publisher": "CESBIO / Theia",
+        "url": "https://www.data.gouv.fr/datasets/cartographie-de-loccupation-du-sol-oso/",
+        "licence": "ODC-BY",
+        "verified": "not checked",
+        "role": "fallback",
+        "notes": "Latest edition, classes and download not checked."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "BD TOPO® v3.5, batiment layer",
+        "publisher": "IGN",
+        "url": "https://data.geopf.fr/telechargement/resource/BDTOPO",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Footprints with height in metres. Edition 2026-09-15 is listed for each of the 101 départements in the download feed. Tried for 14, 50 and 61: height for 97.9 % of 1,539,916 buildings. hauteur runs from the lowest ground point to the top of the eaves (the roof edge, or the top of the wall under a flat roof), not to the ridge (BD TOPO 3.5 content description, July 2026; second check)."
+      },
+      {
+        "dataset": "Global ML Building Footprints",
+        "publisher": "Microsoft",
+        "url": "https://github.com/microsoft/GlobalMLBuildingFootprints",
+        "licence": "CDLA-Permissive-2.0 per its README; ODbL per Overture",
+        "verified": "2026-11-17",
+        "role": "fallback",
+        "notes": "Format tools/build_buildings.py already reads; heights mostly missing."
+      }
+    ],
+    "places": [
+      {
+        "dataset": "BD TOPO® v3.5: commune, commune_associee_ou_deleguee, zone_d_habitation, lieu_dit_non_habite, zone_d_activite_ou_d_interet",
+        "publisher": "IGN",
+        "url": "https://data.geopf.fr/telechargement/resource/BDTOPO",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Communes with population, delegated and associated communes, named hamlets."
+      },
+      {
+        "dataset": "Code officiel géographique 2026; populations de référence 2023",
+        "publisher": "Insee",
+        "url": "https://www.insee.fr/fr/information/8740222",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "official names, codes and populations",
+        "notes": "\"Source : Insee\". Population tables exclude Mayotte."
+      },
+      {
+        "dataset": "GeoNames, France",
+        "publisher": "GeoNames",
+        "url": "https://download.geonames.org/export/dump/FR.zip",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "fallback"
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "Base Adresse Nationale (BAN), CSV per département",
+        "publisher": "Base Adresse Nationale (adresse.data.gouv.fr)",
+        "url": "https://adresse.data.gouv.fr/data/ban/adresses/latest/csv/",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Updated daily. Separate repetition index (rep), former commune, AFNOR form. Files exist for 971 to 976, 2A and 2B (HEAD). 26,123,035 address numbers in the commune summary of 2026-11-17, all territories. Tried for 14, 50 and 61."
+      },
+      {
+        "dataset": "Overture addresses",
+        "publisher": "Overture Maps Foundation, from the BAN through OpenAddresses",
+        "url": "https://docs.overturemaps.org/attribution/#france",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "alternative",
+        "notes": "country = FR, 26,052,116 rows; the same BAN, about a month older. Release 2026-10-21.0 (second check, measured with DuckDB): every FR row has a five-digit postcode; postal_city is empty in every row and address_levels has one entry, the commune, so tools/build_addresses.py as written would store an empty city and the commune's first two letters as the state (351 values, 6,894,553 rows or 26 % equal to a real US code); 7.8 % of numbers carry a suffix, mostly fused (\"12bis\"); sources[0].dataset names the département (fr/59, fr/2A), an exact cut without postcodes. The five overseas regions are under FR, as are Saint-Barthélemy, Saint-Martin and Saint-Pierre-et-Miquelon; no rows under GP, MQ, GF, RE or YT."
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OSM amenities as the US map uses them, from the Geofabrik extracts",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/europe/france.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "counts_as_of": "trial area only; metropolitan counts in counts_metropolitan_france",
+        "counts": {
+          "hospital": 73,
+          "pharmacy": 397,
+          "chemist": 18,
+          "fuel": 386,
+          "fire_station": 152,
+          "police": 176,
+          "shelter": 983,
+          "drinking_water": 348
+        },
+        "counts_metropolitan_france_as_of": "taginfo for Geofabrik's metropolitan France extract, data until 2026-11-16 21:22 UTC, all object types (second check)",
+        "counts_metropolitan_france": {
+          "pharmacy": 19141,
+          "fire_station": 6124,
+          "police": 5979,
+          "hospital": 2494,
+          "drinking_water": 26740,
+          "defibrillator": 28328,
+          "fire_hydrant": 246264
+        }
+      },
+      {
+        "dataset": "BD TOPO® v3.5, zone_d_activite_ou_d_interet layer",
+        "publisher": "IGN",
+        "url": "https://data.geopf.fr/wfs/ows",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17 (second check, measured: WFS counts)",
+        "role": "official source (fire stations, gendarmerie, police, mountain refuges)",
+        "notes": "With geometry, overseas included, same licence as the buildings. Caserne de pompiers 6,710; Gendarmerie 3,775; police entries 960; Refuge 718; Abri de montagne 1,854."
+      },
+      {
+        "dataset": "Géo'DAE, national defibrillator base",
+        "publisher": "Atlasanté",
+        "url": "https://www.data.gouv.fr/datasets/geodae-base-nationale-des-defibrillateurs",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "proposed new kind",
+        "notes": "192,233 records in the tabular API copy, date of copy unknown."
+      },
+      {
+        "dataset": "Unités de gendarmerie accueillant du public",
+        "publisher": "Ministère de l'Intérieur",
+        "url": "https://www.data.gouv.fr/datasets/liste-des-unites-de-gendarmerie-accueillant-du-public-comprenant-leur-geolocalisation-et-leurs-horaires-douverture",
+        "licence": "Licence-Ouverte-1.0",
+        "verified": "2026-11-17",
+        "role": "supplement (police)",
+        "notes": "3,681 units in France, with coordinates and opening hours."
+      },
+      {
+        "dataset": "Prix des carburants en France, flux instantané v2",
+        "publisher": "DGCCRF",
+        "url": "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree",
+        "licence": "Licence-Ouverte-2.0",
+        "verified": "2026-11-17",
+        "role": "supplement (fuel)",
+        "notes": "9,833 stations; coordinates are integers × 1e5."
+      },
+      {
+        "dataset": "FINESS, extraction du fichier des établissements",
+        "publisher": "Ministère de la Santé",
+        "url": "https://www.data.gouv.fr/datasets/finess-extraction-du-fichier-des-etablissements",
+        "licence": "Licence-Ouverte-1.0",
+        "verified": "2026-11-17",
+        "role": "supplement (hospitals, pharmacies)",
+        "notes": "Counts per département not obtained."
+      },
+      {
+        "dataset": "Annuaire de l'administration, base de données locales",
+        "publisher": "DILA",
+        "url": "https://www.data.gouv.fr/datasets/service-public-gouv-fr-annuaire-de-ladministration-base-de-donnees-locales",
+        "licence": "Licence-Ouverte-1.0",
+        "verified": "2026-11-17",
+        "role": "supplement (town halls, police stations)"
+      }
+    ]
+  },
+  "not_open_nationwide": [
+    "NF Z 10-011 addressing standard (AFNOR, sold; read only through La Poste's specification)",
+    "BSS EAU water points (BRGM): licence \"not specified\" on data.gouv.fr",
+    "BNPE abstraction works (Hub'Eau): points at the commune centroid or of unknown precision; licence not checked",
+    "A national list of fire stations: none found (Calvados publishes its own); BD TOPO's zone_d_activite_ou_d_interet holds 6,710 fire and rescue centres under Licence Ouverte 2.0, see pois (second check, measured)",
+    "A national list of public drinking water points, shelters or SAIP sirens: none found"
+  ],
+  "addressing": {
+    "postal_code": {
+      "format": "Five digits. The first two are usually the département; Corsica uses 20, overseas départements three digits (971 to 976). A postcode can serve several communes and a commune can have several postcodes. 23 metropolitan communes use a neighbouring département's prefix, 6 of them across a region boundary (geo.api.gouv.fr, 2026-11-17).",
+      "example_pattern": "00000"
+    },
+    "order": "Number, optional repetition index (bis, ter, a letter), street type and name; then postcode and commune on the last line (\"14 bis Rue Écuyère, 14000 Caen\").",
+    "notes": "normalize() and norm() keep only a-z and 0-9 (\"Église\" becomes \"glise\"); the postcode is read only as the last word; a final word such as me, ri or il is taken for a US state (Bellême, Ri, Bonnœil); tools/build_addresses.py keeps only country = 'US'. Checked in this repository on 2026-11-17. The trial index declares meta.country = 'FR' and is searched with its own rules."
+  },
+  "regions": [
+    {
+      "code": "FR-ARA",
+      "name": "Auvergne-Rhône-Alpes",
+      "name_en": "Auvergne-Rhône-Alpes",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "84",
+      "bbox": {
+        "west": 2.0629,
+        "south": 44.1155,
+        "east": 7.1856,
+        "north": 46.8043,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/84/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/84/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          1.91,
+          43.96,
+          7.34,
+          46.96
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "01",
+          "03",
+          "07",
+          "15",
+          "26",
+          "38",
+          "42",
+          "43",
+          "63",
+          "69",
+          "73",
+          "74"
+        ],
+        "communes": 4025,
+        "population": 8205557,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "auvergne",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/auvergne-latest.osm.pbf",
+            "osm_pbf_bytes": 156961781,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/auvergne-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 321884575
+          },
+          {
+            "name": "rhone-alpes",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/rhone-alpes-latest.osm.pbf",
+            "osm_pbf_bytes": 533240582,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/rhone-alpes-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 958809824
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 2989836,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/84",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The box covers parts of Switzerland and Italy (Natural Earth 1:110m test)."
+      }
+    },
+    {
+      "code": "FR-BFC",
+      "name": "Bourgogne-Franche-Comté",
+      "name_en": "Bourgogne-Franche-Comté (Burgundy-Franche-Comté)",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "27",
+      "bbox": {
+        "west": 2.8449,
+        "south": 46.1561,
+        "east": 7.1434,
+        "north": 48.4001,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/27/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/27/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          2.69,
+          46.0,
+          7.3,
+          48.56
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "21",
+          "25",
+          "39",
+          "58",
+          "70",
+          "71",
+          "89",
+          "90"
+        ],
+        "communes": 3685,
+        "population": 2802670,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "bourgogne",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/bourgogne-latest.osm.pbf",
+            "osm_pbf_bytes": 201100080,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/bourgogne-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 408145534
+          },
+          {
+            "name": "franche-comte",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/franche-comte-latest.osm.pbf",
+            "osm_pbf_bytes": 125192196,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/franche-comte-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 241019361
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 1334428,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/27",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The box covers part of Switzerland (Natural Earth 1:110m test)."
+      }
+    },
+    {
+      "code": "FR-BRE",
+      "name": "Bretagne",
+      "name_en": "Brittany",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "53",
+      "bbox": {
+        "west": -5.1412,
+        "south": 47.2779,
+        "east": -1.0156,
+        "north": 48.9008,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/53/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/53/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -5.3,
+          47.12,
+          -0.86,
+          49.06
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "22",
+          "29",
+          "35",
+          "56"
+        ],
+        "communes": 1202,
+        "population": 3449370,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "bretagne",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/bretagne-latest.osm.pbf",
+            "osm_pbf_bytes": 330755575,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/bretagne-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 615402636
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 1754716,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/53",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The padded box reaches Les Minquiers (Jersey), judged from a Nominatim box, not an official boundary."
+      }
+    },
+    {
+      "code": "FR-CVL",
+      "name": "Centre-Val de Loire",
+      "name_en": "Centre-Val de Loire",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "24",
+      "bbox": {
+        "west": 0.0527,
+        "south": 46.3469,
+        "east": 3.1287,
+        "north": 48.941,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/24/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/24/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -0.1,
+          46.19,
+          3.28,
+          49.1
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "18",
+          "28",
+          "36",
+          "37",
+          "41",
+          "45"
+        ],
+        "communes": 1754,
+        "population": 2587031,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "centre",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/centre-latest.osm.pbf",
+            "osm_pbf_bytes": 245671405,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/centre-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 484652828
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 1275641,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/24",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "No foreign land in the padded box in the Natural Earth 1:110m test."
+      }
+    },
+    {
+      "code": "FR-20R",
+      "name": "Corse",
+      "name_en": "Corsica",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "metropolitan collectivity with special status (a region in INSEE and geo.api.gouv.fr)",
+      "insee_code": "94",
+      "bbox": {
+        "west": 8.5347,
+        "south": 41.3336,
+        "east": 9.56,
+        "north": 43.0276,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/94/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/94/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          8.38,
+          41.18,
+          9.71,
+          43.18
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "2A",
+          "2B"
+        ],
+        "communes": 360,
+        "population": 355486,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "corse",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/corse-latest.osm.pbf",
+            "osm_pbf_bytes": 34540890,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/corse-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 74580156
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 135260,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m, D02A and D02B, edition 2020-04-16, Lambert-93 / IGN78C heights",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG_4-0__GPKG_LAMB93_R94_2025-01-01",
+        "addresses": "Base Adresse Nationale, one CSV per département (2A: 2095024 bytes, 2B: 2658437 bytes)",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/94",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The padded box reaches the north of Sardinia (Natural Earth 1:110m test)."
+      }
+    },
+    {
+      "code": "FR-GES",
+      "name": "Grand Est",
+      "name_en": "Grand Est",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "44",
+      "bbox": {
+        "west": 3.3837,
+        "south": 47.4203,
+        "east": 8.2325,
+        "north": 50.1693,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/44/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/44/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          3.23,
+          47.27,
+          8.39,
+          50.32
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "08",
+          "10",
+          "51",
+          "52",
+          "54",
+          "55",
+          "57",
+          "67",
+          "68",
+          "88"
+        ],
+        "communes": 5115,
+        "population": 5563378,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "alsace",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/alsace-latest.osm.pbf",
+            "osm_pbf_bytes": 132053076,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/alsace-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 234272483
+          },
+          {
+            "name": "champagne-ardenne",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/champagne-ardenne-latest.osm.pbf",
+            "osm_pbf_bytes": 105829468,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/champagne-ardenne-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 214672137
+          },
+          {
+            "name": "lorraine",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/lorraine-latest.osm.pbf",
+            "osm_pbf_bytes": 171864964,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/lorraine-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 327453536
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 2131157,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/44",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The box covers parts of Germany, Switzerland, Luxembourg and Belgium (Natural Earth 1:110m test). ISO 3166-2 gives FR-67 and FR-68 the parent FR-6AE (Alsace), not FR-GES (Wikipedia's copy, ISO not checked); INSEE and geo.api.gouv.fr place them in region 44."
+      }
+    },
+    {
+      "code": "FR-HDF",
+      "name": "Hauts-de-France",
+      "name_en": "Hauts-de-France",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "32",
+      "bbox": {
+        "west": 1.3802,
+        "south": 48.8372,
+        "east": 4.2558,
+        "north": 51.0892,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/32/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/32/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          1.23,
+          48.68,
+          4.41,
+          51.24
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "02",
+          "59",
+          "60",
+          "62",
+          "80"
+        ],
+        "communes": 3782,
+        "population": 5992194,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "nord-pas-de-calais",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/nord-pas-de-calais-latest.osm.pbf",
+            "osm_pbf_bytes": 241529390,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/nord-pas-de-calais-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 454186491
+          },
+          {
+            "name": "picardie",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/picardie-latest.osm.pbf",
+            "osm_pbf_bytes": 133612542,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/picardie-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 279668327
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 2543096,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/32",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The padded box covers part of Belgium; the padded box reaches England (Natural Earth 1:110m test)."
+      }
+    },
+    {
+      "code": "FR-IDF",
+      "name": "Île-de-France",
+      "name_en": "Île-de-France",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "11",
+      "bbox": {
+        "west": 1.4463,
+        "south": 48.1201,
+        "east": 3.559,
+        "north": 49.2415,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/11/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/11/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          1.29,
+          47.97,
+          3.71,
+          49.4
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "75",
+          "77",
+          "78",
+          "91",
+          "92",
+          "93",
+          "94",
+          "95"
+        ],
+        "communes": 1266,
+        "population": 12463067,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "ile-de-france",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf",
+            "osm_pbf_bytes": 340430258,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/ile-de-france-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 563159234
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 2177071,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/11",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "No foreign land in the padded box in the Natural Earth 1:110m test."
+      }
+    },
+    {
+      "code": "FR-NOR",
+      "name": "Normandie",
+      "name_en": "Normandy",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "28",
+      "bbox": {
+        "west": -1.955,
+        "south": 48.1799,
+        "east": 1.8029,
+        "north": 50.0722,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/28/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/28/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -2.11,
+          48.02,
+          1.96,
+          50.23
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "14",
+          "27",
+          "50",
+          "61",
+          "76"
+        ],
+        "communes": 2644,
+        "population": 3345842,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "basse-normandie",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/basse-normandie-latest.osm.pbf",
+            "osm_pbf_bytes": 144578108,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/basse-normandie-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 300777899
+          },
+          {
+            "name": "haute-normandie",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/haute-normandie-latest.osm.pbf",
+            "osm_pbf_bytes": 107619515,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/haute-normandie-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 216306656
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 1548301,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/28",
+        "verified": "2026-11-17; départements 14, 50 and 61 tried in a local build",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The padded box reaches into Jersey (its east end), Les Écréhous and Les Minquiers; the raw box already covers part of Les Écréhous. Cut by département outlines, not by the box. The three départements 14, 50 and 61 are the trial build described in REGIONS-FR.md."
+      }
+    },
+    {
+      "code": "FR-NAQ",
+      "name": "Nouvelle-Aquitaine",
+      "name_en": "Nouvelle-Aquitaine",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "75",
+      "bbox": {
+        "west": -1.7924,
+        "south": 42.7779,
+        "east": 2.6113,
+        "north": 47.176,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/75/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/75/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -1.95,
+          42.62,
+          2.77,
+          47.33
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "16",
+          "17",
+          "19",
+          "23",
+          "24",
+          "33",
+          "40",
+          "47",
+          "64",
+          "79",
+          "86",
+          "87"
+        ],
+        "communes": 4293,
+        "population": 6150451,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "aquitaine",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/aquitaine-latest.osm.pbf",
+            "osm_pbf_bytes": 297063693,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/aquitaine-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 608060615
+          },
+          {
+            "name": "limousin",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/limousin-latest.osm.pbf",
+            "osm_pbf_bytes": 99222535,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/limousin-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 204624169
+          },
+          {
+            "name": "poitou-charentes",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/poitou-charentes-latest.osm.pbf",
+            "osm_pbf_bytes": 231480457,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/poitou-charentes-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 431812504
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 3235717,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/75",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The box covers part of Spain; the padded box reaches the north edge of Andorra (Geofabrik outline, which carries a buffer)."
+      }
+    },
+    {
+      "code": "FR-OCC",
+      "name": "Occitanie",
+      "name_en": "Occitania",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "76",
+      "bbox": {
+        "west": -0.3272,
+        "south": 42.3329,
+        "east": 4.8456,
+        "north": 45.0467,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/76/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/76/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -0.48,
+          42.18,
+          5.0,
+          45.2
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "09",
+          "11",
+          "12",
+          "30",
+          "31",
+          "32",
+          "34",
+          "46",
+          "48",
+          "65",
+          "66",
+          "81",
+          "82"
+        ],
+        "communes": 4446,
+        "population": 6124653,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "languedoc-roussillon",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/languedoc-roussillon-latest.osm.pbf",
+            "osm_pbf_bytes": 271068827,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/languedoc-roussillon-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 503894627
+          },
+          {
+            "name": "midi-pyrenees",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/midi-pyrenees-latest.osm.pbf",
+            "osm_pbf_bytes": 364614023,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/midi-pyrenees-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 723020433
+          }
+        ],
+        "geofabrik_merge": true,
+        "ban_address_numbers": 2835248,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/76",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The box covers Andorra and part of Spain."
+      }
+    },
+    {
+      "code": "FR-PDL",
+      "name": "Pays de la Loire",
+      "name_en": "Pays de la Loire",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "52",
+      "bbox": {
+        "west": -2.6254,
+        "south": 46.2667,
+        "east": 0.9167,
+        "north": 48.568,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/52/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/52/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -2.78,
+          46.11,
+          1.07,
+          48.72
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "44",
+          "49",
+          "53",
+          "72",
+          "85"
+        ],
+        "communes": 1228,
+        "population": 3907156,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "pays-de-la-loire",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/pays-de-la-loire-latest.osm.pbf",
+            "osm_pbf_bytes": 374315248,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/pays-de-la-loire-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 693609053
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 1799822,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/52",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "No foreign land in the padded box in the Natural Earth 1:110m test."
+      }
+    },
+    {
+      "code": "FR-PAC",
+      "name": "Provence-Alpes-Côte d'Azur",
+      "name_en": "Provence-Alpes-Côte d'Azur",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "region",
+      "insee_code": "93",
+      "bbox": {
+        "west": 4.2302,
+        "south": 42.982,
+        "east": 7.719,
+        "north": 45.1268,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/93/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/93/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          4.08,
+          42.83,
+          7.87,
+          45.28
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "04",
+          "05",
+          "06",
+          "13",
+          "83",
+          "84"
+        ],
+        "communes": 946,
+        "population": 5218960,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "provence-alpes-cote-d-azur",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/provence-alpes-cote-d-azur-latest.osm.pbf",
+            "osm_pbf_bytes": 391878638,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/provence-alpes-cote-d-azur-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 675207117
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 1527860,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m per département, Lambert-93 / NGF-IGN69 heights (as in the trial)",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15",
+        "crops": "RPG 2025 v4.0, Lambert-93, one file per region",
+        "addresses": "Base Adresse Nationale, one CSV per département",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/93",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0",
+        "notes": "The box covers Monaco and part of Italy."
+      }
+    },
+    {
+      "code": "FR-971",
+      "name": "Guadeloupe",
+      "name_en": "Guadeloupe",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "overseas region and department",
+      "insee_code": "01",
+      "bbox": {
+        "west": -61.8098,
+        "south": 15.832,
+        "east": -61.002,
+        "north": 16.5145,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/01/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/01/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -61.96,
+          15.68,
+          -60.85,
+          16.67
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "971"
+        ],
+        "communes": 32,
+        "population": 384160,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "guadeloupe",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/guadeloupe-latest.osm.pbf",
+            "osm_pbf_bytes": 24765563,
+            "free_gpkg_zip": null,
+            "free_gpkg_zip_bytes": null
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 163474,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m, D971, edition 2014-01-15, UTM 20 / GUAD88 heights",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15 (local UTM projection)",
+        "crops": "RPG_4-0__GPKG_RGAF09UTM20_R01_2025-01-01",
+        "addresses": "Base Adresse Nationale, one CSV per département (971: 6338213 bytes)",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/01",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0: Overture files these rows under FR, with no rows under GP, MQ, GF, RE or YT (second check, measured)",
+        "notes": "Small neighbouring islands (Dominica, Montserrat) are not in the Natural Earth 1:110m outlines; overlap not checked. Saint-Barthélemy and Saint-Martin are not part of this region but use 971xx postcodes. They lie outside the box: BD TOPO's collectivite_territoriale layer puts Saint-Barthélemy at 62.93° to 62.79° W, 17.87° to 17.97° N and Saint-Martin at 63.15° to 62.97° W, 18.05° to 18.13° N, at least 1.2° north and 0.8° west of the padded box, so a Guadeloupe map would not show their streets (second check, measured). Coverage: MNT LiDAR HD planned; BD TOPAGE 2026 and INPE 2023 present; no OSO; CORINE Land Cover 2018 (second check). Geofabrik offers no free GeoPackage or shapefile for this region (\"not available for this region\"); tools/build_map.py reads the free GeoPackage."
+      }
+    },
+    {
+      "code": "FR-972",
+      "name": "Martinique",
+      "name_en": "Martinique",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "overseas single collectivity (region and department)",
+      "insee_code": "02",
+      "bbox": {
+        "west": -61.229,
+        "south": 14.3886,
+        "east": -60.8097,
+        "north": 14.8787,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/02/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/02/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -61.38,
+          14.23,
+          -60.65,
+          15.03
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "972"
+        ],
+        "communes": 34,
+        "population": 360630,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "martinique",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/martinique-latest.osm.pbf",
+            "osm_pbf_bytes": 20382369,
+            "free_gpkg_zip": null,
+            "free_gpkg_zip_bytes": null
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 138347,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m, D972, edition 2015-10-21, UTM 20 / MART87 heights",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15 (local UTM projection)",
+        "crops": "RPG_4-0__GPKG_RGAF09UTM20_R02_2025-01-01",
+        "addresses": "Base Adresse Nationale, one CSV per département (972: 5838040 bytes)",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/02",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0: Overture files these rows under FR, with no rows under GP, MQ, GF, RE or YT (second check, measured)",
+        "notes": "Small neighbouring islands (Dominica, Saint Lucia) are not in the Natural Earth 1:110m outlines; overlap not checked. Geofabrik offers no free GeoPackage or shapefile for this region (\"not available for this region\"); tools/build_map.py reads the free GeoPackage. Coverage: MNT LiDAR HD planned; BD TOPAGE 2026 and INPE 2023 present; no OSO; CORINE Land Cover 2018 (second check)."
+      }
+    },
+    {
+      "code": "FR-973",
+      "name": "Guyane",
+      "name_en": "French Guiana",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "overseas single collectivity (region and department)",
+      "insee_code": "03",
+      "bbox": {
+        "west": -54.6024,
+        "south": 2.1111,
+        "east": -51.6191,
+        "north": 5.7487,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/03/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/03/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          -54.76,
+          1.96,
+          -51.46,
+          5.9
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "973"
+        ],
+        "communes": 22,
+        "population": 293996,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "guyane",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/guyane-latest.osm.pbf",
+            "osm_pbf_bytes": 14426214,
+            "free_gpkg_zip": "https://download.geofabrik.de/europe/france/guyane-latest-free.gpkg.zip",
+            "free_gpkg_zip_bytes": 33390133
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 62266,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m, D973, edition 2023-08-02, UTM 22 (RGFG95) / GUYA77 heights",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15 (local UTM projection)",
+        "crops": "RPG_4-0__GPKG_UTM22RGFG95_R03_2025-01-01",
+        "addresses": "Base Adresse Nationale, one CSV per département (973: 2493649 bytes)",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/03",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0: Overture files these rows under FR, with no rows under GP, MQ, GF, RE or YT (second check, measured)",
+        "notes": "The box covers parts of Suriname and Brazil (Natural Earth 1:110m test). Coverage: MNT LiDAR HD excludes Guyane; INPE 2023 has no Guyane file (its record says \"in progress\"); BD TOPAGE 2026 not found for Guyane: Sandre's 2026 folder lists files for FXX, GLP, MTQ, MYT and REU and none for Guyane (one listing, not a statement by the publisher); no OSO; CORINE Land Cover 2018, only for a 20 km strip along the coast and the lower reaches of the border rivers, as the ministry's CORINE page says (second check)."
+      }
+    },
+    {
+      "code": "FR-974",
+      "name": "La Réunion",
+      "name_en": "Réunion",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "overseas region and department",
+      "insee_code": "04",
+      "bbox": {
+        "west": 55.2165,
+        "south": -21.3896,
+        "east": 55.8367,
+        "north": -20.8718,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/04/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/04/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          55.06,
+          -21.54,
+          55.99,
+          -20.72
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "974"
+        ],
+        "communes": 24,
+        "population": 889679,
+        "population_source": "Insee, populations de référence 2023 (in force 1 January 2026), table \"Populations des régions\", https://www.insee.fr/fr/statistiques/8680653?sommaire=8681011",
+        "geofabrik_extracts": [
+          {
+            "name": "reunion",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/reunion-latest.osm.pbf",
+            "osm_pbf_bytes": 34582431,
+            "free_gpkg_zip": null,
+            "free_gpkg_zip_bytes": null
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 340794,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m, D974, edition 2023-09-05, UTM 40S (RGR92) / REUN89 heights",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15 (local UTM projection)",
+        "crops": "RPG_4-0__GPKG_RGR92UTM40S_R04_2025-01-01",
+        "addresses": "Base Adresse Nationale, one CSV per département (974: 13562959 bytes)",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/04",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0: Overture files these rows under FR, with no rows under GP, MQ, GF, RE or YT (second check, measured)",
+        "notes": "No other land within the padded box in the Natural Earth 1:110m outlines; small islands not checked. Geofabrik offers no free GeoPackage or shapefile for this region (\"not available for this region\"); tools/build_map.py reads the free GeoPackage. Coverage: MNT LiDAR HD planned; BD TOPAGE 2026 and INPE 2023 present; no OSO; CORINE Land Cover 2018 (second check)."
+      }
+    },
+    {
+      "code": "FR-976",
+      "name": "Mayotte",
+      "name_en": "Mayotte",
+      "country": "France",
+      "country_iso": "FR",
+      "admin_level": "overseas department (a region in INSEE and geo.api.gouv.fr)",
+      "insee_code": "06",
+      "bbox": {
+        "west": 45.0183,
+        "south": -13.0053,
+        "east": 45.3,
+        "north": -12.6366,
+        "source": {
+          "dataset": "Union of commune bounding boxes from the API Découpage administratif (geo.api.gouv.fr/regions/06/departements, then /departements/{code}/communes?fields=code,bbox)",
+          "publisher": "geo.api.gouv.fr (French State API)",
+          "licence": null,
+          "url": "https://geo.api.gouv.fr/regions/06/departements",
+          "verified": "2026-11-17; simplified outlines: for départements 14, 50 and 61 the north edge falls about 270 m short of IGN ADMIN EXPRESS COG 2026, the other three edges agree; the source and licence of the outlines are not stated on the API page read. Boxes computed from every vertex of IGN's WFS layer ADMINEXPRESS-COG.2026:region agree with this one to 0.0001°, and the padded box is identical (second check, measured); IGN's ADMIN EXPRESS page on cartes.gouv.fr names etalab-2.0 and fixes no credit sentence (second check)"
+        },
+        "padded_0_15": [
+          44.86,
+          -13.16,
+          45.45,
+          -12.48
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "state_sources": {
+        "departments": [
+          "976"
+        ],
+        "communes": 17,
+        "population": null,
+        "population_source": "not checked: Insee's 2023 reference tables exclude Mayotte; commune populations on geo.api.gouv.fr add up to 256,518, year not stated",
+        "geofabrik_extracts": [
+          {
+            "name": "mayotte",
+            "osm_pbf": "https://download.geofabrik.de/europe/france/mayotte-latest.osm.pbf",
+            "osm_pbf_bytes": 10977681,
+            "free_gpkg_zip": null,
+            "free_gpkg_zip_bytes": null
+          }
+        ],
+        "geofabrik_merge": false,
+        "ban_address_numbers": 52982,
+        "ban_source": "BAN commune summary https://plateforme.adresse.data.gouv.fr/api/communes-summary.csv, composed up to 2026-11-17",
+        "elevation": "BD ALTI 25 m, D976, edition 2013-12-19, UTM 38S (RGM04) / MAYO53 heights",
+        "buildings": "BD TOPO 3.5 batiment, edition 2026-09-15 (local UTM projection)",
+        "crops": "RPG_4-0__GPKG_RGM04UTM38S_R06_2025-01-01",
+        "addresses": "Base Adresse Nationale, one CSV per département (976: 2094474 bytes)",
+        "licence": "Licence-Ouverte-2.0",
+        "attribution": "Source and date of last update for each IGN, Insee and BAN product; \"© OpenStreetMap contributors\" (ODbL) for OSM",
+        "bulk": "Geofabrik extracts as listed; IGN products per département or region through https://data.geopf.fr/telechargement/resource/<product>",
+        "url": "https://geo.api.gouv.fr/regions/06",
+        "verified": "2026-11-17; IGN and BAN files seen in the download feeds and by HEAD only, not tried",
+        "overture_addresses_licence": "Licence-Ouverte-2.0: Overture files these rows under FR, with no rows under GP, MQ, GF, RE or YT (second check, measured)",
+        "notes": "INSEE's population de référence 2023 tables cover France excluding Mayotte. Overlap with the Comoros not checked (not in the Natural Earth 1:110m outlines). Geofabrik offers no free GeoPackage or shapefile for this region (\"not available for this region\"); tools/build_map.py reads the free GeoPackage. Coverage: MNT LiDAR HD planned; BD TOPAGE 2026 and INPE 2023 present; no OSO; CORINE Land Cover 2018 (second check)."
+      }
+    }
+  ]
+}

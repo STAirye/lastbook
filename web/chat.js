@@ -288,8 +288,30 @@ const Chat = (() => {
     const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|\W)\*(?!\s)(.+?)\*(?=\W|$)/g, '$1<em>$2</em>')
       .replace(/\[([SM]\d+)\]/g, (_, k) => cite(k));
     const lines = text.replace(/\r/g, '').split('\n');
-    let out = '', list = null, section = 'main';
+    let out = '', list = null, section = 'main', table = null, before = '';
     const close = () => { if (list) { out += `</${list}>`; list = null } };
+    // A table the model copied from a source. It counts as cited when a key is in it or in the line just before it, as the instructions ask.
+    // Cells split on bare pipes only: "\|" is a pipe inside a cell.
+    const cells = r => {
+      const s = r.replace(/^\|/, '').replace(/(?<!\\)\|$/, ''), c = [];
+      let cur = '';
+      for (let i = 0; i < s.length; i++) {
+        if (s[i] === '\\' && s[i + 1] === '|') { cur += '|'; i++ } else if (s[i] === '|') { c.push(cur.trim()); cur = '' } else cur += s[i];
+      }
+      c.push(cur.trim());
+      return c;
+    };
+    const SEP = /^\|?(\s*:?-{2,}:?\s*\|)*\s*:?-{2,}:?\s*\|?$/;
+    const flush = () => {
+      if (!table) return;
+      const head = table.length > 1 && SEP.test(table[1]) ? cells(table[0]) : null, rows = table.slice(head ? 2 : 0).filter(r => !SEP.test(r)).map(cells);
+      const cited = section !== 'main' || m.running || /\[[SM]\d+\]/.test(table.join(' ') + ' ' + before);
+      const no = cited ? '' : ' title="Not linked to a source"', width = head ? head.length : (rows[0] || []).length;
+      // A row with more or fewer cells than the header would put numbers under the wrong heading, so show the lines as written.
+      if (rows.some(r => r.length !== width)) out += `<p class="ans-raw${cited ? '' : ' uncited'}"${no}>${table.map(inline).join('<br>')}</p>`;
+      else out += `<div class="ans-table${cited ? '' : ' uncited'}"${no}><table>${head ? `<thead><tr>${head.map(c => `<th>${inline(c)}</th>`).join('')}</tr></thead>` : ''}<tbody>${rows.map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+      table = null; before = '';  // a key before one table says nothing about the next
+    };
     const mark = raw => {  // wrap sentences that carry no citation (main sections only)
       if (section !== 'main' || m.running) return inline(raw);
       // fork: a sentence also starts at ¿, ¡ or a capital like É or Ñ
@@ -297,7 +319,10 @@ const Chat = (() => {
     };
     for (let ln of lines) {
       const t = ln.trim();
-      if (!t) { close(); continue }
+      if (/^\|.*\|$/.test(t)) { close(); (table = table || []).push(t); continue }
+      flush();
+      if (!t) { close(); before = ''; continue }
+      before = t;
       const head = /^#{1,4}\s+(.*)$/.exec(t) || /^\*\*([^*]+:)\*\*$/.exec(t) || /^\*\*([^*]+)\*\*:?$/.exec(t);
       const hText = head ? head[1] : '';
       // fork: an answer in Spanish may translate these headings (assistant.LANGUAGE_NOTE asks it not to); only as a heading
@@ -320,7 +345,7 @@ const Chat = (() => {
       }
       close(); out += `<p>${mark(t)}</p>`;
     }
-    close();
+    flush(); close();
     if (out.includes('<div class="sec-')) out += '</div>';
     return out;
   }

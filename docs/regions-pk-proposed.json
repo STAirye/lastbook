@@ -1,0 +1,578 @@
+{
+  "about": "Proposed region definitions for detailed maps of Pakistan: four provinces, the Islamabad Capital Territory, and Azad Jammu and Kashmir and Gilgit-Baltistan, with Islamabad and Rawalpindi as one group. A proposal for discussion (docs/REGIONS-PK.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "ISO 3166-2:PK codes: PK-BA, PK-GB, PK-IS, PK-JK, PK-KP, PK-PB, PK-SD.",
+    "why": "Hyphenated codes collide with no US code in STATE_CODES (engine/address_search.py). The suffix alone is not safe: SD (Sindh) is also South Dakota. tools/build_addresses.py uses state.upper()[:2], so PK-SD would become PK if passed directly; stripping the prefix first would instead produce the colliding SD. The full PK- code must be preserved and the [A-Z]{2} address-index name rule (engine/setup/manifest.py, engine/setup/install.py) updated before implementation. COD-AB p-codes PK1 to PK7 are kept beside them.",
+    "verified": "Read from the shapeISO field of geoBoundaries' province file and from Wikipedia's copy of the ISO list. ISO's own site asks visitors to accept its terms first and was not read.",
+    "iso_categories": {
+      "PK-BA": "province",
+      "PK-KP": "province",
+      "PK-PB": "province",
+      "PK-SD": "province",
+      "PK-IS": "federal capital territory",
+      "PK-JK": "Pakistan administered area",
+      "PK-GB": "Pakistan administered area"
+    },
+    "deleted": "PK-TA (Federally Administered Tribal Areas), deleted in 2019; the areas are now part of Khyber Pakhtunkhwa.",
+    "related": "PR #35 names its Islamabad city map pk-isl: a city box of OSM data, not a region."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "crops": "crops.sqlite (land cover, since no usable crop-type map was found)",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "roads": "base map (OSM today)",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite",
+    "floods": "new: flood context, not a current layer"
+  },
+  "licences": {
+    "ODbL-1.0": {
+      "name": "Open Data Commons Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\"; a database built from it is offered under the ODbL.",
+      "share_alike": true,
+      "verified": "as in REGIONS.md"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "verified": "as in REGIONS.md",
+      "share_alike": false
+    },
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Credit the publisher, link the licence, say if changed.",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "CDLA-Permissive-2.0": {
+      "name": "Community Data License Agreement Permissive 2.0",
+      "url": "https://cdla.dev/permissive-2-0/",
+      "attribution": "As Microsoft's README states; Overture's attribution page lists the same source under ODbL.",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "CC-BY-IGO": {
+      "name": "Creative Commons Attribution 3.0 IGO",
+      "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "Credit OCHA and its source, the World Food Programme's SDI.",
+      "share_alike": false,
+      "verified": "2026-11-17"
+    },
+    "Public-Domain": {
+      "name": "Public Domain (geoBoundaries metadata)",
+      "url": "https://creativecommons.org/share-your-work/public-domain/",
+      "conditions": "Used here only to compare boxes.",
+      "verified": "2026-11-17"
+    },
+    "CC-BY-SA-unversioned": {
+      "name": "\"CC BY-SA\" (HDX label, no version)",
+      "url": null,
+      "share_alike": true,
+      "conditions": "Share-alike; needs the maintainers' decision before it sits in a pack beside ODbL data.",
+      "verified": "2026-11-17"
+    },
+    "non-commercial": {
+      "name": "NDMA website terms: personal, non-commercial use only",
+      "url": "https://www.ndma.gov.pk/terms-and-conditions",
+      "conditions": "Reproduction not allowed. Not usable.",
+      "verified": "2026-11-17"
+    },
+    "all-rights-reserved": {
+      "name": "Copyright or \"All Rights Reserved\", no licence",
+      "url": null,
+      "conditions": "PBS, Survey of Pakistan, NSDI (nsdi.gov.pk), SUPARCO. Not usable.",
+      "verified": "2026-11-17"
+    },
+    "not-specified": {
+      "name": "No licence stated",
+      "url": null,
+      "conditions": "Treated as not yet usable. 1,443 of 1,505 datasets on opendata.com.pk; Pakistan Post's postcode list.",
+      "verified": "2026-11-17"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "Copernicus DEM GLO-30",
+        "publisher": "European Space Agency / Airbus Defence and Space",
+        "url": "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "as in REGIONS.md",
+        "role": "primary",
+        "notes": "30 m surface model. No open national elevation model was found."
+      }
+    ],
+    "water": [
+      {
+        "dataset": "OpenStreetMap, Pakistan extract",
+        "publisher": "Geofabrik / OSM contributors",
+        "url": "https://download.geofabrik.de/asia/pakistan.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "150 MB .osm.pbf, 360 MB GeoPackage; data up to 2026-11-16T21:22:36Z."
+      },
+      {
+        "dataset": "Global Dam Watch database (GDW) v1.0",
+        "publisher": "Global Dam Watch",
+        "url": "https://www.globaldamwatch.org/",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "dams",
+        "notes": "Published 25 July 2024; supersedes GRanD. Dams in Pakistan not counted."
+      },
+      {
+        "dataset": "WAPDA's dam lists",
+        "publisher": "Water and Power Development Authority",
+        "url": "https://www.wapda.gov.pk/",
+        "licence": null,
+        "verified": "not checked",
+        "role": "gap",
+        "notes": "The site reset every connection."
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "ESA WorldCover 2021 (10 m)",
+        "publisher": "ESA WorldCover consortium",
+        "url": "https://esa-worldcover.org/en/data-access",
+        "licence": "CC-BY-4.0",
+        "verified": "as in REGIONS.md",
+        "role": "primary",
+        "notes": "Land cover, not crop types."
+      },
+      {
+        "dataset": "ESA WorldCereal 2021 v100",
+        "publisher": "ESA WorldCereal consortium",
+        "url": "https://zenodo.org/records/7875105",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "partial",
+        "notes": "Winter cereals, maize, temporary crops and irrigation; no rice, cotton or sugarcane; global files of 3.8 to 25 GB only."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "Microsoft Global ML Building Footprints",
+        "publisher": "Microsoft",
+        "url": "https://github.com/microsoft/GlobalMLBuildingFootprints",
+        "licence": "CDLA-Permissive-2.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Index of 2026-08-13: 225 Pakistan rows, about 2.69 GB compressed. Gilgit-Baltistan tiles are filed under India (quadkey 123101232 and the Gilgit tile); 47 quadkeys are listed under both. A PK-GB build needs the India files, clipped. Azad Jammu and Kashmir not checked."
+      },
+      {
+        "dataset": "Overture buildings",
+        "publisher": "Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/guides/buildings/",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "alternative",
+        "notes": "From OSM, Esri, Microsoft and Google; Pakistan not named; ODbL version not stated."
+      },
+      {
+        "dataset": "Google Open Buildings v3",
+        "publisher": "Google",
+        "url": "https://sites.research.google/gr/open-buildings/",
+        "licence": "CC-BY-4.0",
+        "verified": "2026-11-17",
+        "role": "gap",
+        "notes": "Pakistan is not in the 110-country list; the page says conflict zones were left out."
+      }
+    ],
+    "places": [
+      {
+        "dataset": "HOT populated places export (hotosm_pak_populated_places)",
+        "publisher": "OSM contributors via HOT on HDX",
+        "url": "https://data.humdata.org/dataset/hotosm_pak_populated_places",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Updated 16 November 2026, refreshed every 30 days."
+      },
+      {
+        "dataset": "COD-AB Pakistan: 7 / 160 / 577 units",
+        "publisher": "OCHA, from World Food Programme SDI",
+        "url": "https://data.humdata.org/dataset/cod-ab-pak",
+        "licence": "CC-BY-IGO",
+        "verified": "2026-11-17",
+        "role": "boundaries",
+        "notes": "Created 2 September 2022, valid from 9 September 2022, reviewed 27 September 2024."
+      },
+      {
+        "dataset": "Settlements (NGA)",
+        "publisher": "OCHA Pakistan",
+        "url": "https://data.humdata.org/dataset/pakistan-settlement",
+        "licence": "CC-BY-IGO",
+        "verified": "2026-11-17",
+        "role": "old",
+        "notes": "Dated 2017."
+      },
+      {
+        "dataset": "Census 2023 rural locality tables",
+        "publisher": "Pakistan Bureau of Statistics",
+        "url": "https://www.pbs.gov.pk/",
+        "licence": "all-rights-reserved",
+        "verified": "2026-11-17",
+        "role": "not usable",
+        "notes": "No coordinates; no Azad Jammu and Kashmir or Gilgit-Baltistan."
+      }
+    ],
+    "roads": [
+      {
+        "dataset": "OpenStreetMap, Pakistan extract",
+        "publisher": "Geofabrik / OSM contributors",
+        "url": "https://download.geofabrik.de/asia/pakistan.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary"
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "none found",
+        "publisher": "",
+        "url": "https://docs.overturemaps.org/guides/addresses/",
+        "licence": null,
+        "verified": "2026-11-17",
+        "role": "gap",
+        "notes": "Overture's address theme covers 41 countries (release 2026-10-21.0) and not Pakistan. OSM has 104,601 objects with addr:housenumber (Geofabrik taginfo, data until 2026-11-16)."
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OpenStreetMap",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/asia/pakistan.html",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Geofabrik taginfo: hospital 2,560; clinic 936; pharmacy 891; fuel 3,806; police 797; fire_station 66; shelter 254."
+      },
+      {
+        "dataset": "healthsites.io Pakistan",
+        "publisher": "healthsites.io on HDX",
+        "url": "https://data.humdata.org/dataset/pakistan-healthsites",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "supplement",
+        "notes": "29 September 2026."
+      }
+    ],
+    "floods": [
+      {
+        "dataset": "UNOSAT flood extents, 2022 floods (18 datasets; e.g. FL20220808PAK)",
+        "publisher": "UNOSAT on HDX",
+        "url": "https://data.humdata.org/organization/unosat",
+        "licence": "CC-BY-SA-unversioned",
+        "verified": "2026-11-17",
+        "role": "context",
+        "notes": "Dated 10 August 2022 to 7 March 2023. FL20220808PAK: about 75,000 km2 flooded of about 793,000 km2 analysed, 1 to 29 August 2022."
+      }
+    ]
+  },
+  "addressing": {
+    "order": "Name / house number / street number / sector / LOCALITY–POSTCODE / PAKISTAN, left-aligned.",
+    "postal_code": {
+      "format": "Five digits: the first two the routeing district, the last three the post office",
+      "example_pattern": "00000",
+      "source": {
+        "dataset": "Addressing sheet for Pakistan (09/2004)",
+        "publisher": "Universal Postal Union",
+        "url": "https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/pakEn.pdf",
+        "licence": null,
+        "verified": "2026-11-17",
+        "role": "reference"
+      }
+    },
+    "post_offices": "Pakistan Post's list: 2,298 delivery and 848 non-delivery offices, by province, including Azad Kashmir and Gilgit Baltistan; no coordinates, no licence.",
+    "notes": "Planned cities use sectors and blocks (Islamabad F-7/2, G-9/4); elsewhere landmarks, mohalla or village, tehsil and district. Addresses are written in English and in Urdu (Nastaliq). address_search.py keeps only a-z, 0-9 and spaces, and treats a query as an address only when it starts with a digit."
+  },
+  "bbox_source": {
+    "dataset": "OCHA COD-AB Pakistan, pak_admin1.geojson (and pak_admin2.geojson for the group)",
+    "publisher": "OCHA, from World Food Programme SDI",
+    "url": "https://data.humdata.org/dataset/cod-ab-pak",
+    "licence": "CC-BY-IGO",
+    "verified": "2026-11-17",
+    "file_sha256": "dc56da20dc578b01617f219f13a37e3be3beea78018adc902a6dee9d08dee45c (the GeoJSON zip)",
+    "method": "Extent of every vertex of the unit polygon; margin is 0.15 degrees, rounded outward to 0.01.",
+    "compared_with": "geoBoundaries gbOpen PAK ADM1 (Public Domain; built 2023-12-12). Six units agree within 0.10 degrees; PK-JK differs by 0.63 degrees on its east edge."
+  },
+  "disputed": {
+    "areas": [
+      "Kashmir: Line of Control, and the line north of NJ9842 (Siachen Glacier)",
+      "Sir Creek",
+      "Durand Line"
+    ],
+    "sources": {
+      "cod_ab": "Azad Kashmir (PK1) and Gilgit Baltistan (PK3) are ordinary first-level units; Gilgit Baltistan reaches the Karakoram Pass.",
+      "geoboundaries": "Gilgit-Baltistan reaches the Karakoram Pass; Azad Kashmir reaches 75.49 E, 0.63 degrees beyond COD-AB.",
+      "iso_3166_2": "Pakistan administered area.",
+      "geofabrik": "pakistan.poly covers Azad Jammu and Kashmir and Gilgit-Baltistan and excludes Srinagar, Jammu and Leh; a coarse 200-point outline that stops at 77.22 E.",
+      "microsoft_buildings": "Gilgit-Baltistan tiles filed under India."
+    },
+    "decision": "REGIONS.md item 6; this proposal does not answer it."
+  },
+  "grouped": [
+    {
+      "code": "PK-ISR",
+      "name": "Islamabad and Rawalpindi",
+      "iso": false,
+      "members": [
+        "Islamabad (PK401, in Islamabad)",
+        "Rawalpindi (PK630, in Punjab)"
+      ],
+      "why": "The two cities form one urban area; a map of the capital territory alone stops at its boundary with Rawalpindi.",
+      "bbox": {
+        "west": 72.6322,
+        "south": 33.0644,
+        "east": 73.6317,
+        "north": 34.0183
+      },
+      "bbox_with_margin": {
+        "west": 72.48,
+        "south": 32.91,
+        "east": 73.79,
+        "north": 34.17
+      }
+    }
+  ],
+  "regions": [
+    {
+      "code": "PK-BA",
+      "name": "Balochistan",
+      "name_in_cod_ab": "Balochistan",
+      "cod_ab_pcode": "PK2",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "province",
+      "vertices_in_cod_ab": 3213,
+      "bbox": {
+        "west": 60.8786,
+        "south": 24.8907,
+        "east": 70.2948,
+        "north": 32.1006
+      },
+      "bbox_with_margin": {
+        "west": 60.72,
+        "south": 24.74,
+        "east": 70.45,
+        "north": 32.26
+      },
+      "bbox_geoboundaries": {
+        "west": 60.8769,
+        "south": 24.9106,
+        "east": 70.2537,
+        "north": 32.0094
+      },
+      "largest_edge_difference_degrees": 0.0912,
+      "layers": "country_layers"
+    },
+    {
+      "code": "PK-GB",
+      "name": "Gilgit-Baltistan",
+      "name_in_cod_ab": "Gilgit Baltistan",
+      "cod_ab_pcode": "PK3",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "Pakistan administered area",
+      "vertices_in_cod_ab": 1669,
+      "bbox": {
+        "west": 72.5128,
+        "south": 34.5158,
+        "east": 77.834,
+        "north": 37.0894
+      },
+      "bbox_with_margin": {
+        "west": 72.36,
+        "south": 34.36,
+        "east": 77.99,
+        "north": 37.24
+      },
+      "bbox_geoboundaries": {
+        "west": 72.5401,
+        "south": 34.5721,
+        "east": 77.8149,
+        "north": 37.0038
+      },
+      "largest_edge_difference_degrees": 0.0856,
+      "layers": "country_layers",
+      "disputed": "Part of the Kashmir dispute; see \"Disputed areas\" in REGIONS-PK.md.",
+      "caveat": "The east-most vertex (77.834, 35.5021) is about 2 km from the Karakoram Pass: the polygon follows the line Pakistan claims north of NJ9842, which takes in the Siachen Glacier."
+    },
+    {
+      "code": "PK-IS",
+      "name": "Islamabad Capital Territory",
+      "name_in_cod_ab": "Islamabad",
+      "cod_ab_pcode": "PK4",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "federal capital territory",
+      "vertices_in_cod_ab": 685,
+      "bbox": {
+        "west": 72.8139,
+        "south": 33.4897,
+        "east": 73.3894,
+        "north": 33.8119
+      },
+      "bbox_with_margin": {
+        "west": 72.66,
+        "south": 33.33,
+        "east": 73.54,
+        "north": 33.97
+      },
+      "bbox_geoboundaries": {
+        "west": 72.7817,
+        "south": 33.4911,
+        "east": 73.2952,
+        "north": 33.811
+      },
+      "largest_edge_difference_degrees": 0.0942,
+      "layers": "country_layers",
+      "grouped_with": "PK-ISR"
+    },
+    {
+      "code": "PK-JK",
+      "name": "Azad Jammu and Kashmir",
+      "name_in_cod_ab": "Azad Kashmir",
+      "cod_ab_pcode": "PK1",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "Pakistan administered area",
+      "vertices_in_cod_ab": 1110,
+      "bbox": {
+        "west": 73.398,
+        "south": 32.7692,
+        "east": 74.8649,
+        "north": 35.1347
+      },
+      "bbox_with_margin": {
+        "west": 73.24,
+        "south": 32.61,
+        "east": 75.02,
+        "north": 35.29
+      },
+      "bbox_geoboundaries": {
+        "west": 73.3905,
+        "south": 32.7977,
+        "east": 75.4947,
+        "north": 35.0882
+      },
+      "largest_edge_difference_degrees": 0.6298,
+      "layers": "country_layers",
+      "disputed": "Part of the Kashmir dispute; see \"Disputed areas\" in REGIONS-PK.md.",
+      "caveat": "geoBoundaries reaches 75.4947 E; COD-AB stops at 74.8649 E. Neither was compared with the Line of Control."
+    },
+    {
+      "code": "PK-KP",
+      "name": "Khyber Pakhtunkhwa",
+      "name_in_cod_ab": "Khyber Pakhtunkhwa",
+      "cod_ab_pcode": "PK5",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "province",
+      "vertices_in_cod_ab": 4705,
+      "bbox": {
+        "west": 69.2388,
+        "south": 31.1655,
+        "east": 74.1274,
+        "north": 36.9076
+      },
+      "bbox_with_margin": {
+        "west": 69.08,
+        "south": 31.01,
+        "east": 74.28,
+        "north": 37.06
+      },
+      "bbox_geoboundaries": {
+        "west": 69.2468,
+        "south": 31.0704,
+        "east": 74.1151,
+        "north": 36.8575
+      },
+      "largest_edge_difference_degrees": 0.0951,
+      "layers": "country_layers"
+    },
+    {
+      "code": "PK-PB",
+      "name": "Punjab",
+      "name_in_cod_ab": "Punjab",
+      "cod_ab_pcode": "PK6",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "province",
+      "vertices_in_cod_ab": 4981,
+      "bbox": {
+        "west": 69.3213,
+        "south": 27.7051,
+        "east": 75.3819,
+        "north": 34.0183
+      },
+      "bbox_with_margin": {
+        "west": 69.17,
+        "south": 27.55,
+        "east": 75.54,
+        "north": 34.17
+      },
+      "bbox_geoboundaries": {
+        "west": 69.3405,
+        "south": 27.709,
+        "east": 75.3961,
+        "north": 34.0622
+      },
+      "largest_edge_difference_degrees": 0.0439,
+      "layers": "country_layers"
+    },
+    {
+      "code": "PK-SD",
+      "name": "Sindh",
+      "name_in_cod_ab": "Sindh",
+      "cod_ab_pcode": "PK7",
+      "country": "Pakistan",
+      "country_iso": "PK",
+      "iso_category": "province",
+      "vertices_in_cod_ab": 3234,
+      "bbox": {
+        "west": 66.5961,
+        "south": 23.6947,
+        "east": 71.1244,
+        "north": 28.485
+      },
+      "bbox_with_margin": {
+        "west": 66.44,
+        "south": 23.54,
+        "east": 71.28,
+        "north": 28.64
+      },
+      "bbox_geoboundaries": {
+        "west": 66.6719,
+        "south": 23.7313,
+        "east": 71.108,
+        "north": 28.4706
+      },
+      "largest_edge_difference_degrees": 0.0758,
+      "layers": "country_layers"
+    }
+  ],
+  "country": {
+    "code": "PK",
+    "name": "Pakistan",
+    "bbox": {
+      "west": 60.8786,
+      "south": 23.6947,
+      "east": 77.834,
+      "north": 37.0894
+    },
+    "bbox_with_margin": {
+      "west": 60.72,
+      "south": 23.54,
+      "east": 77.99,
+      "north": 37.24
+    }
+  }
+}

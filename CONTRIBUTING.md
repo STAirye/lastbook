@@ -7,7 +7,9 @@ stays correct, and never sends anything anywhere.
 
 1. Clone the repository and make a virtual environment with Python 3.11 or later.
 2. Install the requirements for your platform: `packaging/requirements_macos.txt` (Mac) or
-   `packaging/requirements_app.txt` (Windows).
+   `packaging/requirements_app.txt` (Windows). On Linux, use `packaging/linux/requirements_linux.txt` in a virtual
+   environment made with `--system-site-packages`, and start the app with `packaging/linux/run_source_linux.sh` so videos
+   play. The README's "Run from source" section lists the packages it needs.
 3. Get a data folder: run `python app/main.py` and let setup download the Small pack, or unzip a pack from lastbook.org.
    Point the app at it with `--data` or `LASTBOOK_DATA`.
 
@@ -16,10 +18,10 @@ The README explains the layout and how to build the apps.
 ## Test
 
 ```bash
-python3 -B -m unittest app.tests.test_bridge app.tests.test_setup app.tests.test_data_folder app.tests.test_what_ships app.tests.test_update app.tests.test_address_search app.tests.test_topic_search app.tests.test_chat_steps app.tests.test_validate_topics app.tests.test_libq app.tests.test_shell_macos
+python3 -B -m unittest app.tests.test_readable app.tests.test_bridge app.tests.test_setup app.tests.test_data_folder app.tests.test_what_ships app.tests.test_update app.tests.test_address_search app.tests.test_topic_search app.tests.test_chat_steps app.tests.test_validate_topics app.tests.test_libq app.tests.test_shell_macos app.tests.test_run_source_linux
 ```
 
-Run these before you open a pull request (`test_topic_search` needs Node and is skipped without it; `test_shell_macos` needs a Mac with PyObjC and is skipped elsewhere). If you change the packaging, also run the build for your platform: it ends
+Run these before you open a pull request (`test_topic_search` needs Node and is skipped without it; `test_shell_macos` needs a Mac with PyObjC and is skipped elsewhere; `test_run_source_linux` needs bash and is skipped on Windows). If you change the packaging, also run the build for your platform: it ends
 with a package scan, and that scan must pass. If you change a guide in `content/`, run `tools/validate_topics.py`
 against a library, so every id, page and encyclopedia path it cites still exists:
 

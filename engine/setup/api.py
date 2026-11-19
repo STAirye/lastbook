@@ -79,6 +79,7 @@ class _Item:
 
     def progress(self, done, total, state=None):
         d = self.d
+        d.pop('retry_at', None)
         if state and d['state'] != state:
             d['state'] = state
             self.t, self.at, self.rate = time.time(), done, 0.0
@@ -90,6 +91,12 @@ class _Item:
             self.t, self.at = now, done
             d['rate_bps'] = int(self.rate)
             d['eta_s'] = round((total - done) / self.rate) if self.rate > 0 else None
+
+    def waiting(self, seconds):
+        """The server is busy: nothing arrives for `seconds`, so there is no rate, and the time of the next try is kept."""
+        d = self.d
+        d['retry_at'], d['rate_bps'], d['eta_s'] = time.time() + seconds, 0, None
+        self.t, self.at, self.rate = time.time(), d.get('bytes_done', 0), 0.0
 
 
 class Setup:
@@ -147,6 +154,7 @@ class Setup:
                         it['paused_from'] = was       # what it was doing when this program stopped; dropped on resume
                     it['bytes_done'], it['bytes_total'] = self._done_after_restart(job['plan'], it, was)
                 it['rate_bps'], it['eta_s'] = 0, None
+                it.pop('retry_at', None)
         return job
 
     def _checked_job(self, job):
@@ -445,7 +453,13 @@ class Setup:
         with self.lock:
             if not self.job:
                 return None
-            return {k: v for k, v in json.loads(json.dumps(self.job)).items() if k != 'plan'}
+            job = {k: v for k, v in json.loads(json.dumps(self.job)).items() if k != 'plan'}
+        now = time.time()
+        for it in job['items']:      # retry_at becomes seconds from now, shown only while that wait is still ahead
+            at = it.pop('retry_at', None)
+            if at and it['state'] == 'downloading' and at > now:
+                it['retry_in_s'] = round(at - now)
+        return job
 
     # -------------------------------------------------------------------------------------------------- the actions --
     def _parent_for(self, folder):
@@ -586,16 +600,29 @@ class Setup:
             model = self.manifest.model() if (ai or cur['model']) and cur['model'] != 'custom' else None   # fork: never fetch the published model over the person's own
             parent, target = self.current.parent, self.current
             work = _work_for(target)
-            srcs = {f['name']: f['path'] for f in self.found() if f.get('size_ok') and f['kind'] in ('pack', 'model')}
+            srcs = {f['name']: f['path'] for f in self.found() if f.get('size_ok') and f['kind'] in ('pack', 'model', 'map')}
             items = [{'id': pack['id'], 'kind': 'pack', 'title': pack['title'], 'state': 'waiting', 'bytes_done': 0,
                       'bytes_total': pack['installed_bytes'], 'rate_bps': 0, 'eta_s': None, 'error': None}]
             if model:
                 items.append({'id': model['id'], 'kind': 'model', 'title': model['title'], 'state': 'waiting', 'bytes_done': 0,
                               'bytes_total': model['size'], 'rate_bps': 0, 'eta_s': None, 'error': None})
-            names = [f['name'] for f in pack['files']] + ([model['file']] if model else [])
+            mp = None
+            if _separate_map(target):
+                try:                 # a state map's files come from its own download, not the pack's: the pack check skips them
+                    install.check_map(target)
+                except install.Refused as e:
+                    print('setup: repair:', e.message, flush=True)
+                    mp = self.manifest.map(cur['map'])
+                    if not mp or not mp['available']:
+                        return {'error': f'The {cur["map"]} map in this library is damaged, and this version does not offer it to download again. '
+                                         'Choose a map again.', 'code': 'unavailable'}
+                    if mp:
+                        items.insert(1, {'id': mp['id'], 'kind': 'map', 'title': mp['title'], 'state': 'waiting', 'bytes_done': 0,
+                                         'bytes_total': mp['download_bytes'], 'rate_bps': 0, 'eta_s': None, 'error': None})
+            names = [f['name'] for f in pack['files']] + ([model['file']] if model else []) + ([f['name'] for f in mp['files']] if mp else [])
             self.job = {'id': uuid.uuid4().hex[:12], 'state': 'waiting', 'items': items, 'error': None, 'started': _now(), 'folder': str(target),
                         'repair': True,
-                        'plan': {'pack': pack, 'model': model, 'parent': str(parent), 'target': str(target), 'work': str(work),
+                        'plan': {'pack': pack, 'model': model, 'map': mp, 'parent': str(parent), 'target': str(target), 'work': str(work),
                                  'sources': {k: v for k, v in srcs.items() if k in names}, 'explicit': False, 'retried': {},
                                  'switch': True, 'repair': True}}
             s = self._settings()
@@ -613,12 +640,8 @@ class Setup:
             rows = [(r[0], int(r[1]), r[2]) for r in rows]
         except (OSError, ValueError, IndexError):
             return ['pack-manifest.tsv']
-        if install.map_set(lib):      # a state map replaced the pack's own: its files are checked against map-set.json instead
+        if _separate_map(lib):        # a state map replaced the pack's own: _start_repair checks it against map-set.json instead
             rows = [r for r in rows if not install.map_member(r[0])]
-            try:
-                install.check_map(lib)
-            except install.Refused as e:
-                print('setup: repair:', e.message, flush=True)
         total = sum(r[1] for r in rows) or 1
         tracker, done, bad = _Item(it), 0, []
         self._set(it, 'verifying', bytes_done=0, bytes_total=total)
@@ -1007,7 +1030,7 @@ class Setup:
             self._set(it, 'downloading')
             d = download.Download(f['url'], dest, f['size'], f['sha256'], control,
                                   lambda done, total, phase: tracker.progress(offset + done, it['bytes_total'], phase),
-                                  allowed=self.allowed, context=self.context)
+                                  allowed=self.allowed, context=self.context, waiting=tracker.waiting)
             try:
                 return d.run(), True
             except download.BadChecksum:
@@ -1033,6 +1056,7 @@ class Setup:
             with self.lock:
                 it['bytes_total'], it['bytes_done'] = pack['download_bytes'], 0
         staged = work / 'unpack'
+        _fresh_unpack(staged, {'pack': pack['id'], 'revision': pack.get('revision'), 'files': [f['sha256'] for f in pack['files']]})
         got, offset = [], 0
         for f in pack['files']:
             path, ours = self._get_file(it, f, plan, work, control, offset)
@@ -1052,8 +1076,8 @@ class Setup:
             if metadata.get('content_revision') != pack['revision']:
                 raise install.Refused('unpack', 'The library content version does not match this download.')
         current = self.current_info() or {}
-        if (not plan.get('repair') and not plan.get('map') and Path(plan['target']) == self.current and current.get('pack') == pack['id']
-                and current.get('map') not in (None, 'base')):
+        if (not plan.get('map') and Path(plan['target']) == self.current and current.get('pack') == pack['id']
+                and _separate_map(self.current)):          # kept only when Repair found it whole, or it would have its own item
             install.copy_map(self.current, lib)
         install._write_json(lib / 'setup-pack.json', {'pack': pack['id'], 'installed': _now(), 'files': [f['name'] for f in pack['files']]})
         for path, ours in got:
@@ -1251,6 +1275,27 @@ def _margin(total):
     return max(RECOMMEND_MARGIN, min(int((total or 0) * 0.05), RECOMMEND_MARGIN_MAX))
 
 
+def _fresh_unpack(staged, stamp):
+    """The unpack folder keeps whole files from an earlier run, so a resumed job does not unpack them again. That is only right
+    for the same pack: files left by another pack (or another revision) would be taken as whole when their size matches. So the
+    folder carries a note of what it was unpacked from, and is emptied when that is not what comes next. The new note is written
+    only once the folder is empty: a file that cannot be removed (still open on Windows) stops setup instead of being reused."""
+    note = Path(staged) / 'unpacked-from.json'
+    try:
+        same = json.loads(note.read_text(encoding='utf-8')) == stamp
+    except (OSError, ValueError):
+        same = False
+    if not same and Path(staged).exists():
+        try:
+            note.unlink(missing_ok=True)
+            shutil.rmtree(staged)
+        except OSError as e:
+            raise install.Refused('unpack', f'Lastbook could not clear the files of the previous download ({type(e).__name__}). '
+                                            'Close anything that may be using them, then try again.')
+    Path(staged).mkdir(parents=True, exist_ok=True)
+    install._write_json(note, stamp)
+
+
 def _tree_size(p):
     n = 0
     for root, _, files in os.walk(p):
@@ -1260,6 +1305,24 @@ def _tree_size(p):
             except OSError:
                 pass
     return n
+
+
+def _separate_map(lib):
+    """Does the library hold a map set installed apart from its pack (a state map), rather than the pack's own (All's whole US)?
+    The pack's own set is named by pack.json's `map`, and its map-set.json is listed in pack-manifest.tsv with its other files,
+    so they are checked and fetched with the pack. Ownership never depends on map-set.json's contents being whole: a damaged one
+    of the pack's own then shows up as a damaged pack file."""
+    lib = Path(lib)
+    d = install.map_set(lib)
+    if not d:
+        return False
+    try:
+        own = json.loads((lib / 'pack.json').read_text(encoding='utf-8')).get('map')
+        listed = any(line.split('\t', 1)[0] == 'map-set.json'
+                     for line in (lib / 'pack-manifest.tsv').read_text(encoding='utf-8').splitlines()[1:])
+    except (OSError, ValueError, AttributeError):
+        return True
+    return not (listed and d.get('name') == own)
 
 
 # ------------------------------------------------------------------------------------------------ startup and the app --

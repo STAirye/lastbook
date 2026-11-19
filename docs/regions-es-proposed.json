@@ -1,0 +1,1104 @@
+{
+  "about": "Proposed region definitions for detailed maps of Spain: 17 autonomous communities and 2 autonomous cities, one region each. See docs/REGIONS-ES.md.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "ISO 3166-2:ES community codes, ES-AN to ES-ML.",
+    "why": "Six of the 19 two-letter parts are US codes in STATE_CODES (engine/address_search.py): AR, CT, GA, MD, NC, RI. A bare ES is not a US code.",
+    "verified": "The ISO 3166-2 codes were not checked against the ISO site in this change."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "dams": "water.sqlite (nid part today)",
+    "crops": "crops.sqlite",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite"
+  },
+  "licences": {
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "IGN/CNIG: «<product> <date> CC-BY 4.0 <producers>», e.g. \"BTN25 2014-2015 CC-BY 4.0 ign.es\"; derived works add «Obra derivada de …»; shown legibly at the foot of the map (Orden FOM/2807/2015, licence PDF https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf). Others: credit the publisher.",
+      "share_alike": false,
+      "verified": "IGN licence PDF and data policy page opened 2026-11-17; licence text itself not reopened"
+    },
+    "CC-BY-3.0-ES": {
+      "name": "Creative Commons Attribution 3.0 Spain",
+      "url": "https://creativecommons.org/licenses/by/3.0/es/",
+      "attribution": "\"Bizkaiko Foru Aldundia - Diputación Foral de Bizkaia\", with a link and the date of last update",
+      "share_alike": false,
+      "verified": "Bizkaia INSPIRE page opened 2026-11-17; licence text not reopened"
+    },
+    "CC-BY-SA": {
+      "name": "Creative Commons Attribution-ShareAlike (version as stated by Gipuzkoa)",
+      "url": "https://b5m.gipuzkoa.eus/inspire/download/gfa_atom_feed_en.xml",
+      "attribution": "\"© Gipuzkoa Provincial Council\"",
+      "share_alike": true,
+      "verified": "Gipuzkoa ATOM feed opened 2026-11-17; licence version not confirmed"
+    },
+    "MITECO-reuse": {
+      "name": "MITECO free reuse with source credit (no named licence)",
+      "url": "https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua/red-hidrografica.html",
+      "attribution": "\"Fuente: Ministerio para la Transición Ecológica y el Reto Demográfico\"",
+      "share_alike": false,
+      "verified": "download page opened 2026-11-17; the dam and reservoir inventories' own licence not read"
+    },
+    "ODbL-1.0": {
+      "name": "Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\"",
+      "share_alike": true,
+      "verified": "as for the US map"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "url": "see docs/regions-proposed.json",
+      "attribution": "see docs/regions-proposed.json",
+      "share_alike": false,
+      "verified": "as in docs/regions-proposed.json"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "MDT25 (25 m, PNOA-LiDAR ground class, 1st and 2nd coverage, COG)",
+        "publisher": "IGN / CNIG",
+        "url": "https://centrodedescargas.cnig.es/CentroDescargas/modelos-digitales-elevaciones",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-17",
+        "role": "primary",
+        "notes": "Bare-earth national model close to the 30 m the app uses today. Exact attribution label (scne.es/productos.html), coverage of the Canaries, Ceuta and Melilla, and registration not confirmed."
+      },
+      {
+        "dataset": "MDT05 / MDT02 (5 m / 2 m)",
+        "publisher": "IGN / CNIG",
+        "url": "https://centrodedescargas.cnig.es/CentroDescargas/modelos-digitales-elevaciones",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-17",
+        "role": "detail"
+      },
+      {
+        "dataset": "Copernicus DEM GLO-30",
+        "publisher": "ESA / Airbus",
+        "url": "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "opened 2026-11-17",
+        "role": "alternative",
+        "notes": "Surface model: follows canopy and roofs."
+      }
+    ],
+    "water": [
+      {
+        "dataset": "Ríos completos clasificados según Pfafstetter modificado, 1:25,000 (SHP, 436 MB, 2018)",
+        "publisher": "MITECO",
+        "url": "https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua/red-hidrografica.html",
+        "licence": "MITECO-reuse",
+        "verified": "opened 2026-11-17",
+        "role": "primary"
+      },
+      {
+        "dataset": "Inventario de embalses (reservoirs, SHP)",
+        "publisher": "MITECO",
+        "url": "https://www.miteco.gob.es/es/agua/servicios/acceso-rapido-datos-agua.html",
+        "licence": "MITECO-reuse",
+        "verified": "page opened 2026-11-17; file not downloaded",
+        "role": "reservoirs",
+        "notes": "No licence text on the page."
+      },
+      {
+        "dataset": "Hidrografía de España (rivers, still water, dams; WFS and SHP)",
+        "publisher": "IGN",
+        "url": "https://www.idee.es/csw-codsi-idee/srv/api/records/spaignHIDROGRAFIA_IGR",
+        "licence": "CC-BY-4.0",
+        "verified": "search only (record timed out)",
+        "role": "alternative"
+      },
+      {
+        "dataset": "OSM waterways and water areas",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/europe/spain.html",
+        "licence": "ODbL-1.0",
+        "verified": "as for the US map",
+        "role": "fallback"
+      }
+    ],
+    "dams": [
+      {
+        "dataset": "Inventario de Presas y Embalses (SNCZI), SHP, 348 KB",
+        "publisher": "MITECO",
+        "url": "https://www.miteco.gob.es/content/dam/miteco/es/agua/servicios/egis_presa_geoetrs89_tcm30-175857.zip",
+        "licence": "MITECO-reuse",
+        "verified": "file downloaded and read 2026-11-17; licence not read",
+        "role": "primary",
+        "notes": "3,208 records with coordinates, owner, use, height and capacity. None in the Balearic Islands; 9 with no community."
+      },
+      {
+        "dataset": "OSM waterway=dam",
+        "publisher": "OSM contributors",
+        "url": "https://wiki.openstreetmap.org/wiki/Tag:waterway%3Ddam",
+        "licence": "ODbL-1.0",
+        "verified": "not checked",
+        "role": "fallback"
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "SIGPAC land-use parcels (recintos)",
+        "publisher": "FEGA",
+        "url": "https://www.fega.gob.es/orig/",
+        "licence": "CC-BY-4.0",
+        "verified": "ATOM page opened 2026-11-17; use codes and per-municipality rule search only",
+        "role": "primary",
+        "notes": "Keep VI (vineyard), FY (fruit trees), FS (nuts), OV (olives), CI (citrus) and mixed codes such as VO, OF, CF. Olives, citrus and nuts have no US class. Downloaded per municipality (about 8,000)."
+      },
+      {
+        "dataset": "CORINE Land Cover 2018, classes 221, 222, 223",
+        "publisher": "Copernicus Land Monitoring Service / EEA",
+        "url": "https://land.copernicus.eu/en/products/corine-land-cover/clc2018",
+        "licence": "CLMS data policy (not opened)",
+        "verified": "product page opened 2026-11-17",
+        "role": "fallback",
+        "notes": "25 ha minimum unit; citrus and nuts fall inside 222."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "Overture buildings (including IGN BTN 2024, OSM, Microsoft, Esri)",
+        "publisher": "Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/attribution/",
+        "licence": "ODbL-1.0 / CC-BY-4.0",
+        "verified": "opened 2026-11-17",
+        "role": "primary",
+        "notes": "\"Work derived from BTN 2024 ign.es\", CC BY 4.0."
+      },
+      {
+        "dataset": "Catastro INSPIRE buildings (BU), ATOM per municipality",
+        "publisher": "Dirección General del Catastro",
+        "url": "https://www.catastro.hacienda.gob.es/webinspire/index.html",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-17; BU licence search only",
+        "role": "official",
+        "notes": "All of Spain except the Basque Country and Navarre; Ceuta and Melilla not checked."
+      },
+      {
+        "dataset": "Bizkaia cadastre INSPIRE buildings and addresses",
+        "publisher": "Diputación Foral de Bizkaia",
+        "url": "https://www.bizkaia.eus/es/inspirebizkaia",
+        "licence": "CC-BY-3.0-ES",
+        "verified": "opened 2026-11-17",
+        "role": "foral"
+      },
+      {
+        "dataset": "Gipuzkoa INSPIRE buildings and addresses (b5m)",
+        "publisher": "Diputación Foral de Gipuzkoa",
+        "url": "https://b5m.gipuzkoa.eus/inspire/download/gfa_atom_feed_en.xml",
+        "licence": "CC-BY-SA",
+        "verified": "opened 2026-11-17",
+        "role": "foral"
+      },
+      {
+        "dataset": "Álava / Araba INSPIRE buildings",
+        "publisher": "Diputación Foral de Álava",
+        "url": "https://datos.gob.es/en/catalogo/e0dat0002-edificios-de-araba-alava-inspire",
+        "licence": "CC-BY-4.0",
+        "verified": "search only (HTTP 503)",
+        "role": "foral"
+      },
+      {
+        "dataset": "Navarre cadastre buildings and parcels",
+        "publisher": "Gobierno de Navarra (SITNA)",
+        "url": "https://catastro.navarra.es/descargas/",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-17",
+        "role": "foral"
+      }
+    ],
+    "places": [
+      {
+        "dataset": "Nomenclátor Geográfico Básico de España (NGBE)",
+        "publisher": "IGN",
+        "url": "https://www.idee.es/csw-codsi-idee/srv/api/records/spaignwfs_ngbe",
+        "licence": "CC-BY-4.0",
+        "verified": "metadata and API opened 2026-11-17",
+        "role": "primary",
+        "notes": "Names in the original language; a bilingual-name field is described in a 2015 IGN presentation (search only)."
+      },
+      {
+        "dataset": "INE municipality register (codes and names)",
+        "publisher": "INE",
+        "url": "https://www.ine.es/daco/daco42/codmun/codmun00i.htm",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-17",
+        "role": "municipalities",
+        "notes": "Footer names CC BY-SA 4.0 but links CC BY 4.0; to confirm with INE."
+      },
+      {
+        "dataset": "GeoNames postal codes ES.zip",
+        "publisher": "GeoNames",
+        "url": "https://download.geonames.org/export/zip/readme.txt",
+        "licence": "CC-BY-4.0",
+        "verified": "readme opened 2026-11-17",
+        "role": "postcode points",
+        "notes": "Estimated coordinates; not postcode areas."
+      },
+      {
+        "dataset": "OSM place=*",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/europe/spain.html",
+        "licence": "ODbL-1.0",
+        "verified": "as for the US map",
+        "role": "named places"
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "Overture addresses",
+        "publisher": "Overture Maps Foundation, from scne.es through OpenAddresses",
+        "url": "https://docs.overturemaps.org/attribution/",
+        "licence": "CC-BY-4.0",
+        "verified": "opened and rows counted 2026-11-17",
+        "role": "primary",
+        "notes": "Release 2026-10-21.0: 15,627,615 rows; 15,627,066 with a five-digit postcode whose first two digits (01-52) are the province; address_levels holds only the municipality; postal_city empty; 44,667 without number and 308,341 with S-N."
+      },
+      {
+        "dataset": "Catastro INSPIRE addresses (AD), ATOM per municipality",
+        "publisher": "Dirección General del Catastro",
+        "url": "https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/ES.SDGC.AD.atom.xml",
+        "licence": "CC-BY-4.0",
+        "verified": "metadata and feed opened 2026-11-17",
+        "role": "gap fill",
+        "notes": "Not the Basque Country or Navarre."
+      },
+      {
+        "dataset": "Navarre INSPIRE addresses (WFS)",
+        "publisher": "Gobierno de Navarra (SITNA)",
+        "url": "https://inspire-geoportal.ec.europa.eu/srv/api/records/engSITNAINSPIRE_ES_SITNA_AD",
+        "licence": "CC-BY-4.0",
+        "verified": "search only",
+        "role": "gap fill"
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OSM help points",
+        "publisher": "OSM contributors",
+        "url": "https://taginfo.geofabrik.de/europe:spain/",
+        "licence": "ODbL-1.0",
+        "verified": "taginfo opened 2026-11-17",
+        "role": "primary",
+        "counts_as_of": "2026-11-16T21:20:11Z",
+        "counts": {
+          "amenity=pharmacy": 17746,
+          "amenity=fire_station": 921,
+          "amenity=police": 3767,
+          "amenity=hospital": 989,
+          "amenity=clinic": 6467,
+          "amenity=drinking_water": 44411,
+          "man_made=water_tap": 7435,
+          "man_made=water_well": 5550,
+          "natural=spring": 15337,
+          "emergency=water_tank": 2011,
+          "emergency=drinking_water": 0,
+          "emergency=defibrillator": 5435,
+          "tourism=wilderness_hut": 854,
+          "tourism=alpine_hut": 435,
+          "amenity=shelter": 6833,
+          "amenity=fountain": 12144
+        }
+      },
+      {
+        "dataset": "Registre de desfibril·ladors instal·lats a Catalunya fora de l'àmbit sanitari",
+        "publisher": "Generalitat de Catalunya",
+        "url": "https://analisi.transparenciacatalunya.cat/resource/wpud-ukyg.json",
+        "licence": "see its Terms of Use (not read)",
+        "verified": "API opened 2026-11-17",
+        "role": "regional",
+        "notes": "12,853 rows with coordinates and opening hours."
+      }
+    ]
+  },
+  "not_open_nationwide": [
+    "Postcode areas: Correos owns them; BOE-A-2023-11522 (opened) forbids CNIG from offering the postcode layer for download or to third parties"
+  ],
+  "addressing": {
+    "postal_code": {
+      "format": "Five digits; the first two are the province (01-52), so leading zeros are common (01xxx Álava, 08xxx Barcelona).",
+      "example_pattern": "00000"
+    },
+    "order": "Street type, street name, number, then postcode and town (\"Calle de Alcalá, 45, 28014 Madrid\").",
+    "notes": "normalize() and norm() keep only a-z and 0-9 (\"Alcalá\" becomes \"alcal\", \"Peña\" \"pe a\"); is_address_query() needs a number first; _parts() reads a postcode only as the last word; tools/build_addresses.py keeps only country = 'US', reads the state from address_levels[1] (the municipality in Spain) and the city from postal_city (empty in Spain). Overture writes streets in capitals, mostly without accents, with leading articles moved to the end (\"CALLE CUEVAS LAS\"). Checked in this repository and on Overture rows on 2026-11-17."
+  },
+  "regions": [
+    {
+      "code": "ES-AN",
+      "name": "Andalucía",
+      "name_en": "Andalusia",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "01",
+      "provinces_ine": [
+        "04",
+        "11",
+        "14",
+        "18",
+        "21",
+        "23",
+        "29",
+        "41"
+      ],
+      "bbox": {
+        "west": -7.523,
+        "south": 35.9376,
+        "east": -1.6301,
+        "north": 38.7291,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34010000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -7.68,
+          35.78,
+          -1.48,
+          38.88
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 3169403,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 819
+      },
+      "notes": "Box reaches 35.78° N with the margin and contains Ceuta and a strip of the Moroccan coast; south edge is the island of Alborán."
+    },
+    {
+      "code": "ES-AR",
+      "name": "Aragón",
+      "name_en": "Aragon",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "02",
+      "provinces_ine": [
+        "22",
+        "44",
+        "50"
+      ],
+      "bbox": {
+        "west": -2.1737,
+        "south": 39.8468,
+        "east": 0.7713,
+        "north": 42.9244,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34020000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -2.33,
+          39.69,
+          0.93,
+          43.08
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 480557,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 239
+      },
+      "notes": "AR is also Arkansas in STATE_CODES."
+    },
+    {
+      "code": "ES-AS",
+      "name": "Principado de Asturias",
+      "name_en": "Asturias",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "03",
+      "provinces_ine": [
+        "33"
+      ],
+      "bbox": {
+        "west": -7.1825,
+        "south": 42.8825,
+        "east": -4.5105,
+        "north": 43.6665,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34030000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -7.34,
+          42.73,
+          -4.36,
+          43.82
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 336254,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 37
+      }
+    },
+    {
+      "code": "ES-IB",
+      "name": "Illes Balears",
+      "name_en": "Balearic Islands",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "04",
+      "provinces_ine": [
+        "07"
+      ],
+      "bbox": {
+        "west": 1.1572,
+        "south": 38.6404,
+        "east": 4.3278,
+        "north": 40.0946,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34040000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          1.0,
+          38.49,
+          4.48,
+          40.25
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 426587,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 0
+      },
+      "notes": "The MITECO dam inventory lists no dam here, although Mallorca has the Cúber and Gorg Blau reservoirs."
+    },
+    {
+      "code": "ES-CN",
+      "name": "Canarias",
+      "name_en": "Canary Islands",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "05",
+      "provinces_ine": [
+        "35",
+        "38"
+      ],
+      "bbox": {
+        "west": -18.1612,
+        "south": 27.6377,
+        "east": -13.335,
+        "north": 29.4165,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34050000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -18.32,
+          27.48,
+          -13.18,
+          29.57
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 528163,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 153
+      },
+      "notes": "About 1,000 km south-west of the peninsula; must be its own region."
+    },
+    {
+      "code": "ES-CB",
+      "name": "Cantabria",
+      "name_en": "Cantabria",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "06",
+      "provinces_ine": [
+        "39"
+      ],
+      "bbox": {
+        "west": -4.8518,
+        "south": 42.758,
+        "east": -3.1496,
+        "north": 43.5137,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34060000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -5.01,
+          42.6,
+          -2.99,
+          43.67
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 203877,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 23
+      }
+    },
+    {
+      "code": "ES-CL",
+      "name": "Castilla y León",
+      "name_en": "Castile and León",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "07",
+      "provinces_ine": [
+        "05",
+        "09",
+        "24",
+        "34",
+        "37",
+        "40",
+        "42",
+        "47",
+        "49"
+      ],
+      "bbox": {
+        "west": -7.0771,
+        "south": 40.0819,
+        "east": -1.7754,
+        "north": 43.2382,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34070000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -7.23,
+          39.93,
+          -1.62,
+          43.39
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 1801561,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 401
+      },
+      "notes": "Holds the Condado de Treviño, an enclave inside the Basque Country."
+    },
+    {
+      "code": "ES-CM",
+      "name": "Castilla-La Mancha",
+      "name_en": "Castilla-La Mancha",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "08",
+      "provinces_ine": [
+        "02",
+        "13",
+        "16",
+        "19",
+        "45"
+      ],
+      "bbox": {
+        "west": -5.4062,
+        "south": 38.0218,
+        "east": -0.9158,
+        "north": 41.3276,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34080000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -5.56,
+          37.87,
+          -0.76,
+          41.48
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 1318826,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 277
+      }
+    },
+    {
+      "code": "ES-CT",
+      "name": "Cataluña / Catalunya",
+      "name_en": "Catalonia",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "09",
+      "provinces_ine": [
+        "08",
+        "17",
+        "25",
+        "43"
+      ],
+      "bbox": {
+        "west": 0.1591,
+        "south": 40.523,
+        "east": 3.3326,
+        "north": 42.8614,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34090000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          0.0,
+          40.37,
+          3.49,
+          43.02
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 2126882,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 177
+      },
+      "notes": "CT is also Connecticut in STATE_CODES. Holds Llívia, an enclave inside France."
+    },
+    {
+      "code": "ES-VC",
+      "name": "Comunitat Valenciana",
+      "name_en": "Valencian Community",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "10",
+      "provinces_ine": [
+        "03",
+        "12",
+        "46"
+      ],
+      "bbox": {
+        "west": -1.5288,
+        "south": 37.8438,
+        "east": 0.6903,
+        "north": 40.7886,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34100000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -1.68,
+          37.69,
+          0.85,
+          40.94
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 1531698,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 221
+      },
+      "notes": "Holds the Rincón de Ademuz, between Aragon and Castilla-La Mancha."
+    },
+    {
+      "code": "ES-EX",
+      "name": "Extremadura",
+      "name_en": "Extremadura",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "11",
+      "provinces_ine": [
+        "06",
+        "10"
+      ],
+      "bbox": {
+        "west": -7.5413,
+        "south": 37.941,
+        "east": -4.6476,
+        "north": 40.4867,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34110000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -7.7,
+          37.79,
+          -4.49,
+          40.64
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 623773,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 361
+      }
+    },
+    {
+      "code": "ES-GA",
+      "name": "Galicia",
+      "name_en": "Galicia",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "12",
+      "provinces_ine": [
+        "15",
+        "27",
+        "32",
+        "36"
+      ],
+      "bbox": {
+        "west": -9.3015,
+        "south": 41.8072,
+        "east": -6.734,
+        "north": 43.7924,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34120000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -9.46,
+          41.65,
+          -6.58,
+          43.95
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 1104323,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 117
+      },
+      "notes": "GA is also Georgia in STATE_CODES."
+    },
+    {
+      "code": "ES-MD",
+      "name": "Comunidad de Madrid",
+      "name_en": "Community of Madrid",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "13",
+      "provinces_ine": [
+        "28"
+      ],
+      "bbox": {
+        "west": -4.5791,
+        "south": 39.8847,
+        "east": -3.053,
+        "north": 41.1658,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34130000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -4.73,
+          39.73,
+          -2.9,
+          41.32
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 933226,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 70
+      },
+      "notes": "MD is also Maryland in STATE_CODES."
+    },
+    {
+      "code": "ES-MC",
+      "name": "Región de Murcia",
+      "name_en": "Region of Murcia",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "14",
+      "provinces_ine": [
+        "30"
+      ],
+      "bbox": {
+        "west": -2.3442,
+        "south": 37.3738,
+        "east": -0.648,
+        "north": 38.7551,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34140000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -2.5,
+          37.22,
+          -0.49,
+          38.91
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 479396,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 85
+      }
+    },
+    {
+      "code": "ES-NC",
+      "name": "Comunidad Foral de Navarra",
+      "name_en": "Navarre",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "15",
+      "provinces_ine": [
+        "31"
+      ],
+      "bbox": {
+        "west": -2.5001,
+        "south": 41.9099,
+        "east": -0.7241,
+        "north": 43.3148,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34150000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -2.66,
+          41.75,
+          -0.57,
+          43.47
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 177648,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 62
+      },
+      "notes": "NC is also North Carolina in STATE_CODES. Own foral cadastre, outside the DG Catastro."
+    },
+    {
+      "code": "ES-PV",
+      "name": "País Vasco / Euskadi",
+      "name_en": "Basque Country",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "16",
+      "provinces_ine": [
+        "01",
+        "20",
+        "48"
+      ],
+      "bbox": {
+        "west": -3.4503,
+        "south": 42.4724,
+        "east": -1.7293,
+        "north": 43.4572,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34160000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -3.61,
+          42.32,
+          -1.57,
+          43.61
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 221689,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 101
+      },
+      "notes": "Three foral cadastres (Álava, Bizkaia, Gipuzkoa), outside the DG Catastro; Overture coverage looks thin (see REGIONS-ES.md)."
+    },
+    {
+      "code": "ES-RI",
+      "name": "La Rioja",
+      "name_en": "La Rioja",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous community",
+      "ine": "17",
+      "provinces_ine": [
+        "26"
+      ],
+      "bbox": {
+        "west": -3.1343,
+        "south": 41.919,
+        "east": -1.6787,
+        "north": 42.6443,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34170000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -3.29,
+          41.76,
+          -1.52,
+          42.8
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 144060,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 53
+      },
+      "notes": "RI is also Rhode Island in STATE_CODES."
+    },
+    {
+      "code": "ES-CE",
+      "name": "Ciudad Autónoma de Ceuta",
+      "name_en": "Ceuta",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous city",
+      "ine": "18",
+      "provinces_ine": [
+        "51"
+      ],
+      "bbox": {
+        "west": -5.3821,
+        "south": 35.8707,
+        "east": -5.2783,
+        "north": 35.918,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34180000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -5.54,
+          35.72,
+          -5.12,
+          36.07
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 7469,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 2
+      },
+      "notes": "Lies wholly inside the padded ES-AN box."
+    },
+    {
+      "code": "ES-ML",
+      "name": "Ciudad Autónoma de Melilla",
+      "name_en": "Melilla",
+      "country": "Spain",
+      "country_iso": "ES",
+      "admin_level": "autonomous city",
+      "ine": "19",
+      "provinces_ine": [
+        "52"
+      ],
+      "bbox": {
+        "west": -2.9703,
+        "south": 35.2655,
+        "east": -2.9232,
+        "north": 35.3203,
+        "source": {
+          "dataset": "IGN INSPIRE administrative units, au:AdministrativeUnit AU_ADMINISTRATIVEUNIT_34190000000 (2ndOrder), all polygons, ETRS89 (EPSG:4258)",
+          "publisher": "IGN",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.ign.es/wfs-inspire/unidades-administrativas",
+          "verified": "2026-11-17"
+        },
+        "padded_0_15": [
+          -3.13,
+          35.11,
+          -2.77,
+          35.48
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "overture_addresses": 11674,
+        "overture_addresses_note": "Overture 2026-10-21.0, country ES, split by the first two postcode digits (province); all rows fall inside this padded box",
+        "miteco_dams": 1
+      }
+    }
+  ]
+}

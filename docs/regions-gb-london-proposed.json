@@ -1,0 +1,179 @@
+{
+  "about": "Proposed region definition for a detailed map of Greater London, as one region. A proposal for discussion (docs/REGIONS-GB-LONDON.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "how_checked": "By an AI research agent reading publishers' pages through a fetch tool that returns an extract of each page. No person has yet opened each source again. Marks: opened, search only, not checked.",
+  "codes": {
+    "proposal": "GB-LON for Greater London.",
+    "not_iso": "GB-LON is not an ISO 3166-2 code. ISO 3166-2:GB codes each London borough on its own and has no code for Greater London; GB-LND is the City of London only.",
+    "official_id": "E12000007 (ONS region code for London)",
+    "why": "Neither GB nor LON is an entry in STATE_CODES (engine/address_search.py).",
+    "alternative": "Use the ONS code as the id, or wait for a scheme for the whole United Kingdom. The nine ONS regions of England (E12000001 to E12000009) are one consistent level.",
+    "verified": "ONS codes opened (feature service). ISO list read from Wikipedia's copy, search only; the ISO site was not checked."
+  },
+  "regions": [
+    {
+      "code": "GB-LON",
+      "ons_code": "E12000007",
+      "name": "London",
+      "also_called": "Greater London",
+      "country": "United Kingdom",
+      "level": "region of England (32 London boroughs and the City of London)",
+      "box": { "west": -0.5160, "south": 51.2788, "east": 0.3414, "north": 51.6976 },
+      "box_with_margin_0_15": { "west": -0.67, "south": 51.12, "east": 0.50, "north": 51.85 },
+      "box_source": {
+        "dataset": "Regions (December 2024) Boundaries EN BFC, feature RGN24NM = 'London'",
+        "publisher": "Office for National Statistics",
+        "url": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Regions_December_2024_Boundaries_EN_BFC/FeatureServer",
+        "query": "0/query?where=RGN24NM='London'&returnExtentOnly=true&outSR=4326&f=json",
+        "raw_extent": { "xmin": -0.5159981453109059, "ymin": 51.27881283015336, "xmax": 0.3413979690717652, "ymax": 51.697608730225355 },
+        "licence": "OGL-UK-3.0; contains both Ordnance Survey and ONS intellectual property rights",
+        "verified": "extent opened 2026-11-17; licence search only",
+        "caveat": "Source data is in EPSG:27700 and the service did the conversion. If it converted the box corners and not every vertex, an edge can be off by a few thousandths of a degree. Recompute from the vertices before a build."
+      }
+    }
+  ],
+  "layers": {
+    "base_map_and_poi": {
+      "dataset": "OSM extract for Greater London",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "url": "https://download.geofabrik.de/europe/united-kingdom/england/greater-london.html",
+      "licence": "ODbL-1.0",
+      "verified": "not checked (the site refuses automated reading); its taginfo instance was opened",
+      "data_up_to": "2026-11-16T21:18:16Z"
+    },
+    "terrain": {
+      "dataset": "LIDAR Composite Digital Terrain Model (DTM), 1 m, resampled; OS Terrain 50 as fallback",
+      "publisher": "Environment Agency; Ordnance Survey",
+      "urls": [
+        "https://environment.data.gov.uk/dataset/13787b9a-26a4-4775-8523-806d13af58fc",
+        "https://www.ordnancesurvey.co.uk/products/os-terrain-50"
+      ],
+      "licence": "OGL-UK-3.0",
+      "verified": "LIDAR: search only (platform page is a JavaScript app). OS Terrain 50: opened; 50 m post spacing, Great Britain, updated annually; the page says free to use and names no licence, OS's open data page gives OGL v3.",
+      "note": "Both are bare-earth models. Copernicus GLO-30 is a surface model and would follow roofs in a city."
+    },
+    "water": {
+      "dataset": "OS Open Rivers; OSM water areas, reservoirs and dams",
+      "licence": "OGL-UK-3.0; ODbL-1.0",
+      "verified": "OS product list opened; OS Open Rivers' own page not opened",
+      "gap": "No open inventory of dams or reservoirs was looked for."
+    },
+    "crops": {
+      "dataset": "Crop Map of England (CROME) 2024",
+      "publisher": "Rural Payments Agency",
+      "url": "https://www.data.gov.uk/dataset/0f52fe52-80f6-4aa7-bee2-afb9a320f631/crop-map-of-england-crome-2024",
+      "licence": "OGL-UK-3.0",
+      "attribution": "© Rural Payments Agency copyright and/or database right 2024. All rights reserved.",
+      "verified": "opened 2026-11-17",
+      "gap": "Class list (CROME_LUCODE_LOOKUP.XLSX) not read, so orchard, vineyard and berry classes are not confirmed.",
+      "london_note": "Allotments are the food-growing land inside London: 881 landuse=allotments in the OSM extract; OS Open Greenspace also lists allotments."
+    },
+    "buildings": {
+      "dataset": "OSM buildings or Overture buildings; OS OpenMap - Local as a cross-check",
+      "licence": "ODbL-1.0; OGL-UK-3.0",
+      "verified": "OS product list opened; coverage not measured; Microsoft footprints for the UK not checked"
+    },
+    "places": {
+      "datasets": [
+        {
+          "dataset": "OS Open Names",
+          "url": "https://os.uk/business-government/products/open-map-names",
+          "contents": "more than 870,000 roads, nearly 44,000 settlements, more than 1.6 million postcodes (Great Britain); quarterly",
+          "licence": "OGL-UK-3.0",
+          "verified": "opened 2026-11-17"
+        },
+        {
+          "dataset": "Code-Point Open",
+          "url": "https://www.ordnancesurvey.co.uk/products/code-point-open",
+          "contents": "about 1.7 million current postcode units (Great Britain); quarterly",
+          "licence": "OGL-UK-3.0",
+          "attribution_extra": "Royal Mail and National Statistics lines are also asked for (search only)",
+          "verified": "opened 2026-11-17; the page names no licence, OS's open data page gives OGL v3"
+        }
+      ],
+      "gap": "Rows inside London not counted."
+    },
+    "addresses": {
+      "dataset": null,
+      "gap": "No open source for full addresses in Great Britain. Overture's address theme (release 2026-10-21.0, 41 countries) has no GB rows. OS Open UPRN holds only UPRN, X_COORDINATE, Y_COORDINATE, LATITUDE, LONGITUDE.",
+      "urls": [
+        "https://docs.overturemaps.org/guides/addresses/",
+        "https://docs.os.uk/os-downloads/identifiers/os-open-uprn/os-open-uprn-overview"
+      ],
+      "verified": "2026-11-17",
+      "proposed_instead": "Postcode points (Code-Point Open) and street names (OS Open Names); exact houses only from OSM addr:* tags.",
+      "osm_counts": { "addr:housenumber": 627550, "addr:postcode": 668125, "data_until": "2026-11-16T21:18:16Z" }
+    }
+  },
+  "help_points": {
+    "source": "OSM",
+    "taginfo": "https://taginfo.geofabrik.de/europe:united-kingdom:england:greater-london",
+    "data_until": "2026-11-16T21:18:16Z",
+    "counts": {
+      "amenity=pharmacy": 1290,
+      "amenity=hospital": 200,
+      "amenity=police": 134,
+      "amenity=fire_station": 111,
+      "amenity=drinking_water": 560,
+      "landuse=allotments": 881
+    },
+    "caveat": "Read through a tool that reformats the service's answer. The extract's clipping line was not read, so counts may include places just outside the boundary.",
+    "official_lists": [
+      {
+        "dataset": "Fire stations dataset (England)",
+        "publisher": "Home Office",
+        "url": "https://assets.publishing.service.gov.uk/media/606438e0d3bf7f0c8ee28192/fire-stations-dataset-guidance-121120.pdf",
+        "licence": "OGL-UK-3.0",
+        "verified": "guidance note opened 2026-11-17",
+        "caveat": "1,398 stations as of July 2020; London rows not counted. A cross-check, not a source."
+      },
+      {
+        "dataset": "NHS website datasets (hospitals, GPs, pharmacies, dentists)",
+        "url": "https://www.nhs.uk/about-us/nhs-website-datasets",
+        "verified": "opened 2026-11-17",
+        "caveat": "Available on request by email or through a feed that needs a developer account. Not proposed."
+      },
+      {
+        "dataset": "Cool Space Data 2025",
+        "publisher": "Greater London Authority",
+        "url": "https://data.london.gov.uk/dataset/cool-space-data-2025-2z19p",
+        "licence": null,
+        "verified": "opened 2026-11-17",
+        "caveat": "No licence stated on the page. Not yet usable."
+      }
+    ],
+    "for_decision": {
+      "dataset": "Flood Warning Areas",
+      "publisher": "Environment Agency",
+      "url": "https://environment.data.gov.uk/dataset/87e5d78f-d465-11e4-9343-f0def148f590",
+      "licence": "OGL-UK-3.0",
+      "attribution": "© Environment Agency copyright and/or database right 2025. All rights reserved.",
+      "revised": "2025-07-09",
+      "verified": "opened 2026-11-17",
+      "note": "Fixed areas fit an offline map; live warnings do not. A new kind of layer, so a question, not a proposal."
+    }
+  },
+  "addresses_format": {
+    "lines": "house number and street; post town; postcode on its own line",
+    "postcode_shapes": ["AN NAA", "ANN NAA", "AAN NAA", "AANN NAA", "ANA NAA", "AANA NAA"],
+    "postcode_examples": ["M2 5BQ", "M34 3AB", "DN5 7XY", "DN16 9AA", "W1A 4WW", "EC1A 1HQ"],
+    "source": "https://docs.os.uk/os-downloads/products/areas-and-zones-portfolio/code-point/code-point-overview/product-details",
+    "verified": "opened 2026-11-17",
+    "breaks_today": [
+      "engine/address_search.py reads a postcode only as five digits",
+      "engine/address_search.py treats a query as an address only when it starts with a digit",
+      "tools/build_addresses.py keeps only country = 'US' and cuts postcodes to five characters",
+      "address search expects a US state name at the end of a query"
+    ]
+  },
+  "not_checked": [
+    "Text of the Open Government Licence v3.0 (the National Archives page returned an error)",
+    "Geofabrik's Greater London page and .poly file",
+    "CROME class list",
+    "OS Open Rivers, OS OpenMap - Local and OS Open Greenspace beyond their entries in OS's product list",
+    "Microsoft and Overture building coverage for London",
+    "Metropolitan Police and London Fire Brigade station lists",
+    "Counts of postcodes, roads and addresses inside London"
+  ]
+}

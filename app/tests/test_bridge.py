@@ -6,6 +6,7 @@
 Uses the made-up library in derived/app-build/testdata (no model) and a stub for chat. Never packaged."""
 import faulthandler, hashlib, json, os, shutil, socket, statistics, subprocess, sys, threading, time, types, unittest
 from pathlib import Path
+from unittest import mock
 
 sys.dont_write_bytecode = True
 faulthandler.dump_traceback_later(600, exit=True)
@@ -834,6 +835,66 @@ class ForkSearchWords(unittest.TestCase):
             self.assertIsNone(json.loads(call(b, 'GET', '/api/retrieve?q=boil%20water%20now').body)['confidence'])
         finally:
             os.environ.pop('LASTBOOK_CONF', None)
+
+
+class AssistantHTTPMessages(unittest.TestCase):
+    def round(self, messages, tools=None):
+        import io
+        sent, pieces = [], []
+        response = io.BytesIO(b'data: {"choices":[{"delta":{"content":"Answer [S1]"}}]}\n\ndata: [DONE]\n')
+
+        def send(req, timeout):
+            body = json.loads(req.data)
+            sent.append(body)
+            if any(m['role'] == 'system' for m in body['messages'][1:]):
+                raise ValueError('System message must be at the beginning.')
+            return response
+
+        with mock.patch.object(assistant, 'model_open', side_effect=send):
+            result = assistant._http_round(messages, tools, lambda: False, pieces.append, lambda state: None)
+        self.assertEqual(result, ('Answer [S1]', {}))
+        self.assertEqual(pieces, ['Answer [S1]'])
+        self.assertTrue(response.closed)
+        return sent[0]
+
+    def test_later_app_notes_stay_in_order_with_only_one_system_message(self):
+        messages = [
+            {'role': 'system', 'content': 'Use only the library.'},
+            {'role': 'system', 'content': 'The person is on a guide.'},
+            {'role': 'user', 'content': 'Which pages cover this?'},
+            {'role': 'system', 'content': 'Initial library search results: [S1].'},
+            {'role': 'assistant', 'content': '', 'tool_calls': [
+                {'id': 'call_0', 'type': 'function', 'function': {'name': 'read_pages', 'arguments': '{}'}}]},
+            {'role': 'tool', 'tool_call_id': 'call_0', 'content': 'Page text [S1].'},
+            {'role': 'system', 'content': 'Stop searching now.'},
+            {'role': 'system', 'content': 'Your reply was empty. Answer the question now.'},
+        ]
+        before = json.loads(json.dumps(messages))
+        tools = [{'type': 'function', 'function': {'name': 'read_pages', 'parameters': {'type': 'object'}}}]
+        body = self.round(messages, tools)
+        self.assertEqual(body['tools'], tools)
+        self.assertEqual([m['role'] for m in body['messages']],
+                         ['system', 'user', 'user', 'user', 'assistant', 'tool', 'user', 'user'])
+        for i, message in enumerate(before):
+            expected = ({'role': 'user', 'content': '[Note from the Lastbook app, not from the person]\n' + message['content']}
+                        if i > 0 and message['role'] == 'system' else message)
+            self.assertEqual(body['messages'][i], expected)
+        self.assertEqual(messages, before)
+        self.assertEqual(self.round(messages, tools), body)  # a later round must not add a second marker
+        self.assertEqual(messages, before)
+
+    def test_without_later_system_messages_keeps_image_and_tool_messages(self):
+        messages = [
+            {'role': 'system', 'content': 'Use only the library.'},
+            {'role': 'user', 'content': [{'type': 'text', 'text': 'Look at this page.'},
+                                         {'type': 'image_url', 'image_url': {'url': 'data:image/png;base64,AA=='}}]},
+            {'role': 'assistant', 'content': '', 'tool_calls': [
+                {'id': 'call_1', 'type': 'function', 'function': {'name': 'view_page', 'arguments': '{}'}}]},
+            {'role': 'tool', 'tool_call_id': 'call_1', 'content': 'Page image [S1].'},
+        ]
+        body = self.round(messages)
+        self.assertEqual(body['messages'], messages)
+        self.assertNotIn('tools', body)
 
 
 class NothingGoesOut(unittest.TestCase):

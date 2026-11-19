@@ -1,0 +1,589 @@
+{
+  "about": "Proposed region definition for a detailed map of Paraguay, as one region for the whole country, with the 17 departments and Asunción listed as an alternative. A proposal for discussion (docs/REGIONS-PY.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "PY for the whole country.",
+    "why": "A bare PY collides with no US code in STATE_CODES (engine/address_search.py).",
+    "alternative": "ISO 3166-2:PY: PY-ASU for Asunción, PY-1 to PY-16 and PY-19 for the departments.",
+    "warning": "OCHA COD-AB p-codes differ from ISO for two departments: PY16 is Boquerón (ISO PY-19) and PY17 is Alto Paraguay (ISO PY-16). Join by name, not by number.",
+    "verified": "The ISO 3166-2 codes were not checked against the ISO site (search only)."
+  },
+  "regions": [
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "country": "Paraguay",
+      "level": "country",
+      "area_km2": 399603,
+      "box": {
+        "west": -62.6446,
+        "south": -27.5918,
+        "east": -54.2589,
+        "north": -19.2876
+      },
+      "box_with_margin_0_15": {
+        "west": -62.8,
+        "south": -27.75,
+        "east": -54.1,
+        "north": -19.13
+      },
+      "box_source": {
+        "dataset": "OCHA COD-AB Paraguay (pry_admin0.geojson / pry_admin1.geojson), source DGEEC / INE, valid_on 2026-07-29",
+        "url": "https://data.humdata.org/dataset/cod-ab-pry",
+        "licence": "CC-BY-IGO",
+        "computed": "2026-11-17",
+        "rule": "Extent of every vertex, minus/plus 0.15 degrees (the margin of map_sets.state in derived/packs/pack-spec.json), rounded outward to 0.01 degrees."
+      },
+      "clip": "Geofabrik's extract is already cut a few kilometres outside the border, so a first build holds almost nothing of the neighbours and cuts the twin cities (Posadas, Foz do Iguaçu, Ponta Porã, Clorinda). Suggested: the border as the edge of a first build, and later a band (for example 20 km) from the Argentina and Brazil extracts. Undecided.",
+      "area_source": "area_sqkm attribute of COD-AB level 0",
+      "area_note": "area_km2 is the area_sqkm attribute of COD-AB level 0; the official figure is 406,752 km2 (general knowledge).",
+      "neighbours_in_box": "From a sample of points, not measured. Argentina: all of Formosa, most of Chaco province, northern Corrientes, most of Misiones province, a corner of Santiago del Estero, a sliver of Salta. Brazil: much of Mato Grosso do Sul, the western edge of Paraná, a corner of Rio Grande do Sul. Bolivia: parts of the south-east."
+    }
+  ],
+  "alternative_regions": {
+    "about": "If finer regions are wanted. Central's box contains the whole of Asunción's, so a PY-11 map cut by its box holds Asunción too. A map of the metropolitan area (which also takes in the Villa Hayes side of Presidente Hayes) would be a separate grouping with its own id, not a PY-11 that means more than Central.",
+    "box_source": {
+      "dataset": "OCHA COD-AB Paraguay (pry_admin0.geojson / pry_admin1.geojson), source DGEEC / INE, valid_on 2026-07-29",
+      "url": "https://data.humdata.org/dataset/cod-ab-pry",
+      "licence": "CC-BY-IGO",
+      "computed": "2026-11-17",
+      "rule": "Extent of every vertex, minus/plus 0.15 degrees (the margin of map_sets.state in derived/packs/pack-spec.json), rounded outward to 0.01 degrees."
+    },
+    "regions": [
+      {
+        "code": "PY-ASU",
+        "cod_ab_pcode": "PY00",
+        "name": "Asunción",
+        "level": "capital district",
+        "area_km2": 129,
+        "box": {
+          "west": -57.6739,
+          "south": -25.3809,
+          "east": -57.5248,
+          "north": -25.2246
+        },
+        "box_with_margin_0_15": {
+          "west": -57.83,
+          "south": -25.54,
+          "east": -57.37,
+          "north": -25.07
+        }
+      },
+      {
+        "code": "PY-1",
+        "cod_ab_pcode": "PY01",
+        "name": "Concepción",
+        "level": "department",
+        "area_km2": 18543,
+        "box": {
+          "west": -57.9938,
+          "south": -23.5095,
+          "east": -56.1258,
+          "north": -22.0791
+        },
+        "box_with_margin_0_15": {
+          "west": -58.15,
+          "south": -23.66,
+          "east": -55.97,
+          "north": -21.92
+        }
+      },
+      {
+        "code": "PY-2",
+        "cod_ab_pcode": "PY02",
+        "name": "San Pedro",
+        "level": "department",
+        "area_km2": 20852,
+        "box": {
+          "west": -57.4735,
+          "south": -25.0193,
+          "east": -55.702,
+          "north": -23.3007
+        },
+        "box_with_margin_0_15": {
+          "west": -57.63,
+          "south": -25.17,
+          "east": -55.55,
+          "north": -23.15
+        }
+      },
+      {
+        "code": "PY-3",
+        "cod_ab_pcode": "PY03",
+        "name": "Cordillera",
+        "level": "department",
+        "area_km2": 4790,
+        "box": {
+          "west": -57.4783,
+          "south": -25.669,
+          "east": -56.5614,
+          "north": -24.8433
+        },
+        "box_with_margin_0_15": {
+          "west": -57.63,
+          "south": -25.82,
+          "east": -56.41,
+          "north": -24.69
+        }
+      },
+      {
+        "code": "PY-4",
+        "cod_ab_pcode": "PY04",
+        "name": "Guairá",
+        "level": "department",
+        "area_km2": 3870,
+        "box": {
+          "west": -56.7477,
+          "south": -26.1973,
+          "east": -55.6334,
+          "north": -25.5648
+        },
+        "box_with_margin_0_15": {
+          "west": -56.9,
+          "south": -26.35,
+          "east": -55.48,
+          "north": -25.41
+        }
+      },
+      {
+        "code": "PY-5",
+        "cod_ab_pcode": "PY05",
+        "name": "Caaguazú",
+        "level": "department",
+        "area_km2": 12904,
+        "box": {
+          "west": -56.8115,
+          "south": -25.7084,
+          "east": -54.9232,
+          "north": -24.4655
+        },
+        "box_with_margin_0_15": {
+          "west": -56.97,
+          "south": -25.86,
+          "east": -54.77,
+          "north": -24.31
+        }
+      },
+      {
+        "code": "PY-6",
+        "cod_ab_pcode": "PY06",
+        "name": "Caazapá",
+        "level": "department",
+        "area_km2": 9550,
+        "box": {
+          "west": -56.8491,
+          "south": -26.7944,
+          "east": -55.2482,
+          "north": -25.5236
+        },
+        "box_with_margin_0_15": {
+          "west": -57.0,
+          "south": -26.95,
+          "east": -55.09,
+          "north": -25.37
+        }
+      },
+      {
+        "code": "PY-7",
+        "cod_ab_pcode": "PY07",
+        "name": "Itapúa",
+        "level": "department",
+        "area_km2": 15866,
+        "box": {
+          "west": -56.8848,
+          "south": -27.5918,
+          "east": -54.6482,
+          "north": -26.0922
+        },
+        "box_with_margin_0_15": {
+          "west": -57.04,
+          "south": -27.75,
+          "east": -54.49,
+          "north": -25.94
+        }
+      },
+      {
+        "code": "PY-8",
+        "cod_ab_pcode": "PY08",
+        "name": "Misiones",
+        "level": "department",
+        "area_km2": 8160,
+        "box": {
+          "west": -57.7431,
+          "south": -27.4861,
+          "east": -56.6259,
+          "north": -26.3761
+        },
+        "box_with_margin_0_15": {
+          "west": -57.9,
+          "south": -27.64,
+          "east": -56.47,
+          "north": -26.22
+        }
+      },
+      {
+        "code": "PY-9",
+        "cod_ab_pcode": "PY09",
+        "name": "Paraguarí",
+        "level": "department",
+        "area_km2": 8603,
+        "box": {
+          "west": -57.7494,
+          "south": -26.6196,
+          "east": -56.6076,
+          "north": -25.4018
+        },
+        "box_with_margin_0_15": {
+          "west": -57.9,
+          "south": -26.77,
+          "east": -56.45,
+          "north": -25.25
+        }
+      },
+      {
+        "code": "PY-10",
+        "cod_ab_pcode": "PY10",
+        "name": "Alto Paraná",
+        "level": "department",
+        "area_km2": 14209,
+        "box": {
+          "west": -55.5506,
+          "south": -26.2571,
+          "east": -54.3458,
+          "north": -24.4762
+        },
+        "box_with_margin_0_15": {
+          "west": -55.71,
+          "south": -26.41,
+          "east": -54.19,
+          "north": -24.32
+        }
+      },
+      {
+        "code": "PY-11",
+        "cod_ab_pcode": "PY11",
+        "name": "Central",
+        "level": "department",
+        "area_km2": 2413,
+        "box": {
+          "west": -57.8268,
+          "south": -26.0251,
+          "east": -57.193,
+          "north": -25.0965
+        },
+        "box_with_margin_0_15": {
+          "west": -57.98,
+          "south": -26.18,
+          "east": -57.04,
+          "north": -24.94
+        }
+      },
+      {
+        "code": "PY-12",
+        "cod_ab_pcode": "PY12",
+        "name": "Ñeembucú",
+        "level": "department",
+        "area_km2": 11675,
+        "box": {
+          "west": -58.6649,
+          "south": -27.4442,
+          "east": -57.1821,
+          "north": -25.7672
+        },
+        "box_with_margin_0_15": {
+          "west": -58.82,
+          "south": -27.6,
+          "east": -57.03,
+          "north": -25.61
+        }
+      },
+      {
+        "code": "PY-13",
+        "cod_ab_pcode": "PY13",
+        "name": "Amambay",
+        "level": "department",
+        "area_km2": 12548,
+        "box": {
+          "west": -56.8261,
+          "south": -23.8309,
+          "east": -55.5045,
+          "north": -22.0745
+        },
+        "box_with_margin_0_15": {
+          "west": -56.98,
+          "south": -23.99,
+          "east": -55.35,
+          "north": -21.92
+        }
+      },
+      {
+        "code": "PY-14",
+        "cod_ab_pcode": "PY14",
+        "name": "Canindeyú",
+        "level": "department",
+        "area_km2": 15029,
+        "box": {
+          "west": -56.1725,
+          "south": -24.784,
+          "east": -54.2589,
+          "north": -23.5237
+        },
+        "box_with_margin_0_15": {
+          "west": -56.33,
+          "south": -24.94,
+          "east": -54.1,
+          "north": -23.37
+        }
+      },
+      {
+        "code": "PY-15",
+        "cod_ab_pcode": "PY15",
+        "name": "Presidente Hayes",
+        "level": "department",
+        "area_km2": 73655,
+        "box": {
+          "west": -60.7854,
+          "south": -25.3543,
+          "east": -57.1493,
+          "north": -22.0762
+        },
+        "box_with_margin_0_15": {
+          "west": -60.94,
+          "south": -25.51,
+          "east": -56.99,
+          "north": -21.92
+        }
+      },
+      {
+        "code": "PY-16",
+        "cod_ab_pcode": "PY17",
+        "name": "Alto Paraguay",
+        "level": "department",
+        "area_km2": 78542,
+        "box": {
+          "west": -61.9225,
+          "south": -22.3992,
+          "east": -57.8171,
+          "north": -19.2876
+        },
+        "box_with_margin_0_15": {
+          "west": -62.08,
+          "south": -22.55,
+          "east": -57.66,
+          "north": -19.13
+        }
+      },
+      {
+        "code": "PY-19",
+        "cod_ab_pcode": "PY16",
+        "name": "Boquerón",
+        "level": "department",
+        "area_km2": 88265,
+        "box": {
+          "west": -62.6446,
+          "south": -23.8858,
+          "east": -59.3366,
+          "north": -20.0892
+        },
+        "box_with_margin_0_15": {
+          "west": -62.8,
+          "south": -24.04,
+          "east": -59.18,
+          "north": -19.93
+        }
+      }
+    ],
+    "middle_option": "Two regions: eastern Paraguay (14 departments and Asunción) and the Chaco (PY-15, PY-16, PY-19). This split would also cut Greater Asunción, whose Chaco side lies in Presidente Hayes.",
+    "area_source": "area_sqkm attribute of COD-AB level 1"
+  },
+  "layers": {
+    "base_map_and_poi": {
+      "dataset": "OSM extract paraguay-latest.osm.pbf (147 MB); shp.zip 305 MB, gpkg.zip 312 MB",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "url": "https://download.geofabrik.de/south-america/paraguay.html",
+      "licence": "ODbL-1.0",
+      "verified": "2026-11-17",
+      "data_up_to": "2026-11-16T21:22:36Z"
+    },
+    "places": {
+      "dataset": "OCHA COD-AB levels 1 to 4 plus adminpoints and admincapitals; OSM named places",
+      "url": "https://data.humdata.org/dataset/cod-ab-pry",
+      "licence": [
+        "CC-BY-IGO",
+        "ODbL-1.0"
+      ],
+      "verified": "HDX record opened on 2026-11-17; admin0 and admin1 downloads confirmed"
+    },
+    "places_and_streets_official": {
+      "dataset": "INE Cartografía Digital 2012: departments, districts, barrios and localities, cities, blocks (manzanas), roads, main roads, hydrography, indigenous communities; Shape, KML, GeoJSON",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "url": "https://www.ine.gov.py/microdatos/cartografia-digital-2012.php",
+      "licence": "INE-licence",
+      "verified": "2026-11-17",
+      "caveat": "Predates the 2022 census; no downloadable 2022 cartography found (search only)."
+    },
+    "terrain": {
+      "dataset": "Copernicus DEM GLO-30",
+      "licence": "Copernicus-WorldDEM-30",
+      "verified": "as in docs/regions-proposed.json"
+    },
+    "water": {
+      "dataset": "OSM waterways and water areas; INE 2012 hydrography to fill gaps",
+      "licence": [
+        "ODbL-1.0",
+        "INE-licence"
+      ],
+      "gap": "No open dam inventory and no dataset of Chaco cisterns (aljibes) or earth reservoirs (tajamares) found."
+    },
+    "crops": {
+      "dataset": "MapBiomas Paraguay Collection 2, annual land cover and land use 1985-2023, 30 m (land cover classes, not crop types); ESA WorldCover 2021 as fallback",
+      "url": "https://paraguay.mapbiomas.org/en/terminos-de-uso/",
+      "licence": [
+        "MapBiomas-PY",
+        "CC-BY-4.0"
+      ],
+      "verified": "terms page opened 2026-11-17; collection details search only"
+    },
+    "buildings": {
+      "dataset": "Google Open Buildings v3; Microsoft Global ML Building Footprints to fill gaps",
+      "licence": [
+        "CC-BY-4.0",
+        "ODbL-1.0"
+      ],
+      "verified": "Google's page opened 2026-11-17 (PRY in the v3 list); coverage not measured",
+      "notes": "Google offers the data under CC BY 4.0 or ODbL 1.0, at the user's choice. Microsoft: see docs/regions-proposed.json."
+    },
+    "addresses": {
+      "dataset": null,
+      "gap": "Overture's address theme (release 2026-10-21.0) lists 41 countries and Paraguay is not among them. OSM has 44,614 objects with addr:housenumber.",
+      "url": "https://docs.overturemaps.org/guides/addresses/",
+      "verified": "2026-11-17"
+    }
+  },
+  "osm_counts": {
+    "about": "Counted with pyosmium over paraguay-latest.osm.pbf (data up to 2026-11-16T21:22:36Z); nodes, ways and relations.",
+    "counts": {
+      "amenity=hospital": 387,
+      "amenity=clinic": 412,
+      "amenity=doctors": 245,
+      "amenity=pharmacy": 1377,
+      "amenity=fire_station": 123,
+      "amenity=police": 1508,
+      "amenity=drinking_water": 56,
+      "man_made=water_tap": 21,
+      "amenity=water_point": 6,
+      "man_made=water_well": 177,
+      "man_made=water_tower": 935,
+      "man_made=storage_tank": 626,
+      "water=reservoir": 2852,
+      "waterway=dam": 291,
+      "amenity=fuel": 1577,
+      "amenity=shelter": 284,
+      "social_facility=shelter": 5,
+      "emergency=assembly_point": 0,
+      "emergency=ambulance_station": 5,
+      "amenity=school": 4748,
+      "addr:housenumber": 44614,
+      "name:gn": 147
+    },
+    "shelter_type_of_amenity_shelter": {
+      "lean_to": 93,
+      "picnic_shelter": 70,
+      "sun_shelter": 67,
+      "(none)": 41,
+      "pavilion": 5,
+      "public_transport": 4,
+      "gazebo": 3,
+      "weather_shelter": 1
+    },
+    "caveat": "amenity=shelter marks small roofs, not emergency shelters.",
+    "notes": {
+      "man_made=storage_tank": "contents not checked; some will not hold water",
+      "water=reservoir": "landuse=reservoir was not counted",
+      "amenity=hospital": "Rows, not sites: in a test map of Central and Asunción, 163 hospital rows were about 113 sites (rows within 150 m grouped)."
+    }
+  },
+  "help_point_gaps": {
+    "health": "No downloadable Ministry of Health (MSPBS) facility list with coordinates found; reports say it exists and was shared on formal request (search only).",
+    "fire_stations": "About 140 volunteer fire stations (CBVP) per news reports (search only); no published location list. OSM has 123.",
+    "shelters": "SEN flood shelters are opened as needed; no dataset found (search only).",
+    "chaco_water": "No dataset of aljibes or tajamares found."
+  },
+  "licences": {
+    "INE-licence": {
+      "name": "Licencia de Uso de la Información Pública del Gobierno Paraguayo",
+      "url": "https://www.ine.gov.py/microdatos/license.php",
+      "attribution": "Cite the public source; say the content is under this licence; give the date of the last update if known. Do not suggest or simulate official use or sponsorship by the Paraguayan State.",
+      "share_alike": false,
+      "conditions": "Free, perpetual, non-exclusive; any lawful use, including copy, distribution, adaptation. No non-commercial condition. Cites Ley 5282/2014 and Decreto 4064.",
+      "verified": "2026-11-17"
+    },
+    "CC-BY-IGO": {
+      "name": "Creative Commons Attribution for Intergovernmental Organisations",
+      "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "Credit OCHA and its source (DGEEC / INE).",
+      "share_alike": false,
+      "verified": "licence name read through HDX API 2026-11-17; licence text not reopened"
+    },
+    "MapBiomas-PY": {
+      "name": "Creative Commons CC BY, as MapBiomas Paraguay's terms page states it",
+      "url": "https://paraguay.mapbiomas.org/en/terminos-de-uso/",
+      "attribution": "\"MapBiomas – Colección [versión] de la Serie Anual de Mapas de Cobertura y Uso del Suelo de Paraguay\", with access date and link.",
+      "share_alike": "unclear",
+      "conditions": "A search result for the same page showed CC-CY-SA (sic), and a Source Coop mirror lists CC BY-SA 4.0 (search only). Confirm before a build.",
+      "verified": "terms page opened 2026-11-17"
+    },
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Credit the publisher, link the licence, say if changed.",
+      "share_alike": false,
+      "verified": "licence text not reopened"
+    },
+    "ODbL-1.0": {
+      "name": "Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; a database built from it is offered under the ODbL.",
+      "share_alike": true,
+      "verified": "licence text not reopened"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "url": "see docs/regions-proposed.json",
+      "attribution": "see docs/regions-proposed.json",
+      "share_alike": false,
+      "verified": "as in docs/regions-proposed.json"
+    }
+  },
+  "addressing": {
+    "order": "Street, then door number, then city: \"José Martí 1953, Luque\" (search only).",
+    "corners": "Often given by corner: \"c/\" (casi) or \"esq.\" (esquina); many homes are \"s/n\" (no number). General knowledge.",
+    "postcode": "Six digits: department, district, barrio (search only). Older four-digit codes are still seen (general knowledge). engine/address_search.py reads only \\d{5}; tools/build_addresses.py keeps left(postcode, 5).",
+    "accents": "normalize() in engine/address_search.py and norm() in tools/build_addresses.py keep only a-z, 0-9 and spaces, so every other letter becomes a space: \"Avda. Mcal. López 1234 c/ Ñeembucú\" becomes \"avda mcal l pez 1234 c eembuc\" (tested 2026-11-17). Folding is needed on both sides; see related.pr_79.",
+    "place_finder": "FTS5 unicode61 folds diacritics: \"itapesyi\" finds \"Itapesỹi\" (a real name:gn in the extract). No place name with g̃ was found in the extract; a made-up spelling with it matched plain g (tested 2026-11-17).",
+    "verified": "Correo Paraguayo pages not checked; needs a native reader.",
+    "postcode_lookup": "Correo Paraguayo (DINACOPA) has an online look-up (search only; not opened)."
+  },
+  "undecided": [
+    "Codes in setup",
+    "The box rule: the border as the edge of a first build, and a later band for twin cities",
+    "One region, two, or eighteen (plus a separate metropolitan grouping)",
+    "MapBiomas' licence and class mapping",
+    "Address search (six-digit postcodes, number after street, corners, accent folding)",
+    "Help points with no open source",
+    "Language: Spanish or Guaraní names; font coverage for Guaraní letters",
+    "The California-only layers (REGIONS.md item 7)"
+  ],
+  "marks": {
+    "opened": "the page, file or API response was opened and read",
+    "computed": "computed here from a downloaded file",
+    "search only": "seen in a search result; page not opened",
+    "general knowledge": "stated from memory; needs a local reader's check",
+    "not checked": "could not be reached or read"
+  },
+  "related": {
+    "pr_35": "Has a py-asu box for Asunción (-57.94, -25.59, -57.34, -24.99) cut from the same Geofabrik extract.",
+    "pr_79": "Proposes that each address index declares its own spelling rule (meta.norm)."
+  }
+}

@@ -4,7 +4,7 @@ The contract is `docs/SETUP-API.md`. This package fills it in.
 
 | File | What it does |
 |---|---|
-| `download.py` | The only module in Lastbook that opens a network connection. It uses HTTPS on port 443 to `ALLOWED_HOSTS` (and `*.hf.co`) and takes no proxy: it uses `http.client`, which never reads proxy settings. A redirect is followed only to an allowed address. A download resumes with Range. The ETag is compared here, because R2 ignores If-Range. The SHA-256 is computed while the file streams in. |
+| `download.py` | The only module in Lastbook that opens a network connection. It uses HTTPS on port 443 to `ALLOWED_HOSTS` (and `*.hf.co`) and takes no proxy: it uses `http.client`, which never reads proxy settings. A redirect is followed only to an allowed address. A download resumes with Range. The ETag is compared here, because R2 ignores If-Range. The SHA-256 is computed while the file streams in. A file of 512 MiB or more comes over 8 connections at once, each asking for a 16 MiB piece; the run of finished pieces from byte 0 is hashed as it grows, so there is no second pass at the end. A server that answers a Range with 200 sends it back to one connection. |
 | `roots.pem` | The only root certificates the downloader trusts: 11 roots from Mozilla's bundle, those the allowed hosts' chains end in, plus their siblings. The system's trust store is never used. Rebuild with `packaging/setup_roots.py <certifi cacert.pem>`. The package scans require it. |
 | `manifest.py` | Loads the bundled `setup/manifest-v1.json`, plus one fetch of `https://downloads.lastbook.org/manifest-v1.json` when setup opens. The fetched copy is used only if it validates and every URL is allowed. |
 | `hardware.py` | Reads the OS, processor type, RAM, unified memory, GPUs and VRAM (DXGI through ctypes on Windows) and free space per disk. It estimates whether the AI fits, or measures it with `lastbook-llm --measure` and `llm_local.judge`. |
@@ -25,9 +25,17 @@ The contract is `docs/SETUP-API.md`. This package fills it in.
 - `POST /api/setup/delete-old {path}` deletes a `LastbookData.old-*` that setup itself moved aside. These are listed in `state.current.old`.
 - `state.recommend` also carries `folder` and `need_bytes` (per pack). Each `found` entry is `{kind: library|pack|model, path, name, id, size, size_ok}`.
 
+## Comparing two packs (not used by setup yet)
+
+`install.read_pack_manifest` reads a `pack-manifest.tsv` the way repair does, and `install.compare_pack_manifests` compares an installed library's list with a new release's: which paths would be added, removed, changed (size or SHA-256) or unchanged, and how many bytes would have to be fetched or are already here. It is read-only: it opens no library file and downloads nothing. Nothing in setup calls it yet. It is a first step toward upgrades that fetch only what changed (issue #144). To try it:
+
+```bash
+python3 tools/compare_packs.py --data /path/to/LastbookData /path/to/new/pack-manifest.tsv --list
+```
+
 ## Tests
 
-The tests use a local HTTPS test server, which exists only in the test file. It can cut the connection, send corrupt bytes, change the ETag, ignore Range and redirect to bad hosts. The tests also cover kill and restart mid-download and mid-unpack, unpack guards, switching, rollback, upgrades, recommendations, and the bridge:
+The tests use a local HTTPS test server, which exists only in the test file. It can cut the connection, send corrupt bytes, change the ETag, ignore Range and redirect to bad hosts. `ParallelDownloads` runs the same server with pieces made small, so a 3 MiB file comes in 13 of them. The tests also cover kill and restart mid-download and mid-unpack, unpack guards, switching, rollback, upgrades, recommendations, and the bridge:
 
 ```bash
 derived/app-build/mac-venv/bin/python -W ignore -B app/tests/test_setup.py

@@ -1,0 +1,457 @@
+{
+  "about": "Proposed region definitions for detailed maps of Chile's 16 regions (ISO 3166-2:CL). A proposal for discussion (docs/REGIONS-CL.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "ISO 3166-2:CL codes CL-AP through CL-MA (16 regions, including CL-RM for Región Metropolitana de Santiago).",
+    "why": "Several two-letter suffixes (MA, AR, CO) collide with US state codes in STATE_CODES (engine/address_search.py), so the CL- prefix is kept.",
+    "verified": "CUT two-digit codes (01 to 16) and ISO 3166-2:CL codes were cross-checked from general reference and search; the ISO site was not opened."
+  },
+  "country_extract": {
+    "dataset": "Geofabrik chile-latest.osm.pbf (352,124,743 bytes on 2026-11-17); chile-261116-free.gpkg.zip (774,826,582 bytes)",
+    "url": "https://download.geofabrik.de/south-america/chile.html",
+    "poly_url": "https://download.geofabrik.de/south-america/chile.poly",
+    "poly_vertices": 132,
+    "poly_outer_box": {
+      "west": -113.2233,
+      "south": -58.4519,
+      "east": -65.5141,
+      "north": -17.4574
+    },
+    "licence": "ODbL-1.0",
+    "verified": "2026-11-17",
+    "caveat": "Geofabrik's country polygon wraps Rapa Nui (-109.35 W) with the mainland and a wide margin (west edge -113.2233), so per-region mainland boxes should be cut from BCN / INE official boundaries."
+  },
+  "regions": [
+    {
+      "code": "CL-AP",
+      "cut": "15",
+      "name": "Arica y Parinacota",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -70.38,
+        "south": -19.23,
+        "east": -68.91,
+        "north": -17.5
+      },
+      "box_with_margin_0_15": {
+        "west": -70.53,
+        "south": -19.38,
+        "east": -68.76,
+        "north": -17.35
+      }
+    },
+    {
+      "code": "CL-TA",
+      "cut": "01",
+      "name": "Tarapacá",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -70.29,
+        "south": -21.64,
+        "east": -68.4,
+        "north": -18.94
+      },
+      "box_with_margin_0_15": {
+        "west": -70.44,
+        "south": -21.79,
+        "east": -68.25,
+        "north": -18.79
+      }
+    },
+    {
+      "code": "CL-AN",
+      "cut": "02",
+      "name": "Antofagasta",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -70.75,
+        "south": -26.06,
+        "east": -67,
+        "north": -20.93
+      },
+      "box_with_margin_0_15": {
+        "west": -70.9,
+        "south": -26.21,
+        "east": -66.85,
+        "north": -20.78
+      }
+    },
+    {
+      "code": "CL-AT",
+      "cut": "03",
+      "name": "Atacama",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -71.59,
+        "south": -29.54,
+        "east": -68.26,
+        "north": -25.29
+      },
+      "box_with_margin_0_15": {
+        "west": -71.74,
+        "south": -29.69,
+        "east": -68.11,
+        "north": -25.14
+      }
+    },
+    {
+      "code": "CL-CO",
+      "cut": "04",
+      "name": "Coquimbo",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -71.72,
+        "south": -32.28,
+        "east": -69.81,
+        "north": -29.04
+      },
+      "box_with_margin_0_15": {
+        "west": -71.87,
+        "south": -32.43,
+        "east": -69.66,
+        "north": -28.89
+      }
+    },
+    {
+      "code": "CL-VS",
+      "cut": "05",
+      "name": "Valparaíso",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -71.86,
+        "south": -33.9,
+        "east": -70,
+        "north": -32.02
+      },
+      "box_with_margin_0_15": {
+        "west": -72.01,
+        "south": -34.05,
+        "east": -69.85,
+        "north": -31.87
+      },
+      "note": "Continental mainland box only. All offshore cuts are listed in island_boxes; their broad bounds surround reference positions, not official boundary polygons.",
+      "island_boxes": [
+        {
+          "name": "Rapa Nui",
+          "box": {
+            "west": -109.5,
+            "south": -27.25,
+            "east": -109.2,
+            "north": -27.0
+          },
+          "box_with_margin_0_15": {
+            "west": -109.65,
+            "south": -27.4,
+            "east": -109.05,
+            "north": -26.85
+          },
+          "source_url": "https://en.wikipedia.org/wiki/Easter_Island",
+          "checked": "2026-11-17",
+          "caveat": "Provisional broad box around published island positions; not boundary-derived. Recompute from official regional polygons before building."
+        },
+        {
+          "name": "Sala y Gómez",
+          "box": {
+            "west": -105.39,
+            "south": -26.5,
+            "east": -105.33,
+            "north": -26.44
+          },
+          "box_with_margin_0_15": {
+            "west": -105.54,
+            "south": -26.65,
+            "east": -105.18,
+            "north": -26.29
+          },
+          "source_url": "https://en.wikipedia.org/wiki/Salas_y_G%C3%B3mez",
+          "checked": "2026-11-17",
+          "caveat": "Provisional broad box around published island positions; not boundary-derived. Recompute from official regional polygons before building."
+        },
+        {
+          "name": "Robinson Crusoe and Santa Clara",
+          "box": {
+            "west": -79.08,
+            "south": -33.78,
+            "east": -78.72,
+            "north": -33.56
+          },
+          "box_with_margin_0_15": {
+            "west": -79.23,
+            "south": -33.93,
+            "east": -78.57,
+            "north": -33.41
+          },
+          "source_url": "https://en.wikipedia.org/wiki/Juan_Fern%C3%A1ndez_Islands",
+          "checked": "2026-11-17",
+          "caveat": "Provisional broad box around published island positions; not boundary-derived. Recompute from official regional polygons before building."
+        },
+        {
+          "name": "Alejandro Selkirk",
+          "box": {
+            "west": -80.87,
+            "south": -33.86,
+            "east": -80.7,
+            "north": -33.69
+          },
+          "box_with_margin_0_15": {
+            "west": -81.02,
+            "south": -34.01,
+            "east": -80.55,
+            "north": -33.54
+          },
+          "source_url": "https://en.wikipedia.org/wiki/Juan_Fern%C3%A1ndez_Islands",
+          "checked": "2026-11-17",
+          "caveat": "Provisional broad box around published island positions; not boundary-derived. Recompute from official regional polygons before building."
+        },
+        {
+          "name": "Desventuradas",
+          "box": {
+            "west": -80.18,
+            "south": -26.4,
+            "east": -79.84,
+            "north": -26.22
+          },
+          "box_with_margin_0_15": {
+            "west": -80.33,
+            "south": -26.55,
+            "east": -79.69,
+            "north": -26.07
+          },
+          "source_url": "https://en.wikipedia.org/wiki/Desventuradas_Islands",
+          "checked": "2026-11-17",
+          "caveat": "Provisional broad box around published island positions; not boundary-derived. Recompute from official regional polygons before building."
+        }
+      ]
+    },
+    {
+      "code": "CL-RM",
+      "cut": "13",
+      "name": "Metropolitana de Santiago",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -71.72,
+        "south": -34.29,
+        "east": -69.77,
+        "north": -32.92
+      },
+      "box_with_margin_0_15": {
+        "west": -71.87,
+        "south": -34.44,
+        "east": -69.62,
+        "north": -32.77
+      }
+    },
+    {
+      "code": "CL-LI",
+      "cut": "06",
+      "name": "Libertador General Bernardo O'Higgins",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -72.07,
+        "south": -35.01,
+        "east": -70.01,
+        "north": -33.85
+      },
+      "box_with_margin_0_15": {
+        "west": -72.22,
+        "south": -35.16,
+        "east": -69.86,
+        "north": -33.7
+      }
+    },
+    {
+      "code": "CL-ML",
+      "cut": "07",
+      "name": "Maule",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -72.79,
+        "south": -36.55,
+        "east": -70.32,
+        "north": -34.69
+      },
+      "box_with_margin_0_15": {
+        "west": -72.94,
+        "south": -36.7,
+        "east": -70.17,
+        "north": -34.54
+      }
+    },
+    {
+      "code": "CL-NB",
+      "cut": "16",
+      "name": "Ñuble",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -72.9,
+        "south": -37.2,
+        "east": -71,
+        "north": -36.01
+      },
+      "box_with_margin_0_15": {
+        "west": -73.05,
+        "south": -37.35,
+        "east": -70.85,
+        "north": -35.86
+      }
+    },
+    {
+      "code": "CL-BI",
+      "cut": "08",
+      "name": "Biobío",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -73.98,
+        "south": -38.49,
+        "east": -70.98,
+        "north": -36.44
+      },
+      "box_with_margin_0_15": {
+        "west": -74.13,
+        "south": -38.64,
+        "east": -70.83,
+        "north": -36.29
+      }
+    },
+    {
+      "code": "CL-AR",
+      "cut": "09",
+      "name": "La Araucanía",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -73.53,
+        "south": -39.64,
+        "east": -70.83,
+        "north": -37.59
+      },
+      "box_with_margin_0_15": {
+        "west": -73.68,
+        "south": -39.79,
+        "east": -70.68,
+        "north": -37.44
+      }
+    },
+    {
+      "code": "CL-LR",
+      "cut": "14",
+      "name": "Los Ríos",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -73.73,
+        "south": -40.68,
+        "east": -71.58,
+        "north": -39.27
+      },
+      "box_with_margin_0_15": {
+        "west": -73.88,
+        "south": -40.83,
+        "east": -71.43,
+        "north": -39.12
+      }
+    },
+    {
+      "code": "CL-LL",
+      "cut": "10",
+      "name": "Los Lagos",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -74.85,
+        "south": -44.07,
+        "east": -71.58,
+        "north": -40.23
+      },
+      "box_with_margin_0_15": {
+        "west": -75,
+        "south": -44.22,
+        "east": -71.43,
+        "north": -40.08
+      }
+    },
+    {
+      "code": "CL-AI",
+      "cut": "11",
+      "name": "Aysén del General Carlos Ibáñez del Campo",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -75.68,
+        "south": -49.16,
+        "east": -71.09,
+        "north": -43.64
+      },
+      "box_with_margin_0_15": {
+        "west": -75.83,
+        "south": -49.31,
+        "east": -70.94,
+        "north": -43.49
+      }
+    },
+    {
+      "code": "CL-MA",
+      "cut": "12",
+      "name": "Magallanes y de la Antártica Chilena",
+      "country": "Chile",
+      "level": "region",
+      "box": {
+        "west": -75.73,
+        "south": -56.6,
+        "east": -66.42,
+        "north": -48.6
+      },
+      "box_with_margin_0_15": {
+        "west": -75.88,
+        "south": -56.75,
+        "east": -66.27,
+        "north": -48.45
+      },
+      "note": "American sector only, including Diego Ramírez and Águila Islet (about 56.54 S); excludes Antarctic claims south of 60 S. Southern bound is provisional, not boundary-derived.",
+      "southern_extent_source_url": "https://en.wikipedia.org/wiki/Diego_Ram%C3%ADrez_Islands"
+    }
+  ],
+  "layers": {
+    "base_map_and_poi": {
+      "dataset": "OSM extract chile-261116.osm.pbf: 352,124,743 bytes (352 MB / 336 MiB); chile-261116-free.gpkg.zip: 774,826,582 bytes (775 MB / 739 MiB)",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "url": "https://download.geofabrik.de/south-america/chile.html",
+      "licence": "ODbL-1.0",
+      "verified": "2026-11-17"
+    },
+    "addresses": {
+      "dataset": "Overture Maps Foundation addresses theme (CL: 4,199,023 records)",
+      "url": "https://docs.overturemaps.org/guides/addresses/",
+      "publisher": "Instituto Nacional de Estadísticas (INE), distributed by AddressForAll, via Overture Maps Foundation",
+      "licence": "CC-BY-4.0",
+      "attribution": "© Instituto Nacional de Estadísticas. Available under CC BY 4.0. Distributed by AddressForAll.",
+      "attribution_source": "https://docs.overturemaps.org/attribution/ (Addresses, Chile; Overture's access date 2026-10-15; page read 2026-11-18)",
+      "verified": "2026-11-17",
+      "parser_notes": "Proposal only: parse the first comma-separated street part using its last number, keeping numeric street names, and accept S/N separately. Treat all remaining parts as place hints and rank street/number candidates by comuna or locality matches rather than assuming the final part is a comuna. Preserve seven-digit postcodes when supplied.",
+      "builder_notes": "Current tools/build_addresses.py keeps country = 'US', truncates postcodes with left(postcode, 5), strips region codes with state.upper()[:2], and uses ASCII-only normalization. Chile needs country selection, full postcodes and full CL-XX codes, plus a checked mapping of actual address_levels and postal_city fields; those Chilean fields have not been inspected. No builder or parser change is made here."
+    },
+    "terrain": {
+      "dataset": "Copernicus DEM GLO-30",
+      "licence": "Copernicus-WorldDEM-30",
+      "verified": "as in docs/regions-proposed.json"
+    },
+    "crops": {
+      "dataset": "ESA WorldCover 2021 (land cover, 10 m)",
+      "licence": "CC-BY-4.0",
+      "verified": "as in docs/regions-proposed.json"
+    }
+  },
+  "boxes_note": "All region boxes are approximate and not checked against official boundary polygons. CL-VS.box is mainland only; island_boxes hold separate provisional offshore cuts. A future build must include both, after checking official bounds."
+}

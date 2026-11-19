@@ -5,8 +5,8 @@
 
 Accented words stay whole and fold (niño finds nino), short words in Chinese, Hindi, Hebrew and Arabic count,
 typed symbols never reach a RegExp, Turkish İ folds to i, and every English query in the list ranks exactly as it
-did before. Words used outside the US (torch, rubbish, 999, 108, power cut) find the guide their US word finds.
-Needs Node on PATH; skipped without it. Never packaged."""
+did before. Words used outside the US (torch, rubbish, 999, 108, power cut, hydro, forest fire) find the guide
+their US word finds. Needs Node on PATH; skipped without it. Never packaged."""
 import json, re, shutil, subprocess, tempfile, unicodedata, unittest
 from pathlib import Path
 
@@ -83,17 +83,30 @@ SAME_GUIDE = {
     'bushfire': 'wildfire', 'bushfire smoke': 'wildfire smoke', 'heatwave': 'heat wave', 'barbecue': 'grill',
     'bbq': 'grill', 'sanitiser': 'sanitizer', 'hand sanitiser': 'hand sanitizer',
     'heatstroke': 'heat stroke',
+    'snowstorm': 'winter storm', 'snow squall': 'winter storm', 'whiteout': 'winter storm',
+    'polar vortex': 'winter storm', 'wind chill': 'winter storm', 'arctic outflow': 'winter storm',
+    'warming centre': 'winter storm', 'aqhi': 'air quality', 'AQHI': 'air quality',
+    'cooling centre': 'cooling center', 'washroom': 'sanitation',
 }
-# Words used in India with no single US twin among the guides: [guide, choice] that comes first.
+# Words used in India and Canada with no single US twin among the guides: [guide, choice] that comes first.
 FIRST = {
     'power cut': ['power', 'first-hours'], 'cyclone': ['disaster', 'flood'], 'monsoon': ['disaster', 'flood'],
     'borewell': ['water', 'outside'], 'tubewell': ['water', 'outside'], 'loose motions': ['hurt', 'diarrhea'],
+    'hydro': ['power', 'first-hours'], 'hydro is out': ['power', 'first-hours'],
+    'hydro outage': ['power', 'first-hours'], 'ice storm': ['shelter', 'cold'], 'freezing rain': ['shelter', 'cold'],
+    'extreme cold': ['shelter', 'cold'], 'cold snap': ['shelter', 'cold'], 'blizzard': ['shelter', 'cold'],
+    'furnace': ['shelter', 'cold'], 'furnace is out': ['shelter', 'cold'], 'frostnip': ['hurt', 'heatcold'],
+    'forest fire': ['disaster', 'wildfire'], 'forest fires': ['disaster', 'wildfire'],
+    'forest fire smoke': ['disaster', 'smoke'], 'Hydro': ['power', 'first-hours'], 'Frostnip': ['hurt', 'heatcold'],
 }
 # Searches the new words must not disturb: [guide, choice] that comes first.
 UNDISTURBED = {
     'bus': ['disaster', 'no-car'], 'no bus': ['disaster', 'no-car'], 'bar soap': ['sanitation', 'hands'],
     'heat wave': ['shelter', 'heat'], 'grill': ['food', 'cook'], 'canned food': ['food', 'cook'],
     'cut': ['hurt', 'bleeding'], 'well': ['land', 'water-source'], 'storm': ['disaster', 'flood'],
+    'ice': ['water', 'inhome'], 'micro-hydro': ['energy', None], 'wind': ['disaster', 'hurricane'],
+    'winter storm': ['shelter', 'cold'], 'furnace smells like gas': ['power', 'gas'], 'gas furnace': ['power', 'gas'],
+    'lost in the forest': ['comms', 'signal'],
 }
 TOPS = sorted({*SAME_AS, *SAME_AS.values(), *SAME_GUIDE, *SAME_GUIDE.values(), *FIRST, *UNDISTURBED})
 

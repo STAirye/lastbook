@@ -1,0 +1,166 @@
+{
+  "about": "Proposed region definitions for detailed offline maps of India, by state and union territory. A proposal for discussion (docs/REGIONS-IN.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-18",
+  "codes": {
+    "proposal": "ISO 3166-2:IN codes with IN- prefix (e.g. IN-MH for Maharashtra, IN-DL for Delhi, IN-KA for Karnataka).",
+    "why": "A bare IN collides with Indiana in STATE_CODES (engine/address_search.py). State-wise packaging mirrors US state maps and avoids oversized 30+ GB monolithic downloads.",
+    "verified": "ISO 3166-2:IN standard state codes."
+  },
+  "regions": [
+    {
+      "code": "IN-DL",
+      "name": "Delhi",
+      "country": "India",
+      "level": "union_territory",
+      "sample_placeholder_box": { "west": 76.838, "south": 28.404, "east": 77.348, "north": 28.883 },
+      "sample_box_with_margin_0_15": { "west": 76.68, "south": 28.25, "east": 77.50, "north": 29.04 },
+      "box_source": {
+        "status": "sample placeholder",
+        "note": "Preliminary bounds for illustration; to be recomputed from official Survey of India / OCHA COD-AB Level 1 boundary polygons."
+      }
+    },
+    {
+      "code": "IN-MH",
+      "name": "Maharashtra",
+      "country": "India",
+      "level": "state",
+      "sample_placeholder_box": { "west": 72.639, "south": 15.606, "east": 80.898, "north": 22.028 },
+      "sample_box_with_margin_0_15": { "west": 72.48, "south": 15.45, "east": 81.05, "north": 22.18 },
+      "box_source": {
+        "status": "sample placeholder",
+        "note": "Preliminary bounds for illustration; to be recomputed from official Survey of India / OCHA COD-AB Level 1 boundary polygons."
+      }
+    },
+    {
+      "code": "IN-KA",
+      "name": "Karnataka",
+      "country": "India",
+      "level": "state",
+      "sample_placeholder_box": { "west": 74.054, "south": 11.593, "east": 78.588, "north": 18.450 },
+      "sample_box_with_margin_0_15": { "west": 73.90, "south": 11.44, "east": 78.74, "north": 18.60 },
+      "box_source": {
+        "status": "sample placeholder",
+        "note": "Preliminary bounds for illustration; to be recomputed from official Survey of India / OCHA COD-AB Level 1 boundary polygons."
+      }
+    },
+    {
+      "code": "IN-TN",
+      "name": "Tamil Nadu",
+      "country": "India",
+      "level": "state",
+      "sample_placeholder_box": { "west": 76.230, "south": 8.068, "east": 80.347, "north": 13.565 },
+      "sample_box_with_margin_0_15": { "west": 76.08, "south": 7.91, "east": 80.50, "north": 13.72 },
+      "box_source": {
+        "status": "sample placeholder",
+        "note": "Preliminary bounds for illustration; to be recomputed from official Survey of India / OCHA COD-AB Level 1 boundary polygons."
+      }
+    },
+    {
+      "code": "IN-GJ",
+      "name": "Gujarat",
+      "country": "India",
+      "level": "state",
+      "sample_placeholder_box": { "west": 68.106, "south": 20.126, "east": 74.476, "north": 24.712 },
+      "sample_box_with_margin_0_15": { "west": 67.95, "south": 19.97, "east": 74.63, "north": 24.87 },
+      "box_source": {
+        "status": "sample placeholder",
+        "note": "Preliminary bounds for illustration; to be recomputed from official Survey of India / OCHA COD-AB Level 1 boundary polygons."
+      }
+    },
+    {
+      "code": "IN-WB",
+      "name": "West Bengal",
+      "country": "India",
+      "level": "state",
+      "sample_placeholder_box": { "west": 85.826, "south": 21.539, "east": 89.882, "north": 27.221 },
+      "sample_box_with_margin_0_15": { "west": 85.67, "south": 21.38, "east": 90.04, "north": 27.38 },
+      "box_source": {
+        "status": "sample placeholder",
+        "note": "Preliminary bounds for illustration; to be recomputed from official Survey of India / OCHA COD-AB Level 1 boundary polygons."
+      }
+    }
+  ],
+  "layers": {
+    "base_map_and_poi": {
+      "dataset": "Geofabrik India OSM extract (india-latest.osm.pbf or zonal extracts)",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "url": "https://download.geofabrik.de/asia/india.html",
+      "licence": "ODbL-1.0",
+      "licence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "verified": "2026-11-18"
+    },
+    "places": {
+      "sources": [
+        {
+          "dataset": "OSM named places (place=city, town, village, suburb)",
+          "publisher": "OpenStreetMap contributors",
+          "licence": "ODbL-1.0",
+          "licence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+          "verified": "2026-11-18"
+        },
+        {
+          "dataset": "India Post All India Pincode Directory",
+          "publisher": "Department of Posts / India Post",
+          "url": "https://data.gov.in/resource/all-india-pincode-directory-till-last-month",
+          "licence": "Government Open Data Licence (GODL) India",
+          "licence_url": "https://data.gov.in/government-open-data-license-india",
+          "verified": "2026-11-18"
+        },
+        {
+          "dataset": "OCHA COD-AB administrative boundaries (levels 0-3)",
+          "publisher": "OCHA",
+          "url": "https://data.humdata.org/dataset/cod-ab-ind",
+          "licence": "pending",
+          "status": "pending verification"
+        }
+      ],
+      "status": "proposed / pending verification",
+      "note": "Would let /api/places find towns, districts, villages and 6-digit PIN codes once the shared postcode design (section 4) is implemented."
+    },
+    "terrain": {
+      "dataset": "Copernicus DEM GLO-30 (30 m global raster)",
+      "publisher": "ESA / Airbus",
+      "licence": "Copernicus-WorldDEM-30",
+      "licence_url": "https://spacedata.copernicus.eu/documents/20123/122407/Copernicus_WorldDEM_30m_License.pdf",
+      "verified": "as in docs/regions-proposed.json"
+    },
+    "water": {
+      "dataset": "OSM water features (natural=water, water=reservoir, waterway=dam, waterway=river)",
+      "publisher": "OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "verified": "2026-11-18",
+      "pending_verification": "Official Central Water Commission (CWC) NRLD register with machine-readable open reuse terms."
+    },
+    "crops": {
+      "dataset": "ESA WorldCover 2021 (10 m global land cover)",
+      "publisher": "ESA WorldCover consortium",
+      "licence": "CC-BY-4.0",
+      "licence_url": "https://worldcover2021.esa.int/",
+      "verified": "as in docs/regions-proposed.json"
+    },
+    "buildings": {
+      "dataset": "Microsoft Global ML Building Footprints (India) / Google Open Buildings",
+      "publisher": "Microsoft / Google",
+      "licence": "CDLA-Permissive-2.0 / CC-BY-4.0 / ODbL",
+      "licence_url": "https://github.com/microsoft/GlobalMLBuildingFootprints",
+      "verified": "2026-11-18"
+    },
+    "addresses": {
+      "dataset": "Overture Maps Foundation address theme (where present) / OSM address tags",
+      "licence": "per source, pending",
+      "licence_url": "https://docs.overturemaps.org/attribution/",
+      "status": "pending verification / data gap",
+      "note": "Descriptive, landmark-based addressing format. Exact civic house numbers are sparse; locality, town, and 6-digit PIN code search via /api/places is prioritized."
+    }
+  },
+  "open_questions": {
+    "disputed_boundaries": "Depiction of external borders under Indian statutory context (Criminal Law Amendment Act 1961 - status unconfirmed, National Geospatial Policy 2022). Open decision for maintainers on clipping to Survey of India polygons vs displaying disclaimer notices.",
+    "postcode_parsing": "Support 6-digit Indian PIN codes while fully preserving existing 5-digit US ZIP behavior in engine/address_search.py."
+  },
+  "related": {
+    "issues": [23, 25, 31, 96],
+    "prs": [52, 61, 62, 71, 72, 97]
+  }
+}

@@ -82,8 +82,11 @@ def norm_ws(s):
 
 
 def readable(text):
-    """Skip table/spreadsheet debris and non-English runs that match every query by accident."""
-    words = re.findall(r"[A-Za-z][a-z']+", text)
+    """Skip table/spreadsheet debris and non-English runs that match every query by accident.
+
+    Words in capitals count too: manuals print their warnings that way ("DO NOT DRINK FLOOD WATER"). A curly
+    apostrophe (don’t) keeps a word whole, the same as a straight one."""
+    words = re.findall(r"[A-Za-z][A-Za-z'’]+", text)
     if len(words) < 12:
         return False
     letters = sum(len(w) for w in words)

@@ -56,6 +56,7 @@
     const h = Math.floor(m / 60), r = m % 60;
     return `about ${h} h${r ? ` ${r} min` : ''} left`;
   }
+  const retryIn = s => `The server is busy. Retrying in ${s < 60 ? 'under a minute' : Math.ceil(s / 60) + ' min'}`;
   const home = p => String(p || '').replace(/^\/Users\/[^/]+/, '~').replace(/^[A-Z]:\\Users\\[^\\]+\\/i, '');   // ~/… on a Mac; Documents\… on Windows, as Explorer names it
 
   /* ------------------------------------------------------------ the engine */
@@ -470,6 +471,7 @@
       })(),
       no_space: [`Not enough room on ${esc(diskName(d))}${e && e.need_bytes ? `: this needs ${size(e.need_bytes)}, and ${size(e.free_bytes)} is free` : ''}.`, 'Free some space, then retry, or go back and choose less.', 'retry'],
       network: ['The internet connection dropped.', 'What is downloaded is kept. Retry when you are online again.', 'retry'],
+      server: ['The download server stayed busy.', 'Your internet connection is fine, and what is downloaded is kept. Retry in a while.', 'retry'],
       checksum: ['The download came out damaged twice, so it was not used.', 'Retry to download it once more.', 'retry'],
       unpack: ['Unpacking did not finish.', 'Check there is room on the disk, then retry.', 'retry'],
       activate: ['The new library is ready but could not be switched in.', 'Retry, or close Lastbook and open it again.', 'retry'],
@@ -506,7 +508,7 @@
     if (showPct) bar.setAttribute('aria-valuenow', Math.round(pct)); else bar.removeAttribute('aria-valuenow');
     let t = '';
     if (it.state === 'done') t = it.bytes_total ? size(it.bytes_total) : '';
-    else if (it.state === 'downloading') t = [`${size(it.bytes_done)} of ${size(it.bytes_total)}`, rate(it.rate_bps), eta(it.eta_s)].filter(Boolean).join(' · ');
+    else if (it.state === 'downloading') t = [`${size(it.bytes_done)} of ${size(it.bytes_total)}`, it.retry_in_s ? retryIn(it.retry_in_s) : rate(it.rate_bps), eta(it.eta_s)].filter(Boolean).join(' · ');
     else if (it.state === 'paused' && noDownload(it)) t = `${STOPPED[it.paused_from] || 'Stopped'}${it.paused_from === 'unpacking' && it.bytes_done && it.bytes_total ? ` at ${size(it.bytes_done)} of ${size(it.bytes_total)}` : ''}. Nothing to download.`;
     else if ((it.state === 'waiting' || it.state === 'paused') && !it.bytes_done) t = it.bytes_total ? `${size(it.bytes_total)} to download${behind(it) ? ', after the one above' : ''}` : '';
  else if (it.state === 'paused' || it.state === 'waiting' || it.state === 'failed') t = it.bytes_total && it.bytes_done ? `${size(it.bytes_done)} of ${size(it.bytes_total)}` : '';

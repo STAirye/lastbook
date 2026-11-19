@@ -82,18 +82,33 @@ def app_version():
     return os.environ.get('LASTBOOK_VERSION') or None
 
 
+# Ubuntu releases by code name, for systems built on Ubuntu that number their own releases (Linux Mint 22 and elementary OS 8 are
+# both Ubuntu 24.04 underneath) and name the Ubuntu they are built on in os-release's UBUNTU_CODENAME. A name missing here is
+# simply not known: the check then says nothing about the system, as on any other Linux.
+UBUNTU_CODENAMES = {'jammy': '22.04', 'noble': '24.04', 'oracular': '24.10', 'plucky': '25.04', 'questing': '25.10', 'resolute': '26.04'}
+
+
+def linux_version(release):
+    """The Ubuntu version this Linux is, or is built on, from os-release's fields; None when it cannot be told. Only Ubuntu's
+    numbers compare with the Linux min_os: Mint's 22 or Fedora's 43 are not Ubuntu versions."""
+    if release.get('ID') == 'ubuntu':
+        return release.get('VERSION_ID') or None
+    return UBUNTU_CODENAMES.get(release.get('UBUNTU_CODENAME', '').lower())
+
+
 def os_version():
+    """This system's version as min_os counts it, or None when it cannot be told (and then no system is called too old)."""
     if sys.platform == 'darwin':
-        return platform.mac_ver()[0] or '0'
+        return platform.mac_ver()[0] or None
     if sys.platform == 'win32':
         w = sys.getwindowsversion()
         return f'{w.major}.{w.minor}.{w.build}'
-    if sys.platform.startswith('linux'):     # Ubuntu's 24.04, from os-release
+    if sys.platform.startswith('linux'):
         try:
-            return platform.freedesktop_os_release().get('VERSION_ID') or '0'
+            return linux_version(platform.freedesktop_os_release())
         except OSError:
-            return '0'
-    return '0'
+            return None
+    return None
 
 
 def validate(m, key):
@@ -201,9 +216,11 @@ class Updater:
         mine = _ver(self.version or '')
         if mine and _ver(offer['version']) <= mine:
             return self._set(state='up_to_date', latest=offer['version'])
-        if offer['min_os'] and _ver(os_version()) and _ver(os_version()) < _ver(offer['min_os']):
+        have = _ver(os_version())
+        if offer['min_os'] and have and have < _ver(offer['min_os']):
+            built_on = ', or a system built on it' if self.key == 'linux' else ''
             return self._set(state='too_old_os', version=offer['version'],
-                             message=f"Version {offer['version']} needs {OS_NAMES.get(self.key, self.key)} {offer['min_os']} or later.")
+                             message=f"Version {offer['version']} needs {OS_NAMES.get(self.key, self.key)} {offer['min_os']} or later{built_on}.")
         self._set(state='available', version=offer['version'])
 
 

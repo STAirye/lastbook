@@ -8,6 +8,7 @@ import sys
 import time
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -36,13 +37,14 @@ class UpdateTest(unittest.TestCase):
         cls.srv, cls.ctx, cls.base = T.start_server(cls.tmp, cls.files)
 
     def meta(self, version='1.2.0', min_os='10.0', **extra):
-        self.files.data['app-v1.json'] = json.dumps({'version': 1, 'mac': dict(version=version, min_os=min_os, **extra),
-                                                     'windows': dict(version=version, min_os=min_os, **extra)}).encode()
+        self.files.data['app-v1.json'] = json.dumps({'version': 1, **{k: dict(version=version, min_os=min_os, **extra) for k in ('mac', 'windows', 'linux')}}).encode()
 
-    def check(self, version='1.1.2', url=None):
-        u = update.Updater(url or f'{self.base}/app-v1.json', allowed=ALLOWED, context=self.ctx, key='mac', version=version)
-        u.check()
-        return wait(u)
+    def check(self, version='1.1.2', url=None, key='mac', system='14.0'):
+        """system: this computer's version as os_version() would say, so the result does not depend on the machine running the tests."""
+        u = update.Updater(url or f'{self.base}/app-v1.json', allowed=ALLOWED, context=self.ctx, key=key, version=version)
+        with mock.patch.object(update, 'os_version', return_value=system):
+            u.check()
+            return wait(u)
 
     def test_available(self):
         self.meta(url='https://evil.example/x.dmg', sha256='0' * 64, size=1)    # anything else in the file is not read
@@ -70,6 +72,35 @@ class UpdateTest(unittest.TestCase):
     def test_too_old_os(self):
         self.meta(min_os='99.0')
         self.assertEqual(self.check()['state'], 'too_old_os')
+
+    def test_unknown_system_is_never_too_old(self):
+        self.meta(min_os='99.0')
+        self.assertEqual(self.check(system=None)['state'], 'available')
+
+    def test_linux_built_on_ubuntu(self):
+        self.meta(min_os='24.04')
+        self.assertEqual(self.check(key='linux', system='24.04')['state'], 'available')
+        s = self.check(key='linux', system='22.04')
+        self.assertEqual(s['state'], 'too_old_os')
+        self.assertEqual(s['message'], 'Version 1.2.0 needs Ubuntu 24.04 or later, or a system built on it.')
+
+    def test_linux_version(self):
+        cases = [
+            ({'ID': 'ubuntu', 'VERSION_ID': '24.04', 'UBUNTU_CODENAME': 'noble'}, '24.04'),
+            ({'ID': 'ubuntu', 'VERSION_ID': '26.04', 'UBUNTU_CODENAME': 'resolute'}, '26.04'),
+            ({'ID': 'linuxmint', 'ID_LIKE': 'ubuntu debian', 'VERSION_ID': '22.1', 'UBUNTU_CODENAME': 'noble'}, '24.04'),   # not 22.1
+            ({'ID': 'elementary', 'ID_LIKE': 'ubuntu debian', 'VERSION_ID': '8', 'UBUNTU_CODENAME': 'noble'}, '24.04'),       # not 8
+            ({'ID': 'zorin', 'ID_LIKE': 'ubuntu debian', 'VERSION_ID': '17', 'UBUNTU_CODENAME': 'jammy'}, '22.04'),
+            ({'ID': 'pop', 'ID_LIKE': 'ubuntu debian', 'VERSION_ID': '24.04', 'UBUNTU_CODENAME': 'noble'}, '24.04'),
+            ({'ID': 'linuxmint', 'VERSION_ID': '30', 'UBUNTU_CODENAME': 'someday'}, None),      # a code name this version does not know
+            ({'ID': 'debian', 'VERSION_ID': '13'}, None),
+            ({'ID': 'fedora', 'VERSION_ID': '43'}, None),
+            ({'ID': 'arch', 'BUILD_ID': 'rolling'}, None),
+            ({}, None),
+        ]
+        for release, want in cases:
+            with self.subTest(release=release.get('ID')):
+                self.assertEqual(update.linux_version(release), want)
 
     def test_windows_build_numbers(self):
         self.assertEqual(update._ver('10.0.26200'), (10, 0, 26200))     # five-digit Windows builds must compare

@@ -1,0 +1,548 @@
+{
+  "about": "Proposed region definitions for a detailed map of the United Arab Emirates: all seven emirates, proposed as one region for the whole country, with a box for each emirate so that seven separate maps remain possible. A proposal for discussion (docs/REGIONS-AE.md); no code reads this file, and it does not ship. Sources are national or global, so they are listed once under country_layers, and each region points there.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "AE for the whole country; ISO 3166-2:AE codes AE-AZ, AE-AJ, AE-DU, AE-FU, AE-RK, AE-SH, AE-UQ for the seven emirates.",
+    "why": "AE is not in STATE_CODES (engine/address_search.py) or NAMES (packaging/state_maps.py). The part after the hyphen is not safe alone: AZ already means Arizona.",
+    "verified": "Read from Wikipedia's copy of the ISO list and from the shapeISO field of geoBoundaries' emirate file, which carries all seven. The ISO site itself was not checked."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "dams": "water.sqlite (nid part today)",
+    "crops": "crops.sqlite (land cover, since no usable crop map was found)",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "roads": "base map (OSM today)",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite"
+  },
+  "licences": {
+    "ODbL-1.0": {
+      "name": "Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\"",
+      "share_alike": true,
+      "verified": "as for the US map"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "url": "see docs/regions-proposed.json",
+      "attribution": "see docs/regions-proposed.json",
+      "share_alike": false,
+      "verified": "as in docs/regions-proposed.json; not reopened"
+    },
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Credit the publisher, link the licence, say if changed.",
+      "share_alike": false,
+      "verified": "named and set out on bayanat.ae's terms of use, opened 2026-11-17; the terms give no fixed credit wording"
+    },
+    "CDLA-Permissive-2.0": {
+      "name": "Community Data License Agreement - Permissive 2.0",
+      "url": "https://cdla.dev/permissive-2-0/",
+      "attribution": "none fixed",
+      "share_alike": false,
+      "verified": "named in Microsoft's README, opened 2026-11-17; licence text not opened"
+    },
+    "CC-BY-IGO": {
+      "name": "Creative Commons Attribution for Intergovernmental Organisations",
+      "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "Credit OCHA and its source.",
+      "share_alike": false,
+      "verified": "as in docs/regions-proposed.json; the UAE record on HDX could not be opened, so its licence is not confirmed"
+    },
+    "UAE-Federal-Open-Data-Licence": {
+      "name": "UAE Federal Open Data Licence",
+      "url": null,
+      "attribution": "Credit the publishing entity as the source.",
+      "share_alike": null,
+      "conditions": "Summary seen in search results: worldwide, royalty-free, perpetual, non-exclusive licence to use and re-use. Full text not read.",
+      "verified": "search only; the government.ae PDF that holds it refused automated reading"
+    },
+    "Dubai-Open-Data-Licence": {
+      "name": "Open Data Licence (Dubai Data Establishment)",
+      "url": "https://www.dubaipulse.gov.ae/docs/DDE%20_%20DRAFT_Open_Data%20Licence_LONG_Form_English%203.pdf",
+      "attribution": "Name the originator, keep any copyright notice, link the original where practicable. No fixed wording.",
+      "share_alike": true,
+      "conditions": "Worldwide, royalty-free, non-exclusive; commercial use allowed. Adapted material must be offered under the same licence; original information may not be sold; no use of the licensor's or the Dubai Government's name to suggest a link; images, logos, trademarks and personal data are excluded. UAE law as applied in Dubai.",
+      "verified": "opened 2026-11-17; the text carries no date or version and its file name says DRAFT"
+    },
+    "Makani-open-data-terms": {
+      "name": "Makani open data terms (Dubai Municipality)",
+      "url": "https://www.dm.gov.ae/open-data/open-data-for-makani/",
+      "attribution": "Name Dubai Municipality as the source.",
+      "share_alike": null,
+      "conditions": "Makani data may not be sold; for-profit applications are allowed where they serve the public interest of Dubai or the UAE.",
+      "verified": "search only"
+    },
+    "not-specified": {
+      "name": "No licence seen",
+      "url": null,
+      "attribution": null,
+      "share_alike": null,
+      "conditions": "Treated as not yet usable, as in docs/REGIONS-AR.md and docs/REGIONS-TH.md.",
+      "verified": "n/a"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "Copernicus DEM GLO-30 Public",
+        "publisher": "ESA / Airbus",
+        "url": "https://registry.opendata.aws/copernicus-dem/",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Surface model. The page says some countries' tiles are not public without naming them; whether every UAE tile is public was not checked."
+      }
+    ],
+    "water": [
+      {
+        "dataset": "OSM waterways and water areas (Geofabrik GCC States extract)",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/asia/gcc-states.html",
+        "licence": "ODbL-1.0",
+        "verified": "search only; the page refused automated reading",
+        "role": "primary",
+        "notes": "The extract holds six countries; the UAE has to be cut out of it. Most watercourses are wadis that run only after rain."
+      }
+    ],
+    "dams": [
+      {
+        "dataset": "OSM dams and reservoirs",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/asia/gcc-states.html",
+        "licence": "ODbL-1.0",
+        "verified": "coverage not measured",
+        "role": "primary"
+      },
+      {
+        "dataset": "Dams in the United Arab Emirates (point Shapefile)",
+        "publisher": "Ministry of Climate Change and Environment; copy held by NYU Spatial Data Repository",
+        "url": "https://archivefda.dlib.nyu.edu/handle/2451/44229",
+        "licence": "not-specified",
+        "verified": "search only",
+        "role": "cross-check",
+        "notes": "Downloaded by NYU from the ministry's map service in December 2018; collection date unknown. Not usable until a licence is found."
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "ESA WorldCover 2021, 10 m",
+        "publisher": "ESA WorldCover consortium",
+        "url": "see docs/regions-proposed.json",
+        "licence": "CC-BY-4.0",
+        "verified": "as in docs/regions-proposed.json; not reopened",
+        "role": "primary",
+        "notes": "Land cover, not crop types."
+      },
+      {
+        "dataset": "Palm Tree Plantation Areas in the United Arab Emirates (polygon Shapefile)",
+        "publisher": "Ministry of Climate Change and Environment; copy held by NYU Spatial Data Repository",
+        "url": "https://archive.nyu.edu/handle/2451/44247",
+        "licence": "not-specified",
+        "verified": "search only",
+        "role": "not usable as found",
+        "notes": "Downloaded by NYU in December 2018; collection date unknown; no licence seen."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "Overture buildings",
+        "publisher": "Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/attribution",
+        "licence": "ODbL-1.0",
+        "verified": "2026-11-17",
+        "role": "primary",
+        "notes": "Blends OSM with Microsoft's footprints. UAE coverage not measured."
+      },
+      {
+        "dataset": "Global ML Building Footprints",
+        "publisher": "Microsoft",
+        "url": "https://github.com/microsoft/GlobalMLBuildingFootprints",
+        "licence": "CDLA-Permissive-2.0",
+        "verified": "2026-11-17",
+        "role": "alternative",
+        "notes": "README opened: 1.4 billion buildings, file index of 13 August 2026 with 225 regions. The index itself could not be reached, so whether and how much it holds for the UAE was not read. Overture lists the same source under ODbL."
+      }
+    ],
+    "places": [
+      {
+        "dataset": "OSM named places, with name, name:ar and name:en",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/asia/gcc-states.html",
+        "licence": "ODbL-1.0",
+        "verified": "coverage not measured",
+        "role": "primary"
+      },
+      {
+        "dataset": "COD-AB United Arab Emirates, levels 0 and 1",
+        "publisher": "OCHA, from the Federal Competitiveness and Statistics Centre and ITOS",
+        "url": "https://data.humdata.org/dataset/cod-ab-are",
+        "licence": "CC-BY-IGO",
+        "verified": "search only; HDX could not be opened",
+        "role": "boundaries"
+      },
+      {
+        "dataset": "Dubai communities and sectors (dm_community-open, dm_sectors-open)",
+        "publisher": "Dubai Municipality on Dubai Pulse",
+        "url": "https://www.dubaipulse.gov.ae/organisation/dubai-municipality/service/dm-location",
+        "licence": "Dubai-Open-Data-Licence",
+        "verified": "search only; files not opened",
+        "role": "supplement, Dubai only"
+      }
+    ],
+    "roads": [
+      {
+        "dataset": "OSM, as today (Geofabrik GCC States extract, cut to the UAE)",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/asia/gcc-states.html",
+        "licence": "ODbL-1.0",
+        "verified": "search only",
+        "role": "primary"
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "Overture addresses",
+        "publisher": "Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/attribution",
+        "licence": "n/a",
+        "verified": "2026-11-17",
+        "role": "none",
+        "notes": "41 countries and territories are listed; the UAE is not one of them."
+      },
+      {
+        "dataset": "Makani building entrances (dm_dmgisnet_enterances-open)",
+        "publisher": "Dubai Municipality on Dubai Pulse",
+        "url": "https://www.dubaipulse.gov.ae/organisation/dubai-municipality/service/dm-location",
+        "licence": "Dubai-Open-Data-Licence",
+        "verified": "search only; file not opened",
+        "role": "candidate, Dubai only",
+        "notes": "Listed with the date 23 April 2024. Columns, row count and whether it holds Makani numbers and coordinates are not known. Makani's own terms forbid selling the data."
+      },
+      {
+        "dataset": "Onwani addresses",
+        "publisher": "Department of Municipalities and Transport, Abu Dhabi",
+        "url": null,
+        "licence": "not-specified",
+        "verified": "search only",
+        "role": "none found as a file",
+        "notes": "About 200,000 numbered buildings, 19,000 streets and 240 districts by news reports; no open bulk file was found."
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OSM amenities as the US map uses them",
+        "publisher": "OpenStreetMap contributors",
+        "url": "https://download.geofabrik.de/asia/gcc-states.html",
+        "licence": "ODbL-1.0",
+        "verified": "counts not measured; taginfo and Overpass refused automated reading",
+        "role": "primary"
+      },
+      {
+        "dataset": "Emirates Health Services facilities (geospatial open data, Dubai and the Northern Emirates)",
+        "publisher": "Emirates Health Services",
+        "url": "https://ehs.gov.ae/en/open-data/number-of-the-facilities",
+        "licence": "UAE-Federal-Open-Data-Licence",
+        "verified": "search only; licence on the page not read",
+        "role": "candidate"
+      },
+      {
+        "dataset": "Licensed medical facilities by emirate, sector, type and location",
+        "publisher": "Ministry of Health and Prevention",
+        "url": "https://mohap.gov.ae/en/open-data/mohap-open-data",
+        "licence": "UAE-Federal-Open-Data-Licence",
+        "verified": "search only; whether it has coordinates is not known",
+        "role": "cross-check"
+      },
+      {
+        "dataset": "Dubai Pulse point datasets (public transport stations, schools, parks and beaches)",
+        "publisher": "Dubai government entities",
+        "url": "https://www.dubaipulse.gov.ae/data/organisation",
+        "licence": "Dubai-Open-Data-Licence",
+        "verified": "search only; some datasets show a Request Permission step",
+        "role": "supplement, Dubai only"
+      }
+    ]
+  },
+  "addressing": {
+    "levels": "Emirate; city; community, district or area; street; building or villa. In practice a P.O. Box as well.",
+    "order": "Postal: name, P.O. Box number, emirate or city, country (\"PO BOX 111 / DUBAI / UNITED ARAB EMIRATES\"). Abu Dhabi's Onwani: building number, street name, city (\"26, Al Seray Street, Khalifa City, Abu Dhabi\", from a news report).",
+    "postal_code": {
+      "format": "None on the Universal Postal Union's sheet: deliveries are made to P.O. Boxes only. News reports say Onwani gives Abu Dhabi locations a postal code; its format was not found.",
+      "example_pattern": null,
+      "source": {
+        "dataset": "Addressing sheet for the United Arab Emirates (09/2014)",
+        "publisher": "Universal Postal Union",
+        "url": "https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/areEn.pdf",
+        "licence": "n/a",
+        "verified": "2026-11-17"
+      }
+    },
+    "geographic_codes": {
+      "makani": "Ten digits, written as two groups of five (\"30032 95320\"), one per building entrance; by a trade press report five digits are an easting and five a northing. Official in Dubai, Ajman, Umm Al Quwain, Fujairah and Ras Al Khaimah by the app's own description. The grid behind the number was not found.",
+      "verified": "search only"
+    },
+    "notes": "Addresses are written in Arabic or in Latin letters, and Latin spellings vary (Abū Z̧aby and Abu Dhabi, Ash Shāriqah and Sharjah). normalize() in engine/address_search.py keeps only a-z and 0-9, so Arabic script is dropped and \"Ra's al Khaymah\" becomes \"ra s al khaymah\". is_address_query() needs a number and then a space, so \"26 Al Seray Street\" is an address query and \"26, Al Seray Street\" is not; it reads \"30032 95320\" as house number 30032, and _parts() then takes 95320 as a five-digit postcode, leaving no street. tools/build_addresses.py keeps only country = 'US'. Checked in this repository on 2026-11-17."
+  },
+  "bbox_source": {
+    "dataset": "geoBoundaries gbOpen ARE ADM1 (boundaryID ARE-ADM1-86790563)",
+    "publisher": "William & Mary geoLab (from OpenStreetMap, Wambacher)",
+    "url": "https://github.com/wmgeolab/geoBoundaries/tree/main/releaseData/gbOpen/ARE/ADM1",
+    "licence": "ODbL-1.0",
+    "verified": "2026-11-17",
+    "sha256": "f6f0097b183518b7ddedd48c60b7e864e222156d2f0227bd345f271c2dd3d873",
+    "method": "Extent of every vertex of the emirate's polygons in the full-resolution GeoJSON (7 features, 2,254,355 bytes; source data of 19 January 2023, built 12 December 2023); margin is 0.15 degrees, rounded outward to 0.01.",
+    "cross_check": "Natural Earth 1:10m countries gives 51.5693, 22.6209, 56.3836, 26.0748 for the UAE; the two agree to 0.04 degrees on the west edge and 0.011 on the others."
+  },
+  "country": {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "name_ar": "الإمارات العربية المتحدة",
+    "admin_level": "country",
+    "members": [
+      "AE-AJ",
+      "AE-AZ",
+      "AE-DU",
+      "AE-FU",
+      "AE-RK",
+      "AE-SH",
+      "AE-UQ"
+    ],
+    "bbox": {
+      "west": 51.5318,
+      "south": 22.6316,
+      "east": 56.3816,
+      "north": 26.0695
+    },
+    "bbox_with_margin": {
+      "west": 51.38,
+      "south": 22.48,
+      "east": 56.54,
+      "north": 26.22
+    },
+    "layers": "country_layers"
+  },
+  "grouped": [
+    {
+      "code": null,
+      "name": "Dubai and the Northern Emirates",
+      "note": "An alternative if one map for the country is too large: Abu Dhabi alone, and these six together. No ISO code exists for the group.",
+      "members": [
+        "AE-AJ",
+        "AE-DU",
+        "AE-FU",
+        "AE-RK",
+        "AE-SH",
+        "AE-UQ"
+      ],
+      "bbox": {
+        "west": 54.8905,
+        "south": 24.6245,
+        "east": 56.3816,
+        "north": 26.0695
+      },
+      "bbox_with_margin": {
+        "west": 54.74,
+        "south": 24.47,
+        "east": 56.54,
+        "north": 26.22
+      }
+    }
+  ],
+  "boundary_notes": [
+    "Ajman, Dubai, Fujairah, Ras Al Khaimah and Sharjah each have two or more separate pieces of at least 10 km2 in this file (Ajman three, Fujairah three, Sharjah four); Dubai's second piece lies about 34 km east of its main one.",
+    "With the margin, each emirate's box reaches into all six others.",
+    "No polygon in this file covers Abu Musa or the Greater and Lesser Tunbs (tested at 55.03 E 25.875 N, 55.305 E 26.26 N and 55.145 E 26.24 N; the positions are from general knowledge).",
+    "The country box also holds parts of Oman and Saudi Arabia, as any box holds its neighbours."
+  ],
+  "regions": [
+    {
+      "code": "AE-AJ",
+      "name": "Ajman",
+      "name_romanised": "‘Ajmān",
+      "name_ar": "عجمان",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 3,
+      "bbox": {
+        "west": 55.4229,
+        "south": 24.7395,
+        "east": 56.1056,
+        "north": 25.4507
+      },
+      "bbox_with_margin": {
+        "west": 55.27,
+        "south": 24.58,
+        "east": 56.26,
+        "north": 25.61
+      },
+      "margin_box_contains": [],
+      "addressing_system": "Makani",
+      "layers": "country_layers"
+    },
+    {
+      "code": "AE-AZ",
+      "name": "Abu Dhabi",
+      "name_romanised": "Abū Z̧aby",
+      "name_ar": "أبو ظبي",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 66,
+      "bbox": {
+        "west": 51.5318,
+        "south": 22.6316,
+        "east": 56.0174,
+        "north": 25.2528
+      },
+      "bbox_with_margin": {
+        "west": 51.38,
+        "south": 22.48,
+        "east": 56.17,
+        "north": 25.41
+      },
+      "margin_box_contains": [],
+      "addressing_system": "Onwani",
+      "layers": "country_layers"
+    },
+    {
+      "code": "AE-DU",
+      "name": "Dubai",
+      "name_romanised": "Dubayy",
+      "name_ar": "دبي",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 9,
+      "bbox": {
+        "west": 54.8905,
+        "south": 24.6245,
+        "east": 56.2036,
+        "north": 25.3697
+      },
+      "bbox_with_margin": {
+        "west": 54.74,
+        "south": 24.47,
+        "east": 56.36,
+        "north": 25.52
+      },
+      "margin_box_contains": [
+        "AE-AJ"
+      ],
+      "addressing_system": "Makani",
+      "layers": "country_layers"
+    },
+    {
+      "code": "AE-FU",
+      "name": "Fujairah",
+      "name_romanised": "Al Fujayrah",
+      "name_ar": "الفجيرة",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 3,
+      "bbox": {
+        "west": 55.9644,
+        "south": 24.8661,
+        "east": 56.3769,
+        "north": 25.6608
+      },
+      "bbox_with_margin": {
+        "west": 55.81,
+        "south": 24.71,
+        "east": 56.53,
+        "north": 25.82
+      },
+      "margin_box_contains": [],
+      "addressing_system": "Makani",
+      "layers": "country_layers"
+    },
+    {
+      "code": "AE-RK",
+      "name": "Ras Al Khaimah",
+      "name_romanised": "Ra’s al Khaymah",
+      "name_ar": "رأس الخيمة",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 4,
+      "bbox": {
+        "west": 55.731,
+        "south": 24.8203,
+        "east": 56.2717,
+        "north": 26.0695
+      },
+      "bbox_with_margin": {
+        "west": 55.58,
+        "south": 24.67,
+        "east": 56.43,
+        "north": 26.22
+      },
+      "margin_box_contains": [
+        "AE-FU"
+      ],
+      "addressing_system": "Makani",
+      "layers": "country_layers"
+    },
+    {
+      "code": "AE-SH",
+      "name": "Sharjah",
+      "name_romanised": "Ash Shāriqah",
+      "name_ar": "الشارقة",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 9,
+      "bbox": {
+        "west": 55.3498,
+        "south": 24.7534,
+        "east": 56.3816,
+        "north": 25.6291
+      },
+      "bbox_with_margin": {
+        "west": 55.19,
+        "south": 24.6,
+        "east": 56.54,
+        "north": 25.78
+      },
+      "margin_box_contains": [
+        "AE-AJ",
+        "AE-FU",
+        "AE-UQ"
+      ],
+      "addressing_system": "not researched",
+      "layers": "country_layers"
+    },
+    {
+      "code": "AE-UQ",
+      "name": "Umm Al Quwain",
+      "name_romanised": "Umm al Qaywayn",
+      "name_ar": "أم القيوين",
+      "country": "United Arab Emirates",
+      "country_iso": "AE",
+      "admin_level": "emirate",
+      "polygons_in_source": 5,
+      "bbox": {
+        "west": 55.5211,
+        "south": 25.2756,
+        "east": 55.9281,
+        "north": 25.6568
+      },
+      "bbox_with_margin": {
+        "west": 55.37,
+        "south": 25.12,
+        "east": 56.08,
+        "north": 25.81
+      },
+      "margin_box_contains": [],
+      "addressing_system": "Makani",
+      "layers": "country_layers"
+    }
+  ]
+}

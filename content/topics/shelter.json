@@ -16,6 +16,18 @@
   "cold",
   "freezing",
   "winter",
+  "ice storm",
+  "freezing rain",
+  "blizzard",
+  "snowstorm",
+  "snow squall",
+  "whiteout",
+  "extreme cold",
+  "cold snap",
+  "polar vortex",
+  "wind chill",
+  "arctic outflow",
+  "warming centre",
   "hypothermia",
   "warm",
   "heater",
@@ -29,6 +41,7 @@
   "wildfire",
   "smoke",
   "air quality",
+  "AQHI",
   "N95",
   "mask",
   "evacuate",
@@ -45,7 +58,8 @@
   "high-rise",
   "city",
   "upper floor",
-  "cooling center"
+  "cooling center",
+  "cooling centre"
  ],
  "choices": [
   {
@@ -106,7 +120,7 @@
   {
    "id": "cold",
    "label": "It's freezing and the heat is out",
-   "hint": "Winter storm, no heating, staying warm overnight",
+   "hint": "Winter storm or blizzard, furnace out, no heating in the cold, staying warm overnight",
    "read": [
     {
      "doc": "f6becaef71ffd5",

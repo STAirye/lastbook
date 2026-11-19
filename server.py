@@ -17,6 +17,7 @@ requests, and adds a few read-only endpoints:
   /api/map/tile/<z>/<x>/<y>   offline street map vector tile (SoCal OpenStreetMap)
   /api/map/near?lat=&lon=     nearest help points (hospital, pharmacy, water, fire station...)
   /api/places?q=              place finder (ZIP codes, towns, named places)
+  /api/battery                this computer's battery (Linux so far), read when asked; this computer only
 
 Nothing in library-data is written. Caches go to derived/cache.
 """
@@ -2008,6 +2009,9 @@ class Handler(library.Handler):
             if path.startswith('/api/update/'):
                 from engine import update
                 return update.handle(self, 'GET', path)
+            if path == '/api/battery':   # this computer's battery, read when asked: engine/setup/hardware.py, this computer only
+                from engine.setup import hardware
+                return hardware.handle_battery(self)
             if path in ('/', '/index.html'):
                 return self.send_static(WEB / 'index.html')
             if path.startswith('/ui/'):

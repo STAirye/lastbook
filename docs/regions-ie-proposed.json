@@ -1,0 +1,240 @@
+{
+  "about": "Proposed region definition for a detailed map of the island of Ireland (the Republic of Ireland and Northern Ireland) as one region. A proposal for discussion (docs/REGIONS-IE.md); no code reads this file, and it does not ship.",
+  "status": "proposal",
+  "checked": "2026-11-17",
+  "codes": {
+    "proposal": "No code chosen: the scheme the maintainers pick for countries (IE, or eu-ie as in PR #84). Name: Ireland and Northern Ireland.",
+    "why": "A bare IE collides with no US code in STATE_CODES (engine/address_search.py).",
+    "caveat": "IE is the ISO 3166-1 code of the Republic only; Northern Ireland is GB-NIR (general knowledge, not checked against the ISO site).",
+    "pr_84": "PR #84's eu-ie uses the same extract, titled Ireland, boxed by Geofabrik's polygon; its eu-gb uses the united-kingdom extract, which also covers Northern Ireland."
+  },
+  "regions": [
+    {
+      "code": "IE",
+      "name": "Ireland and Northern Ireland",
+      "countries": [
+        "Ireland",
+        "United Kingdom (Northern Ireland)"
+      ],
+      "level": "island",
+      "box": {
+        "west": -10.6909,
+        "south": 51.3887,
+        "east": -5.4328,
+        "north": 55.4503
+      },
+      "box_with_margin_0_15": {
+        "west": -10.85,
+        "south": 51.23,
+        "east": -5.28,
+        "north": 55.61,
+        "rounding": "outward"
+      },
+      "box_source": {
+        "republic": {
+          "dataset": "Tailte Éireann, National Statutory Boundaries - Counties Ungeneralised - 2026",
+          "url": "https://services-eu1.arcgis.com/FH5XCsx8rYXqnjF5/ArcGIS/rest/services/National_Statutory_Boundaries_-_Counties_Ungeneralised_-_2026/FeatureServer/1",
+          "method": "Vertex extent of all 9,261 polygons (2,030,853 vertices) fetched with outSR=4326. The service's returnExtentOnly answer is the reprojected corners of its Irish Transverse Mercator envelope and is not used.",
+          "extent": {
+            "west": -10.6909,
+            "south": 51.3887,
+            "east": -5.9945,
+            "north": 55.4503
+          },
+          "verified": "2026-11-17"
+        },
+        "northern_ireland": {
+          "dataset": "ONS Countries December 2023 Boundaries UK BFC, Northern Ireland row",
+          "url": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Countries_December_2023_Boundaries_UK_BFC/FeatureServer/0",
+          "method": "Vertex extent of the Northern Ireland polygon (206,626 vertices), used only to compute the east edge because OSNI's service did not resolve.",
+          "extent": {
+            "west": -8.1775,
+            "south": 54.0227,
+            "east": -5.4328,
+            "north": 55.313
+          },
+          "licence": "not read",
+          "verified": "2026-11-17"
+        },
+        "upper_bound": {
+          "dataset": "Geofabrik ireland-and-northern-ireland.poly (extract clipping polygon, 10 distinct vertices)",
+          "url": "https://download.geofabrik.de/europe/ireland-and-northern-ireland.poly",
+          "box": {
+            "west": -14.4022,
+            "south": 49.6,
+            "east": -5.0593,
+            "north": 56.8655
+          },
+          "verified": "2026-11-17",
+          "caveat": "A coarse hull, far larger than the island. The extract's clipping shape, not a box for cutting map layers."
+        },
+        "great_britain_inside_box": "Scotland: south Kintyre with Campbeltown, Machrihanish and Sanda; west Arran; south tip of Islay. Wales: St David's Head, Ramsey Island, Grassholm, most of Skomer. None is inside the Irish extract, so they hold only base-map detail unless the United Kingdom extract is added. The Isle of Man and the Rhins of Galloway are outside."
+      }
+    }
+  ],
+  "layers": {
+    "base_map_and_poi": {
+      "dataset": "OSM extract ireland-and-northern-ireland-latest.osm.pbf (398 MB) or -latest-free.gpkg.zip (954 MB)",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "url": "https://download.geofabrik.de/europe/ireland-and-northern-ireland.html",
+      "licence": "ODbL-1.0",
+      "verified": "2026-11-17",
+      "data_up_to": "2026-11-16T21:22:36Z"
+    },
+    "places": {
+      "sources": [
+        {
+          "dataset": "OSM named places and townlands (61,097 locality=townland areas)",
+          "licence": "ODbL-1.0",
+          "verified": "2026-11-17"
+        },
+        {
+          "dataset": "Logainm, Placenames Database of Ireland (Irish-language forms)",
+          "url": "https://docs.gaois.ie/en/data/logainm/v1.0/licence",
+          "licence": "CC-BY-4.0",
+          "attribution": "Irish-language placename data by Logainm © Government of Ireland and licensed under CC BY 4.0.",
+          "verified": "2026-11-17",
+          "caveat": "A Linked Logainm page reportedly names ODbL 1.0 (search only). API key access; no bulk file found. Confirm bulk redistribution with Logainm."
+        },
+        {
+          "dataset": "Tailte Éireann National Statutory Boundaries (counties, townlands)",
+          "licence": "CC-BY-4.0 on data.gov.ie (search only); tailte.ie: free to use with Tailte Éireann attributed as the content creator, and 'A standard Creative Commons licence applies to this data' (opened)",
+          "verified": "2026-11-17"
+        },
+        {
+          "dataset": "OSNI Open Data Largescale Boundaries - Country 2016",
+          "url": "https://www.data.gov.uk/dataset/osni-open-data-largescale-boundaries-country-20161",
+          "licence": "OGL-UK-3.0",
+          "verified": "2026-11-17",
+          "attribution": "Contains LPS Intellectual Property © Crown copyright and database right (year). This information is licensed under the terms of the Open Government Licence."
+        }
+      ]
+    },
+    "terrain": {
+      "proposal": "Copernicus DEM GLO-30 for the whole island (a surface model).",
+      "licence": "Copernicus-WorldDEM-30",
+      "verified": "search only (licence PDF did not render)",
+      "upgrades": [
+        {
+          "dataset": "Geological Survey Ireland open topographic LiDAR (DTM and DSM, 1 to 2 m, survey areas only)",
+          "url": "https://data.gov.ie/en_GB/dataset/open-topographic-lidar-data",
+          "licence": "CC-BY-4.0",
+          "verified": "2026-11-17"
+        },
+        {
+          "dataset": "OSNI Open Data 10 m DTM (Northern Ireland)",
+          "url": "https://www.nidirect.gov.uk/articles/10m-digital-terrain-model-height-data",
+          "licence": "LPS Open Government Data Licence (text not read)",
+          "verified": "search only"
+        }
+      ]
+    },
+    "water": {
+      "proposal": "OSM lakes, rivers, reservoirs and dams for a first build.",
+      "candidates": [
+        {
+          "dataset": "EPA Water Framework Directive river waterbodies",
+          "url": "https://data.gov.ie/dataset/water-framework-directive-river-waterbodies",
+          "licence": "CC-BY-4.0",
+          "verified": "2026-11-17",
+          "caveat": "Seen only as a web map service, not a download."
+        },
+        {
+          "dataset": "Tailte Éireann Lakes & Reservoirs, National 250k Map of Ireland",
+          "licence": "CC-BY-4.0",
+          "verified": "search only"
+        },
+        {
+          "dataset": "Uisce Éireann reservoirs list (XLSX)",
+          "url": "https://www.water.ie/open-data",
+          "licence": "not seen",
+          "verified": "search only"
+        },
+        {
+          "dataset": "Northern Ireland controlled reservoirs register (Reservoirs Act (Northern Ireland) 2015)",
+          "licence": "no open download found",
+          "verified": "search only",
+          "caveat": "May hold reservoir managers' details; drop any personal names."
+        }
+      ],
+      "gap": "No open dam register found for the Republic (one search, not exhaustive)."
+    },
+    "crops": {
+      "proposal": "OSM landuse=orchard (746 objects, taginfo 2026-11-16), or no crop layer.",
+      "not_proposed": [
+        "EPA Irish CORINE 2018 (CC BY 4.0, Republic only, 25 ha minimum unit misses orchards)",
+        "National Land Cover Map 2018 (no orchard class; no licence stated)"
+      ]
+    },
+    "buildings": {
+      "candidates": [
+        {
+          "dataset": "Microsoft Global ML Building Footprints (dataset-links.csv 2026-08-13: Ireland 56 tiles, UnitedKingdom 194 tiles)",
+          "licence": "CDLA-Permissive-2.0",
+          "verified": "2026-11-17",
+          "note": "The UnitedKingdom rows include tiles over Belfast and County Down that the Ireland rows lack, so Northern Ireland's footprints are filed under the United Kingdom (tile contents not opened)."
+        },
+        {
+          "dataset": "Overture buildings",
+          "licence": "ODbL-1.0",
+          "verified": "2026-11-17"
+        },
+        {
+          "dataset": "OSM buildings (4,091,466 objects tagged building, taginfo)",
+          "licence": "ODbL-1.0",
+          "verified": "2026-11-17"
+        }
+      ],
+      "gap": "No open official building outlines found for either jurisdiction (search only)."
+    },
+    "addresses": {
+      "dataset": "OSM addr:* tags and OSM townlands",
+      "gap": "No other open source: Overture's address theme lists 41 countries; neither IE nor GB is among them. The Eircode database is licensed by agreement only. OSNI Pointer appears to be a paid licence (search only). Code-Point Open covers Great Britain; Northern Ireland is only in the paid Code-Point. ONS: BT postcodes need a separate licence for commercial use from Land and Property Services.",
+      "url": "https://docs.overturemaps.org/guides/addresses/",
+      "verified": "2026-11-17",
+      "osm": {
+        "addr:housenumber": 492642,
+        "addr:street": 771886,
+        "addr:housename": 26157,
+        "addr:city": 230858,
+        "addr:postcode": 29493,
+        "locality=townland (relations)": 61097,
+        "source": "taginfo, data until 2026-11-16; townland tagging per OSM wiki Ireland/Boundaries",
+        "coverage_estimate": "Very roughly one home in six, against about 2.9 million homes (general knowledge, not checked). An estimate, not a measurement; where the numbered addresses lie was not measured."
+      },
+      "format": "Republic: Eircode, 7 characters, routing key plus unique identifier (A65 F4E2). Northern Ireland: UK postcodes starting BT (general knowledge).",
+      "code_note": "tools/build_addresses.py keeps only country = 'US', cuts the region to two letters and keeps left(postcode, 5) (A65 F4E2 becomes A65 F). engine/address_search.py reads only five-digit postcodes, and normalize() turns letters outside a-z (á, é, í, ó, ú) into spaces. The place finder holds US ZIP code areas only.",
+      "licence": "ODbL-1.0",
+      "proposal": "1. Townlands with their county in the place finder. 2. An address index from OSM addr:* tags, saying plainly that coverage is partial. Or ship the map first without address search."
+    }
+  },
+  "help_points_osm_counts": {
+    "source": "taginfo.geofabrik.de europe:ireland-and-northern-ireland, data until 2026-11-16 21:19 UTC",
+    "amenity=pharmacy": 1745,
+    "amenity=hospital": 253,
+    "amenity=clinic": 655,
+    "amenity=doctors": 789,
+    "amenity=police": 536,
+    "amenity=fire_station": 295,
+    "emergency=ambulance_station": 70,
+    "emergency=defibrillator": 2816,
+    "amenity=drinking_water": 373,
+    "natural=spring": 2309,
+    "place_of_worship=holy_well": 826,
+    "man_made=water_well": 661,
+    "amenity=shelter": 2430,
+    "amenity=fuel": 2246,
+    "shop=supermarket": 1664,
+    "amenity=community_centre": 2297,
+    "shelter_type=public_transport (with amenity=shelter)": 1145,
+    "shelter_type=weather_shelter": 337,
+    "shelter_type=basic_hut": 2,
+    "name:ga (key)": 123698
+  },
+  "related": {
+    "pr_84": "Lists eu-ie from the same extract, boxed by Geofabrik's polygon; its eu-gb also covers Northern Ireland.",
+    "pr_35": "Adds a Dublin box cut from the same extract.",
+    "pr_63": "Reads the full .osm.pbf; its bus-shelter filter and any new help-point kinds need a reader like it."
+  },
+  "help_points_builder_note": "tools/build_map.py takes the class from the fclass column of Geofabrik's free GeoPackage, which has no class for defibrillators, ambulance stations or holy wells and no shelter_type (layer specification 0.7.12). man_made=water_well has a class but is not in POI_KEEP."
+}

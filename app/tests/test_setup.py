@@ -8,7 +8,7 @@ The test server lives only in this file: it serves a small fake pack and model o
 for the run, and can cut the connection mid-file, send wrong bytes, change the file's ETag, ignore Range, or redirect anywhere.
 The product's allowlist is not touched: tests pass their own `allowed` and TLS context to the downloader. Never packaged.
 """
-import hashlib, http.server, importlib.util, io, json, os, shutil, signal, socketserver, ssl, subprocess, sys, threading, time, unittest, zipfile
+import hashlib, http.server, importlib.util, io, json, os, shutil, signal, socket, socketserver, ssl, subprocess, sys, threading, time, unittest, zipfile
 from pathlib import Path
 from unittest import mock
 
@@ -51,8 +51,19 @@ class Files:
         self.ignore_range = set()
         self.ignore_once = {}     # name -> how many more Range requests get a 200 with the whole file
         self.redirect = {}        # name -> Location
+        self.answers = {}         # name -> answers to give in turn: (status, Retry-After or None), 'whole' (a 200 with the whole
+                                  # file, even to a Range, that leaves cut_after for the next) or None (served as usual)
         self.pace = 0             # seconds to sleep per 64 KiB
+        self.hold = {}            # name -> Hold: the next answer that covers its byte stops there until the test lets it go
         self.lock = threading.Lock()
+
+
+class Hold:
+    """Holds one answer open at byte `at`, so a test can pause or cancel mid-transfer without guessing at timings.
+    .reached is set once the bytes before `at` are sent; the answer then waits for .release (or 30 s) before sending the rest."""
+
+    def __init__(self, at):
+        self.at, self.reached, self.release = at, threading.Event(), threading.Event()
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -72,6 +83,15 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_header('Content-Length', '0')
             self.end_headers()
             return
+        with F.lock:
+            answer = F.answers[name].pop(0) if F.answers.get(name) else None
+        if isinstance(answer, tuple):
+            self.send_response(answer[0])
+            if answer[1] is not None:
+                self.send_header('Retry-After', str(answer[1]))
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return
         if name not in F.data:
             self.send_response(404)
             self.send_header('Content-Length', '0')
@@ -83,29 +103,44 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 F.corrupt[name] -= 1
                 body = bytes([body[0] ^ 0xff]) + body[1:]
         start, rng = 0, self.headers.get('Range')
-        once = False
+        once = answer == 'whole'
         with F.lock:
-            if rng and F.ignore_once.get(name):
+            if rng and not once and F.ignore_once.get(name):
                 F.ignore_once[name] -= 1
                 once = True
+        end = len(body)                                         # past the last byte sent
         if rng and name not in F.ignore_range and not once:     # like R2: If-Range is ignored
-            start = int(rng.split('=')[1].split('-')[0])
+            a, _, b = rng.split('=')[1].partition('-')
+            start = int(a)
+            if b:
+                end = min(int(b) + 1, len(body))
             self.send_response(206)
-            self.send_header('Content-Range', f'bytes {start}-{len(body) - 1}/{len(body)}')
+            self.send_header('Content-Range', f'bytes {start}-{end - 1}/{len(body)}')
         else:
             self.send_response(200)
-        self.send_header('Content-Length', str(len(body) - start))
+        self.send_header('Content-Length', str(end - start))
         self.send_header('ETag', F.etag.get(name, '"e1"'))
         self.send_header('Accept-Ranges', 'bytes')
         self.end_headers()
-        cut = None
+        cut = hold = None
         with F.lock:
-            if F.cut_after.get(name):
-                cut = F.cut_after[name].pop(0)
+            cuts = F.cut_after.get(name)
+            if cuts and answer != 'whole':
+                cut = cuts.pop(start, None) if isinstance(cuts, dict) else cuts.pop(0)
+            if name in F.hold and start <= F.hold[name].at < end:
+                hold = F.hold.pop(name)
         sent = start
         try:
-            while sent < len(body):
-                n = min(64 * 1024, len(body) - sent)
+            while sent < end:
+                if hold is not None and hold.at < sent + 64 * 1024:
+                    self.wfile.write(body[sent:hold.at])
+                    self.wfile.flush()
+                    sent = hold.at
+                    hold.reached.set()
+                    hold.release.wait(30)
+                    hold = None
+                    continue
+                n = min(64 * 1024, end - sent)
                 if cut is not None and sent + n > cut:
                     self.wfile.write(body[sent:cut])
                     self.wfile.flush()
@@ -171,11 +206,13 @@ class Base(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.srv.shutdown()
+        cls.srv.server_close()       # shutdown stops serving; close the fixture listener as well
         shutil.rmtree(cls.tmp_class, ignore_errors=True)
 
     def setUp(self):
         F = self.files
-        F.data.clear(); F.etag.clear(); F.log.clear(); F.cut_after.clear(); F.corrupt.clear(); F.ignore_range.clear(); F.ignore_once.clear(); F.redirect.clear()
+        F.data.clear(); F.etag.clear(); F.log.clear(); F.cut_after.clear(); F.corrupt.clear(); F.ignore_range.clear(); F.ignore_once.clear(); F.redirect.clear(); F.answers.clear()
+        F.hold.clear()
         F.pace = 0
         env = mock.patch.dict(os.environ)      # a LASTBOOK_MODEL_FILE of the person running the tests would win over everything
         env.start()
@@ -201,7 +238,7 @@ class Base(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
-    def manifest(self, zip_sha=None, model_sha=None):
+    def manifest(self, zip_sha=None, model_sha=None, more_packs=()):
         m = {'version': 1, 'published': '2026-11-12',
              'packs': [{'id': 'small', 'title': 'Small', 'summary': 's', 'records': 3, 'installed_bytes': self.installed, 'available': True,
                         'files': [{'name': 'Lastbook-Small.zip', 'url': f'{self.base}/Lastbook-Small.zip', 'size': len(self.zip),
@@ -209,6 +246,7 @@ class Base(unittest.TestCase):
                        {'id': 'all', 'title': 'All', 'available': False, 'files': []}],
              'models': [{'id': 'gemma', 'title': 'Gemma', 'file': 'model.gguf', 'url': f'{self.base}/model.gguf', 'size': len(self.model),
                          'sha256': model_sha or sha(self.model), 'memory_bytes': 19_027_384_256, 'available': True}]}
+        m['packs'][1:1] = more_packs
         v = manifest.validate(m, ALLOWED)
         self.assertIsNotNone(v)
         return manifest.Manifest(bundled=v, remote=None, allowed=ALLOWED, context=self.ctx)
@@ -230,8 +268,17 @@ class Base(unittest.TestCase):
         self.fail(f'job never reached {states}: {s.public_job()}')
 
 
-def fast_backoff():
-    return mock.patch.object(download, 'BACKOFF', (0.05,) * 6)
+class fast_backoff:
+    """Waits between tries shortened to 0.05 s, for broken connections and for a busy server alike."""
+
+    def __enter__(self):
+        self.p = [mock.patch.object(download, 'BACKOFF', (0.05,) * 6), mock.patch.object(download, 'BUSY_BACKOFF', (0.05,) * 6)]
+        for x in self.p:
+            x.start()
+
+    def __exit__(self, *a):
+        for x in self.p:
+            x.stop()
 
 
 # ----------------------------------------------------------------------------------------------------------- tests --
@@ -321,6 +368,84 @@ class Downloads(Base):
         self.assertEqual(ranges[0], None)
         self.assertTrue(all(r and r.startswith('bytes=') for r in ranges[1:]), ranges)
         self.assertEqual(len(ranges), 3)
+
+    def test_busy_server_is_waited_out(self):
+        """downloads.lastbook.org cut a 388 GB download, then answered its resume with 503 for minutes: more 503s in a row than
+        NETWORK_TRIES. A busy server is waited on longer, and the download finishes from where it was cut."""
+        self.files.cut_after['model.gguf'] = [700_000]
+        self.files.answers['model.gguf'] = [None] + [(503, None)] * (download.NETWORK_TRIES + 2) + [(429, None)]   # None: served (and cut)
+        with fast_backoff():
+            p = self.dl('model.gguf').run()
+        self.assertEqual(Path(p).read_bytes(), self.model)
+        ranges = [r for n, r, _ in self.files.log if n == 'model.gguf']
+        self.assertEqual(ranges[0], None)
+        self.assertEqual(set(ranges[1:]), {'bytes=700000-'})                          # every retry resumed, nothing started over
+
+    def test_busy_server_gives_up_as_server(self):
+        """A server busy for good fails with 'server', not 'network': the person's internet is fine. The waits add up to
+        BUSY_LIMIT, however long a Retry-After the server asks for."""
+        for retry_after in (None, 600):
+            with self.subTest(retry_after=retry_after):
+                self.files.log.clear()
+                self.files.answers['model.gguf'] = [(503, retry_after)] * 30
+                waits, d = [], self.dl('model.gguf')
+                d.control.sleep = waits.append
+                with self.assertRaises(download.Failed) as e:
+                    d.run()
+                self.assertEqual(e.exception.code, 'server')
+                self.assertEqual(sum(waits), download.BUSY_LIMIT)
+                self.assertEqual(len(self.files.log), len(waits) + 1)      # one last ask after the last wait
+
+    def test_progress_renews_the_busy_budget(self):
+        """Bytes that arrive before a connection breaks are progress, so the busy waits before them no longer count against
+        BUSY_LIMIT. Before, only the broken-connection count was reset there, and this ran out of budget on the fourth ask."""
+        self.files.cut_after['model.gguf'] = [700_000]
+        self.files.answers['model.gguf'] = [(503, None), None, (503, None), (503, None)]
+        waits, d = [], self.dl('model.gguf')
+        d.control.sleep = waits.append
+        with mock.patch.object(download, 'BUSY_BACKOFF', (10,) * 6), mock.patch.object(download, 'BUSY_LIMIT', 20), \
+                mock.patch.object(download, 'BACKOFF', (0,) * 6):
+            p = d.run()
+        self.assertEqual(Path(p).read_bytes(), self.model)
+        self.assertEqual(waits, [10, 0, 10, 10])
+        self.assertEqual(self.files.log[-1][1], 'bytes=700000-')
+
+    def test_progress_renews_the_stray_200_allowance(self):
+        """A 200 to a resume is asked about once more before starting over. After progress that allowance is there again, so a
+        second passing 200 hours into a large download does not throw away what is downloaded."""
+        self.files.cut_after['model.gguf'] = [500_000, 1_000_000]
+        self.files.answers['model.gguf'] = [None, 'whole', None, 'whole']
+        with fast_backoff():
+            p = self.dl('model.gguf').run()
+        self.assertEqual(Path(p).read_bytes(), self.model)
+        self.assertEqual([r for _, r, _ in self.files.log], [None, 'bytes=500000-', 'bytes=500000-', 'bytes=1000000-', 'bytes=1000000-'])
+
+    def test_pause_during_busy_wait_then_resume(self):
+        """Pause wakes a wait on a busy server at once, the bytes already downloaded are kept, and the next run resumes from them."""
+        self.files.cut_after['model.gguf'] = [700_000]
+        self.files.answers['model.gguf'] = [None, (503, 300)]
+        control, waits = download.Control(), []
+        d = download.Download(f'{self.base}/model.gguf', self.tmp / 'dl' / 'model.gguf', len(self.model), sha(self.model), control,
+                              allowed=ALLOWED, context=self.ctx, waiting=waits.append)
+        threading.Timer(0.5, control.stop, ['paused']).start()
+        t0 = time.time()
+        with fast_backoff(), self.assertRaises(download.Stopped):
+            d.run()
+        self.assertLess(time.time() - t0, 5)                                   # not the 300 s the server asked for
+        self.assertEqual(waits, [300])
+        self.assertEqual(os.path.getsize(d.part), 700_000)
+        p = self.dl('model.gguf').run()
+        self.assertEqual(Path(p).read_bytes(), self.model)
+        self.assertEqual(self.files.log[-1][1], 'bytes=700000-')
+
+    def test_retry_after_is_honoured(self):
+        waits = []
+        self.files.answers['model.gguf'] = [(503, 7), (503, 'Wed, 21 Oct 2015 07:28:00 GMT'), (503, 99999)]
+        d = self.dl('model.gguf')
+        d.control.sleep = waits.append
+        with fast_backoff():
+            d.run()
+        self.assertEqual(waits, [7, 0.05, download.MAX_RETRY_AFTER])
 
     def test_etag_changed_starts_over(self):
         """R2 answers 206 whatever If-Range says, so the ETag is compared here."""
@@ -424,6 +549,431 @@ class Downloads(Base):
         self.assertEqual(Path(d.run()).read_bytes(), self.model)
 
 
+def pieces(n=4, piece=256 * 1024):
+    """Several connections for a test-sized file: anything of 1 MiB or more, in pieces of `piece`."""
+    return mock.patch.multiple(download, CONNECTIONS=n, PARALLEL_MIN=MiB, PIECE=piece, AHEAD=2 * n)
+
+
+class ParallelDownloads(Base):
+    def setUp(self):
+        super().setUp()
+        self.big = os.urandom(3 * MiB + 4321)
+        self.files.data['big.bin'] = self.big
+
+    def dl(self, sha256=None, size=None, control=None, connections=None):
+        return download.Download(f'{self.base}/big.bin', self.tmp / 'dl' / 'big.bin', size or len(self.big), sha256 or sha(self.big),
+                                 control or download.Control(), allowed=ALLOWED, context=self.ctx, connections=connections)
+
+    def ranges(self):
+        return [r for n, r, _ in self.files.log if n == 'big.bin']
+
+    def test_pieces(self):
+        seen = []
+        d = self.dl()
+        d.progress = lambda done, total, phase: seen.append(done)
+        with pieces():
+            p = d.run()
+        self.assertEqual(Path(p).read_bytes(), self.big)
+        self.assertFalse(Path(d.part).exists() or Path(d.meta).exists())
+        r = self.ranges()
+        self.assertEqual(len(r), 13)                                       # 3 MiB + a bit in 256 KiB pieces
+        self.assertTrue(all(x and x.startswith('bytes=') and not x.endswith('-') for x in r), r)   # every one closed: bytes=a-b
+        self.assertEqual(sorted(int(x[6:].split('-')[0]) for x in r), [i * 256 * 1024 for i in range(13)])
+        self.assertEqual(seen[-1], len(self.big))
+        self.assertTrue(all(b >= a for a, b in zip(seen, seen[1:])), 'progress went back')
+
+    def test_small_file_one_connection(self):
+        with pieces():
+            p = download.Download(f'{self.base}/model.gguf', self.tmp / 'm', 1000, sha(self.model[:1000]), download.Control(),
+                                  allowed=ALLOWED, context=self.ctx)
+            self.files.data['model.gguf'] = self.model[:1000]
+            p.run()
+        self.assertEqual([r for n, r, _ in self.files.log if n == 'model.gguf'], [None])
+
+    def test_one_connection_asked_for(self):
+        with pieces():
+            self.dl(connections=1).run()
+        self.assertEqual(self.ranges(), [None])
+
+    def test_cut_pieces_try_again(self):
+        # Bind the faults to piece offsets, not thread arrival order. Piece zero must carry the mid-piece cut.
+        self.files.cut_after['big.bin'] = {0: 200_000, 256 * 1024: 200_000, 512 * 1024: 200_000}
+        with pieces(), fast_backoff():
+            p = self.dl().run()
+        self.assertEqual(Path(p).read_bytes(), self.big)
+        self.assertEqual(len(self.ranges()), 16)
+        self.assertIn('bytes=200000-262143', self.ranges())            # the cut piece carried on from where it broke
+
+    def test_pause_and_resume(self):
+        """Pause while one piece is held open by the server: every connection stops, nothing is written after run() returns,
+        and the resume finishes from the hashed run. The server's hold, not a timer, decides when the pause lands."""
+        hold = self.files.hold['big.bin'] = Hold(600_000)                # inside the third 256 KiB piece
+        self.addCleanup(hold.release.set)
+        c = download.Control()
+        d = self.dl(control=c)
+        out = []
+        with pieces():
+            t = threading.Thread(target=lambda: out.append(self.outcome(d.run)), name='test-run')
+            t.start()
+            self.assertTrue(hold.reached.wait(10), 'the held piece was never asked for')
+            c.stop('paused')
+            t.join(15)
+        self.assertFalse(t.is_alive(), 'run() did not return after pause')
+        self.assertIsInstance(out[0], download.Stopped)
+        self.assertEqual(self.download_threads(), [], 'a download connection outlived the pause')
+        before = self.snapshot(d.part)
+        hold.release.set()                                               # the held answer sends the rest of its piece now
+        time.sleep(0.5)
+        self.assertEqual(self.snapshot(d.part), before, 'the partial file changed after pause returned')
+        meta = json.loads(Path(d.meta).read_text())
+        self.assertTrue(meta['parallel'])
+        self.assertEqual(meta['bytes_done'] % (256 * 1024), 0)           # a whole number of pieces, hashed
+        self.assertEqual(d.done_bytes(), meta['bytes_done'])
+        self.assertLessEqual(meta['bytes_done'], os.path.getsize(d.part))
+        self.assertLessEqual(meta['bytes_done'], 512 * 1024)              # the held piece was never in the hashed run
+        self.files.log.clear()
+        d.control = download.Control()
+        with pieces():
+            p = d.run()
+        self.assertEqual(sha(Path(p).read_bytes()), sha(self.big))
+        self.assertTrue(all(int(x[6:].split('-')[0]) >= meta['bytes_done'] for x in self.ranges()))   # nothing hashed is fetched again
+        self.assertEqual(self.download_threads(), [])
+
+    @staticmethod
+    def outcome(fn):
+        try:
+            return fn()
+        except BaseException as e:      # noqa: B036 -- handed back to the test thread to assert on
+            return e
+
+    @staticmethod
+    def download_threads():
+        return [t.name for t in threading.enumerate() if t.name.startswith('download-') and t.is_alive()]
+
+    @staticmethod
+    def snapshot(path):
+        p = Path(path)
+        return (p.stat().st_size, p.stat().st_mtime_ns, sha(p.read_bytes())) if p.exists() else None
+
+    def test_pause_during_stalled_handshake(self):
+        """A server that takes the connection but never answers the TLS handshake: pause ends the run and every worker within a
+        couple of seconds, not at the 30 s network timeout."""
+        lsn = socket.socket()
+        lsn.bind(('127.0.0.1', 0))
+        lsn.listen(8)
+        held, accepted = [], threading.Semaphore(0)
+
+        def accept():
+            while True:
+                try:
+                    s, _ = lsn.accept()
+                except OSError:
+                    return
+                held.append(s)
+                accepted.release()
+        listener = threading.Thread(target=accept, daemon=True)
+        listener.start()
+        self.files.redirect['big.bin'] = f'https://127.0.0.1:{lsn.getsockname()[1]}/big.bin'
+        c = download.Control()
+        d = self.dl(control=c, connections=2)
+        err = []
+
+        def run():
+            try:
+                with pieces():
+                    d.run()
+            except BaseException as e:      # noqa: B036
+                err.append(e)
+        runner = threading.Thread(target=run, daemon=True)
+        try:
+            runner.start()
+            for _ in range(2):
+                self.assertTrue(accepted.acquire(timeout=10), 'the workers never connected')
+            time.sleep(0.3)                 # both are in the handshake now, waiting for a ServerHello that never comes
+            t0 = time.monotonic()
+            c.stop('paused')
+            runner.join(10)
+            took = time.monotonic() - t0
+            self.assertFalse(runner.is_alive(), 'run() was still going 10 s after the pause')
+            self.assertEqual(len(err), 1)
+            self.assertIsInstance(err[0], download.Stopped)
+            self.assertLess(took, 2)
+            self.assertEqual([t.name for t in threading.enumerate() if t.name.startswith('download-')], [])
+        finally:
+            try:
+                lsn.shutdown(socket.SHUT_RDWR)   # wake accept() before closing the fixture listener
+            except OSError:
+                pass
+            lsn.close()
+            listener.join(1)
+            for s in held:
+                s.close()
+
+    def test_resume_after_kill_ignores_unhashed_bytes(self):
+        """Bytes past bytes_done may be holes or half a piece: a resume trusts only the hashed run."""
+        d = self.dl()
+        os.makedirs(os.path.dirname(d.part), exist_ok=True)
+        Path(d.part).write_bytes(self.big[:512 * 1024] + b'\0' * (1024 * 1024))
+        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"e1"', 'bytes_done': 512 * 1024, 'parallel': True}))
+        with pieces():
+            self.assertEqual(Path(d.run()).read_bytes(), self.big)
+        self.assertEqual(min(int(x[6:].split('-')[0]) for x in self.ranges()), 512 * 1024)
+
+    def test_resume_from_one_connection_file(self):
+        """A .part left by one connection (no "parallel" in its .json) carries on in pieces from its length."""
+        d = self.dl()
+        os.makedirs(os.path.dirname(d.part), exist_ok=True)
+        Path(d.part).write_bytes(self.big[:700_000])
+        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"e1"', 'bytes_done': 600_000}))
+        with pieces():
+            self.assertEqual(Path(d.run()).read_bytes(), self.big)
+        self.assertEqual(min(int(x[6:].split('-')[0]) for x in self.ranges()), 700_000)
+
+    def test_etag_changed_starts_over(self):
+        d = self.dl()
+        os.makedirs(os.path.dirname(d.part), exist_ok=True)
+        Path(d.part).write_bytes(b'x' * 512 * 1024)
+        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"old"', 'bytes_done': 512 * 1024, 'parallel': True}))
+        self.files.etag['big.bin'] = '"new"'
+        with pieces():
+            self.assertEqual(Path(d.run()).read_bytes(), self.big)
+        self.assertIn('bytes=0-262143', self.ranges())
+
+    def test_server_ignores_range_goes_to_one_connection(self):
+        self.files.ignore_range.add('big.bin')
+        with pieces(), fast_backoff():
+            p = self.dl().run()
+        self.assertEqual(Path(p).read_bytes(), self.big)
+        self.assertEqual(self.ranges()[-1], None)                          # finished as one plain GET
+        self.assertNotIn('parallel', json.dumps(self.files.log))
+
+    def test_one_stray_200_keeps_pieces(self):
+        self.files.ignore_once['big.bin'] = 1
+        with pieces():
+            p = self.dl().run()
+        self.assertEqual(Path(p).read_bytes(), self.big)
+        self.assertEqual(len(self.ranges()), 14)                           # 13 pieces, one asked for twice
+        self.assertNotIn(None, self.ranges())                              # never went back to one plain GET
+
+    def test_wrong_checksum(self):
+        d = self.dl(sha256='0' * 64)
+        with pieces(), self.assertRaises(download.BadChecksum):
+            d.run()
+        self.assertFalse(Path(d.part).exists())
+
+    def test_wrong_size_on_server(self):
+        d = self.dl(size=len(self.big) + 10)
+        with pieces(), self.assertRaises(download.BadChecksum):
+            d.run()
+
+    def test_redirect_to_unknown_host_refused(self):
+        self.files.redirect['big.bin'] = 'https://evil.example/big.bin'
+        with pieces(), self.assertRaises(download.Failed) as e:
+            self.dl().run()
+        self.assertEqual(e.exception.code, 'network')
+
+    # -------------------------------------------------------------- a busy server, over several connections (with #149) --
+    def test_busy_pieces_wait_it_out(self):
+        """30 answers of 503 or 429 are a busy server, not 30 broken connections: the pieces wait (and say so), then finish.
+        Over one connection each piece would give up after NETWORK_TRIES."""
+        self.files.answers['big.bin'] = [(503, None), (429, None)] * 15
+        d, waits = self.dl(), []
+        d.waiting = waits.append
+        with pieces(n=2), fast_backoff():
+            p = d.run()
+        self.assertEqual(sha(Path(p).read_bytes()), sha(self.big))
+        self.assertTrue(waits and all(w == 0.05 for w in waits), waits)
+
+    def test_busy_pieces_share_one_budget(self):
+        """The connections share one wait and one budget: four of them waiting together count the time once, and the download
+        stops as 'server' (not 'network') once BUSY_LIMIT has been waited with no progress."""
+        self.files.answers['big.bin'] = [(503, None)] * 400
+        d, waits = self.dl(), []
+        d.waiting = waits.append
+        t0 = time.monotonic()
+        with pieces(n=4), fast_backoff(), mock.patch.object(download, 'BUSY_LIMIT', 0.3), self.assertRaises(download.Failed) as e:
+            d.run()
+        self.assertEqual(e.exception.code, 'server')
+        self.assertLessEqual(sum(waits), 0.3 + 1e-9)
+        self.assertLessEqual(len(waits), 6)                                   # 0.3 s in waits of 0.05 s, not one set per connection
+        self.assertLess(time.monotonic() - t0, 5)
+        self.assertGreater(len(self.ranges()), len(waits))                    # several connections joined each wait
+
+    def busy_clock(self, limit=20):
+        """A _Pieces on a clock the test moves by hand (now[0], seconds): no sleeping, no server. BUSY_BACKOFF 10 s."""
+        now = [0.0]
+        for p in (mock.patch.object(download.time, 'monotonic', lambda: now[0]),
+                  mock.patch.object(download, 'BUSY_BACKOFF', (10,) * 6), mock.patch.object(download, 'BUSY_LIMIT', limit)):
+            p.start()
+            self.addCleanup(p.stop)
+        return now, download._Pieces(0, 10 * download.PIECE, None)
+
+    def test_busy_budget_and_wait_rules(self):
+        """The shared rules on a moved clock: one announced wait that others join without charging it again, Retry-After
+        as a floor within what is left of the budget, the budget used up with no progress, and a byte renewing it."""
+        now, st = self.busy_clock()
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (10, True))
+        now[0] = 4
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (6, False))       # another connection joins: 6 s left
+        self.assertEqual(st.waited, 10)                                          # counted once, not twice
+        now[0] = 10                                                              # that wait is over
+        self.assertEqual(st.busy_wait(download._Busy(503, '15')), (10, True))    # Retry-After 15, but only 10 s of 20 left
+        now[0] = 20
+        with self.assertRaises(download.Failed) as e:
+            st.busy_wait(download._Busy(503, None))
+        self.assertEqual(e.exception.code, 'server')
+        st.progress(0, 1)                                                        # one byte arrived, no wait on: all 20 s again
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (10, True))
+
+    def test_joining_answer_with_a_longer_retry_after_extends_the_wait(self):
+        """A connection told "Retry-After: 15" one second into a 10 s wait must not try again before 16 s: the shared wait is
+        extended to 16, only the 6 s extension is charged, and the countdown hears the new wait. Within the budget only."""
+        now, st = self.busy_clock()
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (10, True))
+        now[0] = 1
+        self.assertEqual(st.busy_wait(download._Busy(429, '15')), (15, True))    # announced again: the wait got longer
+        self.assertEqual((st.resume_at, st.waited, st.announce), (16, 16, 15))
+        now[0] = 2
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (14, False))   # a shorter one just joins
+        self.assertEqual(st.waited, 16)
+        now, st = self.busy_clock(limit=12)                                       # only 2 s of budget left for the extension
+        st.busy_wait(download._Busy(503, None))
+        now[0] = 1
+        self.assertEqual(st.busy_wait(download._Busy(429, '15')), (11, True))
+        self.assertEqual((st.resume_at, st.waited), (12, 12))
+        now[0] = 12
+        with self.assertRaises(download.Failed):
+            st.busy_wait(download._Busy(503, None))
+
+    def test_busy_pieces_wait_for_the_longest_retry_after(self):
+        """Over the test server: one connection hears 503 (a 0.05 s wait), the other "Retry-After: 1". No connection asks
+        again until that second has passed, including the one already asleep on the short wait; then the file completes."""
+        self.files.answers['big.bin'] = [(503, None), (503, 1)]
+        times, real_open = [], download._open
+
+        def timed_open(*a, **k):
+            times.append(time.monotonic())
+            return real_open(*a, **k)
+        with pieces(n=2), fast_backoff(), mock.patch.object(download, '_open', timed_open):
+            p = self.dl().run()
+        self.assertEqual(sha(Path(p).read_bytes()), sha(self.big))
+        later = [t - times[1] for t in times[2:]]
+        self.assertTrue(later and min(later) >= 0.9, [round(x, 2) for x in later[:4]])
+
+    def test_progress_during_a_wait_does_not_forgive_the_rest_of_it(self):
+        """Bytes on another piece one second into a 10 s wait renew the budget, but the 9 s still to wait come after that
+        progress and count: with a 20 s budget the download gives up 20 s after the progress, not 29."""
+        now, st = self.busy_clock()
+        st.busy_wait(download._Busy(503, None))
+        now[0] = 1
+        st.progress(0, 1)
+        self.assertEqual((st.busy, st.waited), (0, 9))
+        now[0] = 10
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (10, True))
+        now[0] = 20
+        self.assertEqual(st.busy_wait(download._Busy(503, None)), (1, True))     # 19 of 20 s used since the progress
+        now[0] = 21
+        with self.assertRaises(download.Failed) as e:
+            st.busy_wait(download._Busy(503, None))
+        self.assertEqual(e.exception.code, 'server')
+        self.assertLessEqual(now[0] - 1, download.BUSY_LIMIT)
+
+    def test_pause_ends_a_busy_wait_and_a_stalled_handshake_together(self):
+        """#125 with #149: one connection asleep in a busy wait (Retry-After 300), the other stuck in a TLS handshake that never
+        answers. Pause ends both within about 2 s, raises Stopped, and leaves no download-* thread."""
+        lsn = socket.socket()
+        lsn.bind(('127.0.0.1', 0))
+        lsn.listen(8)
+        held, accepted = [], threading.Event()
+
+        def accept():
+            while True:
+                try:
+                    s, _ = lsn.accept()
+                except OSError:
+                    return
+                held.append(s)
+                accepted.set()
+        listener = threading.Thread(target=accept, daemon=True)
+        listener.start()
+        stall = f'https://127.0.0.1:{lsn.getsockname()[1]}/big.bin'
+        self.files.answers['big.bin'] = [(503, 300)]
+        calls, real_open, lock = [], download._open, threading.Lock()
+
+        def split_open(url, *a, **k):
+            with lock:
+                calls.append(url)
+                n = len(calls)
+            return real_open(stall if n == 2 else url, *a, **k)     # the second connection goes to the silent listener
+        c = download.Control()
+        d, waits, err = self.dl(control=c, connections=2), [], []
+        d.waiting = waits.append
+
+        def run():
+            try:
+                with pieces(n=2), mock.patch.object(download, '_open', split_open):
+                    d.run()
+            except BaseException as e:      # noqa: B036
+                err.append(e)
+        runner = threading.Thread(target=run, daemon=True)
+        try:
+            runner.start()
+            self.assertTrue(accepted.wait(10), 'no connection reached the silent listener')
+            t0 = time.monotonic()
+            while not waits and time.monotonic() - t0 < 10:
+                time.sleep(0.02)
+            self.assertEqual(waits[:1], [300])                              # the busy wait is on, and announced
+            time.sleep(0.3)
+            t0 = time.monotonic()
+            c.stop('paused')
+            runner.join(10)
+            took = time.monotonic() - t0
+            self.assertFalse(runner.is_alive(), 'run() was still going 10 s after the pause')
+            self.assertEqual(len(err), 1)
+            self.assertIsInstance(err[0], download.Stopped)
+            self.assertLess(took, 2)
+            self.assertEqual([t.name for t in threading.enumerate() if t.name.startswith('download-')], [])
+        finally:
+            try:
+                lsn.shutdown(socket.SHUT_RDWR)   # wake accept() before closing the fixture listener
+            except OSError:
+                pass
+            lsn.close()
+            listener.join(1)
+            for s in held:
+                s.close()
+
+    def test_job_countdown_while_pieces_wait_then_pause_and_resume(self):
+        """Through api.Setup: while every connection waits on a busy server the item shows one countdown, which the coordinator's
+        polling does not wipe; Pause during that wait returns at once; resume finishes."""
+        self.files.answers['Lastbook-Small.zip'] = [(503, 300)] * 50
+        with pieces():
+            s = self.setup()
+            s.start('small', False)
+            t0, seen = time.time(), []
+            while time.time() - t0 < 10 and not seen:
+                it = s.public_job()['items'][0]
+                if it.get('retry_in_s'):
+                    seen.append(it['retry_in_s'])
+                time.sleep(0.02)
+            self.assertTrue(seen, 'no countdown shown')
+            self.assertTrue(295 <= seen[0] <= 300, seen)
+            time.sleep(1.5)                                                # three coordinator polls later, still counting down
+            it = s.public_job()['items'][0]
+            self.assertIn('retry_in_s', it)
+            self.assertTrue(293 <= it['retry_in_s'] < seen[0], (it, seen))
+            self.assertEqual((it['rate_bps'], it['eta_s']), (0, None))
+            t1 = time.monotonic()
+            j = s.pause()
+            self.assertLess(time.monotonic() - t1, 3)
+            self.assertEqual(j['state'], 'paused')
+            self.assertNotIn('retry_in_s', j['items'][0])
+            self.assertEqual([t.name for t in threading.enumerate() if t.name.startswith('download-')], [])
+            self.files.answers.clear()
+            s.resume()
+            self.assertEqual(self.wait(s)['state'], 'done')
+
+
 class Unpacking(Base):
     def bad_zip(self, info, data=b'x'):
         p = self.tmp / 'bad.zip'
@@ -524,6 +1074,85 @@ class Jobs(Base):
         self.assertFalse(work.exists())
         self.assertEqual(json.loads((lib / 'setup-pack.json').read_text())['pack'], 'small')
 
+    def test_choosing_another_pack_after_a_failure_installs_only_its_files(self):
+        """#73: the first pack's unpacked files must not end up in the library made from the second."""
+        s, shared = self.small_failed_then_medium()
+        s.start('medium', False)                       # "Choose again", the same place
+        self.assert_only_medium(s, shared)
+
+    def test_a_folder_that_cannot_be_cleared_stops_until_it_can(self):
+        """#86 review: if the old pack's files cannot be removed, setup stops with a retry message, and the retry installs
+        only the new pack's files."""
+        s, shared = self.small_failed_then_medium()
+        real = shutil.rmtree
+
+        def rmtree(path, ignore_errors=False, **k):       # like Windows with a file still open: the rest goes, that file stays
+            if Path(path).name == 'unpack':
+                for f in sorted(Path(path).rglob('*'), reverse=True):
+                    if f.name != 'shared.bin':
+                        f.rmdir() if f.is_dir() and not any(f.iterdir()) else f.unlink() if f.is_file() else None
+                if not ignore_errors:
+                    raise PermissionError('in use')
+                return
+            return real(path, ignore_errors=ignore_errors, **k)
+        with mock.patch.object(api.shutil, 'rmtree', rmtree):
+            s.start('medium', False)
+            j = self.wait(s)
+        self.assertEqual(j['state'], 'failed', j)
+        self.assertIn('could not clear the files of the previous download', j['items'][0]['error']['message'])
+        note = self.parent / 'LastbookData.setup' / 'unpack' / 'unpacked-from.json'
+        self.assertFalse(note.exists() and json.loads(note.read_text())['pack'] == 'medium')
+        s.start('medium', False)                       # "Try again", once the file is free
+        self.assert_only_medium(s, shared)
+
+    def assert_only_medium(self, s, shared):
+        j = self.wait(s)
+        self.assertEqual(j['state'], 'done', j)
+        s.finish()
+        lib, _ = api.startup(self.settings)
+        self.assertEqual((lib / 'pack.json').read_bytes(), b'{"name": "medium"}')
+        self.assertEqual((lib / shared).read_bytes(), b'b' * MiB)
+        self.assertFalse((lib / 'library-data' / 'only-small.bin').exists())
+
+    def small_failed_then_medium(self):
+        """A failed Small install has left its unpacked files; Medium is offered too."""
+        shared = 'library-data/shared.bin'
+        first = self.tmp / 'Lastbook-Small.zip'
+        self.installed = make_pack(first, {'library-data/catalog.json': b'{"records": []}', 'pack.json': b'{"name": "small"}',
+                                           shared: b'a' * MiB, 'library-data/only-small.bin': b'small'})
+        second = self.tmp / 'Lastbook-Medium.zip'
+        medium_installed = make_pack(second, {'library-data/catalog.json': b'{"records": [1]}', 'pack.json': b'{"name": "medium"}',
+                                              shared: b'b' * MiB})
+        self.zip = first.read_bytes()
+        medium_zip = second.read_bytes()
+        self.files.data['Lastbook-Small.zip'] = self.zip
+        self.files.data['Lastbook-Medium.zip'] = medium_zip
+        medium = {'id': 'medium', 'title': 'Medium', 'summary': 'm', 'records': 4, 'installed_bytes': medium_installed, 'available': True,
+                  'files': [{'name': 'Lastbook-Medium.zip', 'url': f'{self.base}/Lastbook-Medium.zip', 'size': len(medium_zip),
+                             'sha256': sha(medium_zip), 'kind': 'zip'}]}
+        m = self.manifest(more_packs=[medium])
+
+        self.files.corrupt['model.gguf'] = 5          # the pack unpacks, then the local AI fails
+        s = self.setup(manifest=m)
+        s.start('small', True)
+        j = self.wait(s)
+        self.assertEqual(j['state'], 'failed', j)
+        self.assertEqual([i['state'] for i in j['items']], ['done', 'failed'])
+        return s, shared
+
+    def test_trying_the_same_pack_again_keeps_its_unpacked_files(self):
+        """#73: the reverse case: the same pack and revision still reuse what the failed run unpacked."""
+        self.files.corrupt['model.gguf'] = 5
+        s = self.setup()
+        s.start('small', True)
+        self.assertEqual(self.wait(s)['state'], 'failed')
+        big = self.parent / 'LastbookData.setup' / 'unpack' / 'LastbookData' / 'library-data' / 'big.bin'
+        before = big.stat().st_ino
+        self.files.corrupt.clear()
+        s.start('small', True)
+        self.assertEqual(self.wait(s)['state'], 'done')
+        self.assertEqual(big.stat().st_ino, before)    # not written again
+
     def test_corrupt_once_then_good(self):
         self.files.corrupt['Lastbook-Small.zip'] = 1
         s = self.setup()
@@ -572,6 +1201,26 @@ class Jobs(Base):
         self.assertEqual(j['error']['code'], 'cancelled')
         self.assertFalse((self.parent / 'LastbookData.setup' / 'downloads').exists())
         self.assertFalse((self.parent / 'LastbookData').exists())
+
+    def test_job_shows_busy_wait(self):
+        """While the server is busy, the item says when the next try is, with no rate. Pausing then drops it, and resume finishes."""
+        self.files.cut_after['Lastbook-Small.zip'] = [700_000]
+        self.files.answers['Lastbook-Small.zip'] = [None, (503, 300)]
+        s = self.setup()
+        s.start('small', False)
+        t0 = time.time()
+        while time.time() - t0 < 10 and not s.public_job()['items'][0].get('retry_in_s'):
+            time.sleep(0.02)
+        it = s.public_job()['items'][0]
+        self.assertEqual((it['state'], it['rate_bps'], it['eta_s']), ('downloading', 0, None))
+        self.assertTrue(295 <= it['retry_in_s'] <= 300, it['retry_in_s'])
+        j = s.pause()
+        self.assertEqual(j['state'], 'paused')
+        self.assertNotIn('retry_in_s', j['items'][0])
+        self.assertEqual(j['items'][0]['bytes_done'], 700_000)
+        s.resume()
+        self.assertEqual(self.wait(s)['state'], 'done')
+        self.assertEqual([r for n, r, _ in self.files.log if n == 'Lastbook-Small.zip'][-1], 'bytes=700000-')
 
     def test_rate_and_eta(self):
         self.files.pace = 0.06
@@ -831,6 +1480,93 @@ class Switching(Base):
         self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(), 'old')
         self.assertEqual(sorted(p.name for p in self.parent.iterdir()), ['LastbookData', 'LastbookData.setup'])
 
+    def test_failed_rename_keeps_carried_files(self):
+        """#74: when either rename fails, the model and address indexes stay with the library that reopens."""
+        real = os.replace
+        for failing in ('current aside', 'staged into place'):
+            with self.subTest(failing=failing):
+                shutil.rmtree(self.parent, ignore_errors=True)
+                cur = self.lib(self.parent / 'LastbookData', 'old')
+                new = self.lib(self.parent / 'LastbookData.setup' / 'unpack' / 'LastbookData', 'new')
+                (cur / 'models').mkdir()
+                (cur / 'models' / 'model.gguf').write_bytes(b'model')
+                (cur / 'derived/geo/addresses').mkdir(parents=True)
+                (cur / 'derived/geo/addresses/CA.sqlite').write_bytes(b'address index')
+                source = cur if failing == 'current aside' else new
+
+                def replace(src, dst):
+                    if Path(src) == source:
+                        raise PermissionError('in use')
+                    return real(src, dst)
+                with mock.patch.object(install.os, 'replace', replace), self.assertRaises(install.Refused):
+                    install.switch(new, cur)
+                self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(), 'old')
+                self.assertEqual((cur / 'models' / 'model.gguf').read_bytes(), b'model')
+                self.assertEqual((cur / 'derived/geo/addresses/CA.sqlite').read_bytes(), b'address index')
+                self.assertFalse((new / 'models' / 'model.gguf').exists())
+                self.assertFalse((new / 'derived/geo/addresses/CA.sqlite').exists())
+
+    def carried_libraries(self):
+        shutil.rmtree(self.parent, ignore_errors=True)
+        cur = self.lib(self.parent / 'LastbookData', 'old')
+        new = self.lib(self.parent / 'LastbookData.setup' / 'unpack' / 'LastbookData', 'new')
+        (cur / 'models').mkdir()
+        (cur / 'models' / 'model.gguf').write_bytes(b'model')
+        (cur / 'derived/geo/addresses').mkdir(parents=True)
+        (cur / 'derived/geo/addresses/CA.sqlite').write_bytes(b'address index')
+        return cur, new
+
+    def test_failed_carry_puts_back_what_already_moved(self):
+        """#83 review: the model moves, the address index does not; both stay with the library that reopens."""
+        cur, new = self.carried_libraries()
+        real = os.replace
+
+        def replace(src, dst):
+            if Path(src).name == 'CA.sqlite':
+                raise PermissionError('in use')
+            return real(src, dst)
+        with mock.patch.object(install.os, 'replace', replace), self.assertRaises(install.Refused) as e:
+            install.switch(new, cur)
+        self.assertIn('could not move your files', e.exception.message)
+        self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(), 'old')
+        self.assertEqual((cur / 'models' / 'model.gguf').read_bytes(), b'model')
+        self.assertEqual((cur / 'derived/geo/addresses/CA.sqlite').read_bytes(), b'address index')
+        self.assertFalse((new / 'models' / 'model.gguf').exists())
+
+    def test_failed_carry_back_says_where_the_file_is(self):
+        """If a moved file cannot go back either, the error names where it is."""
+        cur, new = self.carried_libraries()
+        real = os.replace
+
+        def replace(src, dst):
+            if Path(src).name == 'CA.sqlite' or Path(src) == new / 'models' / 'model.gguf':
+                raise PermissionError('in use')
+            return real(src, dst)
+        with mock.patch.object(install.os, 'replace', replace), self.assertRaises(install.Refused) as e:
+            install.switch(new, cur)
+        self.assertIn(str(new / 'models' / 'model.gguf'), e.exception.message)
+        self.assertEqual((new / 'models' / 'model.gguf').read_bytes(), b'model')
+        self.assertEqual((cur / 'derived/geo/addresses/CA.sqlite').read_bytes(), b'address index')
+
+    def test_failed_restore_of_the_old_library_says_where_both_are(self):
+        """#83 review: the new library cannot go in place and the old one cannot come back: the error names both folders."""
+        cur, new = self.carried_libraries()
+        real = os.replace
+
+        def replace(src, dst):
+            if Path(dst) == cur:            # any rename into the library's place fails; moving it aside still works
+                raise PermissionError('in use')
+            return real(src, dst)
+        with mock.patch.object(install.os, 'replace', replace), self.assertRaises(install.Refused) as e:
+            install.switch(new, cur)
+        aside = [p for p in self.parent.iterdir() if p.name.startswith('LastbookData.old-')]
+        self.assertEqual(len(aside), 1)
+        self.assertIn(str(aside[0]), e.exception.message)
+        self.assertIn(str(new / 'models' / 'model.gguf'), e.exception.message)
+        self.assertNotIn('moved back', e.exception.message)
+        self.assertEqual((aside[0] / 'library-data' / 'catalog.json').read_text(), 'old')
+        self.assertEqual((new / 'models' / 'model.gguf').read_bytes(), b'model')
+
     def test_ai_only_in_manage_mode(self):
         cur = self.lib(self.parent / 'LastbookData', '{}')
         (cur / 'pack.json').write_text('{"name": "small"}')
@@ -840,6 +1576,89 @@ class Switching(Base):
         self.assertEqual(self.wait(s)['state'], 'done')
         self.assertEqual(self.marked, [(str(cur / 'models' / 'model.gguf'), sha(self.model))])
         self.assertEqual(s.start('small', True)['code'], 'nothing')
+
+
+class PackCompare(unittest.TestCase):
+    """Comparing an installed pack-manifest.tsv with a new one (issue #144): read-only, from the two lists alone."""
+    HEADER = 'path\tbytes\tsha256\thow\tchanges\n'
+
+    def setUp(self):
+        self.tmp = shorttemp.mkdtemp('lastbook-compare-')
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+
+    def write(self, name, text):
+        p = self.tmp / name
+        p.write_text(text, encoding='utf-8')
+        return p
+
+    def test_compare(self):
+        a, b, c = sha(b'a'), sha(b'b'), sha(b'c')
+        old = [('pack.json', 10, a), ('library-data/kept.pdf', 100, b), ('library-data/bigger.pdf', 50, c),
+               ('library-data/rehashed.pdf', 70, a), ('library-data/gone.pdf', 30, b)]
+        new = [('pack.json', 10, a), ('library-data/kept.pdf', 100, b), ('library-data/bigger.pdf', 60, c),
+               ('library-data/rehashed.pdf', 70, b), ('library-data/fresh.pdf', 40, c)]
+        d = install.compare_pack_manifests(old, new)
+        self.assertEqual(d['added'], ['library-data/fresh.pdf'])
+        self.assertEqual(d['removed'], ['library-data/gone.pdf'])
+        self.assertEqual(d['changed'], ['library-data/bigger.pdf', 'library-data/rehashed.pdf'])     # size, then SHA-256 only
+        self.assertEqual(d['unchanged'], ['library-data/kept.pdf', 'pack.json'])
+        self.assertEqual(d['unsafe'], [])
+        self.assertEqual(d['bytes'], {'added': 40, 'changed': 130, 'unchanged': 110, 'removed': 30})
+        self.assertEqual((d['fetch_bytes'], d['reuse_bytes']), (170, 110))
+        same = install.compare_pack_manifests(new, new)
+        self.assertEqual((same['fetch_bytes'], same['reuse_bytes'], same['changed']), (0, 280, []))
+
+    def test_empty_and_unsafe(self):
+        d = install.compare_pack_manifests([], [])
+        self.assertEqual((d['added'], d['removed'], d['fetch_bytes'], d['reuse_bytes']), ([], [], 0, 0))
+        d = install.compare_pack_manifests([], [('pack.json', 5, sha(b'x'))])
+        self.assertEqual((d['added'], d['fetch_bytes']), (['pack.json'], 5))
+        d = install.compare_pack_manifests([('../outside', 1, 'x'), ('pack.json', 5, 'y')],
+                                           [('/etc/hosts', 9, 'z'), ('../outside', 1, 'x'), ('library-data/../../up', 2, 'w')])
+        self.assertEqual(d['unsafe'], ['../outside', '/etc/hosts', 'library-data/../../up'])     # never kept, never fetched
+        self.assertEqual((d['removed'], d['unchanged'], d['added'], d['fetch_bytes'], d['reuse_bytes']), (['pack.json'], [], [], 0, 0))
+
+    def test_windows_paths_are_unsafe_on_every_system(self):
+        bad = ['\\Windows\\b.dll', '/Windows/d.dll', 'C:c.dll', 'C:\\Windows\\a.dll', '..\\up.txt', 'ok\\fine.pdf', '.']
+        d = install.compare_pack_manifests([], [(rel, 1, sha(b'x')) for rel in bad] + [('library-data/ok.pdf', 2, sha(b'y'))])
+        self.assertEqual(d['unsafe'], sorted(bad))
+        self.assertEqual((d['added'], d['fetch_bytes']), (['library-data/ok.pdf'], 2))
+
+    def test_reading(self):
+        p = self.write('m.tsv', self.HEADER + f'pack.json\t5\t{sha(b"x")}\tgenerated\t\n\n  \nlibrary-data/a.pdf\t7\t{sha(b"a")}\r\n')
+        self.assertEqual(install.read_pack_manifest(p), [('pack.json', 5, sha(b'x')), ('library-data/a.pdf', 7, sha(b'a'))])
+        # A list that lost its header or its rows must not read as "every installed file was removed".
+        x = sha(b'x')
+        for name, text in (('empty', ''), ('header', self.HEADER), ('nohead', f'pack.json\t5\t{x}\nother.pdf\t5\t{x}\n')):
+            with self.subTest(name), self.assertRaises(ValueError):
+                install.read_pack_manifest(self.write(name + '.tsv', text))
+        for name, row in (('short', 'pack.json\t5\n'), ('size', f'pack.json\tfive\t{x}\n'), ('negative', f'pack.json\t-1\t{x}\n'),
+                          ('nopath', f'\t5\t{x}\n'), ('twice', f'pack.json\t5\t{x}\npack.json\t6\t{x}\n'),
+                          ('nosha', 'pack.json\t5\t\n'), ('shortsha', 'pack.json\t5\tabc\n'), ('uppersha', f'pack.json\t5\t{x.upper()}\n')):
+            with self.subTest(name), self.assertRaises(ValueError):
+                install.read_pack_manifest(self.write(name + '.tsv', self.HEADER + row))
+        with self.assertRaises(OSError):
+            install.read_pack_manifest(self.tmp / 'missing.tsv')
+
+    def test_tool(self):
+        """tools/compare_packs.py as a maintainer runs it, as its own process."""
+        tool = ROOT / 'tools' / 'compare_packs.py'
+        (self.tmp / 'lib').mkdir()
+        self.write('lib/pack-manifest.tsv', self.HEADER + f'pack.json\t5\t{sha(b"x")}\t\t\nold.pdf\t3\t{sha(b"o")}\t\t\n')
+        new = self.write('new.tsv', self.HEADER + f'pack.json\t5\t{sha(b"x")}\t\t\nfresh.pdf\t2000\t{sha(b"f")}\t\t\n')
+        r = subprocess.run([sys.executable, '-B', str(tool), '--data', str(self.tmp / 'lib'), str(new), '--list'], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn('To fetch: 2.0 KB (added and changed). Already here: 5 bytes.', r.stdout)
+        self.assertIn('added:\n  fresh.pdf', r.stdout)
+        self.assertIn('removed:\n  old.pdf', r.stdout)
+        odd = self.write('odd.tsv', self.HEADER + f'schr\u251c\u2562dingers.pdf\t5\t{sha(b"x")}\t\t\n')
+        r = subprocess.run([sys.executable, '-B', str(tool), str(new), str(odd), '--list'], capture_output=True, text=True,
+                           env={**os.environ, 'PYTHONIOENCODING': 'cp1252'})
+        self.assertEqual(r.returncode, 0, r.stderr)     # a Windows file or pipe cannot hold these letters
+        bad = self.write('bad.tsv', self.HEADER + 'pack.json\tfive\tabc\n')
+        r = subprocess.run([sys.executable, '-B', str(tool), str(new), str(bad)], capture_output=True, text=True)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('line 2 of', r.stderr)
 
 
 class Manage(Base):
@@ -980,6 +1799,118 @@ class Maps(Base):
         api.opened(self.settings, lib, note)
         self.assertFalse((self.parent / 'LastbookData.setup').exists())
         self.assertEqual(self.setup('manage', current=lib, manifest=mf).start(None, False, map_id='CA')['code'], 'nothing')
+
+    def library_with_state_map(self):
+        """#75: a Small library as setup installs it (with its pack-manifest.tsv), then the California map set in place of its own."""
+        files = {'library-data/catalog.json': b'{"records": []}', 'pack.json': b'{"name": "small", "map": "base"}',
+                 'library-data/big.bin': os.urandom(MiB), 'derived/geo/map.sqlite': b'base map'}
+        rows = ['path\tbytes\tsha256\thow\tchanges'] + [f'{k}\t{len(v)}\t{sha(v)}\tclone\t' for k, v in files.items()]
+        files['pack-manifest.tsv'] = ('\n'.join(rows) + '\n').encode()
+        zpath = self.tmp / 'Lastbook-Small.zip'
+        self.installed = make_pack(zpath, files)
+        self.zip = zpath.read_bytes()
+        self.files.data['Lastbook-Small.zip'] = self.zip
+        lib = install.unpack(zpath, self.parent, self.installed, Control(), lambda d, t: None)
+        zpath.unlink()
+        mf, map_files = self.map_manifest()
+        unpacked = install.unpack(self.tmp / 'Lastbook-Map-CA.zip', self.tmp / 'map', None, Control(), lambda d, t: None, allowed=install.map_member)
+        install.replace_map_in(lib, unpacked)
+        self.assertEqual(install.map_name(lib), 'CA')
+        return lib, mf, map_files
+
+    def test_repair_of_another_file_keeps_the_state_map(self):
+        lib, mf, map_files = self.library_with_state_map()
+        (lib / 'library-data' / 'big.bin').unlink()
+        s = self.setup('manage', current=lib, manifest=mf)
+        s.start(repair=True)
+        self.assertEqual(self.wait(s)['state'], 'done')
+        new, _ = api.startup(self.settings)
+        self.assertTrue((new / 'library-data' / 'big.bin').is_file())
+        self.assertEqual(install.map_name(new), 'CA')
+        self.assertEqual((new / 'derived/geo/map.sqlite').read_bytes(), map_files['derived/geo/map.sqlite'])
+
+    def test_repair_fetches_a_missing_state_map_file(self):
+        lib, mf, map_files = self.library_with_state_map()
+        (lib / 'derived/geo/terrain.sqlite').unlink()
+        s = self.setup('manage', current=lib, manifest=mf)
+        j = s.start(repair=True)
+        self.assertEqual([i['kind'] for i in j['items']], ['pack', 'map'])
+        self.assertEqual(self.wait(s)['state'], 'done')
+        self.assertIn('Lastbook-Map-CA.zip', [n for n, _, _ in self.files.log])
+        new, note = api.startup(self.settings)
+        self.assertIsNone(note.get('error'))
+        self.assertEqual(install.map_name(new), 'CA')
+        self.assertEqual((new / 'derived/geo/terrain.sqlite').read_bytes(), map_files['derived/geo/terrain.sqlite'])
+
+    def test_repair_says_when_a_damaged_state_map_cannot_be_fetched(self):
+        lib, mf, _ = self.library_with_state_map()
+        (lib / 'derived/geo/terrain.sqlite').unlink()
+        mf.current['maps'][0]['available'] = False
+        j = self.setup('manage', current=lib, manifest=mf).start(repair=True)
+        self.assertEqual(j.get('code'), 'unavailable', j)
+
+    def library_with_own_map(self):
+        """#88 review: a library like All, whose pack ships its own map set (the whole US) with map-set.json, as setup installs it."""
+        terrain = os.urandom(MiB)
+        files = {'library-data/catalog.json': b'{"records": []}', 'pack.json': b'{"name": "small", "map": "us"}',
+                 'library-data/big.bin': os.urandom(MiB), 'derived/geo/map.sqlite': b'us map', 'derived/geo/terrain.sqlite': terrain}
+        files['map-set.json'] = json.dumps({'name': 'us', 'files': {'derived/geo/map.sqlite': 6, 'derived/geo/terrain.sqlite': MiB}}).encode()
+        rows = ['path\tbytes\tsha256\thow\tchanges'] + [f'{k}\t{len(v)}\t{sha(v)}\tclone\t' for k, v in files.items()]
+        files['pack-manifest.tsv'] = ('\n'.join(rows) + '\n').encode()
+        zpath = self.tmp / 'Lastbook-Small.zip'
+        self.installed = make_pack(zpath, files)
+        self.zip = zpath.read_bytes()
+        self.files.data['Lastbook-Small.zip'] = self.zip
+        lib = install.unpack(zpath, self.parent, self.installed, Control(), lambda d, t: None)
+        zpath.unlink()
+        self.assertEqual(install.map_name(lib), 'us')
+        return lib, terrain
+
+    def test_repair_restores_a_file_of_the_packs_own_map(self):
+        """All's whole-US map comes with the pack, not as a separate download: Repair checks it and fetches it with the pack."""
+        lib, terrain = self.library_with_own_map()
+        (lib / 'derived/geo/terrain.sqlite').unlink()
+        s = self.setup('manage', current=lib, manifest=self.manifest())
+        j = s.start(repair=True)
+        self.assertIsNone(j.get('code'), j)
+        self.assertEqual([i['kind'] for i in j['items']], ['pack'])
+        self.assertEqual(self.wait(s)['state'], 'done')
+        new, note = api.startup(self.settings)
+        self.assertIsNone(note.get('error'))
+        self.assertEqual(install.map_name(new), 'us')
+        self.assertEqual((new / 'derived/geo/terrain.sqlite').read_bytes(), terrain)
+
+    def test_repair_restores_a_changed_map_set_json_of_the_packs_own_map(self):
+        """#88 review: a changed map-set.json of the pack's own map is a damaged pack file, not a separate map to download."""
+        lib, terrain = self.library_with_own_map()
+        listed = (lib / 'map-set.json').read_bytes()
+        with open(lib / 'map-set.json', 'ab') as f:
+            f.write(b'\n')
+        (lib / 'derived/geo/terrain.sqlite').unlink()
+        s = self.setup('manage', current=lib, manifest=self.manifest())
+        j = s.start(repair=True)
+        self.assertIsNone(j.get('code'), j)
+        self.assertEqual([i['kind'] for i in j['items']], ['pack'])
+        self.assertEqual(self.wait(s)['state'], 'done')
+        new, note = api.startup(self.settings)
+        self.assertIsNone(note.get('error'))
+        self.assertEqual((new / 'map-set.json').read_bytes(), listed)
+        self.assertEqual((new / 'derived/geo/terrain.sqlite').read_bytes(), terrain)
+
+    def test_repair_keeps_a_state_map_installed_over_the_packs_own(self):
+        """A state map chosen on a pack that ships its own map set (as on Medium) is still a separate map: Repair keeps it."""
+        lib, _ = self.library_with_own_map()
+        mf, map_files = self.map_manifest()
+        unpacked = install.unpack(self.tmp / 'Lastbook-Map-CA.zip', self.tmp / 'map', None, Control(), lambda d, t: None, allowed=install.map_member)
+        install.replace_map_in(lib, unpacked)
+        (lib / 'library-data' / 'big.bin').unlink()
+        s = self.setup('manage', current=lib, manifest=mf)
+        s.start(repair=True)
+        self.assertEqual(self.wait(s)['state'], 'done')
+        new, _ = api.startup(self.settings)
+        self.assertTrue((new / 'library-data' / 'big.bin').is_file())
+        self.assertEqual(install.map_name(new), 'CA')
+        self.assertEqual((new / 'derived/geo/map.sqlite').read_bytes(), map_files['derived/geo/map.sqlite'])
 
     def test_map_into_a_library_with_another_name(self):
         """Windows 1.1.4 test: a library opened with --data from a folder not called LastbookData got the map in a nested

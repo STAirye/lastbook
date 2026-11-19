@@ -35,6 +35,7 @@
   "heat exhaustion",
   "hypothermia",
   "frostbite",
+  "frostnip",
   "allergic reaction",
   "anaphylaxis",
   "epinephrine",
@@ -288,7 +289,7 @@
   {
    "id": "heatcold",
    "label": "Too hot or too cold (heat stroke, hypothermia, frostbite)",
-   "hint": "Heat wave, no AC, confused and hot, shivering, numb white fingers",
+   "hint": "Heat wave, no AC, confused and hot, shivering, frostnip, numb white fingers",
    "read": [
     {
      "doc": "med-2e83e22162a9a006",

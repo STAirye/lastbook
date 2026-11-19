@@ -33,7 +33,7 @@ if getattr(sys, 'frozen', False):
         os.environ.pop(_k, None)
     # Ours instead: lastbooksrc (packaging/linux/gst/lastbooksrc.c), the GStreamer source that plays lastbook://app/videos/ addresses. WebKit's player
     # takes only blob, data, file and http(s) unless WEBKIT_GST_ALLOWED_URI_PROTOCOLS names more, and GStreamer itself has no source for lastbook:.
-    # The web process finds both through the environment it inherits from here.
+    # The web process finds both through the environment it inherits from here. A source run gets the same from packaging/linux/run_source_linux.sh.
     _gst = os.path.join(getattr(sys, '_MEIPASS', ''), 'gst')
     if os.path.isdir(_gst):
         os.environ['GST_PLUGIN_PATH_1_0'] = _gst

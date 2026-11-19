@@ -1,0 +1,1128 @@
+{
+  "about": "Proposed region definitions for detailed maps of Italy: 20 regions (15 ordinary, 5 with special statute), one map per region. Companion to docs/REGIONS-IT.md; a proposal, not read by any code.",
+  "status": "proposal",
+  "checked": "2026-11-18",
+  "codes": {
+    "proposal": "ISO 3166-2:IT region codes, IT-21 to IT-88 (two digits after IT-).",
+    "why": "The part after IT- is two digits, so none can equal a US code in STATE_CODES (engine/address_search.py); the hyphenated code also keeps files apart from US ones. The two-letter province codes would collide: 18 of the 110 ISTAT province sigle are US codes (AL, AR, CA, CO, CT, ME, MI, MN, MO, MS, MT, OR, PA, PR, RI, TN, VA, VT).",
+    "verified": "Codes taken from Wikipedia's copy of ISO 3166-2:IT (opened 2026-11-18), not checked against the ISO site."
+  },
+  "layer_keys": {
+    "terrain": "terrain.sqlite",
+    "water": "water.sqlite",
+    "dams": "water.sqlite (nid part today)",
+    "crops": "crops.sqlite",
+    "buildings": "buildings.sqlite",
+    "places": "places.sqlite",
+    "addresses": "derived/geo/addresses/<code>.sqlite",
+    "pois": "poi rows in national.sqlite"
+  },
+  "licences": {
+    "CC-BY-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "ISTAT: credit ISTAT, link the licence and say if the data was changed (note legali). TINITALY: cite \"TINITALY, a digital elevation model of Italy with a 10 meters cell size (Version 1.1)\" and Tarquini et al.",
+      "share_alike": false,
+      "verified": "ISTAT note legali and INGV TINITALY page opened 2026-11-18; licence text itself not reopened"
+    },
+    "IODL-2.0": {
+      "name": "Italian Open Data Licence v2.0",
+      "url": "https://www.dati.gov.it/content/italian-open-data-license-v20",
+      "attribution": "Credit the licensor (Ministero della Salute) and, where possible, link the licence",
+      "share_alike": false,
+      "verified": "named on the Ministry of Health dataset pages opened 2026-11-18; licence text not opened. IODL 2.0 is generally treated as compatible with CC BY 4.0, which was not checked here"
+    },
+    "ODbL-1.0": {
+      "name": "Open Database License 1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "\"© OpenStreetMap contributors\"",
+      "share_alike": true,
+      "verified": "as for the US map"
+    },
+    "Copernicus-WorldDEM-30": {
+      "name": "Copernicus WorldDEM-30 licence",
+      "url": "see docs/regions-proposed.json",
+      "attribution": "see docs/regions-proposed.json",
+      "share_alike": false,
+      "verified": "as in docs/regions-proposed.json; AWS registry page opened 2026-11-18"
+    },
+    "Copernicus-CLMS": {
+      "name": "Copernicus data and information policy, Regulation (EU) No 1159/2013 (full, open and free access)",
+      "url": "https://land.copernicus.eu/en/products/corine-land-cover/clc2018",
+      "attribution": "Source credit to the European Union, Copernicus Land Monitoring Service, EEA",
+      "share_alike": false,
+      "verified": "CLC2018 product page opened 2026-11-18"
+    }
+  },
+  "country_layers": {
+    "terrain": [
+      {
+        "dataset": "TINITALY/1.1 (10 m cell, whole country, released January 2023)",
+        "publisher": "INGV",
+        "url": "https://tinitaly.pi.ingv.it/",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-18",
+        "role": "primary",
+        "notes": "Finer than the 30 m the app uses today, and one source for the whole country. Download terms beyond the licence line (registration, tiles) and whether it is bare earth or surface were not checked."
+      },
+      {
+        "dataset": "Copernicus DEM GLO-30 (surface model)",
+        "publisher": "ESA / Airbus",
+        "url": "https://registry.opendata.aws/copernicus-dem/",
+        "licence": "Copernicus-WorldDEM-30",
+        "verified": "opened 2026-11-18",
+        "role": "alternative",
+        "notes": "Same source as the other proposals; one licence for all of Europe."
+      }
+    ],
+    "water": [
+      {
+        "dataset": "OSM waterways and water areas",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/europe/italy.html",
+        "licence": "ODbL-1.0",
+        "verified": "Geofabrik pages opened 2026-11-18",
+        "role": "primary",
+        "notes": "No national river network was opened. ISPRA publishes hazard mosaics (IdroGEO) under CC BY 4.0 and CC BY-SA 4.0; its national hydrographic network (SINAnet) was seen in search only."
+      },
+      {
+        "dataset": "IdroGEO open data (landslide and flood hazard mosaics)",
+        "publisher": "ISPRA",
+        "url": "https://idrogeo.isprambiente.it/cms/open-data",
+        "licence": "CC-BY-4.0",
+        "verified": "opened 2026-11-18",
+        "role": "possible",
+        "notes": "The page lists some products as CC BY 4.0 and others as CC BY-SA 4.0; which is which per product must be read before use. Not a river network."
+      }
+    ],
+    "dams": [
+      {
+        "dataset": "OSM waterway=dam",
+        "publisher": "OSM contributors",
+        "url": "https://taginfo.geofabrik.de/europe:italy/",
+        "licence": "ODbL-1.0",
+        "verified": "taginfo opened 2026-11-18",
+        "role": "primary",
+        "notes": "2,044 objects in Italy."
+      },
+      {
+        "dataset": "Registro italiano dighe (large dams, Ministry of Infrastructure, DG Dighe)",
+        "publisher": "MIT",
+        "url": "https://dgdighe.mit.gov.it/categoria/_registro_dighe",
+        "licence": "not checked",
+        "verified": "page fetched 2026-11-18; no download or licence text found in it",
+        "role": "possible",
+        "notes": "A \"grandi dighe italiane\" dataset on dati.mit.gov.it was seen in search only; the catalogue page did not return content."
+      }
+    ],
+    "crops": [
+      {
+        "dataset": "CORINE Land Cover 2018, classes 221 (vineyards), 222 (fruit trees and berries), 223 (olive groves)",
+        "publisher": "Copernicus / EEA",
+        "url": "https://land.copernicus.eu/en/products/corine-land-cover/clc2018",
+        "licence": "Copernicus-CLMS",
+        "verified": "opened 2026-11-18",
+        "role": "primary",
+        "notes": "25 ha minimum unit; citrus and nuts fall inside 222. No national parcel-level layer (as SIGPAC in Spain) was found open."
+      }
+    ],
+    "buildings": [
+      {
+        "dataset": "OSM buildings, or Overture buildings",
+        "publisher": "OSM contributors; Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/attribution/",
+        "licence": "ODbL-1.0",
+        "verified": "Overture attribution page opened 2026-11-18",
+        "role": "primary",
+        "notes": "No national open building layer was checked. The Agenzia delle Entrate cadastre was not opened."
+      }
+    ],
+    "places": [
+      {
+        "dataset": "ISTAT administrative boundaries and commune list (1 January 2026)",
+        "publisher": "ISTAT",
+        "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+        "licence": "CC-BY-4.0",
+        "verified": "opened and downloaded 2026-11-18",
+        "role": "primary",
+        "notes": "7,896 communes in the 2026 layers (sum of the per-region counts). 124 of them carry a second-language name (COMUNE_A)."
+      },
+      {
+        "dataset": "OSM named places",
+        "publisher": "OSM contributors",
+        "url": "https://download.geofabrik.de/europe/italy.html",
+        "licence": "ODbL-1.0",
+        "verified": "as for the US map",
+        "role": "primary",
+        "notes": "Frazioni and località are mostly only in OSM."
+      }
+    ],
+    "addresses": [
+      {
+        "dataset": "ANNCSU indirizzario (national archive of street numbers), one CSV per region",
+        "publisher": "Agenzia delle Entrate and ISTAT",
+        "url": "https://anncsu.gov.it/it/consultazione-dellarchivio/open-data/",
+        "licence": "CC-BY-4.0 (not stated on the ANNCSU pages)",
+        "verified": "pages opened and the Lombardia file downloaded and read 2026-11-18; the licence was read on Overture's attribution page, and the dati.gov.it catalogue returned 502",
+        "role": "primary",
+        "notes": "Lombardia file INDIR_LOMB_20261102.csv: 3,136,806 rows, 2,070,077 with coordinates; columns have no postcode (CAP). Distributed as a high-value dataset under Implementing Regulation (EU) 2023/138."
+      },
+      {
+        "dataset": "Overture addresses (Italy from ANNCSU, through OpenAddresses)",
+        "publisher": "Overture Maps Foundation",
+        "url": "https://docs.overturemaps.org/attribution/",
+        "licence": "CC-BY-4.0",
+        "verified": "attribution page opened 2026-11-18; Italian rows not counted",
+        "role": "alternative",
+        "notes": "Whether Overture adds postcodes to Italian rows was not measured."
+      }
+    ],
+    "pois": [
+      {
+        "dataset": "OSM help points",
+        "publisher": "OSM contributors",
+        "url": "https://taginfo.geofabrik.de/europe:italy/",
+        "licence": "ODbL-1.0",
+        "verified": "taginfo opened 2026-11-18",
+        "role": "primary",
+        "counts_as_of": "2026-11-17T21:24:30Z",
+        "counts": {
+          "amenity=clinic": 2181,
+          "amenity=drinking_water": 69898,
+          "amenity=fire_station": 1472,
+          "amenity=fountain": 12304,
+          "amenity=hospital": 2348,
+          "amenity=pharmacy": 16891,
+          "amenity=police": 7135,
+          "amenity=shelter": 11713,
+          "emergency=assembly_point": 1584,
+          "emergency=defibrillator": 8180,
+          "emergency=drinking_water": 0,
+          "emergency=water_tank": 826,
+          "man_made=water_tap": 10297,
+          "man_made=water_well": 3986,
+          "natural=spring": 9888,
+          "tourism=alpine_hut": 1944,
+          "tourism=wilderness_hut": 1522,
+          "waterway=dam": 2044
+        }
+      },
+      {
+        "dataset": "Farmacie (pharmacies), with coordinates",
+        "publisher": "Ministero della Salute",
+        "url": "https://www.dati.salute.gov.it/it/dataset/farmacie",
+        "licence": "IODL-2.0",
+        "verified": "opened and file read 2026-11-18",
+        "role": "primary",
+        "notes": "FRM_FARMA_5_20261118.csv: 59,268 rows, 20,779 with no end date, of which 18,941 have coordinates."
+      },
+      {
+        "dataset": "Aziende ospedaliere, aziende ospedaliere universitarie e IRCCS pubblici",
+        "publisher": "Ministero della Salute",
+        "url": "https://www.dati.salute.gov.it/it/dataset/aziende-ospedaliere-aziende-ospedaliere-universitarie-e-irccs-pubblici-anche-costituiti",
+        "licence": "IODL-2.0",
+        "verified": "page opened 2026-11-18; file not downloaded",
+        "role": "possible",
+        "notes": "Hospital trusts with address, commune and province sigla; no coordinates mentioned on the page."
+      }
+    ]
+  },
+  "not_open_nationwide": [
+    "Postcode (CAP) areas: Poste Italiane assigns them; no open boundary layer was found, and the ANNCSU address file has no postcode column.",
+    "Fire stations (Vigili del Fuoco) and civil protection assembly areas: no national open list was opened; the fire service open data portal was not reached."
+  ],
+  "addressing": {
+    "postal_code": {
+      "format": "Five digits (CAP). Leading zeros occur (00xxx is Rome), so a CAP must stay text. 20,778 of 20,779 active pharmacy rows carry a five-digit CAP.",
+      "example_pattern": "00000"
+    },
+    "order": "Street type, street name, comma, house number (civico), then CAP, town and province sigla (\"Piazza della Scala, 2, 20121 Milano MI\").",
+    "notes": "Street type comes first (Via, Viale, Piazza, Corso, Vicolo, Strada, Largo). Civico can carry a suffix (esponente: 10/A, 10 bis). A frazione or località may stand in for the street or between street and town. In ANNCSU Lombardia every street name is in capitals, 2,738,891 of 3,136,806 rows start with VIA, and there is no postcode column. normalize() and norm() keep only a-z and 0-9, so accents need folding; is_address_query() needs the number first, which Italian addresses never put first.",
+    "languages": "Bilingual names are official in Bolzano/Bozen (Italian, German, some Ladin), Valle d'Aosta (Italian, French) and in Slovene-speaking communes of Friuli Venezia Giulia.",
+    "emergency_numbers": "112 (NUE). On 2026-11-18 the Department for European Affairs page said NUE runs in 16 regions and 2 autonomous provinces through 23 answering centres. How 112 is answered in the other regions, and whether 113, 115 and 118 are still answered everywhere, was not checked on a publisher page."
+  },
+  "regions": [
+    {
+      "code": "IT-21",
+      "name": "Piemonte",
+      "name_en": "Piedmont",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "01",
+      "provinces_sigla": [
+        "TO",
+        "VC",
+        "NO",
+        "CN",
+        "AT",
+        "AL",
+        "BI",
+        "VB"
+      ],
+      "communes": 1180,
+      "area_km2": 25387,
+      "bbox": {
+        "west": 6.6266,
+        "south": 44.0601,
+        "east": 9.2142,
+        "north": 46.4644,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          6.47,
+          43.91,
+          9.37,
+          46.62
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1703,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-23",
+      "name": "Valle d'Aosta/Vallée d'Aoste",
+      "name_en": "Aosta Valley",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "autonomous region",
+      "istat": "02",
+      "provinces_sigla": [
+        "AO"
+      ],
+      "communes": 74,
+      "area_km2": 3261,
+      "bbox": {
+        "west": 6.8013,
+        "south": 45.467,
+        "east": 7.9395,
+        "north": 45.9878,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          6.65,
+          45.31,
+          8.09,
+          46.14
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 52,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "Officially bilingual (Italian and French); ISTAT name \"Valle d'Aosta/Vallée d'Aoste\". One province (AO); the region itself runs the provincial functions."
+    },
+    {
+      "code": "IT-25",
+      "name": "Lombardia",
+      "name_en": "Lombardy",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "03",
+      "provinces_sigla": [
+        "VA",
+        "CO",
+        "SO",
+        "MI",
+        "BG",
+        "BS",
+        "PV",
+        "CR",
+        "MN",
+        "LC",
+        "LO",
+        "MB"
+      ],
+      "communes": 1502,
+      "area_km2": 23863,
+      "bbox": {
+        "west": 8.4979,
+        "south": 44.6797,
+        "east": 11.4277,
+        "north": 46.6352,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          8.34,
+          44.52,
+          11.58,
+          46.79
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 3287,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")",
+        "anncsu_addresses": 3136806,
+        "anncsu_addresses_note": "ANNCSU indirizzario Lombardia, file INDIR_LOMB_20261102.csv: 3,136,806 rows, 2,070,077 with coordinates, 1,501 communes, no postcode column"
+      },
+      "notes": "Box holds Campione d'Italia, a Lombard exclave inside Switzerland, and with the margin parts of Ticino and Graubünden."
+    },
+    {
+      "code": "IT-32",
+      "name": "Trentino-Alto Adige/Südtirol",
+      "name_en": "Trentino-South Tyrol",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "autonomous region",
+      "istat": "04",
+      "provinces_sigla": [
+        "BZ",
+        "TN"
+      ],
+      "communes": 282,
+      "area_km2": 13605,
+      "bbox": {
+        "west": 10.3818,
+        "south": 45.6731,
+        "east": 12.4779,
+        "north": 47.0918,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          10.23,
+          45.52,
+          12.63,
+          47.25
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 337,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "Two autonomous provinces (Bolzano/Bozen, Trento) run most of what regions run elsewhere, including health and civil protection. ISO 3166-2 also gives them IT-BZ and IT-TN. Bolzano/Bozen is bilingual Italian and German, with Ladin in some valleys."
+    },
+    {
+      "code": "IT-34",
+      "name": "Veneto",
+      "name_en": "Veneto",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "05",
+      "provinces_sigla": [
+        "VR",
+        "VI",
+        "BL",
+        "TV",
+        "VE",
+        "PD",
+        "RO"
+      ],
+      "communes": 560,
+      "area_km2": 18355,
+      "bbox": {
+        "west": 10.6229,
+        "south": 44.7928,
+        "east": 13.1022,
+        "north": 46.6805,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          10.47,
+          44.64,
+          13.26,
+          46.84
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1569,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-36",
+      "name": "Friuli-Venezia Giulia",
+      "name_en": "Friuli Venezia Giulia",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "autonomous region",
+      "istat": "06",
+      "provinces_sigla": [
+        "UD",
+        "GO",
+        "TS",
+        "PN"
+      ],
+      "communes": 215,
+      "area_km2": 7933,
+      "bbox": {
+        "west": 12.3209,
+        "south": 45.5809,
+        "east": 13.9189,
+        "north": 46.6478,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          12.17,
+          45.43,
+          14.07,
+          46.8
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 430,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "Slovene is protected in parts of the provinces of Trieste, Gorizia and Udine; Friulian is recognised regionally."
+    },
+    {
+      "code": "IT-42",
+      "name": "Liguria",
+      "name_en": "Liguria",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "07",
+      "provinces_sigla": [
+        "IM",
+        "SV",
+        "GE",
+        "SP"
+      ],
+      "communes": 234,
+      "area_km2": 5418,
+      "bbox": {
+        "west": 7.4948,
+        "south": 43.7757,
+        "east": 10.071,
+        "north": 44.6764,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          7.34,
+          43.62,
+          10.23,
+          44.83
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 629,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "With the margin the box reaches Monaco, which is not part of Italy, and the French coast around Menton."
+    },
+    {
+      "code": "IT-45",
+      "name": "Emilia-Romagna",
+      "name_en": "Emilia-Romagna",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "08",
+      "provinces_sigla": [
+        "PC",
+        "PR",
+        "RE",
+        "MO",
+        "BO",
+        "FE",
+        "RA",
+        "FC",
+        "RN"
+      ],
+      "communes": 330,
+      "area_km2": 22502,
+      "bbox": {
+        "west": 9.1979,
+        "south": 43.7319,
+        "east": 12.7556,
+        "north": 45.1391,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          9.04,
+          43.58,
+          12.91,
+          45.29
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1489,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "Box contains San Marino, which is not part of Italy."
+    },
+    {
+      "code": "IT-52",
+      "name": "Toscana",
+      "name_en": "Tuscany",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "09",
+      "provinces_sigla": [
+        "MS",
+        "LU",
+        "PT",
+        "FI",
+        "LI",
+        "PI",
+        "AR",
+        "SI",
+        "GR",
+        "PO"
+      ],
+      "communes": 273,
+      "area_km2": 22990,
+      "bbox": {
+        "west": 9.6867,
+        "south": 42.2377,
+        "east": 12.3714,
+        "north": 44.4727,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          9.53,
+          42.08,
+          12.53,
+          44.63
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1273,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-55",
+      "name": "Umbria",
+      "name_en": "Umbria",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "10",
+      "provinces_sigla": [
+        "PG",
+        "TR"
+      ],
+      "communes": 92,
+      "area_km2": 8464,
+      "bbox": {
+        "west": 11.8919,
+        "south": 42.3641,
+        "east": 13.2642,
+        "north": 43.6173,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          11.74,
+          42.21,
+          13.42,
+          43.77
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 303,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-57",
+      "name": "Marche",
+      "name_en": "Marche",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "11",
+      "provinces_sigla": [
+        "PU",
+        "AN",
+        "MC",
+        "AP",
+        "FM"
+      ],
+      "communes": 225,
+      "area_km2": 9346,
+      "bbox": {
+        "west": 12.1855,
+        "south": 42.6872,
+        "east": 13.9164,
+        "north": 43.9716,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          12.03,
+          42.53,
+          14.07,
+          44.13
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 564,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "Box contains San Marino, which is not part of Italy."
+    },
+    {
+      "code": "IT-62",
+      "name": "Lazio",
+      "name_en": "Lazio",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "12",
+      "provinces_sigla": [
+        "VT",
+        "RI",
+        "RM",
+        "LT",
+        "FR"
+      ],
+      "communes": 378,
+      "area_km2": 17239,
+      "bbox": {
+        "west": 11.4494,
+        "south": 40.7847,
+        "east": 14.0276,
+        "north": 42.8387,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          11.29,
+          40.63,
+          14.18,
+          42.99
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1802,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "Box contains Vatican City, which is not part of Italy. South edge is the Pontine islands (Ventotene and Santo Stefano)."
+    },
+    {
+      "code": "IT-65",
+      "name": "Abruzzo",
+      "name_en": "Abruzzo",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "13",
+      "provinces_sigla": [
+        "AQ",
+        "TE",
+        "PE",
+        "CH"
+      ],
+      "communes": 305,
+      "area_km2": 10832,
+      "bbox": {
+        "west": 13.0185,
+        "south": 41.6821,
+        "east": 14.783,
+        "north": 42.8951,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          12.86,
+          41.53,
+          14.94,
+          43.05
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 571,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-67",
+      "name": "Molise",
+      "name_en": "Molise",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "14",
+      "provinces_sigla": [
+        "CB",
+        "IS"
+      ],
+      "communes": 136,
+      "area_km2": 4461,
+      "bbox": {
+        "west": 13.941,
+        "south": 41.364,
+        "east": 15.1616,
+        "north": 42.0703,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          13.79,
+          41.21,
+          15.32,
+          42.23
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 177,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-72",
+      "name": "Campania",
+      "name_en": "Campania",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "15",
+      "provinces_sigla": [
+        "CE",
+        "BN",
+        "NA",
+        "AV",
+        "SA"
+      ],
+      "communes": 550,
+      "area_km2": 13676,
+      "bbox": {
+        "west": 13.7621,
+        "south": 39.9905,
+        "east": 15.8064,
+        "north": 41.5074,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          13.61,
+          39.84,
+          15.96,
+          41.66
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1885,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-75",
+      "name": "Puglia",
+      "name_en": "Apulia",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "16",
+      "provinces_sigla": [
+        "FG",
+        "BA",
+        "TA",
+        "BR",
+        "LE",
+        "BT"
+      ],
+      "communes": 257,
+      "area_km2": 19543,
+      "bbox": {
+        "west": 14.9341,
+        "south": 39.7896,
+        "east": 18.5204,
+        "north": 42.2266,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          14.78,
+          39.63,
+          18.68,
+          42.38
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1308,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-77",
+      "name": "Basilicata",
+      "name_en": "Basilicata",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "17",
+      "provinces_sigla": [
+        "PZ",
+        "MT"
+      ],
+      "communes": 131,
+      "area_km2": 10073,
+      "bbox": {
+        "west": 15.335,
+        "south": 39.8948,
+        "east": 16.8672,
+        "north": 41.1399,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          15.18,
+          39.74,
+          17.02,
+          41.29
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 229,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-78",
+      "name": "Calabria",
+      "name_en": "Calabria",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "region",
+      "istat": "18",
+      "provinces_sigla": [
+        "CS",
+        "CZ",
+        "RC",
+        "KR",
+        "VV"
+      ],
+      "communes": 404,
+      "area_km2": 15219,
+      "bbox": {
+        "west": 15.6298,
+        "south": 37.9158,
+        "east": 17.2065,
+        "north": 40.1439,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          15.47,
+          37.76,
+          17.36,
+          40.3
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 837,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      }
+    },
+    {
+      "code": "IT-82",
+      "name": "Sicilia",
+      "name_en": "Sicily",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "autonomous region",
+      "istat": "19",
+      "provinces_sigla": [
+        "TP",
+        "PA",
+        "ME",
+        "AG",
+        "CL",
+        "EN",
+        "CT",
+        "RG",
+        "SR"
+      ],
+      "communes": 391,
+      "area_km2": 25835,
+      "bbox": {
+        "west": 11.9257,
+        "south": 35.4929,
+        "east": 15.6533,
+        "north": 38.8177,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          11.77,
+          35.34,
+          15.81,
+          38.97
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 1671,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "South edge is Lampedusa; west edge is Pantelleria. The box is mostly sea and contains Malta (the islands of Malta, Gozo and Comino), which is not part of Italy."
+    },
+    {
+      "code": "IT-88",
+      "name": "Sardegna",
+      "name_en": "Sardinia",
+      "country": "Italy",
+      "country_iso": "IT",
+      "admin_level": "autonomous region",
+      "istat": "20",
+      "provinces_sigla": [
+        "SS",
+        "OT",
+        "NU",
+        "OR",
+        "OG",
+        "VS",
+        "CA",
+        "CI"
+      ],
+      "communes": 377,
+      "area_km2": 24109,
+      "bbox": {
+        "west": 8.1307,
+        "south": 38.8592,
+        "east": 9.8284,
+        "north": 41.3133,
+        "source": {
+          "dataset": "ISTAT Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati (Limiti01012026.zip), layer Reg01012026_WGS84 (WGS 84 / UTM 32N, EPSG:32632), all polygons, every vertex",
+          "publisher": "ISTAT",
+          "licence": "CC-BY-4.0",
+          "url": "https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/",
+          "verified": "2026-11-18"
+        },
+        "padded_0_15": [
+          7.98,
+          38.7,
+          9.98,
+          41.47
+        ],
+        "padded_note": "west, south, east, north plus or minus 0.15°, rounded outward to 0.01°, the same margin map_sets.state uses for US states"
+      },
+      "layers": "country_layers",
+      "measured": {
+        "pharmacies_ministry": 663,
+        "pharmacies_ministry_note": "Ministry of Health pharmacy list FRM_FARMA_5_20261118.csv, rows with no end date (data_fine_validita \"-\")"
+      },
+      "notes": "183 polygon parts (islands). With the margin the box reaches the southern tip of Corsica (France)."
+    }
+  ]
+}
