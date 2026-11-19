@@ -13,8 +13,12 @@ ranks them no better (.claude/drafts/triage/conf_top3.py).
 
 The chat uses it (assistant.chat): below BUTTONS it offers buttons; below UNSURE, on a conversation's own new question, it
 asks the person to say more instead of answering from pages that are probably wrong. A question that may be an emergency
-(urgent()) gets the pages all the same. LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS and LASTBOOK_CONF_UNSURE
-move the thresholds (0 to 1).
+(urgent()) gets the pages all the same. An everyday question (one that may not be urgent) gets buttons only below
+EVERYDAY_BUTTONS, much lower, and smaller ones (everyday_level()). LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS,
+LASTBOOK_CONF_UNSURE and LASTBOOK_CONF_BUTTONS_EVERYDAY move the thresholds (0 to 1).
+
+fork: when the question's words are not the library's (unknown_words: keyboard mash, a glued question that could not be
+split), the search is unsure whatever the model says. LASTBOOK_CONF_UNKNOWN=0 turns that off.
 """
 import math
 import os
@@ -24,6 +28,8 @@ from engine import typos
 
 BUTTONS = 0.60      # below this, the chat offers buttons (0.75 put them on 68 % of keyword-only questions)
 UNSURE = 0.25       # below this, the chat asks the person to say more (and still gives the pages if it may be urgent)
+EVERYDAY_BUTTONS = 0.30   # an everyday question gets (smaller) buttons only below this; 4 % of the test set's everyday
+                          # questions keyword-only, none whose first page was right (0.35: 10 %, 2 right ones)
 
 # Coefficients on the raw signals of features(): p = 1 / (1 + exp(-(bias + sum(w * signal)))).
 MODELS = {
@@ -57,6 +63,139 @@ URGENT = re.compile(
     re.I)
 
 
+# fork: the injury words of URGENT, for server.PHRASES. A how-to phrase ("light a fire", "treat water") is not used when the
+# question also names an injury or a danger to the body: "light a fire to keep him warm with hypothermia" is about
+# hypothermia, not firecraft. Not URGENT itself: its fire, smoke, gas, flood, baby and cut would also stop "how do i light a
+# campfire", "make the water safe for a baby's formula" and "cut kindling". A bare "burn" or "smoke" is how a fire is
+# made too ("wood that burns longer", "a fire without smoke"), so only a burn on someone and smoke breathed in count.
+# Added to URGENT's words: lungs, monoxide alone, inhaled, blisters, electrocuted, coughing.
+INJURY = re.compile(
+    r"\b(breath\w*|chok\w*|unconscious|unresponsive|collaps\w*|pass(ed)? out|faint\w*|pulse|cpr|bleed\w*|blood\w*"
+    r"|wound\w*|stab\w*|amputat\w*|drown\w*|submerg\w*|lungs?|cough\w*|electrocut\w*|shock\w*|live wire|lightning"
+    r"|burn(ed|t)|scald\w*|blister\w*|inhal\w*|carbon monoxide|monoxide|fumes|poison\w*|swallow\w*|overdos\w*"
+    r"|bitten|stung|anaphyla\w*|seizure\w*|convuls\w*|hypotherm\w*|frostbit\w*|shiver\w*|heat ?stroke|injur\w*|hurt\w*"
+    r"|fractur\w*|caught fire|on fire|in flames|fell|fallen|dying)\b"
+    r"|\b(a|the|my|his|her|their|bad|first|second|third)[ -](degree )?burns?\b|\bburns? (on|to)\b",
+    re.I)
+
+
+def injury(text):
+    """True when the text names an injury or a danger to the body (INJURY): then server.PHRASES' how-to phrases are not used."""
+    return bool(INJURY.search((text or '').replace('’', "'")))
+
+
+# fork: body signs. A question that names one (no pulse, not breathing, blue lips, unconscious, choking, bleeding, a
+# seizure, chest pain, not moving, cold and clammy) always gets an answer from its pages, never only "help me help you",
+# and counts as urgent (assistant.turn_hits, assistant.chat). Matched one slip away too, and two for long words, the first
+# letter kept, on a word the library itself has on fewer than BODY_COMMON pages: "puls" (24 pages, so typo correction
+# leaves it) is pulse, but "bloom", "breeding", "pulses" and "chose" are words of their own. A one-slip match must be a
+# plausible slip (engine/typos.py: a key next to it, a vowel for a vowel, a letter dropped, added or swapped), so "chore"
+# is not choke nor "blond" blood. In a glued run the library doesn't hold ("mybbyisntbreathing") the stems of BODY_GLUED
+# are looked for inside it. A subset of URGENT, with the slips: it narrows nothing. LASTBOOK_BODY_SIGNS=0 turns it off.
+BODY_WORDS = {
+    'pulse': 'pulse', 'heartbeat': 'pulse',
+    'breathing': 'breathing', 'breathe': 'breathing', 'breath': 'breathing', 'breathes': 'breathing', 'breathed': 'breathing',
+    'unconscious': 'unconscious', 'unresponsive': 'unconscious', 'collapsed': 'unconscious',
+    'choking': 'choking', 'choke': 'choking', 'choked': 'choking',
+    'bleeding': 'bleeding', 'bleed': 'bleeding', 'blood': 'bleeding',
+    'seizure': 'seizure', 'seizures': 'seizure', 'convulsing': 'seizure', 'convulsions': 'seizure',
+    'clammy': 'cold and clammy',
+}
+BODY_PHRASES = {
+    'blue': r"\b(lips?|skin|face|fingers|he|she|baby) (is |are |was |were |look |looks |gone |going |turned |turning )*"
+            r"(blue|grey|gray)\b|\b(turn(ed|ing)?|gone|going|went) (blue|grey|gray)\b|\bblue (lips?|skin|face)\b",
+    'unconscious': r"\b(passed|blacked) out\b|\bwon'?t wake( up)?\b|\bnot waking\b|\bfainted\b",
+    'chest pain': r"\bchest\b.{0,20}\b(pain\w*|hurts?|hurting|tight\w*|pressure|crushing)\b|\b(pain|pressure) in (his|her|my|the) chest\b",
+    'not moving': r"\b(not|isn'?t|stopped|won'?t|can'?t|cannot) mov(e|ing)\b|\b(limp|floppy)\b",
+    'seizure': r"\b(having|had|has|is|was|keeps?) (a )?fit(s|ting)?\b",
+    'cold and clammy': r"\bcold and (wet|clammy|sweaty)\b|\b(wet|sweaty) and cold\b",
+}
+BODY_PHRASES = {k: re.compile(v, re.I) for k, v in BODY_PHRASES.items()}
+BODY_COMMON = 50    # a word on this many pages or more is a word of its own: only an exact body word counts
+# Stems looked for inside a glued run (a word of 8+ letters the library doesn't hold), in order, and the words a search
+# gets for them (typos.correct_with, LASTBOOK_BODY_FIX). The first of a sign wins: "isntbreath" before "breath".
+BODY_GLUED = [(re.compile(rx), words, sign) for rx, words, sign in (
+    (r"(not|isnt|cant|stopped|wont)breath", 'not breathing', 'breathing'), (r"breath", 'breathing', 'breathing'),
+    (r"nopulse", 'no pulse', 'pulse'), (r"pulse", 'pulse', 'pulse'), (r"heartbeat", 'heartbeat', 'pulse'),
+    (r"bleed", 'bleeding', 'bleeding'), (r"blood", 'blood', 'bleeding'), (r"chok", 'choking', 'choking'),
+    (r"seizur", 'seizure', 'seizure'), (r"convuls", 'convulsions', 'seizure'), (r"unconscious", 'unconscious', 'unconscious'),
+    (r"unrespons", 'unresponsive', 'unconscious'), (r"coll?aps", 'collapsed', 'unconscious'),
+    (r"passedout", 'passed out', 'unconscious'), (r"chestpain", 'chest pain', 'chest pain'),
+    (r"notmoving", 'not moving', 'not moving'), (r"(isblue|turningblue|bluelips|lipsblue|lipsareblue)", 'blue lips', 'blue'),
+)]
+
+
+def body_on():
+    return os.environ.get('LASTBOOK_BODY_SIGNS', '1') != '0'
+
+
+def _osa(a, b):
+    """Edits from a to b: letters dropped, added, changed, or two next to each other swapped."""
+    d = [[i + j if not i * j else 0 for j in range(len(b) + 1)] for i in range(len(a) + 1)]
+    for i in range(1, len(a) + 1):
+        for j in range(1, len(b) + 1):
+            d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] != b[j - 1]))
+            if i > 1 and j > 1 and a[i - 1] == b[j - 2] and a[i - 2] == b[j - 1]:
+                d[i][j] = min(d[i][j], d[i - 2][j - 2] + 1)
+    return d[-1][-1]
+
+
+def body_match(t, V=None):
+    """The word of BODY_WORDS that the word t is, or is a slip for (see above), or None."""
+    if t in BODY_WORDS:
+        return t
+    if len(t) < 4 or not t.isalpha() or (V or {}).get(t, 0) >= BODY_COMMON or t in typos.ENGLISH_WORDS:
+        return None
+    best = None
+    for b in BODY_WORDS:
+        n = 1 if len(b) <= 6 else 2
+        if b[0] != t[0] or abs(len(b) - len(t)) > n:
+            continue
+        e = _osa(t, b)
+        if (e == 1 and (typos._how(t, b) or (False,))[0]) or 1 < e <= n:
+            if best is None or e < best[0]:
+                best = (e, b)
+    return best and best[1]
+
+
+def body_word(t, V=None):
+    """The sign of BODY_WORDS that the word t is, or is a slip for, or None."""
+    b = body_match(t, V)
+    return BODY_WORDS[b] if b else None
+
+
+def glued_body(t, V=None):
+    """[(search words, sign)] for the stems of BODY_GLUED inside t, a glued run of 8+ letters the library doesn't hold."""
+    if len(t) < 8 or not t.isalpha() or (V or {}).get(t, 0):
+        return []
+    out, signs = [], set()
+    for rx, words, sign in BODY_GLUED:
+        if sign not in signs and rx.search(t):
+            out.append((words, sign))
+            signs.add(sign)
+    return out
+
+
+def body_signs(*texts):
+    """fork: the body signs (see BODY_WORDS) that any of the texts names, as a set of names; empty when off."""
+    if not body_on():
+        return set()
+    V, _ = _words()
+    out = set()
+    for text in texts:
+        text = (text or '').lower().replace('’', "'")
+        if not text:
+            continue
+        out |= {k for k, rx in BODY_PHRASES.items() if rx.search(text)}
+        for t in re.findall(r"[a-z]+", text.replace("'", '')):
+            s = body_word(t, V)
+            if s:
+                out.add(s)
+            else:
+                out |= {sign for _, sign in glued_body(t, V)}
+    return out
+
+
 def on():
     return os.environ.get('LASTBOOK_CONF', '1') != '0'
 
@@ -74,9 +213,22 @@ def thresholds():
     return _env('LASTBOOK_CONF_BUTTONS', BUTTONS), _env('LASTBOOK_CONF_UNSURE', UNSURE)
 
 
+def everyday_cut():
+    """The buttons cut for an everyday question, from the environment when set there."""
+    return _env('LASTBOOK_CONF_BUTTONS_EVERYDAY', EVERYDAY_BUTTONS)
+
+
+def everyday_level(p):
+    """'sure' | 'buttons' | 'unsure' for an everyday question of probability p: buttons below everyday_cut(), and the
+    request to say more below UNSURE only where that is under the buttons cut too (never without the buttons)."""
+    cut, unsure = everyday_cut(), thresholds()[1]
+    return 'unsure' if p < min(unsure, cut) else 'buttons' if p < cut else 'sure'
+
+
 def urgent(*texts):
-    """True when any of the texts (the question as typed, as searched, its English words) may be about an emergency."""
-    return any(URGENT.search((t or '').replace('’', "'")) for t in texts)
+    """True when any of the texts (the question as typed, as searched, its English words) may be about an emergency: a word
+    of URGENT, or a body sign (body_signs: "he has no puls", "mybbyisntbreathing")."""
+    return any(URGENT.search((t or '').replace('’', "'")) for t in texts) or bool(body_signs(*texts))
 
 
 def _words():
@@ -133,9 +285,44 @@ def probability(f, model):
     return 1 / (1 + math.exp(-max(-30.0, min(30.0, z))))
 
 
+# Not content words either, besides typos.ENGLISH_WORDS (the search's stop words): as assistant._SHORT.
+NOT_CONTENT = set('he she him her his hers oh yes ok'.split())
+
+
+def unknown_words(q):
+    """fork: True when the question as searched (its misspellings put right and glued words split, engine/typos.py) has no
+    content word at all, or when most of its content words are not words the library uses (on fewer than 3 pages): keyboard
+    mash ("jdjdk", "asdfgh"), or a glued question the splitting could not take apart. The fitted model has no such signal
+    (in the test set it was always 0), and a few chance matches can give mash a middling p. False without the library's
+    words, for a question in another language (its words are not the library's), and for words with digits (EU2200i)."""
+    if not q or not unknown_on():
+        return False
+    V, _ = _words()
+    if not V or typos.looks_foreign(q):
+        return False
+    toks = re.findall(r"[a-z0-9]+", q.lower().replace('’', "'").replace("'", ' '))
+    if any(re.search(r'\d', t) for t in toks):
+        return False
+    content = [t for t in toks if t not in typos.ENGLISH_WORDS and t not in NOT_CONTENT and len(t) > 1]
+    return not content or sum(t not in V for t in content) * 2 > len(content)
+
+
+def unknown_on():
+    return os.environ.get('LASTBOOK_CONF_UNKNOWN', '1') != '0'
+
+
 def estimate(hits, trace):
-    """{'p': 0..1, 'mode': 'keyword' | 'hybrid', 'level': 'sure' | 'buttons' | 'unsure'} for one search."""
+    """{'p': 0..1, 'mode': 'keyword' | 'hybrid', 'level': 'sure' | 'buttons' | 'unsure'} for one search. When the question's
+    words are not the library's (unknown_words, on the question as searched: trace['q']), p is capped under both unsure cuts
+    (UNSURE and the everyday one), whatever the fitted model says: the chat then asks for more words, with buttons, and
+    still gives the pages if the question may be urgent. 'unknown_words': True and 'p_fitted' then say so."""
     m = mode(trace)
     p = probability(features(list(hits)[:8], trace), MODELS[m])
     buttons, unsure = thresholds()
-    return {'p': round(p, 3), 'mode': m, 'level': 'unsure' if p < unsure else 'buttons' if p < buttons else 'sure'}
+    out = {'p': round(p, 3), 'mode': m}
+    if unknown_words(trace.get('q')):
+        cap = max(0.0, min(unsure, everyday_cut()) - 0.05)
+        out.update(p=round(min(p, cap), 3), p_fitted=round(p, 3), unknown_words=True)
+        p = out['p']
+    out['level'] = 'unsure' if p < unsure else 'buttons' if p < buttons else 'sure'
+    return out

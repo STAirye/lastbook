@@ -92,6 +92,106 @@ class Corrections(unittest.TestCase):
             self.assertEqual(fix(q), q, q)
 
 
+# fork: words typed with no spaces (split_word). Page counts and emergency-book counts from the real library, rounded.
+GV = {
+    'and': 130010, 'the': 119546, 'a': 116101, 'to': 114554, 'in': 111293, 'is': 103375, 'on': 80883, 'this': 76621,
+    'it': 70581, 'can': 67601, 'not': 63310, 'so': 36241, 'do': 33303, 'how': 31207, 'i': 29030, 'water': 22274,
+    'help': 14680, 'note': 13685, 'he': 7091, 'his': 5942, 'stop': 5500, 'cut': 5330, 'my': 4506, 'fire': 3433,
+    'store': 3010, 'baby': 2229, 'blue': 2133, 'breathing': 2036, 'bleeding': 1853, 'rice': 1567, 'burn': 1508,
+    'ion': 1433, 'son': 845, 'king': 545, 'kitchen': 408, 'craft': 363, 'ate': 352, 'hypothermia': 294, 'electro': 172,
+    'choking': 137, 'cho': 123, 'electrocution': 94, 'purify': 74, 'hyper': 71, 'gutenberg': 53, 'hypo': 42, 'elk': 27,
+    'hes': 21, 'chunking': 10, 'firecraft': 3, 'she': 6000, 'make': 9000, 'soap': 400,
+}
+GE = {'not': 4452, 'breathing': 1292, 'choking': 117, 'help': 1609, 'baby': 645, 'blue': 52, 'kitchen': 15, 'fire': 1496,
+      'can': 3401, 'stop': 391, 'bleeding': 762, 'hypothermia': 101, 'electrocution': 4, 'the': 29784, 'his': 419,
+      'this': 2472, 'cut': 144, 'burn': 393, 'water': 2475, 'how': 1018, 'store': 59, 'rice': 39}
+GLUED = typos.Words(GV, GE)
+
+
+class Glued(unittest.TestCase):
+    """Words typed with no spaces, split into the library's words (split_word)."""
+
+    def setUp(self):
+        self.addCleanup(os.environ.pop, 'LASTBOOK_TYPO_SPLIT', None)
+        os.environ.pop('LASTBOOK_TYPO_SPLIT', None)
+
+    def fix(self, q):
+        return typos.correct_with(q, GLUED)
+
+    def test_glued_questions(self):
+        for q, want in [('heschuokinghelkp', "he's choking help"),          # the owner's test: two slips and an apostrophe
+                        ('hesnotbreathing', "he's not breathing"), ('mybabyisblue', 'my baby is blue'),
+                        ('kitchenonfire', 'kitchen on fire'), ('cantstopbleeding', "can't stop bleeding"),
+                        ('howtopurifywater', 'how to purify water'), ('Kitchenonfire', 'Kitchen on fire'),
+                        ('MYBABYISBLUE', 'MY BABY IS BLUE'), ('help kitchenonfire now', 'help kitchen on fire now')]:
+            self.assertEqual(self.fix(q), want, q)
+
+    def test_real_long_words_and_names_stay(self):
+        for q in ('hypothermia', 'electrocution', 'firecraft', 'Gutenberg', 'how do i treat hypothermia',
+                  'what is electrocution', 'chunking'):
+            self.assertEqual(self.fix(q), q, q)
+        self.assertIsNone(typos.split_word('firecraft', GLUED))      # on 3 pages: a word of the library, never split
+        self.assertEqual(self.fix('hypothermai'), 'hypothermia')    # a slip in one long word: corrected whole, not split
+
+    def test_mash_and_short_words_stay(self):
+        for q in ('asdfghjkl', 'qwertyuiop', 'jdjdk', 'zxcvbnm', 'sdfsdfsdf', 'hjkhjkhjk'):
+            self.assertEqual(self.fix(q), q, q)
+        self.assertIsNone(typos.split_word('mybaby', GLUED))           # fewer than 8 letters: never split
+
+    def test_clean_questions_unchanged(self):
+        for q in ('my baby is blue', "he's not breathing", 'how to purify water', 'kitchen on fire'):
+            self.assertEqual(self.fix(q), q, q)
+
+    def test_neighbours_found_as_edits1_finds_them(self):
+        for s in ('chuoking', 'helkp', 'bleeeding', 'hypothermai', 'brething', 'kitchne', 'waterr', 'xqzv'):
+            want = {x: how for x, how in typos._edits1(s).items() if x in GLUED.common}
+            self.assertEqual(typos._near(s, GLUED), want, s)
+
+    def test_switch(self):
+        os.environ['LASTBOOK_TYPO_SPLIT'] = '0'
+        self.assertEqual(self.fix('kitchenonfire'), 'kitchenonfire')
+        self.assertEqual(self.fix('kitchne on fire'), 'kitchen on fire')     # the rest of the correction stays on
+
+
+class BodyWords(unittest.TestCase):
+    """fork: body words one slip away that fix_word leaves because the library has the slip as a word ("puls", on 24 pages),
+    and glued runs with a body word that could not be split (typos.body_fix, engine/confidence.BODY_WORDS)."""
+    BV = dict(GV, puls=24, pulse=1577, pulses=560, bloom=259, breeding=581, chore=16, choke=193, chose=359, blood=4372,
+              breath=635, cook=2000, flowers=900, chicken=700, household=800, list=3000, has=50000, no=40000, what=31234)
+    WORDS = typos.Words(BV, dict(GE, pulse=206, blood=955, breath=152, choke=5))
+
+    def setUp(self):
+        for k in ('LASTBOOK_BODY_FIX', 'LASTBOOK_BODY_SIGNS'):
+            self.addCleanup(os.environ.pop, k, None)
+            os.environ.pop(k, None)
+
+    def fix(self, q):
+        return typos.correct_with(q, self.WORDS)
+
+    def test_real_word_slips_for_body_words(self):
+        self.assertEqual(typos.fix_word('puls', self.WORDS), 'puls')        # 24 pages: a real word to fix_word
+        self.assertEqual(self.fix('he has no puls what do i do'), 'he has no pulse what do i do')
+        self.assertEqual(self.fix('He has no Puls'), 'He has no Pulse')
+
+    def test_glued_body_words_that_could_not_be_split(self):
+        self.assertIsNone(typos.split_word('mybbyisntbreathing', self.WORDS))
+        self.assertEqual(self.fix('mybbyisntbreathing'), 'not breathing')
+        self.assertEqual(self.fix('hesnotbreathing'), "he's not breathing")   # split as before
+
+    def test_other_words_unchanged(self):
+        for q in ('how to cook pulses', 'how to make flowers bloom', 'chicken breeding', 'household chore list',
+                  'she chose', 'he has no pulse', "she can't breath", 'my baby is blue', 'kitchenonfire', 'firecraft'):
+            self.assertEqual(self.fix(q), q.replace('kitchenonfire', 'kitchen on fire'), q)
+
+    def test_switches(self):
+        os.environ['LASTBOOK_BODY_FIX'] = '0'
+        self.assertEqual(self.fix('he has no puls'), 'he has no puls')
+        self.assertEqual(self.fix('mybbyisntbreathing'), 'mybbyisntbreathing')
+        os.environ.pop('LASTBOOK_BODY_FIX')
+        os.environ['LASTBOOK_BODY_SIGNS'] = '0'                                 # the body signs off: their correction too
+        self.assertEqual(self.fix('he has no puls'), 'he has no puls')
+
+
 class Switch(unittest.TestCase):
     def setUp(self):
         self.real = typos.words_for

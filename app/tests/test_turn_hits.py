@@ -82,7 +82,21 @@ class TurnHits(unittest.TestCase):
 
     def test_one_noise_message_is_still_searched(self):
         hits, info = self.a.turn_hits(self.convo('jdjdjdk'))
-        self.assertEqual((self.calls, hits, info['buttons']), (['jdjdjdk'], [], False))
+        self.assertEqual((self.calls, hits, info['route'], info['buttons']), (['jdjdjdk'], [], 'first', False))
+        # (its words are not the library's: engine.confidence.unknown_words makes it unsure, test_confidence)
+
+    def test_one_stock_noise_message(self):
+        for msg in ('ok', 'sorry wrong chat', '😭😭😭'):
+            self.calls.clear()
+            hits, info = self.a.turn_hits(self.convo(msg))
+            # nothing before it to fall back on: searched, with buttons, as noise later on; the chat then asks for more words
+            self.assertEqual((self.calls, info['route'], info['buttons'], info['still']), ([msg], 'noise', True, ''), msg)
+
+    def test_glued_message_is_not_noise(self):
+        with mock.patch.object(self.a.typos, 'correct', lambda q: "he's choking help" if q == 'heschuokinghelkp' else q):
+            self.assertFalse(self.a.is_noise('heschuokinghelkp'))       # as searched, its words are the library's
+        with mock.patch.object(self.a.typos, 'correct', lambda q: q):
+            self.assertTrue(self.a.is_noise('heschuokinghelkp'))         # not split (LASTBOOK_TYPO_SPLIT=0): noise
 
     def test_followup_off_searches_the_message_alone(self):
         hits, info = self.a.turn_hits(self.convo('how do i purify water', '', 'THE KITCHEN IS ON FIRE'), followup=False)

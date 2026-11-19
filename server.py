@@ -36,6 +36,7 @@ import engine.paths as lastbook_paths  # noqa: E402  (data folder and program fo
 from engine.paths import ro_uri  # noqa: E402
 from engine import saved_pages, address_search, sections  # noqa: E402
 from engine import typos  # noqa: E402  (fork: spelling mistakes in search questions)
+from engine import confidence  # noqa: E402  (fork: its injury words stop the how-to phrases)
 from engine.setup import api as setup_api  # noqa: E402  (the one module that may download: only when the person asks)
 HERE = lastbook_paths.DATA  # holds derived/
 APP = lastbook_paths.APP  # holds web/ and content/
@@ -311,6 +312,7 @@ def fts_expr(groups):
     return ' AND '.join('(' + ' OR '.join(q(t) for t in g) + ')' for g in groups)
 
 
+HOWTO = 'howto'     # fork: a phrase's fourth item: a how-to phrase, not used when the question names an injury
 PHRASES = [  # everyday phrases -> one idea, checked before single words
     (r"power (cut|outage|failure)|no (power|electricity)|lights? (are )?out|blackout", ['outage', 'blackout', 'power outage']),
     (r"(phone|cell|mobile)( is| was)? (dead|flat|out of battery)|(dead|flat) (phone|battery)", [['phone', 'phones', 'cell phone'], ['charge', 'charging', 'charger', 'power bank']]),
@@ -324,24 +326,48 @@ PHRASES = [  # everyday phrases -> one idea, checked before single words
     # first, and "no matches and no gas" pulls them further up, because those pages warn about matches and gas.
     # Not "building fire", which is a building on fire. Not "ignition": it brought welding and hazmat pages back.
     # Unless the question is about a fire that is an emergency: one in a kitchen or a building, by accident, spreading.
+    # fork: or about keeping a fire from starting, or getting away from one (#128's review, #154): "how do i prevent a
+    # generator from starting a fire", "make a fire escape plan for my family", "what causes a fire to start". A fire drill,
+    # but not a bow drill, which is how a fire is made.
     (r"\b(start|make|light|build|starting|making|lighting)( up)?( a| the| my| our)? ?(camp)?fire\b", [['fire', 'fires'], ['tinder', 'kindling', 'firecraft']],
-     r"\b(kitchen|building|apartment|garage|accident(al|ally)?|by mistake|arson|spread(s|ing)?|evacuat\w*)\b|\bin (the|my|our|a) (house|home)\b"),
+     r"\b(kitchen|building|apartment|garage|accident(al|ally)?|by mistake|arson|spread(s|ing)?|evacuat\w*)\b|\bin (the|my|our|a) (house|home)\b"
+     r"|\b(prevent\w*|avoid\w*|stop\w*|risk\w*|hazard\w*|caus\w*|escape|spread\w*|safety)\b|(?<!bow )\bdrills?\b", HOWTO),
     # fork: water damage is a flooded home, not drinking water. The verb goes with it: a "treat" left behind has to be on the page.
     # Not "flood damage": flood questions already find flood pages, and these words pulled garden pages in ("mold").
     (r"\b((treat|fix|repair|clean( up)?|deal with|dry( out)?)( the| my| our)? )?water[- ]damage[ds]?\b", ['water damage', 'flood damage', 'flooding', 'mold', 'mould']),
-    # fork: "make the water safe" in the manuals' words. Not water damage or a water heater.
+    # fork: "make the water safe" in the manuals' words. Not water damage or a water heater. Nor too much water in the body
+    # (#128's review: "how do i treat water intoxication" got wastewater manuals), water poisoning, water in the lungs.
     (r"\b(make|making|get|keep)( the| my| our)? water (safe|drinkable|potable)|purify (the )?water|treat (the )?water", [['water'], ['disinfect', 'disinfection', 'purify', 'purification', 'treatment', 'chlorine']],
-     r"\bwater (damage[ds]?|heaters?)\b"),
+     r"\bwater (damage[ds]?|heaters?)\b|\b(intoxicat\w*|poison\w*|lungs?|overdos\w*)\b", HOWTO),
 ]
 
 
-def query_groups(q):
+def phrase_injury_on():
+    """fork: LASTBOOK_PHRASE_INJURY=0 turns off the injury exception of the how-to phrases (docs/FORK.md 3h)."""
+    return os.environ.get('LASTBOOK_PHRASE_INJURY', '1') != '0'
+
+
+def phrase_retry_on():
+    """fork: LASTBOOK_PHRASE_RETRY=1 turns on the all-words retry without a phrase's helper words. Off: it lost "start a
+    fire with no matches and no gas" (docs/FORK.md 3h)."""
+    return os.environ.get('LASTBOOK_PHRASE_RETRY', '0') == '1'
+
+
+def query_groups(q, info=None):
+    """(content words, word groups) for q. info (a dict), when given, gets 'helpers': the positions in groups of the
+    phrases' helper groups (a phrase's groups after its first: tinder/kindling for "light a fire"), for find's retry."""
     q = typos.correct(q)    # fork: misspelled words put right first ("breating" -> breathing), engine/typos.py
     q = q.lower().replace('\u2019', "'")
-    phrase_groups = []
-    for rx, g, *unless in PHRASES:        # fork: an optional third regex; when it is found in the question, the phrase is not used
-        if re.search(rx, q) and not (unless and re.search(unless[0], q)):
-            phrase_groups += g if isinstance(g[0], list) else [g]
+    phrase_groups, helpers = [], []
+    hurt = phrase_injury_on() and confidence.injury(q)
+    for rx, g, *rest in PHRASES:        # fork: an optional third regex; when it is found in the question, the phrase is not used
+        unless, kind = (rest + [None, None])[:2]
+        if kind == HOWTO and hurt:      # fork: nor a how-to phrase in a question about an injury (engine/confidence.INJURY)
+            continue
+        if re.search(rx, q) and not (unless and re.search(unless, q)):
+            gs = g if isinstance(g[0], list) else [g]
+            helpers += range(len(phrase_groups) + 1, len(phrase_groups) + len(gs))
+            phrase_groups += gs
             q = re.sub(rx, ' ', q)
     words = [w.lower() for w in re.findall(r"[\w'-]+", q)]
     words = [w.strip("'") for w in words if w.strip("'")]
@@ -354,12 +380,36 @@ def query_groups(q):
         groups.append(g)
     groups = phrase_groups + groups
     content = [g[0] for g in phrase_groups] + content
+    if info is not None:
+        info['helpers'] = helpers
     return content, groups
+
+
+def keyword_rows(run, groups, helpers, short):
+    """fork: the keyword search's rows for groups as (row, tier) and the mode, shared by find and assistant._fts.
+    All words first. Fewer than short rows: before relaxing to any of the words, all words again without the phrases'
+    helper groups (phrase_retry_on): "treat water in the lungs after drowning" has no page with disinfection words AND
+    lungs AND drowning, and any of the words then ranked water-treatment manuals first. The helpers are left out of the
+    relaxing too then. Tier 0 had every word, 1 every word but the helpers, 2 some words; after a retry (the third
+    value, True) lower tiers rank first."""
+    rows = [(r, 0) for r in run(fts_expr(groups))]
+    mode, relax, retried = 'all words', groups, False
+    if len(rows) < short and helpers and phrase_retry_on():
+        relax, retried = [g for i, g in enumerate(groups) if i not in helpers], True
+        seen = {r[:2] for r, _ in rows}
+        rows += [(r, 1) for r in run(fts_expr(relax)) if r[:2] not in seen]
+        mode = 'all words but the helpers'
+    if len(rows) < short and len(relax) > 1:
+        # relax: any of the ideas, rank documents that have more of them higher
+        mode = 'some words'
+        rows += [(r, 2) for r in run(' OR '.join('(' + fts_expr([g]) + ')' for g in relax))]
+    return rows, mode, retried
 
 
 @functools.lru_cache(maxsize=256)
 def find(q, kind='all', limit=30):
-    content, groups = query_groups(q)
+    info = {}
+    content, groups = query_groups(q, info)
     if not groups:
         return {'q': q, 'results': [], 'expanded': []}
     # fork: long HTML pages are searched in their sections (engine/sections.py); a section's page is its number
@@ -367,17 +417,16 @@ def find(q, kind='all', limit=30):
                                    'bm25(pages,0,6,1,1,0,0,1)', m, 600)
     rows, mode = [], 'all words'
     try:
-        rows = run(fts_expr(groups))
-        if len(rows) < 8 and len(groups) > 1:
-            # relax: any of the ideas, rank documents that have more of them higher
-            mode = 'some words'
-            rows += run(' OR '.join('(' + fts_expr([g]) + ')' for g in groups))
+        rows, mode, retried = keyword_rows(run, groups, info['helpers'], 8)
     except sqlite3.OperationalError:
-        rows = []
+        rows, retried = [], False
+    # fork: after the retry without a phrase's helpers, pages with every word come first, then every word but the
+    # helpers, then some words; and the helpers give no title bonus (they put "Water treatment" manuals first)
+    tgroups = [g for i, g in enumerate(groups) if i not in info['helpers']] if retried else groups
     cat = catalog()['by_id']
     docs = {}
     allowed = KIND_FILTERS.get(kind)
-    for doc_id, page, snip, score in rows:
+    for (doc_id, page, snip, score), tier in rows:
         r = cat.get(doc_id)
         if not r or r['kind'] == 'metadata':
             continue
@@ -389,7 +438,7 @@ def find(q, kind='all', limit=30):
             continue
         d = docs.get(r['id'])
         if not d:
-            d = docs[r['id']] = {'r': r, 'score': 0.0, 'hits': []}
+            d = docs[r['id']] = {'r': r, 'score': 0.0, 'hits': [], 'tier': tier}
         if len(d['hits']) < 3 and not any(h['page'] == page for h in d['hits']):
             d['hits'].append({'page': page if r['kind'] == 'pdf' or sections.sectioned(r['id']) else None, 'snippet': snip})
         d['n'] = d.get('n', 0) + 1
@@ -403,7 +452,7 @@ def find(q, kind='all', limit=30):
         r = d['r']
         t, w = trust(r)
         title = r['title'].lower()
-        tb = sum(1 for g in groups if any(x in title for x in g)) / len(groups)
+        tb = sum(1 for g in tgroups if any(x in title for x in g)) / len(tgroups)
         s = d['score'] * w * (1 + tb)
         if re.search(r'Spanish|español|\bkit de\b', r['title'] + r.get('notes', ''), re.I):
             s *= 0.5
@@ -414,7 +463,7 @@ def find(q, kind='all', limit=30):
         if GENERAL.search(r['title']):
             s *= 1.25
         out.append((s, d))
-    out.sort(key=lambda x: -x[0])
+    out.sort(key=lambda x: (x[1]['tier'] if retried else 0, -x[0]))
     results = []
     for s, d in out[:limit]:
         p = public(d['r'])

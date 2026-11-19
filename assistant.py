@@ -94,7 +94,8 @@ def model_status():
 def _fts(q, limit=80, kinds=None, trace=None):
     """(doc_id, page, snippet) rows for q, best first. trace (a dict), when given, gets what engine/confidence.py reads:
     the query's word groups, how many rows had every word, whether the any-word fallback ran, and each row's bm25."""
-    content, groups = S.query_groups(q)
+    info = {}
+    content, groups = S.query_groups(q, info)
     if trace is not None:
         trace.update(groups=[list(g) for g in groups], strict=0, any_word=False, bm25=[])
     if not groups:
@@ -104,14 +105,11 @@ def _fts(q, limit=80, kinds=None, trace=None):
                                    'bm25(pages,0,6,1,1,0,0,1)', m, limit)
     rows = []
     try:
-        rows = run(S.fts_expr(groups))
-        strict = len(rows)
-        if len(rows) < 10 and len(groups) > 1:
-            rows += run(' OR '.join('(' + S.fts_expr([g]) + ')' for g in groups))
-            if trace is not None:
-                trace['any_word'] = True
+        # fork: as server.find, with a retry without a phrase's helper words before any of the words (docs/FORK.md 3h)
+        tiered, mode, retried = S.keyword_rows(run, groups, info['helpers'], 10)
+        rows = [r for r, _ in tiered]
         if trace is not None:
-            trace['strict'] = strict
+            trace.update(strict=sum(1 for _, t in tiered if t == 0), any_word=mode == 'some words', retry=retried)
     except sqlite3.OperationalError:
         pass
     if trace is not None:
@@ -414,20 +412,32 @@ def _known(w, V):
                                 {a + c + b for a, b in s for c in 'abcdefghijklmnopqrstuvwxyz'}))
 
 
+def stock_noise(msg):
+    """fork: a stock phrase ("sorry wrong chat", "ok", "wait") or no letters at all ("😭😭😭")."""
+    msg = STILL.sub('', msg or '')
+    if msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}:
+        return False
+    return bool(NOISE_PHRASE.match(msg)) or not re.search(r'[^\W\d_]', msg)
+
+
 def is_noise(msg):
     """fork: a stock phrase ("sorry wrong chat", "ok", "wait"), no letters at all ("😭😭😭"), or mostly not words ("jdjdk").
     A message in another language is never noise by its words: they are not the library's."""
     msg = STILL.sub('', msg or '')
     if msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}:
         return False
-    if NOISE_PHRASE.match(msg) or not re.search(r'[^\W\d_]', msg):
+    if stock_noise(msg):
         return True
-    if needs_english(msg):
+    if needs_english(msg) or confidence.body_signs(msg):    # fork: a body sign is never noise ("mybbyisntbreathing")
         return False
-    words = [w.split("'")[0] for w in re.findall(r"[a-z']+", msg.lower().replace('’', "'")) if w.strip("'")]
-    words = [w for w in words if w]
     V = _vocab()
-    return not words or sum(1 for w in words if _known(w, V)) / len(words) < 0.5
+
+    def mostly_unknown(m):
+        words = [w.split("'")[0] for w in re.findall(r"[a-z']+", m.lower().replace('’', "'")) if w.strip("'")]
+        words = [w for w in words if w]
+        return not words or sum(1 for w in words if _known(w, V)) / len(words) < 0.5
+    # fork: as searched too (engine/typos.py): "heschuokinghelkp" is "he's choking help" with no spaces, not noise
+    return mostly_unknown(msg) and mostly_unknown(typos.correct(msg))
 
 
 def classify(msg):
@@ -495,16 +505,20 @@ def turn_hits(messages, english=None, followup=True, k=8):
     english: the newest message's English search words (english_query), used instead of it. followup False (not the person's
     own Gemma, or LASTBOOK_AI_FOLLOWUP=0): this message alone, as upstream. info['route']:
       first    one message, or no sensible one before it: its own search
-      noise    no new search: the last sensible message's results again, and buttons
+      noise    no new search: the last sensible message's results again, and buttons. With no sensible message before it
+               (a first message "ok" or "😭"; "jdjdk" alone is caught by the confidence's unknown words): its own search,
+               buttons, and the chat asks for more words (as for an unsure search)
       correct  correction words stripped; pages shown last time go to the end; no carried pages; then the joined search
       danger   a danger sign the conversation did not have: its own best 5, then the joined search, no carried pages
       follow   the pages the previous answer cited (cited_before), its own best 4, the joined search, the rest
     info['buttons']: noise, or this message's own search found fewer than 3; info['still']: the last sensible question.
     info['danger']: this message or the one it is joined with may be urgent (is_danger). info['confidence']: engine.confidence's
-    estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None."""
-    idx = [i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
+    estimate ({'p', 'mode', 'level'}) for the better of this message's own search and the joined one, or None.
+    info['body']: the body signs this message names (engine/confidence.body_signs), sorted; then chat_level never only asks."""
+    idx =[i for i, m in enumerate(messages) if m.get('role') == 'user' and isinstance(m.get('content'), str)]
     question = STILL.sub('', messages[idx[-1]]['content']) if idx else ''
-    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None}
+    info = {'route': 'first', 'buttons': False, 'still': '', 'danger': is_danger(question, english), 'confidence': None,
+            'body': sorted(confidence.body_signs(question, typos.correct(question), english))}
     searched = []      # (hits, trace) of this message's own search and the joined one, for the confidence
 
     def own_search(q):
@@ -527,6 +541,10 @@ def turn_hits(messages, english=None, followup=True, k=8):
         info['confidence'] = max(ests, key=lambda e: e['p']) if ests else None
         return hits, info
     if not followup or len(idx) < 2:
+        if len(idx) < 2 and stock_noise(question):  # a first message "ok", "sorry wrong chat", "😭": nothing before it to
+            info.update(route='noise', buttons=True)  # fall back on, so its own search, buttons, and (chat) a request for
+            # more words. Not words the library lacks: there engine.confidence.unknown_words makes the search unsure, on
+            # the words of 3+ pages ("firecraft" is a word; is_noise's own list starts at 20 pages)
         return done(own_search(question))
     j = next((i for i in reversed(idx[:-1]) if not is_noise(messages[i]['content'])), None)
     earlier = STILL.sub('', messages[j]['content']) if j is not None else ''
@@ -586,6 +604,28 @@ UNSURE_DANGER = ("In case this is urgent, here are the pages the library found f
 UNSURE_DANGER_NONE = ("The library found nothing that fits your question. Please help me help you: say a few more words about "
                       "what happened and what you can see, or pick one of the buttons below.")
 SUGGEST_PROMPT = {'buttons': 'Not sure these pages fit. Is it about one of these?', 'unsure': 'Is it about one of these?'}
+
+
+def chat_level(turn, followup=True, asked=1):
+    """fork: what the chat does with turn_hits' info for a message (asked: how many user messages so far) -> (level, the
+    confidence as shown, everyday). level 'sure' answers; 'buttons' answers with buttons; 'unsure' asks the person to say
+    more (with the pages when the question may be urgent). An everyday question (not is_danger) gets buttons only when the
+    search is very unsure, and smaller ones. A question that names a body sign (info['body'], engine/confidence.body_signs)
+    is never only asked to say more: it is answered from its pages, with the buttons."""
+    conf = turn.get('confidence')
+    level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
+    everyday = not turn.get('danger')      # after noise: the earlier message's (turn_hits)
+    if everyday and conf and turn['route'] != 'noise':
+        level = confidence.everyday_level(conf['p'])
+        conf = dict(conf, level=level, everyday=True)
+    if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and asked > 1)):
+        level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
+    if turn['route'] == 'noise' and not turn.get('still'):
+        level = 'unsure'        # fork: noise with no sensible message before it ("ok" first): ask, as unsure does
+    if level == 'unsure' and turn.get('body'):
+        level = 'buttons'       # fork: "he has no puls": the answer from the pages, never only "help me help you"
+        conf = dict(conf, level=level, body=True) if conf else conf
+    return level, conf, everyday
 
 
 def suggest_choices(info):
@@ -1091,17 +1131,17 @@ def chat(messages, about, emit, cancelled):
         emit({'type': 'found', 'count': len(hits)})
         # fork: how likely the first page is right (engine/confidence.py). Unsure: buttons. Very unsure: ask for more words
         # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
-        conf = turn.get('confidence')
-        level = conf['level'] if conf and turn['route'] != 'noise' else 'sure'
-        if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and len(asked) > 1)):
-            level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
+        level, conf, everyday = chat_level(turn, followup, len(asked))
         if level != 'sure':
             turn['buttons'] = True
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:
             print('local AI confidence:', json.dumps(dict(conf, route=turn['route'], danger=turn.get('danger'))), flush=True)
-        if turn['buttons']:     # fork: noise, or a weak search inside a conversation: offer what it may be about
-            emit({'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
-                  'prompt': SUGGEST_PROMPT.get(level, '')})
+        if turn['buttons']:     # fork: noise, a weak search, or an unsure one: offer what it may be about
+            ev = {'type': 'suggest', 'route': turn['route'], 'choices': suggest_choices(turn), 'confidence': conf,
+                  'prompt': SUGGEST_PROMPT.get(level, '')}
+            if everyday:
+                ev['style'] = 'compact'     # the same buttons, drawn smaller (web/chat.js)
+            emit(ev)
         if level == 'unsure':
             found = list(sess.sources.values())
             emit({'type': 'sources', 'sources': found})

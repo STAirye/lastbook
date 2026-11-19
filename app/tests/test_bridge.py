@@ -792,6 +792,97 @@ class ForkSearchWords(unittest.TestCase):
                   'how do i treat the water heater before winter'):    # ("purify" alone still means disinfect: upstream's SYN)
             self.assertFalse(any('disinfect' in g for g in server.query_groups(q)[1]), q)
 
+    def test_no_how_to_phrase_in_an_injury_question(self):
+        """fork: a how-to phrase is not used when the question names an injury (engine/confidence.INJURY); docs/FORK.md 3h.
+        LASTBOOK_PHRASE_INJURY=0 turns the exception off."""
+        helper = lambda q: [w for g in server.query_groups(q)[1] for w in g if w in ('tinder', 'disinfect')]
+        hurt = ('treat water in the lungs after drowning', 'light a fire to keep him warm with hypothermia',
+                'carbon monoxide from making a fire in the tent', 'burned my hand trying to light a fire',
+                'he got an electric shock, should i make a fire', 'he is not breathing, start a fire for warmth',
+                'how do i treat water poisoning', 'smoke inhalation from lighting a fire indoors')
+        for q in hurt:
+            info = {}
+            server.query_groups(q, info)
+            self.assertEqual((helper(q), info['helpers']), ([], []), q)
+        self.assertIn('drowning', server.query_groups(hurt[0])[0])
+        self.assertIn('fire', server.query_groups(hurt[1])[0])          # still a fire, without firecraft
+        for q in ('how do i light a campfire', 'i need to start a fire but i have no matches and no gas',
+                  'how do i make the water safe to drink', 'how do i purify water from a creek',
+                  "how to make the water safe for a baby's formula", 'make a fire that burns all night',
+                  'start a fire without much smoke'):
+            info = {}
+            server.query_groups(q, info)
+            self.assertTrue(helper(q), q)
+            self.assertEqual(info['helpers'], [1], q)
+        self.assertIn('mold', server.query_groups('how do i treat water damage on the floor')[1][0])
+        self.assertIn('outage', server.query_groups('power cut and he is not breathing')[1][0])   # not a how-to phrase
+        os.environ['LASTBOOK_PHRASE_INJURY'] = '0'
+        try:
+            for q in hurt[1:4]:     # (not hurt[0]: water in the lungs is now the water phrase's own exception)
+                self.assertTrue(helper(q), q)
+            self.assertEqual(helper(hurt[0]), [])
+        finally:
+            os.environ.pop('LASTBOOK_PHRASE_INJURY', None)
+
+    def test_how_to_paired_with_its_safety_or_medical_counterpart(self):
+        """fork: #128's review asked for each how-to phrase's example paired with its safety or medical counterpart, the
+        counterpart keeping its own search terms. The fire-making phrase is not used when the question is about keeping a
+        fire from starting or getting away from one (prevent, avoid, stop, risk, hazard, cause, escape, spread, safety, a
+        drill but not a bow drill); the water-safe phrase not for water in the body (intoxication, poisoning, lungs, overdose).
+        docs/FORK.md 3h."""
+        helper = lambda q: {w for g in server.query_groups(q)[1] for w in g if w in ('tinder', 'disinfect')}
+        words = lambda q: server.query_groups(q)[0]
+        pairs = [
+            ('how do i start a fire', 'how do i prevent a generator from starting a fire', ['generator', 'fire']),
+            ('how do i make a fire', 'make a fire escape plan for my family', ['escape', 'plan', 'family']),
+            ('how to light a fire in the woods', 'how to avoid starting a fire in the woods', ['avoid', 'woods']),
+            ('starting a fire with wet wood', 'what is the risk of starting a fire with a space heater', ['risk', 'heater']),
+            ('how to build a campfire', 'what can cause my dryer to start a fire', ['cause', 'dryer']),
+            ('making a fire in the rain', 'fire safety when making a fire indoors', ['safety', 'indoors']),
+            ('how do i make the water safe to drink', 'how do i treat water intoxication', ['intoxication']),
+            ('treat water with bleach', 'how do i treat water poisoning', ['poisoning']),
+            ('purify water from a creek', 'how do i treat water in the lungs', ['lungs']),
+            ('how do i make the water safe', 'how do i treat a water overdose', ['overdose']),
+        ]
+        for how_to, other, keep in pairs:
+            self.assertTrue(helper(how_to), how_to)                         # the how-to still gets the manuals' words
+            self.assertEqual(helper(other), set(), other)                   # its counterpart does not
+            self.assertTrue(set(keep) <= set(words(other)), (other, words(other)))
+            self.assertEqual(server.query_groups(other, {})[1], server.query_groups(other)[1])
+        for q in ('how to make a fire with a bow drill', 'start a fire without matches'):
+            self.assertTrue(helper(q), q)                                   # a bow drill makes fire
+        self.assertEqual(helper('how to run a fire drill at home'), set())   # no phrase there anyway
+        self.assertEqual(helper('make a fire for the evacuation drill'), set())
+
+    def test_retry_without_the_helpers(self):
+        """fork: LASTBOOK_PHRASE_RETRY=1: when every word finds too little, every word again without the phrase's helper
+        group, and the any-word fallback without it too (server.keyword_rows). Off by default; docs/FORK.md 3h."""
+        groups = [['water'], ['disinfect', 'chlorine'], ['lungs']]
+        asked = []
+
+        def run(expr):
+            asked.append(expr)
+            return [(f'd{len(asked)}', 1, '', -1.0)] if len(asked) > 1 else []
+        rows, mode, retried = server.keyword_rows(run, groups, [1], 8)
+        self.assertEqual((mode, retried, len(asked)), ('some words', False, 2))
+        self.assertIn('disinfect', asked[1])              # off: the helper is in the any-word search, as before
+        os.environ['LASTBOOK_PHRASE_RETRY'] = '1'
+        try:
+            asked.clear()
+            rows, mode, retried = server.keyword_rows(run, groups, [1], 8)
+            self.assertTrue(retried)
+            self.assertEqual(len(asked), 3)
+            self.assertIn('disinfect', asked[0])
+            self.assertTrue(all('disinfect' not in a and 'water' in a and 'lungs' in a for a in asked[1:]), asked)
+            self.assertEqual([t for _, t in rows], [1, 2])
+            asked.clear()
+            server.keyword_rows(run, groups, [], 8)       # no phrase: no retry
+            self.assertEqual(len(asked), 2)
+            self.assertIn('lungs', server.find('treat water in the lungs after drowning')['q'])
+        finally:
+            os.environ.pop('LASTBOOK_PHRASE_RETRY', None)
+            server.find.cache_clear()
+
     def test_water_damage_is_a_flooded_home(self):
         for q in ('how do i treat water damage in my house', 'fix the water-damaged wall', 'water damage'):
             groups = server.query_groups(q)[1]
