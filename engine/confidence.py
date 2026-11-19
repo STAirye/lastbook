@@ -16,6 +16,9 @@ asks the person to say more instead of answering from pages that are probably wr
 (urgent()) gets the pages all the same. An everyday question (one that may not be urgent) gets buttons only below
 EVERYDAY_BUTTONS, much lower, and smaller ones (everyday_level()). LASTBOOK_CONF=0 turns it off; LASTBOOK_CONF_BUTTONS,
 LASTBOOK_CONF_UNSURE and LASTBOOK_CONF_BUTTONS_EVERYDAY move the thresholds (0 to 1).
+
+fork: when the question's words are not the library's (unknown_words: keyboard mash, a glued question that could not be
+split), the search is unsure whatever the model says. LASTBOOK_CONF_UNKNOWN=0 turns that off.
 """
 import math
 import os
@@ -169,9 +172,44 @@ def probability(f, model):
     return 1 / (1 + math.exp(-max(-30.0, min(30.0, z))))
 
 
+# Not content words either, besides typos.ENGLISH_WORDS (the search's stop words): as assistant._SHORT.
+NOT_CONTENT = set('he she him her his hers oh yes ok'.split())
+
+
+def unknown_words(q):
+    """fork: True when the question as searched (its misspellings put right and glued words split, engine/typos.py) has no
+    content word at all, or when most of its content words are not words the library uses (on fewer than 3 pages): keyboard
+    mash ("jdjdk", "asdfgh"), or a glued question the splitting could not take apart. The fitted model has no such signal
+    (in the test set it was always 0), and a few chance matches can give mash a middling p. False without the library's
+    words, for a question in another language (its words are not the library's), and for words with digits (EU2200i)."""
+    if not q or not unknown_on():
+        return False
+    V, _ = _words()
+    if not V or typos.looks_foreign(q):
+        return False
+    toks = re.findall(r"[a-z0-9]+", q.lower().replace('’', "'").replace("'", ' '))
+    if any(re.search(r'\d', t) for t in toks):
+        return False
+    content = [t for t in toks if t not in typos.ENGLISH_WORDS and t not in NOT_CONTENT and len(t) > 1]
+    return not content or sum(t not in V for t in content) * 2 > len(content)
+
+
+def unknown_on():
+    return os.environ.get('LASTBOOK_CONF_UNKNOWN', '1') != '0'
+
+
 def estimate(hits, trace):
-    """{'p': 0..1, 'mode': 'keyword' | 'hybrid', 'level': 'sure' | 'buttons' | 'unsure'} for one search."""
+    """{'p': 0..1, 'mode': 'keyword' | 'hybrid', 'level': 'sure' | 'buttons' | 'unsure'} for one search. When the question's
+    words are not the library's (unknown_words, on the question as searched: trace['q']), p is capped under both unsure cuts
+    (UNSURE and the everyday one), whatever the fitted model says: the chat then asks for more words, with buttons, and
+    still gives the pages if the question may be urgent. 'unknown_words': True and 'p_fitted' then say so."""
     m = mode(trace)
     p = probability(features(list(hits)[:8], trace), MODELS[m])
     buttons, unsure = thresholds()
-    return {'p': round(p, 3), 'mode': m, 'level': 'unsure' if p < unsure else 'buttons' if p < buttons else 'sure'}
+    out = {'p': round(p, 3), 'mode': m}
+    if unknown_words(trace.get('q')):
+        cap = max(0.0, min(unsure, everyday_cut()) - 0.05)
+        out.update(p=round(min(p, cap), 3), p_fitted=round(p, 3), unknown_words=True)
+        p = out['p']
+    out['level'] = 'unsure' if p < unsure else 'buttons' if p < buttons else 'sure'
+    return out

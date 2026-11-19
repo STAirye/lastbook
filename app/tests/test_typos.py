@@ -92,6 +92,67 @@ class Corrections(unittest.TestCase):
             self.assertEqual(fix(q), q, q)
 
 
+# fork: words typed with no spaces (split_word). Page counts and emergency-book counts from the real library, rounded.
+GV = {
+    'and': 130010, 'the': 119546, 'a': 116101, 'to': 114554, 'in': 111293, 'is': 103375, 'on': 80883, 'this': 76621,
+    'it': 70581, 'can': 67601, 'not': 63310, 'so': 36241, 'do': 33303, 'how': 31207, 'i': 29030, 'water': 22274,
+    'help': 14680, 'note': 13685, 'he': 7091, 'his': 5942, 'stop': 5500, 'cut': 5330, 'my': 4506, 'fire': 3433,
+    'store': 3010, 'baby': 2229, 'blue': 2133, 'breathing': 2036, 'bleeding': 1853, 'rice': 1567, 'burn': 1508,
+    'ion': 1433, 'son': 845, 'king': 545, 'kitchen': 408, 'craft': 363, 'ate': 352, 'hypothermia': 294, 'electro': 172,
+    'choking': 137, 'cho': 123, 'electrocution': 94, 'purify': 74, 'hyper': 71, 'gutenberg': 53, 'hypo': 42, 'elk': 27,
+    'hes': 21, 'chunking': 10, 'firecraft': 3, 'she': 6000, 'make': 9000, 'soap': 400,
+}
+GE = {'not': 4452, 'breathing': 1292, 'choking': 117, 'help': 1609, 'baby': 645, 'blue': 52, 'kitchen': 15, 'fire': 1496,
+      'can': 3401, 'stop': 391, 'bleeding': 762, 'hypothermia': 101, 'electrocution': 4, 'the': 29784, 'his': 419,
+      'this': 2472, 'cut': 144, 'burn': 393, 'water': 2475, 'how': 1018, 'store': 59, 'rice': 39}
+GLUED = typos.Words(GV, GE)
+
+
+class Glued(unittest.TestCase):
+    """Words typed with no spaces, split into the library's words (split_word)."""
+
+    def setUp(self):
+        self.addCleanup(os.environ.pop, 'LASTBOOK_TYPO_SPLIT', None)
+        os.environ.pop('LASTBOOK_TYPO_SPLIT', None)
+
+    def fix(self, q):
+        return typos.correct_with(q, GLUED)
+
+    def test_glued_questions(self):
+        for q, want in [('heschuokinghelkp', "he's choking help"),          # the owner's test: two slips and an apostrophe
+                        ('hesnotbreathing', "he's not breathing"), ('mybabyisblue', 'my baby is blue'),
+                        ('kitchenonfire', 'kitchen on fire'), ('cantstopbleeding', "can't stop bleeding"),
+                        ('howtopurifywater', 'how to purify water'), ('Kitchenonfire', 'Kitchen on fire'),
+                        ('MYBABYISBLUE', 'MY BABY IS BLUE'), ('help kitchenonfire now', 'help kitchen on fire now')]:
+            self.assertEqual(self.fix(q), want, q)
+
+    def test_real_long_words_and_names_stay(self):
+        for q in ('hypothermia', 'electrocution', 'firecraft', 'Gutenberg', 'how do i treat hypothermia',
+                  'what is electrocution', 'chunking'):
+            self.assertEqual(self.fix(q), q, q)
+        self.assertIsNone(typos.split_word('firecraft', GLUED))      # on 3 pages: a word of the library, never split
+        self.assertEqual(self.fix('hypothermai'), 'hypothermia')    # a slip in one long word: corrected whole, not split
+
+    def test_mash_and_short_words_stay(self):
+        for q in ('asdfghjkl', 'qwertyuiop', 'jdjdk', 'zxcvbnm', 'sdfsdfsdf', 'hjkhjkhjk'):
+            self.assertEqual(self.fix(q), q, q)
+        self.assertIsNone(typos.split_word('mybaby', GLUED))           # fewer than 8 letters: never split
+
+    def test_clean_questions_unchanged(self):
+        for q in ('my baby is blue', "he's not breathing", 'how to purify water', 'kitchen on fire'):
+            self.assertEqual(self.fix(q), q, q)
+
+    def test_neighbours_found_as_edits1_finds_them(self):
+        for s in ('chuoking', 'helkp', 'bleeeding', 'hypothermai', 'brething', 'kitchne', 'waterr', 'xqzv'):
+            want = {x: how for x, how in typos._edits1(s).items() if x in GLUED.common}
+            self.assertEqual(typos._near(s, GLUED), want, s)
+
+    def test_switch(self):
+        os.environ['LASTBOOK_TYPO_SPLIT'] = '0'
+        self.assertEqual(self.fix('kitchenonfire'), 'kitchenonfire')
+        self.assertEqual(self.fix('kitchne on fire'), 'kitchen on fire')     # the rest of the correction stays on
+
+
 class Switch(unittest.TestCase):
     def setUp(self):
         self.real = typos.words_for

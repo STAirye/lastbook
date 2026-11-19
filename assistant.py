@@ -412,20 +412,32 @@ def _known(w, V):
                                 {a + c + b for a, b in s for c in 'abcdefghijklmnopqrstuvwxyz'}))
 
 
+def stock_noise(msg):
+    """fork: a stock phrase ("sorry wrong chat", "ok", "wait") or no letters at all ("😭😭😭")."""
+    msg = STILL.sub('', msg or '')
+    if msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}:
+        return False
+    return bool(NOISE_PHRASE.match(msg)) or not re.search(r'[^\W\d_]', msg)
+
+
 def is_noise(msg):
     """fork: a stock phrase ("sorry wrong chat", "ok", "wait"), no letters at all ("😭😭😭"), or mostly not words ("jdjdk").
     A message in another language is never noise by its words: they are not the library's."""
     msg = STILL.sub('', msg or '')
     if msg.strip().lower() in {c.lower() for c in DANGER_CHOICES}:
         return False
-    if NOISE_PHRASE.match(msg) or not re.search(r'[^\W\d_]', msg):
+    if stock_noise(msg):
         return True
     if needs_english(msg):
         return False
-    words = [w.split("'")[0] for w in re.findall(r"[a-z']+", msg.lower().replace('’', "'")) if w.strip("'")]
-    words = [w for w in words if w]
     V = _vocab()
-    return not words or sum(1 for w in words if _known(w, V)) / len(words) < 0.5
+
+    def mostly_unknown(m):
+        words = [w.split("'")[0] for w in re.findall(r"[a-z']+", m.lower().replace('’', "'")) if w.strip("'")]
+        words = [w for w in words if w]
+        return not words or sum(1 for w in words if _known(w, V)) / len(words) < 0.5
+    # fork: as searched too (engine/typos.py): "heschuokinghelkp" is "he's choking help" with no spaces, not noise
+    return mostly_unknown(msg) and mostly_unknown(typos.correct(msg))
 
 
 def classify(msg):
@@ -493,7 +505,9 @@ def turn_hits(messages, english=None, followup=True, k=8):
     english: the newest message's English search words (english_query), used instead of it. followup False (not the person's
     own Gemma, or LASTBOOK_AI_FOLLOWUP=0): this message alone, as upstream. info['route']:
       first    one message, or no sensible one before it: its own search
-      noise    no new search: the last sensible message's results again, and buttons
+      noise    no new search: the last sensible message's results again, and buttons. With no sensible message before it
+               (a first message "ok" or "😭"; "jdjdk" alone is caught by the confidence's unknown words): its own search,
+               buttons, and the chat asks for more words (as for an unsure search)
       correct  correction words stripped; pages shown last time go to the end; no carried pages; then the joined search
       danger   a danger sign the conversation did not have: its own best 5, then the joined search, no carried pages
       follow   the pages the previous answer cited (cited_before), its own best 4, the joined search, the rest
@@ -525,6 +539,10 @@ def turn_hits(messages, english=None, followup=True, k=8):
         info['confidence'] = max(ests, key=lambda e: e['p']) if ests else None
         return hits, info
     if not followup or len(idx) < 2:
+        if len(idx) < 2 and stock_noise(question):  # a first message "ok", "sorry wrong chat", "😭": nothing before it to
+            info.update(route='noise', buttons=True)  # fall back on, so its own search, buttons, and (chat) a request for
+            # more words. Not words the library lacks: there engine.confidence.unknown_words makes the search unsure, on
+            # the words of 3+ pages ("firecraft" is a word; is_noise's own list starts at 20 pages)
         return done(own_search(question))
     j = next((i for i in reversed(idx[:-1]) if not is_noise(messages[i]['content'])), None)
     earlier = STILL.sub('', messages[j]['content']) if j is not None else ''
@@ -1091,6 +1109,8 @@ def chat(messages, about, emit, cancelled):
             conf = dict(conf, level=level, everyday=True)
         if level == 'unsure' and (turn['route'] not in ('first', 'danger') or (not followup and len(asked) > 1)):
             level = 'buttons'       # inside a conversation: its first page is often one the earlier answer cited
+        if turn['route'] == 'noise' and not turn.get('still'):
+            level = 'unsure'        # fork: noise with no sensible message before it ("ok" first): ask, as unsure does
         if level != 'sure':
             turn['buttons'] = True
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and conf:

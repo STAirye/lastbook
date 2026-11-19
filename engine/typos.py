@@ -19,6 +19,9 @@ misspelled word back to a word the library uses, before the keyword search and t
   20 times the pages: "chocking" -> choking, not checking; "stabed" -> stabbed.
 - Words with digits ("EU2200i", "MT07"), apostrophes, hyphens or letters beyond a-z, and questions that look like another
   language ("hervir agua", "niño"), are left as typed. A library too small to tell typos from rare words changes nothing.
+- fork: words typed with no spaces are split (split_word): "heschuokinghelkp" -> "he's choking help", "kitchenonfire" ->
+  "kitchen on fire". Only a word of 8+ letters the index doesn't hold, so "hypothermia", "firecraft" and "Gutenberg"
+  stay; each piece may have one of the slips above. Off with LASTBOOK_TYPO_SPLIT=0.
 - Off with LASTBOOK_TYPO_FIX=0.
 """
 import math, os, re, sqlite3, threading, time, unicodedata
@@ -65,6 +68,8 @@ class Words:
         self.V, self.E = vocab, emergency or {}
         self.common = {t for t, n in vocab.items() if n >= MIN_PAGES and len(t) >= 3}    # what a word can become
         self._drops = None
+        self.lmax = math.log(max(vocab.values())) if vocab else 0.0    # split_word: the commonest word's pages
+        self.pieces = {}        # split_word: each piece tried -> its cheapest reading
 
     @property
     def drops(self):
@@ -203,7 +208,156 @@ def fix_word(w, words):
     return max(found, key=lambda x: (x[0] == w[0], found[x][0], words.score(x) + found[x][1]))
 
 
+# fork: words typed with no spaces ("heschuokinghelkp" = he's choking help). See split_word.
+SPLIT_MIN = 8           # a word of fewer letters is never split
+SPLIT_PIECE = 20        # the longest piece tried
+SPLIT_PAGES = MIN_PAGES  # a piece of 3+ letters is a word on at least this many pages, as a replacement in fix_word
+SPLIT_COST = 3.0        # added for each space put in
+SPLIT_EDIT = 5.0        # a piece one plausible slip from its word (fix_word's slips: a neighbouring key, a vowel, ...)
+SPLIT_EDIT_OTHER = 8.0  # one other slip (a changed letter that is not a neighbouring key nor a vowel for a vowel)
+SPLIT_DOUBLED = 2.0     # taken off for a letter doubled or undoubled ("chocking")
+SPLIT_APOSTROPHE = 1.0  # a piece typed without its apostrophe ("hes" -> he's)
+SPLIT_EMERGENCY = 0.5   # the word corrected whole costs this much less per log of the emergency books' use of it ...
+SPLIT_EMERGENCY_MAX = 3.0  # ... at most this
+SPLIT_SHORT = 1.0       # taken off for a word of one or two letters ("a", "my"): commoner in a question than in its pages
+# A split is used when its cost is at most SPLIT_BASE + SPLIT_PER_LETTER * letters + SPLIT_PER_SPACE * spaces, and
+# SPLIT_MARGIN under the cost of the word corrected whole (fix_word), when it can be. Chosen on data (docs/FORK.md 3k).
+SPLIT_BASE = -4.0
+SPLIT_PER_LETTER = 1.5
+SPLIT_PER_SPACE = 4.0
+SPLIT_MARGIN = 4.0
+# Words of one or two letters a piece may be. Not "jd", "dk" or "ed": the index has those too, from abbreviations.
+SPLIT_SHORT_WORDS = set('a i am an as at be by do go he if in is it me my no of oh ok on or so to up us we'.split())
 TOKEN = re.compile(r"[\w'’-]+")
+
+
+def split_on():
+    return os.environ.get('LASTBOOK_TYPO_SPLIT', '1') != '0'
+
+
+def _how(s, x):
+    """How x is one edit from s, as _edits1(s)[x] would say ((plausible, bonus)), or None: without making every string one
+    edit from s, for the many pieces split_word tries."""
+    n, m = len(s), len(x)
+    out = None
+    if m == n:
+        diff = [i for i in range(n) if s[i] != x[i]]
+        if len(diff) == 1:
+            out = (_plausible_change(s[diff[0]], x[diff[0]]), 0.0)                                   # changed
+        elif len(diff) == 2 and diff[1] == diff[0] + 1 and s[diff[0]] == x[diff[1]] and s[diff[1]] == x[diff[0]]:
+            out = (True, 0.0)                                                                         # swapped
+    elif m == n - 1:
+        for i in range(n):                                                                            # dropped
+            if s[:i] + s[i + 1:] == x:
+                d = (i > 0 and _double(s[i - 1], s[i])) or (i + 1 < n and _double(s[i], s[i + 1]))
+                out = _better(out, (True, DOUBLED if d else 0.0))
+    elif m == n + 1:
+        for i in range(m):                                                                            # added
+            if x[:i] + x[i + 1:] == s:
+                c = x[i]
+                d = (i > 0 and _double(s[i - 1], c)) or (i < n and _double(c, s[i]))
+                out = _better(out, (True, DOUBLED if d else 0.0))
+    return out
+
+
+def _near(s, words):
+    """The words a word can become (words.common) one edit from s -> (plausible, bonus), as _edits1 with its strings looked
+    up, but found through words.drops: a few lookups instead of some 50 strings per letter."""
+    drops, common = words.drops, words.common
+    found = set()
+    for t in [s] + [s[:i] + s[i + 1:] for i in range(len(s))]:
+        v = drops.get(t)
+        if v:
+            found.update((v,) if isinstance(v, str) else v)
+        if t != s and t in common:
+            found.add(t)
+    out = {}
+    for x in found:
+        how = _how(s, x)
+        if how:
+            out[x] = how
+    return out
+
+
+def _piece(s, words):
+    """The cheapest reading of s as one word: (cost, word) or None. The cost is how rare the word is in the library (log of
+    the commonest word's pages over its own pages), plus SPLIT_EDIT when s is a slip for it. A piece that is a word of the
+    library (on SPLIT_PAGES or more) is that word. Otherwise its slips are fix_word's: one edit, the first letter kept, and
+    of several words the one fix_word would pick (plausible slips, the emergency books' words, a doubled letter)."""
+    memo = words.pieces
+    if s in memo:
+        return memo[s]
+    V = words.V
+    rare = lambda w: words.lmax - math.log(V.get(w, 3)) - (SPLIT_SHORT if len(w) <= 2 else 0.0)
+    best = None
+    if len(s) <= 2:
+        best = (rare(s), s) if s in SPLIT_SHORT_WORDS and s in V else None
+    else:
+        if s in APOSTROPHES:        # "he's" as rare as "he"
+            best = (rare(APOSTROPHES[s].split("'")[0]) + SPLIT_APOSTROPHE, APOSTROPHES[s])
+        if V.get(s, 0) >= SPLIT_PAGES:
+            best = min(best or (math.inf, s), (rare(s), s))
+        elif best is None and len(s) >= 4:
+            found = {x: how for x, how in _near(s, words).items() if x[0] == s[0] and V.get(x, 0) >= SPLIT_PAGES}
+            if found:
+                x = max(found, key=lambda x: (found[x][0], words.score(x) + found[x][1]))
+                best = (rare(x) + (SPLIT_EDIT if found[x][0] else SPLIT_EDIT_OTHER) - (SPLIT_DOUBLED if found[x][1] else 0.0), x)
+    if len(memo) > 200000:
+        memo.clear()
+    memo[s] = best
+    return best
+
+
+def segment(w, words):
+    """(cost, pieces) of the cheapest way to cut w into the library's words (see split_word), or None."""
+    n = len(w)
+    best = [(0.0, ())] + [None] * n
+    for j in range(1, n + 1):
+        for i in range(max(0, j - SPLIT_PIECE), j):
+            if best[i] is None:
+                continue
+            p = _piece(w[i:j], words)
+            if p is None:
+                continue
+            c = best[i][0] + p[0] + (SPLIT_COST if i else 0.0)
+            if best[j] is None or c < best[j][0]:
+                best[j] = (c, best[i][1] + (p[1],))
+    return best[n]
+
+
+def whole_cost(w, words):
+    """The cost of w corrected whole by fix_word, as _piece would count it, less a little for a word of the emergency books
+    ("overdoes" is overdose, not "over does"), or None when fix_word leaves it."""
+    f = fix_word(w, words)
+    if f == w:
+        return None
+    e = _edits1(w).get(f)
+    return (words.lmax - math.log(words.V[f]) - min(SPLIT_EMERGENCY * math.log1p(words.E.get(f, 0)), SPLIT_EMERGENCY_MAX) +
+            (2 * SPLIT_EDIT if e is None else (SPLIT_EDIT if e[0] else SPLIT_EDIT_OTHER) - (SPLIT_DOUBLED if e[1] else 0.0)))
+
+
+def split_word(w, words):
+    """fork: w (lower-case, a-z, not a word of the library) as the library's words it was typed for with no spaces, or None.
+
+    Every way of cutting w into pieces is weighed at once (dynamic programming over where the spaces go): each piece costs
+    _piece's cost, each space SPLIT_COST. The cheapest is used when it costs at most SPLIT_PER_SPACE per space, and
+    SPLIT_MARGIN less than the word corrected whole when fix_word can correct it ("hypothermai" stays one word). Pieces of
+    one or two letters only from SPLIT_SHORT_WORDS. A word the index holds (on 3+ pages: "firecraft", "gutenberg") is never
+    split. The costs were chosen on glued runs of 2-6 words of the triage questions (clean and with typos) against long
+    words with a typo and rare real words (.claude/drafts/triage, docs/FORK.md 3k)."""
+    n = len(w)
+    if n < SPLIT_MIN or w in words.V or not w.isascii() or not w.isalpha():
+        return None
+    best = segment(w, words)
+    if best is None or len(best[1]) < 2:
+        return None
+    cost, parts = best
+    if cost > SPLIT_BASE + SPLIT_PER_SPACE * (len(parts) - 1) + SPLIT_PER_LETTER * n:
+        return None
+    whole = whole_cost(w, words)
+    if whole is not None and cost + SPLIT_MARGIN >= whole:
+        return None
+    return list(parts)
 
 
 def looks_foreign(q):
@@ -225,6 +379,10 @@ def correct_with(q, words):
         t = m.group(0)
         if not re.fullmatch(r'[A-Za-z]+', t) or (t.isupper() and len(t) > 1 and not shouting):   # CPR, AED, ERG
             return t
+        parts = split_word(t.lower(), words) if split_on() else None
+        if parts:       # fork: words typed with no spaces
+            f = ' '.join(parts)
+            return f.upper() if t.isupper() else f[0].upper() + f[1:] if t[0].isupper() else f
         f = fix_word(t.lower(), words)
         if f == t.lower():
             return t
@@ -275,12 +433,12 @@ def correct(q):
     words = words_for()
     if words is None:
         return q
-    memo = _state['memo']
-    if q not in memo:
+    memo, key = _state['memo'], (q, split_on())
+    if key not in memo:
         if len(memo) > 2000:
             memo.clear()
-        memo[q] = correct_with(q, words)
-    return memo[q]
+        memo[key] = correct_with(q, words)
+    return memo[key]
 
 
 def shown(q):

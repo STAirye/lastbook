@@ -423,6 +423,34 @@ repo for now (upstream issue #154 asked for a test-only pull request of them).
   breating" → "my husband collapsed and isn't breathing". 99 of the 109 typo questions changed, 0 of the 253 clean
   ones. The corrected question is returned as `corrected` by `/api/find` and `/api/retrieve`. `LASTBOOK_TYPO_FIX=0`
   turns it off.
+- **Words typed with no spaces** (`typos.split_word`). In a live test the first message "heschuokinghelkp" ("he's
+  choking help") got no buttons and was answered as plain "help": the correction works word by word, so a 16-letter
+  blob was never corrected, and `urgent()` never saw "choking". Now a word of 8 or more letters that the index doesn't
+  hold is cut into the library's words where that is clearly better than leaving it. Every way of cutting it is weighed
+  at once (dynamic programming over where the spaces go): each piece costs how rare its word is in the library (log of
+  the commonest word's pages over its own), plus 5 when the piece is a slip for its word (the same slips as above: one
+  edit, first letter kept, a doubled letter cheaper; 8 for a changed letter that isn't a neighbouring key), plus 1 for a
+  missing apostrophe ("hes" → he's); each space costs 3. Pieces of one or two letters only from a short list ("a", "my",
+  "is", …), not the index's "jd" or "ed". The cut is used when it costs at most −4 + 1.5 per letter + 4 per space, and 4
+  less than the word corrected whole (that one a little cheaper for a word of the emergency books: "overdoes" is
+  overdose, not "over does"). A word on 3+ pages ("firecraft", "gutenberg") is never cut.
+
+  The costs were chosen on data: 2,729 runs of 2–6 words glued from the test questions (clean) and 1,157 from their
+  typo versions, against 800 long words with one or two typos (they must be corrected, not cut) and 800 real rare words
+  of the index treated as unknown. Chosen setting: clean runs cut at the right places 94% (wrong 3.5%, mostly "in to"
+  for "into" and "can not"), typo runs 79% (wrong 8%), long words with typos cut 1%. Real rare words are cut 35% of
+  the time ("pilocarpine" → pilot car pine), but only words the index doesn't hold are ever tried, and those find
+  nothing as typed anyway. It costs nothing for a question without such a word, and a few milliseconds for one with it
+  (the slips are looked up through the index of words with a letter dropped that the two-edit correction already
+  builds). `LASTBOOK_TYPO_SPLIT=0` turns the splitting off.
+
+  On 48 invented glued and gibberish questions (with 3l's unknown-word rule): 20 of 24 glued questions are split right
+  (all 6 everyday ones, 14 of 18 emergencies; missed "mysonatebleach" → "my so nate bleach", "hescolapsednotbreathin"
+  → "… breath in", and "snakebitmyleg" and "mybbyisntbreathing" stay whole). `urgent()` is now true for 17 of the 18
+  emergencies (3 before), and the first page is right for 10 (keyword-only; 0 before) and 13 (hybrid; 1 before). The
+  owner's question now finds the choking pages first, p 0.91 hybrid. The 11 long real words and names stay whole. On the
+  362 test questions and #154's 32 with their typo versions nothing changed, keyword-only or hybrid (the words
+  searched, the route, the first page, what the chat does), nor on the 52 conversations.
 - **Conversations** (`assistant.turn_hits`). The newest message is classified without a model: noise ("jdjdk", "sorry
   wrong chat") → no search, and the chat shows buttons (a `suggest` event); a correction ("no no I mean…") → the
   correction words are dropped and pages already shown go last, none carried over; a danger sign the conversation
@@ -476,6 +504,22 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
   handbook) and "tooth nocked out" (a trail notebook), neither with a right first page. 0.35 adds two right first pages.
   Hybrid never goes that low on an everyday question (lowest 0.46). 51 questions is a small sample: the wide urgent
   list takes most of the test set.
+- **Words the library doesn't have.** The fitted model has no signal for "the question's words aren't real words" (one
+  was tried while fitting and dropped: it was 0 on every test question), and a search for keyboard mash can look fine:
+  keyword-only, "jdjdk" finds nothing and gets p 0.38, which is over the everyday cut, so it was answered; "qwertyuiop"
+  got 0.94. Now, after typo correction and splitting, if the question has no content word (only search stop words, such
+  as "help" or "how do i") or most of its content words are on fewer than 3 pages, p is capped under both unsure cuts
+  (`unknown_words` in the estimate, with the fitted p as `p_fitted`), whatever the model says. The chat then asks for
+  more words, with buttons, also on a first message, and still gives the pages if the question may be urgent. A
+  question in another language and words with digits ("EU2200i") are left to the model. `LASTBOOK_CONF_UNKNOWN=0`
+  turns the rule off. The coefficients were not refitted. All 7 keyboard-mash questions of 3k's glued set and 2 of its 3
+  unknown words ("blorft" is corrected to "blot") now get the request, keyword-only and hybrid, where all were answered
+  before; it never fires on the 426 test questions.
+- **Noise as a first message.** Later in a conversation, noise ("ok", "sorry wrong chat") brings back the last sensible
+  message's results with buttons. A first message has nothing to fall back on: a stock phrase or one with no letters
+  now gets its own search, the buttons and the request to say more, as an unsure search does (before: answered from
+  whatever its search found). Mash as a first message ("jdjdk") gets the same through the rule above. A message whose
+  words are mash as typed but the library's words once split ("heschuokinghelkp") is not noise.
 - **Inside a conversation** it only offers buttons: there the confidence predicts poorly (AUC 0.45–0.65), since the
   first page is often one the previous answer cited.
 - **Tried and dropped:** buttons below 0.75 (68% of keyword-only questions, 116 false alarms against 70); predicting
@@ -483,7 +527,7 @@ It is a logistic regression stored as plain numbers, one set for keyword-only se
   hybrid), so that model is sure almost always and lets 2–4 times as many all-wrong searches through without buttons,
   and it ranks them no better.
 - `/api/retrieve` returns `confidence` (the urgent cuts). Settings: `LASTBOOK_CONF=0`, `LASTBOOK_CONF_BUTTONS`,
-  `LASTBOOK_CONF_UNSURE`, `LASTBOOK_CONF_BUTTONS_EVERYDAY`.
+  `LASTBOOK_CONF_UNSURE`, `LASTBOOK_CONF_BUTTONS_EVERYDAY`, `LASTBOOK_CONF_UNKNOWN=0`.
 
 `app/tests/test_confidence.py` covers it.
 
@@ -512,7 +556,9 @@ Then `python app/main.py --data <path to LastbookData>`. The packages are in `pa
 | `LASTBOOK_PHRASE_INJURY=0` | Use the fire and water-safe phrases even when the question names an injury (3h) |
 | `LASTBOOK_PHRASE_RETRY=1` | When every word finds too little, search again without a phrase's helper words before relaxing (3h; off: it lost "no matches and no gas") |
 | `LASTBOOK_TYPO_FIX=0` | Search questions as typed, without correcting misspelled words (3k) |
+| `LASTBOOK_TYPO_SPLIT=0` | Don't split words typed with no spaces ("kitchenonfire"); the rest of the correction stays on (3k) |
 | `LASTBOOK_CONF=0` | No confidence estimate: no buttons or request to say more from it (3l). `LASTBOOK_CONF_BUTTONS` / `LASTBOOK_CONF_UNSURE` move the cuts (0.60 / 0.25); `LASTBOOK_CONF_BUTTONS_EVERYDAY` the everyday questions' buttons cut (0.30) |
+| `LASTBOOK_CONF_UNKNOWN=0` | Trust the confidence model even when the question's words aren't the library's (3l) |
 | `LASTBOOK_AI_DEBUG=1` | Log each round's raw output (thinking and markup included) and the runner's token counts, as `local AI raw:` and `local AI done:`, and each question's English search words as `local AI english search:` |
 
 The app log is `LastbookData\derived\logs\lastbook.log`, and the runner's is `local-ai.log` beside it. For your own file the
