@@ -230,10 +230,13 @@ const Chat = (() => {
     if (running && found.length) h += `<div class="prefound"><p class="small muted">Pages found so far — you can open them while the answer is written:</p>${srcCards(found.slice(0, 6), true)}</div>`;
     if (m.fallback) h += srcCards(m.fallback, true);
     // fork: after noise or a weak search inside a conversation the server offers what the message may be about (assistant.turn_hits)
-    if (!running && (m.suggest || []).length && i === cur.messages.length - 1)
+    if (!running && (m.suggest || []).length && i === cur.messages.length - 1) {
+      // fork: coloured so they stand out from the page: the emergency choices red, "Still about…" and "Something else" green
+      const sg = c => /^(something else|still about)/i.test(c.label || '') ? 'sg-other' : 'sg-danger';
       h += m.suggestStyle === 'compact'   // fork: an everyday question gets the same buttons, smaller (engine/confidence.everyday_level)
-        ? `<div class="suggest compact"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="chips">${m.suggest.map(c => `<button class="chip" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`
-        : `<div class="suggest"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
+        ? `<div class="suggest compact"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="chips">${m.suggest.map(c => `<button class="chip ${sg(c)}" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`
+        : `<div class="suggest"><p class="small muted">${esc(m.suggestPrompt || 'Is this about something else?')}</p><div class="ans-actions">${m.suggest.map(c => `<button class="btn plain ${sg(c)}" data-say="${esc(c.text || '')}">${esc(c.label || '')}</button>`).join('')}</div></div>`;
+    }
     if (!running && m.content) {
       const cited = m.cited || [];
       if ((m.invalid || []).length) h += `<p class="small" style="color:var(--stop)">The model referred to sources that don’t exist (${m.invalid.join(', ')}); those markers were removed.</p>`;
