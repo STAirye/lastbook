@@ -61,7 +61,7 @@ find "$OPT/lib" -type f -name '*_tests*' -delete
 mkdir -p "$OPT/app" "$OPT/engine/setup" "$OPT/setup"
 cp "$ROOT/app/main.py" "$ROOT/app/bridge.py" "$ROOT/app/shell_linux.py" "$OPT/app/"
 cp "$ROOT/server.py" "$ROOT/retrieval.py" "$ROOT/assistant.py" "$ROOT/llm_local.py" "$OPT/"
-cp "$ROOT/engine/__init__.py" "$ROOT/engine/paths.py" "$ROOT/engine/library.py" "$ROOT/engine/safe_paths.py" "$ROOT/engine/encyclopedias.py" "$ROOT/engine/saved_pages.py" "$ROOT/engine/address_search.py" "$ROOT/engine/page_tables.py" "$ROOT/engine/update.py" "$ROOT/engine/sections.py" "$ROOT/engine/typos.py" "$ROOT/engine/confidence.py" "$ROOT/engine/meaning_red.py" "$ROOT/engine/english_words.txt.gz" "$ROOT/engine/english_words.LICENSE.txt" "$OPT/engine/"
+cp "$ROOT/engine/__init__.py" "$ROOT/engine/paths.py" "$ROOT/engine/library.py" "$ROOT/engine/safe_paths.py" "$ROOT/engine/encyclopedias.py" "$ROOT/engine/saved_pages.py" "$ROOT/engine/address_search.py" "$ROOT/engine/page_tables.py" "$ROOT/engine/update.py" "$ROOT/engine/sections.py" "$ROOT/engine/typos.py" "$ROOT/engine/confidence.py" "$ROOT/engine/meaning_red.py" "$ROOT/engine/wiki_pick.py" "$ROOT/engine/english_words.txt.gz" "$ROOT/engine/english_words.LICENSE.txt" "$OPT/engine/"
 cp "$ROOT"/engine/setup/*.py "$ROOT/engine/setup/roots.pem" "$OPT/engine/setup/"
 # fork: the meaning check (docs/FORK.md 3m) runs on the local AI's runner, as a second process: its manifest always; its two files
 # (a GGUF and the centroids) beside the runner, in llm/meaning-red, when derived/models/meaning-red has them as the manifest says

@@ -768,6 +768,42 @@ manifest and no download while unpublished, the runner's arguments, a process of
 onnxruntime and leaves no runner behind); `test_what_ships` that every build and scan carries it and that the Mac and
 Linux builds still have no onnxruntime.
 
+### 3n. Encyclopedia articles in the first results, by their best section
+
+Upstream 1.1.13 adds the top 3 encyclopedia hits (MDWiki, Appropedia, Wikibooks, Wikipedia when present) to Chat's first
+results: the raw question goes to the encyclopedias' own search, and the first 2,000 characters of each article go to the
+model. When 1.1.13 was merged, the fork's first search (`turn_hits`) won the conflict, and the articles were left out, while
+upstream's SYSTEM prompt still says they are there. They are back now, but picked the way §3k picks long pages, because
+the same problem shows up there and is worse (`.claude/drafts/encyclopedia/`, the 253 clean test questions over the
+three installed files):
+
+- The median article is 28,000 characters; 723 of 752 are over 5,000 and 136 over 100,000. Whole books stored as one
+  article came first: "Mirad Grammar/print version" (1.35 MB) for "my toddler drank bleach", "US History/Print version"
+  for "my eyes sting from wildfire smoke", "Richard Nixon" for "he is pale cold and sweaty after the accident".
+- The words a useful answer needs were in the first 2,000 characters for 259 of the 622 articles that held them.
+
+`engine/wiki_pick.py`: the question's content words only go to the encyclopedias' search ("my" and "has" matched every
+book). Print and printable versions are skipped, since each chapter is its own article too, and so is anything over
+800 KB. Each candidate (6 per file) is cut into ~5,000-character sections (`sections.cut`). An article scores by the share
+of the question's words in its best section (plural and past-tense endings dropped, so "burns" finds "burned"), plus a
+little for words in its title; ties keep the encyclopedia's order. The excerpt is the part of that section where the
+words are. The words are the ones `turn_hits` searched with (a follow-up's joined words, the earlier message's after
+noise), with typos fixed (`assistant.wiki_q`). Any failure falls back to upstream's way; `LASTBOOK_WIKI_PICK=0` turns it off.
+
+| 253 clean questions | Upstream's way | Best section |
+|---|---|---|
+| First article useful (holds the needed words) | 92 (36%) | **146 (58%)** |
+| Any of the 3 useful | 163 | **197** |
+| Red / yellow / green, first useful | 34 / 25 / 33 | 61 / 40 / 45 |
+| No article at all | 1 | 5 |
+| Time, median / p90 | 92 / 512 ms | 578 / 962 ms |
+
+The excerpt is chosen for the question's words, so "holds the needed words" favours it a little where those overlap.
+The encyclopedias still hold little first aid, so wrong first articles remain ("Doom/Complete list of enemies" for a
+chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fixes typos first.
+`app/tests/test_wiki_pick.py` and `test_confidence.ChatConfidence.test_encyclopedia_articles_join_the_first_results`
+cover it.
+
 ## 4. Running from source on Windows
 
 Running from source needs two things from an upstream release, copied in (both folders are ignored by git):

@@ -11,6 +11,7 @@ from engine.paths import ro_uri
 from engine import page_tables, sections
 from engine import typos    # fork: spelling mistakes in search questions
 from engine import confidence    # fork: how likely a search's first page is right
+from engine import wiki_pick    # fork: encyclopedia articles by their best section
 from engine import meaning_red    # fork: a meaning-based second opinion on urgent questions (words OR meaning)
 
 import os
@@ -267,6 +268,28 @@ def validate_citations(answer, sess):
         else:
             invalid.append(k)
     return answer, valid, invalid
+
+
+def wiki_q(question, turn):
+    """fork: the words for the first encyclopedia search: what turn_hits searched with (a follow-up's joined words), with
+    typos fixed, since the encyclopedias' own search matches whole words only."""
+    q = (turn.get('joined_q') if turn.get('route') == 'follow' else None) or turn.get('q') or question
+    try:
+        q = typos.correct(q) or q
+    except Exception:
+        pass
+    return q[:300]
+
+
+def first_wiki(q, root=None):
+    """fork: the encyclopedia articles for the first results, by their best section (engine/wiki_pick.py); upstream's
+    encyclopedia_hits when that fails or LASTBOOK_WIKI_PICK=0. Never raises."""
+    if os.environ.get('LASTBOOK_WIKI_PICK') != '0':
+        try:
+            return wiki_pick.pick(q, root=root)
+        except Exception as e:
+            print(f'encyclopedia pick: {type(e).__name__}', flush=True)
+    return encyclopedia_hits(q, limit=encyclopedias.INITIAL_LIMIT, excerpt=encyclopedias.INITIAL_CHARS, root=root)
 
 
 def encyclopedia_hits(q, limit=encyclopedias.INITIAL_LIMIT, excerpt=encyclopedias.INITIAL_CHARS, collection=None, root=None):
@@ -642,6 +665,7 @@ def turn_hits(messages, english=None, followup=True, k=8):
     def own_search(q):
         tr = {}
         hits = _traced(english, k, tr) if english else []
+        info['q'] = english if hits else q[:300]     # fork: the words this message's own search used (encyclopedias too)
         if not hits:
             tr = {}
             hits = _traced(q[:300], k, tr)
@@ -649,6 +673,7 @@ def turn_hits(messages, english=None, followup=True, k=8):
         return hits
 
     def joined_search(q):
+        info['joined_q'] = q      # fork: a follow-up's encyclopedia search uses these joined words
         tr = {}
         hits = _traced(q, k, tr)
         searched.append((hits, tr))
@@ -674,7 +699,8 @@ def turn_hits(messages, english=None, followup=True, k=8):
         prev = messages[:j + 1]
         e = _ENGLISH_OF.get(earlier) if needs_english(earlier) else None
         hits, before_info = turn_hits(prev, e, followup, k)
-        info.update(danger=before_info['danger'], confidence=before_info['confidence'])    # the earlier message's
+        info.update(danger=before_info['danger'], confidence=before_info['confidence'],    # the earlier message's
+                    q=before_info.get('q'))
         return hits, info
     if j is None:
         hits = own_search(question)
@@ -1299,8 +1325,8 @@ def chat(messages, about, emit, cancelled):
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and turn['route'] != 'first':
             print('local AI turn:', json.dumps({'q': question[:200], 'route': turn['route'], 'earlier': turn['still'][:200]},
                                                ensure_ascii=False), flush=True)
+        blocks = []
         if hits:
-            blocks = []
             for n, h in enumerate(hits):
                 body = None
                 if n < 4 and h['kind'] == 'pdf' and h.get('page'):  # whole page for the best few, so a second read is rarely needed
@@ -1310,12 +1336,21 @@ def chat(messages, about, emit, cancelled):
                         body = page_body(ps[h['page'] - 1], 3200)
                 body = body if body is not None else excerpt_body(h)
                 blocks.append(_src_block(sess.add(h), h, body))
-            msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages to check exact wording):\n\n' + '\n\n'.join(blocks)})
+        # upstream 1.1.13: a few encyclopedia articles join the first results. fork: searched with the words this turn's
+        # own search used (typos fixed; a follow-up's joined words, the earlier message's after noise), see wiki_q.
+        wiki = first_wiki(wiki_q(question, turn))
+        if wiki:
+            blocks.append('Encyclopedia articles (community-written — background only; prefer a manual for safety-critical steps when both exist):')
+            for it in wiki:
+                src = wiki_row(it)
+                blocks.append(_src_block(sess.add(src), src, it.get('excerpt') or src['excerpt']))
+        if blocks:
+            msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages or read_encyclopedia to check exact wording):\n\n' + '\n\n'.join(blocks)})
         else:
-            msgs.append({'role': 'system', 'content': 'An initial library search for the latest question found nothing. Try other wording once; if still nothing, say the library does not cover it.'})
+            msgs.append({'role': 'system', 'content': 'An initial library search for the latest question found nothing. Try other wording once, or search_encyclopedia; if still nothing, say the library does not cover it.'})
         if english:
             msgs.append({'role': 'system', 'content': LANGUAGE_NOTE.format(english=english)})
-        emit({'type': 'found', 'count': len(hits)})
+        emit({'type': 'found', 'count': len(hits) + len(wiki)})
         # fork: how likely the first page is right (engine/confidence.py). Unsure: buttons. Very unsure: ask for more words
         # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
         reply = chat_reply(turn, len(hits), followup, len(asked))      # fork: see chat_reply

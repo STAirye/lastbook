@@ -370,6 +370,27 @@ class ChatConfidence(unittest.TestCase):
             self.a.chat([{'role': 'user', 'content': question}], None, events.append, lambda: False)
         return {e['type']: e for e in events}, events
 
+    def test_encyclopedia_articles_join_the_first_results(self):
+        asked = []
+        art = {'title': 'Water purification', 'zim': 'appropedia_en_all_maxi_2026-02.zim', 'article': 'Water_purification',
+               'zim_key': 'zim/appropedia_en_all_maxi_2026-02.zim/Water_purification', 'excerpt': 'Boil water for one minute.'}
+
+        def wiki(q, **k):
+            asked.append(q)
+            return [dict(art)]
+        with mock.patch.object(self.a, 'first_wiki', wiki), \
+                mock.patch.object(self.a.typos, 'correct', lambda q: q.replace('purfy', 'purify')):
+            ev, _ = self.run_chat('how do i purfy water', 'sure')
+            first = next(m['content'] for m in self.rounds[0] if m['content'].startswith('Initial library search'))
+            self.assertIn('Encyclopedia articles', first)
+            self.assertIn('Boil water for one minute.', first)
+            self.assertEqual(ev['found']['count'], 2)
+            self.assertIn('zim', [s['kind'] for s in ev['sources']['sources']])
+            self.assertNotIn('purfy', asked[0])                  # typos fixed: the encyclopedias match whole words only
+            self.assertEqual(self.a.wiki_q('and kids?', {'route': 'follow', 'q': 'and kids?',
+                                                          'joined_q': 'purify water and kids?'}), 'purify water and kids?')
+            self.assertEqual(self.a.wiki_q('ok', {'route': 'noise', 'q': 'purify water'}), 'purify water')
+
     def test_sure_answers_as_before(self):
         ev, _ = self.run_chat('how do i purify water', 'sure')
         self.assertNotIn('suggest', ev)
