@@ -2,7 +2,7 @@
 
 This is an unofficial fork of [Immortal-Protocols/lastbook](https://github.com/Immortal-Protocols/lastbook), kept at
 [STAirye/lastbook](https://github.com/STAirye/lastbook) on the branch `fork/lightweight-gemma-no-us-maps` (that repository's
-default branch). It is based on upstream Lastbook 1.1.12 and is not signed or published on lastbook.org. The library,
+default branch). It is based on upstream Lastbook 1.1.13 and is not signed or published on lastbook.org. The library,
 guides, search, the no-network rules and the bridge are upstream's. This file records what the fork changes and why, what
 was measured, and what is still open.
 

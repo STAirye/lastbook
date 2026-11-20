@@ -1,6 +1,6 @@
-"""fork: read a page's tables row by row before a model sees the page.
+"""Read a page's tables row by row before a model sees the page.
 
-The library's PDF text comes from `pdftotext -layout`, so a table keeps its columns as runs of spaces. Chat used to squash
+The library's PDF text comes from `pdftotext -layout`, so a table keeps its columns as runs of spaces. Chat squashed
 every run of spaces to one, which reads the page line by line. When a row's label takes two lines and its amount sits
 between them, or a column of prose runs beside the table, that interleaves the rows. Hesperian's bleach table:
 
@@ -14,7 +14,8 @@ between them, or a column of prose runs beside the table, that interleaves the r
 squashed reads "20 liters For a 200 liter 5 teaspoons", and a small model gave 5 teaspoons for 20 litres (ten times the
 dose). `for_model` finds columns of amounts (a number and a unit), attaches each line of the columns beside them to the
 nearest amount, and writes the table as one line per row, "For 5 gallons or 20 liters | 1/2 teaspoon". The rest of the page
-is squashed as before. Pages without such a column come back exactly as the old squash gave them.
+is squashed as before. Pages without such a column come back exactly as the old squash gave them. `page_text` is what
+Chat calls: the page for the model, at most n characters.
 """
 import collections, re
 
@@ -294,7 +295,7 @@ def for_model(text):
 
 def page_text(text, n):
     """A page as the model reads it, at most n characters. A page with no table to rebuild is exactly the old squashed
-    text cut at n (as in upstream PR #178)."""
+    text cut at n."""
     body = for_model(text)
     if body == _squash(text):
         return body.strip()[:n]
