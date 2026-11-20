@@ -7,13 +7,15 @@ No library and no model: hybrid returns canned hits keyed by the query, and the 
 answer's "(Title, p. N)" citations come back as carried pages. Every route (first, follow, noise, correct, danger), noise
 never becoming the earlier message, a correction dropping the pages already shown, a new danger sign carrying nothing,
 the English search words, and one-message conversations searching as before. Never packaged."""
-import sys, unittest
+import os, sys, unittest
 from pathlib import Path
 from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-sys.path[:0] = [str(ROOT)]
+sys.path[:0] = [str(ROOT), str(HERE)]
+import fixture  # noqa: E402
+os.environ['LASTBOOK_DATA'] = str(fixture.ensure())   # engine.paths reads it once: the made-up library every test module uses
 
 
 def hit(doc, page):

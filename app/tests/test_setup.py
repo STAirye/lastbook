@@ -625,7 +625,7 @@ class ParallelDownloads(Base):
         hold.release.set()                                               # the held answer sends the rest of its piece now
         time.sleep(0.5)
         self.assertEqual(self.snapshot(d.part), before, 'the partial file changed after pause returned')
-        meta = json.loads(Path(d.meta).read_text())
+        meta = json.loads(Path(d.meta).read_text(encoding='utf-8'))
         self.assertTrue(meta['parallel'])
         self.assertEqual(meta['bytes_done'] % (256 * 1024), 0)           # a whole number of pieces, hashed
         self.assertEqual(d.done_bytes(), meta['bytes_done'])
@@ -714,7 +714,7 @@ class ParallelDownloads(Base):
         d = self.dl()
         os.makedirs(os.path.dirname(d.part), exist_ok=True)
         Path(d.part).write_bytes(self.big[:512 * 1024] + b'\0' * (1024 * 1024))
-        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"e1"', 'bytes_done': 512 * 1024, 'parallel': True}))
+        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"e1"', 'bytes_done': 512 * 1024, 'parallel': True}), encoding='utf-8')
         with pieces():
             self.assertEqual(Path(d.run()).read_bytes(), self.big)
         self.assertEqual(min(int(x[6:].split('-')[0]) for x in self.ranges()), 512 * 1024)
@@ -724,7 +724,7 @@ class ParallelDownloads(Base):
         d = self.dl()
         os.makedirs(os.path.dirname(d.part), exist_ok=True)
         Path(d.part).write_bytes(self.big[:700_000])
-        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"e1"', 'bytes_done': 600_000}))
+        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"e1"', 'bytes_done': 600_000}), encoding='utf-8')
         with pieces():
             self.assertEqual(Path(d.run()).read_bytes(), self.big)
         self.assertEqual(min(int(x[6:].split('-')[0]) for x in self.ranges()), 700_000)
@@ -733,7 +733,7 @@ class ParallelDownloads(Base):
         d = self.dl()
         os.makedirs(os.path.dirname(d.part), exist_ok=True)
         Path(d.part).write_bytes(b'x' * 512 * 1024)
-        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"old"', 'bytes_done': 512 * 1024, 'parallel': True}))
+        Path(d.meta).write_text(json.dumps({'url': d.url, 'size': d.size, 'sha256': d.sha256, 'etag': '"old"', 'bytes_done': 512 * 1024, 'parallel': True}), encoding='utf-8')
         self.files.etag['big.bin'] = '"new"'
         with pieces():
             self.assertEqual(Path(d.run()).read_bytes(), self.big)
@@ -1101,7 +1101,7 @@ class Jobs(Base):
         self.assertEqual(j['state'], 'failed', j)
         self.assertIn('could not clear the files of the previous download', j['items'][0]['error']['message'])
         note = self.parent / 'LastbookData.setup' / 'unpack' / 'unpacked-from.json'
-        self.assertFalse(note.exists() and json.loads(note.read_text())['pack'] == 'medium')
+        self.assertFalse(note.exists() and json.loads(note.read_text(encoding='utf-8'))['pack'] == 'medium')
         s.start('medium', False)                       # "Try again", once the file is free
         self.assert_only_medium(s, shared)
 
@@ -1500,7 +1500,7 @@ class Switching(Base):
                     return real(src, dst)
                 with mock.patch.object(install.os, 'replace', replace), self.assertRaises(install.Refused):
                     install.switch(new, cur)
-                self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(), 'old')
+                self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(encoding='utf-8'), 'old')
                 self.assertEqual((cur / 'models' / 'model.gguf').read_bytes(), b'model')
                 self.assertEqual((cur / 'derived/geo/addresses/CA.sqlite').read_bytes(), b'address index')
                 self.assertFalse((new / 'models' / 'model.gguf').exists())
@@ -1528,7 +1528,7 @@ class Switching(Base):
         with mock.patch.object(install.os, 'replace', replace), self.assertRaises(install.Refused) as e:
             install.switch(new, cur)
         self.assertIn('could not move your files', e.exception.message)
-        self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(), 'old')
+        self.assertEqual((cur / 'library-data' / 'catalog.json').read_text(encoding='utf-8'), 'old')
         self.assertEqual((cur / 'models' / 'model.gguf').read_bytes(), b'model')
         self.assertEqual((cur / 'derived/geo/addresses/CA.sqlite').read_bytes(), b'address index')
         self.assertFalse((new / 'models' / 'model.gguf').exists())
@@ -1564,7 +1564,7 @@ class Switching(Base):
         self.assertIn(str(aside[0]), e.exception.message)
         self.assertIn(str(new / 'models' / 'model.gguf'), e.exception.message)
         self.assertNotIn('moved back', e.exception.message)
-        self.assertEqual((aside[0] / 'library-data' / 'catalog.json').read_text(), 'old')
+        self.assertEqual((aside[0] / 'library-data' / 'catalog.json').read_text(encoding='utf-8'), 'old')
         self.assertEqual((new / 'models' / 'model.gguf').read_bytes(), b'model')
 
     def test_ai_only_in_manage_mode(self):
@@ -2182,8 +2182,8 @@ def make_geo(lib, name='CA'):
     db = sqlite3.connect(atlas)
     db.execute('CREATE TABLE resource(id)')
     db.commit(); db.close()
-    (geo / 'national-status.json').write_text('{"state":"complete"}')
-    (geo / 'socal-cells.json').write_text('[[1,2]]')
+    (geo / 'national-status.json').write_text('{"state":"complete"}', encoding='utf-8')
+    (geo / 'socal-cells.json').write_text('[[1,2]]', encoding='utf-8')
     return {'national_feat': 3, 'water_feat': 4, 'tiles': 4, 'places': 2}
 
 
@@ -2236,7 +2236,7 @@ class ForkNoMaps(Base):
             self.assertFalse((out / gone).exists(), gone)
         self.assertEqual(install.map_name(out), 'base')
         install.check_map(out)
-        self.assertEqual(json.loads((geo / 'socal-cells.json').read_text()), [])
+        self.assertEqual(json.loads((geo / 'socal-cells.json').read_text(encoding='utf-8')), [])
         self.assertEqual({p: p.stat().st_size for p in src.rglob('*') if p.is_file()}, before)     # the source is only read
 
     def test_thin_refuses_a_library_without_a_map(self):
@@ -2398,9 +2398,9 @@ class ForkCustomModel(Base):
         library, note = api.startup(self.settings)
         with mock.patch.dict(sys.modules, {'llm_local': None}):
             api.opened(self.settings, library, note)
-        d = json.loads((library / 'derived/llm/state.json').read_text())
+        d = json.loads((library / 'derived/llm/state.json').read_text(encoding='utf-8'))
         self.assertEqual(d['custom_model'], str(p.resolve()))
-        self.assertNotIn('custom_model', json.loads((self.settings / 'setup.json').read_text()))
+        self.assertNotIn('custom_model', json.loads((self.settings / 'setup.json').read_text(encoding='utf-8')))
         m = self.setup('manage', current=library)
         self.assertEqual(m.current_info()['model'], 'custom')
         self.assertEqual(m.custom_model(), str(p.resolve()))
@@ -2420,8 +2420,8 @@ class ForkCustomModel(Base):
     def test_running_ai_is_told_in_manage_mode(self):
         lib = self.parent / 'LastbookData'
         (lib / 'library-data').mkdir(parents=True)
-        (lib / 'library-data/catalog.json').write_text('{}')
-        (lib / 'pack.json').write_text('{"name":"small"}')
+        (lib / 'library-data/catalog.json').write_text('{}', encoding='utf-8')
+        (lib / 'pack.json').write_text('{"name":"small"}', encoding='utf-8')
         p = self.gguf()
         self.llm.LOCAL = local = FakeLocal()
         m = self.setup('manage', current=lib)
@@ -2443,7 +2443,7 @@ class ForkCustomModel(Base):
         with mock.patch.dict(sys.modules, {'llm_local': fake}):
             api.opened(self.settings, library, note)
         self.assertEqual(fake.LOCAL.calls, [('use', str(p.resolve()))])
-        self.assertNotIn('custom_model', json.loads((self.settings / 'setup.json').read_text()))
+        self.assertNotIn('custom_model', json.loads((self.settings / 'setup.json').read_text(encoding='utf-8')))
         self.assertFalse((library / 'derived/llm/state.json').exists())
 
     def test_estimate_and_state_use_the_file(self):
@@ -2461,15 +2461,15 @@ class ForkCustomModel(Base):
     def test_manage_mode_writes_the_library_state_and_clears_it(self):
         lib = self.parent / 'LastbookData'
         (lib / 'library-data').mkdir(parents=True)
-        (lib / 'library-data/catalog.json').write_text('{}')
-        (lib / 'pack.json').write_text('{"name":"small"}')
+        (lib / 'library-data/catalog.json').write_text('{}', encoding='utf-8')
+        (lib / 'pack.json').write_text('{"name":"small"}', encoding='utf-8')
         p = self.gguf()
         m = self.setup('manage', current=lib)
         self.assertTrue(m.use(str(p))['noted'])
-        self.assertEqual(json.loads((lib / 'derived/llm/state.json').read_text())['custom_model'], str(p.resolve()))
+        self.assertEqual(json.loads((lib / 'derived/llm/state.json').read_text(encoding='utf-8'))['custom_model'], str(p.resolve()))
         self.assertEqual(m.current_info()['model'], 'custom')
         self.assertEqual(m.clear_custom_model(), {'ok': True})
-        self.assertNotIn('custom_model', json.loads((lib / 'derived/llm/state.json').read_text()))
+        self.assertNotIn('custom_model', json.loads((lib / 'derived/llm/state.json').read_text(encoding='utf-8')))
         self.assertIsNone(m.current_info()['model'])
 
     def test_repair_never_fetches_the_published_model_over_it(self):
@@ -2492,7 +2492,7 @@ class ForkCustomModel(Base):
         s.use(str(chosen))                       # first run: noted in setup.json
         lib = self.parent / 'LastbookData'
         (lib / 'derived/llm').mkdir(parents=True)
-        (lib / 'derived/llm/state.json').write_text(json.dumps({'custom_model': str(in_library)}))
+        (lib / 'derived/llm/state.json').write_text(json.dumps({'custom_model': str(in_library)}), encoding='utf-8')
         m = self.setup('manage', current=lib)
         self.assertEqual(s.custom_model(), str(chosen.resolve()))
         self.assertEqual(m.custom_model(), str(in_library))
@@ -2517,9 +2517,12 @@ class ForkLocalAI(unittest.TestCase):
         cls.L = llm_local
         cls.state_file = mock.patch.object(llm_local, 'STATE_FILE', cls.data / 'derived' / 'llm' / 'state.json')
         cls.state_file.start()
+        cls.data_dir = mock.patch.object(llm_local.paths, 'DATA', cls.data)   # also when another module loaded engine.paths first
+        cls.data_dir.start()
 
     @classmethod
     def tearDownClass(cls):
+        cls.data_dir.stop()
         cls.state_file.stop()
         cls.env.stop()
         for name in cls.imported:

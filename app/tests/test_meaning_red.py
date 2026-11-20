@@ -15,7 +15,9 @@ from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-sys.path[:0] = [str(ROOT)]
+sys.path[:0] = [str(ROOT), str(HERE)]
+import fixture  # noqa: E402
+os.environ['LASTBOOK_DATA'] = str(fixture.ensure())   # engine.paths reads it once: the made-up library every test module uses
 
 from engine import meaning_red  # noqa: E402
 
@@ -264,8 +266,10 @@ class Runner(unittest.TestCase):
             r = meaning_red.check('my husband is not breathing')
             self.assertLess(time.time() - t, 5)
             self.assertEqual((r['fired'], r['state']), (False, 'error: TimeoutError'))
-            time.sleep(0.5)
-            self.assertIsNotNone(proc.poll())        # the stuck one was stopped
+            try:
+                proc.wait(timeout=10)                # the stuck one was stopped (not a fixed sleep: a busy machine is slow)
+            except subprocess.TimeoutExpired:
+                self.fail('the runner that stopped answering is still running')
 
     def test_threads_with_a_stand_in(self):
         with Stand('good'):

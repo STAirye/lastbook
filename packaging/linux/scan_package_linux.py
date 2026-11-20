@@ -45,6 +45,12 @@ def bad_name(name):
     return sorted((set(parts) & BAD_SEGMENTS) | {p for p in parts if p.endswith('_tests') or p.startswith('test_')})
 
 
+def not_allowed(rel, never_ship=()):
+    """True for a packaged file (its path inside the .deb) that must not ship by its name alone."""
+    return bool(bad_name(rel.removeprefix('opt/lastbook/')) or (BAD_FILE.search(rel) and not MEANING_MODEL.search(rel))
+                or rel.rpartition('/')[2] in never_ship)
+
+
 def net_imports(source):
     out = set()
     for node in ast.walk(ast.parse(source)):
@@ -85,7 +91,7 @@ def main():
             n_files += 1
             if not rel.startswith(('opt/lastbook/', 'usr/bin/lastbook', 'usr/share/applications/lastbook.desktop', 'usr/share/icons/hicolor/', 'usr/share/doc/lastbook/')):
                 problems.append(f'file outside the places the package owns: {rel}')
-            if bad_name(rel.removeprefix('opt/lastbook/')) or (BAD_FILE.search(rel) and not MEANING_MODEL.search(rel)) or p.name in ship['never_ship']:
+            if not_allowed(rel, ship['never_ship']):
                 problems.append(f'file not allowed: {rel}')
             data = p.read_bytes()
             low = data.lower()

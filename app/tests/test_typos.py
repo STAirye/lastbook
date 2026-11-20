@@ -11,7 +11,9 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT))
+sys.path[:0] = [str(ROOT), str(ROOT / 'app' / 'tests')]
+import fixture  # noqa: E402
+os.environ['LASTBOOK_DATA'] = str(fixture.ensure())   # engine.paths reads it once: the made-up library every test module uses
 from engine import typos  # noqa: E402
 
 V = {  # pages per word
@@ -262,10 +264,8 @@ class EnglishWords(unittest.TestCase):
 
     def test_the_list_ships_and_reads_fast(self):
         typos._ENGLISH['words'] = None
-        import time
-        t = time.perf_counter()
         words = typos.english_words()
-        self.assertLess(time.perf_counter() - t, 1.0)
+        self.assertIs(typos.english_words(), words)     # read once: later questions pay nothing (no clock: a busy machine is slow)
         self.assertGreater(len(words), 50000)
         self.assertTrue({'keeled', 'puking', 'gasps', 'seizes', 'breathing'} <= words)
         self.assertFalse({'strock', 'poisend', 'siezing', 'bleding', 'hlep', 'breating'} & words)
@@ -341,6 +341,7 @@ class FromDatabase(unittest.TestCase):
 
     def test_small_library_changes_nothing_and_rebuilds_on_change(self):
         import sqlite3, tempfile
+        self.addCleanup(typos._state.update, key=None, words=None, memo={})   # also when a check fails
         with tempfile.TemporaryDirectory() as d:
             db = Path(d) / 'search.sqlite'
             con = sqlite3.connect(db)
@@ -363,7 +364,6 @@ class FromDatabase(unittest.TestCase):
             con.close()
             typos.words_for(db)
             self.assertNotEqual(typos._state['key'], before)
-            typos._state.update(key=None, words=None, memo={})
 
 
 if __name__ == '__main__':

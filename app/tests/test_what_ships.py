@@ -180,9 +180,12 @@ class WhatShips(unittest.TestCase):
         self.assertNotIn('MEANING_MODEL', mac)
         spec = (ROOT / 'packaging' / 'lastbook_macos.spec').read_text(encoding='utf-8')
         self.assertIn("'onnxruntime', 'tokenizers',", spec)
-        pat = re.compile(re.search(r"BAD_FILE = re.compile\(r'(.*?)', re.I\)", src).group(1), re.I)
-        ok = re.compile(re.search(r"MEANING_MODEL = re.compile\(r'(.*?)'\)", src).group(1))
-        allowed = lambda rel: not (pat.search(rel) and not ok.search(rel))
+        sys.path.insert(0, str(ROOT / 'packaging' / 'linux'))
+        try:
+            import scan_package_linux      # the scan's own rule, not a copy of its patterns
+        finally:
+            sys.path.remove(str(ROOT / 'packaging' / 'linux'))
+        allowed = lambda rel: not scan_package_linux.not_allowed(rel, SHIP['never_ship'])
         self.assertTrue(allowed('opt/lastbook/llm/meaning-red/bge-small-en-v1.5-q8_0.gguf'))
         self.assertFalse(allowed('opt/lastbook/models/gemma-4-E4B-it-Q4_K_M.gguf'))
         self.assertFalse(allowed('opt/lastbook/llm/meaning-red/other.gguf'))

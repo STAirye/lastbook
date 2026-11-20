@@ -184,7 +184,9 @@ class LongPages(unittest.TestCase):
 
 class Cut(unittest.TestCase):
     def test_cut_after_sentences(self):
-        sys.path.insert(0, str(ROOT))
+        sys.path[:0] = [str(ROOT), str(ROOT / 'app' / 'tests')]
+        import fixture
+        os.environ['LASTBOOK_DATA'] = str(fixture.ensure())   # engine.paths reads it once: the made-up library every test module uses
         from engine import sections
         text = ' '.join(f'Sentence number {i} is here.' for i in range(1500))
         secs = sections.cut(text)
@@ -194,7 +196,7 @@ class Cut(unittest.TestCase):
         starts = [s for s, _ in secs]
         self.assertEqual([sections.section_of(starts, s) for s in starts], list(range(1, len(secs) + 1)))
         self.assertEqual(sections.section_of(starts, starts[3] + 5), 4)
-        self.assertEqual(sections.cut('x' * 12000)[0][1], 'x' * 5000)   # no space at all: a hard cut
+        self.assertEqual(sections.cut('x' * (sections.SECTION * 3))[0][1], 'x' * sections.SECTION)   # no space at all: a hard cut
 
 
 if __name__ == '__main__':

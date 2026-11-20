@@ -19,7 +19,9 @@ from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-sys.path[:0] = [str(ROOT)]
+sys.path[:0] = [str(ROOT), str(HERE)]
+import fixture  # noqa: E402
+os.environ['LASTBOOK_DATA'] = str(fixture.ensure())   # engine.paths reads it once: the made-up library every test module uses
 
 from engine import confidence  # noqa: E402
 
@@ -40,14 +42,43 @@ WEAK = ([hit('z1', 'Tools and Their Uses', 'a hammer and a saw')],
         {'groups': [['zebra'], ['cellar'], ['tomato']], 'strict': 0, 'any_word': True, 'bm25': [-1.5], 'semantic': False})
 
 
+SWITCHES = ('LASTBOOK_CONF', 'LASTBOOK_BODY_', 'LASTBOOK_TYPO_', 'LASTBOOK_MEANING_RED', 'LASTBOOK_AI_')
+
+
+def clean_env(test):
+    """Every fork switch and tuning value unset for this test, as on a fresh install, except the meaning check, which is
+    off: these tests are about the words, and another module in the same run may have started the real one (test_bridge's
+    server.init does when its files are here). The environment as it was (the shell's own values included) comes back
+    afterwards."""
+    p = mock.patch.dict(os.environ)
+    p.start()
+    test.addCleanup(p.stop)
+    for k in [k for k in os.environ if k.startswith(SWITCHES)]:
+        del os.environ[k]
+    os.environ['LASTBOOK_MEANING_RED'] = '0'
+
+
+def own_assistant(test):
+    """A copy of assistant of this test's own. Another test module in the same run may have loaded it and swapped parts
+    for stand-ins (test_bridge replaces chat); that copy, and every module this one adds, are put back afterwards."""
+    before, shared = set(sys.modules), sys.modules.pop('assistant', None)
+
+    def restore():
+        for n in set(sys.modules) - before:
+            sys.modules.pop(n, None)
+        if shared is not None:
+            sys.modules['assistant'] = shared
+    test.addCleanup(restore)
+    import assistant
+    return assistant
+
+
 class Signals(unittest.TestCase):
     def setUp(self):
         p = mock.patch.object(confidence, '_words', lambda: (V, max(V.values())))
         p.start()
         self.addCleanup(p.stop)
-        for k in ('LASTBOOK_CONF', 'LASTBOOK_CONF_BUTTONS', 'LASTBOOK_CONF_UNSURE', 'LASTBOOK_CONF_BUTTONS_EVERYDAY'):
-            self.addCleanup(os.environ.pop, k, None)
-            os.environ.pop(k, None)
+        clean_env(self)
 
     def test_signals_are_plain_numbers_and_the_models_use_only_them(self):
         f = confidence.features(*STRONG)
@@ -176,8 +207,7 @@ class BodySigns(unittest.TestCase):
         p = mock.patch.object(confidence, '_words', lambda: (self.BV, max(self.BV.values())))
         p.start()
         self.addCleanup(p.stop)
-        self.addCleanup(os.environ.pop, 'LASTBOOK_BODY_SIGNS', None)
-        os.environ.pop('LASTBOOK_BODY_SIGNS', None)
+        clean_env(self)
 
     def test_named_and_misspelled(self):
         for q, want in [('he has no puls what do i do', {'pulse'}), ('he has no pulse', {'pulse'}),
@@ -217,10 +247,8 @@ class TurnHitsConfidence(unittest.TestCase):
     """assistant.turn_hits with a hybrid stand-in that fills its trace."""
 
     def setUp(self):
-        before = set(sys.modules)
-        import assistant
-        self.addCleanup(lambda: [sys.modules.pop(n, None) for n in set(sys.modules) - before])
-        self.a = assistant
+        clean_env(self)
+        self.a = assistant = own_assistant(self)
         self.canned = {'how do i purify water': STRONG, 'zebra cellar tomato': WEAK,
                        'how do i purify water zebra cellar tomato': WEAK}
 
@@ -316,10 +344,8 @@ class ChatConfidence(unittest.TestCase):
     """assistant.chat with turn_hits and the model round stood in for: which events the browser gets."""
 
     def setUp(self):
-        before = set(sys.modules)
-        import assistant
-        self.addCleanup(lambda: [sys.modules.pop(n, None) for n in set(sys.modules) - before])
-        self.a = assistant
+        clean_env(self)
+        self.a = assistant = own_assistant(self)
         self.rounds = []
         cat = {'by_id': {'w1': {'id': 'w1', 'kind': 'html', 'title': 'Purify Water'}}}
         S = mock.Mock(catalog=lambda: cat)
@@ -453,24 +479,25 @@ class ChatConfidence(unittest.TestCase):
         self.assertEqual(act(info()), 'ask+pages')
         self.assertEqual(act(info(), 0), 'ask (nothing found)')
         self.assertEqual(act(info(danger=True)), 'buttons')
-        self.assertEqual(act(info(body=['pulse'])), 'compact buttons')
+        body = self.a.chat_reply(info(body=['pulse'], danger=True), 1)   # turn_hits: a body sign is always danger
+        self.assertEqual((body['action'], body['style'], body['confidence'].get('body')), ('buttons', '', True))
         self.assertEqual(act(info(plea=True, danger=True, route='noise')), 'plea')
         self.assertEqual(act(info(confidence={'p': 0.9, 'mode': 'keyword', 'level': 'sure'})), 'answer')
 
     def test_very_unsure_with_a_body_sign_answers(self):
         """fork: "he has no puls": never only "help me help you" (nor the pages without an answer): the model answers from
         the pages, with the emergency buttons."""
-        for danger in (True, False):
-            self.rounds.clear()
-            ev, events = self.run_chat('he has no puls what do i do', 'unsure', danger=danger, p=0.22, body=['pulse'])
-            self.assertEqual(len(self.rounds), 1, danger)
-            self.assertEqual(ev['done']['answer'], 'Boil it [S1].')
-            self.assertNotIn('unsure', ev['done'])
-            self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['buttons'])
-            self.assertTrue(ev['suggest']['confidence']['body'])
-            self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
+        ev, events = self.run_chat('he has no puls what do i do', 'unsure', danger=True, p=0.22, body=['pulse'])
+        self.assertEqual(len(self.rounds), 1)
+        self.assertEqual(ev['done']['answer'], 'Boil it [S1].')
+        self.assertNotIn('unsure', ev['done'])
+        self.assertEqual(ev['suggest']['prompt'], self.a.SUGGEST_PROMPT['buttons'])
+        self.assertTrue(ev['suggest']['confidence']['body'])
+        self.assertNotIn('style', ev['suggest'])                             # the emergency buttons full size
+        self.assertLess(events.index(ev['suggest']), events.index(ev['done']))
+        self.rounds.clear()
         ev, _ = self.run_chat('mybbyisntbreathing', 'unsure', danger=True, body=['breathing'])
-        self.assertEqual((len(self.rounds), ev['done']['answer']), (2, 'Boil it [S1].'))
+        self.assertEqual((len(self.rounds), ev['done']['answer']), (1, 'Boil it [S1].'))
 
     def test_very_unsure_in_a_follow_up_is_only_buttons(self):
         ev, _ = self.run_chat('and at night?', 'unsure', route='follow')
