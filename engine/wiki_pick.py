@@ -66,6 +66,20 @@ def best_section(text, pats):
     return best
 
 
+def share_of(text, pats):
+    """The share of the question's words (their patterns) in text."""
+    return sum(1 for p in pats if p.search(text or '')) / len(pats) if pats else 0.0
+
+
+def score_text(text, title, pats):
+    """The score pick gives an article, for any text the model gets (a library page too): the share of the question's
+    words in it, plus TITLE_WEIGHT times the share in its title."""
+    if not pats:
+        return 0.0
+    t = text or ''
+    return (sum(1 for p in pats if p.search(t)) + TITLE_WEIGHT * sum(1 for p in pats if p.search(title or ''))) / len(pats)
+
+
 def _size(arc, article):
     try:
         return int(encyclopedias._follow(arc.get_entry_by_path(article)).get_item().size)
@@ -101,8 +115,8 @@ def pick(q, limit=encyclopedias.INITIAL_LIMIT, excerpt=encyclopedias.INITIAL_CHA
         share, sec = best_section(text, pats)
         if share <= 0:
             continue
-        in_title = sum(1 for p in pats if p.search(title)) / len(pats)
-        scored.append((-(share + TITLE_WEIGHT * in_title), rank, dict(h, title=title,
-                                                                      excerpt=encyclopedias.pick_section(sec, query, excerpt))))
+        score = share + TITLE_WEIGHT * sum(1 for p in pats if p.search(title)) / len(pats)
+        scored.append((-score, rank, dict(h, title=title, score=round(score, 4), share=round(share, 4),
+                                          excerpt=encyclopedias.pick_section(sec, query, excerpt))))
     scored.sort(key=lambda t: t[:2])
     return [h for _, _, h in scored[:limit]]

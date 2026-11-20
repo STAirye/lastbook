@@ -281,6 +281,75 @@ def wiki_q(question, turn):
     return q[:300]
 
 
+class WikiJob:
+    """fork: the first results' encyclopedia articles, labelled first and searched beside the library.
+
+    The newest message is labelled before anything is searched (is_danger: the urgent words and the meaning check, about
+    10 ms). Urgent: no encyclopedia search at all, so the manuals have the first results to themselves (upstream's own rule:
+    prefer a manual for safety-critical steps). Else first_wiki runs on a thread of its own while turn_hits searches the
+    library, from its own pool of candidates, so the encyclopedias' size cannot take the library's places (at most
+    INITIAL_LIMIT articles beside the library's 8). result() drops the articles when turn_hits found the conversation urgent
+    (an earlier message), and searches again, after the library, when turn_hits used other words (a follow-up's joined
+    words, the earlier message's after noise). dropped: the label took the articles away, so chat offers the button
+    "Not an emergency? Add the encyclopedias" (web/chat.js), which asks again with force.
+
+    Measured (.claude/drafts/encyclopedia/): the label takes 11 ms; the library search 115 ms and the encyclopedias 383 ms
+    median, so 806 ms one after the other and 433 ms side by side. The broad label (confidence.urgent's words) drops the
+    articles for all 131 red test questions, and also for 48 of 58 yellow and 38 of 64 green ones ("how to use a fire
+    extinguisher"); hence the button."""
+
+    def __init__(self, question, english=None, root=None, force=False):
+        # force: the person said it is not an emergency (chat's wiki, the "Not an emergency?" button), so no label
+        self.root, self.got, self.thread, self.dropped = root, None, None, False
+        self.keep = force or os.environ.get('LASTBOOK_WIKI_URGENT') == '1'
+        self.urgent = not self.keep and is_danger(question, english)
+        self.q = None
+        if self.urgent:
+            self.dropped = True
+            return
+        self.q = wiki_q(question, {'q': english or question})
+        self.thread = threading.Thread(target=self._run, name='first-wiki', daemon=True)
+        self.thread.start()
+
+    def _run(self):
+        self.got = first_wiki(self.q, root=self.root)
+
+    def result(self, question, turn):
+        if self.urgent or (turn.get('danger') and not self.keep):
+            self.dropped = True
+            return []
+        self.thread.join(20)
+        q = wiki_q(question, turn)
+        if q != self.q:
+            return first_wiki(q, root=self.root)
+        return self.got or []
+
+
+MERGE_BELOW = 0.5
+
+
+def merge_first(lib, art, q):
+    """fork: the first results' blocks in one order. lib: (hit, body, block) in the library search's order (triage-ranked,
+    kept as is); art: (hit, block) of encyclopedia articles, by wiki_pick's score. Upstream puts the articles after the
+    library. Here an article whose excerpt holds every word of the question goes just above the first library page (never
+    the first one) holding fewer than MERGE_BELOW of them; the others go after the library. A plain comparison of scores
+    put articles at 2nd to 4th place above useful manual pages (76 of 108 articles on the test questions): a short web
+    excerpt holds fewer of the words than a 2,000-character article only because it is shorter."""
+    words = wiki_pick.words_of(q)
+    pats = [wiki_pick._pattern(w) for w in words]
+    out, i = [b for _, _, b in lib[:1]], 1
+    later = []
+    for h, block in art:
+        if wiki_pick.share_of(h.get('excerpt') or '', pats) < 1:
+            later.append(block)         # not every word of the question: after the library, as upstream
+            continue
+        while i < len(lib) and wiki_pick.share_of(lib[i][1], pats) >= MERGE_BELOW:
+            out.append(lib[i][2])
+            i += 1
+        out.append(block)
+    return out + [b for _, _, b in lib[i:]] + later
+
+
 def first_wiki(q, root=None):
     """fork: the encyclopedia articles for the first results, by their best section (engine/wiki_pick.py); upstream's
     encyclopedia_hits when that fails or LASTBOOK_WIKI_PICK=0. Never raises."""
@@ -1271,8 +1340,10 @@ def _fit_prompt(msgs, tools, llm_local):
         work[long]['content'] = work[long]['content'][:len(work[long]['content']) // 2] + '\n[…shortened to fit]'
 
 
-def chat(messages, about, emit, cancelled):
-    """Run one assistant turn. emit(event: dict) streams to the browser; cancelled() -> True stops early."""
+def chat(messages, about, emit, cancelled, wiki=False):
+    """Run one assistant turn. emit(event: dict) streams to the browser; cancelled() -> True stops early.
+    fork: wiki True (the person pressed "Not an emergency? Add the encyclopedias"): encyclopedia articles even when the
+    question is labelled urgent (WikiJob). Nothing else about the urgent label changes."""
     t0 = time.time()
     sess = Session()
     msgs = [{'role': 'system', 'content': SYSTEM}]
@@ -1321,29 +1392,28 @@ def chat(messages, about, emit, cancelled):
             if cancelled():
                 emit({'type': 'stopped'})
                 return
+        wiki_job = WikiJob(question, english, force=wiki)    # fork: urgent first; else the encyclopedias, beside the library
         hits, turn = turn_hits(messages, english, followup)     # fork: see turn_hits
         if os.environ.get('LASTBOOK_AI_DEBUG') == '1' and turn['route'] != 'first':
             print('local AI turn:', json.dumps({'q': question[:200], 'route': turn['route'], 'earlier': turn['still'][:200]},
                                                ensure_ascii=False), flush=True)
-        blocks = []
-        if hits:
-            for n, h in enumerate(hits):
-                body = None
-                if n < 4 and h['kind'] == 'pdf' and h.get('page'):  # whole page for the best few, so a second read is rarely needed
-                    r = S.catalog()['by_id'][h['doc_id']]
-                    ps = S.page_texts(r)
-                    if 0 < h['page'] <= len(ps):
-                        body = page_body(ps[h['page'] - 1], 3200)
-                body = body if body is not None else excerpt_body(h)
-                blocks.append(_src_block(sess.add(h), h, body))
-        # upstream 1.1.13: a few encyclopedia articles join the first results. fork: searched with the words this turn's
-        # own search used (typos fixed; a follow-up's joined words, the earlier message's after noise), see wiki_q.
-        wiki = first_wiki(wiki_q(question, turn))
-        if wiki:
-            blocks.append('Encyclopedia articles (community-written — background only; prefer a manual for safety-critical steps when both exist):')
-            for it in wiki:
-                src = wiki_row(it)
-                blocks.append(_src_block(sess.add(src), src, it.get('excerpt') or src['excerpt']))
+        lib = []
+        for n, h in enumerate(hits):
+            body = None
+            if n < 4 and h['kind'] == 'pdf' and h.get('page'):  # whole page for the best few, so a second read is rarely needed
+                r = S.catalog()['by_id'][h['doc_id']]
+                ps = S.page_texts(r)
+                if 0 < h['page'] <= len(ps):
+                    body = page_body(ps[h['page'] - 1], 3200)
+            body = body if body is not None else excerpt_body(h)
+            lib.append((h, body, _src_block(sess.add(h), h, body)))
+        wiki = wiki_job.result(question, turn)
+        art = []
+        for it in wiki:
+            src = wiki_row(it)
+            art.append((it, _src_block(sess.add(src), src, '(Encyclopedia article: community-written, background only; prefer '
+                                       'a manual for safety-critical steps when both exist.)\n' + (it.get('excerpt') or src['excerpt']))))
+        blocks = merge_first(lib, art, wiki_q(question, turn))
         if blocks:
             msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages or read_encyclopedia to check exact wording):\n\n' + '\n\n'.join(blocks)})
         else:
@@ -1351,6 +1421,8 @@ def chat(messages, about, emit, cancelled):
         if english:
             msgs.append({'role': 'system', 'content': LANGUAGE_NOTE.format(english=english)})
         emit({'type': 'found', 'count': len(hits) + len(wiki)})
+        if wiki_job.dropped and encyclopedias.list_files():
+            emit({'type': 'wiki_offer'})    # fork: labelled urgent, so no encyclopedias; web/chat.js offers to add them
         # fork: how likely the first page is right (engine/confidence.py). Unsure: buttons. Very unsure: ask for more words
         # instead of answering from pages that are probably wrong; if it may be urgent (is_danger), with the pages all the same.
         reply = chat_reply(turn, len(hits), followup, len(asked))      # fork: see chat_reply

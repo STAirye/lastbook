@@ -360,14 +360,15 @@ class ChatConfidence(unittest.TestCase):
             self.addCleanup(p.stop)
         self.hits = [hit('w1', 'Purify Water', 'boil it')]
 
-    def run_chat(self, question, level, route='first', danger=False, p=None, still='', body=(), plea=False, unknown=False):
+    def run_chat(self, question, level, route='first', danger=False, p=None, still='', body=(), plea=False, unknown=False,
+                 wiki=False):
         p = {'sure': 0.9, 'buttons': 0.5, 'unsure': 0.1}[level] if p is None else p
         info = {'route': route, 'buttons': route == 'noise', 'still': still, 'danger': danger or plea,
                 'confidence': dict({'p': p, 'mode': 'keyword', 'level': level}, **({'unknown_words': True} if unknown else {})),
                 'body': list(body), 'plea': plea}
         events = []
         with mock.patch.object(self.a, 'turn_hits', lambda *a, **k: (self.hits, dict(info))):
-            self.a.chat([{'role': 'user', 'content': question}], None, events.append, lambda: False)
+            self.a.chat([{'role': 'user', 'content': question}], None, events.append, lambda: False, wiki=wiki)
         return {e['type']: e for e in events}, events
 
     def test_encyclopedia_articles_join_the_first_results(self):
@@ -382,7 +383,7 @@ class ChatConfidence(unittest.TestCase):
                 mock.patch.object(self.a.typos, 'correct', lambda q: q.replace('purfy', 'purify')):
             ev, _ = self.run_chat('how do i purfy water', 'sure')
             first = next(m['content'] for m in self.rounds[0] if m['content'].startswith('Initial library search'))
-            self.assertIn('Encyclopedia articles', first)
+            self.assertIn('(Encyclopedia article: community-written', first)
             self.assertIn('Boil water for one minute.', first)
             self.assertEqual(ev['found']['count'], 2)
             self.assertIn('zim', [s['kind'] for s in ev['sources']['sources']])
@@ -390,6 +391,39 @@ class ChatConfidence(unittest.TestCase):
             self.assertEqual(self.a.wiki_q('and kids?', {'route': 'follow', 'q': 'and kids?',
                                                           'joined_q': 'purify water and kids?'}), 'purify water and kids?')
             self.assertEqual(self.a.wiki_q('ok', {'route': 'noise', 'q': 'purify water'}), 'purify water')
+            # urgent: labelled first, and the encyclopedias are not searched at all; the manuals have the results
+            asked.clear()
+            self.rounds.clear()
+            ev, _ = self.run_chat('he is not breathing', 'sure')
+            self.assertEqual(asked, [])
+            self.assertNotIn('Encyclopedia article', next(m['content'] for m in self.rounds[0]
+                                                          if m['content'].startswith('Initial library search')))
+            # an earlier message made the conversation urgent (turn_hits says so): the articles found are dropped
+            ev, _ = self.run_chat('what should i do', 'sure', route='follow', danger=True)
+            self.assertEqual(ev['found']['count'], 1)
+            self.assertNotIn('wiki_offer', ev)           # no encyclopedias installed: nothing to offer
+            with mock.patch.object(self.a.encyclopedias, 'list_files', lambda root=None: ['x.zim']):
+                ev, _ = self.run_chat('he is not breathing', 'sure')
+                self.assertIn('wiki_offer', ev)           # "Not an emergency? Add the encyclopedias"
+                ev, _ = self.run_chat('how do i purfy water', 'sure')
+                self.assertNotIn('wiki_offer', ev)
+                # the button: the same question, the label bypassed for the encyclopedias only
+                asked.clear()
+                ev, _ = self.run_chat('he is not breathing', 'sure', wiki=True)
+                self.assertEqual(len(asked), 1)
+                self.assertNotIn('wiki_offer', ev)
+                self.assertEqual(ev['found']['count'], 2)
+
+    def test_merge_keeps_the_library_order_and_its_first_page(self):
+        q = 'cool a burn with water'
+        lib = [({'title': 'Manual A'}, 'nothing here', 'A'), ({'title': 'Manual B'}, 'cool burn water', 'B'),
+               ({'title': 'Manual C'}, 'nothing', 'C')]
+        art = [({'excerpt': 'Cool the burn under running water.'}, 'W1'), ({'excerpt': 'A burn.'}, 'W2')]
+        # W1 holds every word: above C (none of them), not above A (the library's first) or B (all of them).
+        # W2 holds one of three: after the library, as upstream.
+        self.assertEqual(self.a.merge_first(lib, art, q), ['A', 'B', 'W1', 'C', 'W2'])
+        self.assertEqual(self.a.merge_first([], art, q), ['W1', 'W2'])
+        self.assertEqual(self.a.merge_first(lib, [], q), ['A', 'B', 'C'])
 
     def test_sure_answers_as_before(self):
         ev, _ = self.run_chat('how do i purify water', 'sure')

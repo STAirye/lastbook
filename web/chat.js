@@ -265,6 +265,8 @@ const Chat = (() => {
     if (running && found.length) h += `<div class="prefound"><p class="small muted">Pages found so far — you can open them while the answer is written:</p>${srcCards(found.slice(0, 6), true)}</div>`;
     if (m.fallback) h += srcCards(m.fallback, true);
     if (m.suggestStyle !== 'urgent') h += sugg;
+    // fork: labelled urgent, so the encyclopedias were left out (assistant.WikiJob); the person can say it is not an emergency
+    if (!running && m.wikiOffer && i === cur.messages.length - 1) h += `<div class="suggest compact wiki-offer"><div class="chips"><button class="chip sg-other" data-act="wiki">Not an emergency? Add the encyclopedias</button></div></div>`;
     if (!running && m.content) {
       const cited = m.cited || [];
       if ((m.invalid || []).length) h += `<p class="small" style="color:var(--stop)">The model referred to sources that don’t exist (${m.invalid.join(', ')}); those markers were removed.</p>`;
@@ -403,6 +405,7 @@ const Chat = (() => {
       }
       if (b.dataset.act === 'export') exportChat(cur);
       if (b.dataset.act === 'retry') { const q = cur.messages[cur.messages.length - 2]?.content; cur.messages.splice(-2, 2); send(q) }
+      if (b.dataset.act === 'wiki' && !busy()) { const q = cur.messages[cur.messages.length - 2]?.content; cur.messages.splice(-2, 2); send(q, { wiki: true }) }
     });
     $$('[data-say]', el).forEach(b => b.onclick = () => { if (busy()) return; if (b.dataset.say) send(b.dataset.say); else $('#chatIn')?.focus() });
     // citation chips scroll to their card instead of changing the route
@@ -433,8 +436,9 @@ const Chat = (() => {
   }
 
   /* -------------------------------------------------------------- send --- */
-  async function send(text) {
+  async function send(text, opts) {
     text = (text || '').trim();
+    const wiki = !!(opts && opts.wiki);   // fork: "Not an emergency? Add the encyclopedias"
     if (!text) return;
     if (!cur) {
       cur = { id: newId(), title: text.slice(0, 70), created: Date.now(), updated: Date.now(), messages: [], about: aboutCtx ? aboutCtx.about : null, aboutInfo: aboutCtx };
@@ -454,7 +458,7 @@ const Chat = (() => {
     try {
       const st = await getStatus();
       if (!st.online) throw Object.assign(new Error('offline'), { offline: true, why: st.local && localLine(st.local)[1] });
-      const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history_(c).slice(0, -1).concat([{ role: 'user', content: text }]), about: c.about }), signal: ctl.signal });
+      const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history_(c).slice(0, -1).concat([{ role: 'user', content: text }]), about: c.about, ...(wiki ? { wiki: true } : {}) }), signal: ctl.signal });
       if (!r.ok || !r.body) throw new Error('The server refused the question (' + r.status + ').');
       const rd = r.body.getReader(), dec = new TextDecoder();
       let buf = '';
@@ -486,6 +490,7 @@ const Chat = (() => {
   function onEvent(m, ev) {
     if (ev.type === 'state') { m.state = ev.state; m.pct = ev.pct }
     else if (ev.type === 'found') m.steps.push({ name: 'found', count: ev.count });
+    else if (ev.type === 'wiki_offer') m.wikiOffer = true;
     else if (ev.type === 'tool') { if (ev.phase === 'start') m.steps.push({ name: ev.name, args: ev.args }); else { const s = [...m.steps].reverse().find(x => x.name === ev.name && !x.summary); if (s) s.summary = ev.summary } m.state = 'searching' }
     else if (ev.type === 'sources') m.sources = ev.sources;
     else if (ev.type === 'delta') m.content += ev.text;

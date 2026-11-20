@@ -801,7 +801,30 @@ noise), with typos fixed (`assistant.wiki_q`). Any failure falls back to upstrea
 The excerpt is chosen for the question's words, so "holds the needed words" favours it a little where those overlap.
 The encyclopedias still hold little first aid, so wrong first articles remain ("Doom/Complete list of enemies" for a
 chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fixes typos first.
-`app/tests/test_wiki_pick.py` and `test_confidence.ChatConfidence.test_encyclopedia_articles_join_the_first_results`
+**Urgent first, then side by side, then merged** (`assistant.WikiJob`, `merge_first`):
+
+- The newest message is labelled before anything is searched (`is_danger`, 11 ms). Urgent: no encyclopedia search at
+  all, so the manuals have the first results to themselves. All 131 red test questions skip it. The label is the broad
+  one that never holds pages back, so it also drops the articles for 48 of 58 yellow and 38 of 64 green questions ("how to
+  use a fire extinguisher"). So the chat then shows **"Not an emergency? Add the encyclopedias"**, which asks again with
+  `wiki: true`: the articles come back, and nothing else about the urgent label changes (manual first, pages never
+  held back, emergency buttons). The precise label (danger signs or the meaning check) would drop them for only 9 green
+  questions, but it misses 14 red ones, including "splashed bleach in my eye" and "downed power line in the yard".
+- Otherwise the encyclopedia search runs on a thread of its own while `turn_hits` searches the library, from its own
+  pool of candidates, with its own limit (3 beside the library's 8): the encyclopedias' size cannot take the library's
+  places. Median 806 ms one after the other → 433 ms side by side (library 115 ms, encyclopedias 383 ms).
+- The merge keeps the library's (triage) order and its first page first. A plain comparison of word-share scores put
+  articles 2nd to 4th, above useful manual pages, for 76 of 108 articles: a short web excerpt holds fewer of the question's
+  words than a 2,000-character article only because it is shorter. So an article goes above a library page only when it
+  holds every word of the question and the page fewer than half (10 of 108 articles); the rest go after the library, as
+  upstream places them. A minimum score was tried and dropped: on everyday questions it moved the useful share only
+  from 68% to 70%.
+- Ranking the candidates by meaning (bge-small through the `--embed` runner) was timed and dropped for now: 60–200 ms per
+  2,000-character excerpt on 2 threads, the runner taking one text at a time, so 0.4–2.4 s a question. A vector index of
+  the encyclopedias built once, where the packs are made, would do it in milliseconds (Open).
+
+`LASTBOOK_WIKI_URGENT=1` keeps the articles for urgent questions too. `app/tests/test_wiki_pick.py` and
+`test_confidence.ChatConfidence` (`test_encyclopedia_articles_join_the_first_results`, `test_merge_keeps_the_library_order_and_its_first_page`)
 cover it.
 
 ## 4. Running from source on Windows
@@ -865,6 +888,9 @@ a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
+- **Encyclopedias by meaning (3n):** a vector index of the encyclopedia files, built once where the packs are made and
+  shipped beside each file (keyed by its checksum), not on each PC: ~1–3 million sections for MDWiki, Wikibooks and
+  Appropedia, about 0.4–2.3 GB, hours on a CPU. It would find articles the encyclopedias' word search misses. Not built.
 - **Meaning check (3m):** the Hugging Face repo is not uploaded (the manifest's `revision` is empty, so setup downloads
   nothing yet; upload the two files of `derived/models/meaning-red`, put the commit id in the manifest). The runner's
   `--embed` mode is built and run on this Windows machine only: the Mac and Linux runner builds (same
