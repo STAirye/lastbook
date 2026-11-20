@@ -326,31 +326,6 @@ class WikiJob:
         return self.got or []
 
 
-MERGE_BELOW = 0.5
-
-
-def merge_first(lib, art, q):
-    """fork: the first results' blocks in one order. lib: (hit, body, block) in the library search's order (triage-ranked,
-    kept as is); art: (hit, block) of encyclopedia articles, by wiki_pick's score. Upstream puts the articles after the
-    library. Here an article whose excerpt holds every word of the question goes just above the first library page (never
-    the first one) holding fewer than MERGE_BELOW of them; the others go after the library. A plain comparison of scores
-    put articles at 2nd to 4th place above useful manual pages (76 of 108 articles on the test questions): a short web
-    excerpt holds fewer of the words than a 2,000-character article only because it is shorter."""
-    words = wiki_pick.words_of(q)
-    pats = [wiki_pick._pattern(w) for w in words]
-    out, i = [b for _, _, b in lib[:1]], 1
-    later = []
-    for h, block in art:
-        if wiki_pick.share_of(h.get('excerpt') or '', pats) < 1:
-            later.append(block)         # not every word of the question: after the library, as upstream
-            continue
-        while i < len(lib) and wiki_pick.share_of(lib[i][1], pats) >= MERGE_BELOW:
-            out.append(lib[i][2])
-            i += 1
-        out.append(block)
-    return out + [b for _, _, b in lib[i:]] + later
-
-
 def first_wiki(q, root=None):
     """fork: the encyclopedia articles for the first results, by their best section (engine/wiki_pick.py); upstream's
     encyclopedia_hits when that fails or LASTBOOK_WIKI_PICK=0. Never raises. Dev toggle LASTBOOK_WIKI_VECTORS=1: by meaning
@@ -1418,10 +1393,13 @@ def chat(messages, about, emit, cancelled, wiki=False):
             src = wiki_row(it)
             art.append((it, _src_block(sess.add(src), src, '(Encyclopedia article: community-written, background only; prefer '
                                        'a manual for safety-critical steps when both exist.)\n' + (it.get('excerpt') or src['excerpt']))))
-        blocks = merge_first(lib, art, wiki_q(question, turn))
-        if blocks:
-            msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages or read_encyclopedia to check exact wording):\n\n' + '\n\n'.join(blocks)})
-        else:
+        # fork: the library's results and the encyclopedia articles stay apart, each in its own order (and apart on screen,
+        # web/chat.js): a merge by score compared numbers that mean different things in the two searches (FORK.md §3n)
+        if lib:
+            msgs.append({'role': 'system', 'content': 'Initial library search results for the latest question (already retrieved — search again only if these are not enough; use read_pages or read_encyclopedia to check exact wording):\n\n' + '\n\n'.join(b for _, _, b in lib)})
+        if art:
+            msgs.append({'role': 'system', 'content': ('Encyclopedia articles for the latest question, from a separate search beside the library (community-written background: prefer the library results above for safety-critical steps; use read_encyclopedia to check exact wording):\n\n' if lib else 'The library search found nothing; these encyclopedia articles were found beside it (community-written background; use read_encyclopedia to check exact wording):\n\n') + '\n\n'.join(b for _, b in art)})
+        if not lib and not art:
             msgs.append({'role': 'system', 'content': 'An initial library search for the latest question found nothing. Try other wording once, or search_encyclopedia; if still nothing, say the library does not cover it.'})
         if english:
             msgs.append({'role': 'system', 'content': LANGUAGE_NOTE.format(english=english)})

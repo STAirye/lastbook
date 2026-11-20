@@ -801,7 +801,7 @@ noise), with typos fixed (`assistant.wiki_q`). Any failure falls back to upstrea
 The excerpt is chosen for the question's words, so "holds the needed words" favours it a little where those overlap.
 The encyclopedias still hold little first aid, so wrong first articles remain ("Doom/Complete list of enemies" for a
 chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fixes typos first.
-**Urgent first, then side by side, then merged** (`assistant.WikiJob`, `merge_first`):
+**Urgent first, then side by side, then shown apart** (`assistant.WikiJob`, `assistant.chat`, `web/chat.js`):
 
 - The newest message is labelled before anything is searched (`is_danger`, 11 ms). Urgent: no encyclopedia search at
   all, so the manuals have the first results to themselves. All 131 red test questions skip it. The label is the broad
@@ -813,12 +813,14 @@ chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fi
 - Otherwise the encyclopedia search runs on a thread of its own while `turn_hits` searches the library, from its own
   pool of candidates, with its own limit (3 beside the library's 8): the encyclopedias' size cannot take the library's
   places. Median 806 ms one after the other → 433 ms side by side (library 115 ms, encyclopedias 383 ms).
-- The merge keeps the library's (triage) order and its first page first. A plain comparison of word-share scores put
-  articles 2nd to 4th, above useful manual pages, for 76 of 108 articles: a short web excerpt holds fewer of the question's
-  words than a 2,000-character article only because it is shorter. So an article goes above a library page only when it
-  holds every word of the question and the page fewer than half (10 of 108 articles); the rest go after the library, as
-  upstream places them. A minimum score was tried and dropped: on everyday questions it moved the useful share only
-  from 68% to 70%.
+- The two searches stay apart, to the model and on screen. The model gets the library's results as before (the triage
+  order, untouched) and, in a second message, the articles, marked as community-written background from a separate
+  search. The chat shows the library's sources, then "From the encyclopedias" with the articles, whether the answer
+  used them or not (the cited ones first). A merge was tried first: a plain comparison of word-share scores put articles
+  2nd to 4th, above useful manual pages, for 76 of 108 articles (a short web excerpt holds fewer of the question's words
+  than a 2,000-character article only because it is shorter), and a strict rule (an article above a page only when it
+  holds every word of the question and the page fewer than half) kept the library's order but pushed most articles to
+  the end. Apart, neither search's order changes and no article is held back for being short.
 - Ranking the candidates by meaning (bge-small through the `--embed` runner) was timed and dropped for now: 60–200 ms per
   2,000-character excerpt on 2 threads, the runner taking one text at a time, so 0.4–2.4 s a question.
 
@@ -842,15 +844,15 @@ The time includes reading the 3 articles for their excerpts. The scorer only che
 show weak articles it cannot see: "he is not breathing" got a lateral-thinking puzzle's solution and (before the search
 instruction) a Latin primer from Wikibooks, beside a good "Medical Emergencies" chapter. A likely cause: the model reads
 320 tokens (about 1,300 characters), so each vector stands for the first quarter of its 5,000-character section. Smaller
-sections mean a bigger index (about 4 times the rows).
+sections mean a bigger index (about 4 times the rows); with the two searches shown apart this was not pursued.
 
 **Setting (chat sidebar): "Encyclopedias on urgent questions too", on by default** (`sg.wikiUrgent` in the browser's
 storage; the chat then sends `wiki: true` with every question). With a vector index of the encyclopedias a search takes
-~36 ms (Open), so speed is no reason to skip them; the articles still come after the manuals' first page. Off: urgent
+~36 ms (Open), so speed is no reason to skip them; the articles are shown apart from the manuals. Off: urgent
 questions use the manuals alone, with the "Not an emergency?" button. A client that sends no `wiki` (the server's own
 default) still skips them. With today's keyword picker the urgent articles are often weak ("he is not breathing":
 "Philips Breath Counter", "Conscious breathing"). `LASTBOOK_WIKI_URGENT=1` keeps them server-side for every client. `app/tests/test_wiki_pick.py` and
-`test_confidence.ChatConfidence` (`test_encyclopedia_articles_join_the_first_results`, `test_merge_keeps_the_library_order_and_its_first_page`)
+`test_confidence.ChatConfidence` (`test_encyclopedia_articles_come_apart_from_the_library`)
 cover it.
 
 ## 4. Running from source on Windows
