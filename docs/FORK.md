@@ -823,7 +823,12 @@ chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fi
   2,000-character excerpt on 2 threads, the runner taking one text at a time, so 0.4–2.4 s a question. A vector index of
   the encyclopedias built once, where the packs are made, would do it in milliseconds (Open).
 
-`LASTBOOK_WIKI_URGENT=1` keeps the articles for urgent questions too. `app/tests/test_wiki_pick.py` and
+**Setting (chat sidebar): "Encyclopedias on urgent questions too", on by default** (`sg.wikiUrgent` in the browser's
+storage; the chat then sends `wiki: true` with every question). With a vector index of the encyclopedias a search takes
+~36 ms (Open), so speed is no reason to skip them; the articles still come after the manuals' first page. Off: urgent
+questions use the manuals alone, with the "Not an emergency?" button. A client that sends no `wiki` (the server's own
+default) still skips them. With today's keyword picker the urgent articles are often weak ("he is not breathing":
+"Philips Breath Counter", "Conscious breathing"). `LASTBOOK_WIKI_URGENT=1` keeps them server-side for every client. `app/tests/test_wiki_pick.py` and
 `test_confidence.ChatConfidence` (`test_encyclopedia_articles_join_the_first_results`, `test_merge_keeps_the_library_order_and_its_first_page`)
 cover it.
 
