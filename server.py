@@ -2037,7 +2037,8 @@ class Handler(library.Handler):
             emit({'type': 'error', 'error': 'model_unavailable', 'text': 'The local assistant model is not running right now.'})
             return
         try:
-            assistant.chat(msgs, about, emit, lambda: gone[0], wiki=req.get('wiki') is True)   # fork: "Not an emergency?"
+            # fork: wiki, the chat setting or the "Not an emergency?" button; only passed when set, as chat had 4 arguments
+            assistant.chat(msgs, about, emit, lambda: gone[0], **({'wiki': True} if req.get('wiki') is True else {}))
         except Exception as e:
             traceback.print_exc()
             emit({'type': 'error', 'error': 'internal', 'text': f'The assistant stopped on an internal error ({type(e).__name__}).'})

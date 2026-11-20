@@ -12,6 +12,7 @@ from engine import page_tables, sections
 from engine import typos    # fork: spelling mistakes in search questions
 from engine import confidence    # fork: how likely a search's first page is right
 from engine import wiki_pick    # fork: encyclopedia articles by their best section
+from engine import wiki_vectors    # fork, dev toggle: encyclopedia articles by meaning (LASTBOOK_WIKI_VECTORS=1)
 from engine import meaning_red    # fork: a meaning-based second opinion on urgent questions (words OR meaning)
 
 import os
@@ -352,7 +353,11 @@ def merge_first(lib, art, q):
 
 def first_wiki(q, root=None):
     """fork: the encyclopedia articles for the first results, by their best section (engine/wiki_pick.py); upstream's
-    encyclopedia_hits when that fails or LASTBOOK_WIKI_PICK=0. Never raises."""
+    encyclopedia_hits when that fails or LASTBOOK_WIKI_PICK=0. Never raises. Dev toggle LASTBOOK_WIKI_VECTORS=1: by meaning
+    first (engine/wiki_vectors.py), when a vector index of the encyclopedias is there and the meaning runner is ready."""
+    got = wiki_vectors.pick(q, root=root)
+    if got is not None:
+        return got
     if os.environ.get('LASTBOOK_WIKI_PICK') != '0':
         try:
             return wiki_pick.pick(q, root=root)

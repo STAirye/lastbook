@@ -820,8 +820,29 @@ chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fi
   upstream places them. A minimum score was tried and dropped: on everyday questions it moved the useful share only
   from 68% to 70%.
 - Ranking the candidates by meaning (bge-small through the `--embed` runner) was timed and dropped for now: 60–200 ms per
-  2,000-character excerpt on 2 threads, the runner taking one text at a time, so 0.4–2.4 s a question. A vector index of
-  the encyclopedias built once, where the packs are made, would do it in milliseconds (Open).
+  2,000-character excerpt on 2 threads, the runner taking one text at a time, so 0.4–2.4 s a question.
+
+**Dev toggle: a vector index of the encyclopedias** (`LASTBOOK_WIKI_VECTORS=1`, off by default; `engine/wiki_vectors.py`).
+A prototype embedded every ~5,000-character section of MDWiki, Appropedia and Wikibooks with bge-small-en-v1.5 on the GPU,
+once (`.claude/drafts/encyclopedia/vectors/` in the wiki-vectors worktree): 185,702 articles, 429,964 sections, 11.6 min
+on an RTX 3080 Ti (about 6 h on a CPU), 330 MB as f16, files `derived/index/vec-<zim>-<size>-<mtime_ns>.{f16.npy,rows.json,meta.json}`
+(the prototype's `rows.npz` needs pickle; `tools/wiki_vectors_rows.py` rewrites it as JSON). With the toggle, `first_wiki`
+asks it first: the question (with bge's search instruction, as `retrieval.QUERY_PREFIX`) is embedded by the meaning check's
+runner, each file's matrix is scanned, the 3 articles with the closest section win, and the excerpt is that section's best
+part. No index, a stale one (size or time changed), the runner not ready, or any error: `wiki_pick` as before.
+
+| Through `first_wiki`, 253 questions | Keyword (`wiki_pick`) | Vectors |
+|---|---|---|
+| Everyday (122): first useful / any of 3 | 85 / 108 | **98 / 114** |
+| Urgent (131): first useful / any of 3 | 61 / 89 | **92 / 111** |
+| Time median / p90 | 583 / 885 ms | **76 / 170 ms** (urgent 140 / 331) |
+| First load / memory | – | 1.4 s once / **+690 MB** (f32) |
+
+The time includes reading the 3 articles for their excerpts. The scorer only checks that topic words appear, and spot checks
+show weak articles it cannot see: "he is not breathing" got a lateral-thinking puzzle's solution and (before the search
+instruction) a Latin primer from Wikibooks, beside a good "Medical Emergencies" chapter. A likely cause: the model reads
+320 tokens (about 1,300 characters), so each vector stands for the first quarter of its 5,000-character section. Smaller
+sections mean a bigger index (about 4 times the rows).
 
 **Setting (chat sidebar): "Encyclopedias on urgent questions too", on by default** (`sg.wikiUrgent` in the browser's
 storage; the chat then sends `wiki: true` with every question). With a vector index of the encyclopedias a search takes
@@ -893,9 +914,9 @@ a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
-- **Encyclopedias by meaning (3n):** a vector index of the encyclopedia files, built once where the packs are made and
-  shipped beside each file (keyed by its checksum), not on each PC: ~1–3 million sections for MDWiki, Wikibooks and
-  Appropedia, about 0.4–2.3 GB, hours on a CPU. It would find articles the encyclopedias' word search misses. Not built.
+- **Encyclopedias by meaning (3n):** wired in behind a dev toggle; the index is built by hand on this PC. Open: sections
+  that fit the model's 320 tokens; the 690 MB of memory; whether MDWiki should win medical questions; a build step where
+  the packs are made (or a download); real answers read by a person.
 - **Meaning check (3m):** the Hugging Face repo is not uploaded (the manifest's `revision` is empty, so setup downloads
   nothing yet; upload the two files of `derived/models/meaning-red`, put the commit id in the manifest). The runner's
   `--embed` mode is built and run on this Windows machine only: the Mac and Linux runner builds (same
