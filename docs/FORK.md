@@ -837,7 +837,7 @@ chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fi
 **Dev toggle: a vector index of the encyclopedias** (`LASTBOOK_WIKI_VECTORS=1`, off by default; `engine/wiki_vectors.py`).
 A prototype embedded every ~5,000-character section of MDWiki, Appropedia and Wikibooks with bge-small-en-v1.5 on the GPU,
 once (`.claude/drafts/encyclopedia/vectors/`: `build.py`, `bench_all.py`, `RESULTS.md`; the built index files are kept in
-`D:\LastbookData\derived\indexec-*` on this PC, not in git): 185,702 articles, 429,964 sections, 11.6 min
+`D:\LastbookData\derived\index\vec-*` on this PC, not in git): 185,702 articles, 429,964 sections, 11.6 min
 on an RTX 3080 Ti (about 6 h on a CPU), 330 MB as f16, files `derived/index/vec-<zim>-<size>-<mtime_ns>.{f16.npy,rows.json,meta.json}`
 (the prototype's `rows.npz` needs pickle; `tools/wiki_vectors_rows.py` rewrites it as JSON). With the toggle, `first_wiki`
 asks it first: the question (with bge's search instruction, as `retrieval.QUERY_PREFIX`) is embedded by the meaning check's
