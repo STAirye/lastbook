@@ -929,8 +929,9 @@ a test server and checks the amount (3j); it needs the model.
 - **Encyclopedias (3n):** shown apart from the library, by the keyword picker. The vector index stays a dev toggle and is
   not pursued (690 MB of memory for 3 files, growing with every pack, a GPU build per file). The encyclopedia group
   under the answer has been seen in the window once ("how do i purify water"); real answers still need reading by a person.
-- **Meaning check (3m):** the Hugging Face repo is not uploaded (the manifest's `revision` is empty, so setup downloads
-  nothing yet; upload the two files of `derived/models/meaning-red`, put the commit id in the manifest). The runner's
+- **Meaning check (3m):** published 2026-11-20 at `STAirye/lastbook-meaning-red`, commit 591b1b9 (pinned in the manifest;
+  a fresh download into an empty folder took 12.6 s and matched both SHA-256s). Setup's own download of it has not been
+  run end to end in the window. The runner's
   `--embed` mode is built and run on this Windows machine only: the Mac and Linux runner builds (same
   `lastbook_llm.cpp`, no script change expected) are untested, and so are the three packaged builds with the files
   bundled in `llm/meaning-red` and the Linux scan's allowance for the GGUF. The check adds one runner process of 66 MB

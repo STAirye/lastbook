@@ -1,7 +1,7 @@
 {
  "about": "fork: the meaning check's files (engine/meaning_red.py). Built by tools/meaning_red_model.py from BAAI/bge-small-en-v1.5 (MIT): a q8_0 GGUF made by the runner's llama.cpp tag (b12032), read by lastbook-llm --embed, and the centroids; published on Hugging Face at repo, revision (a commit id; empty until published, and then nothing is downloaded). Sizes and SHA-256 are checked before any use.",
  "repo": "STAirye/lastbook-meaning-red",
- "revision": "",
+ "revision": "591b1b97e8648a270bc82f1f2d2e335e401bda7d",
  "files": [
   {
    "name": "bge-small-en-v1.5-q8_0.gguf",
