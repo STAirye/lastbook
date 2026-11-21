@@ -982,7 +982,7 @@ a test server and checks the amount (3j); it needs the model.
   the local model (text only, no view_page) can read them. 3,474 PDF pages have no text at all and 108 documents are
   almost all scanned (none in health); pictures of tables on pages that do have text haven't been counted. Options:
   OCR when a pack is built, or page images for a local model that accepts them (not checked for E4B or the runner).
-- 3i was measured once per arm on 8 questions; blind list 4 (2026-11-21, 525 Spanish lines from a local model) then
+- 3i was measured once per arm on 8 questions; blind list 4 (2026-11-21, 525 Spanish lines from Qwen3.5-9B, run locally) then
   gave red recognised 27% as typed → 96% with the English search words, Spanish idioms flagged 7% → 19%, and found that
   untranslated replies passed as English, fixed in c7795b5 (half the words must be English words, else asked once more;
   44 of 45 red). Portuguese and French are detected but not measured. The UI itself is
