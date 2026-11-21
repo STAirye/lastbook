@@ -109,7 +109,7 @@ VERSIONINFO
   --add-data "$LLM;llm" --add-data "$OUT\\ship\\setup\\manifest-v1.json;setup" --add-data "$ROOTW\\engine\\setup\\roots.pem;engine\\setup" --collect-submodules engine.setup \
   --add-data "$ROOTW\\engine\\english_words.txt.gz;engine" --add-data "$ROOTW\\engine\\english_words.LICENSE.txt;engine" \
   --add-data "$ROOTW\\engine\\data\\meaning_red_manifest.json;engine\\data" --add-data "$ROOTW\\engine\\data\\meaning_red_LICENSE.txt;engine\\data" "${MEANING_DATA[@]}" \
-  --hidden-import server --hidden-import retrieval --hidden-import assistant --hidden-import llm_local --hidden-import engine.update \
+  --hidden-import server --hidden-import retrieval --hidden-import assistant --hidden-import llm_local --hidden-import engine.update --hidden-import engine.notes \
   --hidden-import engine.paths --hidden-import engine.library --hidden-import engine.saved_pages --hidden-import engine.quiet_onnx --hidden-import engine.meaning_red \
   --hidden-import bridge --hidden-import shell_windows --hidden-import clr --hidden-import _cffi_backend \
   --exclude-module shell_macos --exclude-module remote_storage --exclude-module tests \

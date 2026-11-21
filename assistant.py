@@ -95,9 +95,10 @@ def model_status():
 
 
 # --------------------------------------------------------------- retrieval --
-def _fts(q, limit=80, kinds=None, trace=None):
+def _fts(q, limit=80, kinds=None, trace=None, ids=None):
     """(doc_id, page, snippet) rows for q, best first. trace (a dict), when given, gets what engine/confidence.py reads:
-    the query's word groups, how many rows had every word, whether the any-word fallback ran, and each row's bm25."""
+    the query's word groups, how many rows had every word, whether the any-word fallback ran, and each row's bm25.
+    ids: a JSON list from S.search_ids, so the LIMIT counts only the rows the caller can use."""
     info = {}
     content, groups = S.query_groups(q, info)
     if trace is not None:
@@ -106,7 +107,7 @@ def _fts(q, limit=80, kinds=None, trace=None):
         return []
     # fork: long HTML pages are searched in their sections (engine/sections.py)
     run = lambda m: sections.query(S.library.DB, S.kind_of, "doc_id,page,snippet(pages,6,'','',' … ',40),bm25(pages,0,6,1,1,0,0,1)",
-                                   'bm25(pages,0,6,1,1,0,0,1)', m, limit)
+                                   'bm25(pages,0,6,1,1,0,0,1)', m, limit, ids)
     rows = []
     try:
         # fork: as server.find, with a retry without a phrase's helper words before any of the words (docs/FORK.md 3h)
@@ -137,7 +138,9 @@ def hybrid(q, k=8, kind='any', doc=None, trace=None):
     if doc:
         allowed = (lambda base: (lambda d: d == doc and base(d)))(allowed)
     kw = []
-    for doc_id, page, snip in _fts(q, 120, trace=kwt):
+    # Videos only, in the query itself (as S.find does): a broad word would fill the LIMIT with manual pages (upstream 1.1.14).
+    ids = S.search_ids(lambda r: r['kind'] == 'video' and allowed(r['id'])) if kind == 'video' else None
+    for doc_id, page, snip in _fts(q, 120, trace=kwt, ids=ids):
         r = cat['by_id'].get(doc_id)
         if not r:
             continue

@@ -175,26 +175,31 @@ def sectioned(doc_id):
     return v[1] if v else 0
 
 
-def query(main_db, kind_of, select, order, match, limit):
+def query(main_db, kind_of, select, order, match, limit, ids=None):
     """Rows of  SELECT <select> FROM pages WHERE pages MATCH ? ORDER BY <order> LIMIT ?  over the library index, with
     the rows of long HTML pages replaced by their sections (whose page is the section number).
 
     The two tables are ranked by `order` (a bm25 call) each and merged by it. bm25 scores from two FTS5 tables are only
     roughly comparable (each uses its own document count and average length), so the merge is approximate; it measured
-    well enough (docs/FORK.md). Raises sqlite3.OperationalError for a bad MATCH, as the plain query does."""
+    well enough (docs/FORK.md). Raises sqlite3.OperationalError for a bad MATCH, as the plain query does.
+
+    ids (a JSON list from server.search_ids), when given, keeps only those documents in the query itself, so the LIMIT
+    counts only rows the caller can use (upstream 1.1.14: a broad word filled the LIMIT with manual pages, and the
+    Videos tab found nothing)."""
     path = ensure(main_db, kind_of)
     skip = _state['skip'] if path else ()
     where = f" AND rowid NOT IN ({','.join(str(int(r)) for r in skip)})" if skip else ''
+    only, args = ('', ()) if ids is None else (' AND doc_id IN (SELECT value FROM json_each(?))', (ids,))
     sql = f'SELECT {select}, {order} FROM pages WHERE pages MATCH ?{{w}} ORDER BY {order} LIMIT ?'
     con = sqlite3.connect(ro_uri(main_db), uri=True)
     try:
-        rows = con.execute(sql.format(w=where), (match, limit)).fetchall()
+        rows = con.execute(sql.format(w=where + only), (match,) + args + (limit,)).fetchall()
     finally:
         con.close()
     if path:
         con = sqlite3.connect(ro_uri(path), uri=True)
         try:
-            rows += con.execute(sql.format(w=''), (match, limit)).fetchall()
+            rows += con.execute(sql.format(w=only), (match,) + args + (limit,)).fetchall()
         finally:
             con.close()
         rows.sort(key=lambda r: r[-1])
