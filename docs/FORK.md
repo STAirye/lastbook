@@ -423,7 +423,7 @@ Hesperian's "Water and Sanitation: Keys to Staying Healthy" p. 23 and "Protectin
 `ForkLocalAI.test_tables_are_read_by_row`, `test_tables_that_cannot_be_split_stay_as_printed` and
 `test_page_body_caps_and_switch` cover it, with both printings of the bleach table.
 
-### 3k. Search as triage: long pages, typos, conversations
+### 3k. The triage-based search engine: long pages, typos, conversations
 
 Measured on a test set of 362 invented questions over 159 topics (emergency medicine, firefighting, disasters, a little
 security, everyday tasks): 253 clean questions coloured red / yellow / green by urgency, 22 counterexamples ("brake
