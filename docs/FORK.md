@@ -916,9 +916,9 @@ a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
-- **Encyclopedias by meaning (3n):** wired in behind a dev toggle; the index is built by hand on this PC. Open: sections
-  that fit the model's 320 tokens; the 690 MB of memory; whether MDWiki should win medical questions; a build step where
-  the packs are made (or a download); real answers read by a person.
+- **Encyclopedias (3n):** shown apart from the library, by the keyword picker. The vector index stays a dev toggle and is
+  not pursued (690 MB of memory for 3 files, growing with every pack, a GPU build per file). The encyclopedia group
+  under the answer has been seen in the window once ("how do i purify water"); real answers still need reading by a person.
 - **Meaning check (3m):** the Hugging Face repo is not uploaded (the manifest's `revision` is empty, so setup downloads
   nothing yet; upload the two files of `derived/models/meaning-red`, put the commit id in the manifest). The runner's
   `--embed` mode is built and run on this Windows machine only: the Mac and Linux runner builds (same
