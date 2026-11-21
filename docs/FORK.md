@@ -709,7 +709,8 @@ prototype in `.claude/drafts/meaning/` (its `RESULTS.md` has the method and how 
   is tuned for sensitivity and accepts low specificity, and the sensitive-but-weak meaning check is only ever added to
   the words, the way a sensitive first test is followed by a specific one. The reference is trauma field triage: the
   American College of Surgeons Committee on Trauma's goal is under 5% undertriage (*Resources for Optimal Care of the
-  Injured Patient*, 2014), with 25–35% overtriage commonly accepted (some sources cite 30–50%). On the held-out lists
+  Injured Patient*, 2014), and "Most agree that an acceptable percentage of overtriage is in the range of 25 to 35
+  percent" (same, chapter 3, p. 28). On the held-out lists
   below, words OR meaning undertriage 0.6% / 2.4% / 5.5% of red lines (the meaning alone 13–19%: not a screen on its
   own) and flag 43% / 60% / 68% of green ones. The green lines are hard look-alikes and mild symptoms written to trip it,
   not a random sample, so real overtriage is lower; it has not been measured on real questions.
