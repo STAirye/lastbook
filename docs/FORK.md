@@ -699,6 +699,16 @@ prototype in `.claude/drafts/meaning/` (its `RESULTS.md` has the method and how 
   check. It can make a question urgent, never take that away; an urgent question's pages are never held back, so a
   false flag costs little. `turn_hits` puts `info['meaning']` (`score`, `fired`, `state`, and what the words said) in
   the turn, and the `local AI confidence:` log line (`LASTBOOK_AI_DEBUG=1`) carries it.
+- **Why it is tuned this way: urgency is a screening step.** The whole urgency label (3l's words, this check, the
+  buttons) is built like a screening test, not a diagnosis: a missed urgent question costs far more than a false alarm,
+  and a false alarm is cheap (the pages are shown anyway, with emergency buttons; nothing is withheld or blocked). So it
+  is tuned for sensitivity and accepts low specificity, and the sensitive-but-weak meaning check is only ever added to
+  the words, the way a sensitive first test is followed by a specific one. The reference is trauma field triage: the
+  American College of Surgeons Committee on Trauma's goal is under 5% undertriage (*Resources for Optimal Care of the
+  Injured Patient*, 2014), with 25–35% overtriage commonly accepted (some sources cite 30–50%). On the held-out lists
+  below, words OR meaning undertriage 0.6% / 2.4% / 5.5% of red lines (the meaning alone 13–19%: not a screen on its
+  own) and flag 43% / 60% / 68% of green ones. The green lines are hard look-alikes and mild symptoms written to trip it,
+  not a random sample, so real overtriage is lower; it has not been measured on real questions.
 - **The runner process:** `server.init` calls `meaning_red.start()`, which starts a thread and returns at once (0.2 ms).
   The thread checks the files' SHA-256, starts the runner (`llm_local.runner_path()`, tied to the app with the same job
   object on Windows; on a Mac or Linux it leaves when its input closes), waits for `ready` (it must say `"embed":true`:
