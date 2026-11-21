@@ -936,10 +936,15 @@ a test server and checks the amount (3j); it needs the model.
   under the answer has been seen in the window once ("how do i purify water"); real answers still need reading by a person.
 - **Meaning check (3m):** published 2026-11-20 at `STAirye/lastbook-meaning-red`, commit 591b1b9 (pinned in the manifest;
   a fresh download into an empty folder took 12.6 s and matched both SHA-256s). Setup's own download of it has not been
-  run end to end in the window. The runner's
-  `--embed` mode is built and run on this Windows machine only: the Mac and Linux runner builds (same
-  `lastbook_llm.cpp`, no script change expected) are untested, and so are the three packaged builds with the files
-  bundled in `llm/meaning-red` and the Linux scan's allowance for the GGUF. The check adds one runner process of 66 MB
+  run end to end in the window. **Linux, 2026-11-21** (Docker, `debian:13-slim`, from a clean clone of bc4c782):
+  `build_llm_linux.sh` builds the runner unchanged (about 5 min on 16 threads); its `--embed` mode loads the GGUF
+  (`"embed":true`) and returns unit vectors of 384. `build_app_linux.sh` builds `Lastbook_1.1.14_debian13_amd64.deb`
+  (31 MB, runner included, scan passed; the packs list taken from an installed 1.1.14's `setup/manifest-v1.json`, since
+  `derived/release/` is upstream's), and `smoke_deb.sh` passes in a fresh container: installs, opens with a library and
+  with none (setup), plays a video, one copy only, no listening socket, quits, removes cleanly. The clean clone had no
+  `derived/models/meaning-red`, so the GGUF and centroids were not bundled and the log says "meaning check: off, the
+  urgent words alone decide": the fallback works; the bundled case and the Linux scan's allowance for the GGUF are
+  still unchecked, and so is the Mac. The check adds one runner process of 66 MB
   beside the chat one. The threshold was set on the examples only; list 2's and 3's false flags (children's and old people's
   everyday questions, idioms the examples lack) show where the examples are thin, and adding examples for them now would be
   tuning on the test lists, so a fresh list is needed before the numbers are trusted further. English only (a question's
@@ -982,8 +987,7 @@ a test server and checks the amount (3j); it needs the model.
   copy of the library has been through it. The conversation buttons and the reader opening a section haven't been seen in the window. Additions and
   messages after noise are weaker than 3g alone. 8 red questions still get no useful page (a severed finger, someone
   trapped under a wall, a mudslide). The iPad port has no typo correction. `packaging/linux/build_app_linux.sh` now
-  copies `page_tables.py`, `sections.py` and `typos.py` (the first was missing since 3j); the Linux build hasn't been
-  run. The classifier and the test set were written together, so its scores are
+  copies `page_tables.py`, `sections.py` and `typos.py` (the first was missing since 3j); the Linux build runs (3m, Open). The classifier and the test set were written together, so its scores are
   optimistic. The confidence buttons (3l), their smaller everyday style and the request to say more haven't been seen in the
   window; everyday questions get the emergency set ("Not breathing", "Heavy bleeding" …), only smaller and only below
   0.30, and the wide urgent-word list
