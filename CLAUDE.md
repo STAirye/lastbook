@@ -16,5 +16,10 @@ why, what was measured and what is open. Upstream's rules in [CONTRIBUTING.md](C
   - Don't rely on `PYTHONUTF8=1` or `python -X utf8`: other computers don't have them.
   - Suspect this first on any `UnicodeDecodeError` or `'charmap'` error. To check a fix, run the test with
     `PYTHONUTF8=0`.
+- **Working scripts are archived when their work is done.** Repro scripts, measuring harnesses and notes live in the
+  untracked `.claude/drafts/` (or a session's scratchpad) while the work is open. When the branch, worktree or session
+  that made them is finished, copy them as they were into `docs/evanesced/<batch>/` and write the batch's section in
+  [docs/evanesced/README.md](docs/evanesced/README.md), which has the rules (no binaries or models, personal paths
+  replaced, never deleted). Pending batches are listed at the end of `.claude/drafts/TODO.md`.
 - **Tests on Windows:** run the test files one at a time (`python -B -m unittest app.tests.<file>`). Run all at
   once, some files change shared state and others then fail. `test_battery` and `test_run_source_linux` only pass on Linux.
