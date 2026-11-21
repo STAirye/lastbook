@@ -134,7 +134,9 @@ EXTRA_ENGLISH = set('lol lmao omg pls plz thx idk ok okay yeah yep nope nah gonn
                     'mum mums mam nan nana nans grandad grandads granny nappy nappies telly bloke paracetamol ibuprofen '
                     'tylenol advil panadol nurofen calpol xanax valium epipen inhaler inhalers cpr aed defib '
                     # fork: slang, brand and medical words the list lacks, that the corrector bent into another word
-                    # ("unalive" -> unlike, "fortnite" -> fortunate, "sniffly" -> stiffly, "stooling" -> stooping)
+                    # ("unalive" -> unlike, "fortnite" -> fortunate, "sniffly" -> stiffly, "stooling" -> stooping).
+                    # All found in independent test list 2's messages (docs/FORK.md 3k): that list is no longer blind
+                    # for them, so its typo numbers after this change are in-sample.
                     'unalive unalived tbh redback redbacks rennie rennies fortnite sniffly gurgly fluey konked gouching '
                     'doms stooling'.split())
 BRITISH = (('our', 'or'), ('isation', 'ization'), ('ise', 'ize'), ('yse', 'yze'), ('ae', 'e'), ('oe', 'e'), ('tre', 'ter'),
