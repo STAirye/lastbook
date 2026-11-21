@@ -2,7 +2,7 @@
 
 Upstream (1.1.13) sends the first INITIAL_CHARS (2,000) characters of the top 3 encyclopedia hits for the raw question.
 Measured on the fork's 253 clean test questions over the MDWiki, Appropedia and Wikibooks files
-(.claude/drafts/encyclopedia/): the median article is 28,000 characters, 136 of 752 are over 100,000, and whole books
+(docs/evanesced/encyclopedias-3n/): the median article is 28,000 characters, 136 of 752 are over 100,000, and whole books
 saved as one article ("Mirad Grammar/print version", 1.35 MB; "US History/Print version") came first for "my toddler
 drank bleach" and "my eyes sting from wildfire smoke", as whole books saved as one web page did in library search
 (engine/sections.py). And the words a useful answer needs were in the first 2,000 characters for only 259 of the 622

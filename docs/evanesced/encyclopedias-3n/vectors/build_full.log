@@ -1,0 +1,22 @@
+entries 473338
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3738.84it/s]
+5007 articles, 16026 sections, 31 s
+10021 articles, 30317 sections, 59 s
+15040 articles, 48507 sections, 96 s
+20051 articles, 63709 sections, 124 s
+25070 articles, 79291 sections, 154 s
+30074 articles, 94557 sections, 175 s
+35099 articles, 109784 sections, 203 s
+40108 articles, 124195 sections, 232 s
+45110 articles, 139053 sections, 255 s
+50116 articles, 152731 sections, 277 s
+55130 articles, 166769 sections, 305 s
+60142 articles, 181518 sections, 327 s
+65163 articles, 193920 sections, 348 s
+70163 articles, 210223 sections, 373 s
+{"zim": "mdwiki_en_all_maxi_2025-11.zim", "size": 2302838768, "mtime_ns": 1792967166000000000, "entries": 473338, "redirects": 292097, "skipped": 109880, "articles": 71361, "sections": 213787, "model": "bge-small-en-v1.5", "dim": 384, "device": "cuda", "build_s": 384.8, "embed_s": 356.6, "limit": 0}
+f16.npy 164188544
+i8.npy 82094336
+rows.npz 5056661
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3322.81it/s]
+{"cpu_sample": 500, "cpu_s": 24.4, "cpu_ms_per_section": 48.9, "est_cpu_full_h": 2.9}

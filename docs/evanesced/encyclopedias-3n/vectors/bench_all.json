@@ -1,0 +1,10104 @@
+{
+ "counts": {
+  "mdwiki_en_all_maxi_2025-11.zim": {
+   "articles": 71361,
+   "sections": 213787
+  },
+  "appropedia_en_all_maxi_2026-02.zim": {
+   "articles": 13956,
+   "sections": 26395
+  },
+  "wikibooks_en_all_maxi_2026-04.zim": {
+   "articles": 100385,
+   "sections": 189782
+  }
+ },
+ "ram_MB": {
+  "f32_total": 629.8,
+  "f16_total": 314.9,
+  "f16_chunk_buffer": 73.2,
+  "f32_each": {
+   "mdwiki_en_all_maxi_2025-11.zim": 313.2,
+   "appropedia_en_all_maxi_2026-02.zim": 38.7,
+   "wikibooks_en_all_maxi_2026-04.zim": 278.0
+  }
+ },
+ "summary": {
+  "nonred": {
+   "n": 122,
+   "keyword": {
+    "first_useful": 85,
+    "any3_useful": 108,
+    "none": 0,
+    "top_article_from": {
+     "wikibooks": 32,
+     "mdwiki": 44,
+     "appropedia": 46
+    }
+   },
+   "vector": {
+    "first_useful": 102,
+    "any3_useful": 113,
+    "none": 0,
+    "top_article_from": {
+     "wikibooks": 61,
+     "mdwiki": 33,
+     "appropedia": 28
+    }
+   },
+   "keyword_ms_median": 444,
+   "keyword_ms_p90": 736,
+   "vector_f32_ms_median": 35.8,
+   "vector_f32_ms_p90": 37.5
+  },
+  "red": {
+   "n": 131,
+   "keyword": {
+    "first_useful": 61,
+    "any3_useful": 89,
+    "none": 5,
+    "top_article_from": {
+     "mdwiki": 65,
+     "appropedia": 32,
+     "wikibooks": 29
+    }
+   },
+   "vector": {
+    "first_useful": 92,
+    "any3_useful": 111,
+    "none": 0,
+    "top_article_from": {
+     "wikibooks": 68,
+     "mdwiki": 46,
+     "appropedia": 17
+    }
+   },
+   "keyword_ms_median": 514,
+   "keyword_ms_p90": 883,
+   "vector_f32_ms_median": 35.6,
+   "vector_f32_ms_p90": 36.9
+  }
+ },
+ "query_ms": {
+  "embed_median": 9.0,
+  "scan3_f32_median": 26.6,
+  "scan3_f32_p90": 27.4,
+  "scan3_f16_chunked_median": 416.0,
+  "scan3_f16_chunked_p90": 432.5,
+  "n_f16": 100
+ },
+ "rows": [
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "i burned my hand on the camp stove",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills II",
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills III (North American Division)",
+    "Standing Rock Technologies"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "i burned my hand on the camp stove",
+   "titles": [
+    "Do-It-Yourself/Campfire",
+    "Woodstoves",
+    "Adventist Youth Honors Answer Book/Recreation/Camp Craft"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "burned my hand trying to light a fire",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Adventist Youth Honors Answer Book/Camping/Fire/Flint and steel",
+    "Papasan chair solar cooker"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "burned my hand trying to light a fire",
+   "titles": [
+    "Electrical burn",
+    "Adventist Youth Honors Answer Book/Recreation/Pioneering",
+    "Ethnomedicine/Home Remedies/A - C"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "i burnt my fingers lighting the campfire",
+   "titles": [
+    "When It Hits the Fan/Personal Strategies and Know-how/Fire",
+    "When It Hits the Fan/Personal Strategies and Know-how"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "i burnt my fingers lighting the campfire",
+   "titles": [
+    "Do-It-Yourself/Campfire",
+    "Adventist Youth Honors Answer Book/Recreation/Camp Craft",
+    "Electrical burn"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "is it safe to put water on a burn",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camp Safety",
+    "Fireless cookers",
+    "Are You Ready?/Chemical Threats"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "is it safe to put water on a burn",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Chemical burn",
+    "Adventist Youth Honors Answer Book/First aid/Burns",
+    "Adventist Youth Honors Answer Book/Camping/Safe water"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how do i treat water blisters on a burn",
+   "titles": [
+    "Burn",
+    "Blister",
+    "First Aid/Burns"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how do i treat water blisters on a burn",
+   "titles": [
+    "Scouting/BSA/First Aid Merit Badge",
+    "Ethnomedicine/Home Remedies/A - C",
+    "Adventist Youth Honors Answer Book/First aid/Burns"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my kid fell into the fire while we were making a fire",
+   "titles": [
+    "Mario Adventure/Story",
+    "Trees, woodland and forest news",
+    "Denn\u014d Senshi Porygon"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my kid fell into the fire while we were making a fire",
+   "titles": [
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Adventist Youth Honors Answer Book/First aid/Clothes on fire",
+    "Three stone cooking fire"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "cut my finger with a knife",
+   "titles": [
+    "Cookbook:Knife Skills",
+    "Back Yard and Commercial Rabbit Production/Simplified tanning",
+    "White Oak Baskets"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "cut my finger with a knife",
+   "titles": [
+    "Paper cut",
+    "Adventist Adventurer Awards and Answers/Finger Play",
+    "Refugee Phrasebook/Austria/Germany/Switzerland: German, English, French, Bos/Cro/Ser, Kurdish, Turkish, Bangla, Urdu, Dari, Arabic"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "deep cut on my hand, does it need stitches",
+   "titles": [
+    "Vertical mattress stitch",
+    "Ozark Home Made Toys",
+    "Stanley and Kristi's eco-friendly cardboard furniture"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "deep cut on my hand, does it need stitches",
+   "titles": [
+    "Metaphysical Arts and Crafts/Crystal glove holder",
+    "Hand stitching",
+    "Paper cut"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "twisted my ankle hiking",
+   "titles": [
+    "Mirad Thesaurus/Human Body",
+    "A Guide to the GRE/Vocabulary List 7",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "twisted my ankle hiking",
+   "titles": [
+    "NREMT Skillset/Sager Traction Splint Application",
+    "Parkour/Basic Moves/Landing",
+    "Adventist Youth Honors Answer Book/Recreation/Abseiling"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "sprained wrist swelling",
+   "titles": [
+    "Sprain",
+    "Wrist pain",
+    "NREMT Skillset/Long Bone Splinting"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "sprained wrist swelling",
+   "titles": [
+    "Wrist pain",
+    "Scapholunate ligament injury",
+    "Wrist osteoarthritis"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "i think my arm is broken",
+   "titles": [
+    "New Public Thinking/The year punk broke - Chris T-T",
+    "Need Mapping",
+    "Environment quality UK news"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "i think my arm is broken",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Adventist Youth Honors Answer Book/First aid/Upper arm splint",
+    "Adventist Youth Honors Answer Book/First aid/Forearm splint"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "broken leg no ambulance",
+   "titles": [
+    "NREMT Skillset/Sager Traction Splint Application",
+    "24 Hours in A&E",
+    "Orthopedic boot"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "broken leg no ambulance",
+   "titles": [
+    "Ambulance",
+    "Nontransporting EMS vehicle",
+    "Stretcher"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "shoulder popped out",
+   "titles": [
+    "Projects with Bart",
+    "Snapping hip syndrome",
+    "Bursitis"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "shoulder popped out",
+   "titles": [
+    "Dislocated shoulder",
+    "Shoulder problems",
+    "SLAP tear"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "nosebleed will not stop",
+   "titles": [
+    "Nosebleed",
+    "NREMT Skillset/Nasopharyngeal Airway Placement",
+    "Horsetail"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "nosebleed will not stop",
+   "titles": [
+    "Ethnomedicine/Home Remedies/A - C",
+    "Refugee Phrasebook/Greek, French, Arabic, Dari/Farsi, Kurdish (Kurmanji), Urdu, Bangla, Bos/Cro/Ser, Macedonian, Hungarian, English",
+    "Human nose"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "kid has a nose bleed",
+   "titles": [
+    "Asakk\u016b mar\u1e63\u016btu",
+    "Adventist Adventurer Awards and Answers/First Aid Helper",
+    "Ethnomedicine/Home Remedies/A - C"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "kid has a nose bleed",
+   "titles": [
+    "Nosebleed",
+    "Nasal foreign body",
+    "Refugee Phrasebook/Workshop Test Chapter 04b - AR"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "tooth knocked out",
+   "titles": [
+    "Tooth replantation",
+    "The Adventures of Ali and His Gang vs. Mr. Tooth Decay",
+    "Dental avulsion"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "tooth knocked out",
+   "titles": [
+    "Tooth impaction",
+    "Dental avulsion",
+    "Tooth hemisection"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "bad toothache and swollen face",
+   "titles": [
+    "Pericoronitis",
+    "Toothache",
+    "Iranian traditional medicine"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "bad toothache and swollen face",
+   "titles": [
+    "Toothache",
+    "Pericoronitis",
+    "Dental emergency"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "stung by a bee",
+   "titles": [
+    "Practical Action/Beekeeping",
+    "Bees and Their Management",
+    "Bee sting"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "stung by a bee",
+   "titles": [
+    "Bee sting",
+    "Insect sting allergy",
+    "Insect bites and stings"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "wasp sting swelling",
+   "titles": [
+    "Bee sting",
+    "Arthropod bites and stings",
+    "Insect bites and stings"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "wasp sting swelling",
+   "titles": [
+    "Arthropod bites and stings",
+    "Insect bites and stings",
+    "Bee sting"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "scorpion sting on my foot",
+   "titles": [
+    "Stingray injury",
+    "Millipede burn",
+    "Insects in medicine"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "scorpion sting on my foot",
+   "titles": [
+    "Scorpion sting",
+    "Arthropod bites and stings",
+    "Bed bug"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "tick on my leg how to remove",
+   "titles": [
+    "Colorado tick fever",
+    "Tick paralysis",
+    "Tick-borne disease"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "tick on my leg how to remove",
+   "titles": [
+    "First Aid/Wilderness First Aid",
+    "Adventist Youth Honors Answer Book/Nature/Dog Care and Training",
+    "Colorado tick fever"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "spider bite turning red",
+   "titles": [
+    "Wikijunior:Bugs/Mexican Red-Kneed Tarantula",
+    "Wound Man",
+    "Snakebite"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "spider bite turning red",
+   "titles": [
+    "Spider bite",
+    "List of medically significant spider bites",
+    "Pathophysiology of spider bites"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "stung by a jellyfish",
+   "titles": [
+    "Irukandji syndrome",
+    "Portuguese man o' war",
+    "Ethnomedicine/Home Remedies/J - L"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "stung by a jellyfish",
+   "titles": [
+    "Jellyfish dermatitis",
+    "Ethnomedicine/Home Remedies/J - L",
+    "List of ICD-9 codes E and V codes: external causes of injury and supplemental classification"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "dog bit my hand, small wound",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Nature/Small Mammal Pets",
+    "Snakebite",
+    "Tooth"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "dog bit my hand, small wound",
+   "titles": [
+    "Animal bite",
+    "Dog bite",
+    "Basic Writing/Creative Writing"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "a stray dog bit me, rabies?",
+   "titles": [
+    "Prevalence of rabies",
+    "Dog bite",
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "a stray dog bit me, rabies?",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Animal bites",
+    "Dog bite",
+    "Rabies in animals"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "rash from poison ivy",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Poison ivy",
+    "Organic Horticulture in the Mid-Atlantic/Poison ivy",
+    "List of poisonous plants"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "rash from poison ivy",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Poison ivy",
+    "Hives",
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership - Advanced"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "itchy rash after touching a plant",
+   "titles": [
+    "Contact dermatitis",
+    "Chronic actinic dermatitis",
+    "Allergies in children"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "itchy rash after touching a plant",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Poison ivy",
+    "Rash",
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership - Advanced"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "drank creek water and now i have diarrhea",
+   "titles": [
+    "Professionalism/DuPont, C8, and Parkersburg, West Virginia",
+    "Native American ethnobotany"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "drank creek water and now i have diarrhea",
+   "titles": [
+    "Water intoxication",
+    "Emergency Medicine/Diarrhea",
+    "Wilderness-acquired diarrhea"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "diarrhea for two days",
+   "titles": [
+    "Porcine epidemic diarrhoea",
+    "Wilderness-acquired diarrhea",
+    "Travelers' diarrhea"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "diarrhea for two days",
+   "titles": [
+    "Emergency Medicine/Diarrhea",
+    "Wilderness-acquired diarrhea",
+    "Travelers' diarrhea"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how do i treat water poisoning",
+   "titles": [
+    "Food poisoning and its prevention",
+    "Practical Action/Food poisoning and its prevention",
+    "Arcata Marsh/Tertiary treatment"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how do i treat water poisoning",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Adventist Youth Honors Answer Book/First aid/Poison",
+    "First Aid/Poisoning"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my child keeps throwing up",
+   "titles": [
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Beverages",
+    "El Nuevo Sol Learning Garden",
+    "Infant food safety"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my child keeps throwing up",
+   "titles": [
+    "Community Health Worker Manual/Diarrhea/Treatment Overview/First Principle -- Keep Giving Liquids/ORS/Feeding the child",
+    "Vomiting",
+    "Refugee Phrasebook/Greece March 2016-a"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my child has a fever",
+   "titles": [
+    "Childhood immunizations in the United States",
+    "Fever",
+    "Information for parents about common Paediatric Surgical conditions"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my child has a fever",
+   "titles": [
+    "Refugee Phrasebook/Arabic, Urdu, Dari, Greek, Bangla, Kurdish, French, Language of FYROM, English",
+    "Refugee Phrasebook/Arabic, Urdu, Dari, Greek, Bangla, Kurdish, French, Macedonian, English",
+    "Refugee Phrasebook/Greece March 2016-a"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to bring down a fever",
+   "titles": [
+    "Staten Island Quarantine War",
+    "Contingent contagionism",
+    "What You Should Know About Medicines/Antipyretic"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to bring down a fever",
+   "titles": [
+    "Ethnomedicine/Home Remedies/A - C",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Outdoor Survival/Water"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "signs of dehydration in a baby",
+   "titles": [
+    "Solar and Energy Conserving Food Technologies/The use of dried foods",
+    "Colostomy in Newborns/Protocol for Management of a Neonate Requiring a Colostomy",
+    "Peace Corps appropriate community technology/Pedal/Treadle Power"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "signs of dehydration in a baby",
+   "titles": [
+    "Emergency Medicine/Dehydration",
+    "Community Health Worker Manual/Diarrhea/Classification",
+    "Congenital syphilis"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "baby very sleepy after diarrhea all day",
+   "titles": [
+    "Baby colic",
+    "Mitotane",
+    "Tiagabine"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "baby very sleepy after diarrhea all day",
+   "titles": [
+    "Chronic diarrhea of infancy",
+    "Community Health Worker Manual/Diarrhea",
+    "Community Health Worker Manual/Diarrhea/Classification"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "fingers are white and numb from the cold",
+   "titles": [
+    "Vibration white finger",
+    "Raynaud syndrome",
+    "Frostbite"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "fingers are white and numb from the cold",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "White hand sign",
+    "Frostbite"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "frostbite on toes",
+   "titles": [
+    "Frostbite",
+    "Adventist Youth Honors Answer Book/First aid/Frostbite",
+    "Are You Ready?/Winter Storms and Extreme Cold"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "frostbite on toes",
+   "titles": [
+    "Frostbite",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard",
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "light a fire to keep him warm with hypothermia",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking",
+    "Suprachiasmatic nucleus"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "light a fire to keep him warm with hypothermia",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Snowshoeing",
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "shivering and cold after getting wet",
+   "titles": [
+    "Natural and Cultural History of North-East Australia's Wet Tropical Forests",
+    "Luigi's Mansion/Ghosts",
+    "Are You Ready?/Winter Storms and Extreme Cold"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "shivering and cold after getting wet",
+   "titles": [
+    "Shivering",
+    "Adventist Youth Honors Answer Book/Recreation/Snowshoeing",
+    "Are You Ready?/Extreme heat"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "dizzy and sweating a lot in the heat",
+   "titles": [
+    "Occupational heat stress",
+    "Healthy eating habits/Sports drinks: are they really doing us good?",
+    "Human Physiology/Homeostasis"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "dizzy and sweating a lot in the heat",
+   "titles": [
+    "Heat syncope",
+    "Adventist Youth Honors Answer Book/First aid/Heat exhaustion",
+    "A-level Applied Science/Energy Transfer Systems/Body Temperature"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "heat exhaustion treatment",
+   "titles": [
+    "Heat exhaustion",
+    "Are You Ready?/Extreme heat",
+    "Heat illness"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "heat exhaustion treatment",
+   "titles": [
+    "Heat therapy",
+    "First Aid/Heat-Related Illness & Injury",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "bad sunburn with blisters",
+   "titles": [
+    "Scouting/BSA/Camping Merit Badge",
+    "Original environment rehabilitation manual 3.369/Protective Void Space:",
+    "Occupational disease"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "bad sunburn with blisters",
+   "titles": [
+    "Sunburn",
+    "Adventist Youth Honors Answer Book/First aid/Sunburn",
+    "Blister"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "splinter deep in my finger",
+   "titles": [
+    "Splinter",
+    "Drill Press (Shop Fox W1848):MOST",
+    "Ross' syndrome"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "splinter deep in my finger",
+   "titles": [
+    "Splinter",
+    "Adventist Adventurer Awards and Answers/Finger Play",
+    "Splinter hemorrhage"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "something in my eye",
+   "titles": [
+    "Themes in Literature/Belonging and Exile/Sights for Sore Eyes",
+    "Blender 3D: Noob to Pro/Creating Pixar-looking eyes in Blender",
+    "How to make Comics"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "something in my eye",
+   "titles": [
+    "Instrument myopia",
+    "Iris (anatomy)",
+    "Pupil"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "dust in my eye will not come out",
+   "titles": [
+    "Eye protection",
+    "Wikijunior:Solar System/Comets",
+    "Practical Action/Drying of chillies"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "dust in my eye will not come out",
+   "titles": [
+    "First Aid/Head & Facial Injuries",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard",
+    "Christmas eye"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my kid has an earache",
+   "titles": [
+    "OMS Manual/Chapter 5"
+   ],
+   "zims": [
+    "wikibooks"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my kid has an earache",
+   "titles": [
+    "Teaching Elementary School Health Education/Personal Health and Physical Activity/Ear Care",
+    "Auditory processing disorder",
+    "Tympanosclerosis"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "the cut is red, hot and has pus",
+   "titles": [
+    "Ingrown nail",
+    "English in Use/Orthography",
+    "Boil"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "the cut is red, hot and has pus",
+   "titles": [
+    "Tolocar/Hot Wire Cutter",
+    "Down'n'dirty Blacksmithing/Hot Cutting",
+    "Punjabi/Dictionary/\u0a17"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "wound not healing after two weeks",
+   "titles": [
+    "Wound healing",
+    "WACS Training Modules/Skin Grafting",
+    "Tibial Fracture Fixation/Knowledge Review/Follow-Up Care"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "wound not healing after two weeks",
+   "titles": [
+    "Quiz: When the Wound is Not as Expected - ECSACONM",
+    "Wound healing",
+    "Chronic wound"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "having a panic attack",
+   "titles": [
+    "Panic attack",
+    "Psychiatric Disorders/Anxiety disorders/Panic attack",
+    "Panic disorder"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "having a panic attack",
+   "titles": [
+    "Psychiatric Disorders/Anxiety disorders/Panic attack",
+    "Panic attack",
+    "Introduction to Psychology/Psychological Disorders"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "i can not stop shaking after the storm",
+   "titles": [
+    "Final Fantasy VI/Rages",
+    "Muggles' Guide to Harry Potter/Books/Philosopher's Stone/Chapter 3",
+    "Loam Plaster (How to make it)"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "i can not stop shaking after the storm",
+   "titles": [
+    "Handbook of the Swatow Vernacular modernized/Exercises (2)",
+    "Are You Ready?/Earthquake preparedness",
+    "When It Hits the Fan/Specific Calamities"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my kids are scared after the earthquake",
+   "titles": [
+    "Dreamer",
+    "IFTC Jump into English Textbook - Teacher's Manual",
+    "MMR vaccine and autism"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my kids are scared after the earthquake",
+   "titles": [
+    "Are You Ready?/Recovering from Disaster",
+    "High School Earth Science/Staying Safe in Earthquakes",
+    "Children in emergencies and conflicts"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to cope after the disaster",
+   "titles": [
+    "Are You Ready?/Recovering from Disaster",
+    "Are You Ready?/Practice and Maintain Your Disaster Safety Plan",
+    "SimCity and Urban Planning/Natural Disasters"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to cope after the disaster",
+   "titles": [
+    "Are You Ready?/Recovering from Disaster",
+    "Are You Ready?/Earthquake preparedness",
+    "How to survive an earthquake"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "kid bumped his head, he seems fine",
+   "titles": [
+    "Hair",
+    "Learning disability",
+    "Child development stages"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "kid bumped his head, he seems fine",
+   "titles": [
+    "Pediatric concussion",
+    "Panayiotopoulos syndrome",
+    "Plagiocephaly"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my eyes sting from wildfire smoke",
+   "titles": [
+    "Chemical warfare"
+   ],
+   "zims": [
+    "mdwiki"
+   ],
+   "ok": [
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my eyes sting from wildfire smoke",
+   "titles": [
+    "Smoke",
+    "Adventist Youth Honors Answer Book/Plain and tundra leadership skills",
+    "Outdoor Survival/Signals"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "can is bulging, is it safe to eat",
+   "titles": [
+    "Botulism",
+    "Healthy eating habits/Creating Quick and Easy Meals using Common Pantry Items",
+    "Traditional Field Crops/Pest and disease control"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "can is bulging, is it safe to eat",
+   "titles": [
+    "Cookbook:Canning",
+    "Willow feeder",
+    "International Service Learning Study Abroad Handbook/Health"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how can i know if my can food has gone bad",
+   "titles": [
+    "Soda drinks",
+    "The Poetry of Gaius Valerius Catullus/14",
+    "Cognitive Science: An Introduction/Olfaction"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how can i know if my can food has gone bad",
+   "titles": [
+    "Cookbook:Canning",
+    "Healthy eating habits/Creating Quick and Easy Meals using Common Pantry Items",
+    "Sanctuary solar food dehydrator"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how do i purify water from a creek",
+   "titles": [
+    "Backpack Camping and Woodland Survival/Skills/Water Purification",
+    "Decreasing turbidity to optimize solar water disinfection",
+    "Sustainability and Sense of Place in the Sonoran Desert/Lower Colorado River"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how do i purify water from a creek",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Camping/Purify water",
+    "Adventist Youth Honors Answer Book/Recreation/Camp Safety",
+    "When It Hits the Fan/Water Purification"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how do i make the water safe to drink",
+   "titles": [
+    "Safe Drinking Water Act",
+    "Drinking water",
+    "Drinking water quality standards"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how do i make the water safe to drink",
+   "titles": [
+    "Outdoor Survival/Water",
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Adventist Youth Honors Answer Book/Camping/Safe water"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "bleach to clean drinking water",
+   "titles": [
+    "Water supplies and sanitation",
+    "Practical Action/Water supplies for food processing",
+    "Water supply and purification for emergencies"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "bleach to clean drinking water",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Portable water purification",
+    "Dishwashing/Cleaning liquids"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how long to boil water to make it safe",
+   "titles": [
+    "Water supply and sanitation in Canada",
+    "Outdoor Survival/Water",
+    "Cookbook:Boiling"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how long to boil water to make it safe",
+   "titles": [
+    "Portable water purification",
+    "STAR-TIDES Field Manual/Hexayurts",
+    "Updated cooking methods in modern kitchens"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to make the water safe for a baby's formula",
+   "titles": [
+    "Infant food safety",
+    "Infant formula",
+    "Infant and toddler safety"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to make the water safe for a baby's formula",
+   "titles": [
+    "Infant food safety",
+    "Adventist Youth Honors Answer Book/Health and Science/Child Care (Babysitting)",
+    "Infant formula"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how much water to store for an emergency",
+   "titles": [
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "Emergency Medicine/Diarrhea",
+    "Are You Ready?/Assemble Disaster Supplies Kit"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how much water to store for an emergency",
+   "titles": [
+    "Outdoor Survival/Water",
+    "When It Hits the Fan/Long-Term Water Storage",
+    "Water supply and sanitation in the United States"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to store water long term",
+   "titles": [
+    "When It Hits the Fan/Long-Term Water Storage",
+    "Antneh's rainwater storing gojo",
+    "Are You Ready?/Assemble Disaster Supplies Kit"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to store water long term",
+   "titles": [
+    "When It Hits the Fan/Long-Term Water Storage",
+    "Occidental greywater",
+    "Cooperation Humboldt home lawn to community garden conversion"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "collect rainwater for drinking",
+   "titles": [
+    "Practivistas Chiapas rainwater catchment",
+    "Parameters for rainwater quality testing at Isla Urbana and the Ajusco Lab",
+    "Rainwater urban design and infrastructure"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "collect rainwater for drinking",
+   "titles": [
+    "Drinking Water/Rain barrel",
+    "Rainwater urban design and infrastructure",
+    "Adventist Youth Honors Answer Book/Recreation/Wilderness Living"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "is the food in the fridge safe after the power went out",
+   "titles": [
+    "2008 Irish pork crisis",
+    "When It Hits the Fan/Personal Strategies and Know-how",
+    "Neologisms of Stanislaw Lem"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "is the food in the fridge safe after the power went out",
+   "titles": [
+    "Healthy eating habits/Creating Quick and Easy Meals using Common Pantry Items",
+    "Updated cooking methods in modern kitchens",
+    "Electric appliances"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "use the water heater as emergency water",
+   "titles": [
+    "Compost heater",
+    "Recycling agricultural wastes to produce hot water",
+    "WHTC Technology Plan"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "use the water heater as emergency water",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Are You Ready?/Extreme heat",
+    "WHTC Technology Plan"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how do i light a campfire",
+   "titles": [
+    "Do-It-Yourself/Campfire",
+    "Guitar/song examples/Campfire Diploma/Spancil Hill",
+    "Guitar/song examples/Campfire Diploma/Oh My Darling Clementine"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how do i light a campfire",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camp Craft",
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership",
+    "Do-It-Yourself/Campfire"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "i need to start a fire but i have no matches and no gas",
+   "titles": [
+    "Practical Action/Kerosene and liquid petroleum gas",
+    "Fire safety",
+    "Woodstoves"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "i need to start a fire but i have no matches and no gas",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills I",
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Puzzles/Logic puzzles/Island on Fire/Solution"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "start a fire with wet wood",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Outdoor Survival/Fire",
+    "HBCSL cobb oven/Cobb Info, Detailed Building and Testing Instructions"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "start a fire with wet wood",
+   "titles": [
+    "Outdoor Survival/Fire",
+    "Adventist Youth Honors Answer Book/Camping/Fire/Wet weather",
+    "Adventist Youth Honors Answer Book/Recreation/Camp Craft"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to use a fire extinguisher",
+   "titles": [
+    "Fire extinguishing",
+    "Are You Ready?/Fires",
+    "Aircraft rescue and firefighting"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to use a fire extinguisher",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership",
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills I",
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "which fire extinguisher for a kitchen",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Fireless cookers",
+    "Fire safety"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "which fire extinguisher for a kitchen",
+   "titles": [
+    "Cookbook:Egg Roll",
+    "Fire extinguishing",
+    "Cookbook:Blowtorch"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "where to put smoke alarms",
+   "titles": [
+    "STOP YOUR HABITS OF SMOKING TOBACCO AND CIGARETTES TO HAVE A SAFETY LIVES",
+    "Bees and Their Management",
+    "Fire prevention"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "where to put smoke alarms",
+   "titles": [
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Adventist Adventurer Awards and Answers/Safety Specialist",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "where to put a carbon monoxide detector",
+   "titles": [
+    "Rocket stove mass heater",
+    "Breathing gas",
+    "Fire safety"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "where to put a carbon monoxide detector",
+   "titles": [
+    "Carbon monoxide detector",
+    "Carbon Monoxide Detector",
+    "Breath carbon monoxide"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "make a fire escape plan for my family",
+   "titles": [
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "Adventist Adventurer Awards and Answers/Safety Specialist",
+    "Scouting/BSA/Safety Merit Badge"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "make a fire escape plan for my family",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Outreach/Family Life",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert",
+    "Are You Ready?/Emergency Disaster Planning and Checklists"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "what could make a fire spread faster",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Small Scale Production of Lime for Building/Chapter 1. General Information",
+    "StarCraft/High Templar"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "what could make a fire spread faster",
+   "titles": [
+    "Sterilization (microbiology)",
+    "Fire Simulation for Engineers/FDS/Limitations",
+    "Adventist Youth Honors Answer Book/Camping/Fire/Fire site selection"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "protect my house from wildfire",
+   "titles": [
+    "Lentis/The 2020 Western Wildfire Season in the U.S.",
+    "A fairer, kinder society",
+    "News by location/2023"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "protect my house from wildfire",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Are You Ready?/Wildfires",
+    "Fire resistant plants"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "clear brush around the house for wildfire",
+   "titles": [
+    "Sustainability and Sense of Place in the Sonoran Desert/Lower Colorado River",
+    "Agent Orange",
+    "Pesticide"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "clear brush around the house for wildfire",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Vocational/House Painting, Interior",
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills I"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to run a generator safely",
+   "titles": [
+    "Waterpod/Bicycle Energy Generator",
+    "Integral fast reactor",
+    "CCAT pedal power laptop"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to run a generator safely",
+   "titles": [
+    "CCAT pedal power laptop",
+    "Electric Vehicle Conversion/Control and interlocks",
+    "Scienceshow/Guides/Van de Graaff Generator"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how often to clean the chimney",
+   "titles": [
+    "Chimney sweeps' carcinoma",
+    "Rocket stove mass heater",
+    "CCAT rocket stove/Operation and maintenance"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how often to clean the chimney",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Household Arts/Housekeeping",
+    "Practivistas rainwater 2014/Literature Review",
+    "CCAT greywater marsh (2014)"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to build a shelter in the woods",
+   "titles": [
+    "World Shelters Make it Complete with Papercrete",
+    "Eind1009 0 0 Lass\u00e9 Shelter Design by group 3V",
+    "Raising Ducks/How to begin"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to build a shelter in the woods",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Wilderness Living",
+    "Scouting/BSA/Wilderness Survival Merit Badge",
+    "Backpack Camping and Woodland Survival/Skills/Crafts/Staff Making"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "stay warm without power in winter",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Warming Center Operations Manual/Basics",
+    "California Public Policy and Citizen Participation/Warming center"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "stay warm without power in winter",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Energy Efficiency Reference/Residential/How to Reduce Energy Usage",
+    "Adventist Youth Honors Answer Book/Maintaining body warmth"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to use a compass",
+   "titles": [
+    "Compassion fatigue",
+    "Compassion-focused therapy",
+    "Compassion fatigue in journalism"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to use a compass",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Compass course",
+    "Adventist Youth Honors Answer Book/Recreation/Orienteering (General Conference)",
+    "High School Earth Science/Modeling Earth's Surface"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to signal for rescue",
+   "titles": [
+    "Post-earthquake rescue efforts",
+    "Avalanche rescue",
+    "Rega (air rescue)"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to signal for rescue",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Wilderness Living",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard",
+    "Adventist Youth Honors Answer Book/Health and Science/Basic Rescue"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "what goes in a first aid kit",
+   "titles": [
+    "Outdoor Survival/First Aid",
+    "Outdoor Survival/Survival Kit",
+    "Disaster preparedness"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "what goes in a first aid kit",
+   "titles": [
+    "First aid kit",
+    "First Aid/Appendix E: First Aid Kits",
+    "First aid kit"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to make a splint from sticks",
+   "titles": [
+    "Traction splint",
+    "777 OSAT projects 2019",
+    "Orthopedic cast"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to make a splint from sticks",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Abseiling",
+    "Adventist Youth Honors Answer Book/First aid/Splints",
+    "Adventist Youth Honors Answer Book/First aid/Ankle splint"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to dig a latrine",
+   "titles": [
+    "Practical Action/Ventilated Improved Pit Latrine",
+    "Single pit latrine",
+    "Pit latrine"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to dig a latrine",
+   "titles": [
+    "Practical Action/Ventilated Improved Pit Latrine",
+    "Chip's Challenge/Levels 61-80",
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills III (North American Division)"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "make a handwashing station",
+   "titles": [
+    "Handwashing",
+    "CCAT greenshed rainwater catchment",
+    "Agrotunnel cleaning procedure:FAST"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "make a handwashing station",
+   "titles": [
+    "Handwashing",
+    "Hand Washing Station",
+    "Handwashing station"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "emergency radio frequencies",
+   "titles": [
+    "Pulsed radiofrequency",
+    "Emergency vehicle equipment",
+    "Adventist Youth Honors Answer Book/Vocational/Radio"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "emergency radio frequencies",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Australasian Radio World/Issues/1939 02",
+    "102 (ambulance service)",
+    "List of emergency telephone numbers"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to sandbag the house for a flood",
+   "titles": [
+    "GEN Solution Library/Earthbag houses",
+    "Earthbag building",
+    "World Shelters Make it Complete with Papercrete"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to sandbag the house for a flood",
+   "titles": [
+    "Weatherization/Water and Freeze Protection",
+    "CCAT Small Pond Revitalization",
+    "Chip's Challenge/Level Pack 2/Levels 121-140"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "secure furniture for earthquakes",
+   "titles": [
+    "Are You Ready?/Earthquake preparedness",
+    "High School Earth Science/Staying Safe in Earthquakes",
+    "Lentis/Cascadia Earthquake Preparation"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "secure furniture for earthquakes",
+   "titles": [
+    "Do-It-Yourself/Household seismic safety",
+    "Quake Safe",
+    "Earthquake proofing for buildings"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "prepare the house for a flood",
+   "titles": [
+    "Are You Ready?/Floods",
+    "Are You Ready?/Why Prepare for Natural Disasters?",
+    "House Construction/Setting the Stage"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "prepare the house for a flood",
+   "titles": [
+    "Are You Ready?/Floods",
+    "Are You Ready?/Why Prepare for Natural Disasters?",
+    "Housing for flood-prone areas"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how do i treat water damage on the floor",
+   "titles": [
+    "Back Yard and Commercial Rabbit Production/Managing the herd",
+    "Cordwoodguy's cordwood guide",
+    "Tres Rios Constructed Wetland System"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how do i treat water damage on the floor",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Adventist Youth Honors Answer Book/First aid/Chemical burn",
+    "Adventist Youth Honors Answer Book/Nature/Fungi"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "where is the safest place in a house during a tornado",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Storms",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "where is the safest place in a house during a tornado",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Natural Disasters/Tornado",
+    "Adventist Adventurer Awards and Answers/Safety Specialist"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to seal a room for shelter in place",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Are You Ready?/Hazardous Material Incidents",
+    "Are You Ready?/Chemical Threats"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to seal a room for shelter in place",
+   "titles": [
+    "Sanctuary abundant free food kiosk",
+    "Flock House Biopod",
+    "Disaster and WMD Defence Guide/Shelter Location"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to prepare a fallout shelter",
+   "titles": [
+    "Are You Ready?/Nuclear blast",
+    "Are You Ready?/Radiological Dispersion Device (RDD)",
+    "Emergency management"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to prepare a fallout shelter",
+   "titles": [
+    "Are You Ready?/Nuclear blast",
+    "Disaster and WMD Defence Guide/Shelter Location",
+    "Scouting/BSA/Wilderness Survival Merit Badge"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "protect yourself from volcanic ash",
+   "titles": [
+    "Are You Ready?/Volcanoes",
+    "Indoor air quality",
+    "Smog"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "protect yourself from volcanic ash",
+   "titles": [
+    "Are You Ready?/Volcanoes",
+    "Historical Geology/Volcanic ash",
+    "HKDSE Geography/M1/Impacts of Tectonic Hazards"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "prepare for a hurricane",
+   "titles": [
+    "Are You Ready?/Hurricanes",
+    "Are You Ready?/Why Prepare for Natural Disasters?",
+    "Disaster preparedness"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "prepare for a hurricane",
+   "titles": [
+    "Are You Ready?/Hurricanes",
+    "Natural Disasters/Hurricane",
+    "Adventist Adventurer Awards and Answers/Safety Specialist"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to tie a bowline",
+   "titles": [
+    "Knots/Loop knots/Bowline",
+    "Adventist Youth Honors Answer Book/Knot/Bowline",
+    "Knots/Loop knots/Triple bowline"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to tie a bowline",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Knot/Double bowline",
+    "Adventist Youth Honors Answer Book/Knot/Bowline",
+    "Adventist Youth Honors Answer Book/Knot/Bowline on a bight"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "make my home harder to break into",
+   "titles": [
+    "United States solar PV roof policy method",
+    "Fire resistant plants",
+    "Taffy Pull"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "make my home harder to break into",
+   "titles": [
+    "Hexayurt project/Hexayurt playa",
+    "Sunny Brae Yurt",
+    "Infiltrator II"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "what to do during riots in the city",
+   "titles": [
+    "Community action/Missouri",
+    "Community action/Eugene, Oregon",
+    "Violence against Muslims in India"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "what to do during riots in the city",
+   "titles": [
+    "Grand Theft Auto: San Andreas/Missions/Riot",
+    "Bicycles/General Safety",
+    "SimCity and Urban Planning/Natural Disasters"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "the engine keeps choking when it is cold",
+   "titles": [
+    "Hemp",
+    "High-altitude breathing apparatus",
+    "Laryngospasm"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "the engine keeps choking when it is cold",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Vocational/Small Engines",
+    "Solar floatovoltaics lit review",
+    "Choosing a Car"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to use the choke on a small engine",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Vocational/Small Engines",
+    "Small Scale Vegetable Oil Extraction/Oil extraction",
+    "Small Scale Vegetable Oil Extraction/Appendices"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to use the choke on a small engine",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Vocational/Small Engines",
+    "Practical Action/Permanent magnet alternator construction",
+    "Adventist Youth Honors Answer Book/Vocational/Welding"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to bleed the brakes",
+   "titles": [
+    "Automotive Systems/Braking System",
+    "Nissan 240SX Performance Modification/Brakes",
+    "NREMT Skillset/Airway Patency Assessment/Quiz"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to bleed the brakes",
+   "titles": [
+    "Automotive Systems/Braking System",
+    "Nissan 240SX Performance Modification/Brakes",
+    "Basic Automobiles"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to bleed a radiator",
+   "titles": [
+    "Radiation proctitis",
+    "Radiation enteropathy",
+    "Lower gastrointestinal bleeding"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to bleed a radiator",
+   "titles": [
+    "Automobile Repair/Radiator flush and fill",
+    "Chinese Tractor Maintenance/General Maintenance",
+    "Practical Action/Permanent magnet alternator construction"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "the car battery is dead",
+   "titles": [
+    "Carbon monoxide detector",
+    "Battery Power/Lithium Ion Batteries",
+    "CCAT barts bike"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "the car battery is dead",
+   "titles": [
+    "Automobile Repair/Battery Checking",
+    "Automobile Repair/Jump start",
+    "Automobile Repair/Mini/Cooper R50 (2001\u20132006)/Electrical"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my phone is dead and no power",
+   "titles": [
+    "215 Solar for low power medical equipment",
+    "Low cost computer guide",
+    "Autoerotic fatality"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my phone is dead and no power",
+   "titles": [
+    "How to save a wet mobile phone",
+    "Engr 305 solar learning station/Literature review",
+    "CCAT wireless solar charging station"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "the shock absorbers on the truck are broken",
+   "titles": [
+    "Chemical Sciences: A Manual for CSIR-UGC National Eligibility Test for Lectureship and JRF/X-ray",
+    "Dominican Republic alternative building analysis",
+    "Wheelchair"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "the shock absorbers on the truck are broken",
+   "titles": [
+    "Compensated shock",
+    "Transportation safety in the United States",
+    "Professionalism/Piper Alpha Oil Rig Disaster"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "build an electric fence for goats",
+   "titles": [
+    "Subject:Miscellaneous",
+    "Mirad/Word Families",
+    "Wikibooks:Alphabetical classification/All Books"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "build an electric fence for goats",
+   "titles": [
+    "Goats/Fencing",
+    "Sheep and Goat Breeding/Giving the animals good housing",
+    "The potential for fencing to be used as low-cost solar photovoltaic racking"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to smoke fish to preserve it",
+   "titles": [
+    "Solar and Energy Conserving Food Technologies/Model solar food dryer: design and construction",
+    "Cooking",
+    "Cold smoking"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to smoke fish to preserve it",
+   "titles": [
+    "Cookbook:Smoking",
+    "Traditional Cheesemaking/Part 2: From milk to cheese",
+    "GEN Solution Library/Fish salting"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to use a burn barrel for trash",
+   "titles": [
+    "Cocaine paste",
+    "Plastics Molding & Manufacturing/Defects",
+    "Geometron Trash Robot"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to use a burn barrel for trash",
+   "titles": [
+    "Urban compost bins at Sembradores Urbanos",
+    "Hog Butchering and Smoking",
+    "CCAT CCATBox"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "is it safe to burn treated wood in the stove",
+   "titles": [
+    "Feces",
+    "No such thing as waste",
+    "Farmers of Forty Centuries/Chapter 4"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "is it safe to burn treated wood in the stove",
+   "titles": [
+    "Woodstoves",
+    "Sawdust stove",
+    "Organic care of wooden kitchenware"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "flooded engine will not start",
+   "titles": [
+    "In-river flood management",
+    "Infrastructure Past, Present, and Future Casebook/Metro Flood Diversion (MN/ND)",
+    "Infrastructure Past, Present, and Future Casebook/Venetian Flood Control (MOSE)"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "flooded engine will not start",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Vocational/Small Engines",
+    "Marinette Aluminum Boat Maintenance/Electrical/Starting Circuits",
+    "HEIF CCAT solar hot water system/Operation and maintenance"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to get rid of rats without poison",
+   "titles": [
+    "Peace Corps appropriate community technology/Earthen Construction and Fuel-Saving Cookstoves",
+    "Rodenticide",
+    "\u0391-Naphthylthiourea"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to get rid of rats without poison",
+   "titles": [
+    "Ornithonyssus bacoti",
+    "Rodenticide",
+    "\u0391-Naphthylthiourea"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "my fire is not getting enough air",
+   "titles": [
+    "Fire prevention",
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Woodstoves"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "my fire is not getting enough air",
+   "titles": [
+    "Down'n'dirty Blacksmithing/Tools, Materials, and Supplies",
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Are You Ready?/Fires"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to run a fire drill at home",
+   "titles": [
+    "Tolocar/Playbook/How to Tolocar/Our Fleet \u2014 The Truck",
+    "Are You Ready?/Earthquake preparedness",
+    "UK Climate news/2024"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to run a fire drill at home",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Fire drill",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert",
+    "Adventist Youth Honors Answer Book/Outreach/Family Life"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "i am drowning my tomato plants with too much water",
+   "titles": [
+    "Heliciculture/Feeding",
+    "Horticulture/Slugs",
+    "MESS (Micro Environment Subsistence System)/Overview of plant needs"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "i am drowning my tomato plants with too much water",
+   "titles": [
+    "WetLand/Edible railing",
+    "Dual use of land for PV farms and agriculture literature review",
+    "Water saving tips for the home gardener"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to cut firewood safely",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills II",
+    "CSU Research Competition 2025 Creative Arts and Design trophy",
+    "Fireless cookers"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to cut firewood safely",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Camping/Cutting firewood",
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Adventist Youth Honors Answer Book/Recreation/Camp Craft"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how long do burns take to heal",
+   "titles": [
+    "Burn scar contracture",
+    "Z-Plasty/Thinking Like a Reconstructive Surgeon",
+    "Elderberries"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how long do burns take to heal",
+   "titles": [
+    "Burn scar contracture",
+    "Adventist Youth Honors Answer Book/First aid/Burns",
+    "Burn"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "infection not responding to antibiotics",
+   "titles": [
+    "Infectious Diseases Society of America",
+    "Structural Biochemistry/Antibiotics",
+    "A-level Biology/Human Health and Disease/infectious diseases"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "infection not responding to antibiotics",
+   "titles": [
+    "Abscess",
+    "Pseudomonas oryzihabitans",
+    "Commonly prescribed drugs"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "heat the house without power",
+   "titles": [
+    "Solar Photovoltaics Integration with Heat Pumps and Thermal Battery to Decarbonize Residential Sector in Canada",
+    "Surrey Hills house",
+    "Ultra-low energy house"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "heat the house without power",
+   "titles": [
+    "Observational U.S. home energy assessment",
+    "Energy Efficiency Reference/Residential/How to Reduce Energy Usage",
+    "Sustainable gifts"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "how to build a root cellar for cold storage",
+   "titles": [
+    "Beacon Food Forest presentation",
+    "Mirad Lexicon/English-Mirad-S",
+    "Bathroom"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "how to build a root cellar for cold storage",
+   "titles": [
+    "Root cellar",
+    "CCAT cold box 2017",
+    "Evaporative cooling (Practical Action)"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "keyword",
+   "q": "is spring water safe to drink",
+   "titles": [
+    "Drinking water",
+    "Adventist Adventurer Awards and Answers/Safe Water",
+    "Water is life"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "nonred",
+   "how": "vector",
+   "q": "is spring water safe to drink",
+   "titles": [
+    "Spring catchment",
+    "Rural Water Supply in Nepal (Hydrology-Water Cycle Course)",
+    "Raw water"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my husband collapsed and isn't breathing",
+   "titles": [],
+   "zims": [],
+   "ok": []
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my husband collapsed and isn't breathing",
+   "titles": [
+    "Puzzles/Lateral puzzles/7/Solution",
+    "A Compendium of Useful Information for the Practical Man/Medical Emergencies",
+    "Assisted suicide"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "man fell down not breathing no pulse",
+   "titles": [
+    "History of cardiopulmonary resuscitation",
+    "Hypothermia",
+    "Intelligent Plastic Machines"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "man fell down not breathing no pulse",
+   "titles": [
+    "Puzzles/Lateral puzzles/7/Solution",
+    "Are You Ready?/Extreme heat",
+    "A Compendium of Useful Information for the Practical Man/Medical Emergencies"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he stopped breathing what do i do",
+   "titles": [
+    "Circular breathing",
+    "First Aid/B for Breathing",
+    "Electrical safety basic principals"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he stopped breathing what do i do",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Swimming - Beginner (General Conference)",
+    "A Compendium of Useful Information for the Practical Man/Medical Emergencies",
+    "Emergency Medicine/Cardiopulmonary Arrest"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my son isn't breathing",
+   "titles": [
+    "Neuroethology"
+   ],
+   "zims": [
+    "mdwiki"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my son isn't breathing",
+   "titles": [
+    "A Compendium of Useful Information for the Practical Man/Medical Emergencies",
+    "NREMT Skillset/Child Cardiopulmonary Resuscitation (CPR)/Quiz",
+    "NREMT Skillset/Prehospital Childbirth"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "kid not breathing and lips are blue",
+   "titles": [
+    "Mercury poisoning",
+    "24 Hours in A&E",
+    "Mephedrone"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "kid not breathing and lips are blue",
+   "titles": [
+    "Pediatric assessment triangle",
+    "Familial dysautonomia",
+    "Psychiatric Disorders/childhood disorders/Clinical symptoms and classification"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my baby is not breathing",
+   "titles": [
+    "Baby Bubbler",
+    "Baby-led weaning",
+    "Baby Care and Development/Baby Development"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my baby is not breathing",
+   "titles": [
+    "NREMT Skillset/Prehospital Childbirth",
+    "Emergency childbirth",
+    "Adaptation to extrauterine life"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "infant stopped breathing in the crib",
+   "titles": [
+    "Torticollis",
+    "Baby-led weaning",
+    "Emergency childbirth"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "infant stopped breathing in the crib",
+   "titles": [
+    "Sudden infant death syndrome",
+    "NREMT Skillset/Prehospital Childbirth",
+    "Infantile apnea"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he is choking on food and cannot talk",
+   "titles": [
+    "Suicide watch",
+    "Parenting",
+    "Choking"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he is choking on food and cannot talk",
+   "titles": [
+    "A Guide to Super Mario Bros. 2/World 7-2",
+    "Na'vi/English\u2013Na'vi dictionary",
+    "Muggles' Guide to Harry Potter/Characters/Dudley Dursley"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone choking at dinner",
+   "titles": [
+    "Adventist Adventurer Awards and Answers/Courtesy",
+    "Casualty series 39",
+    "Basic Writing/Narrative and memoir"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone choking at dinner",
+   "titles": [
+    "First Aid/Obstructed Airway",
+    "History of Western Theatre: 17th Century to Now/French Pre-WWII",
+    "Choking"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my baby is choking on a grape",
+   "titles": [
+    "Baby-led weaning",
+    "Infant food safety",
+    "Choking"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my baby is choking on a grape",
+   "titles": [
+    "Refugee Phrasebook/Welcome to Italy (long)",
+    "Grape wine (Practical Action Brief)",
+    "Making fruit, vegetable and flower wines"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "toddler choking on a coin",
+   "titles": [
+    "Baby-led weaning",
+    "Speech-Language Pathology/Stuttering/Practice Word Lists",
+    "Infant food safety"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "toddler choking on a coin",
+   "titles": [
+    "Choking",
+    "Cognitive Science: An Introduction/Other Cognitive Levels of Explanation",
+    "Parenting"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "she is unconscious but breathing",
+   "titles": [
+    "First Aid/B for Breathing",
+    "NREMT Skillset/Primary Assessment",
+    "PTC Course/Airway"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "she is unconscious but breathing",
+   "titles": [
+    "Suicide/Drowning",
+    "Adventist Youth Honors Answer Book/Recreation/Snowshoeing",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he passed out and will not wake up",
+   "titles": [
+    "Non-24-hour sleep\u2013wake disorder",
+    "Bards Irish Fiddle Tunebook Supplement/Finnegan's Wake",
+    "GEN Solution Library/A small farm in the mountains"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he passed out and will not wake up",
+   "titles": [
+    "Puzzles/Lateral puzzles/7/Solution",
+    "Parables from a mad social scientist",
+    "Assisted suicide"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "asthma attack and no inhaler",
+   "titles": [
+    "Asthma exacerbation",
+    "Asthma trigger",
+    "Brittle asthma"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "asthma attack and no inhaler",
+   "titles": [
+    "First Aid/Asthma & Hyperventilation",
+    "Exercise as it relates to Disease/Exercise induced asthma",
+    "Asthma"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "she can't breathe, wheezing badly",
+   "titles": [
+    "Shortness of breath",
+    "Kehr's sign",
+    "Review of systems"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "she can't breathe, wheezing badly",
+   "titles": [
+    "Emergency Medicine/Wheezing",
+    "NREMT Skillset/Medical Patient Assessment for Respiratory Distress (PASTE)",
+    "First Aid/Asthma & Hyperventilation"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "throat swelling after a bee sting",
+   "titles": [
+    "Melittin",
+    "Insects in medicine",
+    "Apamin"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "throat swelling after a bee sting",
+   "titles": [
+    "Bee sting",
+    "Capillaria aerophila",
+    "Arthropod bites and stings"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "allergic reaction and her lips are swelling",
+   "titles": [
+    "List of allergens",
+    "Oral allergy syndrome",
+    "Lip augmentation"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "allergic reaction and her lips are swelling",
+   "titles": [
+    "Anaphylaxis",
+    "Allergy",
+    "List of allergens"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "peanut allergy can not breathe",
+   "titles": [
+    "Peanut allergen powder",
+    "Sesame allergy",
+    "List of allergens"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "peanut allergy can not breathe",
+   "titles": [
+    "Peanut allergy",
+    "Food allergy",
+    "Farmer's lung"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "smoke inhalation from a house fire",
+   "titles": [
+    "Smoke",
+    "NREMT Skillset/N95 FFR (Filtering Facepiece Respirator) Use/Quiz",
+    "Waterpod/Rocket Stove"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "smoke inhalation from a house fire",
+   "titles": [
+    "Smoke inhalation",
+    "Smoke",
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he breathed in a lot of smoke and is coughing",
+   "titles": [
+    "Influenza treatment",
+    "Treatment of influenza",
+    "Singing/Caring for your voice"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he breathed in a lot of smoke and is coughing",
+   "titles": [
+    "Cough",
+    "Smoke inhalation",
+    "Smoke"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "headache and dizzy after running the generator inside",
+   "titles": [
+    "Superior canal dehiscence syndrome",
+    "CCAT natural paints 2017",
+    "Denn\u014d Senshi Porygon"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "headache and dizzy after running the generator inside",
+   "titles": [
+    "Lightheadedness",
+    "Wind turbine syndrome",
+    "Cerebrospinal fluid leak"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "carbon monoxide poisoning symptoms whole family sick",
+   "titles": [
+    "Hypoxia (medicine)",
+    "Diving disorders",
+    "Hemoglobin"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "carbon monoxide poisoning symptoms whole family sick",
+   "titles": [
+    "Carbon monoxide poisoning",
+    "Structural Biochemistry/Hemoglobin",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "carbon monoxide from making a fire in the tent",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Self-contained self-rescue device",
+    "Phosgene"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "carbon monoxide from making a fire in the tent",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Carbon monoxide",
+    "Carbon monoxide poisoning",
+    "Adventist Youth Honors Answer Book/Recreation/Camp Safety"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "blood is spurting from his leg and won't stop",
+   "titles": [
+    "Human height",
+    "Mirad Lexicon/Mirad-English-Y"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "blood is spurting from his leg and won't stop",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Bleeding",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard",
+    "Blood squirt"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "deep cut on the arm bleeding a lot",
+   "titles": [
+    "24 Hours in A&E",
+    "Nissan 240SX Performance Modification/Brakes",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "deep cut on the arm bleeding a lot",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Bleeding",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone is full of blood, it does not stop",
+   "titles": [
+    "Muggles' Guide to Harry Potter/Books/Half-Blood Prince/Chapter 21",
+    "Control and treatment of bedbugs",
+    "Vaping cessation"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone is full of blood, it does not stop",
+   "titles": [
+    "Blood squirt",
+    "Blood donation",
+    "Adventist Youth Honors Answer Book/First aid/Bleeding"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "his finger got cut off",
+   "titles": [
+    "Little finger",
+    "Building Haycocks/Cutting/Implements",
+    "Adventist Adventurer Awards and Answers/Finger Play"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "his finger got cut off",
+   "titles": [
+    "Paper cut",
+    "Broken finger",
+    "Phoenix Wright: Ace Attorney/Episode 5: Rise from the Ashes/Day 4 - Trial Latter 2"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "chainsaw cut his leg badly",
+   "titles": [
+    "Doom/Complete list of enemies",
+    "Personal protective equipment",
+    "Seed Factories/Starter Set"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "chainsaw cut his leg badly",
+   "titles": [
+    "Butchering a Beef",
+    "Wood Harvesting with Hand Tools/Cutting Windfalls",
+    "Making a stepladder"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "stabbed in the chest",
+   "titles": [
+    "NREMT Skillset/Penetrating Chest Trauma",
+    "Chest injury",
+    "NREMT Skillset"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "stabbed in the chest",
+   "titles": [
+    "Stabbing",
+    "Stab wound",
+    "Chest injury"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "knife wound to the chest and he is struggling to breathe",
+   "titles": [
+    "24 Hours in A&E",
+    "Major trauma",
+    "Neurology and Neurosurgery/Incomplete Spinal Cord Injuries/Brown-S\u00e9quard syndrome"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "knife wound to the chest and he is struggling to breathe",
+   "titles": [
+    "Emergency Medicine/Cardiopulmonary Arrest",
+    "Stab wound",
+    "Refugee Phrasebook/Welcome to Austria, Germany, Switzerland"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "a stick is stuck in his leg",
+   "titles": [
+    "Arroyo Norte sustainable market materials",
+    "Crab",
+    "Practical Electronics/Desoldering"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "a stick is stuck in his leg",
+   "titles": [
+    "Wikijunior:Bugs/Walking Stick",
+    "Adhesive bandage",
+    "Peg leg"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "nail went through her foot and is still in",
+   "titles": [
+    "Parables from a mad social scientist",
+    "How to Build a Mechanically Powered Battery Charger for LED Lighting",
+    "Bayside Park Farm/Solar hot water"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "nail went through her foot and is still in",
+   "titles": [
+    "Nail disease",
+    "Ingrown nail",
+    "Textbook of Psychiatry/The Agitated/Violent Patient"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "chest pain spreading to his left arm",
+   "titles": [
+    "Referred pain",
+    "Radical mastectomy",
+    "Causes of cancer pain"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "chest pain spreading to his left arm",
+   "titles": [
+    "Chest pain",
+    "Side stitch",
+    "NREMT Skillset/Example Narratives"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "i think my dad is having a heart attack",
+   "titles": [
+    "Housing UK news/2015-2021",
+    "24 Hours in A&E",
+    "Casualty series 39"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "i think my dad is having a heart attack",
+   "titles": [
+    "Human Physiology/Development: birth through death",
+    "Chest pain",
+    "NREMT Skillset/Medical Patient Assessment for Altered Mental Status (AEIOUTIPS)/Quiz"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he is pale cold and sweaty after the accident",
+   "titles": [
+    "List of skin conditions"
+   ],
+   "zims": [
+    "mdwiki"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he is pale cold and sweaty after the accident",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Adventist Youth Honors Answer Book/Recreation/Snowshoeing",
+    "Are You Ready?/Extreme heat"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "signs of shock after bleeding",
+   "titles": [
+    "NREMT Skillset/Bleeding Control and Shock Management",
+    "Internal bleeding",
+    "Hypovolemic shock"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "signs of shock after bleeding",
+   "titles": [
+    "Hypovolemia",
+    "Hemorrhagic shock",
+    "CrashSavers Trauma/Hemorrhage Control"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "dog attacked my child and she is bleeding badly",
+   "titles": [
+    "24 Hours in A&E",
+    "Child abuse",
+    "Rise of Nations/Nations/Aztecs"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "dog attacked my child and she is bleeding badly",
+   "titles": [
+    "Dog bite",
+    "Animal bite",
+    "Animal Care/Basic care"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "her face is drooping and she can not speak properly",
+   "titles": [
+    "Three Acres and Liberty/Chapter XIII",
+    "Botulism",
+    "Craniosynostosis"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "her face is drooping and she can not speak properly",
+   "titles": [
+    "Refugee Phrasebook/Learning English and German",
+    "Athetoid cerebral palsy",
+    "Myasthenia gravis"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "sudden weakness on one side of the body",
+   "titles": [
+    "Internal Medicine/Neurologic Weakness and Paralysis",
+    "FAST (stroke)",
+    "Hemiplegic migraine"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "sudden weakness on one side of the body",
+   "titles": [
+    "Internal Medicine/Neurologic Weakness and Paralysis",
+    "Facioscapulohumeral muscular dystrophy",
+    "Hemiparesis"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he is having a seizure",
+   "titles": [
+    "Post-traumatic seizure",
+    "Febrile seizure",
+    "Ecstatic seizures"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he is having a seizure",
+   "titles": [
+    "Panayiotopoulos syndrome",
+    "First Aid/Seizures",
+    "Gelastic seizure"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "she is shaking and foaming at the mouth",
+   "titles": [
+    "Cookbook:Super Foamy Milkshake",
+    "Febrile seizure",
+    "Mass psychogenic illness"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "she is shaking and foaming at the mouth",
+   "titles": [
+    "Confusional arousal",
+    "Refugee Phrasebook/Welcome to Austria, Germany, Switzerland",
+    "Morsicatio buccarum"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my baby has a high fever and is shaking all over",
+   "titles": [
+    "Infant food safety",
+    "Babesiosis",
+    "What is AIDS?"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my baby has a high fever and is shaking all over",
+   "titles": [
+    "Refugee Phrasebook/Arabic, Urdu, Dari, Greek, Bangla, Kurdish, French, Macedonian, English",
+    "Refugee Phrasebook/Arabic, Urdu, Dari, Greek, Bangla, Kurdish, French, Language of FYROM, English",
+    "Dengue fever"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "hit his head and is vomiting and confused",
+   "titles": [
+    "Head injury",
+    "Pediatric concussion",
+    "24 Hours in A&E"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "hit his head and is vomiting and confused",
+   "titles": [
+    "Panayiotopoulos syndrome",
+    "Water intoxication",
+    "Confusional arousal"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "fell and hit her head now very sleepy",
+   "titles": [
+    "Madame Bovary/Chapter One",
+    "Dreamer",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/The 2011 Japan Earthquakes"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "fell and hit her head now very sleepy",
+   "titles": [
+    "Textbook of Psychiatry/The Agitated/Violent Patient",
+    "Head injury",
+    "Confusional arousal"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "fell off the roof and can not move his legs",
+   "titles": [
+    "Sanctuary abundant free food kiosk",
+    "24 Hours in A&E",
+    "Gyakuten Kenji 2/Episode 5: The Grand Turnabout/Beginning, Part 1"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "fell off the roof and can not move his legs",
+   "titles": [
+    "Puzzles/Lateral puzzles/5",
+    "Puzzles/Lateral puzzles/5/Solution",
+    "Death of Tom Simpson"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "neck hurts after a fall, numb arms",
+   "titles": [
+    "24 Hours in A&E",
+    "Spanish by Choice/Novelas Cortas 00",
+    "Mandible"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "neck hurts after a fall, numb arms",
+   "titles": [
+    "Neck pain",
+    "Scouting/BSA/First Aid Merit Badge",
+    "Rotator cuff tear"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "diabetic and shaking, confused, sweating",
+   "titles": [
+    "Glossary of diabetes",
+    "Exercise as it relates to Disease/Preventing hypoglycemia in type 1 diabetics during and after exercise",
+    "Blood sugar level"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "diabetic and shaking, confused, sweating",
+   "titles": [
+    "Cyclic vomiting syndrome",
+    "Hypoglycemia",
+    "Review of systems"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my diabetic son is not making sense",
+   "titles": [
+    "List of Munchausen by proxy cases",
+    "Nesfatin-1",
+    "A History of Japan: From Mythology to Nationhood/The Middle Heian Period"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my diabetic son is not making sense",
+   "titles": [
+    "NREMT Skillset/Medical Patient Assessment for Altered Mental Status (AEIOUTIPS)/Quiz",
+    "EMT-Basic/Medical/Diabetes AMS",
+    "Type 1 diabetes"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "overdose, he is barely breathing and lips are blue",
+   "titles": [],
+   "zims": [],
+   "ok": []
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "overdose, he is barely breathing and lips are blue",
+   "titles": [
+    "1826\u20131837 cholera pandemic",
+    "Assisted suicide",
+    "Adderall"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "took too many pain pills, will not wake",
+   "titles": [
+    "Combined birth control pill",
+    "Chinese alchemical elixir poisoning",
+    "Insomnia"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "took too many pain pills, will not wake",
+   "titles": [
+    "General anaesthesia",
+    "Opioid use disorder",
+    "Excessive daytime sleepiness"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "baby has fever and a rash that does not fade",
+   "titles": [
+    "Teething",
+    "Rubella virus",
+    "Complication (medicine)"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "baby has fever and a rash that does not fade",
+   "titles": [
+    "Congenital syphilis",
+    "Neonatal herpes simplex",
+    "Internal Medicine/Skin Manifestations of Internal Disease"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "stiff neck high fever and purple spots",
+   "titles": [
+    "Meningococcal disease",
+    "Acute lymphoblastic leukemia",
+    "Meningitis"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "stiff neck high fever and purple spots",
+   "titles": [
+    "Internal Medicine/Skin Manifestations of Internal Disease",
+    "Scarlet fever",
+    "Neck stiffness"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my friend says he wants to kill himself",
+   "titles": [
+    "Trial of Anders Behring Breivik",
+    "Fictional portrayals of psychopaths",
+    "Muggles' Guide to Harry Potter/Major Events/Shrieking Shack"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my friend says he wants to kill himself",
+   "titles": [
+    "Living With Depression/Dealing with suicidal thoughts",
+    "Suicidology",
+    "Suicide intervention"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "i do not want to live anymore",
+   "titles": [
+    "How to live cheap and green",
+    "Objectified (documentary)",
+    "Into The World of Social Media"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "i do not want to live anymore",
+   "titles": [
+    "IFTC Jump into English Textbook - Teacher's Manual",
+    "Atlas Shrugged/Synopsis/Section 3A",
+    "The Grand Inquisitor/Rebellion (Part 2)"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "treat water in the lungs after drowning",
+   "titles": [
+    "Drowning",
+    "When It Hits the Fan/Personal Strategies and Know-how/Water",
+    "Diving disorders"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "treat water in the lungs after drowning",
+   "titles": [
+    "Drowning",
+    "Suicide/Drowning",
+    "Basic life support"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my son nearly drowned in the rainwater pool",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership",
+    "A Researcher's Guide to Local History Terminology/Abecedary"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my son nearly drowned in the rainwater pool",
+   "titles": [
+    "Drowning",
+    "Wikijunior:Water Safety/Backyard Pools",
+    "Water intoxication"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone fell in the rainwater pool and isn't breathing",
+   "titles": [],
+   "zims": [],
+   "ok": []
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone fell in the rainwater pool and isn't breathing",
+   "titles": [
+    "Suicide/Drowning",
+    "When It Hits the Fan/Personal Strategies and Know-how",
+    "Drowning"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "pulled him out of the river, not breathing",
+   "titles": [
+    "Planet Earth/4a. The Air You Breathe",
+    "CCAT barts bike",
+    "Yangsheng (Daoism)"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "pulled him out of the river, not breathing",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Philip Bechervaise/Notes/1870s",
+    "Puzzles/Escaping from Prison/Solution",
+    "Puzzles/Lateral puzzles/4/Solution"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he fell through the ice on the lake",
+   "titles": [
+    "Planet Earth/5i. Earth\u2019s Ice: Glaciers, Ice Sheets, and Sea Ice",
+    "NREMT Skillset/Vital Signs Assessment/Skin, Temperature and Pulse Oximetry Quiz",
+    "Micro-livestock/Part 2: Poultry"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he fell through the ice on the lake",
+   "titles": [
+    "Puzzles/Lateral puzzles/5/Solution",
+    "I Ching/Interpretation",
+    "High School Earth Science/Weathering"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "friend fell through thin ice",
+   "titles": [
+    "24 Hours in A&E",
+    "Chromebook",
+    "Tatworth Village/Over the garden gate"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "friend fell through thin ice",
+   "titles": [
+    "Puzzles/Lateral puzzles/5/Solution",
+    "Adventist Youth Honors Answer Book/First aid/Ice rescue",
+    "Adventist Youth Honors Answer Book/Health and Science/Basic Rescue"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone got shocked by a wire in the flood water",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone got shocked by a wire in the flood water",
+   "titles": [
+    "When It Hits the Fan/Personal Strategies and Know-how/Water",
+    "Adventist Youth Honors Answer Book/First aid/Electric wire contact",
+    "Professionalism/The Loss of Ocean Ranger"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he touched a power line and collapsed",
+   "titles": [
+    "Defibrillation with AED - ECSACONM",
+    "Photovoltaic technology impacts on national security: literature review",
+    "Are You Ready?/Floods"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he touched a power line and collapsed",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+    "Suicide/Electrocution",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Samuel Walker McGowan/Notes"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "electric shock from a fallen wire",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+    "24 Hours in A&E",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1922 09 01"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "electric shock from a fallen wire",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+    "Electrical safety basic principals",
+    "Electrical injury"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my friend was struck by lightning",
+   "titles": [
+    "Phoenix Wright: Ace Attorney - Trials and Tribulations/Episode 5: Bridge to the Turnabout/Part 1-2: Investigation",
+    "Muggles' Guide to Harry Potter/Books/Half-Blood Prince/Chapter 27",
+    "Muggles' Guide to Harry Potter/Major Events/Death Eaters"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my friend was struck by lightning",
+   "titles": [
+    "Are You Ready?/Thunderstorms and Lightning",
+    "Lightning injury",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Henry Victor Herschel/Notes"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "her whole arm is badly burned",
+   "titles": [
+    "Hexayurt project/Hexayurt playa",
+    "Disfigurement",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "her whole arm is badly burned",
+   "titles": [
+    "First Aid/Burns",
+    "Burn",
+    "Phoenix Wright: Ace Attorney - Justice For All/Episode 2: Reunion, and Turnabout/Part 4-2: Trial"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "boiling water spilled on the baby",
+   "titles": [
+    "Principles of Microeconomics/Public Goods",
+    "Menstrual cup",
+    "Infant formula"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "boiling water spilled on the baby",
+   "titles": [
+    "Infant food safety",
+    "Adventist Youth Honors Answer Book/Health and Science/Child Care (Babysitting)",
+    "Solar Kettle Thermos Flask"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "burn and not breathing",
+   "titles": [
+    "PTC Course/Burns",
+    "PTC Course/Breathing",
+    "Spontaneous breathing trial"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "burn and not breathing",
+   "titles": [
+    "First Aid/Burns",
+    "Ethnomedicine/Home Remedies/A - C",
+    "Scouting/BSA/First Aid Merit Badge"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "pulled him out of the fire, burned and not breathing",
+   "titles": [
+    "The Legend of Zelda: Ocarina of Time Master Quest/Dodongo's Cavern",
+    "Rural Electrification Systems",
+    "Hexayurt project/Hexayurt playa checklist"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "pulled him out of the fire, burned and not breathing",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Philip Bechervaise/Notes/1860s",
+    "Mirad Lexicon/Mirad-English-U",
+    "Puzzles/How do you ... ?/The Burning Island"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my clothes caught fire",
+   "titles": [
+    "Hog Butchering and Smoking",
+    "Gabriel Boughton",
+    "Fumigatory box"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my clothes caught fire",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Clothes on fire",
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Ba Zi/Date Selection in 1970"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "his shirt is on fire",
+   "titles": [
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Are You Ready?/Volcanoes",
+    "VITA document and link list"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "his shirt is on fire",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Clothes on fire",
+    "Super Mario Bros. 3/Enemies",
+    "Puzzles/Lateral puzzles/4/Solution"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my clothes caught fire while starting the fire",
+   "titles": [
+    "Broken finger",
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Hog Butchering and Smoking"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my clothes caught fire while starting the fire",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Clothes on fire",
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Philip Bechervaise/Notes/1860s"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "found him in the snow, cold and not shivering anymore",
+   "titles": [
+    "Dreamer",
+    "Chinese (Classical Mandarin)",
+    "Yoga/Spiritual Almanac"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "found him in the snow, cold and not shivering anymore",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Philip Bechervaise/Notes/1870s",
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Adventist Youth Honors Answer Book/Maintaining body warmth"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "hypothermia after falling in cold water",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Hypothermia",
+    "Cold shock response"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "hypothermia after falling in cold water",
+   "titles": [
+    "Dry suit",
+    "Cold shock response",
+    "Diving disorders"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "he was working in the sun and now he is confused and hot",
+   "titles": [
+    "Anisa Foundation parabolic solar hot water heater",
+    "Passive solar design",
+    "Heat stroke"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "he was working in the sun and now he is confused and hot",
+   "titles": [
+    "A-level Applied Science/Energy Transfer Systems/Body Temperature",
+    "Sunburn",
+    "Adventist Youth Honors Answer Book/First aid/Heat exhaustion"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "heat stroke what to do",
+   "titles": [
+    "Heat stroke",
+    "Adventist Youth Honors Answer Book/First aid/Heat stroke",
+    "Are You Ready?/Extreme heat"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "heat stroke what to do",
+   "titles": [
+    "Heat stroke",
+    "Adventist Youth Honors Answer Book/First aid/Heat stroke",
+    "A-level Applied Science/Energy Transfer Systems/Body Temperature"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "a snake bit my leg",
+   "titles": [
+    "Snakebite",
+    "Control and treatment of bedbugs",
+    "Adventist Youth Honors Answer Book/Nature/Reptiles"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "a snake bit my leg",
+   "titles": [
+    "Snakebite",
+    "Animal bite",
+    "List of dangerous snakes"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "bitten by a rattlesnake",
+   "titles": [
+    "Snakebite",
+    "Sistrurus miliarius barbouri",
+    "List of dangerous snakes"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "bitten by a rattlesnake",
+   "titles": [
+    "Snakebite",
+    "List of dangerous snakes",
+    "Snake venom"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "snake bite while camping",
+   "titles": [
+    "Snakebite",
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership - Advanced",
+    "Fried Green Tomatoes at the Whistle Stop Cafe/Chapter 6"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "snake bite while camping",
+   "titles": [
+    "Snakebite",
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership - Advanced",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "his legs are trapped under a fallen wall",
+   "titles": [
+    "24 Hours in A&E",
+    "The Legend of Zelda: Ocarina of Time/Ganon's Castle",
+    "Micro-livestock/Part 5: Deer and Antelope"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "his legs are trapped under a fallen wall",
+   "titles": [
+    "Crush syndrome",
+    "Puzzles/Lateral puzzles/5",
+    "The Legend of Zelda: A Link to the Past/Desert Palace"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone trapped under rubble after the earthquake",
+   "titles": [
+    "NYC community resources",
+    "Search and rescue",
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone trapped under rubble after the earthquake",
+   "titles": [
+    "Are You Ready?/Earthquake preparedness",
+    "How to survive an earthquake",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/Fukushima Daini Nuclear Power Plant"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "car crash, the driver is trapped and bleeding",
+   "titles": [
+    "24 Hours in A&E",
+    "Road safety",
+    "Choosing a Car"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "car crash, the driver is trapped and bleeding",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Henry Victor Herschel/Notes",
+    "Neurology and Neurosurgery/Incomplete Spinal Cord Injuries/Brown-S\u00e9quard syndrome",
+    "Scouting/BSA/First Aid Merit Badge"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "motorcycle accident he is not moving",
+   "titles": [
+    "Transportation Deployment Casebook/2014/Motorcycle Helmet Usage",
+    "Uniplanar External Fixation/Knowledge Review/Pre-Operative Management",
+    "Facial trauma"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "motorcycle accident he is not moving",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Henry Victor Herschel/Notes",
+    "List of ICD-9 codes E and V codes: external causes of injury and supplemental classification",
+    "Neurology and Neurosurgery/Incomplete Spinal Cord Injuries/Brown-S\u00e9quard syndrome"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "splashed bleach in my eye",
+   "titles": [
+    "Ataxia\u2013telangiectasia",
+    "Chemical toilet",
+    "Ebola"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "splashed bleach in my eye",
+   "titles": [
+    "First Aid/Head & Facial Injuries",
+    "Blennorrhoea",
+    "Photophthalmia"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "chemical in my eyes and it burns",
+   "titles": [
+    "Chemical eye injury",
+    "Chemical burn",
+    "Are You Ready?/Chemical Threats"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "chemical in my eyes and it burns",
+   "titles": [
+    "Chemical burn",
+    "Eye protection",
+    "Chemical eye injury"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "friend buried in an avalanche",
+   "titles": [
+    "Avalanche rescue",
+    "Principles of Microeconomics/Confronting Objections to the Economic Approach",
+    "High School Earth Science/Erosion and Deposition by Gravity"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "friend buried in an avalanche",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert",
+    "Avalanche rescue",
+    "Adventist Youth Honors Answer Book/Health and Science/Basic Rescue"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my toddler drank bleach",
+   "titles": [],
+   "zims": [],
+   "ok": []
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my toddler drank bleach",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Water intoxication",
+    "Malnutrition"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "kid swallowed drain cleaner",
+   "titles": [],
+   "zims": [],
+   "ok": []
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "kid swallowed drain cleaner",
+   "titles": [
+    "Caustic ingestion",
+    "Foreign body in alimentary tract",
+    "School Science/Mercury cleanup"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my child swallowed lamp oil",
+   "titles": [
+    "Toxic waste",
+    "Esperanto/Appendix/English-Esperanto word list (1889)",
+    "Tatworth Village/Cottage contents and farming pursuits"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my child swallowed lamp oil",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/Home Nursing",
+    "1,4-Butanediol",
+    "Ethnomedicine/Home Remedies/M - O"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "kid drank kerosene",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1929 01 11"
+   ],
+   "zims": [
+    "wikibooks"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "kid drank kerosene",
+   "titles": [
+    "School Science/Cannon fire",
+    "Kerosene lamps",
+    "School Science/Screaming jelly babies"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my kid ate a bottle of pills",
+   "titles": [
+    "BRIDGE/First BRIDGE trip",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1928 03 30"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my kid ate a bottle of pills",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/Home Nursing",
+    "1,4-Butanediol",
+    "Iron polymaltose"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "toddler got into grandma's medicine",
+   "titles": [
+    "24 Hours in A&E",
+    "Mirad Lexicon/Mirad-English-T"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "toddler got into grandma's medicine",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/Home Nursing",
+    "Chickenpox",
+    "Spondyloenchondrodysplasia"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "ate wild mushrooms and now vomiting",
+   "titles": [
+    "Hallucinogenic bolete mushroom",
+    "Chinese alchemical elixir poisoning",
+    "Ergine"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "ate wild mushrooms and now vomiting",
+   "titles": [
+    "Mushroom poisoning",
+    "Hallucinogenic bolete mushroom",
+    "Beginner's Guide to Interactive Fiction with Inform 7/Getting Started with Inform 7"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "the baby is coming right now",
+   "titles": [
+    "Raising Ducks/Growing your own baby ducks",
+    "Back Yard and Commercial Rabbit Production/Managing the herd",
+    "Adventist Youth Honors Answer Book/Health and Science/Child Care (Babysitting)"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "the baby is coming right now",
+   "titles": [
+    "Infant",
+    "Human Physiology/Pregnancy and birth",
+    "NREMT Skillset/Prehospital Childbirth"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "water broke and i can see the head",
+   "titles": [
+    "Maccabiah bridge collapse",
+    "Final Fantasy VII/Preface/Story/During the game",
+    "Mules"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "water broke and i can see the head",
+   "titles": [
+    "Peace Corps appropriate community technology/Plumbing a Solar Water Heater",
+    "Waters' view",
+    "Ba Zi/Date Selection in 1916"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "heavy bleeding after giving birth",
+   "titles": [
+    "Postpartum bleeding",
+    "Human Physiology/Pregnancy and birth",
+    "NREMT Skillset/Uterus Massage"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "heavy bleeding after giving birth",
+   "titles": [
+    "Vaginal delivery",
+    "Postpartum bleeding",
+    "Obstetrical bleeding"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "she keeps bleeding after the baby came",
+   "titles": [
+    "Jefferson Community Center native pollinators landscape",
+    "Placental expulsion",
+    "Obstetrical forceps"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "she keeps bleeding after the baby came",
+   "titles": [
+    "Bleeding during later pregnancy",
+    "Obstetrical bleeding",
+    "Antepartum bleeding"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "newborn baby is not breathing after birth",
+   "titles": [
+    "Blue baby syndrome",
+    "Human Physiology/Development: birth through death",
+    "Human Physiology/Pregnancy and birth"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "newborn baby is not breathing after birth",
+   "titles": [
+    "Adaptation to extrauterine life",
+    "NREMT Skillset/Prehospital Childbirth",
+    "Transient tachypnea of the newborn"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "pregnant and bleeding with bad pain",
+   "titles": [
+    "Pelvic pain",
+    "24 Hours in A&E",
+    "Refugee Phrasebook/Learning English and German"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "pregnant and bleeding with bad pain",
+   "titles": [
+    "Bleeding during later pregnancy",
+    "Late pregnancy bleeding",
+    "Early pregnancy bleeding"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "my house is on fire",
+   "titles": [
+    "Fire resistant plants",
+    "STAR-TIDES Field Manual/Dakota Fire Hole",
+    "District of Columbia Fire and Emergency Medical Services Department"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "my house is on fire",
+   "titles": [
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Adventist Youth Honors Answer Book/Outreach/Family Life",
+    "Are You Ready?/Fires"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "fire in the house and kids are upstairs",
+   "titles": [
+    "CCAT Potential Student Project Page",
+    "Old School RuneScape/Quests/Desert Treasure",
+    "Smoking Meat"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "fire in the house and kids are upstairs",
+   "titles": [
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Philip Bechervaise/Notes/1860s",
+    "Adventist Youth Honors Answer Book/Outreach/Family Life"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "grease fire in the pan",
+   "titles": [
+    "Fire safety",
+    "Scouting/BSA/Fire Safety Merit Badge",
+    "Hog Butchering and Smoking"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "grease fire in the pan",
+   "titles": [
+    "A-level Chemistry/OCR (Salters)/Chip-pan fires",
+    "Adventist Youth Honors Answer Book/Household Arts/Cooking",
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "pour water on a grease fire",
+   "titles": [
+    "Soap making",
+    "Hog Butchering and Smoking",
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "pour water on a grease fire",
+   "titles": [
+    "A-level Chemistry/OCR (Salters)/Chip-pan fires",
+    "Adventist Youth Honors Answer Book/Household Arts/Cooking",
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "the oil in the pan caught fire",
+   "titles": [
+    "Backpack Camping and Woodland Survival/Skills/Cooking/Best Practices",
+    "Phoenix Wright: Ace Attorney/Episode 5: Rise from the Ashes/Day 2 - Investigation",
+    "Super Smash Bros. Melee/Stages"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "the oil in the pan caught fire",
+   "titles": [
+    "A-level Chemistry/OCR (Salters)/Chip-pan fires",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Philip Bechervaise/Notes/1860s",
+    "Professionalism/Piper Alpha Oil Rig Disaster"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "the outlet is sparking and smoking",
+   "titles": [
+    "Smoking ban",
+    "Are You Ready?/Fires",
+    "Kamusi la nishati hai/P - S"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "the outlet is sparking and smoking",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Edward Gustavus Campbell Barton/Notes",
+    "Adventist Youth Honors Answer Book/Camping/Fire/Electric spark",
+    "FCC Technician Class Exam Study Guide - 2014-2018/Subelement T0 Group A"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "electrical fire in the wall",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Fire safety",
+    "Straw Bale Construction/Characteristics/Resistance to fire"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "electrical fire in the wall",
+   "titles": [
+    "Teaching Elementary School Health Education/Injury Prevention and Safety/Unintentional Injuries/Fires",
+    "Electrical burn",
+    "Television Manufacture and Repair"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "chimney fire roaring sound",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Australasian Radio World/Issues/1937 05",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Donald Brader Knock/Notes",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1923 01 05"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "chimney fire roaring sound",
+   "titles": [
+    "Engineering Acoustics/Noise from turbine blades",
+    "Designing Sound in SuperCollider/Fire",
+    "Adventist Youth Honors Answer Book/Camping/Fire/Hunters"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "i smell gas in the house",
+   "titles": [
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "E305 backyard biodigester",
+    "Woodstoves"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "i smell gas in the house",
+   "titles": [
+    "HEIF CCAT solar hot water system/Operation and maintenance",
+    "Odor",
+    "Refugee Phrasebook/Medical Phrases - Italy"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "gas leak from the stove",
+   "titles": [
+    "Gas stove",
+    "How air conditioner works",
+    "Fire safety"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "gas leak from the stove",
+   "titles": [
+    "Gas stove",
+    "HEIF CCAT solar hot water system/Operation and maintenance",
+    "Indoor environmental quality"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "wildfire is coming toward our house",
+   "titles": [
+    "Community action/South Africa",
+    "Lentis/The 2020 Western Wildfire Season in the U.S.",
+    "Infrastructure Past, Present, and Future Casebook/Santa Ynez Reservoir"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "wildfire is coming toward our house",
+   "titles": [
+    "Are You Ready?/Wildfires",
+    "Adventist Youth Honors Answer Book/Outreach/Family Life",
+    "Are You Ready?/Fires"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "fire on the hill, should we evacuate",
+   "titles": [
+    "Fire on the Limestone Plains/Bush Fires/The 1979 Bush Fires",
+    "Fire on the Limestone Plains/Bush Fires/The 1952 Bushfires",
+    "Litter (rescue basket)"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "fire on the hill, should we evacuate",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Outreach/Family Life",
+    "Adventist Youth Honors Answer Book/Fire",
+    "Are You Ready?/Fires"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "our car is stuck in rising flood water",
+   "titles": [
+    "Effects of climate change on health in the United Kingdom",
+    "Internet of things",
+    "Adventist Youth Honors Answer Book/Nature/Weather - Advanced"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "our car is stuck in rising flood water",
+   "titles": [
+    "Astro and Safari Maintenance and Repair/Troubleshooting",
+    "Are You Ready?/Floods",
+    "Rainwater Catchment J Gnarly"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "water is coming into the car",
+   "titles": [
+    "Adapted thermostatic valve for water pasteurization",
+    "Car electronics",
+    "London community activism news/2007-2021"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "water is coming into the car",
+   "titles": [
+    "Astro and Safari Maintenance and Repair/Troubleshooting",
+    "Automobile Repair/Volkswagen",
+    "Peace Corps appropriate community technology/Plumbing a Solar Water Heater"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "the sea pulled back after the earthquake",
+   "titles": [
+    "High School Earth Science/Theory of Plate Tectonics",
+    "Regents Earth Science (High School)",
+    "High School Earth Science/Volcanic Activity"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "the sea pulled back after the earthquake",
+   "titles": [
+    "Fukushima Aftermath: Whither the Indian Point Nuke?/The 2011 Japan Earthquakes",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/The 2011 Japan Earthquakes",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/The Tsunami"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "tsunami warning what do we do",
+   "titles": [
+    "Are You Ready?/Tsunamis",
+    "Cosmos in the Stacks Tsunami demo",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/The Tsunami"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "tsunami warning what do we do",
+   "titles": [
+    "Are You Ready?/Tsunamis",
+    "Are You Ready?/Earthquake preparedness",
+    "Lentis/Cascadia Earthquake Preparation"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "the ground is shaking right now",
+   "titles": [
+    "How to survive an earthquake",
+    "Raising Ducks/Growing your own baby ducks",
+    "Bayside Park Farm/Informational kiosk"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "the ground is shaking right now",
+   "titles": [
+    "Earthquakes",
+    "Are You Ready?/Earthquake preparedness",
+    "How to survive an earthquake"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "earthquake happening what do i do",
+   "titles": [
+    "How to survive an earthquake",
+    "Are You Ready?/Earthquake preparedness",
+    "High School Earth Science/Nature of Earthquakes"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "earthquake happening what do i do",
+   "titles": [
+    "Are You Ready?/Earthquake preparedness",
+    "How to survive an earthquake",
+    "Earthquakes"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "tornado coming where do we hide",
+   "titles": [
+    "Kirby franchise strategy guide/Enemies",
+    "Fukushima Aftermath/Davis-Besse Nuclear Power Station",
+    "Super Mario Sunshine/Bianco Hills"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "tornado coming where do we hide",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Natural Disasters/Tornado",
+    "Science: An Elementary Teacher\u2019s Guide/Weather, seasons, and climate"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "tornado warning and no basement",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "tornado warning and no basement",
+   "titles": [
+    "Natural Disasters/Tornado",
+    "Are You Ready?/Tornadoes",
+    "Science: An Elementary Teacher\u2019s Guide/Weather, seasons, and climate"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone is shooting in the mall",
+   "titles": [
+    "Timeline of the COVID-19 pandemic in New York City",
+    "COVID-19 pandemic in Ottawa",
+    "Mirad Lexicon/English-Mirad-S"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone is shooting in the mall",
+   "titles": [
+    "Gyakuten Kenji 2/Episode 1: Turnabout Target/Beginning",
+    "Point shooting",
+    "Apollo Justice: Ace Attorney/Episode 4: Turnabout Succession/7 Years Ago - Trial Former"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "active shooter at school",
+   "titles": [
+    "School bullying",
+    "Lentis/The School to Prison Pipeline",
+    "Medical Tactical Training Program"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "active shooter at school",
+   "titles": [
+    "Foundations and Assessment of Education/Edition 1/Foundations Table of Contents/Chapter 5/5.4.2",
+    "School bullying",
+    "Foundations of Education and Instructional Assessment/Sociological Influences/Violence"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "explosion and people are bleeding",
+   "titles": [
+    "Blast injury",
+    "Pulmonary contusion",
+    "Suicide"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "explosion and people are bleeding",
+   "titles": [
+    "Blast injury",
+    "Are You Ready?/Nuclear blast",
+    "Total body disruption"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "a bomb went off nearby",
+   "titles": [
+    "New Zealand History/Mid to Late Twentieth Century",
+    "World War I/Causes/Franz Ferdinand",
+    "Yokkaichi asthma"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "a bomb went off nearby",
+   "titles": [
+    "US History/Bush Clinton",
+    "US History/World War II and Rise of Atomic Age",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/Fukushima Daiichi nuclear disaster"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "nuclear explosion what do i do",
+   "titles": [
+    "Effects of nuclear explosions on human health",
+    "Are You Ready?/Nuclear blast",
+    "Wikijunior:How Things Work/Nuclear Bomb"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "nuclear explosion what do i do",
+   "titles": [
+    "Are You Ready?/Nuclear blast",
+    "Are You Ready?/Nuclear power plants",
+    "Are You Ready?/Radiological Dispersion Device (RDD)"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "radiation fallout coming",
+   "titles": [
+    "Ionizing radiation",
+    "Are You Ready?/Nuclear blast",
+    "Effects of nuclear explosions on human health"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "radiation fallout coming",
+   "titles": [
+    "Acute radiation syndrome",
+    "Radiation damage",
+    "Iodine-131"
+   ],
+   "zims": [
+    "mdwiki",
+    "mdwiki",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "chemical spill outside, told to shelter in place",
+   "titles": [
+    "Chemical warfare",
+    "Saylor.org's Comparative Politics/Case Study: The Arab Spring",
+    "Smoking ban"
+   ],
+   "zims": [
+    "mdwiki",
+    "wikibooks",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "chemical spill outside, told to shelter in place",
+   "titles": [
+    "Are You Ready?/Nuclear power plants",
+    "Church Rock uranium mill spill",
+    "Are You Ready?/Hazardous Material Incidents"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "toxic gas cloud near the factory",
+   "titles": [
+    "Professionalism/Union Carbide and Bhopal",
+    "Mustard gas",
+    "Lives Saved by Replacing Coal with PV"
+   ],
+   "zims": [
+    "wikibooks",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "toxic gas cloud near the factory",
+   "titles": [
+    "Hydrogen sulfide",
+    "Hydraulic fracturing subsidies literature review/Why we need more development on government lands and offshore",
+    "Herbicide"
+   ],
+   "zims": [
+    "mdwiki",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "a power line fell on our car",
+   "titles": [
+    "Transportation Deployment Casebook/Cable Car",
+    "News by UK location/2023",
+    "Climate news/2018-2019"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "a power line fell on our car",
+   "titles": [
+    "Automobile Repair/Warning light system",
+    "Practivistas solar 2015",
+    "CCAT solar kiosk"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "downed power line in the yard",
+   "titles": [
+    "Yard Welding Fundamentals",
+    "M Street Eureka rainwater catchment",
+    "Pail closet"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "downed power line in the yard",
+   "titles": [
+    "House wiring",
+    "Trouble shooting electrical problems",
+    "Practivistas solar 2015"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "someone is breaking into my house",
+   "titles": [
+    "Chicken Cleaning and Preparation",
+    "Lorena Cookstove",
+    "The Future We Deserve/TheFWD larahna"
+   ],
+   "zims": [
+    "appropedia",
+    "appropedia",
+    "appropedia"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "someone is breaking into my house",
+   "titles": [
+    "Canadian Criminal Law/Offences/Break and Enter",
+    "Acing the SQE/QLTS Sample",
+    "Gyakuten Kenji 2/Episode 5: The Grand Turnabout/Beginning, Part 2"
+   ],
+   "zims": [
+    "wikibooks",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "mud is sliding down the hill toward the houses",
+   "titles": [
+    "High School Earth Science/Erosion and Deposition by Gravity",
+    "Kamusi la nishati hai/A - C",
+    "Beak"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "mdwiki"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "mud is sliding down the hill toward the houses",
+   "titles": [
+    "Are You Ready?/Landslide and Debris Flow (Mudslide)",
+    "High School Earth Science/Erosion and Deposition by Gravity",
+    "When It Hits the Fan/Personal Strategies and Know-how"
+   ],
+   "zims": [
+    "appropedia",
+    "wikibooks",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "red",
+   "how": "keyword",
+   "q": "hurricane is here and the roof is coming off",
+   "titles": [
+    "News pages on CASwiki/News sections in development",
+    "Green infrastructure",
+    "Ground mount fixed tilt PV racking literature review"
+   ],
+   "zims": [
+    "appropedia",
+    "mdwiki",
+    "appropedia"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "red",
+   "how": "vector",
+   "q": "hurricane is here and the roof is coming off",
+   "titles": [
+    "When It Hits the Fan/Specific Calamities",
+    "Are You Ready?/Hurricanes",
+    "High School Earth Science/Storms"
+   ],
+   "zims": [
+    "wikibooks",
+    "appropedia",
+    "wikibooks"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  }
+ ]
+}

@@ -1,0 +1,10298 @@
+{
+ "summary": {
+  "clean/upstream": {
+   "n": 253,
+   "top1_useful": 92,
+   "any3_useful": 163,
+   "none": 1,
+   "ms_median": 92,
+   "ms_p90": 512
+  },
+  "clean/pick": {
+   "n": 253,
+   "top1_useful": 146,
+   "any3_useful": 197,
+   "none": 5,
+   "ms_median": 578,
+   "ms_p90": 962
+  },
+  "typo/upstream": {
+   "n": 109,
+   "top1_useful": 4,
+   "any3_useful": 6,
+   "none": 71,
+   "ms_median": 4,
+   "ms_p90": 562
+  },
+  "typo/pick": {
+   "n": 109,
+   "top1_useful": 7,
+   "any3_useful": 10,
+   "none": 71,
+   "ms_median": 2,
+   "ms_p90": 589
+  }
+ },
+ "rows": [
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my husband collapsed and isn't breathing",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Yoga/Print version",
+    "Lucid Dreaming/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "man fell down not breathing no pulse",
+   "colour": "red",
+   "titles": [
+    "Inspiring quotes",
+    "History of cardiopulmonary resuscitation",
+    "Hypothermia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he stopped breathing what do i do",
+   "colour": "red",
+   "titles": [
+    "Electrical safety basic principals",
+    "Three Acres and Liberty/Chapter XXVII",
+    "New Public Thinking/Egypt's quest for dignity - Anna Bj\u00f6rkman"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my son isn't breathing",
+   "colour": "red",
+   "titles": [
+    "Inspiring quotes",
+    "BRIDGE/First BRIDGE trip",
+    "24 Hours in A&E"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "kid not breathing and lips are blue",
+   "colour": "red",
+   "titles": [
+    "Tonsillectomy",
+    "Inhalant",
+    "Mercury poisoning"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my baby is not breathing",
+   "colour": "red",
+   "titles": [
+    "Printable Breast Pump",
+    "NREMT Skillset/Seated Spinal Immobilization (KED)",
+    "CCAT greenshed west wall"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "infant stopped breathing in the crib",
+   "colour": "red",
+   "titles": [
+    "Behavioral sleep medicine",
+    "Baby-led weaning",
+    "Emergency childbirth"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he is choking on food and cannot talk",
+   "colour": "red",
+   "titles": [
+    "Choking",
+    "Baby-led weaning",
+    "First aid"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone choking at dinner",
+   "colour": "red",
+   "titles": [
+    "Casualty series 39",
+    "Adventist Adventurer Awards and Answers/Courtesy",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Amateur Radio/Issues/1933 10"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my baby is choking on a grape",
+   "colour": "red",
+   "titles": [
+    "Baby-led weaning",
+    "Suburban Hearth and Home/A Homely Welcome",
+    "History of Western Theatre: 17th Century to Now/American Pre-WWII"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "toddler choking on a coin",
+   "colour": "red",
+   "titles": [
+    "Baby-led weaning",
+    "Infant food safety",
+    "Hydrogen sulfide"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "she is unconscious but breathing",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Scene Assessment Upon Arrival (PENMAN)/Quiz",
+    "NREMT Skillset/Airway Patency Assessment/Quiz",
+    "24 Hours in A&E"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he passed out and will not wake up",
+   "colour": "red",
+   "titles": [
+    "New Public Thinking/Bergeron's Children - Sm\u00e1ri McCarthy",
+    "Neem/Medicinals",
+    "BRIDGE/First BRIDGE trip"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "asthma attack and no inhaler",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Medical Patient Assessment for Respiratory Distress (PASTE)",
+    "Nontoxic alternatives to common household products",
+    "Asthma"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "she can't breathe, wheezing badly",
+   "colour": "red",
+   "titles": [
+    "Electronic cigarette and e-cigarette liquid marketing",
+    "Muggles' Guide to Harry Potter/Characters/Argus Filch",
+    "Muggles' Guide to Harry Potter/Characters/Fred and George Weasley"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "throat swelling after a bee sting",
+   "colour": "red",
+   "titles": [
+    "Insects in medicine",
+    "Apamin",
+    "Anaphylaxis"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "allergic reaction and her lips are swelling",
+   "colour": "red",
+   "titles": [
+    "List of allergens",
+    "Balsam of Peru",
+    "Anaphylaxis"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "peanut allergy can not breathe",
+   "colour": "red",
+   "titles": [
+    "Traditional Field Crops/Appendices",
+    "Sesame allergy",
+    "List of allergens"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "smoke inhalation from a house fire",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/N95 FFR (Filtering Facepiece Respirator) Use/Quiz",
+    "535 FiltAirs DIY air filter",
+    "Waterpod/Rocket Stove"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he breathed in a lot of smoke and is coughing",
+   "colour": "red",
+   "titles": [
+    "Lean (drug)",
+    "2019\u20132020 vaping lung illness outbreak",
+    "Health effects arising from the September 11 attacks"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "headache and dizzy after running the generator inside",
+   "colour": "red",
+   "titles": [
+    "CCAT natural paints 2017",
+    "Superior canal dehiscence syndrome",
+    "Denn\u014d Senshi Porygon"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "carbon monoxide poisoning symptoms whole family sick",
+   "colour": "red",
+   "titles": [
+    "Hypoxia (medicine)",
+    "Diving disorders",
+    "Indoor air quality"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "carbon monoxide from making a fire in the tent",
+   "colour": "red",
+   "titles": [
+    "Self-contained self-rescue device",
+    "Phosgene",
+    "Oxygen mask"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "blood is spurting from his leg and won't stop",
+   "colour": "red",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Human Physiology/Print Version",
+    "Intelligent Plastic Machines"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "deep cut on the arm bleeding a lot",
+   "colour": "red",
+   "titles": [
+    "Laparoscopic Cholecystectomy Training Module/Module 1: Educational Videos",
+    "24 Hours in A&E",
+    "Knee replacement"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone is full of blood, it does not stop",
+   "colour": "red",
+   "titles": [
+    "GEM mosquito control FAQ",
+    "Control and treatment of bedbugs",
+    "Diabetes mellitus cured - George's experience"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "his finger got cut off",
+   "colour": "red",
+   "titles": [
+    "White Oak Baskets",
+    "Making Rope",
+    "New Public Thinking/In the future everyone will be powerful for 15 minutes - Dougald Hine"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "chainsaw cut his leg badly",
+   "colour": "red",
+   "titles": [
+    "List of films impacted by the COVID-19 pandemic",
+    "Doom/Complete list of enemies",
+    "Robotics/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "stabbed in the chest",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Penetrating Chest Trauma",
+    "NREMT Skillset",
+    "The Future We Deserve/Of Arms and the Man - James Hester"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "knife wound to the chest and he is struggling to breathe",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Major trauma",
+    "Neurology and Neurosurgery/Incomplete Spinal Cord Injuries/Brown-S\u00e9quard syndrome"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "a stick is stuck in his leg",
+   "colour": "red",
+   "titles": [
+    "Uniplanar External Fixation for an Open Tibial Shaft Transverse Fracture",
+    "BRIDGE/First BRIDGE trip",
+    "Hexayurt project/Hexayurt playa checklist"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "nail went through her foot and is still in",
+   "colour": "red",
+   "titles": [
+    "Parables from a mad social scientist",
+    "Farmers of Forty Centuries/Chapter 3",
+    "BPF solar fan"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "chest pain spreading to his left arm",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Spinal Immobilization Adult",
+    "Referred pain",
+    "Gorham's disease"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i think my dad is having a heart attack",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "List of medical mnemonics",
+    "List of phobias"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he is pale cold and sweaty after the accident",
+   "colour": "red",
+   "titles": [
+    "Richard Nixon",
+    "Planet Earth/print version",
+    "Final Fantasy VII/Printable version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "signs of shock after bleeding",
+   "colour": "red",
+   "titles": [
+    "PTC Course/Circulation",
+    "CrashSavers Trauma/Tourniquet/Self-assessment",
+    "CrashSavers Trauma/Pressure and Packing/Clinical Case Scenarios"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "dog attacked my child and she is bleeding badly",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Sexual dysfunction",
+    "Child abuse"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "her face is drooping and she can not speak properly",
+   "colour": "red",
+   "titles": [
+    "Breastfeeding",
+    "Stroke",
+    "History of Western Theatre: 17th Century to Now/Jacobean"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "sudden weakness on one side of the body",
+   "colour": "red",
+   "titles": [
+    "Silk Worm Raising",
+    "Gilding and Silvering",
+    "Peace Corps appropriate community technology/Development of Facilitation Skills Criteria"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he is having a seizure",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Medical Patient Assessment for Altered Mental Status (AEIOUTIPS)/Quiz",
+    "Palestinian access to water",
+    "NREMT Skillset/Glucometer Blood Testing"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "she is shaking and foaming at the mouth",
+   "colour": "red",
+   "titles": [
+    "Vegetarianism",
+    "Practice Ideas for Suzuki Students",
+    "Bartending/Cocktails/Glossary"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my baby has a high fever and is shaking all over",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Homeopathy",
+    "Quackery"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "hit his head and is vomiting and confused",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Head injury",
+    "Brain injury"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "fell and hit her head now very sleepy",
+   "colour": "red",
+   "titles": [
+    "Madame Bovary/Chapter One",
+    "Final Fantasy VII/Printable version",
+    "Dreamer"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "fell off the roof and can not move his legs",
+   "colour": "red",
+   "titles": [
+    "Pedal Power MEOW",
+    "Micro-livestock/Part 5: Deer and Antelope",
+    "24 Hours in A&E"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "neck hurts after a fall, numb arms",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Mandible",
+    "List of medical roots and affixes"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "diabetic and shaking, confused, sweating",
+   "colour": "red",
+   "titles": [
+    "Drug withdrawal",
+    "Cellulitis",
+    "Blood sugar level"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my diabetic son is not making sense",
+   "colour": "red",
+   "titles": [
+    "List of Munchausen by proxy cases",
+    "Factitious disorder imposed on another",
+    "Advanced maternal age"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "overdose, he is barely breathing and lips are blue",
+   "colour": "red",
+   "titles": [
+    "Lucid Dreaming/Print version",
+    "Human Physiology/Print Version",
+    "US History/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "took too many pain pills, will not wake",
+   "colour": "red",
+   "titles": [
+    "Chinese alchemical elixir poisoning",
+    "Medication",
+    "Doping in sport"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "baby has fever and a rash that does not fade",
+   "colour": "red",
+   "titles": [
+    "Teething",
+    "Rubella virus",
+    "Immunization"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "stiff neck high fever and purple spots",
+   "colour": "red",
+   "titles": [
+    "Meningococcal disease",
+    "Childhood immunizations in the United States",
+    "Meningitis"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my friend says he wants to kill himself",
+   "colour": "red",
+   "titles": [
+    "Inspiring quotes",
+    "Ethical eating and food production",
+    "Trial of Anders Behring Breivik"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i do not want to live anymore",
+   "colour": "red",
+   "titles": [
+    "Blacksmithing",
+    "Taffy Pull",
+    "Lantan Bentala"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "treat water in the lungs after drowning",
+   "colour": "red",
+   "titles": [
+    "Comfrey",
+    "Inspiring quotes",
+    "Drowning"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my son nearly drowned in the rainwater pool",
+   "colour": "red",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership",
+    "Planet Earth/print version"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone fell in the rainwater pool and isn't breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "pulled him out of the river, not breathing",
+   "colour": "red",
+   "titles": [
+    "CCAT barts bike",
+    "Awakenings",
+    "Yangsheng (Daoism)"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he fell through the ice on the lake",
+   "colour": "red",
+   "titles": [
+    "Micro-livestock/Part 2: Poultry",
+    "COVID-19 pandemic in Utah",
+    "Negligence"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "friend fell through thin ice",
+   "colour": "red",
+   "titles": [
+    "Arcata plastic bags/Raw info",
+    "Micro-livestock/Part 2: Poultry",
+    "24 Hours in A&E"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone got shocked by a wire in the flood water",
+   "colour": "red",
+   "titles": [
+    "The Kensington Rifles/Wasted effort on the Somme",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Trevor Watkins/Notes",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he touched a power line and collapsed",
+   "colour": "red",
+   "titles": [
+    "Umbrella solar cooker",
+    "Haiti Earthquake Assistance Project for HSU Engineering 305",
+    "Steel 3D printing literature review"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "electric shock from a fallen wire",
+   "colour": "red",
+   "titles": [
+    "List of people who have died while on the toilet",
+    "24 Hours in A&E",
+    "Toilet-related injuries and deaths"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my friend was struck by lightning",
+   "colour": "red",
+   "titles": [
+    "MMR vaccine and autism",
+    "Ramakrishna Mission",
+    "Miraculous births"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "her whole arm is badly burned",
+   "colour": "red",
+   "titles": [
+    "Micro-livestock/Part 2: Poultry",
+    "Disfigurement",
+    "Face transplant"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "boiling water spilled on the baby",
+   "colour": "red",
+   "titles": [
+    "MESS (Micro Environment Subsistence System)/Vegetable Yield",
+    "Menstrual cup",
+    "Mercury-in-glass thermometer"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "burn and not breathing",
+   "colour": "red",
+   "titles": [
+    "Trauma Team Training/Post-Course Participant Evaluation",
+    "Trauma Team Training/post-course participant evaluation",
+    "Trauma Team Training/Pre-Course Participant Evaluation-(Quiz)"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "pulled him out of the fire, burned and not breathing",
+   "colour": "red",
+   "titles": [
+    "Rural Electrification Systems",
+    "List of first response mnemonics",
+    "Grain entrapment"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my clothes caught fire",
+   "colour": "red",
+   "titles": [
+    "Making Rope",
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Resurrectionists in the United Kingdom"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "his shirt is on fire",
+   "colour": "red",
+   "titles": [
+    "Peace Corps appropriate community technology/Nature of Volunteerism: Expectations Beyond Training",
+    "Hemp",
+    "Green living"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my clothes caught fire while starting the fire",
+   "colour": "red",
+   "titles": [
+    "Making Rope",
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Great Plague of London"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "found him in the snow, cold and not shivering anymore",
+   "colour": "red",
+   "titles": [
+    "Dreamer",
+    "Chinese (Classical Mandarin)",
+    "Yoga/Spiritual Almanac"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "hypothermia after falling in cold water",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Laparoscopic Cholecystectomy Training Module/Module 1: Educational Videos",
+    "Drowning"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "he was working in the sun and now he is confused and hot",
+   "colour": "red",
+   "titles": [
+    "Heliostats",
+    "CCAT PV system",
+    "Silk Worm Raising"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "heat stroke what to do",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Extreme heat",
+    "Improving system efficiency by combining engines",
+    "Are You Ready?/Nuclear blast"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "a snake bit my leg",
+   "colour": "red",
+   "titles": [
+    "Control and treatment of bedbugs",
+    "Miracle Mineral Supplement",
+    "Quackery"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "bitten by a rattlesnake",
+   "colour": "red",
+   "titles": [
+    "Snakebite",
+    "Sistrurus miliarius barbouri",
+    "List of dangerous snakes"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "snake bite while camping",
+   "colour": "red",
+   "titles": [
+    "Snakebite",
+    "Menstruation hut",
+    "Strychnine poisoning"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "his legs are trapped under a fallen wall",
+   "colour": "red",
+   "titles": [
+    "Micro-livestock/Part 4: Rodents",
+    "Micro-livestock/Part 2: Poultry",
+    "Micro-livestock/Part 5: Deer and Antelope"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone trapped under rubble after the earthquake",
+   "colour": "red",
+   "titles": [
+    "NYC community resources",
+    "Search and rescue",
+    "Straw Bale Construction/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "car crash, the driver is trapped and bleeding",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Road safety",
+    "Storm drain"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "motorcycle accident he is not moving",
+   "colour": "red",
+   "titles": [
+    "Ornge",
+    "24 Hours in A&E",
+    "Face transplant"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "splashed bleach in my eye",
+   "colour": "red",
+   "titles": [
+    "Laparoscopic Cholecystectomy Training Module/Module 1: Educational Videos",
+    "Volap\u00fck/English-Volap\u00fck dictionary",
+    "Mirad Grammar/print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "chemical in my eyes and it burns",
+   "colour": "red",
+   "titles": [
+    "CCAT Natural Exterior Wall Plaster and Paint, part 2",
+    "Papasan chair solar cooker",
+    "Viability of recycling semiconductors in Dell LCD PC monitors"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "friend buried in an avalanche",
+   "colour": "red",
+   "titles": [
+    "Avalanche rescue",
+    "List of deaths from drug overdose and intoxication",
+    "High School Earth Science/Erosion and Deposition by Gravity"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my toddler drank bleach",
+   "colour": "red",
+   "titles": [
+    "Mirad Grammar/print version",
+    "Planet Earth/print version"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "kid swallowed drain cleaner",
+   "colour": "red",
+   "titles": [
+    "Wikijunior:The Elements/Printable version",
+    "Mario franchise strategy guide/Printable version",
+    "Mirad Grammar/Word Families"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my child swallowed lamp oil",
+   "colour": "red",
+   "titles": [
+    "Tatworth Village/Cottage contents and farming pursuits",
+    "Tatworth Village/Printable version",
+    "Mirad Grammar/Word Families"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "kid drank kerosene",
+   "colour": "red",
+   "titles": [
+    "Mirad/Print version",
+    "Mirad Grammar/print version",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1929 01 11"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my kid ate a bottle of pills",
+   "colour": "red",
+   "titles": [
+    "BRIDGE/First BRIDGE trip",
+    "Relationships/Printable version",
+    "Mirad/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "toddler got into grandma's medicine",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Mirad Grammar/Word Families",
+    "Mirad Grammar/print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "ate wild mushrooms and now vomiting",
+   "colour": "red",
+   "titles": [
+    "Hallucinogenic bolete mushroom",
+    "Chinese alchemical elixir poisoning",
+    "Psychedelic drug"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the baby is coming right now",
+   "colour": "red",
+   "titles": [
+    "Haiti Earthquake Assistance Project for HSU Engineering 305",
+    "Operating Manual for Gigabot X printer",
+    "Bike snow plow"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "water broke and i can see the head",
+   "colour": "red",
+   "titles": [
+    "Mules",
+    "Big Bear Heated Driveway",
+    "Death of Savita Halappanavar"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "heavy bleeding after giving birth",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Uterus Massage",
+    "Back Yard and Commercial Rabbit Production/Managing the herd",
+    "Heavy menstrual bleeding"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "she keeps bleeding after the baby came",
+   "colour": "red",
+   "titles": [
+    "Jefferson Community Center native pollinators landscape",
+    "CCAT greenshed west wall",
+    "Postpartum care"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "newborn baby is not breathing after birth",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Prehospital Childbirth",
+    "NREMT Skillset/Prehospital Childbirth/Skill Sheet",
+    "Back Yard and Commercial Rabbit Production/Managing the herd"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "pregnant and bleeding with bad pain",
+   "colour": "red",
+   "titles": [
+    "What is AIDS?",
+    "24 Hours in A&E",
+    "Vaginitis"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my house is on fire",
+   "colour": "red",
+   "titles": [
+    "King Pig's property project",
+    "Smoking Meat",
+    "Simple living/Rural Architecture"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "fire in the house and kids are upstairs",
+   "colour": "red",
+   "titles": [
+    "CCAT Potential Student Project Page",
+    "The Art Village project",
+    "Urban legends about drugs"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "grease fire in the pan",
+   "colour": "red",
+   "titles": [
+    "Hog Butchering and Smoking",
+    "Soap making",
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "pour water on a grease fire",
+   "colour": "red",
+   "titles": [
+    "Soap making",
+    "Hog Butchering and Smoking",
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the oil in the pan caught fire",
+   "colour": "red",
+   "titles": [
+    "Additional Services Provided by Solar PV Systems: A review",
+    "Endocrine disruptor",
+    "Tetrodotoxin"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the outlet is sparking and smoking",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Renewable energy dictionary/S",
+    "CCAT bike powered tools"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "electrical fire in the wall",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Engr535 Development Technology",
+    "DRYTECH"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "chimney fire roaring sound",
+   "colour": "red",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Australasian Radio World/Issues/1937 05",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Charles Dansie Maclurcan/Notes",
+    "History of Western Theatre: 17th Century to Now/English Romantic"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i smell gas in the house",
+   "colour": "red",
+   "titles": [
+    "E305 backyard biodigester",
+    "Woodstoves",
+    "Stadium light solar cookers"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "gas leak from the stove",
+   "colour": "red",
+   "titles": [
+    "Photovoltaic dictionary/E - G",
+    "Renewable energy dictionary/E-G",
+    "Kamusi la nishati hai/D - I"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "wildfire is coming toward our house",
+   "colour": "red",
+   "titles": [
+    "535 FiltAirs DIY air filter",
+    "News by location/2025",
+    "Community action/Los Angeles"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "fire on the hill, should we evacuate",
+   "colour": "red",
+   "titles": [
+    "StartUp Humboldt lectern",
+    "Siege of Mariupol",
+    "COVID-19 pandemic on USS Theodore Roosevelt"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "our car is stuck in rising flood water",
+   "colour": "red",
+   "titles": [
+    "Internet of things",
+    "Impact of the COVID-19 pandemic on the music industry",
+    "Economic impact of the COVID-19 pandemic"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "water is coming into the car",
+   "colour": "red",
+   "titles": [
+    "Adapted thermostatic valve for water pasteurization",
+    "Car electronics",
+    "Hydrogen Fuel Cell Automobiles"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the sea pulled back after the earthquake",
+   "colour": "red",
+   "titles": [
+    "BRIDGE/First BRIDGE trip",
+    "Deep biosphere",
+    "Toilets in Japan"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "tsunami warning what do we do",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Getting Informed",
+    "New Public Thinking/A twitteration on 2011 - Neil Cantwell",
+    "Haiti Earthquake Assistance Project for HSU Engineering 305"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the ground is shaking right now",
+   "colour": "red",
+   "titles": [
+    "How to survive an earthquake",
+    "DIY Graphing Chalkboard",
+    "Hexayurt project/Design Principles"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "earthquake happening what do i do",
+   "colour": "red",
+   "titles": [
+    "How to survive an earthquake",
+    "Honesty as policy in aid and development",
+    "NYC community resources"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "tornado coming where do we hide",
+   "colour": "red",
+   "titles": [
+    "Super Mario Sunshine/Bianco Hills",
+    "When It Hits the Fan/Specific Calamities",
+    "Super Mario World/Printable version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "tornado warning and no basement",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone is shooting in the mall",
+   "colour": "red",
+   "titles": [
+    "COVID-19 pandemic in Metro Manila",
+    "COVID-19 pandemic in Tamil Nadu",
+    "Hyperthymesia"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "active shooter at school",
+   "colour": "red",
+   "titles": [
+    "Community action/Greenwich",
+    "Medical Tactical Training Program",
+    "Pseudocommando"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "explosion and people are bleeding",
+   "colour": "red",
+   "titles": [
+    "Liquid fluoride thorium reactor",
+    "Blast injury",
+    "Pulmonary contusion"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "a bomb went off nearby",
+   "colour": "red",
+   "titles": [
+    "Richard Dimbleby",
+    "1813\u20131814 Malta plague epidemic",
+    "Siege of Mariupol"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "nuclear explosion what do i do",
+   "colour": "red",
+   "titles": [
+    "Nuclear energy",
+    "Are You Ready?/Getting Informed",
+    "FAST News"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "radiation fallout coming",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Nuclear blast",
+    "Using a Gaussian Dispersion Model to Study CO2 Emissions on a Summer Day in Riyadh, Saudi Arabia",
+    "Rachel Carson"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "chemical spill outside, told to shelter in place",
+   "colour": "red",
+   "titles": [
+    "Chemical warfare",
+    "Smoking ban",
+    "COVID-19 misinformation"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "toxic gas cloud near the factory",
+   "colour": "red",
+   "titles": [
+    "Lives Saved by Replacing Coal with PV",
+    "CCAT NZE study",
+    "Glossary of sustainability terms"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "a power line fell on our car",
+   "colour": "red",
+   "titles": [
+    "News by UK location/2023",
+    "Climate news/2018-2019",
+    "Community action/West Midlands"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "downed power line in the yard",
+   "colour": "red",
+   "titles": [
+    "M Street Eureka rainwater catchment",
+    "E305 backyard biodigester",
+    "Urban compost bins at Sembradores Urbanos"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "someone is breaking into my house",
+   "colour": "red",
+   "titles": [
+    "Sustainable gifts",
+    "Chicken Cleaning and Preparation",
+    "CCAT Raised Garden Beds"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "mud is sliding down the hill toward the houses",
+   "colour": "red",
+   "titles": [
+    "Kamusi la nishati hai/A - C",
+    "Beak",
+    "Soil"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "hurricane is here and the roof is coming off",
+   "colour": "red",
+   "titles": [
+    "BRIDGE/First BRIDGE trip",
+    "Ground mount fixed tilt PV racking literature review",
+    "News by location/2023"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i burned my hand on the camp stove",
+   "colour": "yellow",
+   "titles": [
+    "Hexayurt project/Hexayurt playa",
+    "Farm Hack Guide",
+    "777 Big Money Project"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "burned my hand trying to light a fire",
+   "colour": "yellow",
+   "titles": [
+    "Papasan chair solar cooker",
+    "Hexayurt project/Materials",
+    "Blacksmithing"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i burnt my fingers lighting the campfire",
+   "colour": "yellow",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/William Trevor Watkins/Notes",
+    "Planet Earth/print version",
+    "Cultural Anthropology/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "is it safe to put water on a burn",
+   "colour": "yellow",
+   "titles": [
+    "Fireless cookers",
+    "STAR-TIDES Field Manual/Hexayurts",
+    "Laparoscopic Cholecystectomy Training Module/Principles of Electrosurgery"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how do i treat water blisters on a burn",
+   "colour": "yellow",
+   "titles": [
+    "Sunny Brae Yurt",
+    "Traditional Field Crops/Pest and disease control",
+    "Laparoscopic Cholecystectomy Training Module/Module 1: Educational Videos"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my kid fell into the fire while we were making a fire",
+   "colour": "yellow",
+   "titles": [
+    "News by location/2025",
+    "MESS (Micro Environment Subsistence System)/Overview of plant needs",
+    "Denn\u014d Senshi Porygon"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "cut my finger with a knife",
+   "colour": "yellow",
+   "titles": [
+    "Recycled Glass and Windows",
+    "Hexayurt project/Materials",
+    "3D printed PLA as a mold material for ceramics"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "deep cut on my hand, does it need stitches",
+   "colour": "yellow",
+   "titles": [
+    "Stanley and Kristi's eco-friendly cardboard furniture",
+    "Dry suit",
+    "Prevalence of female genital mutilation"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "twisted my ankle hiking",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Pioneering",
+    "Adventist Youth Honors Answer Book/Recreation/Wilderness Leadership",
+    "Yoga/Print version"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "sprained wrist swelling",
+   "colour": "yellow",
+   "titles": [
+    "NREMT Skillset/Long Bone Splinting",
+    "Sprain",
+    "Jammed finger"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i think my arm is broken",
+   "colour": "yellow",
+   "titles": [
+    "New Public Thinking/The year punk broke - Chris T-T",
+    "Dortmund 2010 Forest Conflict/Workshops",
+    "Inspiring quotes"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "broken leg no ambulance",
+   "colour": "yellow",
+   "titles": [
+    "NREMT Skillset/Sager Traction Splint Application",
+    "NREMT Skillset/Spinal Immobilization Adult",
+    "24 Hours in A&E"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "shoulder popped out",
+   "colour": "yellow",
+   "titles": [
+    "Emergency childbirth",
+    "NREMT Skillset/Joint Immobilization",
+    "Community action/New York City"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "nosebleed will not stop",
+   "colour": "yellow",
+   "titles": [
+    "Nuclear energy",
+    "Nosebleed",
+    "Hereditary hemorrhagic telangiectasia"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "kid has a nose bleed",
+   "colour": "yellow",
+   "titles": [
+    "Runny nose",
+    "Tonsillectomy",
+    "Pediatric advanced life support"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "tooth knocked out",
+   "colour": "yellow",
+   "titles": [
+    "Traditional Field Crops/Planning and preparation",
+    "CCAT greenhouse natural wall",
+    "Dental avulsion"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "bad toothache and swollen face",
+   "colour": "yellow",
+   "titles": [
+    "Toothache",
+    "Native American ethnobotany",
+    "Pericoronitis"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "stung by a bee",
+   "colour": "yellow",
+   "titles": [
+    "Practical Action/Beekeeping",
+    "Bees and Their Management",
+    "Schmidt sting pain index"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "wasp sting swelling",
+   "colour": "yellow",
+   "titles": [
+    "Traditional Field Crops/Pest and disease control",
+    "Bee sting",
+    "Arthropod bites and stings"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "scorpion sting on my foot",
+   "colour": "yellow",
+   "titles": [
+    "Stingray injury",
+    "List of skin conditions",
+    "Serotonin"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "tick on my leg how to remove",
+   "colour": "yellow",
+   "titles": [
+    "Delta calibration",
+    "Control and treatment of bedbugs",
+    "Farmers of Forty Centuries/Chapter 1"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "spider bite turning red",
+   "colour": "yellow",
+   "titles": [
+    "Control and treatment of bedbugs",
+    "Micro-livestock/Part 2: Poultry",
+    "Antivenom"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "stung by a jellyfish",
+   "colour": "yellow",
+   "titles": [
+    "Irukandji syndrome",
+    "Stingray injury",
+    "Bee sting"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "dog bit my hand, small wound",
+   "colour": "yellow",
+   "titles": [
+    "Parables from a mad social scientist",
+    "Microchip implant (human)",
+    "Pain in cephalopods"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "a stray dog bit me, rabies?",
+   "colour": "yellow",
+   "titles": [
+    "Animal testing",
+    "Dogs/Printable version",
+    "Final Fantasy VI/Printable version"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "rash from poison ivy",
+   "colour": "yellow",
+   "titles": [
+    "Urushiol-induced contact dermatitis",
+    "Contact dermatitis",
+    "Burow's solution"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "itchy rash after touching a plant",
+   "colour": "yellow",
+   "titles": [
+    "Blackberries",
+    "Contact dermatitis",
+    "Chronic actinic dermatitis"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "drank creek water and now i have diarrhea",
+   "colour": "yellow",
+   "titles": [
+    "Mirad Grammar/print version",
+    "Planet Earth/print version"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "diarrhea for two days",
+   "colour": "yellow",
+   "titles": [
+    "Decreasing turbidity to optimize solar water disinfection lit review/Support for technology",
+    "UTC solar water pasteurizer",
+    "Medicinal clay"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how do i treat water poisoning",
+   "colour": "yellow",
+   "titles": [
+    "Traditional Field Crops/Appendices",
+    "Integral fast reactor",
+    "Traditional Field Crops/Pest and disease control"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my child keeps throwing up",
+   "colour": "yellow",
+   "titles": [
+    "GEM mosquito control",
+    "Three Acres and Liberty/Chapter IV",
+    "News UK/2025"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my child has a fever",
+   "colour": "yellow",
+   "titles": [
+    "GEM mosquito control",
+    "Three Acres and Liberty/Chapter V",
+    "Peace Corps appropriate community technology/Development of Facilitation Skills Criteria"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to bring down a fever",
+   "colour": "yellow",
+   "titles": [
+    "GEM mosquito control FAQ",
+    "Are You Ready?/Extreme heat",
+    "News by location/2023"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "signs of dehydration in a baby",
+   "colour": "yellow",
+   "titles": [
+    "Solar and Energy Conserving Food Technologies/The use of dried foods",
+    "What is AIDS?",
+    "Colostomy in Newborns/Protocol for Management of a Neonate Requiring a Colostomy"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "baby very sleepy after diarrhea all day",
+   "colour": "yellow",
+   "titles": [
+    "Childhood immunizations in the United States",
+    "Ondansetron",
+    "Ergine"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "fingers are white and numb from the cold",
+   "colour": "yellow",
+   "titles": [
+    "Raynaud syndrome",
+    "Vibration white finger",
+    "Frostbite"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "frostbite on toes",
+   "colour": "yellow",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Frostbite",
+    "Chilblains"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "light a fire to keep him warm with hypothermia",
+   "colour": "yellow",
+   "titles": [
+    "Dry suit",
+    "Hyperbaric medicine",
+    "Suicide methods"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "shivering and cold after getting wet",
+   "colour": "yellow",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Human body temperature",
+    "Hypothermia"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "dizzy and sweating a lot in the heat",
+   "colour": "yellow",
+   "titles": [
+    "Traditional Field Crops/Appendices",
+    "Occupational heat stress",
+    "Panic attack"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "heat exhaustion treatment",
+   "colour": "yellow",
+   "titles": [
+    "PV-CHP/Dynamic simulations of hybrid energy systems in load sharing application",
+    "Greenhouses literature review",
+    "Are You Ready?/Extreme heat"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "bad sunburn with blisters",
+   "colour": "yellow",
+   "titles": [
+    "Original environment rehabilitation manual 3.369/Protective Void Space:",
+    "Polymorphous light eruption",
+    "Actinic keratosis"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "splinter deep in my finger",
+   "colour": "yellow",
+   "titles": [
+    "New Public Thinking/Fear and homecoming in 2011 - Keri Facer",
+    "24 Hours in A&E",
+    "List of skin conditions"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "something in my eye",
+   "colour": "yellow",
+   "titles": [
+    "Cordwoodguy's cordwood guide",
+    "Aleiha's parabolic solar cooker",
+    "Kelsey 3-lid 5-gallon bucket design"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "dust in my eye will not come out",
+   "colour": "yellow",
+   "titles": [
+    "CCAT natural concrete stain",
+    "Three Acres and Liberty/Chapter XXIII",
+    "Diabetes mellitus cured - George's experience"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my kid has an earache",
+   "colour": "yellow",
+   "titles": [
+    "Mirad Grammar/print version",
+    "Human Physiology/Print Version",
+    "Mirad Grammar/Word Families"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the cut is red, hot and has pus",
+   "colour": "yellow",
+   "titles": [
+    "Boil",
+    "Abscess",
+    "Staphylococcal infection"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "wound not healing after two weeks",
+   "colour": "yellow",
+   "titles": [
+    "WACS Training Modules/Skin Grafting",
+    "Tibial Fracture Fixation/Knowledge Review/Follow-Up Care",
+    "Uniplanar External Fixation/Knowledge Review/Follow-Up Care"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "having a panic attack",
+   "colour": "yellow",
+   "titles": [
+    "Practical Action/Plywood Boats in South India",
+    "Panic attack",
+    "Panic disorder"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i can not stop shaking after the storm",
+   "colour": "yellow",
+   "titles": [
+    "Loam Plaster (How to make it)",
+    "Silk Worm Raising",
+    "Source control (respiratory disease)"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my kids are scared after the earthquake",
+   "colour": "yellow",
+   "titles": [
+    "MMR vaccine and autism",
+    "Dreamer",
+    "IFTC Jump into English Textbook - Teacher's Manual"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to cope after the disaster",
+   "colour": "yellow",
+   "titles": [
+    "Are You Ready?/Recovering from Disaster",
+    "Climate emergency news",
+    "Are You Ready?/Why Prepare for Natural Disasters?"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "kid bumped his head, he seems fine",
+   "colour": "yellow",
+   "titles": [
+    "Child development stages",
+    "Learning disability",
+    "Chromebook"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my eyes sting from wildfire smoke",
+   "colour": "yellow",
+   "titles": [
+    "US History/Print version",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Columns/Magic Spark NSW/Notes"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "can is bulging, is it safe to eat",
+   "colour": "yellow",
+   "titles": [
+    "Traditional Field Crops/Pest and disease control",
+    "Botulism",
+    "Domoic acid"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how can i know if my can food has gone bad",
+   "colour": "yellow",
+   "titles": [
+    "Soda drinks",
+    "SNU GBUS Class Documentation",
+    "Diabetes mellitus cured - George's experience"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how do i purify water from a creek",
+   "colour": "green",
+   "titles": [
+    "Impact of the COVID-19 pandemic on the environment",
+    "Water supply and sanitation in India",
+    "Cultured meat"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how do i make the water safe to drink",
+   "colour": "green",
+   "titles": [
+    "Soda drinks",
+    "Tavelagarhi water community engagement 2018",
+    "Decreasing turbidity to optimize solar water disinfection lit review"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "bleach to clean drinking water",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Water supplies and sanitation",
+    "Practical Action/Water supplies for food processing"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how long to boil water to make it safe",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Updated cooking methods in modern kitchens",
+    "Water supply and purification for emergencies"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to make the water safe for a baby's formula",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Breast Milk HIV Shield",
+    "CD3WD"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how much water to store for an emergency",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Assemble Disaster Supplies Kit",
+    "Loam Plaster (How to make it)",
+    "Humanitarian wiki"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to store water long term",
+   "colour": "green",
+   "titles": [
+    "Nontoxic alternatives to common household products",
+    "Are You Ready?/Assemble Disaster Supplies Kit",
+    "Integral fast reactor"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "collect rainwater for drinking",
+   "colour": "green",
+   "titles": [
+    "Practivistas Chiapas rainwater catchment",
+    "Testing water quality, surveying water access, and mapping high risk areas in Mexico City with Isla Urbana",
+    "Parameters for rainwater quality testing at Isla Urbana and the Ajusco Lab"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "is the food in the fridge safe after the power went out",
+   "colour": "green",
+   "titles": [
+    "2008 Irish pork crisis",
+    "Impact of the COVID-19 pandemic on television in the United States",
+    "Social impact of the COVID-19 pandemic in the Republic of Ireland"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "use the water heater as emergency water",
+   "colour": "green",
+   "titles": [
+    "Peace Corps appropriate community technology/Design of Solar Water Heaters",
+    "Compost heater silo",
+    "Compost heater"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how do i light a campfire",
+   "colour": "green",
+   "titles": [
+    "Smoking Meat",
+    "New Public Thinking",
+    "Micro-livestock/Part 4: Rodents"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i need to start a fire but i have no matches and no gas",
+   "colour": "green",
+   "titles": [
+    "Woodstoves",
+    "Papasan chair solar cooker",
+    "HBCSL cobb oven/Cobb Info, Detailed Building and Testing Instructions"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "start a fire with wet wood",
+   "colour": "green",
+   "titles": [
+    "Bayside Park Farm earthen oven",
+    "HBCSL cobb oven/Cobb Info, Detailed Building and Testing Instructions",
+    "Practivistas Chiapas improved cookstoves"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to use a fire extinguisher",
+   "colour": "green",
+   "titles": [
+    "Fire extinguishing",
+    "Zane Middle School/Disc golf course",
+    "Are You Ready?/Emergency Disaster Planning and Checklists"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "which fire extinguisher for a kitchen",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Compost heater silo",
+    "Fireless cookers"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "where to put smoke alarms",
+   "colour": "green",
+   "titles": [
+    "Practical Action/Beekeeping",
+    "Bees and Their Management",
+    "Engraving"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "where to put a carbon monoxide detector",
+   "colour": "green",
+   "titles": [
+    "Breathing gas",
+    "Fire safety",
+    "Indoor air quality"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "make a fire escape plan for my family",
+   "colour": "green",
+   "titles": [
+    "News by location/2025",
+    "MESS (Micro Environment Subsistence System)/Overview of plant needs",
+    "Fall Prevention Center of Excellence"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "what could make a fire spread faster",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Fires",
+    "PandemicOSAT",
+    "Ebola"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "protect my house from wildfire",
+   "colour": "green",
+   "titles": [
+    "News by location/2025",
+    "Climate emergency news",
+    "A fairer, kinder society"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "clear brush around the house for wildfire",
+   "colour": "green",
+   "titles": [
+    "Institute of Naval Medicine",
+    "Agent Orange",
+    "Pesticide"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to run a generator safely",
+   "colour": "green",
+   "titles": [
+    "Green Campus Bicycle Generator",
+    "La Yuca small scale renewable energy 2012",
+    "Nuclear energy"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how often to clean the chimney",
+   "colour": "green",
+   "titles": [
+    "Rocket stove mass heater",
+    "Practivistas Chiapas improved cookstoves",
+    "CCAT rocket stove"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to build a shelter in the woods",
+   "colour": "green",
+   "titles": [
+    "Raising Ducks/How to begin",
+    "Appropriate Technology Sourcebook/Part II",
+    "World Shelters Make it Complete with Papercrete"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "stay warm without power in winter",
+   "colour": "green",
+   "titles": [
+    "Need Mapping",
+    "Sun Frost energy efficient shower",
+    "Are You Ready?/Shelter from Natural Disasters"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to use a compass",
+   "colour": "green",
+   "titles": [
+    "Dead reckoning",
+    "The Future We Deserve/This is Mental - Rohan Gunatillake",
+    "Peace Corps appropriate community technology/Pedal/Treadle Power"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to signal for rescue",
+   "colour": "green",
+   "titles": [
+    "Post-earthquake rescue efforts",
+    "Standing Rock Technologies",
+    "NYC community resources"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "what goes in a first aid kit",
+   "colour": "green",
+   "titles": [
+    "Disaster preparedness",
+    "Humboldt 3D printer workshop",
+    "HSU solar suitcase"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to make a splint from sticks",
+   "colour": "green",
+   "titles": [
+    "Requests for 3-D printable open source appropriate technology",
+    "Orthopedic cast",
+    "Running injuries"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to dig a latrine",
+   "colour": "green",
+   "titles": [
+    "Single pit latrine",
+    "Practical Action/Ventilated Improved Pit Latrine",
+    "Peace Corps appropriate community technology/Earthen Construction and Fuel-Saving Cookstoves"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "make a handwashing station",
+   "colour": "green",
+   "titles": [
+    "Handwashing",
+    "CCAT greenshed rainwater catchment",
+    "Agrotunnel cleaning procedure:FAST"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "emergency radio frequencies",
+   "colour": "green",
+   "titles": [
+    "Nanocolumns/ Nanowires fabrication literature review",
+    "STAR-TIDES Activities",
+    "InGaN solar cells literature review/The Effect of Grain Boundaries on Electrical Conductivity in Thin GaN Layers"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to sandbag the house for a flood",
+   "colour": "green",
+   "titles": [
+    "Earthbag building",
+    "World Shelters Make it Complete with Papercrete",
+    "The Kensington Rifles/Wasted effort on the Somme"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "secure furniture for earthquakes",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Earthquake preparedness",
+    "Are You Ready?/Floods",
+    "Pop Up Yurts"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "prepare the house for a flood",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Floods",
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "Soil cement"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how do i treat water damage on the floor",
+   "colour": "green",
+   "titles": [
+    "Cordwoodguy's cordwood guide",
+    "Hexayurt project/Materials",
+    "Rural Electrification Systems"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "where is the safest place in a house during a tornado",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Storms",
+    "Adventist Adventurer Awards and Answers/Safety Specialist"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to seal a room for shelter in place",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Hazardous Material Incidents",
+    "Are You Ready?/Radiological Dispersion Device (RDD)",
+    "Are You Ready?/Shelter from Natural Disasters"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to prepare a fallout shelter",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Radiological Dispersion Device (RDD)",
+    "Contamination control",
+    "Emergency management"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "protect yourself from volcanic ash",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Volcanoes",
+    "Smog",
+    "Indoor air quality"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "prepare for a hurricane",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Hurricanes",
+    "Storms",
+    "Are You Ready?/Tornadoes"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to tie a bowline",
+   "colour": "green",
+   "titles": [
+    "Knots",
+    "Heraklas",
+    "Unethical human experimentation in the United States"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "make my home harder to break into",
+   "colour": "green",
+   "titles": [
+    "United States solar PV roof policy method",
+    "Taffy Pull",
+    "Sculpture"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "what to do during riots in the city",
+   "colour": "green",
+   "titles": [
+    "Community action/Missouri",
+    "New Public Thinking/A twitteration on 2011 - Neil Cantwell",
+    "The Future We Deserve/Reimagining the space between - Laura Burns"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the engine keeps choking when it is cold",
+   "colour": "green",
+   "titles": [
+    "Practical Action/Oil Extraction",
+    "Hemp",
+    "Small Scale Vegetable Oil Extraction/Processing of specific oilseeds"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to use the choke on a small engine",
+   "colour": "green",
+   "titles": [
+    "Cosmos in the Stacks wind tunnel",
+    "Small Scale Vegetable Oil Extraction/Oil extraction",
+    "Practical Action/Oil Extraction"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to bleed the brakes",
+   "colour": "green",
+   "titles": [
+    "Rice husker construction manual",
+    "Perineal tear",
+    "Petroleum jelly"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to bleed a radiator",
+   "colour": "green",
+   "titles": [
+    "NREMT Skillset/Medical Patient Assessment",
+    "MBE protocol:MOST",
+    "Waste heat recovery for greenhouses literature review"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the car battery is dead",
+   "colour": "green",
+   "titles": [
+    "CCAT barts bike",
+    "SHTF Pedal Generator",
+    "Are You Ready?/Winter Storms and Extreme Cold"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my phone is dead and no power",
+   "colour": "green",
+   "titles": [
+    "Aerosol pandemics/PandemicFluGame",
+    "Low cost computer guide",
+    "GEN Solution Library/Technopenuriaphobia (tpp) healing"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "the shock absorbers on the truck are broken",
+   "colour": "green",
+   "titles": [
+    "Dominican Republic alternative building analysis",
+    "Wheelchair",
+    "X-ray"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "build an electric fence for goats",
+   "colour": "green",
+   "titles": [
+    "Appropriate Technology Sourcebook",
+    "VITA document and link list",
+    "Micro-livestock/Part 2: Poultry"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to smoke fish to preserve it",
+   "colour": "green",
+   "titles": [
+    "GEN Solution Library/Fish salting",
+    "Cooking",
+    "Solar and Energy Conserving Food Technologies/Model solar food dryer: design and construction"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to use a burn barrel for trash",
+   "colour": "green",
+   "titles": [
+    "Geometron Trash Robot",
+    "CCAT Natural Exterior Wall Plaster and Paint, part 1",
+    "HEIF Take Back the Tap"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "is it safe to burn treated wood in the stove",
+   "colour": "green",
+   "titles": [
+    "Feces",
+    "No such thing as waste",
+    "Off-the-grid homes"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "flooded engine will not start",
+   "colour": "green",
+   "titles": [
+    "In-river flood management",
+    "Zane Middle School/Permeable concrete 2",
+    "Deep-cycle lead-acid batteries for renewable energy storage"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to get rid of rats without poison",
+   "colour": "green",
+   "titles": [
+    "Peace Corps appropriate community technology/Earthen Construction and Fuel-Saving Cookstoves",
+    "Micro-livestock/Part 2: Poultry",
+    "Tetraethyllead"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "my fire is not getting enough air",
+   "colour": "green",
+   "titles": [
+    "Smoking Meat",
+    "Blacksmithing",
+    "Woodstoves"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to run a fire drill at home",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Earthquake preparedness",
+    "Community action/Surrey",
+    "UK Climate news/2024"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "i am drowning my tomato plants with too much water",
+   "colour": "green",
+   "titles": [
+    "Mirad/Print version",
+    "Mirad Grammar/print version",
+    "Literary Criticism/Shakespeare Our Contemporary"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to cut firewood safely",
+   "colour": "green",
+   "titles": [
+    "Solar cooker",
+    "CSU Research Competition 2025 Creative Arts and Design trophy",
+    "Fireless cookers"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how long do burns take to heal",
+   "colour": "yellow",
+   "titles": [
+    "WACS Training Modules/Skin Grafting",
+    "Z-Plasty/Thinking Like a Reconstructive Surgeon",
+    "Sheep and Goat Breeding/Diseases of sheep and goats"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "infection not responding to antibiotics",
+   "colour": "yellow",
+   "titles": [
+    "ETALO Bone Drilling Module/Osteomyelitis",
+    "What is AIDS?",
+    "Influenza pandemic"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "heat the house without power",
+   "colour": "green",
+   "titles": [
+    "Energy",
+    "The Passive House Association of Ireland",
+    "Observational U.S. home energy assessment"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "how to build a root cellar for cold storage",
+   "colour": "green",
+   "titles": [
+    "Beacon Food Forest presentation",
+    "Bathroom",
+    "Mirad Grammar/Word Families"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "upstream",
+   "q": "is spring water safe to drink",
+   "colour": "green",
+   "titles": [
+    "Water is life",
+    "Community Chlorine Dosing",
+    "Spring catchment"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my husband collapsed and isn't breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "man fell down not breathing no pulse",
+   "colour": "red",
+   "titles": [
+    "History of cardiopulmonary resuscitation",
+    "Hypothermia",
+    "Intelligent Plastic Machines"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he stopped breathing what do i do",
+   "colour": "red",
+   "titles": [
+    "Circular breathing",
+    "First Aid/B for Breathing",
+    "Electrical safety basic principals"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my son isn't breathing",
+   "colour": "red",
+   "titles": [
+    "Neuroethology"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "kid not breathing and lips are blue",
+   "colour": "red",
+   "titles": [
+    "Mercury poisoning",
+    "24 Hours in A&E",
+    "Mephedrone"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my baby is not breathing",
+   "colour": "red",
+   "titles": [
+    "Baby Bubbler",
+    "Baby-led weaning",
+    "Baby Care and Development/Baby Development"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "infant stopped breathing in the crib",
+   "colour": "red",
+   "titles": [
+    "Torticollis",
+    "Baby-led weaning",
+    "Emergency childbirth"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he is choking on food and cannot talk",
+   "colour": "red",
+   "titles": [
+    "Suicide watch",
+    "Parenting",
+    "Choking"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone choking at dinner",
+   "colour": "red",
+   "titles": [
+    "Adventist Adventurer Awards and Answers/Courtesy",
+    "Casualty series 39",
+    "Basic Writing/Narrative and memoir"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my baby is choking on a grape",
+   "colour": "red",
+   "titles": [
+    "Baby-led weaning",
+    "Infant food safety",
+    "Choking"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "toddler choking on a coin",
+   "colour": "red",
+   "titles": [
+    "Baby-led weaning",
+    "Speech-Language Pathology/Stuttering/Practice Word Lists",
+    "Infant food safety"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "she is unconscious but breathing",
+   "colour": "red",
+   "titles": [
+    "First Aid/B for Breathing",
+    "NREMT Skillset/Primary Assessment",
+    "PTC Course/Airway"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he passed out and will not wake up",
+   "colour": "red",
+   "titles": [
+    "Non-24-hour sleep\u2013wake disorder",
+    "Bards Irish Fiddle Tunebook Supplement/Finnegan's Wake",
+    "GEN Solution Library/A small farm in the mountains"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "asthma attack and no inhaler",
+   "colour": "red",
+   "titles": [
+    "Asthma exacerbation",
+    "Asthma trigger",
+    "Brittle asthma"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "she can't breathe, wheezing badly",
+   "colour": "red",
+   "titles": [
+    "Shortness of breath",
+    "Kehr's sign",
+    "Review of systems"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "throat swelling after a bee sting",
+   "colour": "red",
+   "titles": [
+    "Melittin",
+    "Insects in medicine",
+    "Apamin"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "allergic reaction and her lips are swelling",
+   "colour": "red",
+   "titles": [
+    "List of allergens",
+    "Oral allergy syndrome",
+    "Lip augmentation"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "peanut allergy can not breathe",
+   "colour": "red",
+   "titles": [
+    "Peanut allergen powder",
+    "Sesame allergy",
+    "List of allergens"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "smoke inhalation from a house fire",
+   "colour": "red",
+   "titles": [
+    "Smoke",
+    "NREMT Skillset/N95 FFR (Filtering Facepiece Respirator) Use/Quiz",
+    "Waterpod/Rocket Stove"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he breathed in a lot of smoke and is coughing",
+   "colour": "red",
+   "titles": [
+    "Influenza treatment",
+    "Treatment of influenza",
+    "Singing/Caring for your voice"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "headache and dizzy after running the generator inside",
+   "colour": "red",
+   "titles": [
+    "Superior canal dehiscence syndrome",
+    "CCAT natural paints 2017",
+    "Denn\u014d Senshi Porygon"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "carbon monoxide poisoning symptoms whole family sick",
+   "colour": "red",
+   "titles": [
+    "Hypoxia (medicine)",
+    "Diving disorders",
+    "Hemoglobin"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "carbon monoxide from making a fire in the tent",
+   "colour": "red",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Self-contained self-rescue device",
+    "Phosgene"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "blood is spurting from his leg and won't stop",
+   "colour": "red",
+   "titles": [
+    "Human height",
+    "Mirad Lexicon/Mirad-English-Y"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "deep cut on the arm bleeding a lot",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Nissan 240SX Performance Modification/Brakes",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone is full of blood, it does not stop",
+   "colour": "red",
+   "titles": [
+    "Muggles' Guide to Harry Potter/Books/Half-Blood Prince/Chapter 21",
+    "Control and treatment of bedbugs",
+    "Vaping cessation"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "his finger got cut off",
+   "colour": "red",
+   "titles": [
+    "Little finger",
+    "Building Haycocks/Cutting/Implements",
+    "Adventist Adventurer Awards and Answers/Finger Play"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "chainsaw cut his leg badly",
+   "colour": "red",
+   "titles": [
+    "Doom/Complete list of enemies",
+    "Personal protective equipment",
+    "Seed Factories/Starter Set"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "stabbed in the chest",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Penetrating Chest Trauma",
+    "Chest injury",
+    "NREMT Skillset"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "knife wound to the chest and he is struggling to breathe",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Major trauma",
+    "Neurology and Neurosurgery/Incomplete Spinal Cord Injuries/Brown-S\u00e9quard syndrome"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "a stick is stuck in his leg",
+   "colour": "red",
+   "titles": [
+    "Arroyo Norte sustainable market materials",
+    "Crab",
+    "Practical Electronics/Desoldering"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "nail went through her foot and is still in",
+   "colour": "red",
+   "titles": [
+    "Parables from a mad social scientist",
+    "How to Build a Mechanically Powered Battery Charger for LED Lighting",
+    "Bayside Park Farm/Solar hot water"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "chest pain spreading to his left arm",
+   "colour": "red",
+   "titles": [
+    "Referred pain",
+    "Radical mastectomy",
+    "Causes of cancer pain"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i think my dad is having a heart attack",
+   "colour": "red",
+   "titles": [
+    "Housing UK news/2015-2021",
+    "24 Hours in A&E",
+    "Casualty series 39"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he is pale cold and sweaty after the accident",
+   "colour": "red",
+   "titles": [
+    "List of skin conditions"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "signs of shock after bleeding",
+   "colour": "red",
+   "titles": [
+    "NREMT Skillset/Bleeding Control and Shock Management",
+    "Internal bleeding",
+    "Hypovolemic shock"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "dog attacked my child and she is bleeding badly",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Child abuse",
+    "Rise of Nations/Nations/Aztecs"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "her face is drooping and she can not speak properly",
+   "colour": "red",
+   "titles": [
+    "Three Acres and Liberty/Chapter XIII",
+    "Botulism",
+    "Craniosynostosis"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "sudden weakness on one side of the body",
+   "colour": "red",
+   "titles": [
+    "Internal Medicine/Neurologic Weakness and Paralysis",
+    "FAST (stroke)",
+    "Hemiplegic migraine"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he is having a seizure",
+   "colour": "red",
+   "titles": [
+    "Post-traumatic seizure",
+    "Febrile seizure",
+    "Ecstatic seizures"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "she is shaking and foaming at the mouth",
+   "colour": "red",
+   "titles": [
+    "Cookbook:Super Foamy Milkshake",
+    "Febrile seizure",
+    "Mass psychogenic illness"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my baby has a high fever and is shaking all over",
+   "colour": "red",
+   "titles": [
+    "Infant food safety",
+    "Babesiosis",
+    "What is AIDS?"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "hit his head and is vomiting and confused",
+   "colour": "red",
+   "titles": [
+    "Head injury",
+    "Pediatric concussion",
+    "24 Hours in A&E"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "fell and hit her head now very sleepy",
+   "colour": "red",
+   "titles": [
+    "Madame Bovary/Chapter One",
+    "Dreamer",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/The 2011 Japan Earthquakes"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "fell off the roof and can not move his legs",
+   "colour": "red",
+   "titles": [
+    "Sanctuary abundant free food kiosk",
+    "24 Hours in A&E",
+    "Gyakuten Kenji 2/Episode 5: The Grand Turnabout/Beginning, Part 1"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "neck hurts after a fall, numb arms",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Spanish by Choice/Novelas Cortas 00",
+    "Mandible"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "diabetic and shaking, confused, sweating",
+   "colour": "red",
+   "titles": [
+    "Glossary of diabetes",
+    "Exercise as it relates to Disease/Preventing hypoglycemia in type 1 diabetics during and after exercise",
+    "Blood sugar level"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my diabetic son is not making sense",
+   "colour": "red",
+   "titles": [
+    "List of Munchausen by proxy cases",
+    "Nesfatin-1",
+    "A History of Japan: From Mythology to Nationhood/The Middle Heian Period"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "overdose, he is barely breathing and lips are blue",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "took too many pain pills, will not wake",
+   "colour": "red",
+   "titles": [
+    "Combined birth control pill",
+    "Chinese alchemical elixir poisoning",
+    "Insomnia"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "baby has fever and a rash that does not fade",
+   "colour": "red",
+   "titles": [
+    "Teething",
+    "Rubella virus",
+    "Complication (medicine)"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "stiff neck high fever and purple spots",
+   "colour": "red",
+   "titles": [
+    "Meningococcal disease",
+    "Acute lymphoblastic leukemia",
+    "Meningitis"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my friend says he wants to kill himself",
+   "colour": "red",
+   "titles": [
+    "Trial of Anders Behring Breivik",
+    "Fictional portrayals of psychopaths",
+    "Muggles' Guide to Harry Potter/Major Events/Shrieking Shack"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i do not want to live anymore",
+   "colour": "red",
+   "titles": [
+    "How to live cheap and green",
+    "Objectified (documentary)",
+    "Into The World of Social Media"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "treat water in the lungs after drowning",
+   "colour": "red",
+   "titles": [
+    "Drowning",
+    "When It Hits the Fan/Personal Strategies and Know-how/Water",
+    "Diving disorders"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my son nearly drowned in the rainwater pool",
+   "colour": "red",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership",
+    "A Researcher's Guide to Local History Terminology/Abecedary"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone fell in the rainwater pool and isn't breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "pulled him out of the river, not breathing",
+   "colour": "red",
+   "titles": [
+    "Planet Earth/4a. The Air You Breathe",
+    "CCAT barts bike",
+    "Yangsheng (Daoism)"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he fell through the ice on the lake",
+   "colour": "red",
+   "titles": [
+    "Planet Earth/5i. Earth\u2019s Ice: Glaciers, Ice Sheets, and Sea Ice",
+    "NREMT Skillset/Vital Signs Assessment/Skin, Temperature and Pulse Oximetry Quiz",
+    "Micro-livestock/Part 2: Poultry"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "friend fell through thin ice",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Chromebook",
+    "Tatworth Village/Over the garden gate"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone got shocked by a wire in the flood water",
+   "colour": "red",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+    "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he touched a power line and collapsed",
+   "colour": "red",
+   "titles": [
+    "Defibrillation with AED - ECSACONM",
+    "Photovoltaic technology impacts on national security: literature review",
+    "Are You Ready?/Floods"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "electric shock from a fallen wire",
+   "colour": "red",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+    "24 Hours in A&E",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1922 09 01"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my friend was struck by lightning",
+   "colour": "red",
+   "titles": [
+    "Phoenix Wright: Ace Attorney - Trials and Tribulations/Episode 5: Bridge to the Turnabout/Part 1-2: Investigation",
+    "Muggles' Guide to Harry Potter/Books/Half-Blood Prince/Chapter 27",
+    "Muggles' Guide to Harry Potter/Major Events/Death Eaters"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "her whole arm is badly burned",
+   "colour": "red",
+   "titles": [
+    "Hexayurt project/Hexayurt playa",
+    "Disfigurement",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "boiling water spilled on the baby",
+   "colour": "red",
+   "titles": [
+    "Principles of Microeconomics/Public Goods",
+    "Menstrual cup",
+    "Infant formula"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "burn and not breathing",
+   "colour": "red",
+   "titles": [
+    "PTC Course/Burns",
+    "PTC Course/Breathing",
+    "Spontaneous breathing trial"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "pulled him out of the fire, burned and not breathing",
+   "colour": "red",
+   "titles": [
+    "The Legend of Zelda: Ocarina of Time Master Quest/Dodongo's Cavern",
+    "Rural Electrification Systems",
+    "Hexayurt project/Hexayurt playa checklist"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my clothes caught fire",
+   "colour": "red",
+   "titles": [
+    "Hog Butchering and Smoking",
+    "Gabriel Boughton",
+    "Fumigatory box"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "his shirt is on fire",
+   "colour": "red",
+   "titles": [
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Are You Ready?/Volcanoes",
+    "VITA document and link list"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my clothes caught fire while starting the fire",
+   "colour": "red",
+   "titles": [
+    "Broken finger",
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Hog Butchering and Smoking"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "found him in the snow, cold and not shivering anymore",
+   "colour": "red",
+   "titles": [
+    "Dreamer",
+    "Chinese (Classical Mandarin)",
+    "Yoga/Spiritual Almanac"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "hypothermia after falling in cold water",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Hypothermia",
+    "Cold shock response"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "he was working in the sun and now he is confused and hot",
+   "colour": "red",
+   "titles": [
+    "Anisa Foundation parabolic solar hot water heater",
+    "Passive solar design",
+    "Heat stroke"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "heat stroke what to do",
+   "colour": "red",
+   "titles": [
+    "Heat stroke",
+    "Adventist Youth Honors Answer Book/First aid/Heat stroke",
+    "Are You Ready?/Extreme heat"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "a snake bit my leg",
+   "colour": "red",
+   "titles": [
+    "Snakebite",
+    "Control and treatment of bedbugs",
+    "Adventist Youth Honors Answer Book/Nature/Reptiles"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "bitten by a rattlesnake",
+   "colour": "red",
+   "titles": [
+    "Snakebite",
+    "Sistrurus miliarius barbouri",
+    "List of dangerous snakes"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "snake bite while camping",
+   "colour": "red",
+   "titles": [
+    "Snakebite",
+    "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership - Advanced",
+    "Fried Green Tomatoes at the Whistle Stop Cafe/Chapter 6"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "his legs are trapped under a fallen wall",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "The Legend of Zelda: Ocarina of Time/Ganon's Castle",
+    "Micro-livestock/Part 5: Deer and Antelope"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone trapped under rubble after the earthquake",
+   "colour": "red",
+   "titles": [
+    "NYC community resources",
+    "Search and rescue",
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "car crash, the driver is trapped and bleeding",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Road safety",
+    "Choosing a Car"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "motorcycle accident he is not moving",
+   "colour": "red",
+   "titles": [
+    "Transportation Deployment Casebook/2014/Motorcycle Helmet Usage",
+    "Uniplanar External Fixation/Knowledge Review/Pre-Operative Management",
+    "Facial trauma"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "splashed bleach in my eye",
+   "colour": "red",
+   "titles": [
+    "Ataxia\u2013telangiectasia",
+    "Chemical toilet",
+    "Ebola"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "chemical in my eyes and it burns",
+   "colour": "red",
+   "titles": [
+    "Chemical eye injury",
+    "Chemical burn",
+    "Are You Ready?/Chemical Threats"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "friend buried in an avalanche",
+   "colour": "red",
+   "titles": [
+    "Avalanche rescue",
+    "Principles of Microeconomics/Confronting Objections to the Economic Approach",
+    "High School Earth Science/Erosion and Deposition by Gravity"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my toddler drank bleach",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "kid swallowed drain cleaner",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my child swallowed lamp oil",
+   "colour": "red",
+   "titles": [
+    "Toxic waste",
+    "Esperanto/Appendix/English-Esperanto word list (1889)",
+    "Tatworth Village/Cottage contents and farming pursuits"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "kid drank kerosene",
+   "colour": "red",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1929 01 11"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my kid ate a bottle of pills",
+   "colour": "red",
+   "titles": [
+    "BRIDGE/First BRIDGE trip",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1928 03 30"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "toddler got into grandma's medicine",
+   "colour": "red",
+   "titles": [
+    "24 Hours in A&E",
+    "Mirad Lexicon/Mirad-English-T"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "ate wild mushrooms and now vomiting",
+   "colour": "red",
+   "titles": [
+    "Hallucinogenic bolete mushroom",
+    "Chinese alchemical elixir poisoning",
+    "Ergine"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the baby is coming right now",
+   "colour": "red",
+   "titles": [
+    "Raising Ducks/Growing your own baby ducks",
+    "Back Yard and Commercial Rabbit Production/Managing the herd",
+    "Adventist Youth Honors Answer Book/Health and Science/Child Care (Babysitting)"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "water broke and i can see the head",
+   "colour": "red",
+   "titles": [
+    "Maccabiah bridge collapse",
+    "Final Fantasy VII/Preface/Story/During the game",
+    "Mules"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "heavy bleeding after giving birth",
+   "colour": "red",
+   "titles": [
+    "Postpartum bleeding",
+    "Human Physiology/Pregnancy and birth",
+    "NREMT Skillset/Uterus Massage"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "she keeps bleeding after the baby came",
+   "colour": "red",
+   "titles": [
+    "Jefferson Community Center native pollinators landscape",
+    "Placental expulsion",
+    "Obstetrical forceps"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "newborn baby is not breathing after birth",
+   "colour": "red",
+   "titles": [
+    "Blue baby syndrome",
+    "Human Physiology/Development: birth through death",
+    "Human Physiology/Pregnancy and birth"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "pregnant and bleeding with bad pain",
+   "colour": "red",
+   "titles": [
+    "Pelvic pain",
+    "24 Hours in A&E",
+    "Refugee Phrasebook/Learning English and German"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my house is on fire",
+   "colour": "red",
+   "titles": [
+    "Fire resistant plants",
+    "STAR-TIDES Field Manual/Dakota Fire Hole",
+    "District of Columbia Fire and Emergency Medical Services Department"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "fire in the house and kids are upstairs",
+   "colour": "red",
+   "titles": [
+    "CCAT Potential Student Project Page",
+    "Old School RuneScape/Quests/Desert Treasure",
+    "Smoking Meat"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "grease fire in the pan",
+   "colour": "red",
+   "titles": [
+    "Fire safety",
+    "Scouting/BSA/Fire Safety Merit Badge",
+    "Hog Butchering and Smoking"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "pour water on a grease fire",
+   "colour": "red",
+   "titles": [
+    "Soap making",
+    "Hog Butchering and Smoking",
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the oil in the pan caught fire",
+   "colour": "red",
+   "titles": [
+    "Backpack Camping and Woodland Survival/Skills/Cooking/Best Practices",
+    "Phoenix Wright: Ace Attorney/Episode 5: Rise from the Ashes/Day 2 - Investigation",
+    "Super Smash Bros. Melee/Stages"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the outlet is sparking and smoking",
+   "colour": "red",
+   "titles": [
+    "Smoking ban",
+    "Are You Ready?/Fires",
+    "Kamusi la nishati hai/P - S"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "electrical fire in the wall",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Fire safety",
+    "Straw Bale Construction/Characteristics/Resistance to fire"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "chimney fire roaring sound",
+   "colour": "red",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Australasian Radio World/Issues/1937 05",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Donald Brader Knock/Notes",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1923 01 05"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i smell gas in the house",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "E305 backyard biodigester",
+    "Woodstoves"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "gas leak from the stove",
+   "colour": "red",
+   "titles": [
+    "Gas stove",
+    "How air conditioner works",
+    "Fire safety"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "wildfire is coming toward our house",
+   "colour": "red",
+   "titles": [
+    "Community action/South Africa",
+    "Lentis/The 2020 Western Wildfire Season in the U.S.",
+    "Infrastructure Past, Present, and Future Casebook/Santa Ynez Reservoir"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "fire on the hill, should we evacuate",
+   "colour": "red",
+   "titles": [
+    "Fire on the Limestone Plains/Bush Fires/The 1979 Bush Fires",
+    "Fire on the Limestone Plains/Bush Fires/The 1952 Bushfires",
+    "Litter (rescue basket)"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "our car is stuck in rising flood water",
+   "colour": "red",
+   "titles": [
+    "Effects of climate change on health in the United Kingdom",
+    "Internet of things",
+    "Adventist Youth Honors Answer Book/Nature/Weather - Advanced"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "water is coming into the car",
+   "colour": "red",
+   "titles": [
+    "Adapted thermostatic valve for water pasteurization",
+    "Car electronics",
+    "London community activism news/2007-2021"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the sea pulled back after the earthquake",
+   "colour": "red",
+   "titles": [
+    "High School Earth Science/Theory of Plate Tectonics",
+    "Regents Earth Science (High School)",
+    "High School Earth Science/Volcanic Activity"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "tsunami warning what do we do",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Tsunamis",
+    "Cosmos in the Stacks Tsunami demo",
+    "Diablo Canyon Nuclear Power Plant: The WikiBook/The Tsunami"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the ground is shaking right now",
+   "colour": "red",
+   "titles": [
+    "How to survive an earthquake",
+    "Raising Ducks/Growing your own baby ducks",
+    "Bayside Park Farm/Informational kiosk"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "earthquake happening what do i do",
+   "colour": "red",
+   "titles": [
+    "How to survive an earthquake",
+    "Are You Ready?/Earthquake preparedness",
+    "High School Earth Science/Nature of Earthquakes"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "tornado coming where do we hide",
+   "colour": "red",
+   "titles": [
+    "Kirby franchise strategy guide/Enemies",
+    "Fukushima Aftermath/Davis-Besse Nuclear Power Station",
+    "Super Mario Sunshine/Bianco Hills"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "tornado warning and no basement",
+   "colour": "red",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone is shooting in the mall",
+   "colour": "red",
+   "titles": [
+    "Timeline of the COVID-19 pandemic in New York City",
+    "COVID-19 pandemic in Ottawa",
+    "Mirad Lexicon/English-Mirad-S"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "active shooter at school",
+   "colour": "red",
+   "titles": [
+    "School bullying",
+    "Lentis/The School to Prison Pipeline",
+    "Medical Tactical Training Program"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "explosion and people are bleeding",
+   "colour": "red",
+   "titles": [
+    "Blast injury",
+    "Pulmonary contusion",
+    "Suicide"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "a bomb went off nearby",
+   "colour": "red",
+   "titles": [
+    "New Zealand History/Mid to Late Twentieth Century",
+    "World War I/Causes/Franz Ferdinand",
+    "Yokkaichi asthma"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "nuclear explosion what do i do",
+   "colour": "red",
+   "titles": [
+    "Effects of nuclear explosions on human health",
+    "Are You Ready?/Nuclear blast",
+    "Wikijunior:How Things Work/Nuclear Bomb"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "radiation fallout coming",
+   "colour": "red",
+   "titles": [
+    "Ionizing radiation",
+    "Are You Ready?/Nuclear blast",
+    "Effects of nuclear explosions on human health"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "chemical spill outside, told to shelter in place",
+   "colour": "red",
+   "titles": [
+    "Chemical warfare",
+    "Saylor.org's Comparative Politics/Case Study: The Arab Spring",
+    "Smoking ban"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "toxic gas cloud near the factory",
+   "colour": "red",
+   "titles": [
+    "Professionalism/Union Carbide and Bhopal",
+    "Mustard gas",
+    "Lives Saved by Replacing Coal with PV"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "a power line fell on our car",
+   "colour": "red",
+   "titles": [
+    "Transportation Deployment Casebook/Cable Car",
+    "News by UK location/2023",
+    "Climate news/2018-2019"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "downed power line in the yard",
+   "colour": "red",
+   "titles": [
+    "Yard Welding Fundamentals",
+    "M Street Eureka rainwater catchment",
+    "Pail closet"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "someone is breaking into my house",
+   "colour": "red",
+   "titles": [
+    "Chicken Cleaning and Preparation",
+    "Lorena Cookstove",
+    "The Future We Deserve/TheFWD larahna"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "mud is sliding down the hill toward the houses",
+   "colour": "red",
+   "titles": [
+    "High School Earth Science/Erosion and Deposition by Gravity",
+    "Kamusi la nishati hai/A - C",
+    "Beak"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "hurricane is here and the roof is coming off",
+   "colour": "red",
+   "titles": [
+    "News pages on CASwiki/News sections in development",
+    "Green infrastructure",
+    "Ground mount fixed tilt PV racking literature review"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i burned my hand on the camp stove",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills II",
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills III (North American Division)",
+    "Standing Rock Technologies"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "burned my hand trying to light a fire",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Adventist Youth Honors Answer Book/Camping/Fire/Flint and steel",
+    "Papasan chair solar cooker"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i burnt my fingers lighting the campfire",
+   "colour": "yellow",
+   "titles": [
+    "When It Hits the Fan/Personal Strategies and Know-how/Fire",
+    "When It Hits the Fan/Personal Strategies and Know-how"
+   ],
+   "ok": [
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "is it safe to put water on a burn",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camp Safety",
+    "Fireless cookers",
+    "Are You Ready?/Chemical Threats"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how do i treat water blisters on a burn",
+   "colour": "yellow",
+   "titles": [
+    "Burn",
+    "Blister",
+    "First Aid/Burns"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my kid fell into the fire while we were making a fire",
+   "colour": "yellow",
+   "titles": [
+    "Mario Adventure/Story",
+    "Trees, woodland and forest news",
+    "Denn\u014d Senshi Porygon"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "cut my finger with a knife",
+   "colour": "yellow",
+   "titles": [
+    "Cookbook:Knife Skills",
+    "Back Yard and Commercial Rabbit Production/Simplified tanning",
+    "White Oak Baskets"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "deep cut on my hand, does it need stitches",
+   "colour": "yellow",
+   "titles": [
+    "Vertical mattress stitch",
+    "Ozark Home Made Toys",
+    "Stanley and Kristi's eco-friendly cardboard furniture"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "twisted my ankle hiking",
+   "colour": "yellow",
+   "titles": [
+    "Mirad Thesaurus/Human Body",
+    "A Guide to the GRE/Vocabulary List 7",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "sprained wrist swelling",
+   "colour": "yellow",
+   "titles": [
+    "Sprain",
+    "Wrist pain",
+    "NREMT Skillset/Long Bone Splinting"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i think my arm is broken",
+   "colour": "yellow",
+   "titles": [
+    "New Public Thinking/The year punk broke - Chris T-T",
+    "Need Mapping",
+    "Environment quality UK news"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "broken leg no ambulance",
+   "colour": "yellow",
+   "titles": [
+    "NREMT Skillset/Sager Traction Splint Application",
+    "24 Hours in A&E",
+    "Orthopedic boot"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "shoulder popped out",
+   "colour": "yellow",
+   "titles": [
+    "Projects with Bart",
+    "Snapping hip syndrome",
+    "Bursitis"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "nosebleed will not stop",
+   "colour": "yellow",
+   "titles": [
+    "Nosebleed",
+    "NREMT Skillset/Nasopharyngeal Airway Placement",
+    "Horsetail"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "kid has a nose bleed",
+   "colour": "yellow",
+   "titles": [
+    "Asakk\u016b mar\u1e63\u016btu",
+    "Adventist Adventurer Awards and Answers/First Aid Helper",
+    "Ethnomedicine/Home Remedies/A - C"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "tooth knocked out",
+   "colour": "yellow",
+   "titles": [
+    "Tooth replantation",
+    "The Adventures of Ali and His Gang vs. Mr. Tooth Decay",
+    "Dental avulsion"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "bad toothache and swollen face",
+   "colour": "yellow",
+   "titles": [
+    "Pericoronitis",
+    "Toothache",
+    "Iranian traditional medicine"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "stung by a bee",
+   "colour": "yellow",
+   "titles": [
+    "Practical Action/Beekeeping",
+    "Bees and Their Management",
+    "Bee sting"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "wasp sting swelling",
+   "colour": "yellow",
+   "titles": [
+    "Bee sting",
+    "Arthropod bites and stings",
+    "Insect bites and stings"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "scorpion sting on my foot",
+   "colour": "yellow",
+   "titles": [
+    "Stingray injury",
+    "Millipede burn",
+    "Insects in medicine"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "tick on my leg how to remove",
+   "colour": "yellow",
+   "titles": [
+    "Colorado tick fever",
+    "Tick paralysis",
+    "Tick-borne disease"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "spider bite turning red",
+   "colour": "yellow",
+   "titles": [
+    "Wikijunior:Bugs/Mexican Red-Kneed Tarantula",
+    "Wound Man",
+    "Snakebite"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "stung by a jellyfish",
+   "colour": "yellow",
+   "titles": [
+    "Irukandji syndrome",
+    "Portuguese man o' war",
+    "Ethnomedicine/Home Remedies/J - L"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "dog bit my hand, small wound",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Nature/Small Mammal Pets",
+    "Snakebite",
+    "Tooth"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "a stray dog bit me, rabies?",
+   "colour": "yellow",
+   "titles": [
+    "Prevalence of rabies",
+    "Dog bite",
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "rash from poison ivy",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/First aid/Poison ivy",
+    "Organic Horticulture in the Mid-Atlantic/Poison ivy",
+    "List of poisonous plants"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "itchy rash after touching a plant",
+   "colour": "yellow",
+   "titles": [
+    "Contact dermatitis",
+    "Chronic actinic dermatitis",
+    "Allergies in children"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "drank creek water and now i have diarrhea",
+   "colour": "yellow",
+   "titles": [
+    "Professionalism/DuPont, C8, and Parkersburg, West Virginia",
+    "Native American ethnobotany"
+   ],
+   "ok": [
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "diarrhea for two days",
+   "colour": "yellow",
+   "titles": [
+    "Porcine epidemic diarrhoea",
+    "Wilderness-acquired diarrhea",
+    "Travelers' diarrhea"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how do i treat water poisoning",
+   "colour": "yellow",
+   "titles": [
+    "Food poisoning and its prevention",
+    "Practical Action/Food poisoning and its prevention",
+    "Arcata Marsh/Tertiary treatment"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my child keeps throwing up",
+   "colour": "yellow",
+   "titles": [
+    "Household Cyclopedia/Culinary arts/Plain Cookery/Beverages",
+    "El Nuevo Sol Learning Garden",
+    "Infant food safety"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my child has a fever",
+   "colour": "yellow",
+   "titles": [
+    "Childhood immunizations in the United States",
+    "Fever",
+    "Information for parents about common Paediatric Surgical conditions"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to bring down a fever",
+   "colour": "yellow",
+   "titles": [
+    "Staten Island Quarantine War",
+    "Contingent contagionism",
+    "What You Should Know About Medicines/Antipyretic"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "signs of dehydration in a baby",
+   "colour": "yellow",
+   "titles": [
+    "Solar and Energy Conserving Food Technologies/The use of dried foods",
+    "Colostomy in Newborns/Protocol for Management of a Neonate Requiring a Colostomy",
+    "Peace Corps appropriate community technology/Pedal/Treadle Power"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "baby very sleepy after diarrhea all day",
+   "colour": "yellow",
+   "titles": [
+    "Baby colic",
+    "Mitotane",
+    "Tiagabine"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "fingers are white and numb from the cold",
+   "colour": "yellow",
+   "titles": [
+    "Vibration white finger",
+    "Raynaud syndrome",
+    "Frostbite"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "frostbite on toes",
+   "colour": "yellow",
+   "titles": [
+    "Frostbite",
+    "Adventist Youth Honors Answer Book/First aid/Frostbite",
+    "Are You Ready?/Winter Storms and Extreme Cold"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "light a fire to keep him warm with hypothermia",
+   "colour": "yellow",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+    "Adventist Youth Honors Answer Book/Recreation/Backpacking",
+    "Suprachiasmatic nucleus"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "shivering and cold after getting wet",
+   "colour": "yellow",
+   "titles": [
+    "Natural and Cultural History of North-East Australia's Wet Tropical Forests",
+    "Luigi's Mansion/Ghosts",
+    "Are You Ready?/Winter Storms and Extreme Cold"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "dizzy and sweating a lot in the heat",
+   "colour": "yellow",
+   "titles": [
+    "Occupational heat stress",
+    "Healthy eating habits/Sports drinks: are they really doing us good?",
+    "Human Physiology/Homeostasis"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "heat exhaustion treatment",
+   "colour": "yellow",
+   "titles": [
+    "Heat exhaustion",
+    "Are You Ready?/Extreme heat",
+    "Heat illness"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "bad sunburn with blisters",
+   "colour": "yellow",
+   "titles": [
+    "Scouting/BSA/Camping Merit Badge",
+    "Original environment rehabilitation manual 3.369/Protective Void Space:",
+    "Occupational disease"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "splinter deep in my finger",
+   "colour": "yellow",
+   "titles": [
+    "Splinter",
+    "Drill Press (Shop Fox W1848):MOST",
+    "Ross' syndrome"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "something in my eye",
+   "colour": "yellow",
+   "titles": [
+    "Themes in Literature/Belonging and Exile/Sights for Sore Eyes",
+    "Blender 3D: Noob to Pro/Creating Pixar-looking eyes in Blender",
+    "How to make Comics"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "dust in my eye will not come out",
+   "colour": "yellow",
+   "titles": [
+    "Eye protection",
+    "Wikijunior:Solar System/Comets",
+    "Practical Action/Drying of chillies"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my kid has an earache",
+   "colour": "yellow",
+   "titles": [
+    "OMS Manual/Chapter 5"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the cut is red, hot and has pus",
+   "colour": "yellow",
+   "titles": [
+    "Ingrown nail",
+    "English in Use/Orthography",
+    "Boil"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "wound not healing after two weeks",
+   "colour": "yellow",
+   "titles": [
+    "Wound healing",
+    "WACS Training Modules/Skin Grafting",
+    "Tibial Fracture Fixation/Knowledge Review/Follow-Up Care"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "having a panic attack",
+   "colour": "yellow",
+   "titles": [
+    "Panic attack",
+    "Psychiatric Disorders/Anxiety disorders/Panic attack",
+    "Panic disorder"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i can not stop shaking after the storm",
+   "colour": "yellow",
+   "titles": [
+    "Final Fantasy VI/Rages",
+    "Muggles' Guide to Harry Potter/Books/Philosopher's Stone/Chapter 3",
+    "Loam Plaster (How to make it)"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my kids are scared after the earthquake",
+   "colour": "yellow",
+   "titles": [
+    "Dreamer",
+    "IFTC Jump into English Textbook - Teacher's Manual",
+    "MMR vaccine and autism"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to cope after the disaster",
+   "colour": "yellow",
+   "titles": [
+    "Are You Ready?/Recovering from Disaster",
+    "Are You Ready?/Practice and Maintain Your Disaster Safety Plan",
+    "SimCity and Urban Planning/Natural Disasters"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "kid bumped his head, he seems fine",
+   "colour": "yellow",
+   "titles": [
+    "Hair",
+    "Learning disability",
+    "Child development stages"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my eyes sting from wildfire smoke",
+   "colour": "yellow",
+   "titles": [
+    "Chemical warfare"
+   ],
+   "ok": [
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "can is bulging, is it safe to eat",
+   "colour": "yellow",
+   "titles": [
+    "Botulism",
+    "Healthy eating habits/Creating Quick and Easy Meals using Common Pantry Items",
+    "Traditional Field Crops/Pest and disease control"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how can i know if my can food has gone bad",
+   "colour": "yellow",
+   "titles": [
+    "Soda drinks",
+    "The Poetry of Gaius Valerius Catullus/14",
+    "Cognitive Science: An Introduction/Olfaction"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how do i purify water from a creek",
+   "colour": "green",
+   "titles": [
+    "Backpack Camping and Woodland Survival/Skills/Water Purification",
+    "Decreasing turbidity to optimize solar water disinfection",
+    "Sustainability and Sense of Place in the Sonoran Desert/Lower Colorado River"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how do i make the water safe to drink",
+   "colour": "green",
+   "titles": [
+    "Safe Drinking Water Act",
+    "Drinking water",
+    "Drinking water quality standards"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "bleach to clean drinking water",
+   "colour": "green",
+   "titles": [
+    "Water supplies and sanitation",
+    "Practical Action/Water supplies for food processing",
+    "Water supply and purification for emergencies"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how long to boil water to make it safe",
+   "colour": "green",
+   "titles": [
+    "Water supply and sanitation in Canada",
+    "Outdoor Survival/Water",
+    "Cookbook:Boiling"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to make the water safe for a baby's formula",
+   "colour": "green",
+   "titles": [
+    "Infant food safety",
+    "Infant formula",
+    "Infant and toddler safety"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how much water to store for an emergency",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "Emergency Medicine/Diarrhea",
+    "Are You Ready?/Assemble Disaster Supplies Kit"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to store water long term",
+   "colour": "green",
+   "titles": [
+    "When It Hits the Fan/Long-Term Water Storage",
+    "Antneh's rainwater storing gojo",
+    "Are You Ready?/Assemble Disaster Supplies Kit"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "collect rainwater for drinking",
+   "colour": "green",
+   "titles": [
+    "Practivistas Chiapas rainwater catchment",
+    "Parameters for rainwater quality testing at Isla Urbana and the Ajusco Lab",
+    "Rainwater urban design and infrastructure"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "is the food in the fridge safe after the power went out",
+   "colour": "green",
+   "titles": [
+    "2008 Irish pork crisis",
+    "When It Hits the Fan/Personal Strategies and Know-how",
+    "Neologisms of Stanislaw Lem"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "use the water heater as emergency water",
+   "colour": "green",
+   "titles": [
+    "Compost heater",
+    "Recycling agricultural wastes to produce hot water",
+    "WHTC Technology Plan"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how do i light a campfire",
+   "colour": "green",
+   "titles": [
+    "Do-It-Yourself/Campfire",
+    "Guitar/song examples/Campfire Diploma/Spancil Hill",
+    "Guitar/song examples/Campfire Diploma/Oh My Darling Clementine"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i need to start a fire but i have no matches and no gas",
+   "colour": "green",
+   "titles": [
+    "Practical Action/Kerosene and liquid petroleum gas",
+    "Fire safety",
+    "Woodstoves"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "start a fire with wet wood",
+   "colour": "green",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Outdoor Survival/Fire",
+    "HBCSL cobb oven/Cobb Info, Detailed Building and Testing Instructions"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to use a fire extinguisher",
+   "colour": "green",
+   "titles": [
+    "Fire extinguishing",
+    "Are You Ready?/Fires",
+    "Aircraft rescue and firefighting"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "which fire extinguisher for a kitchen",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Fireless cookers",
+    "Fire safety"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "where to put smoke alarms",
+   "colour": "green",
+   "titles": [
+    "STOP YOUR HABITS OF SMOKING TOBACCO AND CIGARETTES TO HAVE A SAFETY LIVES",
+    "Bees and Their Management",
+    "Fire prevention"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "where to put a carbon monoxide detector",
+   "colour": "green",
+   "titles": [
+    "Rocket stove mass heater",
+    "Breathing gas",
+    "Fire safety"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "make a fire escape plan for my family",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Emergency Disaster Planning and Checklists",
+    "Adventist Adventurer Awards and Answers/Safety Specialist",
+    "Scouting/BSA/Safety Merit Badge"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "what could make a fire spread faster",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Fires",
+    "Small Scale Production of Lime for Building/Chapter 1. General Information",
+    "StarCraft/High Templar"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "protect my house from wildfire",
+   "colour": "green",
+   "titles": [
+    "Lentis/The 2020 Western Wildfire Season in the U.S.",
+    "A fairer, kinder society",
+    "News by location/2023"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "clear brush around the house for wildfire",
+   "colour": "green",
+   "titles": [
+    "Sustainability and Sense of Place in the Sonoran Desert/Lower Colorado River",
+    "Agent Orange",
+    "Pesticide"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to run a generator safely",
+   "colour": "green",
+   "titles": [
+    "Waterpod/Bicycle Energy Generator",
+    "Integral fast reactor",
+    "CCAT pedal power laptop"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how often to clean the chimney",
+   "colour": "green",
+   "titles": [
+    "Chimney sweeps' carcinoma",
+    "Rocket stove mass heater",
+    "CCAT rocket stove/Operation and maintenance"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to build a shelter in the woods",
+   "colour": "green",
+   "titles": [
+    "World Shelters Make it Complete with Papercrete",
+    "Eind1009 0 0 Lass\u00e9 Shelter Design by group 3V",
+    "Raising Ducks/How to begin"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "stay warm without power in winter",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Winter Storms and Extreme Cold",
+    "Warming Center Operations Manual/Basics",
+    "California Public Policy and Citizen Participation/Warming center"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to use a compass",
+   "colour": "green",
+   "titles": [
+    "Compassion fatigue",
+    "Compassion-focused therapy",
+    "Compassion fatigue in journalism"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to signal for rescue",
+   "colour": "green",
+   "titles": [
+    "Post-earthquake rescue efforts",
+    "Avalanche rescue",
+    "Rega (air rescue)"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "what goes in a first aid kit",
+   "colour": "green",
+   "titles": [
+    "Outdoor Survival/First Aid",
+    "Outdoor Survival/Survival Kit",
+    "Disaster preparedness"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to make a splint from sticks",
+   "colour": "green",
+   "titles": [
+    "Traction splint",
+    "777 OSAT projects 2019",
+    "Orthopedic cast"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to dig a latrine",
+   "colour": "green",
+   "titles": [
+    "Practical Action/Ventilated Improved Pit Latrine",
+    "Single pit latrine",
+    "Pit latrine"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "make a handwashing station",
+   "colour": "green",
+   "titles": [
+    "Handwashing",
+    "CCAT greenshed rainwater catchment",
+    "Agrotunnel cleaning procedure:FAST"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "emergency radio frequencies",
+   "colour": "green",
+   "titles": [
+    "Pulsed radiofrequency",
+    "Emergency vehicle equipment",
+    "Adventist Youth Honors Answer Book/Vocational/Radio"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to sandbag the house for a flood",
+   "colour": "green",
+   "titles": [
+    "GEN Solution Library/Earthbag houses",
+    "Earthbag building",
+    "World Shelters Make it Complete with Papercrete"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "secure furniture for earthquakes",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Earthquake preparedness",
+    "High School Earth Science/Staying Safe in Earthquakes",
+    "Lentis/Cascadia Earthquake Preparation"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "prepare the house for a flood",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Floods",
+    "Are You Ready?/Why Prepare for Natural Disasters?",
+    "House Construction/Setting the Stage"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how do i treat water damage on the floor",
+   "colour": "green",
+   "titles": [
+    "Back Yard and Commercial Rabbit Production/Managing the herd",
+    "Cordwoodguy's cordwood guide",
+    "Tres Rios Constructed Wetland System"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "where is the safest place in a house during a tornado",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Tornadoes",
+    "Storms",
+    "Adventist Youth Honors Answer Book/Health and Science/Red Alert"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to seal a room for shelter in place",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Shelter from Natural Disasters",
+    "Are You Ready?/Hazardous Material Incidents",
+    "Are You Ready?/Chemical Threats"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to prepare a fallout shelter",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Nuclear blast",
+    "Are You Ready?/Radiological Dispersion Device (RDD)",
+    "Emergency management"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "protect yourself from volcanic ash",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Volcanoes",
+    "Indoor air quality",
+    "Smog"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "prepare for a hurricane",
+   "colour": "green",
+   "titles": [
+    "Are You Ready?/Hurricanes",
+    "Are You Ready?/Why Prepare for Natural Disasters?",
+    "Disaster preparedness"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to tie a bowline",
+   "colour": "green",
+   "titles": [
+    "Knots/Loop knots/Bowline",
+    "Adventist Youth Honors Answer Book/Knot/Bowline",
+    "Knots/Loop knots/Triple bowline"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "make my home harder to break into",
+   "colour": "green",
+   "titles": [
+    "United States solar PV roof policy method",
+    "Fire resistant plants",
+    "Taffy Pull"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "what to do during riots in the city",
+   "colour": "green",
+   "titles": [
+    "Community action/Missouri",
+    "Community action/Eugene, Oregon",
+    "Violence against Muslims in India"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the engine keeps choking when it is cold",
+   "colour": "green",
+   "titles": [
+    "Hemp",
+    "High-altitude breathing apparatus",
+    "Laryngospasm"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to use the choke on a small engine",
+   "colour": "green",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Vocational/Small Engines",
+    "Small Scale Vegetable Oil Extraction/Oil extraction",
+    "Small Scale Vegetable Oil Extraction/Appendices"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to bleed the brakes",
+   "colour": "green",
+   "titles": [
+    "Automotive Systems/Braking System",
+    "Nissan 240SX Performance Modification/Brakes",
+    "NREMT Skillset/Airway Patency Assessment/Quiz"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to bleed a radiator",
+   "colour": "green",
+   "titles": [
+    "Radiation proctitis",
+    "Radiation enteropathy",
+    "Lower gastrointestinal bleeding"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the car battery is dead",
+   "colour": "green",
+   "titles": [
+    "Carbon monoxide detector",
+    "Battery Power/Lithium Ion Batteries",
+    "CCAT barts bike"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my phone is dead and no power",
+   "colour": "green",
+   "titles": [
+    "215 Solar for low power medical equipment",
+    "Low cost computer guide",
+    "Autoerotic fatality"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "the shock absorbers on the truck are broken",
+   "colour": "green",
+   "titles": [
+    "Chemical Sciences: A Manual for CSIR-UGC National Eligibility Test for Lectureship and JRF/X-ray",
+    "Dominican Republic alternative building analysis",
+    "Wheelchair"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "build an electric fence for goats",
+   "colour": "green",
+   "titles": [
+    "Subject:Miscellaneous",
+    "Mirad/Word Families",
+    "Wikibooks:Alphabetical classification/All Books"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to smoke fish to preserve it",
+   "colour": "green",
+   "titles": [
+    "Solar and Energy Conserving Food Technologies/Model solar food dryer: design and construction",
+    "Cooking",
+    "Cold smoking"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to use a burn barrel for trash",
+   "colour": "green",
+   "titles": [
+    "Cocaine paste",
+    "Plastics Molding & Manufacturing/Defects",
+    "Geometron Trash Robot"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "is it safe to burn treated wood in the stove",
+   "colour": "green",
+   "titles": [
+    "Feces",
+    "No such thing as waste",
+    "Farmers of Forty Centuries/Chapter 4"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "flooded engine will not start",
+   "colour": "green",
+   "titles": [
+    "In-river flood management",
+    "Infrastructure Past, Present, and Future Casebook/Metro Flood Diversion (MN/ND)",
+    "Infrastructure Past, Present, and Future Casebook/Venetian Flood Control (MOSE)"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to get rid of rats without poison",
+   "colour": "green",
+   "titles": [
+    "Peace Corps appropriate community technology/Earthen Construction and Fuel-Saving Cookstoves",
+    "Rodenticide",
+    "\u0391-Naphthylthiourea"
+   ],
+   "ok": [
+    false,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "my fire is not getting enough air",
+   "colour": "green",
+   "titles": [
+    "Fire prevention",
+    "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+    "Woodstoves"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to run a fire drill at home",
+   "colour": "green",
+   "titles": [
+    "Tolocar/Playbook/How to Tolocar/Our Fleet \u2014 The Truck",
+    "Are You Ready?/Earthquake preparedness",
+    "UK Climate news/2024"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "i am drowning my tomato plants with too much water",
+   "colour": "green",
+   "titles": [
+    "Heliciculture/Feeding",
+    "Horticulture/Slugs",
+    "MESS (Micro Environment Subsistence System)/Overview of plant needs"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to cut firewood safely",
+   "colour": "green",
+   "titles": [
+    "Adventist Youth Honors Answer Book/Recreation/Camping Skills II",
+    "CSU Research Competition 2025 Creative Arts and Design trophy",
+    "Fireless cookers"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how long do burns take to heal",
+   "colour": "yellow",
+   "titles": [
+    "Burn scar contracture",
+    "Z-Plasty/Thinking Like a Reconstructive Surgeon",
+    "Elderberries"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "infection not responding to antibiotics",
+   "colour": "yellow",
+   "titles": [
+    "Infectious Diseases Society of America",
+    "Structural Biochemistry/Antibiotics",
+    "A-level Biology/Human Health and Disease/infectious diseases"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "heat the house without power",
+   "colour": "green",
+   "titles": [
+    "Solar Photovoltaics Integration with Heat Pumps and Thermal Battery to Decarbonize Residential Sector in Canada",
+    "Surrey Hills house",
+    "Ultra-low energy house"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "how to build a root cellar for cold storage",
+   "colour": "green",
+   "titles": [
+    "Beacon Food Forest presentation",
+    "Mirad Lexicon/English-Mirad-S",
+    "Bathroom"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "clean",
+   "how": "pick",
+   "q": "is spring water safe to drink",
+   "colour": "green",
+   "titles": [
+    "Drinking water",
+    "Adventist Adventurer Awards and Answers/Safe Water",
+    "Water is life"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my husbnd colapsed and isnt breating",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "he stoped breathin wat do i do",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my sun isnt brething",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "kid not breating lips blu",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my bby is not breathng",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "infnt stoped breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "hes chocking on food cant talk",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "somone chokin at diner",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "baby chokeing on grape",
+   "colour": "red",
+   "titles": [
+    "Choking",
+    "Baby-led weaning",
+    "Infant food safety"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "todler choking on coin",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "she is unconsious but breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "he pased out wont wake up",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "asma attack no inhaler",
+   "colour": "red",
+   "titles": [
+    "Smoking",
+    "Cigarette",
+    "Tobacco smoking"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "she cant breath wheezing bad",
+   "colour": "red",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Stations/2KY Sydney/Notes"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "throat sweling after bee sting",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "alergic reaction lips sweling",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "smoke inhilation from house fire",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "carbon monoxid poisoning",
+   "colour": "red",
+   "titles": [
+    "Wood gasification in Northern Ontario Canada",
+    "Carbon Monoxide Detector",
+    "Rocket stove mass heater"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "hedache dizy generator inside",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "blod spurting from his leg wont stop",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "bleding alot from arm",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "bleeeding wont stop",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "his fingr got cut of",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "chainsaw cut his leg bad",
+   "colour": "red",
+   "titles": [
+    "List of films impacted by the COVID-19 pandemic",
+    "Doom/Complete list of enemies",
+    "Robotics/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "stabed in the chest",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "stik stuck in his leg",
+   "colour": "red",
+   "titles": [
+    "Tok Pisin/Dictionary"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "chest pian left arm",
+   "colour": "red",
+   "titles": [
+    "List of acupuncture points",
+    "First Opium War",
+    "Cultural Anthropology/Print version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "dad having a hart attack",
+   "colour": "red",
+   "titles": [
+    "Female sexual arousal disorder",
+    "Amnesia",
+    "Dissociative identity disorder"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "pale cold sweaty after acident",
+   "colour": "red",
+   "titles": [
+    "Iranian traditional medicine",
+    "List of infectious diseases",
+    "Richard Nixon"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "dog atacked my child bleding bad",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "her face is droping cant speek",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "sudden weaknes one side",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "hes having a siezure",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "having a seazure",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "baby high fevr shaking all over",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "hit his hed vomiting confussed",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "fell of the roof cant move legs",
+   "colour": "red",
+   "titles": [
+    "Chinese (Classical Mandarin)/Glossary",
+    "Chinese (Classical Mandarin)/Printable version",
+    "Seed Factories/Starter Set"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "diabetik shaking confused",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "overdoes barely breathing",
+   "colour": "red",
+   "titles": [
+    "Physical Activity/Aerobic Exercise",
+    "Lucid Dreaming/Appendices/VILD",
+    "Adventist Youth Honors Answer Book/Health and Science/Home Nursing"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "baby fever rash doesnt fade",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "frend says he wants to kill himslef",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my son neary drownd in the pool",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "pulled him out of the rver not breathin",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "fell thru the ice",
+   "colour": "red",
+   "titles": [
+    "Impact of the COVID-19 pandemic on the food industry",
+    "Responses to the COVID-19 pandemic in March 2020",
+    "Timeline of the COVID-19 pandemic in Quebec"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "shoked by a wire in flood water",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "elecrtic shock fallen wire",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "struck by lightening",
+   "colour": "red",
+   "titles": [
+    "Saylor.org's Ancient Civilizations of the World/Islam vs. Indigenous Religion",
+    "Social and Cultural Foundations of American Education/Administration/Legal Issues",
+    "Introduction to Linguistics/Printable version"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "whole arm badly burnd",
+   "colour": "red",
+   "titles": [
+    "The Devonshire Manuscript/Witnesses"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "boiling water spiled on the baby",
+   "colour": "red",
+   "titles": [
+    "Mirad Lexicon/English-Mirad-S",
+    "Mirad Lexicon/English-Mirad-T"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "burnt and not breething",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my cloths caught fire",
+   "colour": "red",
+   "titles": [
+    "Making Rope",
+    "History of the District of Columbia Fire and Emergency Medical Services Department",
+    "Resurrectionists in the United Kingdom"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "hypothermai after falling in cold water",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "heat strok what to do",
+   "colour": "red",
+   "titles": [
+    "Tobacco packaging warning messages"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "snak bit my leg",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "biten by a ratlesnake",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "legs traped under fallen wall",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "car crsh driver traped",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "splahsed bleach in my eye",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "todler drank bleech",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "kid swalowed drain cleaner",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "child swalowed lamp oil",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "kid ate a botle of pils",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "ate wild mushroms vomiting",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "the baby is comming now",
+   "colour": "red",
+   "titles": [
+    "Haiti Earthquake Assistance Project for HSU Engineering 305",
+    "Operating Manual for Gigabot X printer",
+    "Last-Mile Transportation Options for Users of All Differing Abilities"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "water broke i can see the hed",
+   "colour": "red",
+   "titles": [
+    "The Devonshire Manuscript/Witnesses",
+    "Wikibooks:AutoWikiBrowser/Typos"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "heavy bleding after giving birth",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "newbron not breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "pregant and bleeding",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my hose is on fire",
+   "colour": "red",
+   "titles": [
+    "King Pig's property project",
+    "Original environment rehabilitation manual 3.364",
+    "MESS (Micro Environment Subsistence System)/Overview of plant needs"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "fier in the house",
+   "colour": "red",
+   "titles": [
+    "InBev-Baillet Latour Fund",
+    "COVID-19 pandemic in Albania",
+    "Impact of the COVID-19 pandemic on domestic violence"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "greese fire in the pan",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "oil in pan cought fire",
+   "colour": "red",
+   "titles": [
+    "Traditional Chinese Medicine/Usage Of Single Herbs"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "outlet sparkling and smoking",
+   "colour": "red",
+   "titles": [
+    "Electronic cigarette and e-cigarette liquid marketing",
+    "Mirad Lexicon/Mirad-English-M",
+    "Spanish by Choice/Novelas Cortas 00"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "chimny fire",
+   "colour": "red",
+   "titles": [
+    "Public International Law/Jurisdiction",
+    "Public International Law/International Economic Law/Trade Law"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "i smel gas in the house",
+   "colour": "red",
+   "titles": [
+    "Tok Pisin/Dictionary",
+    "Volap\u00fck/English-Volap\u00fck dictionary"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "gas leek from stove",
+   "colour": "red",
+   "titles": [
+    "Three Acres and Liberty/Chapter XI",
+    "Passive smoking",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Arthur Edwyn Walz/Notes"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "wildfrie coming to our house",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "car stuk in rising flood water",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "tsunammi warning",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "earthqauke happening",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "tornado comming where to hide",
+   "colour": "red",
+   "titles": [
+    "Mario Adventure/Printable version",
+    "Canadian History/Printable version",
+    "Aros/User/Applications"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "some one is shoting in the mall",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "explotion people bleeding",
+   "colour": "red",
+   "titles": [
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "nucelar explosion",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "chemcial spill outside",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "power lien fell on car",
+   "colour": "red",
+   "titles": [
+    "Health insurance mandate",
+    "COVID-19 pandemic in Singapore",
+    "Doping in sport"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "someones braking into my house",
+   "colour": "red",
+   "titles": [
+    "Driving under the influence",
+    "Road safety",
+    "Drunk driving law by country"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "burnd my hand on the stove",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "brunt my fingers campfire",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "cut my fingr with a knife",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "twistd my ankel",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "i think my arm is brokn",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "brken leg",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "nosebled wont stop",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "tooth nocked out",
+   "colour": "yellow",
+   "titles": [
+    "Ageing Well",
+    "Mirad Lexicon/Mirad-English-Y",
+    "Chinese (Classical Mandarin)/Glossary"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "stug by a bee",
+   "colour": "yellow",
+   "titles": [
+    "Micro-livestock/Research contacts"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "scorpoin sting on my foot",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "dog bit my hand smal wound",
+   "colour": "yellow",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1928 03 30"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "diarea for two days",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "drank creek water now diarrea",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "my chlid keeps throwing up",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "child has a fevor",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "frost bite on toes",
+   "colour": "yellow",
+   "titles": [
+    "Aerosol burn",
+    "Personal protective equipment",
+    "First aid"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "how do i purfy water",
+   "colour": "green",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "make watter safe to drink",
+   "colour": "green",
+   "titles": [
+    "Chondroitin sulfate",
+    "Adverse childhood experiences",
+    "John Adams"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "how do i lite a campfire",
+   "colour": "green",
+   "titles": [
+    "Electronic cigarette and e-cigarette liquid marketing"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "start a fier no matches",
+   "colour": "green",
+   "titles": [
+    "Impact of the COVID-19 pandemic on domestic violence",
+    "COVID-19 pandemic in Italy",
+    "Influenza vaccine"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "how to use a fire extinguiser",
+   "colour": "green",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "upstream",
+   "q": "fire extingisher how to use",
+   "colour": "green",
+   "titles": [
+    "Smoke"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my husbnd colapsed and isnt breating",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "he stoped breathin wat do i do",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my sun isnt brething",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "kid not breating lips blu",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my bby is not breathng",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "infnt stoped breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "hes chocking on food cant talk",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "somone chokin at diner",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "baby chokeing on grape",
+   "colour": "red",
+   "titles": [
+    "Baby-led weaning",
+    "Choking",
+    "Infant food safety"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "todler choking on coin",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "she is unconsious but breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "he pased out wont wake up",
+   "colour": "red",
+   "titles": [
+    "The Devonshire Manuscript/Witnesses"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "asma attack no inhaler",
+   "colour": "red",
+   "titles": [
+    "Asthma trigger",
+    "Smoking",
+    "Cigarette"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "she cant breath wheezing bad",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "throat sweling after bee sting",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "alergic reaction lips sweling",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "smoke inhilation from house fire",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "carbon monoxid poisoning",
+   "colour": "red",
+   "titles": [
+    "Carbon monoxide poisoning",
+    "Carbon Monoxide Detector",
+    "Breath carbon monoxide"
+   ],
+   "ok": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "hedache dizy generator inside",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "blod spurting from his leg wont stop",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "bleding alot from arm",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "bleeeding wont stop",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "his fingr got cut of",
+   "colour": "red",
+   "titles": [
+    "Old English/Old English Phrasebook",
+    "Dupuytren's contracture",
+    "Esperanto/Appendix/English-Esperanto word list (1889)"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "chainsaw cut his leg bad",
+   "colour": "red",
+   "titles": [
+    "Doom/Complete list of enemies",
+    "Personal protective equipment",
+    "Seed Factories/Starter Set"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "stabed in the chest",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "stik stuck in his leg",
+   "colour": "red",
+   "titles": [
+    "Tok Pisin/Dictionary"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "chest pian left arm",
+   "colour": "red",
+   "titles": [
+    "List of acupuncture points",
+    "First Opium War"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "dad having a hart attack",
+   "colour": "red",
+   "titles": [
+    "Dissociative identity disorder",
+    "Lentis/Online Dating Scams",
+    "Female sexual arousal disorder"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "pale cold sweaty after acident",
+   "colour": "red",
+   "titles": [
+    "Iranian traditional medicine",
+    "List of infectious diseases",
+    "Human Physiology/Integumentary System"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "dog atacked my child bleding bad",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "her face is droping cant speek",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "sudden weaknes one side",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "hes having a siezure",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "having a seazure",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "baby high fevr shaking all over",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "hit his hed vomiting confussed",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "fell of the roof cant move legs",
+   "colour": "red",
+   "titles": [
+    "A Researcher's Guide to Local History Terminology/Abecedary",
+    "Seed Factories/Starter Set",
+    "Pinyin/News summary/2013"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "diabetik shaking confused",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "overdoes barely breathing",
+   "colour": "red",
+   "titles": [
+    "Physical Activity/Aerobic Exercise",
+    "Lucid Dreaming/Appendices/VILD",
+    "Adventist Youth Honors Answer Book/Health and Science/Home Nursing"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "baby fever rash doesnt fade",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "frend says he wants to kill himslef",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my son neary drownd in the pool",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "pulled him out of the rver not breathin",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "fell thru the ice",
+   "colour": "red",
+   "titles": [
+    "Impact of the COVID-19 pandemic on the food industry",
+    "New York state government response to the COVID-19 pandemic",
+    "Zero-COVID"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "shoked by a wire in flood water",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "elecrtic shock fallen wire",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "struck by lightening",
+   "colour": "red",
+   "titles": [
+    "Social and Cultural Foundations of American Education/Administration/Legal Issues",
+    "A Compendium of Useful Information for the Practical Man/Camping and Hiking",
+    "Television Manufacture and Repair"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "whole arm badly burnd",
+   "colour": "red",
+   "titles": [
+    "The Devonshire Manuscript/Witnesses"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "boiling water spiled on the baby",
+   "colour": "red",
+   "titles": [
+    "Mirad Lexicon/English-Mirad-S"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "burnt and not breething",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my cloths caught fire",
+   "colour": "red",
+   "titles": [
+    "Hog Butchering and Smoking",
+    "Gabriel Boughton",
+    "Fumigatory box"
+   ],
+   "ok": [
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "hypothermai after falling in cold water",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "heat strok what to do",
+   "colour": "red",
+   "titles": [
+    "Tobacco packaging warning messages"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "snak bit my leg",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "biten by a ratlesnake",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "legs traped under fallen wall",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "car crsh driver traped",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "splahsed bleach in my eye",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "todler drank bleech",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "kid swalowed drain cleaner",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "child swalowed lamp oil",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "kid ate a botle of pils",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "ate wild mushroms vomiting",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "the baby is comming now",
+   "colour": "red",
+   "titles": [
+    "Baby jogger bike trailer",
+    "GEN Solution Library/Baby food",
+    "Baby Gender Mentor"
+   ],
+   "ok": [
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "water broke i can see the hed",
+   "colour": "red",
+   "titles": [
+    "The Devonshire Manuscript/Witnesses"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "heavy bleding after giving birth",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "newbron not breathing",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "pregant and bleeding",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my hose is on fire",
+   "colour": "red",
+   "titles": [
+    "Flash fire",
+    "Firefighting foam",
+    "A-level Physics (Advancing Physics)/Rockets, Hoses and Machine Guns"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "fier in the house",
+   "colour": "red",
+   "titles": [
+    "InBev-Baillet Latour Fund",
+    "Essays in Early Modern Literary Studies, 1995-2000/Hypertext and Editorial Myth",
+    "French/Lessons/Description"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "greese fire in the pan",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "oil in pan cought fire",
+   "colour": "red",
+   "titles": [
+    "Traditional Chinese Medicine/Usage Of Single Herbs"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "outlet sparkling and smoking",
+   "colour": "red",
+   "titles": [
+    "Mirad Lexicon/Mirad-English-M",
+    "Spanish by Choice/Novelas Cortas 00"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "chimny fire",
+   "colour": "red",
+   "titles": [
+    "Public International Law/Jurisdiction",
+    "Public International Law/International Economic Law/Trade Law"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "i smel gas in the house",
+   "colour": "red",
+   "titles": [
+    "Tok Pisin/Dictionary",
+    "Volap\u00fck/English-Volap\u00fck dictionary"
+   ],
+   "ok": [
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "gas leek from stove",
+   "colour": "red",
+   "titles": [
+    "Three Acres and Liberty/Chapter XI",
+    "Passive smoking",
+    "Volap\u00fck/English-Volap\u00fck dictionary"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "wildfrie coming to our house",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "car stuk in rising flood water",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "tsunammi warning",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "earthqauke happening",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "tornado comming where to hide",
+   "colour": "red",
+   "titles": [
+    "Fukushima Aftermath/Davis-Besse Nuclear Power Station",
+    "Aros/User/Applications",
+    "Conversational Yiddish"
+   ],
+   "ok": [
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "some one is shoting in the mall",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "explotion people bleeding",
+   "colour": "red",
+   "titles": [
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "nucelar explosion",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "chemcial spill outside",
+   "colour": "red",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "power lien fell on car",
+   "colour": "red",
+   "titles": [
+    "Health insurance mandate",
+    "Doping in sport",
+    "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "someones braking into my house",
+   "colour": "red",
+   "titles": [
+    "Stadium light solar cookers",
+    "American Health Care Act of 2017",
+    "Driving under the influence"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "burnd my hand on the stove",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "brunt my fingers campfire",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "cut my fingr with a knife",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "twistd my ankel",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "i think my arm is brokn",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "brken leg",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "nosebled wont stop",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "tooth nocked out",
+   "colour": "yellow",
+   "titles": [
+    "Ageing Well",
+    "Writing Adolescent Fiction/Character names/English",
+    "Mirad Lexicon/Mirad-English-Y"
+   ],
+   "ok": [
+    true,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "stug by a bee",
+   "colour": "yellow",
+   "titles": [
+    "Micro-livestock/Research contacts"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "scorpoin sting on my foot",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "dog bit my hand smal wound",
+   "colour": "yellow",
+   "titles": [
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1928 03 30"
+   ],
+   "ok": [
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "diarea for two days",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "drank creek water now diarrea",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "my chlid keeps throwing up",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "child has a fevor",
+   "colour": "yellow",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "frost bite on toes",
+   "colour": "yellow",
+   "titles": [
+    "Aerosol burn",
+    "Planet Earth/6b. Plate Tectonics: You are a Crazy Man, Alfred Wegener",
+    "Hair"
+   ],
+   "ok": [
+    true,
+    false,
+    true
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "how do i purfy water",
+   "colour": "green",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "make watter safe to drink",
+   "colour": "green",
+   "titles": [
+    "Adverse childhood experiences",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Henry Trethowan Simmons/Notes",
+    "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1925 08 28"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "how do i lite a campfire",
+   "colour": "green",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "start a fier no matches",
+   "colour": "green",
+   "titles": [
+    "French For Football/Notes/Words And Phrases",
+    "Impact of the COVID-19 pandemic on domestic violence",
+    "Influenza vaccine"
+   ],
+   "ok": [
+    false,
+    false,
+    false
+   ]
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "how to use a fire extinguiser",
+   "colour": "green",
+   "titles": [],
+   "ok": []
+  },
+  {
+   "set": "typo",
+   "how": "pick",
+   "q": "fire extingisher how to use",
+   "colour": "green",
+   "titles": [
+    "Smoke"
+   ],
+   "ok": [
+    false
+   ]
+  }
+ ]
+}

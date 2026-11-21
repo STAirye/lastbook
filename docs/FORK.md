@@ -6,6 +6,10 @@ default branch). It is based on upstream Lastbook 1.1.14 and is not signed or pu
 guides, search, the no-network rules and the bridge are upstream's. This file records what the fork changes and why, what
 was measured, and what is still open.
 
+The scripts and notes behind each finished piece of work are archived in [docs/evanesced/](evanesced/README.md),
+as they were, when the branch, worktree or session that made them is done (its README has the rules). Fork only, like this
+file.
+
 | | Upstream | This fork |
 |---|---|---|
 | State map step in setup | Required: pick a US state, which downloads its map and address search | Gone. No state picker, no state map or address download |
@@ -784,7 +788,7 @@ Upstream 1.1.13 adds the top 3 encyclopedia hits (MDWiki, Appropedia, Wikibooks,
 results: the raw question goes to the encyclopedias' own search, and the first 2,000 characters of each article go to the
 model. When 1.1.13 was merged, the fork's first search (`turn_hits`) won the conflict, and the articles were left out, while
 upstream's SYSTEM prompt still says they are there. They are back now, but picked the way §3k picks long pages, because
-the same problem shows up there and is worse (`.claude/drafts/encyclopedia/`, the 253 clean test questions over the
+the same problem shows up there and is worse (`docs/evanesced/encyclopedias-3n/`, the 253 clean test questions over the
 three installed files):
 
 - The median article is 28,000 characters; 723 of 752 are over 5,000 and 136 over 100,000. Whole books stored as one
@@ -836,8 +840,8 @@ chainsaw cut). Typo questions were measured raw (4 → 7 useful of 109); Chat fi
 
 **Dev toggle: a vector index of the encyclopedias** (`LASTBOOK_WIKI_VECTORS=1`, off by default; `engine/wiki_vectors.py`).
 A prototype embedded every ~5,000-character section of MDWiki, Appropedia and Wikibooks with bge-small-en-v1.5 on the GPU,
-once (`.claude/drafts/encyclopedia/vectors/`: `build.py`, `bench_all.py`, `RESULTS.md`; the built index files are kept in
-`D:\LastbookData\derived\index\vec-*` on this PC, not in git): 185,702 articles, 429,964 sections, 11.6 min
+once (`docs/evanesced/encyclopedias-3n/vectors/`: `build.py`, `bench_all.py`, `RESULTS.md`; the built index files are
+kept on the development PC, not in git): 185,702 articles, 429,964 sections, 11.6 min
 on an RTX 3080 Ti (about 6 h on a CPU), 330 MB as f16, files `derived/index/vec-<zim>-<size>-<mtime_ns>.{f16.npy,rows.json,meta.json}`
 (the prototype's `rows.npz` needs pickle; `tools/wiki_vectors_rows.py` rewrites it as JSON). With the toggle, `first_wiki`
 asks it first: the question (with bge's search instruction, as `retrieval.QUERY_PREFIX`) is embedded by the meaning check's

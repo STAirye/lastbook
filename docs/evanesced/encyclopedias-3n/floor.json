@@ -1,0 +1,6554 @@
+[
+ {
+  "q": "man fell down not breathing no pulse",
+  "colour": "red",
+  "rank": 0,
+  "title": "History of cardiopulmonary resuscitation",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "man fell down not breathing no pulse",
+  "colour": "red",
+  "rank": 1,
+  "title": "Hypothermia",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "man fell down not breathing no pulse",
+  "colour": "red",
+  "rank": 2,
+  "title": "Intelligent Plastic Machines",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "he stopped breathing what do i do",
+  "colour": "red",
+  "rank": 0,
+  "title": "Circular breathing",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he stopped breathing what do i do",
+  "colour": "red",
+  "rank": 1,
+  "title": "First Aid/B for Breathing",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he stopped breathing what do i do",
+  "colour": "red",
+  "rank": 2,
+  "title": "Electrical safety basic principals",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my son isn't breathing",
+  "colour": "red",
+  "rank": 0,
+  "title": "Neuroethology",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "kid not breathing and lips are blue",
+  "colour": "red",
+  "rank": 0,
+  "title": "Mercury poisoning",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "kid not breathing and lips are blue",
+  "colour": "red",
+  "rank": 1,
+  "title": "24 Hours in A&E",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "kid not breathing and lips are blue",
+  "colour": "red",
+  "rank": 2,
+  "title": "Mephedrone",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "my baby is not breathing",
+  "colour": "red",
+  "rank": 0,
+  "title": "Baby Bubbler",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my baby is not breathing",
+  "colour": "red",
+  "rank": 1,
+  "title": "Baby-led weaning",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my baby is not breathing",
+  "colour": "red",
+  "rank": 2,
+  "title": "Baby Care and Development/Baby Development",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "infant stopped breathing in the crib",
+  "colour": "red",
+  "rank": 0,
+  "title": "Torticollis",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "infant stopped breathing in the crib",
+  "colour": "red",
+  "rank": 1,
+  "title": "Baby-led weaning",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "infant stopped breathing in the crib",
+  "colour": "red",
+  "rank": 2,
+  "title": "Emergency childbirth",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "he is choking on food and cannot talk",
+  "colour": "red",
+  "rank": 0,
+  "title": "Suicide watch",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he is choking on food and cannot talk",
+  "colour": "red",
+  "rank": 1,
+  "title": "Parenting",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he is choking on food and cannot talk",
+  "colour": "red",
+  "rank": 2,
+  "title": "Choking",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "someone choking at dinner",
+  "colour": "red",
+  "rank": 0,
+  "title": "Adventist Adventurer Awards and Answers/Courtesy",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "someone choking at dinner",
+  "colour": "red",
+  "rank": 1,
+  "title": "Casualty series 39",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "someone choking at dinner",
+  "colour": "red",
+  "rank": 2,
+  "title": "Basic Writing/Narrative and memoir",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "my baby is choking on a grape",
+  "colour": "red",
+  "rank": 0,
+  "title": "Baby-led weaning",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my baby is choking on a grape",
+  "colour": "red",
+  "rank": 1,
+  "title": "Infant food safety",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my baby is choking on a grape",
+  "colour": "red",
+  "rank": 2,
+  "title": "Choking",
+  "score": 0.75,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "toddler choking on a coin",
+  "colour": "red",
+  "rank": 0,
+  "title": "Baby-led weaning",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "toddler choking on a coin",
+  "colour": "red",
+  "rank": 1,
+  "title": "Speech-Language Pathology/Stuttering/Practice Word Lists",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "toddler choking on a coin",
+  "colour": "red",
+  "rank": 2,
+  "title": "Infant food safety",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "she is unconscious but breathing",
+  "colour": "red",
+  "rank": 0,
+  "title": "First Aid/B for Breathing",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "she is unconscious but breathing",
+  "colour": "red",
+  "rank": 1,
+  "title": "NREMT Skillset/Primary Assessment",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "she is unconscious but breathing",
+  "colour": "red",
+  "rank": 2,
+  "title": "PTC Course/Airway",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he passed out and will not wake up",
+  "colour": "red",
+  "rank": 0,
+  "title": "Non-24-hour sleep\u2013wake disorder",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he passed out and will not wake up",
+  "colour": "red",
+  "rank": 1,
+  "title": "Bards Irish Fiddle Tunebook Supplement/Finnegan's Wake",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he passed out and will not wake up",
+  "colour": "red",
+  "rank": 2,
+  "title": "GEN Solution Library/A small farm in the mountains",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "asthma attack and no inhaler",
+  "colour": "red",
+  "rank": 0,
+  "title": "Asthma exacerbation",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "asthma attack and no inhaler",
+  "colour": "red",
+  "rank": 1,
+  "title": "Asthma trigger",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "asthma attack and no inhaler",
+  "colour": "red",
+  "rank": 2,
+  "title": "Brittle asthma",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "she can't breathe, wheezing badly",
+  "colour": "red",
+  "rank": 0,
+  "title": "Shortness of breath",
+  "score": 0.75,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "she can't breathe, wheezing badly",
+  "colour": "red",
+  "rank": 1,
+  "title": "Kehr's sign",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "she can't breathe, wheezing badly",
+  "colour": "red",
+  "rank": 2,
+  "title": "Review of systems",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "throat swelling after a bee sting",
+  "colour": "red",
+  "rank": 0,
+  "title": "Melittin",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "throat swelling after a bee sting",
+  "colour": "red",
+  "rank": 1,
+  "title": "Insects in medicine",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "throat swelling after a bee sting",
+  "colour": "red",
+  "rank": 2,
+  "title": "Apamin",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "allergic reaction and her lips are swelling",
+  "colour": "red",
+  "rank": 0,
+  "title": "List of allergens",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "allergic reaction and her lips are swelling",
+  "colour": "red",
+  "rank": 1,
+  "title": "Oral allergy syndrome",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "allergic reaction and her lips are swelling",
+  "colour": "red",
+  "rank": 2,
+  "title": "Lip augmentation",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "peanut allergy can not breathe",
+  "colour": "red",
+  "rank": 0,
+  "title": "Peanut allergen powder",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "peanut allergy can not breathe",
+  "colour": "red",
+  "rank": 1,
+  "title": "Sesame allergy",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "peanut allergy can not breathe",
+  "colour": "red",
+  "rank": 2,
+  "title": "List of allergens",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "smoke inhalation from a house fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "Smoke",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "smoke inhalation from a house fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "NREMT Skillset/N95 FFR (Filtering Facepiece Respirator) Use/Quiz",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "smoke inhalation from a house fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "Waterpod/Rocket Stove",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he breathed in a lot of smoke and is coughing",
+  "colour": "red",
+  "rank": 0,
+  "title": "Influenza treatment",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he breathed in a lot of smoke and is coughing",
+  "colour": "red",
+  "rank": 1,
+  "title": "Treatment of influenza",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he breathed in a lot of smoke and is coughing",
+  "colour": "red",
+  "rank": 2,
+  "title": "Singing/Caring for your voice",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "headache and dizzy after running the generator inside",
+  "colour": "red",
+  "rank": 0,
+  "title": "Superior canal dehiscence syndrome",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "headache and dizzy after running the generator inside",
+  "colour": "red",
+  "rank": 1,
+  "title": "CCAT natural paints 2017",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "headache and dizzy after running the generator inside",
+  "colour": "red",
+  "rank": 2,
+  "title": "Denn\u014d Senshi Porygon",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "carbon monoxide poisoning symptoms whole family sick",
+  "colour": "red",
+  "rank": 0,
+  "title": "Hypoxia (medicine)",
+  "score": 0.8571,
+  "share": 0.8571,
+  "useful": true
+ },
+ {
+  "q": "carbon monoxide poisoning symptoms whole family sick",
+  "colour": "red",
+  "rank": 1,
+  "title": "Diving disorders",
+  "score": 0.7143,
+  "share": 0.7143,
+  "useful": true
+ },
+ {
+  "q": "carbon monoxide poisoning symptoms whole family sick",
+  "colour": "red",
+  "rank": 2,
+  "title": "Hemoglobin",
+  "score": 0.7143,
+  "share": 0.7143,
+  "useful": true
+ },
+ {
+  "q": "carbon monoxide from making a fire in the tent",
+  "colour": "red",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "carbon monoxide from making a fire in the tent",
+  "colour": "red",
+  "rank": 1,
+  "title": "Self-contained self-rescue device",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "carbon monoxide from making a fire in the tent",
+  "colour": "red",
+  "rank": 2,
+  "title": "Phosgene",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "blood is spurting from his leg and won't stop",
+  "colour": "red",
+  "rank": 0,
+  "title": "Human height",
+  "score": 0.4,
+  "share": 0.4,
+  "useful": false
+ },
+ {
+  "q": "blood is spurting from his leg and won't stop",
+  "colour": "red",
+  "rank": 1,
+  "title": "Mirad Lexicon/Mirad-English-Y",
+  "score": 0.4,
+  "share": 0.4,
+  "useful": false
+ },
+ {
+  "q": "deep cut on the arm bleeding a lot",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "deep cut on the arm bleeding a lot",
+  "colour": "red",
+  "rank": 1,
+  "title": "Nissan 240SX Performance Modification/Brakes",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "deep cut on the arm bleeding a lot",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Backpacking",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "someone is full of blood, it does not stop",
+  "colour": "red",
+  "rank": 0,
+  "title": "Muggles' Guide to Harry Potter/Books/Half-Blood Prince/Chapter 21",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "someone is full of blood, it does not stop",
+  "colour": "red",
+  "rank": 1,
+  "title": "Control and treatment of bedbugs",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "someone is full of blood, it does not stop",
+  "colour": "red",
+  "rank": 2,
+  "title": "Vaping cessation",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "his finger got cut off",
+  "colour": "red",
+  "rank": 0,
+  "title": "Little finger",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "his finger got cut off",
+  "colour": "red",
+  "rank": 1,
+  "title": "Building Haycocks/Cutting/Implements",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "his finger got cut off",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Adventurer Awards and Answers/Finger Play",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "chainsaw cut his leg badly",
+  "colour": "red",
+  "rank": 0,
+  "title": "Doom/Complete list of enemies",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "chainsaw cut his leg badly",
+  "colour": "red",
+  "rank": 1,
+  "title": "Personal protective equipment",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "chainsaw cut his leg badly",
+  "colour": "red",
+  "rank": 2,
+  "title": "Seed Factories/Starter Set",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "stabbed in the chest",
+  "colour": "red",
+  "rank": 0,
+  "title": "NREMT Skillset/Penetrating Chest Trauma",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stabbed in the chest",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chest injury",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stabbed in the chest",
+  "colour": "red",
+  "rank": 2,
+  "title": "NREMT Skillset",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "knife wound to the chest and he is struggling to breathe",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "knife wound to the chest and he is struggling to breathe",
+  "colour": "red",
+  "rank": 1,
+  "title": "Major trauma",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "knife wound to the chest and he is struggling to breathe",
+  "colour": "red",
+  "rank": 2,
+  "title": "Neurology and Neurosurgery/Incomplete Spinal Cord Injuries/Brown-S\u00e9quard syndrome",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "a stick is stuck in his leg",
+  "colour": "red",
+  "rank": 0,
+  "title": "Arroyo Norte sustainable market materials",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "a stick is stuck in his leg",
+  "colour": "red",
+  "rank": 1,
+  "title": "Crab",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "a stick is stuck in his leg",
+  "colour": "red",
+  "rank": 2,
+  "title": "Practical Electronics/Desoldering",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "nail went through her foot and is still in",
+  "colour": "red",
+  "rank": 0,
+  "title": "Parables from a mad social scientist",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "nail went through her foot and is still in",
+  "colour": "red",
+  "rank": 1,
+  "title": "How to Build a Mechanically Powered Battery Charger for LED Lighting",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "nail went through her foot and is still in",
+  "colour": "red",
+  "rank": 2,
+  "title": "Bayside Park Farm/Solar hot water",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "chest pain spreading to his left arm",
+  "colour": "red",
+  "rank": 0,
+  "title": "Referred pain",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "chest pain spreading to his left arm",
+  "colour": "red",
+  "rank": 1,
+  "title": "Radical mastectomy",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "chest pain spreading to his left arm",
+  "colour": "red",
+  "rank": 2,
+  "title": "Causes of cancer pain",
+  "score": 0.85,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "i think my dad is having a heart attack",
+  "colour": "red",
+  "rank": 0,
+  "title": "Housing UK news/2015-2021",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i think my dad is having a heart attack",
+  "colour": "red",
+  "rank": 1,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i think my dad is having a heart attack",
+  "colour": "red",
+  "rank": 2,
+  "title": "Casualty series 39",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "he is pale cold and sweaty after the accident",
+  "colour": "red",
+  "rank": 0,
+  "title": "List of skin conditions",
+  "score": 0.25,
+  "share": 0.25,
+  "useful": false
+ },
+ {
+  "q": "signs of shock after bleeding",
+  "colour": "red",
+  "rank": 0,
+  "title": "NREMT Skillset/Bleeding Control and Shock Management",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "signs of shock after bleeding",
+  "colour": "red",
+  "rank": 1,
+  "title": "Internal bleeding",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "signs of shock after bleeding",
+  "colour": "red",
+  "rank": 2,
+  "title": "Hypovolemic shock",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "dog attacked my child and she is bleeding badly",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "dog attacked my child and she is bleeding badly",
+  "colour": "red",
+  "rank": 1,
+  "title": "Child abuse",
+  "score": 0.65,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "dog attacked my child and she is bleeding badly",
+  "colour": "red",
+  "rank": 2,
+  "title": "Rise of Nations/Nations/Aztecs",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "her face is drooping and she can not speak properly",
+  "colour": "red",
+  "rank": 0,
+  "title": "Three Acres and Liberty/Chapter XIII",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "her face is drooping and she can not speak properly",
+  "colour": "red",
+  "rank": 1,
+  "title": "Botulism",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "her face is drooping and she can not speak properly",
+  "colour": "red",
+  "rank": 2,
+  "title": "Craniosynostosis",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "sudden weakness on one side of the body",
+  "colour": "red",
+  "rank": 0,
+  "title": "Internal Medicine/Neurologic Weakness and Paralysis",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "sudden weakness on one side of the body",
+  "colour": "red",
+  "rank": 1,
+  "title": "FAST (stroke)",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "sudden weakness on one side of the body",
+  "colour": "red",
+  "rank": 2,
+  "title": "Hemiplegic migraine",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he is having a seizure",
+  "colour": "red",
+  "rank": 0,
+  "title": "Post-traumatic seizure",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he is having a seizure",
+  "colour": "red",
+  "rank": 1,
+  "title": "Febrile seizure",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he is having a seizure",
+  "colour": "red",
+  "rank": 2,
+  "title": "Ecstatic seizures",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "she is shaking and foaming at the mouth",
+  "colour": "red",
+  "rank": 0,
+  "title": "Cookbook:Super Foamy Milkshake",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "she is shaking and foaming at the mouth",
+  "colour": "red",
+  "rank": 1,
+  "title": "Febrile seizure",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "she is shaking and foaming at the mouth",
+  "colour": "red",
+  "rank": 2,
+  "title": "Mass psychogenic illness",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my baby has a high fever and is shaking all over",
+  "colour": "red",
+  "rank": 0,
+  "title": "Infant food safety",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my baby has a high fever and is shaking all over",
+  "colour": "red",
+  "rank": 1,
+  "title": "Babesiosis",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my baby has a high fever and is shaking all over",
+  "colour": "red",
+  "rank": 2,
+  "title": "What is AIDS?",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "hit his head and is vomiting and confused",
+  "colour": "red",
+  "rank": 0,
+  "title": "Head injury",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "hit his head and is vomiting and confused",
+  "colour": "red",
+  "rank": 1,
+  "title": "Pediatric concussion",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "hit his head and is vomiting and confused",
+  "colour": "red",
+  "rank": 2,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fell and hit her head now very sleepy",
+  "colour": "red",
+  "rank": 0,
+  "title": "Madame Bovary/Chapter One",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "fell and hit her head now very sleepy",
+  "colour": "red",
+  "rank": 1,
+  "title": "Dreamer",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "fell and hit her head now very sleepy",
+  "colour": "red",
+  "rank": 2,
+  "title": "Diablo Canyon Nuclear Power Plant: The WikiBook/The 2011 Japan Earthquakes",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "fell off the roof and can not move his legs",
+  "colour": "red",
+  "rank": 0,
+  "title": "Sanctuary abundant free food kiosk",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fell off the roof and can not move his legs",
+  "colour": "red",
+  "rank": 1,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fell off the roof and can not move his legs",
+  "colour": "red",
+  "rank": 2,
+  "title": "Gyakuten Kenji 2/Episode 5: The Grand Turnabout/Beginning, Part 1",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "neck hurts after a fall, numb arms",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "neck hurts after a fall, numb arms",
+  "colour": "red",
+  "rank": 1,
+  "title": "Spanish by Choice/Novelas Cortas 00",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "neck hurts after a fall, numb arms",
+  "colour": "red",
+  "rank": 2,
+  "title": "Mandible",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "diabetic and shaking, confused, sweating",
+  "colour": "red",
+  "rank": 0,
+  "title": "Glossary of diabetes",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "diabetic and shaking, confused, sweating",
+  "colour": "red",
+  "rank": 1,
+  "title": "Exercise as it relates to Disease/Preventing hypoglycemia in type 1 diabetics during and after exercise",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "diabetic and shaking, confused, sweating",
+  "colour": "red",
+  "rank": 2,
+  "title": "Blood sugar level",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my diabetic son is not making sense",
+  "colour": "red",
+  "rank": 0,
+  "title": "List of Munchausen by proxy cases",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "my diabetic son is not making sense",
+  "colour": "red",
+  "rank": 1,
+  "title": "Nesfatin-1",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "my diabetic son is not making sense",
+  "colour": "red",
+  "rank": 2,
+  "title": "A History of Japan: From Mythology to Nationhood/The Middle Heian Period",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "took too many pain pills, will not wake",
+  "colour": "red",
+  "rank": 0,
+  "title": "Combined birth control pill",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "took too many pain pills, will not wake",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chinese alchemical elixir poisoning",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "took too many pain pills, will not wake",
+  "colour": "red",
+  "rank": 2,
+  "title": "Insomnia",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "baby has fever and a rash that does not fade",
+  "colour": "red",
+  "rank": 0,
+  "title": "Teething",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "baby has fever and a rash that does not fade",
+  "colour": "red",
+  "rank": 1,
+  "title": "Rubella virus",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "baby has fever and a rash that does not fade",
+  "colour": "red",
+  "rank": 2,
+  "title": "Complication (medicine)",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stiff neck high fever and purple spots",
+  "colour": "red",
+  "rank": 0,
+  "title": "Meningococcal disease",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stiff neck high fever and purple spots",
+  "colour": "red",
+  "rank": 1,
+  "title": "Acute lymphoblastic leukemia",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stiff neck high fever and purple spots",
+  "colour": "red",
+  "rank": 2,
+  "title": "Meningitis",
+  "score": 0.8333,
+  "share": 0.8333,
+  "useful": true
+ },
+ {
+  "q": "my friend says he wants to kill himself",
+  "colour": "red",
+  "rank": 0,
+  "title": "Trial of Anders Behring Breivik",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my friend says he wants to kill himself",
+  "colour": "red",
+  "rank": 1,
+  "title": "Fictional portrayals of psychopaths",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my friend says he wants to kill himself",
+  "colour": "red",
+  "rank": 2,
+  "title": "Muggles' Guide to Harry Potter/Major Events/Shrieking Shack",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i do not want to live anymore",
+  "colour": "red",
+  "rank": 0,
+  "title": "How to live cheap and green",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i do not want to live anymore",
+  "colour": "red",
+  "rank": 1,
+  "title": "Objectified (documentary)",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i do not want to live anymore",
+  "colour": "red",
+  "rank": 2,
+  "title": "Into The World of Social Media",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "treat water in the lungs after drowning",
+  "colour": "red",
+  "rank": 0,
+  "title": "Drowning",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "treat water in the lungs after drowning",
+  "colour": "red",
+  "rank": 1,
+  "title": "When It Hits the Fan/Personal Strategies and Know-how/Water",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "treat water in the lungs after drowning",
+  "colour": "red",
+  "rank": 2,
+  "title": "Diving disorders",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my son nearly drowned in the rainwater pool",
+  "colour": "red",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership",
+  "score": 0.4,
+  "share": 0.4,
+  "useful": false
+ },
+ {
+  "q": "my son nearly drowned in the rainwater pool",
+  "colour": "red",
+  "rank": 1,
+  "title": "A Researcher's Guide to Local History Terminology/Abecedary",
+  "score": 0.4,
+  "share": 0.4,
+  "useful": false
+ },
+ {
+  "q": "pulled him out of the river, not breathing",
+  "colour": "red",
+  "rank": 0,
+  "title": "Planet Earth/4a. The Air You Breathe",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pulled him out of the river, not breathing",
+  "colour": "red",
+  "rank": 1,
+  "title": "CCAT barts bike",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pulled him out of the river, not breathing",
+  "colour": "red",
+  "rank": 2,
+  "title": "Yangsheng (Daoism)",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he fell through the ice on the lake",
+  "colour": "red",
+  "rank": 0,
+  "title": "Planet Earth/5i. Earth\u2019s Ice: Glaciers, Ice Sheets, and Sea Ice",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he fell through the ice on the lake",
+  "colour": "red",
+  "rank": 1,
+  "title": "NREMT Skillset/Vital Signs Assessment/Skin, Temperature and Pulse Oximetry Quiz",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he fell through the ice on the lake",
+  "colour": "red",
+  "rank": 2,
+  "title": "Micro-livestock/Part 2: Poultry",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "friend fell through thin ice",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "friend fell through thin ice",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chromebook",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "friend fell through thin ice",
+  "colour": "red",
+  "rank": 2,
+  "title": "Tatworth Village/Over the garden gate",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "someone got shocked by a wire in the flood water",
+  "colour": "red",
+  "rank": 0,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+  "score": 0.85,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "someone got shocked by a wire in the flood water",
+  "colour": "red",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Health and Science/First Aid, Basic",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "someone got shocked by a wire in the flood water",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Health and Science/First Aid, Standard",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "he touched a power line and collapsed",
+  "colour": "red",
+  "rank": 0,
+  "title": "Defibrillation with AED - ECSACONM",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he touched a power line and collapsed",
+  "colour": "red",
+  "rank": 1,
+  "title": "Photovoltaic technology impacts on national security: literature review",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "he touched a power line and collapsed",
+  "colour": "red",
+  "rank": 2,
+  "title": "Are You Ready?/Floods",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "electric shock from a fallen wire",
+  "colour": "red",
+  "rank": 0,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Walter Isaac Monkhouse/Notes",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "electric shock from a fallen wire",
+  "colour": "red",
+  "rank": 1,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "electric shock from a fallen wire",
+  "colour": "red",
+  "rank": 2,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1922 09 01",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "my friend was struck by lightning",
+  "colour": "red",
+  "rank": 0,
+  "title": "Phoenix Wright: Ace Attorney - Trials and Tribulations/Episode 5: Bridge to the Turnabout/Part 1-2: Investigation",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my friend was struck by lightning",
+  "colour": "red",
+  "rank": 1,
+  "title": "Muggles' Guide to Harry Potter/Books/Half-Blood Prince/Chapter 27",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my friend was struck by lightning",
+  "colour": "red",
+  "rank": 2,
+  "title": "Muggles' Guide to Harry Potter/Major Events/Death Eaters",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "her whole arm is badly burned",
+  "colour": "red",
+  "rank": 0,
+  "title": "Hexayurt project/Hexayurt playa",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "her whole arm is badly burned",
+  "colour": "red",
+  "rank": 1,
+  "title": "Disfigurement",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "her whole arm is badly burned",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Backpacking",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "boiling water spilled on the baby",
+  "colour": "red",
+  "rank": 0,
+  "title": "Principles of Microeconomics/Public Goods",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "boiling water spilled on the baby",
+  "colour": "red",
+  "rank": 1,
+  "title": "Menstrual cup",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "boiling water spilled on the baby",
+  "colour": "red",
+  "rank": 2,
+  "title": "Infant formula",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "burn and not breathing",
+  "colour": "red",
+  "rank": 0,
+  "title": "PTC Course/Burns",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "burn and not breathing",
+  "colour": "red",
+  "rank": 1,
+  "title": "PTC Course/Breathing",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "burn and not breathing",
+  "colour": "red",
+  "rank": 2,
+  "title": "Spontaneous breathing trial",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pulled him out of the fire, burned and not breathing",
+  "colour": "red",
+  "rank": 0,
+  "title": "The Legend of Zelda: Ocarina of Time Master Quest/Dodongo's Cavern",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pulled him out of the fire, burned and not breathing",
+  "colour": "red",
+  "rank": 1,
+  "title": "Rural Electrification Systems",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "pulled him out of the fire, burned and not breathing",
+  "colour": "red",
+  "rank": 2,
+  "title": "Hexayurt project/Hexayurt playa checklist",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "my clothes caught fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "Hog Butchering and Smoking",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my clothes caught fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "Gabriel Boughton",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my clothes caught fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "Fumigatory box",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "his shirt is on fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "History of the District of Columbia Fire and Emergency Medical Services Department",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "his shirt is on fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "Are You Ready?/Volcanoes",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "his shirt is on fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "VITA document and link list",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my clothes caught fire while starting the fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "Broken finger",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my clothes caught fire while starting the fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "History of the District of Columbia Fire and Emergency Medical Services Department",
+  "score": 0.85,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "my clothes caught fire while starting the fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "Hog Butchering and Smoking",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "found him in the snow, cold and not shivering anymore",
+  "colour": "red",
+  "rank": 0,
+  "title": "Dreamer",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "found him in the snow, cold and not shivering anymore",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chinese (Classical Mandarin)",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "found him in the snow, cold and not shivering anymore",
+  "colour": "red",
+  "rank": 2,
+  "title": "Yoga/Spiritual Almanac",
+  "score": 0.4,
+  "share": 0.4,
+  "useful": false
+ },
+ {
+  "q": "hypothermia after falling in cold water",
+  "colour": "red",
+  "rank": 0,
+  "title": "Are You Ready?/Winter Storms and Extreme Cold",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "hypothermia after falling in cold water",
+  "colour": "red",
+  "rank": 1,
+  "title": "Hypothermia",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "hypothermia after falling in cold water",
+  "colour": "red",
+  "rank": 2,
+  "title": "Cold shock response",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "he was working in the sun and now he is confused and hot",
+  "colour": "red",
+  "rank": 0,
+  "title": "Anisa Foundation parabolic solar hot water heater",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he was working in the sun and now he is confused and hot",
+  "colour": "red",
+  "rank": 1,
+  "title": "Passive solar design",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "he was working in the sun and now he is confused and hot",
+  "colour": "red",
+  "rank": 2,
+  "title": "Heat stroke",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat stroke what to do",
+  "colour": "red",
+  "rank": 0,
+  "title": "Heat stroke",
+  "score": 1.25,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat stroke what to do",
+  "colour": "red",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/First aid/Heat stroke",
+  "score": 1.25,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat stroke what to do",
+  "colour": "red",
+  "rank": 2,
+  "title": "Are You Ready?/Extreme heat",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "a snake bit my leg",
+  "colour": "red",
+  "rank": 0,
+  "title": "Snakebite",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "a snake bit my leg",
+  "colour": "red",
+  "rank": 1,
+  "title": "Control and treatment of bedbugs",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "a snake bit my leg",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Nature/Reptiles",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bitten by a rattlesnake",
+  "colour": "red",
+  "rank": 0,
+  "title": "Snakebite",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bitten by a rattlesnake",
+  "colour": "red",
+  "rank": 1,
+  "title": "Sistrurus miliarius barbouri",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bitten by a rattlesnake",
+  "colour": "red",
+  "rank": 2,
+  "title": "List of dangerous snakes",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "snake bite while camping",
+  "colour": "red",
+  "rank": 0,
+  "title": "Snakebite",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "snake bite while camping",
+  "colour": "red",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Outdoor Leadership - Advanced",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "snake bite while camping",
+  "colour": "red",
+  "rank": 2,
+  "title": "Fried Green Tomatoes at the Whistle Stop Cafe/Chapter 6",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "his legs are trapped under a fallen wall",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "his legs are trapped under a fallen wall",
+  "colour": "red",
+  "rank": 1,
+  "title": "The Legend of Zelda: Ocarina of Time/Ganon's Castle",
+  "score": 0.65,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "his legs are trapped under a fallen wall",
+  "colour": "red",
+  "rank": 2,
+  "title": "Micro-livestock/Part 5: Deer and Antelope",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "someone trapped under rubble after the earthquake",
+  "colour": "red",
+  "rank": 0,
+  "title": "NYC community resources",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "someone trapped under rubble after the earthquake",
+  "colour": "red",
+  "rank": 1,
+  "title": "Search and rescue",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "someone trapped under rubble after the earthquake",
+  "colour": "red",
+  "rank": 2,
+  "title": "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "car crash, the driver is trapped and bleeding",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "car crash, the driver is trapped and bleeding",
+  "colour": "red",
+  "rank": 1,
+  "title": "Road safety",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "car crash, the driver is trapped and bleeding",
+  "colour": "red",
+  "rank": 2,
+  "title": "Choosing a Car",
+  "score": 0.65,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "motorcycle accident he is not moving",
+  "colour": "red",
+  "rank": 0,
+  "title": "Transportation Deployment Casebook/2014/Motorcycle Helmet Usage",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "motorcycle accident he is not moving",
+  "colour": "red",
+  "rank": 1,
+  "title": "Uniplanar External Fixation/Knowledge Review/Pre-Operative Management",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "motorcycle accident he is not moving",
+  "colour": "red",
+  "rank": 2,
+  "title": "Facial trauma",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "splashed bleach in my eye",
+  "colour": "red",
+  "rank": 0,
+  "title": "Ataxia\u2013telangiectasia",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "splashed bleach in my eye",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chemical toilet",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "splashed bleach in my eye",
+  "colour": "red",
+  "rank": 2,
+  "title": "Ebola",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "chemical in my eyes and it burns",
+  "colour": "red",
+  "rank": 0,
+  "title": "Chemical eye injury",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "chemical in my eyes and it burns",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chemical burn",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "chemical in my eyes and it burns",
+  "colour": "red",
+  "rank": 2,
+  "title": "Are You Ready?/Chemical Threats",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "friend buried in an avalanche",
+  "colour": "red",
+  "rank": 0,
+  "title": "Avalanche rescue",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "friend buried in an avalanche",
+  "colour": "red",
+  "rank": 1,
+  "title": "Principles of Microeconomics/Confronting Objections to the Economic Approach",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "friend buried in an avalanche",
+  "colour": "red",
+  "rank": 2,
+  "title": "High School Earth Science/Erosion and Deposition by Gravity",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "my child swallowed lamp oil",
+  "colour": "red",
+  "rank": 0,
+  "title": "Toxic waste",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "my child swallowed lamp oil",
+  "colour": "red",
+  "rank": 1,
+  "title": "Esperanto/Appendix/English-Esperanto word list (1889)",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "my child swallowed lamp oil",
+  "colour": "red",
+  "rank": 2,
+  "title": "Tatworth Village/Cottage contents and farming pursuits",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "kid drank kerosene",
+  "colour": "red",
+  "rank": 0,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1929 01 11",
+  "score": 0.3333,
+  "share": 0.3333,
+  "useful": false
+ },
+ {
+  "q": "my kid ate a bottle of pills",
+  "colour": "red",
+  "rank": 0,
+  "title": "BRIDGE/First BRIDGE trip",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "my kid ate a bottle of pills",
+  "colour": "red",
+  "rank": 1,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1928 03 30",
+  "score": 0.25,
+  "share": 0.25,
+  "useful": false
+ },
+ {
+  "q": "toddler got into grandma's medicine",
+  "colour": "red",
+  "rank": 0,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "toddler got into grandma's medicine",
+  "colour": "red",
+  "rank": 1,
+  "title": "Mirad Lexicon/Mirad-English-T",
+  "score": 0.3333,
+  "share": 0.3333,
+  "useful": false
+ },
+ {
+  "q": "ate wild mushrooms and now vomiting",
+  "colour": "red",
+  "rank": 0,
+  "title": "Hallucinogenic bolete mushroom",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "ate wild mushrooms and now vomiting",
+  "colour": "red",
+  "rank": 1,
+  "title": "Chinese alchemical elixir poisoning",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "ate wild mushrooms and now vomiting",
+  "colour": "red",
+  "rank": 2,
+  "title": "Ergine",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "the baby is coming right now",
+  "colour": "red",
+  "rank": 0,
+  "title": "Raising Ducks/Growing your own baby ducks",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the baby is coming right now",
+  "colour": "red",
+  "rank": 1,
+  "title": "Back Yard and Commercial Rabbit Production/Managing the herd",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the baby is coming right now",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Health and Science/Child Care (Babysitting)",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "water broke and i can see the head",
+  "colour": "red",
+  "rank": 0,
+  "title": "Maccabiah bridge collapse",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "water broke and i can see the head",
+  "colour": "red",
+  "rank": 1,
+  "title": "Final Fantasy VII/Preface/Story/During the game",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "water broke and i can see the head",
+  "colour": "red",
+  "rank": 2,
+  "title": "Mules",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "heavy bleeding after giving birth",
+  "colour": "red",
+  "rank": 0,
+  "title": "Postpartum bleeding",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heavy bleeding after giving birth",
+  "colour": "red",
+  "rank": 1,
+  "title": "Human Physiology/Pregnancy and birth",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heavy bleeding after giving birth",
+  "colour": "red",
+  "rank": 2,
+  "title": "NREMT Skillset/Uterus Massage",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "she keeps bleeding after the baby came",
+  "colour": "red",
+  "rank": 0,
+  "title": "Jefferson Community Center native pollinators landscape",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "she keeps bleeding after the baby came",
+  "colour": "red",
+  "rank": 1,
+  "title": "Placental expulsion",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "she keeps bleeding after the baby came",
+  "colour": "red",
+  "rank": 2,
+  "title": "Obstetrical forceps",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "newborn baby is not breathing after birth",
+  "colour": "red",
+  "rank": 0,
+  "title": "Blue baby syndrome",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "newborn baby is not breathing after birth",
+  "colour": "red",
+  "rank": 1,
+  "title": "Human Physiology/Development: birth through death",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "newborn baby is not breathing after birth",
+  "colour": "red",
+  "rank": 2,
+  "title": "Human Physiology/Pregnancy and birth",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "pregnant and bleeding with bad pain",
+  "colour": "red",
+  "rank": 0,
+  "title": "Pelvic pain",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pregnant and bleeding with bad pain",
+  "colour": "red",
+  "rank": 1,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pregnant and bleeding with bad pain",
+  "colour": "red",
+  "rank": 2,
+  "title": "Refugee Phrasebook/Learning English and German",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my house is on fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "Fire resistant plants",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my house is on fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "STAR-TIDES Field Manual/Dakota Fire Hole",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my house is on fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "District of Columbia Fire and Emergency Medical Services Department",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fire in the house and kids are upstairs",
+  "colour": "red",
+  "rank": 0,
+  "title": "CCAT Potential Student Project Page",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fire in the house and kids are upstairs",
+  "colour": "red",
+  "rank": 1,
+  "title": "Old School RuneScape/Quests/Desert Treasure",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "fire in the house and kids are upstairs",
+  "colour": "red",
+  "rank": 2,
+  "title": "Smoking Meat",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "grease fire in the pan",
+  "colour": "red",
+  "rank": 0,
+  "title": "Fire safety",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "grease fire in the pan",
+  "colour": "red",
+  "rank": 1,
+  "title": "Scouting/BSA/Fire Safety Merit Badge",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "grease fire in the pan",
+  "colour": "red",
+  "rank": 2,
+  "title": "Hog Butchering and Smoking",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "pour water on a grease fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "Soap making",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "pour water on a grease fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "Hog Butchering and Smoking",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "pour water on a grease fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "Household Cyclopedia/Culinary arts/Plain Cookery/Sweets and Desserts",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the oil in the pan caught fire",
+  "colour": "red",
+  "rank": 0,
+  "title": "Backpack Camping and Woodland Survival/Skills/Cooking/Best Practices",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "the oil in the pan caught fire",
+  "colour": "red",
+  "rank": 1,
+  "title": "Phoenix Wright: Ace Attorney/Episode 5: Rise from the Ashes/Day 2 - Investigation",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "the oil in the pan caught fire",
+  "colour": "red",
+  "rank": 2,
+  "title": "Super Smash Bros. Melee/Stages",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "the outlet is sparking and smoking",
+  "colour": "red",
+  "rank": 0,
+  "title": "Smoking ban",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the outlet is sparking and smoking",
+  "colour": "red",
+  "rank": 1,
+  "title": "Are You Ready?/Fires",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the outlet is sparking and smoking",
+  "colour": "red",
+  "rank": 2,
+  "title": "Kamusi la nishati hai/P - S",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "electrical fire in the wall",
+  "colour": "red",
+  "rank": 0,
+  "title": "Are You Ready?/Fires",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "electrical fire in the wall",
+  "colour": "red",
+  "rank": 1,
+  "title": "Fire safety",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "electrical fire in the wall",
+  "colour": "red",
+  "rank": 2,
+  "title": "Straw Bale Construction/Characteristics/Resistance to fire",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "chimney fire roaring sound",
+  "colour": "red",
+  "rank": 0,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Australasian Radio World/Issues/1937 05",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "chimney fire roaring sound",
+  "colour": "red",
+  "rank": 1,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Biographies/Donald Brader Knock/Notes",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "chimney fire roaring sound",
+  "colour": "red",
+  "rank": 2,
+  "title": "History of wireless telegraphy and broadcasting in Australia/Topical/Publications/Wireless Weekly/Issues/1923 01 05",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "i smell gas in the house",
+  "colour": "red",
+  "rank": 0,
+  "title": "Are You Ready?/Emergency Disaster Planning and Checklists",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i smell gas in the house",
+  "colour": "red",
+  "rank": 1,
+  "title": "E305 backyard biodigester",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i smell gas in the house",
+  "colour": "red",
+  "rank": 2,
+  "title": "Woodstoves",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "gas leak from the stove",
+  "colour": "red",
+  "rank": 0,
+  "title": "Gas stove",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "gas leak from the stove",
+  "colour": "red",
+  "rank": 1,
+  "title": "How air conditioner works",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "gas leak from the stove",
+  "colour": "red",
+  "rank": 2,
+  "title": "Fire safety",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "wildfire is coming toward our house",
+  "colour": "red",
+  "rank": 0,
+  "title": "Community action/South Africa",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wildfire is coming toward our house",
+  "colour": "red",
+  "rank": 1,
+  "title": "Lentis/The 2020 Western Wildfire Season in the U.S.",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wildfire is coming toward our house",
+  "colour": "red",
+  "rank": 2,
+  "title": "Infrastructure Past, Present, and Future Casebook/Santa Ynez Reservoir",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "fire on the hill, should we evacuate",
+  "colour": "red",
+  "rank": 0,
+  "title": "Fire on the Limestone Plains/Bush Fires/The 1979 Bush Fires",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "fire on the hill, should we evacuate",
+  "colour": "red",
+  "rank": 1,
+  "title": "Fire on the Limestone Plains/Bush Fires/The 1952 Bushfires",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "fire on the hill, should we evacuate",
+  "colour": "red",
+  "rank": 2,
+  "title": "Litter (rescue basket)",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "our car is stuck in rising flood water",
+  "colour": "red",
+  "rank": 0,
+  "title": "Effects of climate change on health in the United Kingdom",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "our car is stuck in rising flood water",
+  "colour": "red",
+  "rank": 1,
+  "title": "Internet of things",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "our car is stuck in rising flood water",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Nature/Weather - Advanced",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "water is coming into the car",
+  "colour": "red",
+  "rank": 0,
+  "title": "Adapted thermostatic valve for water pasteurization",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "water is coming into the car",
+  "colour": "red",
+  "rank": 1,
+  "title": "Car electronics",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "water is coming into the car",
+  "colour": "red",
+  "rank": 2,
+  "title": "London community activism news/2007-2021",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the sea pulled back after the earthquake",
+  "colour": "red",
+  "rank": 0,
+  "title": "High School Earth Science/Theory of Plate Tectonics",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the sea pulled back after the earthquake",
+  "colour": "red",
+  "rank": 1,
+  "title": "Regents Earth Science (High School)",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the sea pulled back after the earthquake",
+  "colour": "red",
+  "rank": 2,
+  "title": "High School Earth Science/Volcanic Activity",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "tsunami warning what do we do",
+  "colour": "red",
+  "rank": 0,
+  "title": "Are You Ready?/Tsunamis",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tsunami warning what do we do",
+  "colour": "red",
+  "rank": 1,
+  "title": "Cosmos in the Stacks Tsunami demo",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tsunami warning what do we do",
+  "colour": "red",
+  "rank": 2,
+  "title": "Diablo Canyon Nuclear Power Plant: The WikiBook/The Tsunami",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the ground is shaking right now",
+  "colour": "red",
+  "rank": 0,
+  "title": "How to survive an earthquake",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the ground is shaking right now",
+  "colour": "red",
+  "rank": 1,
+  "title": "Raising Ducks/Growing your own baby ducks",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the ground is shaking right now",
+  "colour": "red",
+  "rank": 2,
+  "title": "Bayside Park Farm/Informational kiosk",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "earthquake happening what do i do",
+  "colour": "red",
+  "rank": 0,
+  "title": "How to survive an earthquake",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "earthquake happening what do i do",
+  "colour": "red",
+  "rank": 1,
+  "title": "Are You Ready?/Earthquake preparedness",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "earthquake happening what do i do",
+  "colour": "red",
+  "rank": 2,
+  "title": "High School Earth Science/Nature of Earthquakes",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tornado coming where do we hide",
+  "colour": "red",
+  "rank": 0,
+  "title": "Kirby franchise strategy guide/Enemies",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tornado coming where do we hide",
+  "colour": "red",
+  "rank": 1,
+  "title": "Fukushima Aftermath/Davis-Besse Nuclear Power Station",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "tornado coming where do we hide",
+  "colour": "red",
+  "rank": 2,
+  "title": "Super Mario Sunshine/Bianco Hills",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "tornado warning and no basement",
+  "colour": "red",
+  "rank": 0,
+  "title": "Are You Ready?/Tornadoes",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tornado warning and no basement",
+  "colour": "red",
+  "rank": 1,
+  "title": "Are You Ready?/Shelter from Natural Disasters",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tornado warning and no basement",
+  "colour": "red",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Health and Science/Red Alert",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "someone is shooting in the mall",
+  "colour": "red",
+  "rank": 0,
+  "title": "Timeline of the COVID-19 pandemic in New York City",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "someone is shooting in the mall",
+  "colour": "red",
+  "rank": 1,
+  "title": "COVID-19 pandemic in Ottawa",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "someone is shooting in the mall",
+  "colour": "red",
+  "rank": 2,
+  "title": "Mirad Lexicon/English-Mirad-S",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "active shooter at school",
+  "colour": "red",
+  "rank": 0,
+  "title": "School bullying",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "active shooter at school",
+  "colour": "red",
+  "rank": 1,
+  "title": "Lentis/The School to Prison Pipeline",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "active shooter at school",
+  "colour": "red",
+  "rank": 2,
+  "title": "Medical Tactical Training Program",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "explosion and people are bleeding",
+  "colour": "red",
+  "rank": 0,
+  "title": "Blast injury",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "explosion and people are bleeding",
+  "colour": "red",
+  "rank": 1,
+  "title": "Pulmonary contusion",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "explosion and people are bleeding",
+  "colour": "red",
+  "rank": 2,
+  "title": "Suicide",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "a bomb went off nearby",
+  "colour": "red",
+  "rank": 0,
+  "title": "New Zealand History/Mid to Late Twentieth Century",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "a bomb went off nearby",
+  "colour": "red",
+  "rank": 1,
+  "title": "World War I/Causes/Franz Ferdinand",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "a bomb went off nearby",
+  "colour": "red",
+  "rank": 2,
+  "title": "Yokkaichi asthma",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "nuclear explosion what do i do",
+  "colour": "red",
+  "rank": 0,
+  "title": "Effects of nuclear explosions on human health",
+  "score": 1.25,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "nuclear explosion what do i do",
+  "colour": "red",
+  "rank": 1,
+  "title": "Are You Ready?/Nuclear blast",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "nuclear explosion what do i do",
+  "colour": "red",
+  "rank": 2,
+  "title": "Wikijunior:How Things Work/Nuclear Bomb",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "radiation fallout coming",
+  "colour": "red",
+  "rank": 0,
+  "title": "Ionizing radiation",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "radiation fallout coming",
+  "colour": "red",
+  "rank": 1,
+  "title": "Are You Ready?/Nuclear blast",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "radiation fallout coming",
+  "colour": "red",
+  "rank": 2,
+  "title": "Effects of nuclear explosions on human health",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "chemical spill outside, told to shelter in place",
+  "colour": "red",
+  "rank": 0,
+  "title": "Chemical warfare",
+  "score": 0.5417,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "chemical spill outside, told to shelter in place",
+  "colour": "red",
+  "rank": 1,
+  "title": "Saylor.org's Comparative Politics/Case Study: The Arab Spring",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "chemical spill outside, told to shelter in place",
+  "colour": "red",
+  "rank": 2,
+  "title": "Smoking ban",
+  "score": 0.3333,
+  "share": 0.3333,
+  "useful": false
+ },
+ {
+  "q": "toxic gas cloud near the factory",
+  "colour": "red",
+  "rank": 0,
+  "title": "Professionalism/Union Carbide and Bhopal",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "toxic gas cloud near the factory",
+  "colour": "red",
+  "rank": 1,
+  "title": "Mustard gas",
+  "score": 0.85,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "toxic gas cloud near the factory",
+  "colour": "red",
+  "rank": 2,
+  "title": "Lives Saved by Replacing Coal with PV",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "a power line fell on our car",
+  "colour": "red",
+  "rank": 0,
+  "title": "Transportation Deployment Casebook/Cable Car",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "a power line fell on our car",
+  "colour": "red",
+  "rank": 1,
+  "title": "News by UK location/2023",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "a power line fell on our car",
+  "colour": "red",
+  "rank": 2,
+  "title": "Climate news/2018-2019",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "downed power line in the yard",
+  "colour": "red",
+  "rank": 0,
+  "title": "Yard Welding Fundamentals",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "downed power line in the yard",
+  "colour": "red",
+  "rank": 1,
+  "title": "M Street Eureka rainwater catchment",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "downed power line in the yard",
+  "colour": "red",
+  "rank": 2,
+  "title": "Pail closet",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "someone is breaking into my house",
+  "colour": "red",
+  "rank": 0,
+  "title": "Chicken Cleaning and Preparation",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "someone is breaking into my house",
+  "colour": "red",
+  "rank": 1,
+  "title": "Lorena Cookstove",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "someone is breaking into my house",
+  "colour": "red",
+  "rank": 2,
+  "title": "The Future We Deserve/TheFWD larahna",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "mud is sliding down the hill toward the houses",
+  "colour": "red",
+  "rank": 0,
+  "title": "High School Earth Science/Erosion and Deposition by Gravity",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "mud is sliding down the hill toward the houses",
+  "colour": "red",
+  "rank": 1,
+  "title": "Kamusi la nishati hai/A - C",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "mud is sliding down the hill toward the houses",
+  "colour": "red",
+  "rank": 2,
+  "title": "Beak",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "hurricane is here and the roof is coming off",
+  "colour": "red",
+  "rank": 0,
+  "title": "News pages on CASwiki/News sections in development",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "hurricane is here and the roof is coming off",
+  "colour": "red",
+  "rank": 1,
+  "title": "Green infrastructure",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "hurricane is here and the roof is coming off",
+  "colour": "red",
+  "rank": 2,
+  "title": "Ground mount fixed tilt PV racking literature review",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "i burned my hand on the camp stove",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Camping Skills II",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i burned my hand on the camp stove",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Camping Skills III (North American Division)",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i burned my hand on the camp stove",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Standing Rock Technologies",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "burned my hand trying to light a fire",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "burned my hand trying to light a fire",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Camping/Fire/Flint and steel",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "burned my hand trying to light a fire",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Papasan chair solar cooker",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i burnt my fingers lighting the campfire",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "When It Hits the Fan/Personal Strategies and Know-how/Fire",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "i burnt my fingers lighting the campfire",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "When It Hits the Fan/Personal Strategies and Know-how",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "is it safe to put water on a burn",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Camp Safety",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "is it safe to put water on a burn",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Fireless cookers",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "is it safe to put water on a burn",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Are You Ready?/Chemical Threats",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water blisters on a burn",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Burn",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water blisters on a burn",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Blister",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water blisters on a burn",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "First Aid/Burns",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my kid fell into the fire while we were making a fire",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Mario Adventure/Story",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my kid fell into the fire while we were making a fire",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Trees, woodland and forest news",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "my kid fell into the fire while we were making a fire",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Denn\u014d Senshi Porygon",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "cut my finger with a knife",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Cookbook:Knife Skills",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "cut my finger with a knife",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Back Yard and Commercial Rabbit Production/Simplified tanning",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "cut my finger with a knife",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "White Oak Baskets",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "deep cut on my hand, does it need stitches",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Vertical mattress stitch",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "deep cut on my hand, does it need stitches",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Ozark Home Made Toys",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "deep cut on my hand, does it need stitches",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Stanley and Kristi's eco-friendly cardboard furniture",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "twisted my ankle hiking",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Mirad Thesaurus/Human Body",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "twisted my ankle hiking",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "A Guide to the GRE/Vocabulary List 7",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "twisted my ankle hiking",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Backpacking",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "sprained wrist swelling",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Sprain",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "sprained wrist swelling",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Wrist pain",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "sprained wrist swelling",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "NREMT Skillset/Long Bone Splinting",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i think my arm is broken",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "New Public Thinking/The year punk broke - Chris T-T",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i think my arm is broken",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Need Mapping",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i think my arm is broken",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Environment quality UK news",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "broken leg no ambulance",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "NREMT Skillset/Sager Traction Splint Application",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "broken leg no ambulance",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "24 Hours in A&E",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "broken leg no ambulance",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Orthopedic boot",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "shoulder popped out",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Projects with Bart",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "shoulder popped out",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Snapping hip syndrome",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "shoulder popped out",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Bursitis",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "nosebleed will not stop",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Nosebleed",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "nosebleed will not stop",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "NREMT Skillset/Nasopharyngeal Airway Placement",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "nosebleed will not stop",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Horsetail",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "kid has a nose bleed",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Asakk\u016b mar\u1e63\u016btu",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "kid has a nose bleed",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Adventist Adventurer Awards and Answers/First Aid Helper",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "kid has a nose bleed",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Ethnomedicine/Home Remedies/A - C",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tooth knocked out",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Tooth replantation",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tooth knocked out",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "The Adventures of Ali and His Gang vs. Mr. Tooth Decay",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tooth knocked out",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Dental avulsion",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bad toothache and swollen face",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Pericoronitis",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bad toothache and swollen face",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Toothache",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "bad toothache and swollen face",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Iranian traditional medicine",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "stung by a bee",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Practical Action/Beekeeping",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stung by a bee",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Bees and Their Management",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stung by a bee",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Bee sting",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wasp sting swelling",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Bee sting",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wasp sting swelling",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Arthropod bites and stings",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wasp sting swelling",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Insect bites and stings",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "scorpion sting on my foot",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Stingray injury",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "scorpion sting on my foot",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Millipede burn",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "scorpion sting on my foot",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Insects in medicine",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "tick on my leg how to remove",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Colorado tick fever",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tick on my leg how to remove",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Tick paralysis",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "tick on my leg how to remove",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Tick-borne disease",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "spider bite turning red",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Wikijunior:Bugs/Mexican Red-Kneed Tarantula",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "spider bite turning red",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Wound Man",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "spider bite turning red",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Snakebite",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stung by a jellyfish",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Irukandji syndrome",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stung by a jellyfish",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Portuguese man o' war",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stung by a jellyfish",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Ethnomedicine/Home Remedies/J - L",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "dog bit my hand, small wound",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Nature/Small Mammal Pets",
+  "score": 0.85,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "dog bit my hand, small wound",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Snakebite",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "dog bit my hand, small wound",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Tooth",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "a stray dog bit me, rabies?",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Prevalence of rabies",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "a stray dog bit me, rabies?",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Dog bite",
+  "score": 0.875,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "a stray dog bit me, rabies?",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "History of Western Theatre: 17th Century to Now/English Pre-WWII or Edwardian",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "rash from poison ivy",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/First aid/Poison ivy",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "rash from poison ivy",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Organic Horticulture in the Mid-Atlantic/Poison ivy",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "rash from poison ivy",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "List of poisonous plants",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "itchy rash after touching a plant",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Contact dermatitis",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "itchy rash after touching a plant",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Chronic actinic dermatitis",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "itchy rash after touching a plant",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Allergies in children",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "drank creek water and now i have diarrhea",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Professionalism/DuPont, C8, and Parkersburg, West Virginia",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "drank creek water and now i have diarrhea",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Native American ethnobotany",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "diarrhea for two days",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Porcine epidemic diarrhoea",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "diarrhea for two days",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Wilderness-acquired diarrhea",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "diarrhea for two days",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Travelers' diarrhea",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water poisoning",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Food poisoning and its prevention",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water poisoning",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Practical Action/Food poisoning and its prevention",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water poisoning",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Arcata Marsh/Tertiary treatment",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my child keeps throwing up",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Household Cyclopedia/Culinary arts/Plain Cookery/Beverages",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my child keeps throwing up",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "El Nuevo Sol Learning Garden",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my child keeps throwing up",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Infant food safety",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my child has a fever",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Childhood immunizations in the United States",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my child has a fever",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Fever",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my child has a fever",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Information for parents about common Paediatric Surgical conditions",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bring down a fever",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Staten Island Quarantine War",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to bring down a fever",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Contingent contagionism",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bring down a fever",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "What You Should Know About Medicines/Antipyretic",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "signs of dehydration in a baby",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Solar and Energy Conserving Food Technologies/The use of dried foods",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "signs of dehydration in a baby",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Colostomy in Newborns/Protocol for Management of a Neonate Requiring a Colostomy",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "signs of dehydration in a baby",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Peace Corps appropriate community technology/Pedal/Treadle Power",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "baby very sleepy after diarrhea all day",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Baby colic",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "baby very sleepy after diarrhea all day",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Mitotane",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "baby very sleepy after diarrhea all day",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Tiagabine",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fingers are white and numb from the cold",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Vibration white finger",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fingers are white and numb from the cold",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Raynaud syndrome",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "fingers are white and numb from the cold",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Frostbite",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "frostbite on toes",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Frostbite",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "frostbite on toes",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/First aid/Frostbite",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "frostbite on toes",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Are You Ready?/Winter Storms and Extreme Cold",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "light a fire to keep him warm with hypothermia",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Winter Camping",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "light a fire to keep him warm with hypothermia",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Backpacking",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "light a fire to keep him warm with hypothermia",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Suprachiasmatic nucleus",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "shivering and cold after getting wet",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Natural and Cultural History of North-East Australia's Wet Tropical Forests",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "shivering and cold after getting wet",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Luigi's Mansion/Ghosts",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "shivering and cold after getting wet",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Are You Ready?/Winter Storms and Extreme Cold",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "dizzy and sweating a lot in the heat",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Occupational heat stress",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "dizzy and sweating a lot in the heat",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Healthy eating habits/Sports drinks: are they really doing us good?",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "dizzy and sweating a lot in the heat",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Human Physiology/Homeostasis",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "heat exhaustion treatment",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Heat exhaustion",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat exhaustion treatment",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Are You Ready?/Extreme heat",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat exhaustion treatment",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Heat illness",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bad sunburn with blisters",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Scouting/BSA/Camping Merit Badge",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bad sunburn with blisters",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Original environment rehabilitation manual 3.369/Protective Void Space:",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "bad sunburn with blisters",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Occupational disease",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "splinter deep in my finger",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Splinter",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "splinter deep in my finger",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Drill Press (Shop Fox W1848):MOST",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "splinter deep in my finger",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Ross' syndrome",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "something in my eye",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Themes in Literature/Belonging and Exile/Sights for Sore Eyes",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "something in my eye",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Blender 3D: Noob to Pro/Creating Pixar-looking eyes in Blender",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "something in my eye",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "How to make Comics",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "dust in my eye will not come out",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Eye protection",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "dust in my eye will not come out",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Wikijunior:Solar System/Comets",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "dust in my eye will not come out",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Practical Action/Drying of chillies",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my kid has an earache",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "OMS Manual/Chapter 5",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the cut is red, hot and has pus",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Ingrown nail",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the cut is red, hot and has pus",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "English in Use/Orthography",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the cut is red, hot and has pus",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Boil",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "wound not healing after two weeks",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Wound healing",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wound not healing after two weeks",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "WACS Training Modules/Skin Grafting",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "wound not healing after two weeks",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Tibial Fracture Fixation/Knowledge Review/Follow-Up Care",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "having a panic attack",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Panic attack",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "having a panic attack",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Psychiatric Disorders/Anxiety disorders/Panic attack",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "having a panic attack",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Panic disorder",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i can not stop shaking after the storm",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Final Fantasy VI/Rages",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i can not stop shaking after the storm",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Muggles' Guide to Harry Potter/Books/Philosopher's Stone/Chapter 3",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i can not stop shaking after the storm",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Loam Plaster (How to make it)",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "my kids are scared after the earthquake",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Dreamer",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my kids are scared after the earthquake",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "IFTC Jump into English Textbook - Teacher's Manual",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my kids are scared after the earthquake",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "MMR vaccine and autism",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "how to cope after the disaster",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Are You Ready?/Recovering from Disaster",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to cope after the disaster",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Are You Ready?/Practice and Maintain Your Disaster Safety Plan",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to cope after the disaster",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "SimCity and Urban Planning/Natural Disasters",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "kid bumped his head, he seems fine",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Hair",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "kid bumped his head, he seems fine",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Learning disability",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "kid bumped his head, he seems fine",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Child development stages",
+  "score": 0.4,
+  "share": 0.4,
+  "useful": false
+ },
+ {
+  "q": "my eyes sting from wildfire smoke",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Chemical warfare",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "can is bulging, is it safe to eat",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Botulism",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "can is bulging, is it safe to eat",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Healthy eating habits/Creating Quick and Easy Meals using Common Pantry Items",
+  "score": 0.75,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "can is bulging, is it safe to eat",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Traditional Field Crops/Pest and disease control",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": false
+ },
+ {
+  "q": "how can i know if my can food has gone bad",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Soda drinks",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how can i know if my can food has gone bad",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "The Poetry of Gaius Valerius Catullus/14",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how can i know if my can food has gone bad",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Cognitive Science: An Introduction/Olfaction",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how do i purify water from a creek",
+  "colour": "green",
+  "rank": 0,
+  "title": "Backpack Camping and Woodland Survival/Skills/Water Purification",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i purify water from a creek",
+  "colour": "green",
+  "rank": 1,
+  "title": "Decreasing turbidity to optimize solar water disinfection",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i purify water from a creek",
+  "colour": "green",
+  "rank": 2,
+  "title": "Sustainability and Sense of Place in the Sonoran Desert/Lower Colorado River",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how do i make the water safe to drink",
+  "colour": "green",
+  "rank": 0,
+  "title": "Safe Drinking Water Act",
+  "score": 1.1875,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i make the water safe to drink",
+  "colour": "green",
+  "rank": 1,
+  "title": "Drinking water",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i make the water safe to drink",
+  "colour": "green",
+  "rank": 2,
+  "title": "Drinking water quality standards",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bleach to clean drinking water",
+  "colour": "green",
+  "rank": 0,
+  "title": "Water supplies and sanitation",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bleach to clean drinking water",
+  "colour": "green",
+  "rank": 1,
+  "title": "Practical Action/Water supplies for food processing",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "bleach to clean drinking water",
+  "colour": "green",
+  "rank": 2,
+  "title": "Water supply and purification for emergencies",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how long to boil water to make it safe",
+  "colour": "green",
+  "rank": 0,
+  "title": "Water supply and sanitation in Canada",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how long to boil water to make it safe",
+  "colour": "green",
+  "rank": 1,
+  "title": "Outdoor Survival/Water",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how long to boil water to make it safe",
+  "colour": "green",
+  "rank": 2,
+  "title": "Cookbook:Boiling",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to make the water safe for a baby's formula",
+  "colour": "green",
+  "rank": 0,
+  "title": "Infant food safety",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to make the water safe for a baby's formula",
+  "colour": "green",
+  "rank": 1,
+  "title": "Infant formula",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to make the water safe for a baby's formula",
+  "colour": "green",
+  "rank": 2,
+  "title": "Infant and toddler safety",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how much water to store for an emergency",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Emergency Disaster Planning and Checklists",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how much water to store for an emergency",
+  "colour": "green",
+  "rank": 1,
+  "title": "Emergency Medicine/Diarrhea",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how much water to store for an emergency",
+  "colour": "green",
+  "rank": 2,
+  "title": "Are You Ready?/Assemble Disaster Supplies Kit",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to store water long term",
+  "colour": "green",
+  "rank": 0,
+  "title": "When It Hits the Fan/Long-Term Water Storage",
+  "score": 1.1875,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to store water long term",
+  "colour": "green",
+  "rank": 1,
+  "title": "Antneh's rainwater storing gojo",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to store water long term",
+  "colour": "green",
+  "rank": 2,
+  "title": "Are You Ready?/Assemble Disaster Supplies Kit",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "collect rainwater for drinking",
+  "colour": "green",
+  "rank": 0,
+  "title": "Practivistas Chiapas rainwater catchment",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "collect rainwater for drinking",
+  "colour": "green",
+  "rank": 1,
+  "title": "Parameters for rainwater quality testing at Isla Urbana and the Ajusco Lab",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "collect rainwater for drinking",
+  "colour": "green",
+  "rank": 2,
+  "title": "Rainwater urban design and infrastructure",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "is the food in the fridge safe after the power went out",
+  "colour": "green",
+  "rank": 0,
+  "title": "2008 Irish pork crisis",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "is the food in the fridge safe after the power went out",
+  "colour": "green",
+  "rank": 1,
+  "title": "When It Hits the Fan/Personal Strategies and Know-how",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "is the food in the fridge safe after the power went out",
+  "colour": "green",
+  "rank": 2,
+  "title": "Neologisms of Stanislaw Lem",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "use the water heater as emergency water",
+  "colour": "green",
+  "rank": 0,
+  "title": "Compost heater",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "use the water heater as emergency water",
+  "colour": "green",
+  "rank": 1,
+  "title": "Recycling agricultural wastes to produce hot water",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "use the water heater as emergency water",
+  "colour": "green",
+  "rank": 2,
+  "title": "WHTC Technology Plan",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i light a campfire",
+  "colour": "green",
+  "rank": 0,
+  "title": "Do-It-Yourself/Campfire",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i light a campfire",
+  "colour": "green",
+  "rank": 1,
+  "title": "Guitar/song examples/Campfire Diploma/Spancil Hill",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i light a campfire",
+  "colour": "green",
+  "rank": 2,
+  "title": "Guitar/song examples/Campfire Diploma/Oh My Darling Clementine",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i need to start a fire but i have no matches and no gas",
+  "colour": "green",
+  "rank": 0,
+  "title": "Practical Action/Kerosene and liquid petroleum gas",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i need to start a fire but i have no matches and no gas",
+  "colour": "green",
+  "rank": 1,
+  "title": "Fire safety",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i need to start a fire but i have no matches and no gas",
+  "colour": "green",
+  "rank": 2,
+  "title": "Woodstoves",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "start a fire with wet wood",
+  "colour": "green",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "start a fire with wet wood",
+  "colour": "green",
+  "rank": 1,
+  "title": "Outdoor Survival/Fire",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "start a fire with wet wood",
+  "colour": "green",
+  "rank": 2,
+  "title": "HBCSL cobb oven/Cobb Info, Detailed Building and Testing Instructions",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to use a fire extinguisher",
+  "colour": "green",
+  "rank": 0,
+  "title": "Fire extinguishing",
+  "score": 1.1667,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a fire extinguisher",
+  "colour": "green",
+  "rank": 1,
+  "title": "Are You Ready?/Fires",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a fire extinguisher",
+  "colour": "green",
+  "rank": 2,
+  "title": "Aircraft rescue and firefighting",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "which fire extinguisher for a kitchen",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Fires",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "which fire extinguisher for a kitchen",
+  "colour": "green",
+  "rank": 1,
+  "title": "Fireless cookers",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "which fire extinguisher for a kitchen",
+  "colour": "green",
+  "rank": 2,
+  "title": "Fire safety",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "where to put smoke alarms",
+  "colour": "green",
+  "rank": 0,
+  "title": "STOP YOUR HABITS OF SMOKING TOBACCO AND CIGARETTES TO HAVE A SAFETY LIVES",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "where to put smoke alarms",
+  "colour": "green",
+  "rank": 1,
+  "title": "Bees and Their Management",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "where to put smoke alarms",
+  "colour": "green",
+  "rank": 2,
+  "title": "Fire prevention",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "where to put a carbon monoxide detector",
+  "colour": "green",
+  "rank": 0,
+  "title": "Rocket stove mass heater",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "where to put a carbon monoxide detector",
+  "colour": "green",
+  "rank": 1,
+  "title": "Breathing gas",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "where to put a carbon monoxide detector",
+  "colour": "green",
+  "rank": 2,
+  "title": "Fire safety",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "make a fire escape plan for my family",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Emergency Disaster Planning and Checklists",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "make a fire escape plan for my family",
+  "colour": "green",
+  "rank": 1,
+  "title": "Adventist Adventurer Awards and Answers/Safety Specialist",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "make a fire escape plan for my family",
+  "colour": "green",
+  "rank": 2,
+  "title": "Scouting/BSA/Safety Merit Badge",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "what could make a fire spread faster",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Fires",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "what could make a fire spread faster",
+  "colour": "green",
+  "rank": 1,
+  "title": "Small Scale Production of Lime for Building/Chapter 1. General Information",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "what could make a fire spread faster",
+  "colour": "green",
+  "rank": 2,
+  "title": "StarCraft/High Templar",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "protect my house from wildfire",
+  "colour": "green",
+  "rank": 0,
+  "title": "Lentis/The 2020 Western Wildfire Season in the U.S.",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "protect my house from wildfire",
+  "colour": "green",
+  "rank": 1,
+  "title": "A fairer, kinder society",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "protect my house from wildfire",
+  "colour": "green",
+  "rank": 2,
+  "title": "News by location/2023",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "clear brush around the house for wildfire",
+  "colour": "green",
+  "rank": 0,
+  "title": "Sustainability and Sense of Place in the Sonoran Desert/Lower Colorado River",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "clear brush around the house for wildfire",
+  "colour": "green",
+  "rank": 1,
+  "title": "Agent Orange",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "clear brush around the house for wildfire",
+  "colour": "green",
+  "rank": 2,
+  "title": "Pesticide",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": true
+ },
+ {
+  "q": "how to run a generator safely",
+  "colour": "green",
+  "rank": 0,
+  "title": "Waterpod/Bicycle Energy Generator",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to run a generator safely",
+  "colour": "green",
+  "rank": 1,
+  "title": "Integral fast reactor",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to run a generator safely",
+  "colour": "green",
+  "rank": 2,
+  "title": "CCAT pedal power laptop",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how often to clean the chimney",
+  "colour": "green",
+  "rank": 0,
+  "title": "Chimney sweeps' carcinoma",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how often to clean the chimney",
+  "colour": "green",
+  "rank": 1,
+  "title": "Rocket stove mass heater",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how often to clean the chimney",
+  "colour": "green",
+  "rank": 2,
+  "title": "CCAT rocket stove/Operation and maintenance",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to build a shelter in the woods",
+  "colour": "green",
+  "rank": 0,
+  "title": "World Shelters Make it Complete with Papercrete",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to build a shelter in the woods",
+  "colour": "green",
+  "rank": 1,
+  "title": "Eind1009 0 0 Lass\u00e9 Shelter Design by group 3V",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to build a shelter in the woods",
+  "colour": "green",
+  "rank": 2,
+  "title": "Raising Ducks/How to begin",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stay warm without power in winter",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Winter Storms and Extreme Cold",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stay warm without power in winter",
+  "colour": "green",
+  "rank": 1,
+  "title": "Warming Center Operations Manual/Basics",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "stay warm without power in winter",
+  "colour": "green",
+  "rank": 2,
+  "title": "California Public Policy and Citizen Participation/Warming center",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a compass",
+  "colour": "green",
+  "rank": 0,
+  "title": "Compassion fatigue",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a compass",
+  "colour": "green",
+  "rank": 1,
+  "title": "Compassion-focused therapy",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a compass",
+  "colour": "green",
+  "rank": 2,
+  "title": "Compassion fatigue in journalism",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to signal for rescue",
+  "colour": "green",
+  "rank": 0,
+  "title": "Post-earthquake rescue efforts",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to signal for rescue",
+  "colour": "green",
+  "rank": 1,
+  "title": "Avalanche rescue",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to signal for rescue",
+  "colour": "green",
+  "rank": 2,
+  "title": "Rega (air rescue)",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "what goes in a first aid kit",
+  "colour": "green",
+  "rank": 0,
+  "title": "Outdoor Survival/First Aid",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "what goes in a first aid kit",
+  "colour": "green",
+  "rank": 1,
+  "title": "Outdoor Survival/Survival Kit",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "what goes in a first aid kit",
+  "colour": "green",
+  "rank": 2,
+  "title": "Disaster preparedness",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to make a splint from sticks",
+  "colour": "green",
+  "rank": 0,
+  "title": "Traction splint",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to make a splint from sticks",
+  "colour": "green",
+  "rank": 1,
+  "title": "777 OSAT projects 2019",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to make a splint from sticks",
+  "colour": "green",
+  "rank": 2,
+  "title": "Orthopedic cast",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to dig a latrine",
+  "colour": "green",
+  "rank": 0,
+  "title": "Practical Action/Ventilated Improved Pit Latrine",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to dig a latrine",
+  "colour": "green",
+  "rank": 1,
+  "title": "Single pit latrine",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to dig a latrine",
+  "colour": "green",
+  "rank": 2,
+  "title": "Pit latrine",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "make a handwashing station",
+  "colour": "green",
+  "rank": 0,
+  "title": "Handwashing",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "make a handwashing station",
+  "colour": "green",
+  "rank": 1,
+  "title": "CCAT greenshed rainwater catchment",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "make a handwashing station",
+  "colour": "green",
+  "rank": 2,
+  "title": "Agrotunnel cleaning procedure:FAST",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "emergency radio frequencies",
+  "colour": "green",
+  "rank": 0,
+  "title": "Pulsed radiofrequency",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "emergency radio frequencies",
+  "colour": "green",
+  "rank": 1,
+  "title": "Emergency vehicle equipment",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "emergency radio frequencies",
+  "colour": "green",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Vocational/Radio",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to sandbag the house for a flood",
+  "colour": "green",
+  "rank": 0,
+  "title": "GEN Solution Library/Earthbag houses",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to sandbag the house for a flood",
+  "colour": "green",
+  "rank": 1,
+  "title": "Earthbag building",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "how to sandbag the house for a flood",
+  "colour": "green",
+  "rank": 2,
+  "title": "World Shelters Make it Complete with Papercrete",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "secure furniture for earthquakes",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Earthquake preparedness",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "secure furniture for earthquakes",
+  "colour": "green",
+  "rank": 1,
+  "title": "High School Earth Science/Staying Safe in Earthquakes",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "secure furniture for earthquakes",
+  "colour": "green",
+  "rank": 2,
+  "title": "Lentis/Cascadia Earthquake Preparation",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "prepare the house for a flood",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Floods",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "prepare the house for a flood",
+  "colour": "green",
+  "rank": 1,
+  "title": "Are You Ready?/Why Prepare for Natural Disasters?",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "prepare the house for a flood",
+  "colour": "green",
+  "rank": 2,
+  "title": "House Construction/Setting the Stage",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how do i treat water damage on the floor",
+  "colour": "green",
+  "rank": 0,
+  "title": "Back Yard and Commercial Rabbit Production/Managing the herd",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how do i treat water damage on the floor",
+  "colour": "green",
+  "rank": 1,
+  "title": "Cordwoodguy's cordwood guide",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how do i treat water damage on the floor",
+  "colour": "green",
+  "rank": 2,
+  "title": "Tres Rios Constructed Wetland System",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "where is the safest place in a house during a tornado",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Tornadoes",
+  "score": 1.05,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "where is the safest place in a house during a tornado",
+  "colour": "green",
+  "rank": 1,
+  "title": "Storms",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "where is the safest place in a house during a tornado",
+  "colour": "green",
+  "rank": 2,
+  "title": "Adventist Youth Honors Answer Book/Health and Science/Red Alert",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to seal a room for shelter in place",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Shelter from Natural Disasters",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to seal a room for shelter in place",
+  "colour": "green",
+  "rank": 1,
+  "title": "Are You Ready?/Hazardous Material Incidents",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to seal a room for shelter in place",
+  "colour": "green",
+  "rank": 2,
+  "title": "Are You Ready?/Chemical Threats",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to prepare a fallout shelter",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Nuclear blast",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to prepare a fallout shelter",
+  "colour": "green",
+  "rank": 1,
+  "title": "Are You Ready?/Radiological Dispersion Device (RDD)",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to prepare a fallout shelter",
+  "colour": "green",
+  "rank": 2,
+  "title": "Emergency management",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "protect yourself from volcanic ash",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Volcanoes",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "protect yourself from volcanic ash",
+  "colour": "green",
+  "rank": 1,
+  "title": "Indoor air quality",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "protect yourself from volcanic ash",
+  "colour": "green",
+  "rank": 2,
+  "title": "Smog",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "prepare for a hurricane",
+  "colour": "green",
+  "rank": 0,
+  "title": "Are You Ready?/Hurricanes",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "prepare for a hurricane",
+  "colour": "green",
+  "rank": 1,
+  "title": "Are You Ready?/Why Prepare for Natural Disasters?",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "prepare for a hurricane",
+  "colour": "green",
+  "rank": 2,
+  "title": "Disaster preparedness",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to tie a bowline",
+  "colour": "green",
+  "rank": 0,
+  "title": "Knots/Loop knots/Bowline",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to tie a bowline",
+  "colour": "green",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Knot/Bowline",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to tie a bowline",
+  "colour": "green",
+  "rank": 2,
+  "title": "Knots/Loop knots/Triple bowline",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "make my home harder to break into",
+  "colour": "green",
+  "rank": 0,
+  "title": "United States solar PV roof policy method",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "make my home harder to break into",
+  "colour": "green",
+  "rank": 1,
+  "title": "Fire resistant plants",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "make my home harder to break into",
+  "colour": "green",
+  "rank": 2,
+  "title": "Taffy Pull",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "what to do during riots in the city",
+  "colour": "green",
+  "rank": 0,
+  "title": "Community action/Missouri",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "what to do during riots in the city",
+  "colour": "green",
+  "rank": 1,
+  "title": "Community action/Eugene, Oregon",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "what to do during riots in the city",
+  "colour": "green",
+  "rank": 2,
+  "title": "Violence against Muslims in India",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the engine keeps choking when it is cold",
+  "colour": "green",
+  "rank": 0,
+  "title": "Hemp",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "the engine keeps choking when it is cold",
+  "colour": "green",
+  "rank": 1,
+  "title": "High-altitude breathing apparatus",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "the engine keeps choking when it is cold",
+  "colour": "green",
+  "rank": 2,
+  "title": "Laryngospasm",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "how to use the choke on a small engine",
+  "colour": "green",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Vocational/Small Engines",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use the choke on a small engine",
+  "colour": "green",
+  "rank": 1,
+  "title": "Small Scale Vegetable Oil Extraction/Oil extraction",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use the choke on a small engine",
+  "colour": "green",
+  "rank": 2,
+  "title": "Small Scale Vegetable Oil Extraction/Appendices",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bleed the brakes",
+  "colour": "green",
+  "rank": 0,
+  "title": "Automotive Systems/Braking System",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bleed the brakes",
+  "colour": "green",
+  "rank": 1,
+  "title": "Nissan 240SX Performance Modification/Brakes",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bleed the brakes",
+  "colour": "green",
+  "rank": 2,
+  "title": "NREMT Skillset/Airway Patency Assessment/Quiz",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to bleed a radiator",
+  "colour": "green",
+  "rank": 0,
+  "title": "Radiation proctitis",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bleed a radiator",
+  "colour": "green",
+  "rank": 1,
+  "title": "Radiation enteropathy",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to bleed a radiator",
+  "colour": "green",
+  "rank": 2,
+  "title": "Lower gastrointestinal bleeding",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the car battery is dead",
+  "colour": "green",
+  "rank": 0,
+  "title": "Carbon monoxide detector",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the car battery is dead",
+  "colour": "green",
+  "rank": 1,
+  "title": "Battery Power/Lithium Ion Batteries",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "the car battery is dead",
+  "colour": "green",
+  "rank": 2,
+  "title": "CCAT barts bike",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my phone is dead and no power",
+  "colour": "green",
+  "rank": 0,
+  "title": "215 Solar for low power medical equipment",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my phone is dead and no power",
+  "colour": "green",
+  "rank": 1,
+  "title": "Low cost computer guide",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my phone is dead and no power",
+  "colour": "green",
+  "rank": 2,
+  "title": "Autoerotic fatality",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "the shock absorbers on the truck are broken",
+  "colour": "green",
+  "rank": 0,
+  "title": "Chemical Sciences: A Manual for CSIR-UGC National Eligibility Test for Lectureship and JRF/X-ray",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": false
+ },
+ {
+  "q": "the shock absorbers on the truck are broken",
+  "colour": "green",
+  "rank": 1,
+  "title": "Dominican Republic alternative building analysis",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": false
+ },
+ {
+  "q": "the shock absorbers on the truck are broken",
+  "colour": "green",
+  "rank": 2,
+  "title": "Wheelchair",
+  "score": 0.5,
+  "share": 0.5,
+  "useful": true
+ },
+ {
+  "q": "build an electric fence for goats",
+  "colour": "green",
+  "rank": 0,
+  "title": "Subject:Miscellaneous",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "build an electric fence for goats",
+  "colour": "green",
+  "rank": 1,
+  "title": "Mirad/Word Families",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "build an electric fence for goats",
+  "colour": "green",
+  "rank": 2,
+  "title": "Wikibooks:Alphabetical classification/All Books",
+  "score": 0.75,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "how to smoke fish to preserve it",
+  "colour": "green",
+  "rank": 0,
+  "title": "Solar and Energy Conserving Food Technologies/Model solar food dryer: design and construction",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to smoke fish to preserve it",
+  "colour": "green",
+  "rank": 1,
+  "title": "Cooking",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to smoke fish to preserve it",
+  "colour": "green",
+  "rank": 2,
+  "title": "Cold smoking",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a burn barrel for trash",
+  "colour": "green",
+  "rank": 0,
+  "title": "Cocaine paste",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to use a burn barrel for trash",
+  "colour": "green",
+  "rank": 1,
+  "title": "Plastics Molding & Manufacturing/Defects",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to use a burn barrel for trash",
+  "colour": "green",
+  "rank": 2,
+  "title": "Geometron Trash Robot",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "is it safe to burn treated wood in the stove",
+  "colour": "green",
+  "rank": 0,
+  "title": "Feces",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "is it safe to burn treated wood in the stove",
+  "colour": "green",
+  "rank": 1,
+  "title": "No such thing as waste",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "is it safe to burn treated wood in the stove",
+  "colour": "green",
+  "rank": 2,
+  "title": "Farmers of Forty Centuries/Chapter 4",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "flooded engine will not start",
+  "colour": "green",
+  "rank": 0,
+  "title": "In-river flood management",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "flooded engine will not start",
+  "colour": "green",
+  "rank": 1,
+  "title": "Infrastructure Past, Present, and Future Casebook/Metro Flood Diversion (MN/ND)",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "flooded engine will not start",
+  "colour": "green",
+  "rank": 2,
+  "title": "Infrastructure Past, Present, and Future Casebook/Venetian Flood Control (MOSE)",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to get rid of rats without poison",
+  "colour": "green",
+  "rank": 0,
+  "title": "Peace Corps appropriate community technology/Earthen Construction and Fuel-Saving Cookstoves",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to get rid of rats without poison",
+  "colour": "green",
+  "rank": 1,
+  "title": "Rodenticide",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to get rid of rats without poison",
+  "colour": "green",
+  "rank": 2,
+  "title": "\u0391-Naphthylthiourea",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "my fire is not getting enough air",
+  "colour": "green",
+  "rank": 0,
+  "title": "Fire prevention",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my fire is not getting enough air",
+  "colour": "green",
+  "rank": 1,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Fire Building & Camp Cookery",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "my fire is not getting enough air",
+  "colour": "green",
+  "rank": 2,
+  "title": "Woodstoves",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to run a fire drill at home",
+  "colour": "green",
+  "rank": 0,
+  "title": "Tolocar/Playbook/How to Tolocar/Our Fleet \u2014 The Truck",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to run a fire drill at home",
+  "colour": "green",
+  "rank": 1,
+  "title": "Are You Ready?/Earthquake preparedness",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how to run a fire drill at home",
+  "colour": "green",
+  "rank": 2,
+  "title": "UK Climate news/2024",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "i am drowning my tomato plants with too much water",
+  "colour": "green",
+  "rank": 0,
+  "title": "Heliciculture/Feeding",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i am drowning my tomato plants with too much water",
+  "colour": "green",
+  "rank": 1,
+  "title": "Horticulture/Slugs",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "i am drowning my tomato plants with too much water",
+  "colour": "green",
+  "rank": 2,
+  "title": "MESS (Micro Environment Subsistence System)/Overview of plant needs",
+  "score": 0.8125,
+  "share": 0.75,
+  "useful": true
+ },
+ {
+  "q": "how to cut firewood safely",
+  "colour": "green",
+  "rank": 0,
+  "title": "Adventist Youth Honors Answer Book/Recreation/Camping Skills II",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to cut firewood safely",
+  "colour": "green",
+  "rank": 1,
+  "title": "CSU Research Competition 2025 Creative Arts and Design trophy",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "how to cut firewood safely",
+  "colour": "green",
+  "rank": 2,
+  "title": "Fireless cookers",
+  "score": 0.6667,
+  "share": 0.6667,
+  "useful": true
+ },
+ {
+  "q": "how long do burns take to heal",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Burn scar contracture",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how long do burns take to heal",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Z-Plasty/Thinking Like a Reconstructive Surgeon",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": false
+ },
+ {
+  "q": "how long do burns take to heal",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "Elderberries",
+  "score": 1.0,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "infection not responding to antibiotics",
+  "colour": "yellow",
+  "rank": 0,
+  "title": "Infectious Diseases Society of America",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "infection not responding to antibiotics",
+  "colour": "yellow",
+  "rank": 1,
+  "title": "Structural Biochemistry/Antibiotics",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "infection not responding to antibiotics",
+  "colour": "yellow",
+  "rank": 2,
+  "title": "A-level Biology/Human Health and Disease/infectious diseases",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat the house without power",
+  "colour": "green",
+  "rank": 0,
+  "title": "Solar Photovoltaics Integration with Heat Pumps and Thermal Battery to Decarbonize Residential Sector in Canada",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat the house without power",
+  "colour": "green",
+  "rank": 1,
+  "title": "Surrey Hills house",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "heat the house without power",
+  "colour": "green",
+  "rank": 2,
+  "title": "Ultra-low energy house",
+  "score": 1.0833,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "how to build a root cellar for cold storage",
+  "colour": "green",
+  "rank": 0,
+  "title": "Beacon Food Forest presentation",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": true
+ },
+ {
+  "q": "how to build a root cellar for cold storage",
+  "colour": "green",
+  "rank": 1,
+  "title": "Mirad Lexicon/English-Mirad-S",
+  "score": 0.8,
+  "share": 0.8,
+  "useful": false
+ },
+ {
+  "q": "how to build a root cellar for cold storage",
+  "colour": "green",
+  "rank": 2,
+  "title": "Bathroom",
+  "score": 0.6,
+  "share": 0.6,
+  "useful": false
+ },
+ {
+  "q": "is spring water safe to drink",
+  "colour": "green",
+  "rank": 0,
+  "title": "Drinking water",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "is spring water safe to drink",
+  "colour": "green",
+  "rank": 1,
+  "title": "Adventist Adventurer Awards and Answers/Safe Water",
+  "score": 1.125,
+  "share": 1.0,
+  "useful": true
+ },
+ {
+  "q": "is spring water safe to drink",
+  "colour": "green",
+  "rank": 2,
+  "title": "Water is life",
+  "score": 1.0625,
+  "share": 1.0,
+  "useful": true
+ }
+]

@@ -1,0 +1,27 @@
+entries 385302
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3822.84it/s]
+5008 articles, 8796 sections, 19 s
+10088 articles, 20006 sections, 44 s
+15146 articles, 29499 sections, 57 s
+20152 articles, 38172 sections, 76 s
+25193 articles, 44412 sections, 81 s
+30231 articles, 52509 sections, 92 s
+35307 articles, 62274 sections, 104 s
+40364 articles, 72384 sections, 125 s
+45398 articles, 84053 sections, 146 s
+50455 articles, 96196 sections, 159 s
+55475 articles, 105331 sections, 175 s
+60502 articles, 116045 sections, 186 s
+65597 articles, 125806 sections, 196 s
+70607 articles, 132915 sections, 203 s
+75628 articles, 143050 sections, 214 s
+80667 articles, 152966 sections, 221 s
+85686 articles, 161890 sections, 230 s
+90693 articles, 172758 sections, 249 s
+95717 articles, 182280 sections, 264 s
+{"zim": "wikibooks_en_all_maxi_2026-04.zim", "size": 6177865115, "mtime_ns": 1792967470000000000, "entries": 385302, "redirects": 16574, "skipped": 268343, "articles": 100385, "sections": 189782, "model": "bge-small-en-v1.5", "dim": 384, "device": "cuda", "build_s": 279.3, "embed_s": 254.2, "limit": 0}
+f16.npy 145752704
+i8.npy 72876416
+rows.npz 11099828
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3283.63it/s]
+{"cpu_sample": 500, "cpu_s": 24.2, "cpu_ms_per_section": 48.3, "est_cpu_full_h": 2.55}

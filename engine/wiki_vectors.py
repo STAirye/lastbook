@@ -1,6 +1,6 @@
 """fork, dev toggle: the encyclopedia articles for Chat's first results, by meaning, from a vector index per file.
 
-Off unless LASTBOOK_WIKI_VECTORS=1. The prototype (.claude/drafts/encyclopedia/vectors/RESULTS.md) embedded every ~5,000-
+Off unless LASTBOOK_WIKI_VECTORS=1. The prototype (docs/evanesced/encyclopedias-3n/vectors/RESULTS.md) embedded every ~5,000-
 character section (engine/sections.cut) of MDWiki, Appropedia and Wikibooks with bge-small-en-v1.5 on a GPU, once: 430,000
 sections, 11.6 min, 330 MB as f16. On the 253 test questions over all three files the first article was useful for 84%
 of everyday questions (wiki_pick, the keyword picker: 70%) and 70% of urgent ones (47%), in about 36 ms (wiki_pick: about
