@@ -932,7 +932,20 @@ def english_words(text):
     text = re.sub(r'<\|?[a-z_]+\|?>', ' ', llm_local.hide_thinking(text or ''))
     line = next((l.strip() for l in text.splitlines() if l.strip()), '')
     line = re.sub(r'^(english|search( words)?|query|keywords?)\s*:\s*', '', line, flags=re.I).strip(' "\'“”.*`')[:120]
-    return line if line and not needs_english(line) else None
+    return line if line and not needs_english(line) and _mostly_english(line) else None
+
+
+def _mostly_english(line):
+    """fork: at least half the words are English (engine/english_words.txt.gz). Blind list 4: E4B sometimes answered in
+    the question's own words ("respirar humo incendio", "respirando esfuerzo costillas"), which hold none of OTHER_WORDS'
+    function words, so they passed as English and a red question was searched in Spanish. A name or a dish among English
+    words is kept ("fever in a child from Ñuble"). Without the word list (file missing), as before."""
+    words = re.findall(r'[^\W\d_]+', unicodedata.normalize('NFC', line).lower())
+    known = typos.english_words()
+    if not words or not known:
+        return True
+    english = sum(1 for w in words if w in known)
+    return english * 2 >= len(words)
 
 
 def english_query(question, earlier, cancelled):
@@ -952,6 +965,17 @@ def english_query(question, earlier, cancelled):
     if done.get('reason') == 'cancel':
         return None
     words = english_words(out[0])
+    if not words and out[0].strip() and not cancelled():    # fork: it answered, but not in English: asked once more
+        retry = llm_local.render([{'role': 'system', 'content': REWRITE},
+                                  {'role': 'user', 'content': ask + '\n(Write the words in English.)'}], None, think=False)
+        out[0] = ''
+        try:
+            done = LOCAL.generate(retry, REWRITE_TOKENS, cancelled, lambda t: out.__setitem__(0, out[0] + t))
+        except RuntimeError:
+            return None
+        if done.get('reason') == 'cancel':
+            return None
+        words = english_words(out[0])
     if os.environ.get('LASTBOOK_AI_DEBUG') == '1':
         print('local AI english search:', json.dumps({'q': question[:200], 'raw': out[0][:300], 'words': words}, ensure_ascii=False), flush=True)
     if words:

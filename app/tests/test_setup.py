@@ -3430,6 +3430,10 @@ class ForkLocalAI(unittest.TestCase):
         self.assertEqual(ew('<|channel>thought\nhmm<channel|>\n\nbaby fever'), 'baby fever')
         self.assertIsNone(ew('¿cómo hiervo agua?'))
         self.assertIsNone(ew('  \n'))
+        # fork (blind list 4): the question's own words without its function words are still not English
+        self.assertIsNone(ew('respirar humo incendio'))
+        self.assertIsNone(ew('respirando esfuerzo costillas'))
+        self.assertEqual(ew('empanadas dough filling'), 'empanadas dough filling')    # a dish among English words is kept
         sent = []
 
         def gen(segs, n, cancelled, on_text):
@@ -3454,6 +3458,19 @@ class ForkLocalAI(unittest.TestCase):
             assistant.english_query('¿y si es de noche?', '¿cómo purifico agua?', lambda: False)
             self.assertEqual(len(sent), 3)
             self.assertIn('Earlier question: ¿cómo purifico agua?', ''.join(s[0] for s in sent[2][0]))
+            # an answer in the question's own language is asked for once more, in English
+            replies = iter(['respirar humo incendio\n', 'smoke inhalation breathing\n'])
+            asked = []
+
+            def spanish_first(segs, n, cancelled, on_text):
+                asked.append(''.join(s[0] for s in segs))
+                on_text(next(replies))
+                return {'reason': 'eos'}
+            with mock.patch.object(assistant, 'LOCAL', mock.Mock(generate=spanish_first, think=True, answer_start='<|turn>model\n')):
+                self.assertEqual(assistant.english_query('no puedo respirar, inhalé humo', '', lambda: False),
+                                 'smoke inhalation breathing')
+                self.assertEqual(len(asked), 2)
+                self.assertIn('Write the words in English', asked[1])
             failing = mock.Mock(generate=mock.Mock(side_effect=RuntimeError('down')))
             with mock.patch.object(assistant, 'LOCAL', failing):
                 self.assertIsNone(assistant.english_query('¿y el fuego?', '', lambda: False))
