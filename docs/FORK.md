@@ -472,8 +472,8 @@ repo for now (upstream issue #154 asked for a test-only pull request of them).
   `engine/english_words.txt.gz` (78,238 lower-case words, 210 KB, read in about 20 ms): every form of the hunspell
   en_US dictionary, made from SCOWL, with its affixes applied, taken by `tools/english_words.py` from the copy Chrome
   keeps for spell checking. Its licence is SCOWL's, permissive (use, change and share, also commercially, with the
-  copyright notices): `engine/english_words.LICENSE.txt`, whose notices still have to be replaced by the verbatim
-  README before a release. British spellings count through the American one ("colour", "haemorrhage"), and a few chat
+  copyright notices): `engine/english_words.LICENSE.txt`, with the verbatim copyright section of Chromium's
+  `README_en_US.txt` (en_US Hunspell Dictionary 2020.12.07). British spellings count through the American one ("colour", "haemorrhage"), and a few chat
   words and medicine names are added ("lol", "mum", "paracetamol").
 
   A few real words are nearly always a slip for an emergency word here, and those are kept in two short, explicit
@@ -989,8 +989,7 @@ a test server and checks the amount (3j); it needs the model.
   0.30, and the wide urgent-word list
   shows some everyday questions' pages "in case this is urgent".
 - **Held-out fixes (3k, 3l).** The first held-out list was used to make them, so its numbers are now in-sample; the
-  second list is the real check. `engine/english_words.LICENSE.txt` gives SCOWL's notices from memory: replace them
-  with the verbatim README of Chromium's hunspell en_US before a release. The plea buttons and the "Pages the library
+  second list is the real check. The plea buttons and the "Pages the library
   found" heading haven't been seen in the window. The wider urgent words make more everyday questions urgent where
   they name a symptom (mild lines 45% → 47%); the cost is buttons and an answer, never pages withheld.
 - **Maps outside the US.** Every detailed layer is built from US data (see [MAPS.md](MAPS.md)). A street map for another
