@@ -121,10 +121,15 @@ PHRASE_SLIPS = [(re.compile(rx, re.I), new, machine) for rx, new, machine in (
 STRETCH = re.compile(r'(.)\1\1')
 # A question in another language is not corrected into English. Common function words of Spanish, Portuguese and French that
 # are not English words (as in assistant.OTHER_WORDS, which decides when the local AI writes English search words).
+# "de", "ir", "voy", "estoy" and the rest of the second line: without them "Me muero de ganas de
+# ir a la playa" counted as English and became "Me mere de gaas de ir a la play" (test list 4).
 OTHER_WORDS = set('el la los las del al en y que es un una por para con sin pero como muy mi mis tu su sus se lo le les nos '
+                  'de ir esa ese eso esas esos estoy estas voy nada quiero cada otra otro todo toda todos unos unas '
                   'yo este esta esto cuando tengo tiene necesito puedo hacer agua fuego nao um uma com isso voce tem '
                   'preciso fazer des du et est avec pas je comment pourquoi vous nous eau'.split())
 ENGLISH_WORDS = STOP | set('am been were has had about after before out'.split())
+# Words of English and of Spanish or Portuguese both ("a", "me", "no"): looks_foreign counts them for neither.
+SHARED = {'a', 'me', 'no'}
 # fork: ordinary English, not only the library's words. The corrector knows only the library, so it bent everyday words
 # into other words: "keeled" -> peeled, "puking" -> poking, "spewing" -> sewing, "gasps" -> gaps. A word of this list
 # (engine/english_words.txt.gz: every form of the hunspell en_US words, 78,238; licence beside it) is never corrected,
@@ -544,7 +549,7 @@ def looks_foreign(q):
     toks = re.findall(r'[^\W\d_]+', unicodedata.normalize('NFC', q).lower())
     if any(not t.isascii() for t in toks):
         return True
-    return sum(t in OTHER_WORDS for t in toks) > sum(t in ENGLISH_WORDS for t in toks)
+    return sum(t in OTHER_WORDS for t in toks) > sum(t in ENGLISH_WORDS and t not in SHARED for t in toks)
 
 
 def correct_with(q, words):

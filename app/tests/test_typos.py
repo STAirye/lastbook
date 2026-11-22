@@ -121,6 +121,14 @@ class Corrections(unittest.TestCase):
             self.assertEqual(fix(q).replace("won't", 'wont'), q, q)
         self.assertEqual(fix('EU2200i wont start'), "EU2200i won't start")
 
+    def test_spanish_with_words_english_shares(self):
+        # "a", "me" and "no" are Spanish too: they no longer make these count as English
+        for q in ('Me muero de ganas de ir a la playa este verano', 'Sacaron a mi sobrino de la piscina, no respira normal',
+                  'Me muero de ganas de aprender a jugar ajedrez', 'Estoy muerto de hambre'):
+            self.assertTrue(typos.looks_foreign(q), q)
+        for q in ('no pulse and a cut on me', 'give me a minute', 'my baby is blue', 'the water is in la casa'):
+            self.assertFalse(typos.looks_foreign(q), q)
+
     def test_capitals_kept(self):
         self.assertEqual(fix('Breating'), 'Breathing')
         self.assertEqual(fix('MY BABY ISNT BREATING'), "MY BABY ISN'T BREATHING")   # all in capitals: still corrected
