@@ -1,0 +1,32 @@
+45 files in /w/lastbook/derived/app-build/linux/20261121-041952/ship
+/w/lastbook/derived/app-build/linux/20261121-041952/ship/setup/manifest-v1.json: 52 maps, 3 packs (small, medium, all), 1 model
+roots: /w/lastbook/engine/setup/roots.pem (11 trusted)
+  ok   cas-bridge.xethub.hf.co (HTTP 403)
+  ok   downloads.lastbook.org (HTTP 404)
+  ok   huggingface.co (HTTP 200)
+  ok   us.aws.cdn.hf.co (HTTP 200)
+  ok   us.gcp.cdn.hf.co (HTTP 200)
+  ok   cdn-lfs.hf.co (HTTP 403)
+  ok   cdn-lfs-us-1.hf.co (HTTP 403)
+  ok   www.digicert.com refused, as it should be
+TLS ROOTS PASSED
+meaning check: no files in /w/lastbook/derived/models/meaning-red; the app is built without them (tools/meaning_red_model.py makes them)
+private words checked: 0 (no terms file: machine names NOT checked)
+Package: lastbook
+Version: 1.1.14+debian13
+Architecture: amd64
+Maintainer: Lastbook <noreply@lastbook.org>
+Installed-Size: 161100
+Depends: python3 (>= 3.13), python3 (<< 3.14), python3-gi, gir1.2-gtk-3.0, gir1.2-webkit2-4.1, gir1.2-soup-3.0, libwebkit2gtk-4.1-0 (>= 2.40), libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-libav, libgomp1
+Recommends: libvulkan1
+Section: education
+Priority: optional
+Homepage: https://lastbook.org
+files 825, native binaries 40, local AI runner: included
+network modules in our Python (allowed there): {'opt/lastbook/assistant.py': ['socket', 'urllib.request'], 'opt/lastbook/engine/library.py': ['http.server'], 'opt/lastbook/engine/setup/api.py': ['http.server'], 'opt/lastbook/engine/setup/download.py': ['http.client', 'socket', 'ssl'], 'opt/lastbook/server.py': ['socket']}
+remote_storage string: {'opt/lastbook/engine/library.py': 4} (the module itself is refused above)
+home-folder strings: {'/home/guido.foobar.txt': ['opt/lastbook/lib/numpy/lib/__pycache__/_datasource.cpython-313.pyc', 'opt/lastbook/lib/numpy/lib/_datasource.py'], '/home/guido': ['opt/lastbook/lib/numpy/lib/__pycache__/_datasource.cpython-313.pyc', 'opt/lastbook/lib/numpy/lib/_datasource.py'], '/home/alex': ['opt/lastbook/lib/numpy/lib/_datasource.py']}
+SCAN PASSED
+Built with the local AI's runner from /w/lastbook/derived/llm/bin-linux: /w/lastbook/derived/app-build/linux/20261121-041952/Lastbook_1.1.14_debian13_amd64.deb
+-rw-r--r-- 1 root root 31303088 Nov 21 04:20 /w/lastbook/derived/app-build/linux/20261121-041952/Lastbook_1.1.14_debian13_amd64.deb
+9eea4f056144ad7b5518ae64e6de02828c0260216209e079decc222c0d2fcd28  /w/lastbook/derived/app-build/linux/20261121-041952/Lastbook_1.1.14_debian13_amd64.deb

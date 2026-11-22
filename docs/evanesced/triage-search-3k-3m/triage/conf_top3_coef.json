@@ -1,0 +1,214 @@
+{
+ "keyword": {
+  "first-a": {
+   "coef": {
+    "bias": -3.6222,
+    "cover1": 2.6573,
+    "title1": 2.3746,
+    "kw_top_per_idf": 0.4326,
+    "idf_mean": 0.2656,
+    "strict": 0.0508,
+    "emerg1": 0.8878
+   },
+   "std": {
+    "cover1": 0.713,
+    "title1": 0.513,
+    "kw_top_per_idf": 0.494,
+    "idf_mean": 0.27,
+    "strict": 0.085,
+    "emerg1": 0.398
+   }
+  },
+  "first-b": {
+   "coef": {
+    "bias": -3.3639,
+    "cover1": 3.0308,
+    "title1": 1.2567,
+    "kw_top_per_idf": 0.4391,
+    "idf_mean": 0.2464,
+    "strict": 0.0797,
+    "emerg1": 1.0407,
+    "cover_best3": -1.7761,
+    "cover_mean3": 1.275,
+    "title_best3": 1.3637,
+    "all3": -0.0133,
+    "emerg3": -0.1648
+   },
+   "std": {
+    "cover1": 0.813,
+    "title1": 0.272,
+    "kw_top_per_idf": 0.502,
+    "idf_mean": 0.25,
+    "strict": 0.133,
+    "emerg1": 0.467,
+    "cover_best3": -0.438,
+    "cover_mean3": 0.286,
+    "title_best3": 0.303,
+    "all3": -0.006,
+    "emerg3": -0.082
+   }
+  },
+  "top3-a": {
+   "coef": {
+    "bias": -2.1292,
+    "cover1": 1.8873,
+    "title1": 1.836,
+    "kw_top_per_idf": 0.5421,
+    "idf_mean": 0.2504,
+    "strict": 0.0842,
+    "emerg1": 0.511
+   },
+   "std": {
+    "cover1": 0.506,
+    "title1": 0.397,
+    "kw_top_per_idf": 0.619,
+    "idf_mean": 0.254,
+    "strict": 0.14,
+    "emerg1": 0.229
+   }
+  },
+  "top3-b": {
+   "coef": {
+    "bias": -2.1278,
+    "cover1": 1.8629,
+    "title1": 0.4346,
+    "kw_top_per_idf": 0.5554,
+    "idf_mean": 0.2012,
+    "strict": 0.0324,
+    "emerg1": -0.7251,
+    "cover_best3": -0.6552,
+    "cover_mean3": 0.0883,
+    "title_best3": 1.8399,
+    "all3": 1.0369,
+    "emerg3": 1.7584
+   },
+   "std": {
+    "cover1": 0.5,
+    "title1": 0.094,
+    "kw_top_per_idf": 0.635,
+    "idf_mean": 0.204,
+    "strict": 0.054,
+    "emerg1": -0.325,
+    "cover_best3": -0.161,
+    "cover_mean3": 0.02,
+    "title_best3": 0.409,
+    "all3": 0.479,
+    "emerg3": 0.879
+   }
+  }
+ },
+ "hybrid": {
+  "first-a": {
+   "coef": {
+    "bias": -2.7284,
+    "cos1": 8.565,
+    "cos_drop": -12.2606,
+    "overlap": 1.1072,
+    "all1": 1.4529,
+    "title1": 2.0129,
+    "docs": -3.2324,
+    "strict": 0.2002,
+    "emerg1": 0.5764
+   },
+   "std": {
+    "cos1": 0.466,
+    "cos_drop": -0.22,
+    "overlap": 0.199,
+    "all1": 0.58,
+    "title1": 0.379,
+    "docs": -0.365,
+    "strict": 0.334,
+    "emerg1": 0.264
+   }
+  },
+  "first-b": {
+   "coef": {
+    "bias": -2.6211,
+    "cos1": 8.6308,
+    "cos_drop": -11.5112,
+    "overlap": 1.1394,
+    "all1": 1.4222,
+    "title1": 1.6262,
+    "docs": -3.3646,
+    "strict": 0.2095,
+    "emerg1": 0.2313,
+    "cover_best3": -0.454,
+    "cover_mean3": -0.096,
+    "title_best3": 0.5777,
+    "all3": 0.3459,
+    "emerg3": 0.5149
+   },
+   "std": {
+    "cos1": 0.469,
+    "cos_drop": -0.206,
+    "overlap": 0.205,
+    "all1": 0.568,
+    "title1": 0.306,
+    "docs": -0.38,
+    "strict": 0.349,
+    "emerg1": 0.106,
+    "cover_best3": -0.11,
+    "cover_mean3": -0.022,
+    "title_best3": 0.119,
+    "all3": 0.156,
+    "emerg3": 0.257
+   }
+  },
+  "top3-a": {
+   "coef": {
+    "bias": -5.396,
+    "cos1": 12.4575,
+    "cos_drop": -0.2859,
+    "overlap": 1.0315,
+    "all1": 0.8791,
+    "title1": 0.6322,
+    "docs": -2.4674,
+    "strict": 0.2249,
+    "emerg1": 0.6097
+   },
+   "std": {
+    "cos1": 0.678,
+    "cos_drop": -0.005,
+    "overlap": 0.186,
+    "all1": 0.351,
+    "title1": 0.119,
+    "docs": -0.279,
+    "strict": 0.375,
+    "emerg1": 0.279
+   }
+  },
+  "top3-b": {
+   "coef": {
+    "bias": -5.3259,
+    "cos1": 11.1916,
+    "cos_drop": 3.3827,
+    "overlap": 0.8662,
+    "all1": 0.1364,
+    "title1": -0.2582,
+    "docs": -2.6423,
+    "strict": 0.1534,
+    "emerg1": -0.405,
+    "cover_best3": -0.1211,
+    "cover_mean3": 1.0444,
+    "title_best3": 1.0946,
+    "all3": 1.2297,
+    "emerg3": 1.5805
+   },
+   "std": {
+    "cos1": 0.609,
+    "cos_drop": 0.061,
+    "overlap": 0.156,
+    "all1": 0.054,
+    "title1": -0.049,
+    "docs": -0.299,
+    "strict": 0.256,
+    "emerg1": -0.185,
+    "cover_best3": -0.029,
+    "cover_mean3": 0.238,
+    "title_best3": 0.225,
+    "all3": 0.553,
+    "emerg3": 0.79
+   }
+  }
+ }
+}

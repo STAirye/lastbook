@@ -1,0 +1,34 @@
+== installed: lastbook 1.1.14+debian13
+== H.264 decoder present (gstreamer1.0-libav)
+== WebM/Matroska demuxer present
+== 1. with a library
+running: yes
+window: yes
+== screenshot library-home.png
+== screenshot library-map.png
+== screenshot library-videos.png
+-- a video: open its card, then play
+== screenshot videos-page.png
+== screenshot video-opened.png
+== screenshot video-playing.png
+-- second copy (must leave at once, the first comes forward)
+
+(lastbook:9841): GLib-GIO-WARNING **: 04:25:12.132: Your application did not unregister from D-Bus before destruction. Consider using g_application_run().
+second copy exit=0 after 1 s
+-- listening sockets of the app (must be none)
+sockets (unix, to X and D-Bus) 0
+-- log
+2026-11-21 04:23:21 start pid=9523 args=['--data', '/home/tester/LastbookData'] data=/home/tester/LastbookData
+onnxruntime telemetry: onnxruntime not loaded
+meaning check: off, the urgent words alone decide (FileNotFoundError: no meaning-red files in /opt/lastbook/derived/models/meaning-red or /opt/lastbook/llm/meaning-red or /home/tester/LastbookData/derived/models/meaning-red)
+-- Quit (Ctrl+Q): the app and its WebKit processes must end
+quit: ended
+== 2. no library: setup
+running: yes
+== screenshot setup.png
+2026-11-21 04:25:35 start pid=9876 args=[] setup
+== 3. remove
+/opt/lastbook gone
+library kept
+kept: /home/tester/.local/share/Lastbook
+exit 0

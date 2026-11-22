@@ -1,0 +1,12 @@
+meaning check: ready in 0.53 s from D:\git\lastbook\derived\models\meaning-red
+meaning check {'present': True, 'ready': True, 'status': {'state': 'ready', 'why': None, 'folder': 'D:\\git\\lastbook\\derived\\models\\meaning-red', 'load_s': 0.53, 'restarts': 0, 'on': True}, 'threshold': 0.00836634635925293} 0.5 s
+code D:\git\lastbook kw semantic off 832
+100 15 s
+200 25 s
+300 35 s
+400 45 s
+500 55 s
+600 79 s
+700 101 s
+800 121 s
+done 126 s

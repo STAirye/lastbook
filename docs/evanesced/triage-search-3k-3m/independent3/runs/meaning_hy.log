@@ -1,0 +1,9 @@
+meaning check: ready in 0.17 s from D:\git\lastbook\.claude\worktrees\meaning-check\derived\models\meaning-red
+meaning check {'present': True, 'ready': True, 'status': {'state': 'ready', 'why': None, 'folder': 'D:\\git\\lastbook\\.claude\\worktrees\\meaning-check\\derived\\models\\meaning-red', 'load_s': 0.17, 'on': True}, 'threshold': 0.006628692150115967} 0.2 s
+code D:\git\lastbook\.claude\worktrees\meaning-check hybrid semantic loaded 531
+100 80 s
+200 152 s
+300 232 s
+400 303 s
+500 372 s
+done 394 s

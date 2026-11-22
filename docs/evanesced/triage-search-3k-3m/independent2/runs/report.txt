@@ -1,0 +1,606 @@
+overlap with list 1 (6): ['cantbreathe', 'he got shot in the leg', 'pregnant and heartburn every night', 'purple spots and stiff neck and light hurts her eyes', 'seizure of assets by the bank', 'worst headache of my life came on like a thunderclap']
+text checks differ kw/hy after: []
+===== kw: list 2 before -> after   ||   list 1 before -> after
+urgent (is_danger) red                                             211/249 (85%) -> 230/249 (92%)   ||   293/343 (85%) -> 340/343 (99%)
+urgent yellow                                                      75/111 (68%) -> 85/111 (77%)   ||   79/104 (76%) -> 98/104 (94%)
+urgent green (false positive)                                      137/246 (56%) -> 127/246 (52%)   ||   155/243 (64%) -> 76/243 (31%)
+  counterexamples (urgent)                                         92/135 (68%) -> 82/135 (61%)   ||   103/128 (80%) -> 22/128 (17%)
+  mild (urgent)                                                    43/109 (39%) -> 43/109 (39%)   ||   53/118 (45%) -> 56/118 (47%)
+body sign found, lines with a covered sign                         91/129 (71%) -> 101/129 (78%)   ||   158/236 (67%) -> 200/236 (85%)
+  right category                                                   91/129 (71%) -> 99/129 (77%)   ||   150/236 (64%) -> 193/236 (82%)
+  red (body)                                                       83/117 (71%) -> 95/117 (81%)   ||   138/211 (65%) -> 177/211 (84%)
+body sign on green                                                 46/246 (19%) -> 42/246 (17%)   ||   54/243 (22%) -> 19/243 (8%)
+  counterexamples (body)                                           42/135 (31%) -> 39/135 (29%)   ||   44/128 (34%) -> 9/128 (7%)
+red: actions                                                       {'answer': 45, 'ask': 17, 'ask+pages': 47, 'buttons': 136, 'compact buttons': 4} -> {'answer': 45, 'ask+pages': 5, 'buttons': 198, 'compact buttons': 1}   ||   {'answer': 91, 'ask': 18, 'ask+pages': 36, 'buttons': 194, 'compact buttons': 4} -> {'answer': 89, 'buttons': 253, 'plea': 1}
+red: bare ask (pages withheld)                                     17 -> 0   ||   18 -> 0
+red: pages withheld (any reason)                                   18 -> 1   ||   18 -> 0
+red: ask+pages (pages, no answer)                                  47 -> 5   ||   36 -> 0
+red: nothing found                                                 1 -> 1   ||   1 -> 0
+all: actions                                                       {'answer': 151, 'ask': 55, 'ask+pages': 91, 'buttons': 282, 'compact buttons': 27} -> {'answer': 154, 'ask+pages': 45, 'buttons': 387, 'compact buttons': 20}   ||   {'answer': 234, 'ask': 37, 'ask+pages': 65, 'buttons': 342, 'compact buttons': 12} -> {'answer': 257, 'ask+pages': 26, 'buttons': 389, 'compact buttons': 15, 'plea': 3}
+all: bare ask (pages withheld)                                     55 -> 0   ||   37 -> 0
+all: pages withheld (any reason)                                   56 -> 1   ||   37 -> 0
+all: ask+pages (pages, no answer)                                  91 -> 45   ||   65 -> 26
+all: nothing found                                                 1 -> 1   ||   2 -> 0
+red sure with first page from an emergency book                    29 -> 30   ||   49 -> 53
+red sure, first page not from one                                  16 -> 15   ||   42 -> 36
+clean lines changed by the corrector                               133/564 (24%) -> 96/564 (17%)   ||   165/606 (27%) -> 137/606 (23%)
+  changed other than apostrophes                                   78 -> 33   ||   59 -> 19
+lines with an English word bent (typed word in the list, not split 49 -> 1   ||   40 -> 3
+  clean lines                                                      46 -> 0   ||   35 -> 0
+  the words                                                        ['blacked->blocked', 'bloated->floated', 'catarrh->catarrhal', 'chapped->chopped', 'chocking->choking', 'chundered->countered', 'cramp->camp', 'crook->cook', 'crusty->crust', 'drummer->dimmer', 'dude->due', 'fella->fell', 'flack->flock', 'gapes->gaps', 'gasps->gaps', 'giddy->buddy', 'gurgle->gargle', 'invincible->invisible', 'jab->job', 'kebab->kerb', 'keeled->peeled', 'licked->locked', 'missus->misses', 'mornings->morning', 'nag->bag', 'paining->painting', 'peed->peer', 'poo->poor', 'pooed->pooled', 'privates->private', 'shivery->silvery', 'sizzler->simpler', 'sofa->soda', 'spewing->sewing', 'spits->spots', 'swam->swim', 'tingly->ingly', 'twinged->tinged', 'wheezy->wheeze', 'whisky->whiskey', 'wonky->wong'] -> ['chocking->choking']   ||   ['blacked->blocked', 'bleating->beating', 'brandy->brand', 'breading->breeding', 'burped->burned', 'chapped->chopped', 'chocking->choking', 'cramp->camp', 'crunched->crunch', 'crusty->crust', 'dads->adds', 'dunno->dunne', 'eulogy->ecology', 'fairies->dairies', 'footballer->football', 'gash->gas', 'gasps->gaps', 'grans->grams', 'keeled->peeled', 'kinda->kind', 'mumbling->tumbling', 'overdoes->overdose', 'overdosed->overdose', 'peed->peer', 'poo->poor', 'puking->poking', 'rattly->rattle', 'seizes->sizes', 'snotty->spotty', 'sparkler->sparkle', 'spewing->sewing', 'squishy->squash', 'texted->tested', 'tingles->tangles', 'tingly->ingly', 'twinged->tinged', 'wee->were'] -> ['chocking->choking', 'overdoes->overdose']
+red sure, first page title not even health-looking (rough)         8 -> 8   ||   23 -> 14
+red sure (total)                                                   45 -> 45   ||   91 -> 89
+all: plea action                                                   0 -> 0   ||   0 -> 3
+typo lines: L2 {'left as typed': 13, 'wrong word': 11, 'fixed': 13, 'nothing to fix': 2, 'partly fixed': 3} -> {'left as typed': 13, 'wrong word': 6, 'fixed': 18, 'nothing to fix': 2, 'partly fixed': 3}
+      L1 {'fixed': 45, 'nothing to fix': 4, 'left as typed': 18, 'wrong word': 15, 'partly fixed': 2} -> {'fixed': 71, 'nothing to fix': 4, 'left as typed': 2, 'wrong word': 6, 'partly fixed': 1}
+plea replies: L2 {} -> {}
+      L1 {'hlep': 'ask', 'HELP': 'ask+pages', 'helo my son': 'answer', '911': 'ask', 'helpheswontwakeup': 'buttons'} -> {'hlep': 'plea', 'HELP': 'plea', 'helo my son': 'answer', '911': 'plea', 'helpheswontwakeup': 'buttons'}
+===== hy: list 2 before -> after   ||   list 1 before -> after
+urgent (is_danger) red                                             211/249 (85%) -> 230/249 (92%)   ||   293/343 (85%) -> 340/343 (99%)
+urgent yellow                                                      75/111 (68%) -> 85/111 (77%)   ||   79/104 (76%) -> 98/104 (94%)
+urgent green (false positive)                                      137/246 (56%) -> 127/246 (52%)   ||   155/243 (64%) -> 76/243 (31%)
+  counterexamples (urgent)                                         92/135 (68%) -> 82/135 (61%)   ||   103/128 (80%) -> 22/128 (17%)
+  mild (urgent)                                                    43/109 (39%) -> 43/109 (39%)   ||   53/118 (45%) -> 56/118 (47%)
+body sign found, lines with a covered sign                         91/129 (71%) -> 101/129 (78%)   ||   158/236 (67%) -> 200/236 (85%)
+  right category                                                   91/129 (71%) -> 99/129 (77%)   ||   150/236 (64%) -> 193/236 (82%)
+  red (body)                                                       83/117 (71%) -> 95/117 (81%)   ||   138/211 (65%) -> 177/211 (84%)
+body sign on green                                                 46/246 (19%) -> 42/246 (17%)   ||   54/243 (22%) -> 19/243 (8%)
+  counterexamples (body)                                           42/135 (31%) -> 39/135 (29%)   ||   44/128 (34%) -> 9/128 (7%)
+red: actions                                                       {'answer': 133, 'ask': 2, 'buttons': 111, 'compact buttons': 3} -> {'answer': 124, 'buttons': 124, 'compact buttons': 1}   ||   {'answer': 212, 'ask': 4, 'ask+pages': 1, 'buttons': 124, 'compact buttons': 2} -> {'answer': 193, 'buttons': 149, 'plea': 1}
+red: bare ask (pages withheld)                                     2 -> 0   ||   4 -> 0
+red: pages withheld (any reason)                                   2 -> 0   ||   4 -> 0
+red: ask+pages (pages, no answer)                                  0 -> 0   ||   1 -> 0
+red: nothing found                                                 0 -> 0   ||   0 -> 0
+all: actions                                                       {'answer': 381, 'ask': 2, 'buttons': 217, 'compact buttons': 6} -> {'answer': 380, 'buttons': 221, 'compact buttons': 5}   ||   {'answer': 451, 'ask': 5, 'ask+pages': 3, 'buttons': 226, 'compact buttons': 5} -> {'answer': 459, 'ask+pages': 1, 'buttons': 220, 'compact buttons': 7, 'plea': 3}
+all: bare ask (pages withheld)                                     2 -> 0   ||   5 -> 0
+all: pages withheld (any reason)                                   2 -> 0   ||   5 -> 0
+all: ask+pages (pages, no answer)                                  0 -> 0   ||   3 -> 1
+all: nothing found                                                 0 -> 0   ||   0 -> 0
+red sure with first page from an emergency book                    60 -> 62   ||   102 -> 104
+red sure, first page not from one                                  73 -> 62   ||   110 -> 89
+clean lines changed by the corrector                               133/564 (24%) -> 96/564 (17%)   ||   165/606 (27%) -> 137/606 (23%)
+  changed other than apostrophes                                   78 -> 33   ||   59 -> 19
+lines with an English word bent (typed word in the list, not split 49 -> 1   ||   40 -> 3
+  clean lines                                                      46 -> 0   ||   35 -> 0
+  the words                                                        ['blacked->blocked', 'bloated->floated', 'catarrh->catarrhal', 'chapped->chopped', 'chocking->choking', 'chundered->countered', 'cramp->camp', 'crook->cook', 'crusty->crust', 'drummer->dimmer', 'dude->due', 'fella->fell', 'flack->flock', 'gapes->gaps', 'gasps->gaps', 'giddy->buddy', 'gurgle->gargle', 'invincible->invisible', 'jab->job', 'kebab->kerb', 'keeled->peeled', 'licked->locked', 'missus->misses', 'mornings->morning', 'nag->bag', 'paining->painting', 'peed->peer', 'poo->poor', 'pooed->pooled', 'privates->private', 'shivery->silvery', 'sizzler->simpler', 'sofa->soda', 'spewing->sewing', 'spits->spots', 'swam->swim', 'tingly->ingly', 'twinged->tinged', 'wheezy->wheeze', 'whisky->whiskey', 'wonky->wong'] -> ['chocking->choking']   ||   ['blacked->blocked', 'bleating->beating', 'brandy->brand', 'breading->breeding', 'burped->burned', 'chapped->chopped', 'chocking->choking', 'cramp->camp', 'crunched->crunch', 'crusty->crust', 'dads->adds', 'dunno->dunne', 'eulogy->ecology', 'fairies->dairies', 'footballer->football', 'gash->gas', 'gasps->gaps', 'grans->grams', 'keeled->peeled', 'kinda->kind', 'mumbling->tumbling', 'overdoes->overdose', 'overdosed->overdose', 'peed->peer', 'poo->poor', 'puking->poking', 'rattly->rattle', 'seizes->sizes', 'snotty->spotty', 'sparkler->sparkle', 'spewing->sewing', 'squishy->squash', 'texted->tested', 'tingles->tangles', 'tingly->ingly', 'twinged->tinged', 'wee->were'] -> ['chocking->choking', 'overdoes->overdose']
+red sure, first page title not even health-looking (rough)         27 -> 24   ||   59 -> 41
+red sure (total)                                                   133 -> 124   ||   212 -> 193
+all: plea action                                                   0 -> 0   ||   0 -> 3
+typo lines: L2 {'left as typed': 13, 'wrong word': 11, 'fixed': 13, 'nothing to fix': 2, 'partly fixed': 3} -> {'left as typed': 13, 'wrong word': 6, 'fixed': 18, 'nothing to fix': 2, 'partly fixed': 3}
+      L1 {'fixed': 45, 'nothing to fix': 4, 'left as typed': 18, 'wrong word': 15, 'partly fixed': 2} -> {'fixed': 71, 'nothing to fix': 4, 'left as typed': 2, 'wrong word': 6, 'partly fixed': 1}
+plea replies: L2 {} -> {}
+      L1 {'hlep': 'ask', 'HELP': 'ask+pages', 'helo my son': 'answer', '911': 'ask', 'helpheswontwakeup': 'buttons'} -> {'hlep': 'plea', 'HELP': 'plea', 'helo my son': 'answer', '911': 'plea', 'helpheswontwakeup': 'buttons'}
+===== list 2 without the overlap (kw): urgent red 208/245 (85%) -> 226/245 (92%); counter 82/134 (61%)
+== red_not_urgent_after: 19
+   'stoke symptoms my dad' [red|typo,fragment] -> 'stoke symptoms my dad' answer body=[] first=Integrating Palliative Care and Symptom Relief into the Response to Humanitarian Emergencies and Crises: A WHO Guide p.41
+   'my mate chainsawed his thigh its pumping' [red|slang] -> 'my mate chainsawed his thigh its pumping' answer body=[] first=Range-of-motion and Other Exercises p.23
+   'his throat is closing after peanuts' [red|plain] -> 'his throat is closing after peanuts' ask+pages body=[] first=Nutrition for Nurses p.236
+   'my brother is ODing' [red|slang,fragment] -> 'my brother is Oring' answer body=[] first=Introduction to Part 1: Making Therapy Functional and Fun p.5
+   'found an old man outside in the snow, barely awake, skin icy' [red|elderly] -> 'found an old man outside in the snow, barely awake, skin icy' answer body=[] first=CERT Basic Training Hazard Annexes (2019) p.115
+   'acid splashed in her eyes at work' [red|plain] -> 'acid splashed in her eyes at work' answer body=[] first=Electronics factories p.4
+   'my son says voices are telling him to jump' [red|mental-health] -> 'my son says voices are telling him to jump' answer body=[] first=Story Telling p.9
+   'cant do this no more. took everything in the cabinet' [red|mental-health] -> "can't do this no more. took everything in the cabinet" ask+pages body=[] first=Module 6: Cover Crop Management Soil Health p.None
+   'unalive myself tonight how many' [red|mental-health,slang] -> 'unlike myself tonight how many' ask+pages body=[] first=Winter Spotter Training p.14
+   'anna flack sis' [red|voice-to-text,fragment] -> 'anna flack sis' answer body=[] first=Introductory Statistics 2e p.199
+   "my mate is having a turn, can't get a word out of him" [red|slang] -> "my mate is having a turn, can't get a word out of him" ask+pages body=[] first=CHILD-to-child: Helping Teachers and Children Understand Children with Disabilities p.3
+   "my missus is having a do and she's grey" [red|slang] -> "my missus is having a do and she's grey" compact buttons body=[] first=Lifespan Development p.847
+   'something wrong with grandma she just staring and drooling' [red|elderly,fragment] -> 'something wrong with grandma she just staring and drooling' answer body=[] first=Children as Health Workers p.18
+   'narcan how' [red|fragment,slang] -> 'narcan how' answer body=[] first=Index p.11
+   'compressions how fast' [red|fragment] -> 'compressions how fast' answer body=[] first=How to give hands-only CPR. #HowTo #CPRSteps p.None
+   'child has croup and making squeaky noise even when calm' [red|child] -> 'child has croup and making squeaky noise even when calm' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.250
+   'my poo is black and tarry and i feel a bit lightheaded' [red|plain] -> 'my poo is black and tarry and i feel a bit lightheaded' answer body=[] first=UNICEF Early Childhood Development Kit Guidance p.63
+   'my bp is very high 200 and my vision is going blurry' [red|non-native] -> 'my bp is very high 200 and my vision is going blurry' answer body=[] first=First Aid p.50
+   "mum's speech went weird for 5 mins then back to normal" [red|elderly] -> "mum's speech went weird for 5 mins then back to normal" ask+pages body=[] first=IFRC CEA Toolkit — Tool 3  Self assessment and planning workshop Guidance p.6
+== red_no_answer_or_no_pages_after kw: 6
+   'his throat is closing after peanuts' [red] -> 'his throat is closing after peanuts' ask+pages urgent=False body=[] hits=8 first=Nutrition for Nurses p.236
+   'cant do this no more. took everything in the cabinet' [red] -> "can't do this no more. took everything in the cabinet" ask+pages urgent=False body=[] hits=8 first=Module 6: Cover Crop Management Soil Health p.None
+   'unalive myself tonight how many' [red] -> 'unlike myself tonight how many' ask+pages urgent=False body=[] hits=8 first=Winter Spotter Training p.14
+   "he'snotbreathingwhatdoido" [red] -> "he'snotbreathingwhatdoido" buttons urgent=True body=['breathing'] hits=0 first=None
+   "my mate is having a turn, can't get a word out of him" [red] -> "my mate is having a turn, can't get a word out of him" ask+pages urgent=False body=[] hits=8 first=CHILD-to-child: Helping Teachers and Children Understand Children with Disabilities p.3
+   "mum's speech went weird for 5 mins then back to normal" [red] -> "mum's speech went weird for 5 mins then back to normal" ask+pages urgent=False body=[] hits=8 first=IFRC CEA Toolkit — Tool 3  Self assessment and planning workshop Guidance p.6
+== red_no_answer_or_no_pages_after hy: 0
+== new_false_positives: 9
+   'can i take ibuprofen with paracetamol for a headache' [green|mild] -> 'can i take ibuprofen with paracetamol for a headache' answer body=[] first=First Aid p.84
+   'server is not responding since 3am' [green|counterexample] -> 'server is not responding since 3am' buttons body=['unconscious'] first=Wireless Networking in the Developing World p.363
+   'the brakes are seizing up on my bike' [green|counterexample] -> 'the brakes are seizing up on my bike' answer body=['seizure'] first=Trek Bicycle Owners Manual 2026 p.26
+   "he's out cold in the fantasy league rankings" [green|counterexample] -> "he's out cold in the fantasy league rankings" buttons body=['unconscious'] first=Cold Weather Safety p.1
+   'zombie makeup grey skin tutorial' [green|counterexample] -> 'zombie makeup grey skin tutorial' buttons body=[] first=APPENDIX B: Common chemicals and materials p.44
+   'how to tie a tourniquet for my first aid exam' [green|counterexample] -> 'how to tie a tourniquet for my first aid exam' answer body=[] first=First Aid p.11
+   "the bus is packed i'm suffocating" [green|counterexample,slang] -> "the bus is packed i'm suffocating" buttons body=[] first=First Aid in Armed Conflicts and Other Situations of Violence p.45
+   'my battery is swollen and hot, vape' [green|counterexample] -> 'my battery is swollen and hot, vape' answer body=[] first=Emergency Response Guidebook 2024 - English p.358
+   'the patient in my nursing case study has sepsis, what are the bundle steps' [green|counterexample] -> 'the patient in my nursing case study has sepsis, what are the bundle steps' buttons body=[] first=Clinical Nursing Skills — OpenStax p.38
+== false_positives_fixed: 19
+   'my stomach is paining me after eating rice and beans' [green|mild,non-native] -> 'my stomach is paining me after eating rice and beans' answer body=[] first=Good Food Makes Good Health p.6
+   'the app keeps crashing and freezing' [green|counterexample] -> 'the app keeps crashing and freezing' answer body=[] first=Winter Storm p.2
+   'how to bleed a radiator' [green|counterexample] -> 'how to bleed a radiator' answer body=[] first=Kubota BX1880-AU BX2380-AU BX2680-AU Operator’s Manual p.100
+   "the dough isn't breathing should i let it rest longer" [green|counterexample] -> "the dough isn't breathing should i let it rest longer" ask+pages body=[] first=Caring for Children p.14
+   'let the wine breathe for how long' [green|counterexample] -> 'let the wine breathe for how long' answer body=[] first=Mental health p.13
+   'my plant is choking, leaves going yellow' [green|counterexample] -> 'my plant is choking, leaves going yellow' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   'my cake collapsed in the middle' [green|counterexample] -> 'my cake collapsed in the middle' compact buttons body=[] first=Algebra and Trigonometry 2e p.480
+   "i'm dying to see that movie" [green|counterexample] -> "i'm dying to see that movie" answer body=[] first=Helping children through death and grief p.4
+   'my heart stopped when she said yes' [green|counterexample] -> 'my heart stopped when she said yes' ask+pages body=[] first=BEC Breathing p.None
+   'mum threw a fit when she saw my room' [green|counterexample] -> 'mum threw a fit when she saw my room' ask+pages body=[] first=Hearing difficulties and communication p.4
+   'stroke of luck we found the keys' [green|counterexample] -> 'stroke of luck we found the keys' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.374
+   'fake blood recipe for halloween that looks real' [green|counterexample] -> 'fake blood recipe for halloween that looks real' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.261
+   'that comeback was a sick burn' [green|counterexample,slang] -> 'that comeback was a sick burn' answer body=[] first=BEC Trauma p.None
+   'feeling blue cheese craving' [green|counterexample] -> 'feeling blue cheese craving' answer body=[] first=Introductory Statistics 2e p.509
+   'drowning in emails today' [green|counterexample] -> 'drowning in emails today' answer body=[] first=Introductory Business Statistics 2e p.227
+   'break a leg tonight at the play!' [green|counterexample] -> 'break a leg tonight at the play!' answer body=[] first=CERT Basic Training Participant Manual (2019) p.113
+   "bloody hell the train's late again" [green|counterexample,slang] -> "bloody hell the train's late again" ask+pages body=[] first=Precalculus 2e p.170
+   'choking hazard toys age 3+ meaning' [green|counterexample] -> 'choking hazard toys age 3+ meaning' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   'seizure of assets by the bank' [green|counterexample] -> 'seizure of assets by the bank' answer body=[] first=Principles of Economics 3e p.671
+== urgent_lost_red_yellow: 0
+== yellow_not_urgent_after: 26
+   'pinky finger bent sideways after volleyball' [yellow|fragment] -> 'pinky finger bent sideways after volleyball' compact buttons body=[] first=Introductory Statistics 2e p.635
+   "spilled hot tea on my toddler's leg small red patch she's crying but playing" [yellow|child] -> "spilled hot tea on my toddler's leg small red patch she's crying but playing" answer body=[] first=First aid treatment for heat exhaustion | First aid training online | British Red Cross p.None
+   'my throat is so swollen on one side i can barely open my mouth' [yellow|plain] -> 'my throat is so swollen on one side i can barely open my mouth' compact buttons body=[] first=Caring for Children p.20
+   'dhe has loose motions since yesterday 10 times, feeling giddy' [yellow|typo,non-native] -> 'due has loose motions since yesterday 10 times, feeling giddy' ask+pages body=[] first=College Physics 2e p.122
+   'chundered 8 times since the kebab, stomach cramps' [yellow|slang] -> 'chundered 8 times since the kebab, stomach cramps' ask+pages body=[] first=Heat and cold p.4
+   'my 2yr old has a barking cough like a seal, worse at night' [yellow|child] -> 'my 2yr old has a barking cough like a seal, worse at night' compact buttons body=[] first=Caring for Children p.16
+   'sudden curtain coming down over my vision in one eye' [yellow|plain] -> 'sudden curtain coming down over my vision in one eye' answer body=[] first=Cognitive Delay: Down Syndrome, Hypothyroidism, and Other Causes p.3
+   'morning sickness so bad cant keep anything down, peeing hardly' [yellow|pregnancy] -> "morning sickness so bad can't keep anything down, peeing hardly" ask+pages body=[] first=Pregnancy and Birth p.4
+   'im 37 wks and my waters might have gone, trickle of clear fluid' [yellow|pregnancy] -> 'im 37 wks and my waters might have gone, trickle of clear fluid' ask+pages body=[] first=Onsite Wastewater Treatment Systems Manual 2002 p.112
+   'my calf is swollen red and hot, one leg only' [yellow|plain] -> 'my calf is swollen red and hot, one leg only' ask+pages body=[] first=Correcting Joint Contractures (with casts or braces) p.2
+   'hiv exposure condom broke last night' [yellow|fragment] -> 'hiv exposure condom broke last night' answer body=[] first=Sphere Handbook - Humanitarian Charter and Minimum Standards in Humanitarian Response p.374
+   'had a hypo had a juice now 5.1 feel ok but shaky' [yellow|fragment] -> 'had a hypo had a juice now 5.1 feel ok but shaky' answer body=[] first=Diabetes p.31
+   'havent slept in 4 days and my thoughts are racing and i feel invincible' [yellow|mental-health] -> 'haven slept in 4 days and my thoughts are racing and i feel invincible' compact buttons body=[] first=Serious mental illness p.7
+   'my mum hasnt eaten in a week since dad died and just stays in bed' [yellow|mental-health,elderly] -> 'my mum hasn eaten in a week since dad died and just stays in bed' ask+pages body=[] first=UNICEF School-in-a-Box Education Kit Handbook - English (pdf, 2 MB) p.49
+   'i feel so low i dont see the point but im not going to do anything' [yellow|mental-health] -> "i feel so low i don't see the point but im not going to do anything" ask+pages body=[] first=Abuse, violence, and self-defense p.5
+   'migraine with aura like usual but worse' [yellow|plain] -> 'migraine with aura like usual but worse' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.436
+   'pressure is 185/110 bit of a headache' [yellow|fragment] -> 'pressure is 185/110 bit of a headache' ask+pages body=[] first=Trail Maintenance and Construction Notebook p.1
+   'my body is hot and i am feeling cold at the same time since 3 days' [yellow|non-native] -> 'my body is hot and i am feeling cold at the same time since 3 days' ask+pages body=[] first=USMC Winter Survival Course Handbook - Historical p.129
+   'nag LBM ako since last night, 7 times' [yellow|non-native,slang] -> 'nag LBM amo since last night, 7 times' ask+pages body=[] first=Microbiology p.110
+   'he got glass in his foot and i can see a piece still in' [yellow|plain] -> 'he got glass in his foot and i can see a piece still in' ask+pages body=[] first=Feeding p.8
+   'earache and pus coming out of ear, kid 5' [yellow|child,fragment] -> 'earache and pus coming out of ear, kid 5' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.434
+   'dehydrated after hike, headache, dark pee, cramps' [yellow|fragment] -> 'dehydrated after hike, headache, dark pee, cramps' answer body=[] first=USMC Winter Survival Course Handbook - Historical p.135
+   'toes black and blistered after the mountain' [yellow|fragment] -> 'toes black and blistered after the mountain' ask+pages body=[] first=NWCG Incident Response Pocket Guide (2025) p.130
+   'my breast is red hot and sore while breastfeeding and i feel fluey' [yellow|pregnancy] -> 'my breast is red hot and sore while breastfeeding and i feel flue' answer body=[] first=Caring for your baby p.8
+   'shingles near my eye' [yellow|fragment] -> 'shingles near my eye' answer body=[] first=Common health problems p.35
+   'eyes and skin turned yellow over the week, pee dark' [yellow|plain] -> 'eyes and skin turned yellow over the week, pee dark' ask+pages body=[] first=Planning a Class p.16
+== green_urgent_after: 127
+   'fainted at the blood test, came round quickly, feel ok now' [green|plain] -> 'fainted at the blood test, came round quickly, feel ok now' buttons body=['bleeding', 'unconscious'] first=Female genital cutting p.4
+   'my daughter has fever and spots in her mouth and hands' [green|child] -> 'my daughter has fever and spots in her mouth and hands' buttons body=[] first=Caring for Children p.24
+   'im 23 and i get a sharp jab in my chest sometimes when i twist' [green|mild] -> 'im 23 and i get a sharp jab in my chest sometimes when i twist' buttons body=[] first=Opticalman 3 and 2 p.7
+   'paper cut on my finger stings' [green|mild] -> 'paper cut on my finger stings' answer body=[] first=First Aid p.52
+   'my lips are chapped and cracking' [green|mild] -> 'my lips are chapped and cracking' buttons body=[] first=Learning to use a spoken language p.3
+   'doms legs dead after leg day lol' [green|mild,slang] -> 'dams legs dead after leg day lol' buttons body=[] first=Artificial Legs p.1
+   'my baby has a few red spots on her cheeks from dribbling' [green|baby,mild] -> 'my baby has a few red spots on her cheeks from dribbling' buttons body=[] first=Why Children Lose Their Vision and What We Can Do p.6
+   'nappy rash on my 4 month old' [green|baby,mild] -> 'nappy rash on my 4 month old' buttons body=[] first=Introduction to Sociology 3e p.393
+   'baby has little white spots on nose' [green|baby,mild] -> 'baby has little white spots on nose' buttons body=[] first=Newborns Babies and Breastfeeding p.2
+   'is it normal my baby hiccups a lot' [green|baby,mild] -> 'is it normal my baby hiccups a lot' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.442
+   'baby spits up a bit after every feed but gaining weight' [green|baby,mild] -> 'baby spits up a bit after every feed but gaining weight' buttons body=[] first=Lifespan Development p.152
+   'how often should a newborn poo' [green|baby,mild] -> 'how often should a newborn poo' buttons body=[] first=UNICEF Early Childhood Development Kit Guidance p.63
+   'mild sore throat no fever' [green|mild,fragment] -> 'mild sore throat no fever' answer body=[] first=Caring for Children p.21
+   'cold sore coming on, tingly lip' [green|mild] -> 'cold sore coming on, tingly lip' buttons body=[] first=USMC Winter Survival Course Handbook - Historical p.129
+   'mouth ulcer on my gum hurts when eating' [green|mild] -> 'mouth ulcer on my gum hurts when eating' buttons body=[] first=Belly Pain, Diarrhea, and Worms p.13
+   'can i take ibuprofen with paracetamol for a headache' [green|mild] -> 'can i take ibuprofen with paracetamol for a headache' answer body=[] first=First Aid p.84
+   'hangover from hell, head pounding, need water' [green|mild,slang] -> 'hangover from hell, head pounding, need water' buttons body=[] first=Microhydropower Handbook — complete Volume 2, January 1983 p.6
+   'got a bit of a sore head and a stuffy nose' [green|mild,slang] -> 'got a bit of a sore head and a stuffy nose' buttons body=[] first=Nutrition for Nurses p.302
+   'my knee clicks when i squat but no pain' [green|mild] -> 'my knee clicks when i squat but no pain' buttons body=[] first=NEETS Module 20 - Master Glossary p.44
+   'crick in my neck from sleeping funny' [green|mild,slang] -> 'crick in my neck from sleeping funny' buttons body=[] first=Microbiology p.389
+   'pregnant 12 weeks and feel nauseous in mornings, keeping food down' [green|mild,pregnancy] -> 'pregnant 12 weeks and feel nauseous in mornings, keeping food down' buttons body=[] first=Pregnancy and Birth p.17
+   'pregnant and heartburn every night' [green|mild,pregnancy] -> 'pregnant and heartburn every night' buttons body=[] first=Pregnancy and Birth p.6
+   'backache in pregnancy 30 weeks normal?' [green|mild,pregnancy] -> 'backache in pregnancy 30 weeks normal?' buttons body=[] first=Pregnancy and Birth p.10
+   'is starve a fever feed a cold true' [green|mild,misconception] -> 'is starve a fever feed a cold true' buttons body=[] first=USMC Winter Survival Course Handbook - Historical p.129
+   "should i tilt head back for a nosebleed, it's a small one from picking" [green|mild,misconception] -> "should i tilt head back for a nosebleed, it's a small one from picking" buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.354
+   'put toothpaste on a burn? just a tiny one from curling iron' [green|mild,misconception] -> 'put toothpaste on a burn? just a tiny one from curling iron' buttons body=[] first=BEC Trauma p.None
+   'hay fever eyes streaming' [green|mild,fragment] -> 'hay fever eyes streaming' buttons body=[] first=Malaria, Dengue, and Other Illnesses from Mosquitoes p.3
+   'mild rash where my watch strap is' [green|mild] -> 'mild rash where my watch strap is' buttons body=[] first=First Aid p.55
+   'toe nail went black after running marathon but no pain' [green|mild] -> 'toe nail went black after running marathon but no pain' buttons body=[] first=Wood Handbook - Wood as an Engineering Material p.209
+   'fell asleep with contacts in eyes a bit dry' [green|mild] -> 'fell asleep with contacts in eyes a bit dry' buttons body=[] first=Field to Fork 2021: Hot Topics in Food Preservation p.None
+   'my kid ate a bit of crayon' [green|mild,child] -> 'my kid ate a bit of crayon' buttons body=[] first=Hotlines, warmlines, and other support, Organizations mentioned in this book, Where to find more information p.8
+   'toddler ate a little bit of sand at the beach' [green|mild,child] -> 'toddler ate a little bit of sand at the beach' buttons body=[] first=Mix the Concrete to Build a Biosand Filter (BSF) p.None
+   'my son swallowed his chewing gum is it going to stay 7 years' [green|mild,child,misconception] -> 'my son swallowed his chewing gum is it going to stay 7 years' buttons body=[] first=Boat Crew Handbook - Rescue and Survival Procedures (2017) p.2
+   'dog licked my cut, is that ok' [green|mild] -> 'dog licked my cut, is that ok' buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.275
+   'whats a normal heart rate' [green|mild] -> 'whats a normal heart rate' buttons body=[] first=Nutrition for Nurses p.249
+   'whats normal blood pressure for 70 year old' [green|mild,elderly] -> 'whats normal blood pressure for 70 year old' buttons body=['bleeding'] first=Field to Fork 2021: Hot Topics in Food Preservation p.None
+   'my head is aching me small small' [green|mild,non-native] -> 'my head is aching me small small' buttons body=[] first=Design of Small Dams, Third Edition p.640
+   'am feeling feverish small, should i take panadol' [green|mild,non-native] -> 'am feeling feverish small, should i take panadol' buttons body=[] first=How to help a person having a seizure p.12
+   'laptop has a heart attack every time i open chrome' [green|counterexample,slang] -> 'laptop has a heart attack every time i open chrome' buttons body=[] first=Basic Emergency Care - Approach to the Acutely Ill and Injured p.209
+   'server is not responding since 3am' [green|counterexample] -> 'server is not responding since 3am' buttons body=['unconscious'] first=Wireless Networking in the Developing World p.363
+   'my wifi is choking every evening' [green|counterexample,slang] -> 'my wifi is choking every evening' buttons body=['choking'] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   'python process killed, no pulse from the heartbeat endpoint' [green|counterexample] -> 'python process killed, no pulse from the heartbeat endpoint' buttons body=['pulse'] first=Health care skills p.7
+   'how do i revive a dead hard drive' [green|counterexample] -> 'how do i revive a dead hard drive' buttons body=[] first=Equipment Operator p.62
+   'my car battery is flat, need a jump start' [green|counterexample] -> 'my car battery is flat, need a jump start' buttons body=[] first=Chevrolet Silverado1500 Owner’s Manual2024 p.412
+   'engine is bleeding oil all over the drive' [green|counterexample] -> 'engine is bleeding oil all over the drive' buttons body=['bleeding'] first=BEC Postpartum Haemorrhage p.1
+   'the brakes are seizing up on my bike' [green|counterexample] -> 'the brakes are seizing up on my bike' answer body=['seizure'] first=Trek Bicycle Owners Manual 2026 p.26
+   'my steak is still bleeding is that rare enough' [green|counterexample] -> 'my steak is still bleeding is that rare enough' buttons body=['bleeding'] first=BEC Postpartum Haemorrhage p.1
+   'the basil collapsed overnight' [green|counterexample] -> 'the basil collapsed overnight' buttons body=['unconscious'] first=CERT Basic Training Participant Manual (2019) p.212
+   'burnt the toast again smoke alarm screaming' [green|counterexample] -> 'burnt the toast again smoke alarm screaming' buttons body=[] first=Wildfire Resources List p.2
+   'im literally dead 😂😂 that video' [green|counterexample,slang] -> 'im literally dead 😂😂 that video' buttons body=[] first=Practical Blacksmithing - Volume 3 (1889-1891) p.322
+   'i nearly had a heart attack when i saw the bill' [green|counterexample] -> 'i nearly had a heart attack when i saw the bill' buttons body=[] first=BEC Transfer and Handover p.None
+   'you took my breath away' [green|counterexample] -> 'you took my breath away' answer body=['breathing'] first=Writing Guide with Handbook p.131
+   "i can't breathe this office is so stuffy lol" [green|counterexample,slang] -> "i can't breathe this office is so stuffy lol" answer body=['breathing'] first=International First Aid Resuscitation and Education Guidelines 2025 p.152
+   'he choked in the final, missed the penalty' [green|counterexample] -> 'he choked in the final, missed the penalty' buttons body=['choking'] first=First Aid p.7
+   "the striker went down like he'd been shot, total dive" [green|counterexample] -> "the striker went down like he'd been shot, total dive" buttons body=[] first=Weight-Shift Control Aircraft Flying Handbook p.141
+   'our bowler is on fire today' [green|counterexample] -> 'our bowler is on fire today' buttons body=[] first=Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.17
+   'team is bleeding goals this season' [green|counterexample] -> 'team is bleeding goals this season' buttons body=['bleeding'] first=BEC Postpartum Haemorrhage p.1
+   "he's out cold in the fantasy league rankings" [green|counterexample] -> "he's out cold in the fantasy league rankings" buttons body=['unconscious'] first=Cold Weather Safety p.1
+   'my character keeps dying on level 3' [green|counterexample] -> 'my character keeps dying on level 3' buttons body=[] first=Caring for Children p.4
+   'minecraft how to stop drowning underwater' [green|counterexample] -> 'minecraft how to stop drowning underwater' buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.218
+   'elden ring boss has a bleed build, need help' [green|counterexample] -> 'eden ring boss has a bleed build, need help' buttons body=['bleeding'] first=Basic Emergency Care - Approach to the Acutely Ill and Injured p.116
+   'poison status effect wont wear off in pokemon' [green|counterexample] -> "poison status effect won't wear off in pokemon" buttons body=[] first=Pesticides are Poison p.20
+   'my sims baby is not breathing?? glitch' [green|counterexample] -> 'my sims baby is not breathing?? glitch' answer body=['breathing'] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   "cpr on the zombie in the game doesn't work" [green|counterexample] -> "cpr on the zombie in the game doesn't work" buttons body=['pulse'] first=International First Aid Resuscitation and Education Guidelines 2025 p.168
+   'best seizure scene in a movie ever?' [green|counterexample] -> 'best seizure scene in a movie ever?' buttons body=['seizure'] first=International First Aid Resuscitation and Education Guidelines 2025 p.399
+   'band name ideas: Cardiac Arrest or Blue Lips?' [green|counterexample] -> 'band name ideas: Cardiac Arrest or Blue Lips?' buttons body=['blue'] first=International First Aid Resuscitation and Education Guidelines 2025 p.528
+   'the drummer had a fit because the amp blew' [green|counterexample,slang] -> 'the drummer had a fit because the amp blew' buttons body=['seizure'] first=Introductory Statistics 2e p.508
+   'my boss is having a stroke over the deadline' [green|counterexample,slang] -> 'my boss is having a stroke over the deadline' buttons body=[] first=Equipment Operator p.549
+   'heatstroke cocktail recipe' [green|counterexample] -> 'heatstroke cocktail recipe' buttons body=[] first=NEETS Module 19 - Technicians Handbook p.23
+   'my cat choked up a hairball' [green|counterexample] -> 'my cat choked up a hairball' buttons body=['choking'] first=Download the Instrument Procedures Handbook — Download, Print, or View the complete IPH p.210
+   'puppy ate my sock help' [green|counterexample] -> 'puppy ate my sock help' buttons body=[] first=Talking with children about epilepsy and seizures p.17
+   'my hamster isnt breathing' [green|counterexample] -> "my hamster isn't breathing" buttons body=['breathing'] first=Sesame Street Wildfires Activity Book p.7
+   'my dog had a seizure, vet number?' [green|counterexample] -> 'my dog had a seizure, vet number?' buttons body=['seizure'] first=How to help a person having a seizure p.12
+   'cat ate a lily' [green|counterexample,fragment] -> 'cat ate a lily' buttons body=[] first=Precalculus 2e p.419
+   'blue lips lipstick shade for halloween' [green|counterexample] -> 'blue lips lipstick shade for halloween' buttons body=['blue'] first=Role Playing p.12
+   'zombie makeup grey skin tutorial' [green|counterexample] -> 'zombie makeup grey skin tutorial' buttons body=[] first=APPENDIX B: Common chemicals and materials p.44
+   'how to tie a tourniquet for my first aid exam' [green|counterexample] -> 'how to tie a tourniquet for my first aid exam' answer body=[] first=First Aid p.11
+   'what is the ratio for cpr compressions for my course quiz' [green|counterexample] -> 'what is the ratio for cpr compressions for my course quiz' answer body=['pulse'] first=International First Aid Resuscitation and Education Guidelines 2025 p.168
+   'stop the bleed course near me' [green|counterexample] -> 'stop the bleed course near me' answer body=['bleeding'] first=USMC Winter Survival Course Handbook - Historical p.138
+   'writing a novel where the character overdoses, what would paramedics say' [green|counterexample] -> 'writing a novel where the character overdoses, what would paramedics say' buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.212
+   'my stocks are bleeding red today' [green|counterexample] -> 'my stocks are bleeding red today' buttons body=['bleeding'] first=Trail Maintenance and Construction Notebook p.1
+   'code blue in the build pipeline lol' [green|counterexample,slang] -> 'code blue in the build pipeline lol' buttons body=[] first=Introduction to Computer Science p.763
+   "the market crashed and i'm in shock" [green|counterexample] -> "the market crashed and i'm in shock" buttons body=[] first=Planning Guidance for Response to a Nuclear Detonation, Second edition, 6/2010 p.22
+   'electric shock from the carpet static' [green|counterexample] -> 'electric shock from the carpet static' buttons body=[] first=NEETS Module 21 - Test Methods and Practices p.64
+   "i'm burned out at work" [green|counterexample] -> "i'm burned out at work" buttons body=[] first=A Healthy Home p.12
+   'got burned in the deal' [green|counterexample] -> 'got burned in the deal' answer body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.50
+   'my printer is jammed and choking on paper' [green|counterexample] -> 'my printer is jammed and choking on paper' buttons body=['choking'] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   "the bus is packed i'm suffocating" [green|counterexample,slang] -> "the bus is packed i'm suffocating" buttons body=[] first=First Aid in Armed Conflicts and Other Situations of Violence p.45
+   'the river is bleeding into the fields after the flood' [green|counterexample] -> 'the river is bleeding into the fields after the flood' buttons body=['bleeding'] first=Trail Maintenance and Construction Notebook p.1
+   'i drowned my chips in vinegar' [green|counterexample] -> 'i drowned my chips in vinegar' buttons body=[] first=Electronics factories p.13
+   'pulse oximeter app on phone accurate?' [green|counterexample] -> 'pulse oximeter app on phone accurate?' answer body=['pulse'] first=Using a Pulse Oximeter - Emergency Care Series p.None
+   'pulse is a good bean to cook with rice' [green|counterexample] -> 'pulse is a good bean to cook with rice' buttons body=['pulse'] first=Work p.6
+   'pulse shower setting broken' [green|counterexample] -> 'pulse shower setting broken' buttons body=['pulse'] first=FM 21-76 U.S. Army Survival Manual - Historical p.27
+   'my battery is swollen and hot, vape' [green|counterexample] -> 'my battery is swollen and hot, vape' answer body=[] first=Emergency Response Guidebook 2024 - English p.358
+   'the baby monitor not working no sound' [green|counterexample,baby] -> 'the baby monitor not working no sound' buttons body=[] first=Lifespan Development p.108
+   'the fire is going out, how to revive embers' [green|counterexample] -> 'the fire is going out, how to revive embers' buttons body=[] first=Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.17
+   'my bread has blue mould' [green|counterexample] -> 'my bread has blue mould' buttons body=[] first=Public Health Engineering in Precarious Situations p.91
+   'the lemon tree has a fungal rash on leaves' [green|counterexample] -> 'the lemon tree has a fungal rash on leaves' buttons body=[] first=Common health problems p.33
+   'the tyre is bleeding air slowly' [green|counterexample] -> 'the tyre is bleeding air slowly' buttons body=['bleeding'] first=BEC Postpartum Haemorrhage p.1
+   'best chokehold technique in bjj' [green|counterexample] -> 'best choke hold technique in bmj' buttons body=['choking'] first=NEETS Module 06 - Electronic Emission Tubes and Power Supplies p.187
+   'how to do a dead hang for grip' [green|counterexample] -> 'how to do a dead hang for grip' buttons body=[] first=Trail Maintenance and Construction Notebook p.1
+   'my yoga teacher said breathe into your belly' [green|counterexample] -> 'my yoga teacher said breathe into your belly' buttons body=['breathing'] first=Living well with epilepsy p.15
+   'holding breath for 2 minutes free diving training' [green|counterexample] -> 'holding breath for 2 minutes free diving training' buttons body=['breathing'] first=International First Aid Resuscitation and Education Guidelines 2025 p.441
+   'my teenager is giving me a heart attack with her driving' [green|counterexample] -> 'my teenager is giving me a heart attack with her driving' buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.364
+   'legit passed out on the couch after the party sleep was amazing' [green|counterexample,slang] -> 'legit passed out on the couch after the party sleep was amazing' buttons body=['unconscious'] first=International First Aid Resuscitation and Education Guidelines 2025 p.404
+   'im so dead tired' [green|counterexample] -> 'im so dead tired' buttons body=[] first=Malaria, Dengue, and Other Illnesses from Mosquitoes p.16
+   'my fantasy team has a broken leg - i mean my RB is out' [green|counterexample] -> 'my fantasy team has a broken leg - i mean my RB is out' buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.301
+   "i'm choking on this calculus homework" [green|counterexample] -> "i'm choking on this calculus homework" buttons body=['choking'] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   'seizure warning in video game settings flashing lights off' [green|counterexample] -> 'seizure warning in video game settings flashing lights off' buttons body=['seizure'] first=NASA-STD-3001 Volume 2 Human Factors Habitability and Environmental Health p.214
+   'he took an overdose of my patience' [green|counterexample] -> 'he took an overdose of my patience' buttons body=[] first=First Aid p.48
+   'the kettle is choking and spitting' [green|counterexample] -> 'the kettle is choking and spitting' answer body=['choking'] first=International First Aid Resuscitation and Education Guidelines 2025 p.241
+   'Vomit Comet zero gravity flight price' [green|counterexample] -> 'Vomit Comet zero gravity flight price' buttons body=[] first=University Physics Volume 1 p.416
+   'crash course in excel pivots' [green|counterexample] -> 'crash course in excel pivots' buttons body=[] first=MIT Linear Algebra — 3play pdf file p.10
+   'my heart is broken he left me' [green|counterexample] -> 'my heart is broken he left me' buttons body=[] first=First Aid p.40
+   "bleedin' printer jammed" [green|counterexample,slang] -> "bleedin' printer jammed" buttons body=['bleeding'] first=Engineering Aid - Construction Methods and Materials p.195
+   "my baby's first tooth came through!" [green|counterexample,baby] -> "my baby's first tooth came through!" buttons body=[] first=Exploring Hand Tool Woodworking | Paul Sellers p.None
+   'HEART ATTACK GRILL menu' [green|counterexample,caps] -> 'HEART ATTACK GRILL menu' buttons body=[] first=International First Aid Resuscitation and Education Guidelines 2025 p.359
+   'how to babyproof cupboards with bleach' [green|counterexample] -> 'how to baby proof cupboards with bleach' buttons body=[] first=Public Health Engineering in Precarious Situations p.128
+   'I’m OK just a bit breathless climbing stairs since covid' [green|mild] -> 'I’m OK just a bit breathless climbing stairs since covid' buttons body=[] first=Living well with epilepsy p.9
+   'my heartbeat feels a bit fast after coffee' [green|mild] -> 'my heartbeat feels a bit fast after coffee' buttons body=['pulse'] first=Heart Disease and High Blood Pressure p.17
+   'baby a bit sniffly but feeding ok' [green|baby,mild] -> 'baby a bit stiffly but feeding ok' buttons body=[] first=Lifespan Development p.128
+   'my son vomited once after spinning on the roundabout, fine now' [green|child,mild] -> 'my son vomited once after spinning on the roundabout, fine now' buttons body=[] first=Psychology 2e p.197
+   'the stroke order for chinese characters' [green|counterexample] -> 'the stroke order for chinese characters' buttons body=[] first=NASA Human Integration Design Handbook, Revision 1 p.951
+   'my arm is dead after sleeping on it, pins and needles gone now' [green|mild,slang] -> 'my arm is dead after sleeping on it, pins and needles gone now' buttons body=[] first=Health care skills p.18
+   'the patient in my nursing case study has sepsis, what are the bundle steps' [green|counterexample] -> 'the patient in my nursing case study has sepsis, what are the bundle steps' buttons body=[] first=Clinical Nursing Skills — OpenStax p.38
+   'sorethroatnofever' [green|glued,mild] -> 'sore throat no fever' answer body=[] first=Common health problems p.21
+   "right so ive been meaning to ask about my knee for ages, it aches going down stairs and sometimes gives a click, no swelling, I'm 52 and do a bit of running, nothing dramatic" [green|rambling,mild] -> "right so ive been meaning to ask about my knee for ages, it aches going down stairs and sometimes gives a click, no swelling, I'm 52 and do a bit of running, nothing dramatic" buttons body=[] first=Lifespan Development p.470
+== red_sure_offtopic_after kw: 8
+   'bleeding out' [red] -> 'bleeding out' answer urgent=True body=['bleeding'] hits=8 first=NEETS Module 19 - Technicians Handbook p.15
+   'my mate chainsawed his thigh its pumping' [red] -> 'my mate chainsawed his thigh its pumping' answer urgent=False body=[] hits=8 first=Range-of-motion and Other Exercises p.23
+   'anafalactic shock what do i do' [red] -> 'anaphylactic shock what do i do' answer urgent=True body=[] hits=8 first=Microbiology p.756
+   'my brother is ODing' [red] -> 'my brother is Oring' answer urgent=False body=[] hits=8 first=Introduction to Part 1: Making Therapy Functional and Fun p.5
+   'acid splashed in her eyes at work' [red] -> 'acid splashed in her eyes at work' answer urgent=False body=[] hits=8 first=Electronics factories p.4
+   'my son says voices are telling him to jump' [red] -> 'my son says voices are telling him to jump' answer urgent=False body=[] hits=8 first=Story Telling p.9
+   'anna flack sis' [red] -> 'anna flack sis' answer urgent=False body=[] hits=8 first=Introductory Statistics 2e p.199
+   'narcan how' [red] -> 'narcan how' answer urgent=False body=[] hits=6 first=Index p.11
+== red_sure_offtopic_after hy: 24
+   'should i put a spoon in his mouth so he doesnt swallow his tongue hes seizing' [red] -> "should i put a spoon in his mouth so he doesn't swallow his tongue he's seizing" answer urgent=True body=['seizure'] hits=8 first=Feeding p.6
+   'bleeding out' [red] -> 'bleeding out' answer urgent=True body=['bleeding'] hits=8 first=NEETS Module 19 - Technicians Handbook p.15
+   'he got stabbed in the stomach theres a knife still in it should i pull it out' [red] -> 'he got stabbed in the stomach theres a knife still in it should i pull it out' answer urgent=True body=[] hits=8 first=Tools and Their Uses p.213
+   'my mate chainsawed his thigh its pumping' [red] -> 'my mate chainsawed his thigh its pumping' answer urgent=False body=[] hits=8 first=Paralysis p.7
+   'found an old man outside in the snow, barely awake, skin icy' [red] -> 'found an old man outside in the snow, barely awake, skin icy' answer urgent=False body=[] hits=8 first=FM 31-70 Basic Cold Weather Manual - Historical p.64
+   'acid splashed in her eyes at work' [red] -> 'acid splashed in her eyes at work' answer urgent=False body=[] hits=8 first=Chemical dangers p.26
+   'dad had a uti now hes confused and hasnt peed all day' [red] -> "dad had a uti now he's confused and hasn peed all day" answer urgent=True body=[] hits=8 first=Microbiology p.622
+   'my sugar is 31 and i keep throwing up' [red] -> 'my sugar is 31 and i keep throwing up' answer urgent=True body=[] hits=8 first=Diabetes p.31
+   'wheezing so bad ribs sucking in, used 10 puffs' [red] -> 'wheezing so bad ribs sucking in, used 10 puffs' answer urgent=True body=[] hits=8 first=BEC Quick Cards p.12
+   'my son says voices are telling him to jump' [red] -> 'my son says voices are telling him to jump' answer urgent=False body=[] hits=8 first=Hearing Loss and Communication p.18
+   'cant do this no more. took everything in the cabinet' [red] -> "can't do this no more. took everything in the cabinet" answer urgent=False body=[] hits=8 first=National Weather Service Flood Survivor Stories p.1
+   'unalive myself tonight how many' [red] -> 'unlike myself tonight how many' answer urgent=False body=[] hits=8 first=Introduction to Philosophy p.37
+   'pregnant and having a fit' [red] -> 'pregnant and having a fit' answer urgent=True body=['seizure'] hits=8 first=Lifespan Development p.109
+   'he become unconscious suddenly please what to do' [red] -> 'he become unconscious suddenly please what to do' answer urgent=True body=['unconscious'] hits=8 first=Diabetes p.31
+   'my father fell down and not getting up, eyes are white' [red] -> 'my father fell down and not getting up, eyes are white' answer urgent=True body=[] hits=8 first=Problems with the Eyes and Seeing p.21
+   "my mate is having a turn, can't get a word out of him" [red] -> "my mate is having a turn, can't get a word out of him" answer urgent=False body=[] hits=8 first=Social skills p.9
+   "my missus is having a do and she's grey" [red] -> "my missus is having a do and she's grey" answer urgent=False body=[] hits=8 first=Lifespan Development p.847
+   'elderly dad on floor confused cold incontinent' [red] -> 'elderly dad on floor confused cold incontinent' answer urgent=True body=[] hits=8 first=USMC Winter Survival Course Handbook - Historical p.129
+   "im 16 weeks and i'm passing big clots and cramping like labour" [red] -> "im 16 weeks and i'm passing big clots and cramping like labour" answer urgent=True body=[] hits=8 first=Infertility p.8
+   'compressions how fast' [red] -> 'compressions how fast' answer urgent=False body=[] hits=8 first=MIT Linear Algebra — vGkn-3NFGck p.14
+   'he ate wild mushrooms 6 hours ago now vomiting and diarrhoea' [red] -> 'he ate wild mushrooms 6 hours ago now vomiting and diarrhoea' answer urgent=True body=[] hits=8 first=USMC Summer Survival Course Handbook - Historical p.105
+   'my poo is black and tarry and i feel a bit lightheaded' [red] -> 'my poo is black and tarry and i feel a bit lightheaded' answer urgent=False body=[] hits=8 first=APPENDIX B: Common chemicals and materials p.23
+   'my son has dengue fever day 4 and now tummy pain and gums bleeding' [red] -> 'my son has dengue fever day 4 and now tummy pain and gums bleeding' answer urgent=True body=['bleeding'] hits=8 first=Microbiology p.1048
+   'my dad has chess pain' [red] -> 'my dad has chest pain' answer urgent=True body=['chest pain'] hits=8 first=BEC Transfer and Handover p.None
+== typo_damage_after: 1
+   'he is chocking on fold' [real-word-typo] before 'he is choking on fold' after 'he is choking on fold' bent=[['chocking', 'fix', 'choking']] urg True->True
+== typo_and_voice_lines: 143
+   'my dad is snoring weird on the floor and wont wake up' [plain] before "my dad is snoring weird on the floor and won't wake up" after "my dad is snoring weird on the floor and won't wake up" bent=[] urg True->True
+   'hes breathing but like only every now n then big gulps' [typo] before "he's breathing but like only every now n then big gulps" after "he's breathing but like only every now n then big gulps" bent=[] urg True->True
+   'babys lips r going blue' [baby,typo] before 'baby lips r going blue' after 'baby lips r going blue' bent=[] urg True->True
+   'my son is choking on a grape cant cough' [child,plain] before "my son is choking on a grape can't cough" after "my son is choking on a grape can't cough" bent=[] urg True->True
+   'choking cant talk hands on throat' [fragment] before "choking can't talk hands on throat" after "choking can't talk hands on throat" bent=[] urg True->True
+   'chokig help' [typo,fragment] before 'choking help' after 'choking help' bent=[] urg True->True
+   'no pulse i cant find one on his neck' [fragment] before "no pulse i can't find one on his neck" after "no pulse i can't find one on his neck" bent=[] urg True->True
+   'cant feel a heartbeat on mum' [fragment] before "can't feel a heartbeat on mum" after "can't feel a heartbeat on mum" bent=[] urg True->True
+   'his face is gray and hes sweating buckets and says his chest feels crushed' [plain] before "his face is gray and he's sweating buckets and says his chest feels crushed" after "his face is gray and he's sweating buckets and says his chest feels crushed" bent=[] urg True->True
+   'tight chest n cant catch breath n feel sick' [typo] before "tight chest n can't catch breath n feel sick" after "tight chest n can't catch breath n feel sick" bent=[] urg True->True
+   'my husband has bad indigestion that wont go away and hes clammy and grey' [misconception] before "my husband has bad indigestion that won't go away and he's clammy and grey" after "my husband has bad indigestion that won't go away and he's clammy and grey" bent=[] urg True->True
+   'chest hurts should i just take a rennie and lie down? its prob gas' [misconception] before 'chest hurts should i just take a ronnie and lie down? its prob gas' after 'chest hurts should i just take a ronnie and lie down? its prob gas' bent=[] urg True->True
+   'her face is dropping on one side and shes talking funny' [plain] before "her face is dropping on one side and she's talking funny" after "her face is drooping on one side and she's talking funny" bent=[] urg True->True
+   'mums mouth gone crooked n she cant lift her arm' [typo,elderly] before "mums mouth gone crooked n she can't lift her arm" after "mums mouth gone crooked n she can't lift her arm" bent=[] urg False->True
+   'stoke symptoms my dad' [typo,fragment] before 'stoke symptoms my dad' after 'stoke symptoms my dad' bent=[] urg False->False
+   'he had a strike i think arm floppy' [real-word-typo] before 'he had a strike i think arm floppy' after 'he had a strike i think arm floppy' bent=[] urg True->True
+   'my aunty had a stroke this morning but she seems ok now should we wait for her gp monday' [misconception,elderly] before 'my aunt had a stroke this morning but she seems ok now should we wait for her gp monday' after 'my aunt had a stroke this morning but she seems ok now should we wait for her gp monday' bent=[] urg True->True
+   'is fitting and wont stop been 6 min' [slang,fragment] before "is fitting and won't stop been 6 min" after "is fitting and won't stop been 6 min" bent=[] urg True->True
+   'should i put a spoon in his mouth so he doesnt swallow his tongue hes seizing' [misconception] before "should i put a spoon in his mouth so he doesn't swallow his tongue he's seizing" after "should i put a spoon in his mouth so he doesn't swallow his tongue he's seizing" bent=[] urg True->True
+   'sezure cant breath after' [typo,fragment] before "seizure can't breath after" after "seizure can't breath after" bent=[] urg True->True
+   'she keeps having siezures one after another not waking in between' [typo] before 'she keeps having seizures one after another not waking in between' after 'she keeps having seizures one after another not waking in between' bent=[] urg True->True
+   'bleeding wont stop soaked through 3 towels' [fragment] before "bleeding won't stop soaked through 3 towels" after "bleeding won't stop soaked through 3 towels" bent=[] urg True->True
+   'blooding alot from head' [typo,non-native] before 'blood ing lot from head' after 'blooding lot from head' bent=[] urg True->True
+   "she's vomitting blood like coffee grounds and fainted" [typo] before "she's vomiting blood like coffee grounds and fainted" after "she's vomiting blood like coffee grounds and fainted" bent=[] urg True->True
+   'nosebleed 45 mins on warfarin wont stop' [fragment,elderly] before "nosebleed 45 mins on warfarin won't stop" after "nosebleed 45 mins on warfarin won't stop" bent=[] urg False->True
+   'lips and tongue swelling up bee sting cant swallow' [plain] before "lips and tongue swelling up bee sting can't swallow" after "lips and tongue swelling up bee sting can't swallow" bent=[] urg True->True
+   'anafalactic shock what do i do' [typo,fragment] before 'an a faa ctic shock what do i do' after 'anaphylactic shock what do i do' bent=[] urg True->True
+   'used the epipen hes still wheezy and blotchy' [plain] before "used the epipen he's still wheeze and blotchy" after "used the epipen he's still wheezy and blotchy" bent=[] urg True->True
+   'my kid ate a cashew and hes all hives and coughing and floppy' [child] before "my kid ate a cashew and he's all hives and coughing and floppy" after "my kid ate a cashew and he's all hives and coughing and floppy" bent=[] urg True->True
+   'pulled my mate out of the surf hes vomiting water and confused' [slang] before "pulled my mate out of the surf he's vomiting water and confused" after "pulled my mate out of the surf he's vomiting water and confused" bent=[] urg True->True
+   'dry drowning is it real my son swam today and now hes really tired and coughing' [misconception,child] before "dry drowning is it real my son swim today and now he's really tired and coughing" after "dry drowning is it real my son swam today and now he's really tired and coughing" bent=[] urg True->True
+   'she took a whole bottle of paracetamol an hour ago but says shes fine' [misconception] before "she took a whole bottle of paracetamol an hour ago but says she's fine" after "she took a whole bottle of paracetamol an hour ago but says she's fine" bent=[] urg False->True
+   'he took a bunch of pills idk what kind and hes really sleepy' [plain] before "he took a bunch of pills idl what kind and he's really sleepy" after "he took a bunch of pills idk what kind and he's really sleepy" bent=[] urg True->True
+   'my brother is ODing' [slang,fragment] before 'my brother is Oring' after 'my brother is Oring' bent=[] urg False->False
+   "he's gouching out and wont come round" [slang] before "he's touching out and won't come round" after "he's touching out and won't come round" bent=[] urg False->True
+   'she drank half a bottle of vodka and is passed out on her back making gurgly sounds' [plain] before 'she drank half a bottle of vodka and is passed out on her back making gargle sounds' after 'she drank half a bottle of vodka and is passed out on her back making gargle sounds' bent=[] urg True->True
+   'should i rub his hands fast and give whisky to warm him hes hypothermic' [misconception] before "should i rub his hands fast and give whiskey to warm him he's hypothermic" after "should i rub his hands fast and give whisky to warm him he's hypothermic" bent=[] urg True->True
+   'baby was left in hot car shes floppy and red' [baby] before "baby was left in hot car she's floppy and red" after "baby was left in hot car she's floppy and red" bent=[] urg True->True
+   'fell off the roof and cant feel his legs' [plain] before "fell off the roof and can't feel his legs" after "fell off the roof and can't feel his legs" bent=[] urg True->True
+   'banged her head and now shes throwing up and very sleepy' [plain] before "banged her head and now she's throwing up and very sleepy" after "banged her head and now she's throwing up and very sleepy" bent=[] urg True->True
+   'thigh bent the wrong way after the tackle and hes going pale' [plain] before "thigh bent the wrong way after the tackle and he's going pale" after "thigh bent the wrong way after the tackle and he's going pale" bent=[] urg True->True
+   'dad had a uti now hes confused and hasnt peed all day' [elderly] before "dad had a uti now he's confused and hasn peer all day" after "dad had a uti now he's confused and hasn peed all day" bent=[] urg True->True
+   'the cut on his hand has red lines going up his arm and hes feverish and dizzy' [plain] before "the cut on his hand has red lines going up his arm and he's feverish and dizzy" after "the cut on his hand has red lines going up his arm and he's feverish and dizzy" bent=[] urg True->True
+   'my baby has a rash that doesnt go away when i press a glass on it' [baby] before "my baby has a rash that doesn't go away when i press a glass on it" after "my baby has a rash that doesn't go away when i press a glass on it" bent=[] urg True->True
+   'menengitis rash on my son? tiny red pin pricks wont fade, hes floppy' [typo,child] before "meningitis rash on my son? tiny red pin pricks won't fade, he's floppy" after "meningitis rash on my son? tiny red pin pricks won't fade, he's floppy" bent=[] urg True->True
+   'my baby wont feed and is really floppy and hard to wake' [baby] before "my baby won't feed and is really floppy and hard to wake" after "my baby won't feed and is really floppy and hard to wake" bent=[] urg True->True
+   'babby has soft spot sunken and no wet nappy since morning' [baby,typo] before 'baby has soft spot sunken and no wet nappy since morning' after 'baby has soft spot sunken and no wet nappy since morning' bent=[] urg True->True
+   'i shook my baby to stop the crying and now hes not right' [baby] before "i shook my baby to stop the crying and now he's not right" after "i shook my baby to stop the crying and now he's not right" bent=[] urg True->True
+   'type 1 friend acting drunk but hasnt drunk anything, sweaty and shaky' [plain] before 'type 1 friend acting drunk but hasn drunk anything, sweaty and shaky' after 'type 1 friend acting drunk but hasn drunk anything, sweaty and shaky' bent=[] urg True->True
+   'my diabetic dad wont wake up properly sugar reading says LO' [elderly] before "my diabetic dad won't wake up properly sugar reading says LO" after "my diabetic dad won't wake up properly sugar reading says LO" bent=[] urg True->True
+   'hypo and hes unconscious can i put juice in his mouth' [misconception] before "hypo and he's unconscious can i put juice in his mouth" after "hypo and he's unconscious can i put juice in his mouth" bent=[] urg True->True
+   'asthma attack inhaler not working cant talk in sentences' [fragment] before "asthma attack inhaler not working can't talk in sentences" after "asthma attack inhaler not working can't talk in sentences" bent=[] urg True->True
+   'he just said goodbye and hes on the bridge' [mental-health] before "he just said goodbye and he's on the bridge" after "he just said goodbye and he's on the bridge" bent=[] urg False->True
+   'i have the pills in my hand i dont want to be here anymore' [mental-health] before "i have the pills in my hand i don't want to be here anymore" after "i have the pills in my hand i don't want to be here anymore" bent=[] urg True->True
+   'she cut her wrists deep, wont stop bleeding' [mental-health] before "she cut her wrists deep, won't stop bleeding" after "she cut her wrists deep, won't stop bleeding" bent=[] urg True->True
+   'cant do this no more. took everything in the cabinet' [mental-health] before "can't do this no more. took everything in the cabinet" after "can't do this no more. took everything in the cabinet" bent=[] urg False->False
+   'unalive myself tonight how many' [mental-health,slang] before 'unlike myself tonight how many' after 'unlike myself tonight how many' bent=[] urg False->False
+   'my waters broke and baby hasnt moved all day' [pregnancy] before 'my waters broke and baby hasn moved all day' after 'my waters broke and baby hasn moved all day' bent=[] urg True->True
+   'mum keeled over in the shower and shes not answering' [slang] before "mum peeled over in the shower and she's not answering" after "mum keeled over in the shower and she's not answering" bent=[] urg False->True
+   'fella just went down outside the pub and hes not right, eyes rolling' [slang] before "fell just went down outside the pub and he's not right, eyes rolling" after "fella just went down outside the pub and he's not right, eyes rolling" bent=[] urg True->True
+   'she konked out and isnt waking' [slang,typo] before "she kinked out and isn't waking" after "she kinked out and isn't waking" bent=[] urg False->True
+   'not breathin' [typo,fragment] before 'not breathing' after 'not breathing' bent=[] urg True->True
+   'notbreathing' [glued,fragment] before 'not breathing' after 'not breathing' bent=[] urg True->True
+   'cantbreathe' [glued,fragment] before "can't breathe" after "can't breathe" bent=[] urg True->True
+   'heartattack' [glued,fragment] before 'heart attack' after 'heart attack' bent=[] urg True->True
+   'babyblue' [glued,fragment,baby] before 'baby blue' after 'baby blue' bent=[] urg True->True
+   "he'snotbreathingwhatdoido" [glued] before "he'snotbreathingwhatdoido" after "he'snotbreathingwhatdoido" bent=[] urg True->True
+   'pleeeeease help my baby wont wake uppp' [baby,typo] before "pleeeeease help my baby won't wake ppp" after "please help my baby won't wake up" bent=[] urg True->True
+   'helpppp hes blue' [typo,fragment] before "helpppp he's blue" after "help he's blue" bent=[] urg True->True
+   'hes nit breathing' [typo] before "he's nit breathing" after "he's nit breathing" bent=[] urg True->True
+   'shes not breaking' [real-word-typo] before "she's not breaking" after "she's not breathing" bent=[] urg True->True
+   'he is chocking on fold' [real-word-typo] before 'he is choking on fold' after 'he is choking on fold' bent=[['chocking', 'fix', 'choking']] urg True->True
+   "my wife's having a heart a tack" [typo] before "my wife's having a heart a tack" after "my wife's having a heart a tack" bent=[] urg True->True
+   'she has a seasure' [typo] before 'she has a measure' after 'she has a seizure' bent=[] urg True->True
+   'anna flack sis' [voice-to-text,fragment] before 'anna flock sis' after 'anna flack sis' bent=[] urg False->False
+   'my husband is having a seizure period he is turning blue period' [voice-to-text] before 'my husband is having a seizure period he is turning blue period' after 'my husband is having a seizure period he is turning blue period' bent=[] urg True->True
+   "he's having a stroke he can't move his right side and his speech is slurred" [voice-to-text,plain] before "he's having a stroke he can't move his right side and his speech is slurred" after "he's having a stroke he can't move his right side and his speech is slurred" bent=[] urg True->True
+   'my son ate a nut and his throat is closing call an ambulance' [voice-to-text,child] before 'my son ate a nut and his throat is closing call an ambulance' after 'my son ate a nut and his throat is closing call an ambulance' bent=[] urg True->True
+   "she's bleeding from her know is and wont stop" [voice-to-text] before "she's bleeding from her know is and won't stop" after "she's bleeding from her know is and won't stop" bent=[] urg True->True
+   'hi i was going to ask about recipes but my nan just fell over and isnt talking' [buried,elderly] before "hi i was going to ask about recipes but my nan just fell over and isn't talking" after "hi i was going to ask about recipes but my nan just fell over and isn't talking" bent=[] urg True->True
+   "been a long week tbh, work's been mad, anyway my chest has been tight for 40 mins and now my left arm aches and im sweating" [buried,rambling] before "been a long week tbu, work's been mad, anyway my chest has been tight for 40 mins and now my left arm aches and im sweating" after "been a long week tbu, work's been mad, anyway my chest has been tight for 40 mins and now my left arm aches and im sweating" bent=[] urg True->True
+   'lol this is prob nothing but my roommate took like 6 xanax and drank and i cant wake him' [buried,slang] before "lol this is prob nothing but my roommate took like 6 xanax and drank and i can't wake him" after "lol this is prob nothing but my roommate took like 6 xanax and drank and i can't wake him" bent=[] urg True->True
+   "redback bit my kid and she's sweating and crying with pain" [child,slang] before "repack bit my kid and she's sweating and crying with pain" after "repack bit my kid and she's sweating and crying with pain" bent=[] urg True->True
+   'just had a bad fall at the station, my hip, cant move my leg and its turned out' [elderly] before "just had a bad fall at the station, my hip, can't move my leg and its turned out" after "just had a bad fall at the station, my hip, can't move my leg and its turned out" bent=[] urg True->True
+   'he fell off his bike onto the handlebars and now hes pale and his tummy hurts more and more' [child] before "he fell off his bike onto the handlebars and now he's pale and his tummy hurts more and more" after "he fell off his bike onto the handlebars and now he's pale and his tummy hurts more and more" bent=[] urg True->True
+   'cant breathe after long flight, calf swollen, coughing blood' [fragment] before "can't breathe after long flight, calf swollen, coughing blood" after "can't breathe after long flight, calf swollen, coughing blood" bent=[] urg True->True
+   'my belly is swollen and rock hard and i havent pooed in days and im vomiting green' [plain] before 'my belly is swollen and rock hard and i haven pooled in days and im vomiting green' after 'my belly is swollen and rock hard and i haven pooed in days and im vomiting green' bent=[] urg True->True
+   'fentynal' [typo,fragment] before 'fentanyl' after 'fentanyl' bent=[] urg False->True
+   'sunburnt so bad got blisters all over my back and feel shivery' [plain] before 'sunburn so bad got blisters all over my back and feel silvery' after 'sunburn so bad got blisters all over my back and feel shivery' bent=[] urg True->True
+   'fever 39.5 for 3 days and wont come down with calpol' [child] before "fever 39.5 for 3 days and won't come down with call" after "fever 39.5 for 3 days and won't come down with calpol" bent=[] urg True->True
+   'temp 40 aching all over sore throat cant swallow' [fragment] before "temp 40 aching all over sore throat can't swallow" after "temp 40 aching all over sore throat can't swallow" bent=[] urg True->True
+   'dhe has loose motions since yesterday 10 times, feeling giddy' [typo,non-native] before 'due has loose motions since yesterday 10 times, feeling buddy' after 'due has loose motions since yesterday 10 times, feeling giddy' bent=[] urg False->False
+   'diarea and vomitting cant keep water down for a day' [typo] before "diarrhea and vomiting can't keep water down for a day" after "diarrhea and vomiting can't keep water down for a day" bent=[] urg True->True
+   'been spewing all night cant even keep a sip down' [slang] before "been sewing all night can't even keep a sip down" after "been spewing all night can't even keep a sip down" bent=[] urg False->True
+   'morning sickness so bad cant keep anything down, peeing hardly' [pregnancy] before "morning sickness so bad can't keep anything down, peeing hardly" after "morning sickness so bad can't keep anything down, peeing hardly" bent=[] urg False->False
+   'bit my tongue really deep during a fall, wont stop oozing' [plain] before "bit my tongue really deep during a fall, won't stop oozing" after "bit my tongue really deep during a fall, won't stop oozing" bent=[] urg True->True
+   "my teen cut her arm, not deep, she's crying and wont talk to me" [mental-health,child] before "my teen cut her arm, not deep, she's crying and won't talk to me" after "my teen cut her arm, not deep, she's crying and won't talk to me" bent=[] urg True->True
+   'havent slept in 4 days and my thoughts are racing and i feel invincible' [mental-health] before 'haven slept in 4 days and my thoughts are racing and i feel invisible' after 'haven slept in 4 days and my thoughts are racing and i feel invincible' bent=[] urg False->False
+   'my mum hasnt eaten in a week since dad died and just stays in bed' [mental-health,elderly] before 'my mum hasn eaten in a week since dad died and just stays in bed' after 'my mum hasn eaten in a week since dad died and just stays in bed' bent=[] urg False->False
+   'i feel so low i dont see the point but im not going to do anything' [mental-health] before "i feel so low i don't see the point but im not going to do anything" after "i feel so low i don't see the point but im not going to do anything" bent=[] urg False->False
+   'my child has been having fever with stooling and he is weak' [non-native,child] before 'my child has been having fever with stooping and he is weak' after 'my child has been having fever with stooping and he is weak' bent=[] urg True->True
+   'nag LBM ako since last night, 7 times' [non-native,slang] before 'bag LBM amo since last night, 7 times' after 'nag LBM amo since last night, 7 times' bent=[] urg False->False
+   'my back went when i lifted the box cant stand straight' [slang] before "my back went when i lifted the box can't stand straight" after "my back went when i lifted the box can't stand straight" bent=[] urg False->True
+   'back pain and now i cant control my bladder and numb between my legs' [plain] before "back pain and now i can't control my bladder and numb between my legs" after "back pain and now i can't control my bladder and numb between my legs" bent=[] urg True->True
+   'my breast is red hot and sore while breastfeeding and i feel fluey' [pregnancy] before 'my breast is red hot and sore while breastfeeding and i feel flue' after 'my breast is red hot and sore while breastfeeding and i feel flue' bent=[] urg False->False
+   'gout attack big toe on fire cant touch the sheet' [slang] before "gout attack big toe on fire can't touch the sheet" after "gout attack big toe on fire can't touch the sheet" bent=[] urg True->True
+   'child limping and wont put weight on leg no injury' [child] before "child limping and won't put weight on leg no injury" after "child limping and won't put weight on leg no injury" bent=[] urg True->True
+   "dandruf won't go away" [mild,typo] before "dandruff won't go away" after "dandruff won't go away" bent=[] urg False->False
+   'doms legs dead after leg day lol' [mild,slang] before 'dams legs dead after leg day lol' after 'dams legs dead after leg day lol' bent=[] urg True->True
+   'my toddler wont eat vegetables is that ok' [child,mild] before "my toddler won't eat vegetables is that ok" after "my toddler won't eat vegetables is that ok" bent=[] urg False->False
+   'feeling a bit crook today, sniffly' [mild,slang] before 'feeling a bit cook today, stiffly' after 'feeling a bit crook today, stiffly' bent=[] urg False->False
+   'pins and needles in my foot from sitting crosslegged' [mild] before 'pins and needles in my foot from sitting cross legged' after 'pins and needles in my foot from sitting cross legged' bent=[] urg False->False
+   'is it true you shouldnt swim after eating' [mild,misconception] before 'is it true you shouldn swim after eating' after 'is it true you shouldn swim after eating' bent=[] urg False->False
+   'pimple on my chin wont pop' [mild] before "pimple on my chin won't pop" after "pimple on my chin won't pop" bent=[] urg False->False
+   'earwax blocked one side cant hear well' [mild] before "earwax blocked one side can't hear well" after "earwax blocked one side can't hear well" bent=[] urg False->False
+   'feelin a lil lightheaded, skipped breakfast' [mild,slang] before 'feeling a lil lightheaded, skipped breakfast' after 'feeling a lil lightheaded, skipped breakfast' bent=[] urg False->False
+   'have sipon, colds lang' [mild,non-native] before 'have sion, colds lang' after 'have sion, colds lang' bent=[] urg False->False
+   'my phone battery died and wont turn on' [counterexample] before "my phone battery died and won't turn on" after "my phone battery died and won't turn on" bent=[] urg False->False
+   'how to revive a teammate in fortnite' [counterexample] before 'how to revive a teammate in fortunate' after 'how to revive a teammate in fortunate' bent=[] urg False->False
+   'elden ring boss has a bleed build, need help' [counterexample] before 'eden ring boss has a bleed build, need help' after 'eden ring boss has a bleed build, need help' bent=[] urg True->True
+   'poison status effect wont wear off in pokemon' [counterexample] before "poison status effect won't wear off in pokemon" after "poison status effect won't wear off in pokemon" bent=[] urg True->True
+   'lyrics to stayin alive' [counterexample] before 'lyrics to staying alive' after 'lyrics to staying alive' bent=[] urg False->False
+   'my hamster isnt breathing' [counterexample] before "my hamster isn't breathing" after "my hamster isn't breathing" bent=[] urg True->True
+   'our project is flatlining' [counterexample] before 'our project is flat lining' after 'our project is flat lining' bent=[] urg False->False
+   'best chokehold technique in bjj' [counterexample] before 'best choke hold technique in bmj' after 'best choke hold technique in bmj' bent=[] urg True->True
+   'how to babyproof cupboards with bleach' [counterexample] before 'how to baby proof cupboards with bleach' after 'how to baby proof cupboards with bleach' bent=[] urg True->True
+   'playing fortnite and my brother just fell off his chair and is shaking' [buried,child] before 'playing fortunate and my brother just fell off his chair and is shaking' after 'playing fortunate and my brother just fell off his chair and is shaking' bent=[] urg True->True
+   'had a few beers and fell, cant remember anything, big cut on head' [plain] before "had a few beers and fell, can't remember anything, big cut on head" after "had a few beers and fell, can't remember anything, big cut on head" bent=[] urg True->True
+   'baby a bit sniffly but feeding ok' [baby,mild] before 'baby a bit stiffly but feeding ok' after 'baby a bit stiffly but feeding ok' bent=[] urg True->True
+   'my sons got a hi temperature and a rash that looks like bruises' [voice-to-text,child] before 'my sons got a hi temperature and a rash that looks like bruises' after 'my sons got a hi temperature and a rash that looks like bruises' bent=[] urg True->True
+   'my mother is having trouble breathing and her lips are blew' [voice-to-text,real-word-typo] before 'my mother is having trouble breathing and her lips are blew' after 'my mother is having trouble breathing and her lips are blew' bent=[] urg True->True
+   'call help my friend took to many pills an is not waking up' [voice-to-text,typo] before 'call help my friend took to many pills an is not waking up' after 'call help my friend took to many pills an is not waking up' bent=[] urg True->True
+   'my dad has chess pain' [real-word-typo,voice-to-text] before 'my dad has chess pain' after 'my dad has chest pain' bent=[] urg True->True
+   'my wife has a sizzler and wont stop shaking' [real-word-typo] before "my wife has a simpler and won't stop shaking" after "my wife has a sizzler and won't stop shaking" bent=[] urg True->True
+   'baby is chalking on milk' [real-word-typo,baby] before 'baby is chalking on milk' after 'baby is chalking on milk' bent=[] urg True->True
+   'the diabetic man is hippo, confused' [real-word-typo] before 'the diabetic man is hippo, confused' after 'the diabetic man is hippo, confused' bent=[] urg True->True
+   'GRANDMA FELL CANT GET UP HIP' [caps,elderly,fragment] before "GRANDMA FELL CAN'T GET UP HIP" after "GRANDMA FELL CAN'T GET UP HIP" bent=[] urg True->True
+   'chestpainandleftarm' [glued] before 'chest pain and left arm' after 'chest pain and left arm' bent=[] urg True->True
+   'babyhasfeverandpurplespots' [glued,baby] before 'baby has fever and purple spots' after 'baby has fever and purple spots' bent=[] urg True->True
+   'kidswallowedbattery' [glued,child] before 'kid swallowed battery' after 'kid swallowed battery' bent=[] urg True->True
+   'sorethroatnofever' [glued,mild] before 'sore throat no fever' after 'sore throat no fever' bent=[] urg True->True
+   "so my sister in law was visiting from Manila and we were cooking adobo and laughing and then she said she felt weird, like her heart was flipping, and then she just slid down the wall and now she's breathing kind of strange and not answering" [rambling,buried] before "so my sister in law was visiting from Manila and we were cooking adobe and laughing and then she said she felt weird, like her heart was flipping, and then she just slid down the wall and now she's breathing kind of strange and not answering" after "so my sister in law was visiting from Manila and we were cooking adobe and laughing and then she said she felt weird, like her heart was flipping, and then she just slid down the wall and now she's breathing kind of strange and not answering" bent=[] urg True->True
+   "ok i dont want to overreact and my husband says im being dramatic, and it's probably the flu going round, but our 9 month old has been really sleepy all day, barely fed, and now her hands and feet are cold and blotchy even though she's burning hot" [rambling,baby] before "ok i don't want to overreact and my husband says im being dramatic, and it's probably the flu going round, but our 9 month old has been really sleepy all day, barely fed, and now her hands and feet are cold and blotchy even though she's burning hot" after "ok i don't want to overreact and my husband says im being dramatic, and it's probably the flu going round, but our 9 month old has been really sleepy all day, barely fed, and now her hands and feet are cold and blotchy even though she's burning hot" bent=[] urg True->True
+== typo_wrong_words_after_by_hand: 20
+   rennie->ronnie
+   ODing->Oring
+   gouching->touching
+   gurgly->gargle
+   unalive->unlike
+   konked->kinked
+   tbh->tbu
+   redback->repack
+   dhe->due
+   stooling->stooping
+   ako->amo
+   fluey->flue
+   doms->dams
+   sniffly->stiffly (x2)
+   sipon->sion
+   fortnite->fortunate (x2)
+   elden->eden
+   bjj->bmj
+   adobo->adobe
+   hasnt/havent/shouldnt -> hasn/haven/shouldn (x7: the 't' dropped, so the negation goes)
+== by kind kw
+   baby             {'n': 34, 'r/y/g': '19/5/10', 'urgent red before': 19, 'urgent red after': 19, 'urgent yellow before': 5, 'urgent yellow after': 5, 'urgent green before': 9, 'urgent green after': 9, 'body covered before': '7/9', 'body covered after': '6/9', 'red withheld before': 0, 'red withheld after': 0}
+   buried           {'n': 13, 'r/y/g': '13/0/0', 'urgent red before': 12, 'urgent red after': 13, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '3/6', 'body covered after': '5/6', 'red withheld before': 1, 'red withheld after': 0}
+   caps             {'n': 7, 'r/y/g': '5/1/1', 'urgent red before': 5, 'urgent red after': 5, 'urgent yellow before': 1, 'urgent yellow after': 1, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '3/3', 'body covered after': '3/3', 'red withheld before': 0, 'red withheld after': 0}
+   child            {'n': 67, 'r/y/g': '37/19/11', 'urgent red before': 36, 'urgent red after': 36, 'urgent yellow before': 14, 'urgent yellow after': 16, 'urgent green before': 5, 'urgent green after': 5, 'body covered before': '8/11', 'body covered after': '9/11', 'red withheld before': 0, 'red withheld after': 0}
+   counterexample   {'n': 135, 'r/y/g': '0/0/135', 'urgent red before': 0, 'urgent red after': 0, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 92, 'urgent green after': 82, 'body covered before': '0/0', 'body covered after': '0/0', 'red withheld before': 0, 'red withheld after': 0}
+   elderly          {'n': 39, 'r/y/g': '24/9/6', 'urgent red before': 17, 'urgent red after': 21, 'urgent yellow before': 6, 'urgent yellow after': 8, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '8/11', 'body covered after': '8/11', 'red withheld before': 2, 'red withheld after': 0}
+   fragment         {'n': 71, 'r/y/g': '45/15/11', 'urgent red before': 37, 'urgent red after': 39, 'urgent yellow before': 7, 'urgent yellow after': 7, 'urgent green before': 3, 'urgent green after': 3, 'body covered before': '18/23', 'body covered after': '19/23', 'red withheld before': 0, 'red withheld after': 0}
+   glued            {'n': 9, 'r/y/g': '8/0/1', 'urgent red before': 8, 'urgent red after': 8, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '5/5', 'body covered after': '5/5', 'red withheld before': 1, 'red withheld after': 1}
+   mental-health    {'n': 14, 'r/y/g': '6/6/2', 'urgent red before': 2, 'urgent red after': 3, 'urgent yellow before': 3, 'urgent yellow after': 3, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '1/1', 'body covered after': '1/1', 'red withheld before': 3, 'red withheld after': 0}
+   mild             {'n': 109, 'r/y/g': '0/0/109', 'urgent red before': 0, 'urgent red after': 0, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 43, 'urgent green after': 43, 'body covered before': '1/3', 'body covered after': '0/3', 'red withheld before': 0, 'red withheld after': 0}
+   misconception    {'n': 33, 'r/y/g': '20/5/8', 'urgent red before': 18, 'urgent red after': 20, 'urgent yellow before': 4, 'urgent yellow after': 5, 'urgent green before': 4, 'urgent green after': 4, 'body covered before': '6/12', 'body covered after': '7/12', 'red withheld before': 1, 'red withheld after': 0}
+   non-native       {'n': 32, 'r/y/g': '17/7/8', 'urgent red before': 15, 'urgent red after': 16, 'urgent yellow before': 4, 'urgent yellow after': 4, 'urgent green before': 3, 'urgent green after': 2, 'body covered before': '8/14', 'body covered after': '9/14', 'red withheld before': 0, 'red withheld after': 0}
+   plain            {'n': 100, 'r/y/g': '57/42/1', 'urgent red before': 50, 'urgent red after': 54, 'urgent yellow before': 32, 'urgent yellow after': 36, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '19/24', 'body covered after': '22/24', 'red withheld before': 4, 'red withheld after': 0}
+   pregnancy        {'n': 22, 'r/y/g': '9/8/5', 'urgent red before': 9, 'urgent red after': 9, 'urgent yellow before': 5, 'urgent yellow after': 5, 'urgent green before': 3, 'urgent green after': 3, 'body covered before': '2/4', 'body covered after': '2/4', 'red withheld before': 0, 'red withheld after': 0}
+   rambling         {'n': 6, 'r/y/g': '5/0/1', 'urgent red before': 4, 'urgent red after': 5, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '2/3', 'body covered after': '3/3', 'red withheld before': 1, 'red withheld after': 0}
+   real-word-typo   {'n': 8, 'r/y/g': '8/0/0', 'urgent red before': 8, 'urgent red after': 8, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '4/7', 'body covered after': '5/7', 'red withheld before': 0, 'red withheld after': 0}
+   slang            {'n': 64, 'r/y/g': '28/10/26', 'urgent red before': 17, 'urgent red after': 22, 'urgent yellow before': 6, 'urgent yellow after': 8, 'urgent green before': 16, 'urgent green after': 15, 'body covered before': '8/18', 'body covered after': '12/18', 'red withheld before': 7, 'red withheld after': 0}
+   typo             {'n': 25, 'r/y/g': '22/2/1', 'urgent red before': 18, 'urgent red after': 21, 'urgent yellow before': 1, 'urgent yellow after': 1, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '14/16', 'body covered after': '14/16', 'red withheld before': 0, 'red withheld after': 0}
+   voice-to-text    {'n': 9, 'r/y/g': '9/0/0', 'urgent red before': 8, 'urgent red after': 8, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '4/5', 'body covered after': '5/5', 'red withheld before': 0, 'red withheld after': 0}
+== by kind hy
+   baby             {'n': 34, 'r/y/g': '19/5/10', 'urgent red before': 19, 'urgent red after': 19, 'urgent yellow before': 5, 'urgent yellow after': 5, 'urgent green before': 9, 'urgent green after': 9, 'body covered before': '7/9', 'body covered after': '6/9', 'red withheld before': 0, 'red withheld after': 0}
+   buried           {'n': 13, 'r/y/g': '13/0/0', 'urgent red before': 12, 'urgent red after': 13, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '3/6', 'body covered after': '5/6', 'red withheld before': 0, 'red withheld after': 0}
+   caps             {'n': 7, 'r/y/g': '5/1/1', 'urgent red before': 5, 'urgent red after': 5, 'urgent yellow before': 1, 'urgent yellow after': 1, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '3/3', 'body covered after': '3/3', 'red withheld before': 0, 'red withheld after': 0}
+   child            {'n': 67, 'r/y/g': '37/19/11', 'urgent red before': 36, 'urgent red after': 36, 'urgent yellow before': 14, 'urgent yellow after': 16, 'urgent green before': 5, 'urgent green after': 5, 'body covered before': '8/11', 'body covered after': '9/11', 'red withheld before': 0, 'red withheld after': 0}
+   counterexample   {'n': 135, 'r/y/g': '0/0/135', 'urgent red before': 0, 'urgent red after': 0, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 92, 'urgent green after': 82, 'body covered before': '0/0', 'body covered after': '0/0', 'red withheld before': 0, 'red withheld after': 0}
+   elderly          {'n': 39, 'r/y/g': '24/9/6', 'urgent red before': 17, 'urgent red after': 21, 'urgent yellow before': 6, 'urgent yellow after': 8, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '8/11', 'body covered after': '8/11', 'red withheld before': 0, 'red withheld after': 0}
+   fragment         {'n': 71, 'r/y/g': '45/15/11', 'urgent red before': 37, 'urgent red after': 39, 'urgent yellow before': 7, 'urgent yellow after': 7, 'urgent green before': 3, 'urgent green after': 3, 'body covered before': '18/23', 'body covered after': '19/23', 'red withheld before': 1, 'red withheld after': 0}
+   glued            {'n': 9, 'r/y/g': '8/0/1', 'urgent red before': 8, 'urgent red after': 8, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '5/5', 'body covered after': '5/5', 'red withheld before': 0, 'red withheld after': 0}
+   mental-health    {'n': 14, 'r/y/g': '6/6/2', 'urgent red before': 2, 'urgent red after': 3, 'urgent yellow before': 3, 'urgent yellow after': 3, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '1/1', 'body covered after': '1/1', 'red withheld before': 1, 'red withheld after': 0}
+   mild             {'n': 109, 'r/y/g': '0/0/109', 'urgent red before': 0, 'urgent red after': 0, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 43, 'urgent green after': 43, 'body covered before': '1/3', 'body covered after': '0/3', 'red withheld before': 0, 'red withheld after': 0}
+   misconception    {'n': 33, 'r/y/g': '20/5/8', 'urgent red before': 18, 'urgent red after': 20, 'urgent yellow before': 4, 'urgent yellow after': 5, 'urgent green before': 4, 'urgent green after': 4, 'body covered before': '6/12', 'body covered after': '7/12', 'red withheld before': 0, 'red withheld after': 0}
+   non-native       {'n': 32, 'r/y/g': '17/7/8', 'urgent red before': 15, 'urgent red after': 16, 'urgent yellow before': 4, 'urgent yellow after': 4, 'urgent green before': 3, 'urgent green after': 2, 'body covered before': '8/14', 'body covered after': '9/14', 'red withheld before': 0, 'red withheld after': 0}
+   plain            {'n': 100, 'r/y/g': '57/42/1', 'urgent red before': 50, 'urgent red after': 54, 'urgent yellow before': 32, 'urgent yellow after': 36, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '19/24', 'body covered after': '22/24', 'red withheld before': 0, 'red withheld after': 0}
+   pregnancy        {'n': 22, 'r/y/g': '9/8/5', 'urgent red before': 9, 'urgent red after': 9, 'urgent yellow before': 5, 'urgent yellow after': 5, 'urgent green before': 3, 'urgent green after': 3, 'body covered before': '2/4', 'body covered after': '2/4', 'red withheld before': 0, 'red withheld after': 0}
+   rambling         {'n': 6, 'r/y/g': '5/0/1', 'urgent red before': 4, 'urgent red after': 5, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 1, 'urgent green after': 1, 'body covered before': '2/3', 'body covered after': '3/3', 'red withheld before': 0, 'red withheld after': 0}
+   real-word-typo   {'n': 8, 'r/y/g': '8/0/0', 'urgent red before': 8, 'urgent red after': 8, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '4/7', 'body covered after': '5/7', 'red withheld before': 0, 'red withheld after': 0}
+   slang            {'n': 64, 'r/y/g': '28/10/26', 'urgent red before': 17, 'urgent red after': 22, 'urgent yellow before': 6, 'urgent yellow after': 8, 'urgent green before': 16, 'urgent green after': 15, 'body covered before': '8/18', 'body covered after': '12/18', 'red withheld before': 0, 'red withheld after': 0}
+   typo             {'n': 25, 'r/y/g': '22/2/1', 'urgent red before': 18, 'urgent red after': 21, 'urgent yellow before': 1, 'urgent yellow after': 1, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '14/16', 'body covered after': '14/16', 'red withheld before': 0, 'red withheld after': 0}
+   voice-to-text    {'n': 9, 'r/y/g': '9/0/0', 'urgent red before': 8, 'urgent red after': 8, 'urgent yellow before': 0, 'urgent yellow after': 0, 'urgent green before': 0, 'urgent green after': 0, 'body covered before': '4/5', 'body covered after': '5/5', 'red withheld before': 1, 'red withheld after': 0}
+== themes red_not_urgent: 19
+     3 stroke wordings | stoke symptoms my dad / my bp is very high 200 and my vision is going blurry / mum's speech went weird for 5 mins then back to normal
+     3 breathing / airway wordings | his throat is closing after peanuts / my missus is having a do and she's grey / child has croup and making squeaky noise even when calm
+     3 unconscious / unresponsive wordings | found an old man outside in the snow, barely awake, skin icy / my mate is having a turn, can't get a word out of him / something wrong with grandma she just staring and drooling
+     3 mental health / suicide in other words | my son says voices are telling him to jump / cant do this no more. took everything in the cabinet / unalive myself tonight how many
+     2 overdose / poisoning / ingestion without the word | my brother is ODing / narcan how
+     2 other | acid splashed in her eyes at work / anna flack sis
+     1 bleeding / wound wordings | my mate chainsawed his thigh its pumping
+     1 chest / heart wordings | compressions how fast
+     1 head injury / fall | my poo is black and tarry and i feel a bit lightheaded
+== themes yellow_not_urgent: 26
+     7 other | pinky finger bent sideways after volleyball / hiv exposure condom broke last night / my mum hasnt eaten in a week since dad died and just stays in bed / i feel so low i dont see the point but im not going to do anything / migraine with aura like usual but worse / he got glass in his foot and i can see a piece still in / toes black and blistered after the mountain
+     4 severe pain / belly | dhe has loose motions since yesterday 10 times, feeling giddy / chundered 8 times since the kebab, stomach cramps / nag LBM ako since last night, 7 times / eyes and skin turned yellow over the week, pee dark
+     2 child / baby specific | spilled hot tea on my toddler's leg small red patch she's crying but playing / earache and pus coming out of ear, kid 5
+     2 stroke wordings | my throat is so swollen on one side i can barely open my mouth / sudden curtain coming down over my vision in one eye
+     2 pregnancy / birth / newborn | morning sickness so bad cant keep anything down, peeing hardly / im 37 wks and my waters might have gone, trickle of clear fluid
+     2 bleeding / wound wordings | had a hypo had a juice now 5.1 feel ok but shaky / pressure is 185/110 bit of a headache
+     2 burns / electric / heat / cold / drowning | my body is hot and i am feeling cold at the same time since 3 days / my breast is red hot and sore while breastfeeding and i feel fluey
+     1 breathing / airway wordings | my 2yr old has a barking cough like a seal, worse at night
+     1 allergy / anaphylaxis | my calf is swollen red and hot, one leg only
+     1 chest / heart wordings | havent slept in 4 days and my thoughts are racing and i feel invincible
+     1 head injury / fall | dehydrated after hike, headache, dark pee, cramps
+     1 fever / infection / rash / meningitis | shingles near my eye
+== themes covered_sign_missed_red_yellow: 25
+     8 breathing / airway wordings | he was eating steak n now he's making no sound just pointing at his neck / is it normal for someone to go grey and stop answering / baby born not crying not pink / my baby is shaking and eyes turning, somebody said put spoon and give palm oil / helpppp hes blue / my missus is having a do and she's grey / my mum's ankles are really swollen and she's more breathless lying flat / baby is chalking on milk
+     7 unconscious / unresponsive wordings | just let him sleep it off right? he's been sick in his sleep / she konked out and isnt waking / my father fell down and not getting up, eyes are white / hi i was going to ask about recipes but my nan just fell over and isnt talking / my mate is having a turn, can't get a word out of him / child limping and wont put weight on leg no injury / my friend took ket and is lying on the floor not answering
+     3 bleeding / wound wordings | my mate chainsawed his thigh its pumping / im 16 weeks and i'm passing big clots and cramping like labour / pregnant and spotting a bit, no pain
+     3 chest / heart wordings | my friend is having a panic attack i think but she is 50 and clutching her chest / compressions how fast / my heart attack my chest
+     2 seizure wordings | please my sister is having convulsion and her body is very hot, they said use onion / my wife has a sizzler and wont stop shaking
+     1 non-English | mi hijo no respira bien and his lips purple
+     1 other | he's crook as, can't stand up and going in and out
+== themes green_urgent: 127
+    21 breathing / airway wordings | my lips are chapped and cracking / mild sore throat no fever / my wifi is choking every evening / i can't breathe this office is so stuffy lol / he choked in the final, missed the penalty / my sims baby is not breathing?? glitch / band name ideas: Cardiac Arrest or Blue Lips? / my cat choked up a hairball / my hamster isnt breathing / blue lips lipstick shade for halloween / zombie makeup grey skin tutorial / code blue in the build pipeline lol / my printer is jammed and choking on paper / my bread has blue mould / best chokehold technique in bjj / my yoga teacher said breathe into your belly / holding breath for 2 minutes free diving training / i'm choking on this calculus homework / the kettle is choking and spitting / I’m OK just a bit breathless climbing stairs since covid / sorethroatnofever
+    14 bleeding / wound wordings | paper cut on my finger stings / should i tilt head back for a nosebleed, it's a small one from picking / dog licked my cut, is that ok / whats normal blood pressure for 70 year old / engine is bleeding oil all over the drive / my steak is still bleeding is that rare enough / the striker went down like he'd been shot, total dive / team is bleeding goals this season / elden ring boss has a bleed build, need help / stop the bleed course near me / my stocks are bleeding red today / the river is bleeding into the fields after the flood / the tyre is bleeding air slowly / bleedin' printer jammed
+    14 other | doms legs dead after leg day lol / how do i revive a dead hard drive / im literally dead 😂😂 that video / our bowler is on fire today / my character keeps dying on level 3 / cpr on the zombie in the game doesn't work / how to tie a tourniquet for my first aid exam / what is the ratio for cpr compressions for my course quiz / pulse oximeter app on phone accurate? / pulse is a good bean to cook with rice / pulse shower setting broken / the fire is going out, how to revive embers / im so dead tired / my fantasy team has a broken leg - i mean my RB is out
+    12 overdose / poisoning / ingestion without the word | my kid ate a bit of crayon / toddler ate a little bit of sand at the beach / my son swallowed his chewing gum is it going to stay 7 years / my car battery is flat, need a jump start / you took my breath away / poison status effect wont wear off in pokemon / puppy ate my sock help / cat ate a lily / writing a novel where the character overdoses, what would paramedics say / my battery is swollen and hot, vape / he took an overdose of my patience / how to babyproof cupboards with bleach
+    11 burns / electric / heat / cold / drowning | cold sore coming on, tingly lip / is starve a fever feed a cold true / put toothpaste on a burn? just a tiny one from curling iron / hay fever eyes streaming / burnt the toast again smoke alarm screaming / minecraft how to stop drowning underwater / the market crashed and i'm in shock / electric shock from the carpet static / i'm burned out at work / got burned in the deal / i drowned my chips in vinegar
+    10 child / baby specific | my daughter has fever and spots in her mouth and hands / my baby has a few red spots on her cheeks from dribbling / nappy rash on my 4 month old / baby has little white spots on nose / is it normal my baby hiccups a lot / baby spits up a bit after every feed but gaining weight / the baby monitor not working no sound / my baby's first tooth came through! / baby a bit sniffly but feeding ok / my son vomited once after spinning on the roundabout, fine now
+    10 chest / heart wordings | im 23 and i get a sharp jab in my chest sometimes when i twist / pregnant and heartburn every night / whats a normal heart rate / laptop has a heart attack every time i open chrome / python process killed, no pulse from the heartbeat endpoint / i nearly had a heart attack when i saw the bill / my teenager is giving me a heart attack with her driving / my heart is broken he left me / HEART ATTACK GRILL menu / my heartbeat feels a bit fast after coffee
+     6 seizure wordings | crick in my neck from sleeping funny / the brakes are seizing up on my bike / best seizure scene in a movie ever? / the drummer had a fit because the amp blew / my dog had a seizure, vet number? / seizure warning in video game settings flashing lights off
+     5 unconscious / unresponsive wordings | fainted at the blood test, came round quickly, feel ok now / server is not responding since 3am / the basil collapsed overnight / he's out cold in the fantasy league rankings / legit passed out on the couch after the party sleep was amazing
+     5 fever / infection / rash / meningitis | mild rash where my watch strap is / am feeling feverish small, should i take panadol / the lemon tree has a fungal rash on leaves / crash course in excel pivots / the patient in my nursing case study has sepsis, what are the bundle steps
+     5 stroke wordings | my boss is having a stroke over the deadline / heatstroke cocktail recipe / the bus is packed i'm suffocating / the stroke order for chinese characters / my arm is dead after sleeping on it, pins and needles gone now
+     4 severe pain / belly | mouth ulcer on my gum hurts when eating / my knee clicks when i squat but no pain / toe nail went black after running marathon but no pain / Vomit Comet zero gravity flight price
+     4 head injury / fall | can i take ibuprofen with paracetamol for a headache / got a bit of a sore head and a stuffy nose / fell asleep with contacts in eyes a bit dry / my head is aching me small small
+     2 pregnancy / birth / newborn | how often should a newborn poo / backache in pregnancy 30 weeks normal?
+     2 mental health / suicide in other words | hangover from hell, head pounding, need water / how to do a dead hang for grip
+     2 allergy / anaphylaxis | pregnant 12 weeks and feel nauseous in mornings, keeping food down / right so ive been meaning to ask about my knee for ages, it aches going down stairs and sometimes gives a click, no swelling, I'm 52 and do a bit of running, nothing dramatic
+== themes combined_red_yellow: 67
+    12 breathing / airway wordings | he was eating steak n now he's making no sound just pointing at his neck / is it normal for someone to go grey and stop answering / his throat is closing after peanuts / baby born not crying not pink / my baby is shaking and eyes turning, somebody said put spoon and give palm oil / he'snotbreathingwhatdoido / helpppp hes blue / my missus is having a do and she's grey / my 2yr old has a barking cough like a seal, worse at night / child has croup and making squeaky noise even when calm / my mum's ankles are really swollen and she's more breathless lying flat / baby is chalking on milk
+    10 other | acid splashed in her eyes at work / anna flack sis / he's crook as, can't stand up and going in and out / pinky finger bent sideways after volleyball / hiv exposure condom broke last night / my mum hasnt eaten in a week since dad died and just stays in bed / i feel so low i dont see the point but im not going to do anything / migraine with aura like usual but worse / he got glass in his foot and i can see a piece still in / toes black and blistered after the mountain
+     9 unconscious / unresponsive wordings | just let him sleep it off right? he's been sick in his sleep / found an old man outside in the snow, barely awake, skin icy / she konked out and isnt waking / my father fell down and not getting up, eyes are white / hi i was going to ask about recipes but my nan just fell over and isnt talking / my mate is having a turn, can't get a word out of him / something wrong with grandma she just staring and drooling / child limping and wont put weight on leg no injury / my friend took ket and is lying on the floor not answering
+     5 stroke wordings | stoke symptoms my dad / my throat is so swollen on one side i can barely open my mouth / sudden curtain coming down over my vision in one eye / my bp is very high 200 and my vision is going blurry / mum's speech went weird for 5 mins then back to normal
+     5 bleeding / wound wordings | my mate chainsawed his thigh its pumping / im 16 weeks and i'm passing big clots and cramping like labour / pregnant and spotting a bit, no pain / had a hypo had a juice now 5.1 feel ok but shaky / pressure is 185/110 bit of a headache
+     4 chest / heart wordings | my friend is having a panic attack i think but she is 50 and clutching her chest / compressions how fast / havent slept in 4 days and my thoughts are racing and i feel invincible / my heart attack my chest
+     4 severe pain / belly | dhe has loose motions since yesterday 10 times, feeling giddy / chundered 8 times since the kebab, stomach cramps / nag LBM ako since last night, 7 times / eyes and skin turned yellow over the week, pee dark
+     3 mental health / suicide in other words | my son says voices are telling him to jump / cant do this no more. took everything in the cabinet / unalive myself tonight how many
+     2 overdose / poisoning / ingestion without the word | my brother is ODing / narcan how
+     2 seizure wordings | please my sister is having convulsion and her body is very hot, they said use onion / my wife has a sizzler and wont stop shaking
+     2 child / baby specific | spilled hot tea on my toddler's leg small red patch she's crying but playing / earache and pus coming out of ear, kid 5
+     2 pregnancy / birth / newborn | morning sickness so bad cant keep anything down, peeing hardly / im 37 wks and my waters might have gone, trickle of clear fluid
+     2 head injury / fall | my poo is black and tarry and i feel a bit lightheaded / dehydrated after hike, headache, dark pee, cramps
+     2 burns / electric / heat / cold / drowning | my body is hot and i am feeling cold at the same time since 3 days / my breast is red hot and sore while breastfeeding and i feel fluey
+     1 non-English | mi hijo no respira bien and his lips purple
+     1 allergy / anaphylaxis | my calf is swollen red and hot, one leg only
+     1 fever / infection / rash / meningitis | shingles near my eye
+== themes red_not_urgent_by_hand: 19
+     4 unresponsive / altered in other words (a turn, a do, staring and drooling, barely awake and icy) | my mate is having a turn, can't get a word out of him / my missus is having a do and she's grey / something wrong with grandma she just staring and drooling / found an old man outside in the snow, barely awake, skin icy
+     3 suicide / self-harm in other words | my son says voices are telling him to jump / cant do this no more. took everything in the cabinet / unalive myself tonight how many
+     3 stroke / TIA / hypertensive wordings | stoke symptoms my dad / mum's speech went weird for 5 mins then back to normal / my bp is very high 200 and my vision is going blurry
+     2 drug slang / antidote (ODing, narcan) | my brother is ODing / narcan how
+     2 airway: throat closing, stridor | his throat is closing after peanuts / child has croup and making squeaky noise even when calm
+     1 bleeding without the word (pumping) | my mate chainsawed his thigh its pumping
+     1 CPR named by its parts (compressions) | compressions how fast
+     1 GI bleed (black tarry stool + lightheaded) | my poo is black and tarry and i feel a bit lightheaded
+     1 chemical eye injury | acid splashed in her eyes at work
+     1 voice-to-text garble ("anna flack sis" = anaphylaxis) | anna flack sis
+urgent words on green: {'before': [('baby', 9), ('heart', 7), ('dead', 6), ('choking', 6), ('bleeding', 6), ('fever', 5), ('blue', 5), ('head', 4), ('ate', 4), ('attack', 4), ('pulse', 4), ('seizure', 4), ('blood', 3), ('lips', 3), ('rash', 3), ('bleed', 3), ('breathing', 3), ('breathe', 3), ('stroke', 3), ('broken', 3), ('cut', 2), ('pain', 2), ('pregnant', 2), ('burn', 2), ('collapsed', 2)], 'after': [('baby', 9), ('heart', 6), ('bleeding', 6), ('fever', 5), ('head', 4), ('ate', 4), ('attack', 4), ('choking', 4), ('pulse', 4), ('dead', 4), ('blue', 4), ('lips', 3), ('rash', 3), ('seizure', 3), ('broken', 3), ('blood', 2), ('cut', 2), ('pain', 2), ('pregnant', 2), ('breath', 2), ('breathe', 2), ('choked', 2), ('fire', 2), ('bleed', 2), ('help', 2)]}

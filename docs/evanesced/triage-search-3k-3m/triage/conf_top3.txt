@@ -1,0 +1,76 @@
+
+==================== keyword: 362 questions
+base rates: first right 59.7% (216), one of first 3 right 78.5% (284), useful in top 8 83.7%
+  red: first 48.6%, top3 73.9% (n=218); first wrong but 2 or 3 right: 68
+
+-- first-a (6 signals): CV AUC own target 0.775 (sd 0.008); on other target (top3) 0.737; red own 0.754; Brier 0.187 (base 0.241)
+   calibration own target: 0.00-0.25 n=25 pred=0.21 act=0.20; 0.25-0.50 n=107 pred=0.37 act=0.36; 0.50-0.75 n=113 pred=0.62 act=0.65; 0.75-1.00 n=117 pred=0.87 act=0.85
+   standardised: cover1 +0.71, title1 +0.51, kw_top_per_idf +0.49, emerg1 +0.40, idf_mean +0.27, strict +0.08
+   raw: {"bias": -3.6222, "cover1": 2.6573, "title1": 2.3746, "kw_top_per_idf": 0.4326, "idf_mean": 0.2656, "strict": 0.0508, "emerg1": 0.8878}
+
+-- first-b (11 signals): CV AUC own target 0.768 (sd 0.009); on other target (top3) 0.721; red own 0.752; Brier 0.189 (base 0.241)
+   calibration own target: 0.00-0.25 n=30 pred=0.20 act=0.23; 0.25-0.50 n=109 pred=0.38 act=0.32; 0.50-0.75 n=106 pred=0.62 act=0.70; 0.75-1.00 n=117 pred=0.88 act=0.85
+   standardised: cover1 +0.81, kw_top_per_idf +0.50, emerg1 +0.47, cover_best3 -0.44, title_best3 +0.30, cover_mean3 +0.29, title1 +0.27, idf_mean +0.25, strict +0.13, emerg3 -0.08, all3 -0.01
+   raw: {"bias": -3.3639, "cover1": 3.0308, "title1": 1.2567, "kw_top_per_idf": 0.4391, "idf_mean": 0.2464, "strict": 0.0797, "emerg1": 1.0407, "cover_best3": -1.7761, "cover_mean3": 1.275, "title_best3": 1.3637, "all3": -0.0133, "emerg3": -0.1648}
+
+-- top3-a (6 signals): CV AUC own target 0.717 (sd 0.011); on other target (first) 0.778; red own 0.680; Brier 0.156 (base 0.169)
+   calibration own target: 0.00-0.25 n=0; 0.25-0.50 n=14 pred=0.44 act=0.71; 0.50-0.75 n=117 pred=0.64 act=0.66; 0.75-1.00 n=231 pred=0.88 act=0.85
+   standardised: kw_top_per_idf +0.62, cover1 +0.51, title1 +0.40, idf_mean +0.25, emerg1 +0.23, strict +0.14
+   raw: {"bias": -2.1292, "cover1": 1.8873, "title1": 1.836, "kw_top_per_idf": 0.5421, "idf_mean": 0.2504, "strict": 0.0842, "emerg1": 0.511}
+
+-- top3-b (11 signals): CV AUC own target 0.778 (sd 0.010); on other target (first) 0.732; red own 0.776; Brier 0.144 (base 0.169)
+   calibration own target: 0.00-0.25 n=1 pred=0.22 act=1.00; 0.25-0.50 n=31 pred=0.43 act=0.61; 0.50-0.75 n=101 pred=0.63 act=0.55; 0.75-1.00 n=229 pred=0.90 act=0.91
+   standardised: emerg3 +0.88, kw_top_per_idf +0.63, cover1 +0.50, all3 +0.48, title_best3 +0.41, emerg1 -0.33, idf_mean +0.20, cover_best3 -0.16, title1 +0.09, strict +0.05, cover_mean3 +0.02
+   raw: {"bias": -2.1278, "cover1": 1.8629, "title1": 0.4346, "kw_top_per_idf": 0.5554, "idf_mean": 0.2012, "strict": 0.0324, "emerg1": -0.7251, "cover_best3": -0.6552, "cover_mean3": 0.0883, "title_best3": 1.8399, "all3": 1.0369, "emerg3": 1.7584}
+
+   policy at buttons 0.6 / unsure 0.25 (out-of-fold). FA = label true but below 0.6; slip = label false but at/above
+| model | sure / buttons / unsure | FA first (red) | slips first (red) | FA top3 (red) | slips top3 = none of 3 right but sure (red) | first right but unsure (red) | unsure & not urgent |
+|---|---|---|---|---|---|---|---|
+| first-a | 180 (50%) / 157 (43%) / 25 (7%) | 70 (41) | 34 (24) | 118 (81) | 14 (9) | 5 (3) | 0 |
+| first-b | 174 (48%) / 158 (44%) / 30 (8%) | 77 (42) | 35 (25) | 125 (82) | 15 (10) | 7 (4) | 1 |
+| top3-a | 319 (88%) / 43 (12%) / 0 (0%) | 12 (7) | 115 (86) | 28 (20) | 63 (44) | 0 (0) | 0 |
+| top3-b | 291 (80%) / 70 (19%) / 1 (0%) | 23 (12) | 98 (72) | 42 (28) | 49 (33) | 0 (0) | 0 |
+
+   at the same share below the buttons cut as first-a at 0.6 (50%):
+     first-a: cut 0.60, none of 3 right but sure 14, first right but buttons 70
+     first-b: cut 0.58, none of 3 right but sure 15, first right but buttons 71
+     top3-a: cut 0.80, none of 3 right but sure 13, first right but buttons 69
+     top3-b: cut 0.84, none of 3 right but sure 10, first right but buttons 80
+
+==================== hybrid: 362 questions
+base rates: first right 76.2% (276), one of first 3 right 89.8% (325), useful in top 8 96.4%
+  red: first 71.6%, top3 86.7% (n=218); first wrong but 2 or 3 right: 49
+
+-- first-a (8 signals): CV AUC own target 0.737 (sd 0.016); on other target (top3) 0.756; red own 0.697; Brier 0.159 (base 0.181)
+   calibration own target: 0.00-0.25 n=1 pred=0.23 act=1.00; 0.25-0.50 n=26 pred=0.41 act=0.46; 0.50-0.75 n=139 pred=0.65 act=0.62; 0.75-1.00 n=196 pred=0.89 act=0.90
+   standardised: all1 +0.58, cos1 +0.47, title1 +0.38, docs -0.37, strict +0.33, emerg1 +0.26, cos_drop -0.22, overlap +0.20
+   raw: {"bias": -2.7284, "cos1": 8.565, "cos_drop": -12.2606, "overlap": 1.1072, "all1": 1.4529, "title1": 2.0129, "docs": -3.2324, "strict": 0.2002, "emerg1": 0.5764}
+
+-- first-b (13 signals): CV AUC own target 0.717 (sd 0.019); on other target (top3) 0.774; red own 0.685; Brier 0.162 (base 0.181)
+   calibration own target: 0.00-0.25 n=1 pred=0.24 act=1.00; 0.25-0.50 n=24 pred=0.40 act=0.46; 0.50-0.75 n=139 pred=0.64 act=0.65; 0.75-1.00 n=198 pred=0.89 act=0.88
+   standardised: all1 +0.57, cos1 +0.47, docs -0.38, strict +0.35, title1 +0.31, emerg3 +0.26, cos_drop -0.21, overlap +0.21, all3 +0.16, title_best3 +0.12, cover_best3 -0.11, emerg1 +0.11, cover_mean3 -0.02
+   raw: {"bias": -2.6211, "cos1": 8.6308, "cos_drop": -11.5112, "overlap": 1.1394, "all1": 1.4222, "title1": 1.6262, "docs": -3.3646, "strict": 0.2095, "emerg1": 0.2313, "cover_best3": -0.454, "cover_mean3": -0.096, "title_best3": 0.5777, "all3": 0.3459, "emerg3": 0.5149}
+
+-- top3-a (8 signals): CV AUC own target 0.718 (sd 0.018); on other target (first) 0.738; red own 0.696; Brier 0.086 (base 0.092)
+   calibration own target: 0.00-0.25 n=0; 0.25-0.50 n=3 pred=0.48 act=0.67; 0.50-0.75 n=27 pred=0.69 act=0.74; 0.75-1.00 n=332 pred=0.92 act=0.91
+   standardised: cos1 +0.68, strict +0.38, all1 +0.35, emerg1 +0.28, docs -0.28, overlap +0.19, title1 +0.12, cos_drop -0.01
+   raw: {"bias": -5.396, "cos1": 12.4575, "cos_drop": -0.2859, "overlap": 1.0315, "all1": 0.8791, "title1": 0.6322, "docs": -2.4674, "strict": 0.2249, "emerg1": 0.6097}
+
+-- top3-b (13 signals): CV AUC own target 0.765 (sd 0.017); on other target (first) 0.719; red own 0.769; Brier 0.081 (base 0.092)
+   calibration own target: 0.00-0.25 n=0; 0.25-0.50 n=5 pred=0.44 act=0.60; 0.50-0.75 n=35 pred=0.66 act=0.69; 0.75-1.00 n=322 pred=0.93 act=0.93
+   standardised: emerg3 +0.79, cos1 +0.61, all3 +0.55, docs -0.30, strict +0.26, cover_mean3 +0.24, title_best3 +0.22, emerg1 -0.19, overlap +0.16, cos_drop +0.06, all1 +0.05, title1 -0.05, cover_best3 -0.03
+   raw: {"bias": -5.3259, "cos1": 11.1916, "cos_drop": 3.3827, "overlap": 0.8662, "all1": 0.1364, "title1": -0.2582, "docs": -2.6423, "strict": 0.1534, "emerg1": -0.405, "cover_best3": -0.1211, "cover_mean3": 1.0444, "title_best3": 1.0946, "all3": 1.2297, "emerg3": 1.5805}
+
+   policy at buttons 0.6 / unsure 0.25 (out-of-fold). FA = label true but below 0.6; slip = label false but at/above
+| model | sure / buttons / unsure | FA first (red) | slips first (red) | FA top3 (red) | slips top3 = none of 3 right but sure (red) | first right but unsure (red) | unsure & not urgent |
+|---|---|---|---|---|---|---|---|
+| first-a | 296 (82%) / 65 (18%) / 1 (0%) | 35 (27) | 55 (36) | 50 (38) | 21 (14) | 1 (1) | 0 |
+| first-b | 296 (82%) / 65 (18%) / 1 (0%) | 38 (29) | 58 (39) | 50 (37) | 21 (14) | 1 (1) | 0 |
+| top3-a | 357 (99%) / 5 (1%) / 0 (0%) | 2 (2) | 83 (59) | 2 (2) | 34 (26) | 0 (0) | 0 |
+| top3-b | 349 (96%) / 13 (4%) / 0 (0%) | 4 (4) | 77 (54) | 7 (6) | 31 (23) | 0 (0) | 0 |
+
+   at the same share below the buttons cut as first-a at 0.6 (18%):
+     first-a: cut 0.60, none of 3 right but sure 21, first right but buttons 35
+     first-b: cut 0.60, none of 3 right but sure 21, first right but buttons 38
+     top3-a: cut 0.81, none of 3 right but sure 22, first right but buttons 33
+     top3-b: cut 0.83, none of 3 right but sure 19, first right but buttons 34

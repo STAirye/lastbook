@@ -1,0 +1,447 @@
+{
+ "typed / keyword-only": {
+  "English": {
+   "lines (red/yellow/green)": "300 (65/133/102)",
+   "red urgent": "58/65 (89%)",
+   "red urgent, words alone": "54/65 (83%)",
+   "red added by the meaning check": 4,
+   "yellow urgent": "63/133 (47%)",
+   "green urgent (false alarm)": "39/102 (38%)",
+   "counterexamples urgent": "6/7 (86%)",
+   "red: pages shown": "65/65 (100%)",
+   "red: nothing found": "0/65 (0%)",
+   "red: first page from an emergency book": "19/65 (29%)",
+   "red: an emergency book in the top 3": "29/65 (45%)",
+   "red: what the chat does": {
+    "buttons": 56,
+    "ask+pages": 7,
+    "answer": 2
+   },
+   "green: what the chat does": {
+    "ask+pages": 60,
+    "buttons": 39,
+    "compact buttons": 3
+   },
+   "clean text changed by typo correction (green)": "71/102 (70%)"
+  },
+  "Spanish": {
+   "lines (red/yellow/green)": "525 (45/18/462)",
+   "red urgent": "12/45 (27%)",
+   "red urgent, words alone": "7/45 (16%)",
+   "red added by the meaning check": 5,
+   "yellow urgent": "1/18 (6%)",
+   "green urgent (false alarm)": "31/462 (7%)",
+   "counterexamples urgent": "31/460 (7%)",
+   "red: pages shown": "45/45 (100%)",
+   "red: nothing found": "0/45 (0%)",
+   "red: first page from an emergency book": "0/45 (0%)",
+   "red: an emergency book in the top 3": "1/45 (2%)",
+   "red: what the chat does": {
+    "answer": 32,
+    "buttons": 11,
+    "compact buttons": 2
+   },
+   "green: what the chat does": {
+    "answer": 434,
+    "buttons": 26,
+    "compact buttons": 2
+   },
+   "clean text changed by typo correction (green)": "47/462 (10%)"
+  },
+  "other": {
+   "lines (red/yellow/green)": "7 (5/2/0)",
+   "red urgent": "4/5 (80%)",
+   "red urgent, words alone": "4/5 (80%)",
+   "red added by the meaning check": 0,
+   "yellow urgent": "2/2 (100%)",
+   "green urgent (false alarm)": "-",
+   "counterexamples urgent": "-",
+   "red: pages shown": "5/5 (100%)",
+   "red: nothing found": "0/5 (0%)",
+   "red: first page from an emergency book": "1/5 (20%)",
+   "red: an emergency book in the top 3": "2/5 (40%)",
+   "red: what the chat does": {
+    "answer": 3,
+    "buttons": 1,
+    "ask+pages": 1
+   },
+   "green: what the chat does": {},
+   "clean text changed by typo correction (green)": "-"
+  },
+  "all": {
+   "lines (red/yellow/green)": "832 (115/153/564)",
+   "red urgent": "74/115 (64%)",
+   "red urgent, words alone": "65/115 (57%)",
+   "red added by the meaning check": 9,
+   "yellow urgent": "66/153 (43%)",
+   "green urgent (false alarm)": "70/564 (12%)",
+   "counterexamples urgent": "37/467 (8%)",
+   "red: pages shown": "115/115 (100%)",
+   "red: nothing found": "0/115 (0%)",
+   "red: first page from an emergency book": "20/115 (17%)",
+   "red: an emergency book in the top 3": "32/115 (28%)",
+   "red: what the chat does": {
+    "buttons": 68,
+    "answer": 37,
+    "ask+pages": 8,
+    "compact buttons": 2
+   },
+   "green: what the chat does": {
+    "answer": 434,
+    "buttons": 65,
+    "ask+pages": 60,
+    "compact buttons": 5
+   },
+   "clean text changed by typo correction (green)": "118/564 (21%)"
+  },
+  "meta": {
+   "code": "D:\\git\\lastbook",
+   "data": "D:\\LastbookData-fork-test",
+   "mode": "keyword",
+   "semantic": "off",
+   "english": false,
+   "seconds": 126.1,
+   "meaning": {
+    "state": "ready",
+    "why": null,
+    "folder": "D:\\git\\lastbook\\derived\\models\\meaning-red",
+    "load_s": 0.53,
+    "restarts": 0,
+    "on": true
+   }
+  }
+ },
+ "typed / hybrid": {
+  "English": {
+   "lines (red/yellow/green)": "300 (65/133/102)",
+   "red urgent": "58/65 (89%)",
+   "red urgent, words alone": "54/65 (83%)",
+   "red added by the meaning check": 4,
+   "yellow urgent": "63/133 (47%)",
+   "green urgent (false alarm)": "39/102 (38%)",
+   "counterexamples urgent": "6/7 (86%)",
+   "red: pages shown": "65/65 (100%)",
+   "red: nothing found": "0/65 (0%)",
+   "red: first page from an emergency book": "22/65 (34%)",
+   "red: an emergency book in the top 3": "38/65 (58%)",
+   "red: what the chat does": {
+    "answer": 47,
+    "buttons": 18
+   },
+   "green: what the chat does": {
+    "answer": 77,
+    "buttons": 24,
+    "ask+pages": 1
+   },
+   "clean text changed by typo correction (green)": "71/102 (70%)"
+  },
+  "Spanish": {
+   "lines (red/yellow/green)": "525 (45/18/462)",
+   "red urgent": "12/45 (27%)",
+   "red urgent, words alone": "7/45 (16%)",
+   "red added by the meaning check": 5,
+   "yellow urgent": "1/18 (6%)",
+   "green urgent (false alarm)": "31/462 (7%)",
+   "counterexamples urgent": "31/460 (7%)",
+   "red: pages shown": "45/45 (100%)",
+   "red: nothing found": "0/45 (0%)",
+   "red: first page from an emergency book": "1/45 (2%)",
+   "red: an emergency book in the top 3": "2/45 (4%)",
+   "red: what the chat does": {
+    "answer": 22,
+    "buttons": 12,
+    "compact buttons": 9,
+    "ask+pages": 2
+   },
+   "green: what the chat does": {
+    "answer": 341,
+    "compact buttons": 61,
+    "ask+pages": 30,
+    "buttons": 30
+   },
+   "clean text changed by typo correction (green)": "47/462 (10%)"
+  },
+  "other": {
+   "lines (red/yellow/green)": "7 (5/2/0)",
+   "red urgent": "4/5 (80%)",
+   "red urgent, words alone": "4/5 (80%)",
+   "red added by the meaning check": 0,
+   "yellow urgent": "2/2 (100%)",
+   "green urgent (false alarm)": "-",
+   "counterexamples urgent": "-",
+   "red: pages shown": "5/5 (100%)",
+   "red: nothing found": "0/5 (0%)",
+   "red: first page from an emergency book": "1/5 (20%)",
+   "red: an emergency book in the top 3": "3/5 (60%)",
+   "red: what the chat does": {
+    "answer": 4,
+    "buttons": 1
+   },
+   "green: what the chat does": {},
+   "clean text changed by typo correction (green)": "-"
+  },
+  "all": {
+   "lines (red/yellow/green)": "832 (115/153/564)",
+   "red urgent": "74/115 (64%)",
+   "red urgent, words alone": "65/115 (57%)",
+   "red added by the meaning check": 9,
+   "yellow urgent": "66/153 (43%)",
+   "green urgent (false alarm)": "70/564 (12%)",
+   "counterexamples urgent": "37/467 (8%)",
+   "red: pages shown": "115/115 (100%)",
+   "red: nothing found": "0/115 (0%)",
+   "red: first page from an emergency book": "24/115 (21%)",
+   "red: an emergency book in the top 3": "43/115 (37%)",
+   "red: what the chat does": {
+    "answer": 73,
+    "buttons": 31,
+    "compact buttons": 9,
+    "ask+pages": 2
+   },
+   "green: what the chat does": {
+    "answer": 418,
+    "compact buttons": 61,
+    "buttons": 54,
+    "ask+pages": 31
+   },
+   "clean text changed by typo correction (green)": "118/564 (21%)"
+  },
+  "meta": {
+   "code": "D:\\git\\lastbook",
+   "data": "D:\\LastbookData-fork-test",
+   "mode": "hybrid",
+   "semantic": "loaded",
+   "english": false,
+   "seconds": 430.4,
+   "meaning": {
+    "state": "ready",
+    "why": null,
+    "folder": "D:\\git\\lastbook\\derived\\models\\meaning-red",
+    "load_s": 0.27,
+    "restarts": 0,
+    "on": true
+   }
+  }
+ },
+ "english / keyword-only": {
+  "English": {
+   "lines (red/yellow/green)": "300 (65/133/102)",
+   "red urgent": "58/65 (89%)",
+   "red urgent, words alone": "54/65 (83%)",
+   "red added by the meaning check": 4,
+   "yellow urgent": "63/133 (47%)",
+   "green urgent (false alarm)": "39/102 (38%)",
+   "counterexamples urgent": "6/7 (86%)",
+   "red: pages shown": "65/65 (100%)",
+   "red: nothing found": "0/65 (0%)",
+   "red: first page from an emergency book": "19/65 (29%)",
+   "red: an emergency book in the top 3": "29/65 (45%)",
+   "red: what the chat does": {
+    "buttons": 56,
+    "ask+pages": 7,
+    "answer": 2
+   },
+   "green: what the chat does": {
+    "ask+pages": 60,
+    "buttons": 39,
+    "compact buttons": 3
+   },
+   "clean text changed by typo correction (green)": "71/102 (70%)"
+  },
+  "Spanish": {
+   "lines (red/yellow/green)": "525 (45/18/462)",
+   "red urgent": "43/45 (96%)",
+   "red urgent, words alone": "42/45 (93%)",
+   "red added by the meaning check": 1,
+   "yellow urgent": "13/18 (72%)",
+   "green urgent (false alarm)": "89/462 (19%)",
+   "counterexamples urgent": "89/460 (19%)",
+   "red: pages shown": "45/45 (100%)",
+   "red: nothing found": "0/45 (0%)",
+   "red: first page from an emergency book": "22/45 (49%)",
+   "red: an emergency book in the top 3": "33/45 (73%)",
+   "red: what the chat does": {
+    "answer": 32,
+    "buttons": 12,
+    "compact buttons": 1
+   },
+   "green: what the chat does": {
+    "answer": 366,
+    "buttons": 59,
+    "compact buttons": 26,
+    "ask+pages": 11
+   },
+   "clean text changed by typo correction (green)": "47/462 (10%)"
+  },
+  "other": {
+   "lines (red/yellow/green)": "7 (5/2/0)",
+   "red urgent": "4/5 (80%)",
+   "red urgent, words alone": "4/5 (80%)",
+   "red added by the meaning check": 0,
+   "yellow urgent": "2/2 (100%)",
+   "green urgent (false alarm)": "-",
+   "counterexamples urgent": "-",
+   "red: pages shown": "5/5 (100%)",
+   "red: nothing found": "0/5 (0%)",
+   "red: first page from an emergency book": "1/5 (20%)",
+   "red: an emergency book in the top 3": "2/5 (40%)",
+   "red: what the chat does": {
+    "answer": 3,
+    "buttons": 1,
+    "ask+pages": 1
+   },
+   "green: what the chat does": {},
+   "clean text changed by typo correction (green)": "-"
+  },
+  "all": {
+   "lines (red/yellow/green)": "832 (115/153/564)",
+   "red urgent": "105/115 (91%)",
+   "red urgent, words alone": "100/115 (87%)",
+   "red added by the meaning check": 5,
+   "yellow urgent": "78/153 (51%)",
+   "green urgent (false alarm)": "128/564 (23%)",
+   "counterexamples urgent": "95/467 (20%)",
+   "red: pages shown": "115/115 (100%)",
+   "red: nothing found": "0/115 (0%)",
+   "red: first page from an emergency book": "42/115 (37%)",
+   "red: an emergency book in the top 3": "64/115 (56%)",
+   "red: what the chat does": {
+    "buttons": 69,
+    "answer": 37,
+    "ask+pages": 8,
+    "compact buttons": 1
+   },
+   "green: what the chat does": {
+    "answer": 366,
+    "buttons": 98,
+    "ask+pages": 71,
+    "compact buttons": 29
+   },
+   "clean text changed by typo correction (green)": "118/564 (21%)"
+  },
+  "meta": {
+   "code": "D:\\git\\lastbook",
+   "data": "D:\\LastbookData-fork-test",
+   "mode": "keyword",
+   "semantic": "off",
+   "english": true,
+   "seconds": 107.7,
+   "meaning": {
+    "state": "ready",
+    "why": null,
+    "folder": "D:\\git\\lastbook\\derived\\models\\meaning-red",
+    "load_s": 0.24,
+    "restarts": 0,
+    "on": true
+   }
+  }
+ },
+ "english / hybrid": {
+  "English": {
+   "lines (red/yellow/green)": "300 (65/133/102)",
+   "red urgent": "58/65 (89%)",
+   "red urgent, words alone": "54/65 (83%)",
+   "red added by the meaning check": 4,
+   "yellow urgent": "63/133 (47%)",
+   "green urgent (false alarm)": "39/102 (38%)",
+   "counterexamples urgent": "6/7 (86%)",
+   "red: pages shown": "65/65 (100%)",
+   "red: nothing found": "0/65 (0%)",
+   "red: first page from an emergency book": "22/65 (34%)",
+   "red: an emergency book in the top 3": "38/65 (58%)",
+   "red: what the chat does": {
+    "answer": 47,
+    "buttons": 18
+   },
+   "green: what the chat does": {
+    "answer": 77,
+    "buttons": 24,
+    "ask+pages": 1
+   },
+   "clean text changed by typo correction (green)": "71/102 (70%)"
+  },
+  "Spanish": {
+   "lines (red/yellow/green)": "525 (45/18/462)",
+   "red urgent": "43/45 (96%)",
+   "red urgent, words alone": "42/45 (93%)",
+   "red added by the meaning check": 1,
+   "yellow urgent": "13/18 (72%)",
+   "green urgent (false alarm)": "89/462 (19%)",
+   "counterexamples urgent": "89/460 (19%)",
+   "red: pages shown": "45/45 (100%)",
+   "red: nothing found": "0/45 (0%)",
+   "red: first page from an emergency book": "22/45 (49%)",
+   "red: an emergency book in the top 3": "37/45 (82%)",
+   "red: what the chat does": {
+    "answer": 41,
+    "buttons": 4
+   },
+   "green: what the chat does": {
+    "answer": 425,
+    "buttons": 31,
+    "compact buttons": 5,
+    "ask+pages": 1
+   },
+   "clean text changed by typo correction (green)": "47/462 (10%)"
+  },
+  "other": {
+   "lines (red/yellow/green)": "7 (5/2/0)",
+   "red urgent": "4/5 (80%)",
+   "red urgent, words alone": "4/5 (80%)",
+   "red added by the meaning check": 0,
+   "yellow urgent": "2/2 (100%)",
+   "green urgent (false alarm)": "-",
+   "counterexamples urgent": "-",
+   "red: pages shown": "5/5 (100%)",
+   "red: nothing found": "0/5 (0%)",
+   "red: first page from an emergency book": "1/5 (20%)",
+   "red: an emergency book in the top 3": "3/5 (60%)",
+   "red: what the chat does": {
+    "answer": 4,
+    "buttons": 1
+   },
+   "green: what the chat does": {},
+   "clean text changed by typo correction (green)": "-"
+  },
+  "all": {
+   "lines (red/yellow/green)": "832 (115/153/564)",
+   "red urgent": "105/115 (91%)",
+   "red urgent, words alone": "100/115 (87%)",
+   "red added by the meaning check": 5,
+   "yellow urgent": "78/153 (51%)",
+   "green urgent (false alarm)": "128/564 (23%)",
+   "counterexamples urgent": "95/467 (20%)",
+   "red: pages shown": "115/115 (100%)",
+   "red: nothing found": "0/115 (0%)",
+   "red: first page from an emergency book": "45/115 (39%)",
+   "red: an emergency book in the top 3": "78/115 (68%)",
+   "red: what the chat does": {
+    "answer": 92,
+    "buttons": 23
+   },
+   "green: what the chat does": {
+    "answer": 502,
+    "buttons": 55,
+    "compact buttons": 5,
+    "ask+pages": 2
+   },
+   "clean text changed by typo correction (green)": "118/564 (21%)"
+  },
+  "meta": {
+   "code": "D:\\git\\lastbook",
+   "data": "D:\\LastbookData-fork-test",
+   "mode": "hybrid",
+   "semantic": "loaded",
+   "english": true,
+   "seconds": 416.8,
+   "meaning": {
+    "state": "ready",
+    "why": null,
+    "folder": "D:\\git\\lastbook\\derived\\models\\meaning-red",
+    "load_s": 0.27,
+    "restarts": 0,
+    "on": true
+   }
+  }
+ }
+}

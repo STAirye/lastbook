@@ -1,0 +1,79 @@
+{
+ "summary": {
+  "mode": "keyword",
+  "search": "hybrid",
+  "semantic": {
+   "state": "off",
+   "chunks": 0
+  },
+  "urgency_check": false,
+  "triage": {
+   "all_clean": {
+    "n": 253,
+    "useful_mean": 4.79,
+    "first_ok": 150,
+    "top3_ok": 202,
+    "covered": 196,
+    "zero_useful": 39,
+    "cap_broken": 4,
+    "wrong_sense_first": 5
+   },
+   "counterexamples": {
+    "n": 22,
+    "useful_mean": 4.82,
+    "first_ok": 14,
+    "top3_ok": 17,
+    "covered": 19,
+    "zero_useful": 3,
+    "cap_broken": 0,
+    "wrong_sense_first": 5
+   },
+   "typos": {
+    "n": 109,
+    "useful_mean": 2.21,
+    "first_ok": 30,
+    "top3_ok": 47,
+    "covered": 41,
+    "zero_useful": 54,
+    "cap_broken": 3,
+    "wrong_sense_first": 0
+   },
+   "red": {
+    "n": 131,
+    "useful_mean": 4.18,
+    "first_ok": 59,
+    "top3_ok": 97,
+    "covered": 89,
+    "zero_useful": 26,
+    "cap_broken": 4,
+    "wrong_sense_first": 0
+   },
+   "yellow": {
+    "n": 56,
+    "useful_mean": 5.21,
+    "first_ok": 40,
+    "top3_ok": 47,
+    "covered": 47,
+    "zero_useful": 8,
+    "cap_broken": 0,
+    "wrong_sense_first": 0
+   },
+   "green": {
+    "n": 44,
+    "useful_mean": 6.05,
+    "first_ok": 37,
+    "top3_ok": 41,
+    "covered": 41,
+    "zero_useful": 2,
+    "cap_broken": 0,
+    "wrong_sense_first": 0
+   }
+  },
+  "sections": {
+   "long_pages": 351,
+   "built_now": false,
+   "error": null
+  },
+  "seconds": 19.4
+ }
+}

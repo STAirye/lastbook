@@ -1,0 +1,370 @@
+===== typed / kw: red lines not urgent, then green counterexamples flagged =====
+MISS  [Spanish] Me corté cocinando y la sangre sale a chorros, no para aunque apriete  | english: None  | meaning -0.0179
+MISS  [Spanish] Mi hermano está inconsciente, lo llamo y no despierta  | english: None  | meaning 0.0019
+MISS  [Spanish] Se le torció la boca a mi abuela y habla todo enredado de repente  | english: None  | meaning -0.0076
+MISS  [Spanish] Comí maní y ahora tengo la lengua hinchada y me cuesta tragar  | english: None  | meaning -0.0544
+MISS  [Spanish] Mi hijo se tragó unas pastillas que encontró y no sabemos cuántas  | english: None  | meaning -0.0063
+MISS  [Spanish] Me quemé con aceite y la piel se me está desprendiendo, es una zona grande  | english: None  | meaning -0.036
+MISS  [Spanish] Sacaron a mi sobrino de la piscina, no respira normal  | english: None  | meaning -0.0125
+MISS  [Spanish] Me tomé un montón de remedios porque ya no quiero seguir viviendo  | english: None  | meaning -0.0077
+MISS  [Spanish] Mi pareja dice que se va a matar esta noche y tiene las pastillas preparadas  | english: None  | meaning -0.0219
+MISS  [Spanish] Choqué en la moto, tengo la pierna deformada y se ve el hueso  | english: None  | meaning -0.0051
+MISS  [Spanish] Mi abuelo se cayó, se pegó fuerte en la cabeza y ahora está muy confundido  | english: None  | meaning -0.0369
+MISS  [Spanish] Siento una presión horrible en el pecho y me falta el aire desde hace diez minutos  | english: None  | meaning -0.0206
+MISS  [Spanish] Me mordió una serpiente y se me está hinchando rápidamente la pierna  | english: None  | meaning -0.0295
+MISS  [Spanish] Está botando sangre al toser y le cuesta mucho respirar  | english: None  | meaning -0.0308
+MISS  [Spanish] Me apreté el cuello con una cuerda y ahora estoy mareado y me cuesta tragar  | english: None  | meaning -0.0377
+MISS  [Spanish] Mi hijo tiene los labios azules y está haciendo pausas largas al respirar  | english: None  | meaning -0.04
+MISS  [Spanish] Me cayó un químico en los ojos y casi no puedo abrirlos  | english: None  | meaning -0.0274
+MISS  [Spanish] Mi pareja está teniendo una reacción alérgica, se le hinchó la cara y jadea  | english: None  | meaning -0.0298
+MISS  [Spanish] Mi hijo se atragantó con comida y no puede hacer ningún sonido  | english: None  | meaning -0.0149
+MISS  [Spanish] Estoy embarazada y tengo un sangrado abundante con dolor muy fuerte  | english: None  | meaning -0.0151
+MISS  [Spanish] No puedo respirar después de inhalar humo en el incendio  | english: None  | meaning -0.0085
+MISS  [Spanish] Mi hermana está sangrando mucho después de dar a luz  | english: None  | meaning -0.0205
+MISS  [Spanish] Me duele el pecho y siento que me voy a desmayar, nunca me había pasado  | english: None  | meaning -0.0386
+MISS  [Spanish] Mi vecino se cayó del techo y quedó inmóvil en el suelo  | english: None  | meaning -0.0466
+MISS  [Spanish] Mi guagua tiene fiebre y ahora le salieron puntitos morados que no desaparecen  | english: None  | meaning -0.0144
+MISS  [Spanish] Me tomé una mezcla de pastillas y alcohol y ahora casi no puedo mantenerme despierto  | english: None  | meaning -0.0029
+MISS  [Spanish] Mi amigo se cortó una arteria, está perdiendo mucha sangre  | english: None  | meaning -0.0256
+MISS  [Spanish] Mi abuela tiene la cara caída y no puede levantar el brazo derecho  | english: None  | meaning -0.0061
+MISS  [Spanish] Mi hijo está respirando con mucho esfuerzo y se le hunden las costillas  | english: None  | meaning -0.0187
+MISS  [Spanish] Mi hijo tiene una quemadura grande y la piel está blanca y dura  | english: None  | meaning -0.0517
+MISS  [Spanish] Me está dando una reacción alérgica, siento que se me cierra la garganta  | english: None  | meaning -0.038
+MISS  [Spanish] Tengo dolor abdominal insoportable y me estoy desmayando  | english: None  | meaning -0.0104
+MISS  [Spanish] Me ahogué en el agua, me sacaron pero sigo tosiendo y me falta el aire  | english: None  | meaning -0.0436
+MISS  [English] im still feeling like i want to just lay down and die after all that work today lol  | english: None  | meaning -0.0011
+MISS  [English] ive been feeling so much like i cant remember anything from this week and i think something is wrong  | english: None  | meaning -0.0203
+MISS  [English] ive been feeling like my sense of hope is all wrong now and i think something is wrong with my future outlook rn  | english: None  | meaning -0.012
+MISS  [English] ive been feeling like my sense of reality is all wrong now and i think something is wrong with my perception of the world rn  | english: None  | meaning -0.0043
+MISS  [English] ive been feeling like my sense of self is all wrong now and i think something is wrong with my identity structure rn  | english: None  | meaning -0.0037
+MISS  [English] ive been feeling like my sense of past is all wrong now and i think something is wrong with my memory or history rn  | english: None  | meaning -0.0024
+MISS  [English] ive been feeling like my sense of truth is all wrong now and i think something is wrong with my understanding of reality rn  | english: None  | meaning -0.0016
+MISS  [other] Real-word typo "rappd  | english: None  | meaning -0.025
+FALSE [Spanish] Cómo mato el ruido del ventilador de mi pieza?  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de cansancio después de limpiar el patio  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de aprender a jugar ajedrez  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento me dejó muerto pero sin dolor ni lesión  | words: []  | meaning fired True
+FALSE [Spanish] El partido fue mortal de bueno, ganamos por penales  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de hambre, pero ya puse las lentejas a cocinar  | words: []  | meaning fired False
+FALSE [Spanish] El auto se murió, pero no hubo choque ni nadie está herido  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de hambre y no sé qué pedir para almorzar  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de sueño, voy a apagar la tele y dormir  | words: []  | meaning fired True
+FALSE [Spanish] El motor murió pero no hubo accidente ni heridos  | words: ['accidente']  | meaning fired False
+FALSE [Spanish] La última partida fue mortal, perdí por un punto  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar el nuevo nivel  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] La bici murió, se pinchó la rueda y no tengo repuesto  | words: []  | meaning fired True
+FALSE [Spanish] Mi tablet murió, no carga aunque cambié el cable  | words: ['tablet']  | meaning fired False
+FALSE [Spanish] Estoy muerto de risa con ese video, no manches  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar otra partida  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de entrenar box, fue pesado  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, no arranca y necesito un mecánico  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa viendo a mi gato jugar  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento estuvo mortal, pero mañana descanso  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar videojuegos todo el fin de semana  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto de sueño pero mañana no trabajo  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de cansancio por el viaje, nada más  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, pero no hay choque ni lesionados  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa con el meme de la abuela  | words: []  | meaning fired True
+FALSE [Spanish] La consola está muerta, no enciende aunque tiene corriente  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa con el chiste que contó mi papá  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar el nuevo videojuego  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El carro está muerto por la batería, pero no es ninguna emergencia  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa por el video de mi perro  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de sueño porque anoche no pude dormir  | words: []  | meaning fired True
+FALSE [English] ngl i was chokin g but a granola bar saved my life im good rn  | words: ['chokin', 'choking']  | meaning fired False
+FALSE [English] im trying to learn how to change a tire but this car keeps making weird noises under my body too  | words: ['car']  | meaning fired False
+FALSE [English] man my truck keeps backfiring again and the smell is like burning plastic or oil  | words: ['burning']  | meaning fired False
+FALSE [English] My friend is trying to fix his car engine. He just said, 'It's just the brakes,' but then he realized the brake fluid reservoir was completely empty.  | words: ['car']  | meaning fired False
+FALSE [English] My friend is running a marathon and says, 'Here comes the finish line!' He is sweating profusely, but he is doing great.  | words: ['sweating']  | meaning fired False
+FALSE [English] My friend is trying to fix his bike chain. He said, 'It's just the chain,' but then he realized the chain was completely broken off.  | words: ['broken']  | meaning fired True
+===== typed / hy: red lines not urgent, then green counterexamples flagged =====
+MISS  [Spanish] Me corté cocinando y la sangre sale a chorros, no para aunque apriete  | english: None  | meaning -0.0179
+MISS  [Spanish] Mi hermano está inconsciente, lo llamo y no despierta  | english: None  | meaning 0.0019
+MISS  [Spanish] Se le torció la boca a mi abuela y habla todo enredado de repente  | english: None  | meaning -0.0076
+MISS  [Spanish] Comí maní y ahora tengo la lengua hinchada y me cuesta tragar  | english: None  | meaning -0.0544
+MISS  [Spanish] Mi hijo se tragó unas pastillas que encontró y no sabemos cuántas  | english: None  | meaning -0.0063
+MISS  [Spanish] Me quemé con aceite y la piel se me está desprendiendo, es una zona grande  | english: None  | meaning -0.036
+MISS  [Spanish] Sacaron a mi sobrino de la piscina, no respira normal  | english: None  | meaning -0.0125
+MISS  [Spanish] Me tomé un montón de remedios porque ya no quiero seguir viviendo  | english: None  | meaning -0.0077
+MISS  [Spanish] Mi pareja dice que se va a matar esta noche y tiene las pastillas preparadas  | english: None  | meaning -0.0219
+MISS  [Spanish] Choqué en la moto, tengo la pierna deformada y se ve el hueso  | english: None  | meaning -0.0051
+MISS  [Spanish] Mi abuelo se cayó, se pegó fuerte en la cabeza y ahora está muy confundido  | english: None  | meaning -0.0369
+MISS  [Spanish] Siento una presión horrible en el pecho y me falta el aire desde hace diez minutos  | english: None  | meaning -0.0206
+MISS  [Spanish] Me mordió una serpiente y se me está hinchando rápidamente la pierna  | english: None  | meaning -0.0295
+MISS  [Spanish] Está botando sangre al toser y le cuesta mucho respirar  | english: None  | meaning -0.0308
+MISS  [Spanish] Me apreté el cuello con una cuerda y ahora estoy mareado y me cuesta tragar  | english: None  | meaning -0.0377
+MISS  [Spanish] Mi hijo tiene los labios azules y está haciendo pausas largas al respirar  | english: None  | meaning -0.04
+MISS  [Spanish] Me cayó un químico en los ojos y casi no puedo abrirlos  | english: None  | meaning -0.0274
+MISS  [Spanish] Mi pareja está teniendo una reacción alérgica, se le hinchó la cara y jadea  | english: None  | meaning -0.0298
+MISS  [Spanish] Mi hijo se atragantó con comida y no puede hacer ningún sonido  | english: None  | meaning -0.0149
+MISS  [Spanish] Estoy embarazada y tengo un sangrado abundante con dolor muy fuerte  | english: None  | meaning -0.0151
+MISS  [Spanish] No puedo respirar después de inhalar humo en el incendio  | english: None  | meaning -0.0085
+MISS  [Spanish] Mi hermana está sangrando mucho después de dar a luz  | english: None  | meaning -0.0205
+MISS  [Spanish] Me duele el pecho y siento que me voy a desmayar, nunca me había pasado  | english: None  | meaning -0.0386
+MISS  [Spanish] Mi vecino se cayó del techo y quedó inmóvil en el suelo  | english: None  | meaning -0.0466
+MISS  [Spanish] Mi guagua tiene fiebre y ahora le salieron puntitos morados que no desaparecen  | english: None  | meaning -0.0144
+MISS  [Spanish] Me tomé una mezcla de pastillas y alcohol y ahora casi no puedo mantenerme despierto  | english: None  | meaning -0.0029
+MISS  [Spanish] Mi amigo se cortó una arteria, está perdiendo mucha sangre  | english: None  | meaning -0.0256
+MISS  [Spanish] Mi abuela tiene la cara caída y no puede levantar el brazo derecho  | english: None  | meaning -0.0061
+MISS  [Spanish] Mi hijo está respirando con mucho esfuerzo y se le hunden las costillas  | english: None  | meaning -0.0187
+MISS  [Spanish] Mi hijo tiene una quemadura grande y la piel está blanca y dura  | english: None  | meaning -0.0517
+MISS  [Spanish] Me está dando una reacción alérgica, siento que se me cierra la garganta  | english: None  | meaning -0.038
+MISS  [Spanish] Tengo dolor abdominal insoportable y me estoy desmayando  | english: None  | meaning -0.0104
+MISS  [Spanish] Me ahogué en el agua, me sacaron pero sigo tosiendo y me falta el aire  | english: None  | meaning -0.0436
+MISS  [English] im still feeling like i want to just lay down and die after all that work today lol  | english: None  | meaning -0.0011
+MISS  [English] ive been feeling so much like i cant remember anything from this week and i think something is wrong  | english: None  | meaning -0.0203
+MISS  [English] ive been feeling like my sense of hope is all wrong now and i think something is wrong with my future outlook rn  | english: None  | meaning -0.012
+MISS  [English] ive been feeling like my sense of reality is all wrong now and i think something is wrong with my perception of the world rn  | english: None  | meaning -0.0043
+MISS  [English] ive been feeling like my sense of self is all wrong now and i think something is wrong with my identity structure rn  | english: None  | meaning -0.0037
+MISS  [English] ive been feeling like my sense of past is all wrong now and i think something is wrong with my memory or history rn  | english: None  | meaning -0.0024
+MISS  [English] ive been feeling like my sense of truth is all wrong now and i think something is wrong with my understanding of reality rn  | english: None  | meaning -0.0016
+MISS  [other] Real-word typo "rappd  | english: None  | meaning -0.025
+FALSE [Spanish] Cómo mato el ruido del ventilador de mi pieza?  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de cansancio después de limpiar el patio  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de aprender a jugar ajedrez  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento me dejó muerto pero sin dolor ni lesión  | words: []  | meaning fired True
+FALSE [Spanish] El partido fue mortal de bueno, ganamos por penales  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de hambre, pero ya puse las lentejas a cocinar  | words: []  | meaning fired False
+FALSE [Spanish] El auto se murió, pero no hubo choque ni nadie está herido  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de hambre y no sé qué pedir para almorzar  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de sueño, voy a apagar la tele y dormir  | words: []  | meaning fired True
+FALSE [Spanish] El motor murió pero no hubo accidente ni heridos  | words: ['accidente']  | meaning fired False
+FALSE [Spanish] La última partida fue mortal, perdí por un punto  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar el nuevo nivel  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] La bici murió, se pinchó la rueda y no tengo repuesto  | words: []  | meaning fired True
+FALSE [Spanish] Mi tablet murió, no carga aunque cambié el cable  | words: ['tablet']  | meaning fired False
+FALSE [Spanish] Estoy muerto de risa con ese video, no manches  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar otra partida  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de entrenar box, fue pesado  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, no arranca y necesito un mecánico  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa viendo a mi gato jugar  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento estuvo mortal, pero mañana descanso  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar videojuegos todo el fin de semana  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto de sueño pero mañana no trabajo  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de cansancio por el viaje, nada más  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, pero no hay choque ni lesionados  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa con el meme de la abuela  | words: []  | meaning fired True
+FALSE [Spanish] La consola está muerta, no enciende aunque tiene corriente  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa con el chiste que contó mi papá  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de jugar el nuevo videojuego  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El carro está muerto por la batería, pero no es ninguna emergencia  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa por el video de mi perro  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de sueño porque anoche no pude dormir  | words: []  | meaning fired True
+FALSE [English] ngl i was chokin g but a granola bar saved my life im good rn  | words: ['chokin', 'choking']  | meaning fired False
+FALSE [English] im trying to learn how to change a tire but this car keeps making weird noises under my body too  | words: ['car']  | meaning fired False
+FALSE [English] man my truck keeps backfiring again and the smell is like burning plastic or oil  | words: ['burning']  | meaning fired False
+FALSE [English] My friend is trying to fix his car engine. He just said, 'It's just the brakes,' but then he realized the brake fluid reservoir was completely empty.  | words: ['car']  | meaning fired False
+FALSE [English] My friend is running a marathon and says, 'Here comes the finish line!' He is sweating profusely, but he is doing great.  | words: ['sweating']  | meaning fired False
+FALSE [English] My friend is trying to fix his bike chain. He said, 'It's just the chain,' but then he realized the chain was completely broken off.  | words: ['broken']  | meaning fired True
+===== english / kw: red lines not urgent, then green counterexamples flagged =====
+MISS  [Spanish] No puedo respirar después de inhalar humo en el incendio  | english: respirar humo incendio  | meaning -0.0085
+MISS  [Spanish] Mi hijo está respirando con mucho esfuerzo y se le hunden las costillas  | english: respirando esfuerzo costillas  | meaning -0.0187
+MISS  [English] im still feeling like i want to just lay down and die after all that work today lol  | english: None  | meaning -0.0011
+MISS  [English] ive been feeling so much like i cant remember anything from this week and i think something is wrong  | english: None  | meaning -0.0203
+MISS  [English] ive been feeling like my sense of hope is all wrong now and i think something is wrong with my future outlook rn  | english: None  | meaning -0.012
+MISS  [English] ive been feeling like my sense of reality is all wrong now and i think something is wrong with my perception of the world rn  | english: None  | meaning -0.0043
+MISS  [English] ive been feeling like my sense of self is all wrong now and i think something is wrong with my identity structure rn  | english: None  | meaning -0.0037
+MISS  [English] ive been feeling like my sense of past is all wrong now and i think something is wrong with my memory or history rn  | english: None  | meaning -0.0024
+MISS  [English] ive been feeling like my sense of truth is all wrong now and i think something is wrong with my understanding of reality rn  | english: None  | meaning -0.0016
+MISS  [other] Real-word typo "rappd  | english: None  | meaning -0.025
+FALSE [Spanish] La receta dice que mate el fuego antes de poner la crema, cómo hago eso?  | words: []  | meaning fired False
+FALSE [Spanish] La pelota casi me mata de un pelotazo, pero estoy bien jaja  | words: []  | meaning fired False
+FALSE [Spanish] Quiero saber cómo apagar el fuego de la cocina cuando termino de freír  | words: []  | meaning fired False
+FALSE [Spanish] Cómo mato el ruido del ventilador de mi pieza?  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto después de ordenar toda la casa  | words: []  | meaning fired False
+FALSE [Spanish] Mi notebook está muerto y tengo una entrega mañana  | words: []  | meaning fired False
+FALSE [Spanish] El auto se murió en medio del estacionamiento y no parte  | words: []  | meaning fired False
+FALSE [Spanish] Ese entrenamiento me dejó muerto, pero fue buenísimo  | words: []  | meaning fired False
+FALSE [Spanish] El motor está muerto pero no hay humo ni olor raro  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de bailar toda la noche  | words: []  | meaning fired False
+FALSE [Spanish] Mi equipo está muerto en la tabla pero todavía puede clasificar  | words: []  | meaning fired False
+FALSE [Spanish] Quedé muerto después de subir los cerros con mis amigos  | words: []  | meaning fired False
+FALSE [Spanish] Cómo mato las bacterias de la tabla de picar después de cocinar?  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió por falta de bencina, ya voy a buscar  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de cansancio después de limpiar el patio  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de aprender a jugar ajedrez  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento me dejó muerto pero sin dolor ni lesión  | words: []  | meaning fired True
+FALSE [Spanish] La batería murió, pero el auto está estacionado en casa  | words: []  | meaning fired False
+FALSE [Spanish] El partido fue mortal de bueno, ganamos por penales  | words: []  | meaning fired True
+FALSE [Spanish] Mi auto murió por una falla eléctrica, está en el taller  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de hambre, pero ya puse las lentejas a cocinar  | words: []  | meaning fired False
+FALSE [Spanish] Mi notebook murió porque se cayó al suelo, quiero saber si tiene arreglo  | words: []  | meaning fired False
+FALSE [Spanish] El auto se murió, pero no hubo choque ni nadie está herido  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de hambre y no sé qué pedir para almorzar  | words: []  | meaning fired True
+FALSE [Spanish] La batería del control murió y no puedo jugar  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de sueño, voy a apagar la tele y dormir  | words: []  | meaning fired True
+FALSE [Spanish] El motor está muerto, pero es solo una consulta de mecánica  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el gusto a quemado de mi café  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió en la carretera, estoy fuera de la vía y esperando grúa  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de jugar un partido completo  | words: []  | meaning fired False
+FALSE [Spanish] Mi auto está muerto porque dejé las luces prendidas toda la noche  | words: []  | meaning fired False
+FALSE [Spanish] Me estoy muriendo de risa con este video de la caída del personaje  | words: []  | meaning fired False
+FALSE [Spanish] El motor murió pero no hubo accidente ni heridos  | words: ['accidente']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de caminar todo el centro  | words: []  | meaning fired False
+FALSE [Spanish] La última partida fue mortal, perdí por un punto  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto después de la caminata, pero no tengo dolor ni lesión  | words: []  | meaning fired False
+FALSE [Spanish] La batería del auto murió, pero ya llamé al mecánico  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar el nuevo nivel  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] La bici murió, se pinchó la rueda y no tengo repuesto  | words: []  | meaning fired True
+FALSE [Spanish] Mi tablet murió, no carga aunque cambié el cable  | words: ['tablet']  | meaning fired False
+FALSE [Spanish] El motor murió después de muchos años, necesito cambiar el auto  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de risa con la cara que puso mi amigo  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el olor a humo de mi chaqueta después del asado  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió en el estacionamiento, no arranca y necesito una grúa  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió por una falla del alternador, no es una urgencia médica  | words: []  | meaning fired False
+FALSE [Spanish] La batería murió después de dejar el auto estacionado una semana  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de jugar pádel toda la tarde  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el olor a ajo que quedó en la tabla  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de risa con ese video, no manches  | words: []  | meaning fired True
+FALSE [Spanish] Mi carro murió en el estacionamiento, ya pedí asistencia  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de la caminata en el cerro  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar otra partida  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de entrenar box, fue pesado  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, no arranca y necesito un mecánico  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa viendo a mi gato jugar  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento estuvo mortal, pero mañana descanso  | words: []  | meaning fired True
+FALSE [Spanish] Mi coche murió por una falla de la batería  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar videojuegos todo el fin de semana  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de subir las escaleras del estadio  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de sueño pero mañana no trabajo  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, pero estoy estacionado en casa  | words: []  | meaning fired False
+FALSE [Spanish] La batería murió y el coche no arranca, necesito consejos  | words: []  | meaning fired False
+FALSE [Spanish] El juego está muerto porque nadie juega ya  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de correr en el parque  | words: []  | meaning fired False
+FALSE [Spanish] Me muero por una nieve de limón  | words: []  | meaning fired False
+FALSE [Spanish] El control se murió a media partida  | words: []  | meaning fired False
+FALSE [Spanish] Mi coche murió después de quedarse sin gasolina  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el olor a quemado de la sartén  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de cansancio por el viaje, nada más  | words: []  | meaning fired True
+FALSE [Spanish] El carro murió pero ya estoy en un lugar seguro  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de una carrera de diez kilómetros  | words: []  | meaning fired False
+FALSE [Spanish] El carro está muerto, pero no hay choque ni lesionados  | words: []  | meaning fired True
+FALSE [Spanish] Mi coche murió y quiero saber cómo revisar la batería  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de risa con el meme de la abuela  | words: []  | meaning fired True
+FALSE [Spanish] La consola está muerta, no enciende aunque tiene corriente  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa con el chiste que contó mi papá  | words: []  | meaning fired True
+FALSE [Spanish] El equipo está muerto en la tabla pero todavía quedan partidos  | words: []  | meaning fired False
+FALSE [Spanish] El motor murió pero el coche está estacionado y no hay peligro  | words: []  | meaning fired False
+FALSE [Spanish] Mi coche murió por una batería descargada, ya lo estoy revisando  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de nadar en la alberca  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar el nuevo videojuego  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Mi computadora está muerta, pero no tengo prisa por arreglarla  | words: []  | meaning fired False
+FALSE [Spanish] El juego está muerto, nadie se conecta desde hace meses  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de una clase de zumba  | words: []  | meaning fired False
+FALSE [Spanish] El coche murió, pero ya estoy en casa y no necesito asistencia médica  | words: []  | meaning fired False
+FALSE [Spanish] El carro está muerto por la batería, pero no es ninguna emergencia  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa por el video de mi perro  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de sueño porque anoche no pude dormir  | words: []  | meaning fired True
+FALSE [Spanish] El carro murió porque olvidé cargar la batería  | words: []  | meaning fired False
+FALSE [English] ngl i was chokin g but a granola bar saved my life im good rn  | words: ['chokin', 'choking']  | meaning fired False
+FALSE [English] im trying to learn how to change a tire but this car keeps making weird noises under my body too  | words: ['car']  | meaning fired False
+FALSE [English] man my truck keeps backfiring again and the smell is like burning plastic or oil  | words: ['burning']  | meaning fired False
+FALSE [English] My friend is trying to fix his car engine. He just said, 'It's just the brakes,' but then he realized the brake fluid reservoir was completely empty.  | words: ['car']  | meaning fired False
+FALSE [English] My friend is running a marathon and says, 'Here comes the finish line!' He is sweating profusely, but he is doing great.  | words: ['sweating']  | meaning fired False
+FALSE [English] My friend is trying to fix his bike chain. He said, 'It's just the chain,' but then he realized the chain was completely broken off.  | words: ['broken']  | meaning fired True
+===== english / hy: red lines not urgent, then green counterexamples flagged =====
+MISS  [Spanish] No puedo respirar después de inhalar humo en el incendio  | english: respirar humo incendio  | meaning -0.0085
+MISS  [Spanish] Mi hijo está respirando con mucho esfuerzo y se le hunden las costillas  | english: respirando esfuerzo costillas  | meaning -0.0187
+MISS  [English] im still feeling like i want to just lay down and die after all that work today lol  | english: None  | meaning -0.0011
+MISS  [English] ive been feeling so much like i cant remember anything from this week and i think something is wrong  | english: None  | meaning -0.0203
+MISS  [English] ive been feeling like my sense of hope is all wrong now and i think something is wrong with my future outlook rn  | english: None  | meaning -0.012
+MISS  [English] ive been feeling like my sense of reality is all wrong now and i think something is wrong with my perception of the world rn  | english: None  | meaning -0.0043
+MISS  [English] ive been feeling like my sense of self is all wrong now and i think something is wrong with my identity structure rn  | english: None  | meaning -0.0037
+MISS  [English] ive been feeling like my sense of past is all wrong now and i think something is wrong with my memory or history rn  | english: None  | meaning -0.0024
+MISS  [English] ive been feeling like my sense of truth is all wrong now and i think something is wrong with my understanding of reality rn  | english: None  | meaning -0.0016
+MISS  [other] Real-word typo "rappd  | english: None  | meaning -0.025
+FALSE [Spanish] La receta dice que mate el fuego antes de poner la crema, cómo hago eso?  | words: []  | meaning fired False
+FALSE [Spanish] La pelota casi me mata de un pelotazo, pero estoy bien jaja  | words: []  | meaning fired False
+FALSE [Spanish] Quiero saber cómo apagar el fuego de la cocina cuando termino de freír  | words: []  | meaning fired False
+FALSE [Spanish] Cómo mato el ruido del ventilador de mi pieza?  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto después de ordenar toda la casa  | words: []  | meaning fired False
+FALSE [Spanish] Mi notebook está muerto y tengo una entrega mañana  | words: []  | meaning fired False
+FALSE [Spanish] El auto se murió en medio del estacionamiento y no parte  | words: []  | meaning fired False
+FALSE [Spanish] Ese entrenamiento me dejó muerto, pero fue buenísimo  | words: []  | meaning fired False
+FALSE [Spanish] El motor está muerto pero no hay humo ni olor raro  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de bailar toda la noche  | words: []  | meaning fired False
+FALSE [Spanish] Mi equipo está muerto en la tabla pero todavía puede clasificar  | words: []  | meaning fired False
+FALSE [Spanish] Quedé muerto después de subir los cerros con mis amigos  | words: []  | meaning fired False
+FALSE [Spanish] Cómo mato las bacterias de la tabla de picar después de cocinar?  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió por falta de bencina, ya voy a buscar  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de cansancio después de limpiar el patio  | words: []  | meaning fired True
+FALSE [Spanish] Me muero de ganas de aprender a jugar ajedrez  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento me dejó muerto pero sin dolor ni lesión  | words: []  | meaning fired True
+FALSE [Spanish] La batería murió, pero el auto está estacionado en casa  | words: []  | meaning fired False
+FALSE [Spanish] El partido fue mortal de bueno, ganamos por penales  | words: []  | meaning fired True
+FALSE [Spanish] Mi auto murió por una falla eléctrica, está en el taller  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de hambre, pero ya puse las lentejas a cocinar  | words: []  | meaning fired False
+FALSE [Spanish] Mi notebook murió porque se cayó al suelo, quiero saber si tiene arreglo  | words: []  | meaning fired False
+FALSE [Spanish] El auto se murió, pero no hubo choque ni nadie está herido  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de hambre y no sé qué pedir para almorzar  | words: []  | meaning fired True
+FALSE [Spanish] La batería del control murió y no puedo jugar  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de sueño, voy a apagar la tele y dormir  | words: []  | meaning fired True
+FALSE [Spanish] El motor está muerto, pero es solo una consulta de mecánica  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el gusto a quemado de mi café  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió en la carretera, estoy fuera de la vía y esperando grúa  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de jugar un partido completo  | words: []  | meaning fired False
+FALSE [Spanish] Mi auto está muerto porque dejé las luces prendidas toda la noche  | words: []  | meaning fired False
+FALSE [Spanish] Me estoy muriendo de risa con este video de la caída del personaje  | words: []  | meaning fired False
+FALSE [Spanish] El motor murió pero no hubo accidente ni heridos  | words: ['accidente']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de caminar todo el centro  | words: []  | meaning fired False
+FALSE [Spanish] La última partida fue mortal, perdí por un punto  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto después de la caminata, pero no tengo dolor ni lesión  | words: []  | meaning fired False
+FALSE [Spanish] La batería del auto murió, pero ya llamé al mecánico  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar el nuevo nivel  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] La bici murió, se pinchó la rueda y no tengo repuesto  | words: []  | meaning fired True
+FALSE [Spanish] Mi tablet murió, no carga aunque cambié el cable  | words: ['tablet']  | meaning fired False
+FALSE [Spanish] El motor murió después de muchos años, necesito cambiar el auto  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de risa con la cara que puso mi amigo  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el olor a humo de mi chaqueta después del asado  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió en el estacionamiento, no arranca y necesito una grúa  | words: []  | meaning fired False
+FALSE [Spanish] El auto murió por una falla del alternador, no es una urgencia médica  | words: []  | meaning fired False
+FALSE [Spanish] La batería murió después de dejar el auto estacionado una semana  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de jugar pádel toda la tarde  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el olor a ajo que quedó en la tabla  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de risa con ese video, no manches  | words: []  | meaning fired True
+FALSE [Spanish] Mi carro murió en el estacionamiento, ya pedí asistencia  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de la caminata en el cerro  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar otra partida  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de entrenar box, fue pesado  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, no arranca y necesito un mecánico  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa viendo a mi gato jugar  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] El entrenamiento estuvo mortal, pero mañana descanso  | words: []  | meaning fired True
+FALSE [Spanish] Mi coche murió por una falla de la batería  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar videojuegos todo el fin de semana  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Estoy muerto después de subir las escaleras del estadio  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de sueño pero mañana no trabajo  | words: []  | meaning fired True
+FALSE [Spanish] El carro está muerto, pero estoy estacionado en casa  | words: []  | meaning fired False
+FALSE [Spanish] La batería murió y el coche no arranca, necesito consejos  | words: []  | meaning fired False
+FALSE [Spanish] El juego está muerto porque nadie juega ya  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de correr en el parque  | words: []  | meaning fired False
+FALSE [Spanish] Me muero por una nieve de limón  | words: []  | meaning fired False
+FALSE [Spanish] El control se murió a media partida  | words: []  | meaning fired False
+FALSE [Spanish] Mi coche murió después de quedarse sin gasolina  | words: []  | meaning fired False
+FALSE [Spanish] Quiero matar el olor a quemado de la sartén  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de cansancio por el viaje, nada más  | words: []  | meaning fired True
+FALSE [Spanish] El carro murió pero ya estoy en un lugar seguro  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de una carrera de diez kilómetros  | words: []  | meaning fired False
+FALSE [Spanish] El carro está muerto, pero no hay choque ni lesionados  | words: []  | meaning fired True
+FALSE [Spanish] Mi coche murió y quiero saber cómo revisar la batería  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto de risa con el meme de la abuela  | words: []  | meaning fired True
+FALSE [Spanish] La consola está muerta, no enciende aunque tiene corriente  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa con el chiste que contó mi papá  | words: []  | meaning fired True
+FALSE [Spanish] El equipo está muerto en la tabla pero todavía quedan partidos  | words: []  | meaning fired False
+FALSE [Spanish] El motor murió pero el coche está estacionado y no hay peligro  | words: []  | meaning fired False
+FALSE [Spanish] Mi coche murió por una batería descargada, ya lo estoy revisando  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de nadar en la alberca  | words: []  | meaning fired False
+FALSE [Spanish] Me muero de ganas de jugar el nuevo videojuego  | words: ['sugar']  | meaning fired False
+FALSE [Spanish] Mi computadora está muerta, pero no tengo prisa por arreglarla  | words: []  | meaning fired False
+FALSE [Spanish] El juego está muerto, nadie se conecta desde hace meses  | words: []  | meaning fired False
+FALSE [Spanish] Estoy muerto después de una clase de zumba  | words: []  | meaning fired False
+FALSE [Spanish] El coche murió, pero ya estoy en casa y no necesito asistencia médica  | words: []  | meaning fired False
+FALSE [Spanish] El carro está muerto por la batería, pero no es ninguna emergencia  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de risa por el video de mi perro  | words: []  | meaning fired True
+FALSE [Spanish] Estoy muerto de sueño porque anoche no pude dormir  | words: []  | meaning fired True
+FALSE [Spanish] El carro murió porque olvidé cargar la batería  | words: []  | meaning fired False
+FALSE [English] ngl i was chokin g but a granola bar saved my life im good rn  | words: ['chokin', 'choking']  | meaning fired False
+FALSE [English] im trying to learn how to change a tire but this car keeps making weird noises under my body too  | words: ['car']  | meaning fired False
+FALSE [English] man my truck keeps backfiring again and the smell is like burning plastic or oil  | words: ['burning']  | meaning fired False
+FALSE [English] My friend is trying to fix his car engine. He just said, 'It's just the brakes,' but then he realized the brake fluid reservoir was completely empty.  | words: ['car']  | meaning fired False
+FALSE [English] My friend is running a marathon and says, 'Here comes the finish line!' He is sweating profusely, but he is doing great.  | words: ['sweating']  | meaning fired False
+FALSE [English] My friend is trying to fix his bike chain. He said, 'It's just the chain,' but then he realized the chain was completely broken off.  | words: ['broken']  | meaning fired True

@@ -1,0 +1,24 @@
+{
+ "mixed": {
+  "files": 1,
+  "kept": 832,
+  "red": 115,
+  "yellow": 153,
+  "green": 564,
+  "with meaning": 824,
+  "counterexamples": 467,
+  "blocks": 1629,
+  "json": 1628,
+  "duplicate": 801,
+  "unreadable": 1,
+  "no red/yellow/green": 3,
+  "plain lines seen": 8,
+  "plain line": 8,
+  "languages": {
+   "es-CL": 321,
+   "en": 300,
+   "es-MX": 204,
+   "?": 7
+  }
+ }
+}

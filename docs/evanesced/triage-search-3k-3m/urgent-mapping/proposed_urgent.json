@@ -1,0 +1,161 @@
+{
+ "hurt": {
+  "breathing": [
+   "not breathing",
+   "stopped breathing",
+   "isn't breathing",
+   "isnt breathing",
+   "unconscious",
+   "no pulse",
+   "cardiac arrest",
+   "heart stopped",
+   "cpr",
+   "passed out",
+   "won't wake up",
+   "wont wake up",
+   "not waking up",
+   "collapsed",
+   "drowning",
+   "drowned",
+   "is choking",
+   "he is choking",
+   "she is choking",
+   "someone is choking",
+   "baby is choking",
+   "child is choking"
+  ],
+  "bleeding": [
+   "heavy bleeding",
+   "bleeding heavily",
+   "bleeding badly",
+   "bleeding a lot",
+   "bleeding won't stop",
+   "bleeding wont stop",
+   "won't stop bleeding",
+   "wont stop bleeding",
+   "bleeding out",
+   "spurting blood",
+   "blood everywhere",
+   "lots of blood"
+  ],
+  "burn": [
+   "clothes on fire",
+   "clothing on fire",
+   "his clothes are on fire",
+   "her clothes are on fire"
+  ],
+  "allergy": [
+   "anaphylaxis",
+   "anaphylactic",
+   "throat swelling",
+   "throat is swelling",
+   "throat closing",
+   "throat is closing",
+   "swollen throat",
+   "tongue swelling",
+   "tongue is swelling"
+  ],
+  "poison": [
+   "overdose",
+   "overdosed",
+   "took too many pills",
+   "swallowed bleach",
+   "drank bleach",
+   "swallowed poison",
+   "swallowed pills",
+   "has been poisoned",
+   "was poisoned"
+  ],
+  "sudden": [
+   "heart attack",
+   "chest pain",
+   "chest pains",
+   "having a stroke",
+   "had a stroke",
+   "face drooping",
+   "drooping face",
+   "slurred speech",
+   "seizure",
+   "seizures",
+   "having a seizure",
+   "convulsions",
+   "having a fit"
+  ],
+  "heatcold": [
+   "heat stroke",
+   "heatstroke",
+   "hypothermia"
+  ],
+  "snakebite": [
+   "snake bite",
+   "snakebite",
+   "bitten by a snake",
+   "bit by a snake",
+   "snake bit"
+  ]
+ },
+ "disaster": {
+  "home-fire": [
+   "house fire",
+   "house is on fire",
+   "kitchen is on fire",
+   "kitchen on fire",
+   "building is on fire",
+   "apartment is on fire",
+   "fire in the house",
+   "caught fire"
+  ],
+  "earthquake-now": [
+   "ground is shaking",
+   "earthquake right now",
+   "earthquake happening now"
+  ],
+  "tsunami": [
+   "tsunami warning",
+   "tsunami coming"
+  ],
+  "tornado": [
+   "tornado warning",
+   "tornado coming"
+  ]
+ },
+ "power": {
+  "gas": [
+   "smell gas",
+   "smell of gas",
+   "smells like gas",
+   "smelling gas",
+   "gas leak"
+  ]
+ },
+ "shelter": {
+  "co": [
+   "carbon monoxide poisoning",
+   "co poisoning",
+   "co alarm going off",
+   "co alarm is going off"
+  ]
+ },
+ "health": {
+  "mind": [
+   "suicide",
+   "suicidal",
+   "kill myself",
+   "killing myself",
+   "want to die",
+   "wants to die",
+   "end my life",
+   "take my own life",
+   "self harm",
+   "hurt myself"
+  ],
+  "pregnant": [
+   "in labor",
+   "in labour",
+   "giving birth",
+   "water broke",
+   "baby is coming",
+   "bleeding after birth"
+  ]
+ }
+}

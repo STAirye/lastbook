@@ -1,0 +1,5 @@
+== 0s apt
+bc4c782 CLAUDE.md: archive finished work's scripts in docs/evanesced
+== 51s runner
+CMAKE_BUILD_TYPE=Release
+exit 137

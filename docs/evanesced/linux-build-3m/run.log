@@ -1,0 +1,62 @@
+== 0s apt
+== 42s clone
+bc4c782 CLAUDE.md: archive finished work's scripts in docs/evanesced
+== 48s runner
+CMAKE_BUILD_TYPE=Release
+total 64432
+-rw-r--r-- 1 root root     1078 Nov 21 04:07 LICENSE-llama.cpp.txt
+-rw-r--r-- 1 root root      379 Nov 21 04:07 NOTICE.txt
+-rw-r--r-- 1 root root     1672 Nov 21 04:07 SHA256SUMS.txt
+-rw-r--r-- 1 root root      144 Nov 21 04:07 addresses-in-messages.txt
+-rw-r--r-- 1 root root     2585 Nov 21 04:07 deps.txt
+-rwxr-xr-x 1 root root   450344 Nov 21 04:07 lastbook-llm
+-rwxr-xr-x 1 root root   845640 Nov 21 04:07 libggml-base.so.0
+-rwxr-xr-x 1 root root  1341376 Nov 21 04:07 libggml-cpu-alderlake.so
+-rwxr-xr-x 1 root root  1521600 Nov 21 04:07 libggml-cpu-cannonlake.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-cascadelake.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-cooperlake.so
+-rwxr-xr-x 1 root root  1345472 Nov 21 04:07 libggml-cpu-haswell.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-icelake.so
+-rwxr-xr-x 1 root root  1280064 Nov 21 04:07 libggml-cpu-ivybridge.so
+-rwxr-xr-x 1 root root  1275968 Nov 21 04:07 libggml-cpu-piledriver.so
+-rwxr-xr-x 1 root root  1284160 Nov 21 04:07 libggml-cpu-sandybridge.so
+-rwxr-xr-x 1 root root  1792192 Nov 21 04:07 libggml-cpu-sapphirerapids.so
+-rwxr-xr-x 1 root root  1521600 Nov 21 04:07 libggml-cpu-skylakex.so
+-rwxr-xr-x 1 root root   972896 Nov 21 04:07 libggml-cpu-sse42.so
+-rwxr-xr-x 1 root root   948320 Nov 21 04:07 libggml-cpu-x64.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-zen4.so
+-rwxr-xr-x 1 root root 40582848 Nov 21 04:07 libggml-vulkan.so
+-rwxr-xr-x 1 root root    43504 Nov 21 04:07 libggml.so.0
+-rwxr-xr-x 1 root root  4582536 Nov 21 04:07 libllama.so.0
+total 64440
+drwxr-xr-x 2 root root     4096 Nov 21 04:07 .
+drwxr-xr-x 5 root root     4096 Nov 21 04:02 ..
+-rw-r--r-- 1 root root     1078 Nov 21 04:07 LICENSE-llama.cpp.txt
+-rw-r--r-- 1 root root      379 Nov 21 04:07 NOTICE.txt
+-rw-r--r-- 1 root root     1672 Nov 21 04:07 SHA256SUMS.txt
+-rw-r--r-- 1 root root      144 Nov 21 04:07 addresses-in-messages.txt
+-rw-r--r-- 1 root root     2585 Nov 21 04:07 deps.txt
+-rwxr-xr-x 1 root root   450344 Nov 21 04:07 lastbook-llm
+-rwxr-xr-x 1 root root   845640 Nov 21 04:07 libggml-base.so.0
+-rwxr-xr-x 1 root root  1341376 Nov 21 04:07 libggml-cpu-alderlake.so
+-rwxr-xr-x 1 root root  1521600 Nov 21 04:07 libggml-cpu-cannonlake.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-cascadelake.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-cooperlake.so
+-rwxr-xr-x 1 root root  1345472 Nov 21 04:07 libggml-cpu-haswell.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-icelake.so
+-rwxr-xr-x 1 root root  1280064 Nov 21 04:07 libggml-cpu-ivybridge.so
+-rwxr-xr-x 1 root root  1275968 Nov 21 04:07 libggml-cpu-piledriver.so
+-rwxr-xr-x 1 root root  1284160 Nov 21 04:07 libggml-cpu-sandybridge.so
+-rwxr-xr-x 1 root root  1792192 Nov 21 04:07 libggml-cpu-sapphirerapids.so
+-rwxr-xr-x 1 root root  1521600 Nov 21 04:07 libggml-cpu-skylakex.so
+-rwxr-xr-x 1 root root   972896 Nov 21 04:07 libggml-cpu-sse42.so
+-rwxr-xr-x 1 root root   948320 Nov 21 04:07 libggml-cpu-x64.so
+-rwxr-xr-x 1 root root  1533888 Nov 21 04:07 libggml-cpu-zen4.so
+-rwxr-xr-x 1 root root 40582848 Nov 21 04:07 libggml-vulkan.so
+-rwxr-xr-x 1 root root    43504 Nov 21 04:07 libggml.so.0
+-rwxr-xr-x 1 root root  4582536 Nov 21 04:07 libllama.so.0
+== 358s embed-check
+== 359s app
+45 files in /w/lastbook/derived/app-build/linux/20261121-040710/ship
+no packs: /w/lastbook/derived/release/manifest-v1.json is missing or empty (publish-packs writes it); --small-from builds Small alone
+exit 1

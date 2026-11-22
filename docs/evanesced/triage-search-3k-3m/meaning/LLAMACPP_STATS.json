@@ -1,0 +1,1614 @@
+{
+ "cv": {
+  "thresholds": {
+   "strict": 0.03168658415476481,
+   "wide": 0.00836634635925293
+  },
+  "oof": {
+   "strict": {
+    "red_recall": 0.803,
+    "yellow_flag": 0.16,
+    "green_fp": 0.048
+   },
+   "wide": {
+    "red_recall": 0.895,
+    "yellow_flag": 0.285,
+    "green_fp": 0.1
+   }
+  },
+  "int8_prototype": {
+   "strict": 0.81,
+   "wide": 0.9
+  },
+  "n_red_centroids": 20,
+  "n_nonred_centroids": 11,
+  "n_examples": 689
+ },
+ "int8_threshold": {
+  "wide": 0.006628692150115967,
+  "strict": 0.024351298809051514
+ },
+ "list1": {
+  "n": {
+   "red": 343,
+   "yellow": 104,
+   "green": 243
+  },
+  "counts": {
+   "words": {
+    "red": 340,
+    "yellow": 98,
+    "green": 76
+   },
+   "int8_wide": {
+    "red": 341,
+    "yellow": 101,
+    "green": 106
+   },
+   "int8_strict": {
+    "red": 340,
+    "yellow": 99,
+    "green": 95
+   },
+   "gguf_wide": {
+    "red": 341,
+    "yellow": 100,
+    "green": 104
+   },
+   "gguf_strict": {
+    "red": 340,
+    "yellow": 99,
+    "green": 91
+   },
+   "meaning_int8_wide": {
+    "red": 294,
+    "yellow": 56,
+    "green": 62
+   },
+   "meaning_gguf_wide": {
+    "red": 297,
+    "yellow": 56,
+    "green": 60
+   },
+   "meaning_gguf_strict": {
+    "red": 252,
+    "yellow": 39,
+    "green": 34
+   }
+  },
+  "green_kinds": {
+   "counterexample": {
+    "n": 128,
+    "words": 22,
+    "int8_wide": 41,
+    "int8_strict": 33,
+    "gguf_wide": 39,
+    "gguf_strict": 30,
+    "meaning_int8_wide": 28,
+    "meaning_gguf_wide": 26,
+    "meaning_gguf_strict": 13
+   },
+   "mild": {
+    "n": 115,
+    "words": 54,
+    "int8_wide": 65,
+    "int8_strict": 62,
+    "gguf_wide": 65,
+    "gguf_strict": 61,
+    "meaning_int8_wide": 34,
+    "meaning_gguf_wide": 34,
+    "meaning_gguf_strict": 21
+   }
+  },
+  "red_only_by_meaning_gguf_wide": 1,
+  "yellow_only_by_meaning_gguf_wide": 2,
+  "green_only_by_meaning_gguf_wide": 28,
+  "red_only_by_meaning_gguf_strict": 0,
+  "yellow_only_by_meaning_gguf_strict": 1,
+  "green_only_by_meaning_gguf_strict": 15,
+  "red_only_by_meaning_int8_wide": 1,
+  "yellow_only_by_meaning_int8_wide": 3,
+  "green_only_by_meaning_int8_wide": 30,
+  "disagree_meaning_gguf_wide_vs_int8_wide": {
+   "count": 31,
+   "gguf_fires_int8_not": {
+    "red": 8,
+    "yellow": 3,
+    "green": 5
+   },
+   "int8_fires_gguf_not": {
+    "red": 5,
+    "yellow": 3,
+    "green": 7
+   },
+   "examples_gguf_only": [
+    {
+     "text": "cpr on dog or person same?? my husband",
+     "label": "red",
+     "gguf": 0.0089,
+     "int8": 0.0023,
+     "words": true
+    },
+    {
+     "text": "passed out and not coming round",
+     "label": "red",
+     "gguf": 0.0275,
+     "int8": -0.0099,
+     "words": true
+    },
+    {
+     "text": "should i rub his hands and give him brandy hes frozen",
+     "label": "red",
+     "gguf": 0.0141,
+     "int8": 0.0057,
+     "words": true
+    },
+    {
+     "text": "grandma fell cant get up hip hurts leg turned out",
+     "label": "yellow",
+     "gguf": 0.0193,
+     "int8": 0.0005,
+     "words": true
+    },
+    {
+     "text": "dog bit my daughters face deep",
+     "label": "yellow",
+     "gguf": 0.0101,
+     "int8": 0.0057,
+     "words": true
+    },
+    {
+     "text": "snake bit me on the ankle",
+     "label": "red",
+     "gguf": 0.0168,
+     "int8": 0.0032,
+     "words": true
+    },
+    {
+     "text": "strock",
+     "label": "red",
+     "gguf": 0.0115,
+     "int8": 0.0039,
+     "words": true
+    },
+    {
+     "text": "pulse is week and fast",
+     "label": "red",
+     "gguf": 0.0222,
+     "int8": 0.0007,
+     "words": true
+    },
+    {
+     "text": "i dont know if this is anything but my 80 yo mum has been a bit off today not eating, mixing up words, tonight she seems really drowsy and her wee smells strong",
+     "label": "red",
+     "gguf": 0.0102,
+     "int8": 0.0025,
+     "words": true
+    },
+    {
+     "text": "my son has nits",
+     "label": "green",
+     "gguf": 0.0292,
+     "int8": -0.0007,
+     "words": false
+    },
+    {
+     "text": "my 6yo has a wobbly tooth that bled",
+     "label": "green",
+     "gguf": 0.0093,
+     "int8": -0.0048,
+     "words": false
+    },
+    {
+     "text": "best position for baby to sleep safely",
+     "label": "green",
+     "gguf": 0.0128,
+     "int8": 0.0049,
+     "words": true
+    },
+    {
+     "text": "the dog is panting after walk normal?",
+     "label": "green",
+     "gguf": 0.0195,
+     "int8": 0.0008,
+     "words": false
+    },
+    {
+     "text": "knocked out tooth adult put back?",
+     "label": "yellow",
+     "gguf": 0.0097,
+     "int8": 0.0033,
+     "words": true
+    },
+    {
+     "text": "fainted in a hot church standing a long time feel fine now",
+     "label": "green",
+     "gguf": 0.0116,
+     "int8": 0.0025,
+     "words": true
+    },
+    {
+     "text": "my wife is fainting and i am alone with kids what i do",
+     "label": "red",
+     "gguf": 0.0199,
+     "int8": 0.0036,
+     "words": true
+    }
+   ],
+   "examples_int8_only": [
+    {
+     "text": "blood soaking through the towel ive been pressing 10 min",
+     "label": "red",
+     "gguf": 0.0018,
+     "int8": 0.0188,
+     "words": true
+    },
+    {
+     "text": "used the epi pen shes better now do we still need to go hospital",
+     "label": "red",
+     "gguf": -0.0006,
+     "int8": 0.0073,
+     "words": true
+    },
+    {
+     "text": "make him throw up the bleach?",
+     "label": "red",
+     "gguf": 0.006,
+     "int8": 0.0245,
+     "words": true
+    },
+    {
+     "text": "pnemonia",
+     "label": "yellow",
+     "gguf": 0.0044,
+     "int8": 0.0092,
+     "words": false
+    },
+    {
+     "text": "blueslipsandshaking",
+     "label": "red",
+     "gguf": 0.0039,
+     "int8": 0.0159,
+     "words": true
+    },
+    {
+     "text": "rub alcohol on baby to bring fever down",
+     "label": "yellow",
+     "gguf": 0.0076,
+     "int8": 0.0121,
+     "words": true
+    },
+    {
+     "text": "upset tummy after takeaway",
+     "label": "green",
+     "gguf": 0.0082,
+     "int8": 0.0137,
+     "words": false
+    },
+    {
+     "text": "had diarrhea twice today drinking ok",
+     "label": "green",
+     "gguf": -0.0062,
+     "int8": 0.0146,
+     "words": false
+    },
+    {
+     "text": "breath of fresh air",
+     "label": "green",
+     "gguf": -0.0053,
+     "int8": 0.0134,
+     "words": false
+    },
+    {
+     "text": "the plant is wilting and looks floppy",
+     "label": "green",
+     "gguf": 0.0044,
+     "int8": 0.014,
+     "words": true
+    },
+    {
+     "text": "seizure of assets by the bank",
+     "label": "green",
+     "gguf": 0.0005,
+     "int8": 0.0153,
+     "words": false
+    },
+    {
+     "text": "the cut of the suit",
+     "label": "green",
+     "gguf": 0.0066,
+     "int8": 0.0123,
+     "words": false
+    },
+    {
+     "text": "water broke green colour",
+     "label": "yellow",
+     "gguf": -0.0008,
+     "int8": 0.0136,
+     "words": true
+    },
+    {
+     "text": "dizzy room spinning vomiting cant walk straight",
+     "label": "red",
+     "gguf": 0.0061,
+     "int8": 0.0067,
+     "words": true
+    },
+    {
+     "text": "small burn from sparkler on kids finger",
+     "label": "green",
+     "gguf": 0.0057,
+     "int8": 0.0146,
+     "words": true
+    }
+   ]
+  },
+  "disagree_OR_verdict_wide": {
+   "count": 9,
+   "examples": [
+    {
+     "text": "pnemonia",
+     "label": "yellow",
+     "gguf": 0.0044,
+     "int8": 0.0092,
+     "words": false
+    },
+    {
+     "text": "upset tummy after takeaway",
+     "label": "green",
+     "gguf": 0.0082,
+     "int8": 0.0137,
+     "words": false
+    },
+    {
+     "text": "had diarrhea twice today drinking ok",
+     "label": "green",
+     "gguf": -0.0062,
+     "int8": 0.0146,
+     "words": false
+    },
+    {
+     "text": "my son has nits",
+     "label": "green",
+     "gguf": 0.0292,
+     "int8": -0.0007,
+     "words": false
+    },
+    {
+     "text": "my 6yo has a wobbly tooth that bled",
+     "label": "green",
+     "gguf": 0.0093,
+     "int8": -0.0048,
+     "words": false
+    },
+    {
+     "text": "breath of fresh air",
+     "label": "green",
+     "gguf": -0.0053,
+     "int8": 0.0134,
+     "words": false
+    },
+    {
+     "text": "seizure of assets by the bank",
+     "label": "green",
+     "gguf": 0.0005,
+     "int8": 0.0153,
+     "words": false
+    },
+    {
+     "text": "the cut of the suit",
+     "label": "green",
+     "gguf": 0.0066,
+     "int8": 0.0123,
+     "words": false
+    },
+    {
+     "text": "the dog is panting after walk normal?",
+     "label": "green",
+     "gguf": 0.0195,
+     "int8": 0.0008,
+     "words": false
+    }
+   ]
+  },
+  "red_missed_gguf_wide_OR": [
+   "myboyiscoking",
+   "ma tête tourne et je vois flou soudain"
+  ],
+  "red_missed_int8_wide_OR": [
+   "myboyiscoking",
+   "ma tête tourne et je vois flou soudain"
+  ],
+  "red_lost_vs_words_gguf_wide": [],
+  "red_only_by_meaning_gguf_wide_examples": [
+   "911"
+  ],
+  "green_only_by_meaning_gguf_wide_examples": [
+   "blocked nose cant sleep",
+   "kid has a temp of 38 but playing and drinking",
+   "toddler teething and grumpy",
+   "burped a lot after fizzy drink",
+   "my son has nits",
+   "my 6yo has a wobbly tooth that bled",
+   "grandad has a small skin tear on his arm from the door",
+   "granny has a bit of a cough and runny nose",
+   "my kid has a runny nose and a cough but hes fine otherwise",
+   "the battery is choking on the cold",
+   "bleed the radiator",
+   "how to bleed brakes on bike",
+   "colour bleed in the wash pink shirt",
+   "bleed in printing what is bleed area",
+   "the engine seized",
+   "he collapsed into laughter",
+   "the tent collapsed in the wind",
+   "this song is fire",
+   "the toast is burning",
+   "sugar rush the kids are bouncing",
+   "he turned red with embarrassment",
+   "choking hazard toys age 3",
+   "a cold reception at the party",
+   "the car broke down",
+   "the dog is panting after walk normal?",
+   "my fish is floating upside down",
+   "my 4 month old has a bit of a cough and snotty nose feeding ok",
+   "hes been bit by a tick in the woods"
+  ]
+ },
+ "list2": {
+  "n": {
+   "red": 249,
+   "yellow": 111,
+   "green": 246
+  },
+  "counts": {
+   "words": {
+    "red": 230,
+    "yellow": 85,
+    "green": 127
+   },
+   "int8_wide": {
+    "red": 245,
+    "yellow": 93,
+    "green": 147
+   },
+   "int8_strict": {
+    "red": 241,
+    "yellow": 89,
+    "green": 143
+   },
+   "gguf_wide": {
+    "red": 243,
+    "yellow": 93,
+    "green": 147
+   },
+   "gguf_strict": {
+    "red": 240,
+    "yellow": 88,
+    "green": 140
+   },
+   "meaning_int8_wide": {
+    "red": 212,
+    "yellow": 52,
+    "green": 64
+   },
+   "meaning_gguf_wide": {
+    "red": 210,
+    "yellow": 53,
+    "green": 62
+   },
+   "meaning_gguf_strict": {
+    "red": 190,
+    "yellow": 34,
+    "green": 36
+   }
+  },
+  "green_kinds": {
+   "counterexample": {
+    "n": 135,
+    "words": 82,
+    "int8_wide": 96,
+    "int8_strict": 92,
+    "gguf_wide": 95,
+    "gguf_strict": 91,
+    "meaning_int8_wide": 39,
+    "meaning_gguf_wide": 36,
+    "meaning_gguf_strict": 22
+   },
+   "mild": {
+    "n": 109,
+    "words": 43,
+    "int8_wide": 49,
+    "int8_strict": 49,
+    "gguf_wide": 50,
+    "gguf_strict": 47,
+    "meaning_int8_wide": 23,
+    "meaning_gguf_wide": 25,
+    "meaning_gguf_strict": 14
+   }
+  },
+  "red_only_by_meaning_gguf_wide": 13,
+  "yellow_only_by_meaning_gguf_wide": 8,
+  "green_only_by_meaning_gguf_wide": 20,
+  "red_only_by_meaning_gguf_strict": 10,
+  "yellow_only_by_meaning_gguf_strict": 3,
+  "green_only_by_meaning_gguf_strict": 13,
+  "red_only_by_meaning_int8_wide": 15,
+  "yellow_only_by_meaning_int8_wide": 8,
+  "green_only_by_meaning_int8_wide": 20,
+  "disagree_meaning_gguf_wide_vs_int8_wide": {
+   "count": 25,
+   "gguf_fires_int8_not": {
+    "red": 4,
+    "yellow": 4,
+    "green": 3
+   },
+   "int8_fires_gguf_not": {
+    "red": 6,
+    "yellow": 3,
+    "green": 5
+   },
+   "examples_gguf_only": [
+    {
+     "text": "menengitis rash on my son? tiny red pin pricks wont fade, hes floppy",
+     "label": "red",
+     "gguf": 0.0112,
+     "int8": -0.0028,
+     "words": true
+    },
+    {
+     "text": "sorry to bother, lovely evening here, the kids are fine, just wondering, my husband has been on the floor for a bit and is making odd snoring noises, is that ok?",
+     "label": "red",
+     "gguf": 0.009,
+     "int8": -0.001,
+     "words": true
+    },
+    {
+     "text": "hi i was going to ask about recipes but my nan just fell over and isnt talking",
+     "label": "red",
+     "gguf": 0.0297,
+     "int8": -0.0189,
+     "words": true
+    },
+    {
+     "text": "just had a bad fall at the station, my hip, cant move my leg and its turned out",
+     "label": "red",
+     "gguf": 0.0378,
+     "int8": 0.0058,
+     "words": true
+    },
+    {
+     "text": "my son fell at football and his collarbone has a lump and hurts to lift arm",
+     "label": "yellow",
+     "gguf": 0.0179,
+     "int8": 0.0054,
+     "words": true
+    },
+    {
+     "text": "got bleach in my eye rinsed it but still burns",
+     "label": "yellow",
+     "gguf": 0.0126,
+     "int8": 0.0043,
+     "words": true
+    },
+    {
+     "text": "my granny has high blood and her head is paining her since morning",
+     "label": "yellow",
+     "gguf": 0.0085,
+     "int8": 0.0002,
+     "words": true
+    },
+    {
+     "text": "nag LBM ako since last night, 7 times",
+     "label": "yellow",
+     "gguf": 0.0127,
+     "int8": 0.0046,
+     "words": false
+    },
+    {
+     "text": "grazed my knee falling off skateboard",
+     "label": "green",
+     "gguf": 0.0098,
+     "int8": -0.0114,
+     "words": false
+    },
+    {
+     "text": "doms legs dead after leg day lol",
+     "label": "green",
+     "gguf": 0.0201,
+     "int8": -0.0141,
+     "words": true
+    },
+    {
+     "text": "the company is on life support",
+     "label": "green",
+     "gguf": 0.009,
+     "int8": -0.0206,
+     "words": false
+    }
+   ],
+   "examples_int8_only": [
+    {
+     "text": "cough cpr can i do that on myself having heart attack",
+     "label": "red",
+     "gguf": 0.0019,
+     "int8": 0.0124,
+     "words": true
+    },
+    {
+     "text": "wheezing so bad ribs sucking in, used 10 puffs",
+     "label": "red",
+     "gguf": -0.0006,
+     "int8": 0.013,
+     "words": true
+    },
+    {
+     "text": "my missus is having a do and she's grey",
+     "label": "red",
+     "gguf": 0.0028,
+     "int8": 0.007,
+     "words": false
+    },
+    {
+     "text": "my son's testicle is suddenly really painful and swollen and he's being sick",
+     "label": "red",
+     "gguf": 0.0015,
+     "int8": 0.0104,
+     "words": true
+    },
+    {
+     "text": "diarea and vomitting cant keep water down for a day",
+     "label": "yellow",
+     "gguf": -0.003,
+     "int8": 0.0123,
+     "words": true
+    },
+    {
+     "text": "been spewing all night cant even keep a sip down",
+     "label": "yellow",
+     "gguf": 0.0065,
+     "int8": 0.011,
+     "words": true
+    },
+    {
+     "text": "fainted at the blood test, came round quickly, feel ok now",
+     "label": "green",
+     "gguf": 0.0084,
+     "int8": 0.0241,
+     "words": true
+    },
+    {
+     "text": "my bp is very high 200 and my vision is going blurry",
+     "label": "red",
+     "gguf": 0.0069,
+     "int8": 0.0109,
+     "words": false
+    },
+    {
+     "text": "my body is hot and i am feeling cold at the same time since 3 days",
+     "label": "yellow",
+     "gguf": -0.0019,
+     "int8": 0.0165,
+     "words": false
+    },
+    {
+     "text": "back pain and now i cant control my bladder and numb between my legs",
+     "label": "red",
+     "gguf": 0.0018,
+     "int8": 0.0123,
+     "words": true
+    },
+    {
+     "text": "engine is bleeding oil all over the drive",
+     "label": "green",
+     "gguf": 0.0049,
+     "int8": 0.0154,
+     "words": true
+    },
+    {
+     "text": "the pipes froze and burst",
+     "label": "green",
+     "gguf": 0.0052,
+     "int8": 0.0109,
+     "words": false
+    },
+    {
+     "text": "electric shock from the carpet static",
+     "label": "green",
+     "gguf": 0.0059,
+     "int8": 0.0141,
+     "words": true
+    },
+    {
+     "text": "seizure of assets by the bank",
+     "label": "green",
+     "gguf": 0.0005,
+     "int8": 0.0153,
+     "words": false
+    }
+   ]
+  },
+  "disagree_OR_verdict_wide": {
+   "count": 8,
+   "examples": [
+    {
+     "text": "my missus is having a do and she's grey",
+     "label": "red",
+     "gguf": 0.0028,
+     "int8": 0.007,
+     "words": false
+    },
+    {
+     "text": "my bp is very high 200 and my vision is going blurry",
+     "label": "red",
+     "gguf": 0.0069,
+     "int8": 0.0109,
+     "words": false
+    },
+    {
+     "text": "my body is hot and i am feeling cold at the same time since 3 days",
+     "label": "yellow",
+     "gguf": -0.0019,
+     "int8": 0.0165,
+     "words": false
+    },
+    {
+     "text": "nag LBM ako since last night, 7 times",
+     "label": "yellow",
+     "gguf": 0.0127,
+     "int8": 0.0046,
+     "words": false
+    },
+    {
+     "text": "grazed my knee falling off skateboard",
+     "label": "green",
+     "gguf": 0.0098,
+     "int8": -0.0114,
+     "words": false
+    },
+    {
+     "text": "the pipes froze and burst",
+     "label": "green",
+     "gguf": 0.0052,
+     "int8": 0.0109,
+     "words": false
+    },
+    {
+     "text": "the company is on life support",
+     "label": "green",
+     "gguf": 0.009,
+     "int8": -0.0206,
+     "words": false
+    },
+    {
+     "text": "seizure of assets by the bank",
+     "label": "green",
+     "gguf": 0.0005,
+     "int8": 0.0153,
+     "words": false
+    }
+   ]
+  },
+  "red_missed_gguf_wide_OR": [
+   "anna flack sis",
+   "my missus is having a do and she's grey",
+   "narcan how",
+   "compressions how fast",
+   "my poo is black and tarry and i feel a bit lightheaded",
+   "my bp is very high 200 and my vision is going blurry"
+  ],
+  "red_missed_int8_wide_OR": [
+   "anna flack sis",
+   "narcan how",
+   "compressions how fast",
+   "my poo is black and tarry and i feel a bit lightheaded"
+  ],
+  "red_lost_vs_words_gguf_wide": [],
+  "red_only_by_meaning_gguf_wide_examples": [
+   "stoke symptoms my dad",
+   "my mate chainsawed his thigh its pumping",
+   "his throat is closing after peanuts",
+   "my brother is ODing",
+   "found an old man outside in the snow, barely awake, skin icy",
+   "acid splashed in her eyes at work",
+   "my son says voices are telling him to jump",
+   "cant do this no more. took everything in the cabinet",
+   "unalive myself tonight how many",
+   "my mate is having a turn, can't get a word out of him",
+   "something wrong with grandma she just staring and drooling",
+   "child has croup and making squeaky noise even when calm",
+   "mum's speech went weird for 5 mins then back to normal"
+  ],
+  "green_only_by_meaning_gguf_wide_examples": [
+   "grazed my knee falling off skateboard",
+   "my toddler wont eat vegetables is that ok",
+   "my kid has a wobbly tooth",
+   "can't sleep, mind won't switch off",
+   "my grandma's feet are always cold",
+   "braxton hicks or real? tightening now and then, not regular, 33 weeks",
+   "my plant is choking, leaves going yellow",
+   "the chicken is still pink inside",
+   "lyrics to stayin alive",
+   "dog is snoring really loud on the sofa",
+   "my goldfish is floating upside down",
+   "the company is on life support",
+   "the engine is overheating on the highway",
+   "my phone got water damage, dropped in the pool",
+   "my kid is fake coughing to skip school lol",
+   "nan's having kittens about the wedding seating",
+   "he's gonna have a cow if he sees this",
+   "the toddler had a meltdown in the supermarket",
+   "choking hazard toys age 3+ meaning",
+   "grandma bit lightheaded after standing too quick, fine after sitting"
+  ]
+ },
+ "list3": {
+  "n": {
+   "red": 199,
+   "yellow": 78,
+   "green": 254
+  },
+  "counts": {
+   "words": {
+    "red": 173,
+    "yellow": 55,
+    "green": 154
+   },
+   "int8_wide": {
+    "red": 186,
+    "yellow": 65,
+    "green": 171
+   },
+   "int8_strict": {
+    "red": 185,
+    "yellow": 61,
+    "green": 162
+   },
+   "gguf_wide": {
+    "red": 188,
+    "yellow": 62,
+    "green": 173
+   },
+   "gguf_strict": {
+    "red": 182,
+    "yellow": 61,
+    "green": 160
+   },
+   "meaning_int8_wide": {
+    "red": 159,
+    "yellow": 39,
+    "green": 71
+   },
+   "meaning_gguf_wide": {
+    "red": 162,
+    "yellow": 35,
+    "green": 75
+   },
+   "meaning_gguf_strict": {
+    "red": 126,
+    "yellow": 24,
+    "green": 42
+   }
+  },
+  "green_kinds": {
+   "counterexample": {
+    "n": 147,
+    "words": 101,
+    "int8_wide": 109,
+    "int8_strict": 105,
+    "gguf_wide": 110,
+    "gguf_strict": 104,
+    "meaning_int8_wide": 41,
+    "meaning_gguf_wide": 44,
+    "meaning_gguf_strict": 28
+   },
+   "mild": {
+    "n": 110,
+    "words": 55,
+    "int8_wide": 64,
+    "int8_strict": 59,
+    "gguf_wide": 65,
+    "gguf_strict": 58,
+    "meaning_int8_wide": 31,
+    "meaning_gguf_wide": 32,
+    "meaning_gguf_strict": 13
+   }
+  },
+  "red_only_by_meaning_gguf_wide": 15,
+  "yellow_only_by_meaning_gguf_wide": 7,
+  "green_only_by_meaning_gguf_wide": 19,
+  "red_only_by_meaning_gguf_strict": 9,
+  "yellow_only_by_meaning_gguf_strict": 6,
+  "green_only_by_meaning_gguf_strict": 6,
+  "red_only_by_meaning_int8_wide": 13,
+  "yellow_only_by_meaning_int8_wide": 10,
+  "green_only_by_meaning_int8_wide": 17,
+  "disagree_meaning_gguf_wide_vs_int8_wide": {
+   "count": 25,
+   "gguf_fires_int8_not": {
+    "red": 5,
+    "yellow": 1,
+    "green": 8
+   },
+   "int8_fires_gguf_not": {
+    "red": 2,
+    "yellow": 5,
+    "green": 4
+   },
+   "examples_gguf_only": [
+    {
+     "text": "dead on my feet, how long can u go without sleep",
+     "label": "green",
+     "gguf": 0.0145,
+     "int8": 0.0051,
+     "words": true
+    },
+    {
+     "text": "back went again lifting plasterboard cant straighten up",
+     "label": "green",
+     "gguf": 0.0095,
+     "int8": 0.0041,
+     "words": false
+    },
+    {
+     "text": "new red sore on his bottom from the wheelchair",
+     "label": "green",
+     "gguf": 0.017,
+     "int8": 0.0039,
+     "words": false
+    },
+    {
+     "text": "dont want to make a fuss but my heart has been going 180 for an hour",
+     "label": "red",
+     "gguf": 0.0152,
+     "int8": 0.0055,
+     "words": true
+    },
+    {
+     "text": "granny's after taking a weakness in the kitchen",
+     "label": "yellow",
+     "gguf": 0.0102,
+     "int8": 0.0011,
+     "words": true
+    },
+    {
+     "text": "ive written the notes and given my cat to my sister",
+     "label": "red",
+     "gguf": 0.0089,
+     "int8": 0.0037,
+     "words": false
+    },
+    {
+     "text": "standing on the bridge",
+     "label": "red",
+     "gguf": 0.0099,
+     "int8": 0.0038,
+     "words": false
+    },
+    {
+     "text": "hit head yesterday fine at the time, now drowsy and one pupil bigger",
+     "label": "red",
+     "gguf": 0.0085,
+     "int8": -0.0008,
+     "words": true
+    },
+    {
+     "text": "my mum's 89 and since tuesday shes off her food, sleepy and seeing people who arent there",
+     "label": "red",
+     "gguf": 0.0199,
+     "int8": -0.0065,
+     "words": true
+    },
+    {
+     "text": "boxer got knocked out cold in round 3 on tv",
+     "label": "green",
+     "gguf": 0.0087,
+     "int8": 0.0025,
+     "words": true
+    },
+    {
+     "text": "beef is still bleeding on the plate is that ok",
+     "label": "green",
+     "gguf": 0.0099,
+     "int8": 0.0053,
+     "words": true
+    },
+    {
+     "text": "cold feet before the wedding",
+     "label": "green",
+     "gguf": 0.0211,
+     "int8": 0.0066,
+     "words": false
+    },
+    {
+     "text": "how did the queen die in the series",
+     "label": "green",
+     "gguf": 0.0093,
+     "int8": 0.0043,
+     "words": false
+    },
+    {
+     "text": "kids are bouncing off the walls on sugar",
+     "label": "green",
+     "gguf": 0.019,
+     "int8": 0.0065,
+     "words": true
+    }
+   ],
+   "examples_int8_only": [
+    {
+     "text": "i took my water tablet twice by mistake today",
+     "label": "yellow",
+     "gguf": -0.0065,
+     "int8": 0.0203,
+     "words": true
+    },
+    {
+     "text": "got cement in my eye flushing it but its burning",
+     "label": "red",
+     "gguf": 0.0041,
+     "int8": 0.0112,
+     "words": true
+    },
+    {
+     "text": "hanging. i cut him down. hes",
+     "label": "red",
+     "gguf": 0.0067,
+     "int8": 0.0209,
+     "words": true
+    },
+    {
+     "text": "peg tube came out, hole still open",
+     "label": "yellow",
+     "gguf": 0.004,
+     "int8": 0.0066,
+     "words": false
+    },
+    {
+     "text": "rugby, took a knock, seeing double, cant remember the score",
+     "label": "yellow",
+     "gguf": -0.0031,
+     "int8": 0.0214,
+     "words": false
+    },
+    {
+     "text": "sudden death penalties tonight cant breathe from nerves",
+     "label": "green",
+     "gguf": -0.0216,
+     "int8": 0.0109,
+     "words": true
+    },
+    {
+     "text": "hit the wall at mile 20 of the marathon, legs just stopped",
+     "label": "green",
+     "gguf": 0.005,
+     "int8": 0.0157,
+     "words": false
+    },
+    {
+     "text": "the pipes froze and burst",
+     "label": "green",
+     "gguf": 0.0052,
+     "int8": 0.0109,
+     "words": false
+    },
+    {
+     "text": "my blue pill for ed, can i take it with wine",
+     "label": "green",
+     "gguf": 0.0015,
+     "int8": 0.011,
+     "words": true
+    },
+    {
+     "text": "vomiting every time i drink anything 12 weeks pregnant, dizzy, not peed today",
+     "label": "yellow",
+     "gguf": 0.0065,
+     "int8": 0.0081,
+     "words": true
+    },
+    {
+     "text": "peeing loads and always thirsty and lost weight",
+     "label": "yellow",
+     "gguf": 0.008,
+     "int8": 0.0194,
+     "words": false
+    }
+   ]
+  },
+  "disagree_OR_verdict_wide": {
+   "count": 11,
+   "examples": [
+    {
+     "text": "back went again lifting plasterboard cant straighten up",
+     "label": "green",
+     "gguf": 0.0095,
+     "int8": 0.0041,
+     "words": false
+    },
+    {
+     "text": "peg tube came out, hole still open",
+     "label": "yellow",
+     "gguf": 0.004,
+     "int8": 0.0066,
+     "words": false
+    },
+    {
+     "text": "new red sore on his bottom from the wheelchair",
+     "label": "green",
+     "gguf": 0.017,
+     "int8": 0.0039,
+     "words": false
+    },
+    {
+     "text": "ive written the notes and given my cat to my sister",
+     "label": "red",
+     "gguf": 0.0089,
+     "int8": 0.0037,
+     "words": false
+    },
+    {
+     "text": "standing on the bridge",
+     "label": "red",
+     "gguf": 0.0099,
+     "int8": 0.0038,
+     "words": false
+    },
+    {
+     "text": "rugby, took a knock, seeing double, cant remember the score",
+     "label": "yellow",
+     "gguf": -0.0031,
+     "int8": 0.0214,
+     "words": false
+    },
+    {
+     "text": "hit the wall at mile 20 of the marathon, legs just stopped",
+     "label": "green",
+     "gguf": 0.005,
+     "int8": 0.0157,
+     "words": false
+    },
+    {
+     "text": "cold feet before the wedding",
+     "label": "green",
+     "gguf": 0.0211,
+     "int8": 0.0066,
+     "words": false
+    },
+    {
+     "text": "how did the queen die in the series",
+     "label": "green",
+     "gguf": 0.0093,
+     "int8": 0.0043,
+     "words": false
+    },
+    {
+     "text": "the pipes froze and burst",
+     "label": "green",
+     "gguf": 0.0052,
+     "int8": 0.0109,
+     "words": false
+    },
+    {
+     "text": "peeing loads and always thirsty and lost weight",
+     "label": "yellow",
+     "gguf": 0.008,
+     "int8": 0.0194,
+     "words": false
+    }
+   ]
+  },
+  "red_missed_gguf_wide_OR": [
+   "splashed sheep dip in me eye stings like hell",
+   "how do I do see PR on a child",
+   "probably nothing but my vision went black in one eye for a couple mins this morning",
+   "bit of a headache. worst one ive ever had tbh came on all at once while lifting",
+   "funnel web in me boot bit me toe, mouth tingling",
+   "my mother is having giddiness since morning and BP machine showing 210/120",
+   "feel like an elephant is sitting on me",
+   "kms fr this time",
+   "had my chemo tuesday temp is 38.2 now",
+   "lawnmower blade took the top of my toe off. found the bit.",
+   "flashing lights and a curtain coming down over my vision"
+  ],
+  "red_missed_int8_wide_OR": [
+   "splashed sheep dip in me eye stings like hell",
+   "how do I do see PR on a child",
+   "probably nothing but my vision went black in one eye for a couple mins this morning",
+   "bit of a headache. worst one ive ever had tbh came on all at once while lifting",
+   "funnel web in me boot bit me toe, mouth tingling",
+   "my mother is having giddiness since morning and BP machine showing 210/120",
+   "feel like an elephant is sitting on me",
+   "ive written the notes and given my cat to my sister",
+   "standing on the bridge",
+   "kms fr this time",
+   "had my chemo tuesday temp is 38.2 now",
+   "lawnmower blade took the top of my toe off. found the bit.",
+   "flashing lights and a curtain coming down over my vision"
+  ],
+  "red_lost_vs_words_gguf_wide": [],
+  "red_only_by_meaning_gguf_wide_examples": [
+   "mum floor cold wont",
+   "pool. kid. bottom",
+   "he just went down. eyes open. nothing",
+   "guy in the rip looking like hes climbing a ladder",
+   "my friend is having a sees your",
+   "just a scratch from the chainsaw, went a bit deep, can see something white",
+   "toddler chewed a laundry pod, foam in mouth, coughing",
+   "everyone would be better off if i just wasnt here anymore",
+   "ive written the notes and given my cat to my sister",
+   "how many of my sertraline would it take",
+   "standing on the bridge",
+   "unalive myself",
+   "grandad found on the floor this morning, cold to touch, been there all night, awake but muddled",
+   "mums legs suddenly gave way and she says she cant feel them",
+   "found my son with a bag of nos canisters and hes twitching"
+  ],
+  "green_only_by_meaning_gguf_wide_examples": [
+   "this concrete is going off too fast",
+   "back went again lifting plasterboard cant straighten up",
+   "how many wet nappies shud a 2 week old have",
+   "hes chundering everywhere but still standing lol",
+   "new red sore on his bottom from the wheelchair",
+   "what is the diffrence betwen a cold and the flu",
+   "eye twitching for 3 days is it ms or als",
+   "ma wee boy's had a skelf in his finger",
+   "cricket bowler has a broken heart after the dropped catch",
+   "horse has colic and keeps rolling",
+   "cold feet before the wedding",
+   "how much fake blood for a halloween costume",
+   "how did the queen die in the series",
+   "fuse blew when i plugged in the kettle",
+   "hit by a truck of tiredness after the flight",
+   "my farm dog got kicked by the cow, limping",
+   "kid has nits again",
+   "grazed knee from playground, gravel in it",
+   "morning sickness is so bad but keeping water down"
+  ]
+ },
+ "triage_insample": {
+  "n": {
+   "red": 273,
+   "yellow": 94,
+   "green": 148
+  },
+  "counts": {
+   "words": {
+    "red": 272,
+    "yellow": 75,
+    "green": 63
+   },
+   "int8_wide": {
+    "red": 272,
+    "yellow": 78,
+    "green": 69
+   },
+   "int8_strict": {
+    "red": 272,
+    "yellow": 76,
+    "green": 64
+   },
+   "gguf_wide": {
+    "red": 272,
+    "yellow": 79,
+    "green": 67
+   },
+   "gguf_strict": {
+    "red": 272,
+    "yellow": 76,
+    "green": 63
+   },
+   "meaning_int8_wide": {
+    "red": 232,
+    "yellow": 44,
+    "green": 12
+   },
+   "meaning_gguf_wide": {
+    "red": 230,
+    "yellow": 38,
+    "green": 9
+   },
+   "meaning_gguf_strict": {
+    "red": 206,
+    "yellow": 26,
+    "green": 3
+   }
+  },
+  "red_only_by_meaning_gguf_wide": 0,
+  "yellow_only_by_meaning_gguf_wide": 4,
+  "green_only_by_meaning_gguf_wide": 4,
+  "red_only_by_meaning_gguf_strict": 0,
+  "yellow_only_by_meaning_gguf_strict": 1,
+  "green_only_by_meaning_gguf_strict": 0,
+  "red_only_by_meaning_int8_wide": 0,
+  "yellow_only_by_meaning_int8_wide": 3,
+  "green_only_by_meaning_int8_wide": 6,
+  "disagree_meaning_gguf_wide_vs_int8_wide": {
+   "count": 27,
+   "gguf_fires_int8_not": {
+    "red": 2,
+    "yellow": 3,
+    "green": 3
+   },
+   "int8_fires_gguf_not": {
+    "red": 4,
+    "yellow": 9,
+    "green": 6
+   },
+   "examples_gguf_only": [
+    {
+     "text": "neck hurts after a fall, numb arms",
+     "label": "red",
+     "gguf": 0.0104,
+     "int8": 0.0012,
+     "words": true
+    },
+    {
+     "text": "snak bit my leg",
+     "label": "red",
+     "gguf": 0.019,
+     "int8": 0.0066,
+     "words": true
+    },
+    {
+     "text": "brken leg",
+     "label": "yellow",
+     "gguf": 0.0173,
+     "int8": 0.0041,
+     "words": true
+    },
+    {
+     "text": "shoulder popped out",
+     "label": "yellow",
+     "gguf": 0.0137,
+     "int8": 0.0061,
+     "words": false
+    },
+    {
+     "text": "my kids are scared after the earthquake",
+     "label": "yellow",
+     "gguf": 0.0139,
+     "int8": -0.0017,
+     "words": true
+    },
+    {
+     "text": "i need to start a fire but i have no matches and no gas",
+     "label": "green",
+     "gguf": 0.0131,
+     "int8": 0.0042,
+     "words": true
+    },
+    {
+     "text": "stay warm without power in winter",
+     "label": "green",
+     "gguf": 0.0159,
+     "int8": -0.0109,
+     "words": false
+    },
+    {
+     "text": "i need to start a fire but i have no matches and no gas",
+     "label": "green",
+     "gguf": 0.0131,
+     "int8": 0.0042,
+     "words": true
+    }
+   ],
+   "examples_int8_only": [
+    {
+     "text": "nail went through her foot and is still in",
+     "label": "red",
+     "gguf": -0.0011,
+     "int8": 0.0109,
+     "words": true
+    },
+    {
+     "text": "snake bite while camping",
+     "label": "red",
+     "gguf": -0.0058,
+     "int8": 0.0082,
+     "words": true
+    },
+    {
+     "text": "is it safe to put water on a burn",
+     "label": "yellow",
+     "gguf": -0.0044,
+     "int8": 0.0115,
+     "words": true
+    },
+    {
+     "text": "deep cut on my hand, does it need stitches",
+     "label": "yellow",
+     "gguf": -0.004,
+     "int8": 0.0071,
+     "words": true
+    },
+    {
+     "text": "stung by a bee",
+     "label": "yellow",
+     "gguf": 0.0071,
+     "int8": 0.0123,
+     "words": true
+    },
+    {
+     "text": "stug by a bee",
+     "label": "yellow",
+     "gguf": 0.0071,
+     "int8": 0.0123,
+     "words": true
+    },
+    {
+     "text": "drank creek water and now i have diarrhea",
+     "label": "yellow",
+     "gguf": 0.0082,
+     "int8": 0.021,
+     "words": true
+    },
+    {
+     "text": "start a fier no matches",
+     "label": "green",
+     "gguf": 0.0063,
+     "int8": 0.0142,
+     "words": true
+    },
+    {
+     "text": "how to bleed the brakes",
+     "label": "green",
+     "gguf": 0.0017,
+     "int8": 0.0238,
+     "words": false
+    },
+    {
+     "text": "infection not responding to antibiotics",
+     "label": "yellow",
+     "gguf": 0.003,
+     "int8": 0.0079,
+     "words": true
+    },
+    {
+     "text": "i ran out of baby formula, what can i feed my baby",
+     "label": "green",
+     "gguf": -0.0008,
+     "int8": 0.0143,
+     "words": true
+    },
+    {
+     "text": "i ran out of baby formla what can i feed my baby",
+     "label": "green",
+     "gguf": -0.0069,
+     "int8": 0.0072,
+     "words": true
+    },
+    {
+     "text": "drank creek water and now i have diarrhea",
+     "label": "yellow",
+     "gguf": 0.0082,
+     "int8": 0.021,
+     "words": true
+    },
+    {
+     "text": "snake bite while camping",
+     "label": "red",
+     "gguf": -0.0058,
+     "int8": 0.0082,
+     "words": true
+    },
+    {
+     "text": "is it safe to put water on a burn",
+     "label": "yellow",
+     "gguf": -0.0044,
+     "int8": 0.0115,
+     "words": true
+    },
+    {
+     "text": "how do i treat a burn from a campfire",
+     "label": "yellow",
+     "gguf": 0.0007,
+     "int8": 0.0096,
+     "words": true
+    },
+    {
+     "text": "food went bad",
+     "label": "green",
+     "gguf": 0.0025,
+     "int8": 0.0148,
+     "words": false
+    },
+    {
+     "text": "hypothermia",
+     "label": "red",
+     "gguf": -0.0025,
+     "int8": 0.0158,
+     "words": true
+    },
+    {
+     "text": "breastfeeding",
+     "label": "green",
+     "gguf": 0.0041,
+     "int8": 0.0133,
+     "words": false
+    }
+   ]
+  },
+  "disagree_OR_verdict_wide": {
+   "count": 5,
+   "examples": [
+    {
+     "text": "shoulder popped out",
+     "label": "yellow",
+     "gguf": 0.0137,
+     "int8": 0.0061,
+     "words": false
+    },
+    {
+     "text": "stay warm without power in winter",
+     "label": "green",
+     "gguf": 0.0159,
+     "int8": -0.0109,
+     "words": false
+    },
+    {
+     "text": "how to bleed the brakes",
+     "label": "green",
+     "gguf": 0.0017,
+     "int8": 0.0238,
+     "words": false
+    },
+    {
+     "text": "food went bad",
+     "label": "green",
+     "gguf": 0.0025,
+     "int8": 0.0148,
+     "words": false
+    },
+    {
+     "text": "breastfeeding",
+     "label": "green",
+     "gguf": 0.0041,
+     "int8": 0.0133,
+     "words": false
+    }
+   ]
+  },
+  "red_missed_gguf_wide_OR": [
+   "snakebitmyleg"
+  ],
+  "red_missed_int8_wide_OR": [
+   "snakebitmyleg"
+  ],
+  "red_lost_vs_words_gguf_wide": [],
+  "red_only_by_meaning_gguf_wide_examples": [],
+  "green_only_by_meaning_gguf_wide_examples": [
+   "stay warm without power in winter",
+   "the engine keeps choking when it is cold",
+   "the car battery is dead",
+   "overwintering"
+  ]
+ },
+ "speed": {
+  "n": 2342,
+  "single_request_ms_median": 5.18,
+  "p95": 8.86,
+  "p99": 12.08,
+  "max": 24.5,
+  "mean": 5.55,
+  "batching": {
+   "batch8": {
+    "ms_per_question": 5.42,
+    "total_s": 12.7
+   },
+   "batch32": {
+    "ms_per_question": 5.32,
+    "total_s": 12.5
+   },
+   "batch128": {
+    "ms_per_question": 5.3,
+    "total_s": 12.4
+   }
+  },
+  "int8_inprocess_ms_median": 2.15,
+  "int8_inprocess_ms_p95": 3.72
+ },
+ "runner_memory": {
+  "peak_wset_MB": 73,
+  "private_MB": 66,
+  "wset_MB": 69
+ }
+}

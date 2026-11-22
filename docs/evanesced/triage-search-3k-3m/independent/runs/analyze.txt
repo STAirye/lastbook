@@ -1,0 +1,134 @@
+text differ between modes: []
+urgent {'red': '292/343 (85%)', 'yellow': '79/104 (76%)', 'green': '155/243 (64%)', 'green counterexample': '103/128 (80%)', 'mild': '53/118 (45%)'}
+is_danger {'red': '293/343 (85%)', 'yellow': '79/104 (76%)', 'green': '155/243 (64%)', 'green counterexample': '103/128 (80%)', 'mild': '53/118 (45%)'}
+danger_signs_only {'red': '78/343 (23%)', 'yellow': '10/104 (10%)', 'green': '19/243 (8%)'}
+body_any_sign_line {'red': '141/341 (41%)', 'yellow': '20/99 (20%)', 'green': '10/113 (9%)'}
+body_inscope_any {'red': '138/211 (65%)', 'yellow': '12/15 (80%)', 'green': '8/10 (80%)'}
+body_inscope_right_category {'red': '131/211 (62%)', 'yellow': '11/15 (73%)', 'green': '8/10 (80%)'}
+body_fp {'green counterexample': '44/128 (34%)', 'green (all)': '54/243 (22%)', 'green, no in-scope sign': '46/233 (20%)', 'mild': '10/118 (8%)'}
+unknown_words {'red': '2/343 (1%)', 'yellow': '2/104 (2%)', 'green': '0/243 (0%)'}
+changed 233/690 (34%)
+by cat {'pulse': {'n': 13, 'any_body': 6, 'right_category': 6, 'urgent': 13}, 'breathing': {'n': 63, 'any_body': 55, 'right_category': 54, 'urgent': 61}, 'blue': {'n': 19, 'any_body': 13, 'right_category': 8, 'urgent': 17}, 'unconscious': {'n': 59, 'any_body': 34, 'right_category': 24, 'urgent': 47}, 'choking': {'n': 20, 'any_body': 16, 'right_category': 14, 'urgent': 19}, 'bleeding': {'n': 45, 'any_body': 29, 'right_category': 28, 'urgent': 36}, 'seizure': {'n': 20, 'any_body': 11, 'right_category': 9, 'urgent': 18}, 'chest pain': {'n': 17, 'any_body': 11, 'right_category': 8, 'urgent': 17}, 'not moving': {'n': 8, 'any_body': 8, 'right_category': 8, 'urgent': 8}, 'cold and clammy': {'n': 0, 'any_body': 0, 'right_category': 0, 'urgent': 0}}
+kw {"red": {"n": 343, "actions": {"answer": 91, "buttons": 194, "ask+pages": 36, "ask": 18, "compact buttons": 4}, "pages_withheld": 18, "first_emergency_book": 94, "top3_emergency_book": 143, "p_mean": 0.43, "unknown_capped": 2}, "yellow": {"n": 104, "actions": {"buttons": 46, "answer": 35, "ask+pages": 15, "compact buttons": 3, "ask": 5}, "pages_withheld": 5, "first_emergency_book": 24, "top3_emergency_book": 40, "p_mean": 0.402, "unknown_capped": 2}, "green": {"n": 243, "actions": {"buttons": 102, "ask+pages": 14, "answer": 108, "ask": 14, "compact buttons": 5}, "pages_withheld": 14, "first_emergency_book": 42, "top3_emergency_book": 68, "p_mean": 0.461, "unknown_capped": 0}, "all": {"n": 690, "actions": {"answer": 234, "buttons": 342, "ask+pages": 65, "ask": 37, "compact buttons": 12}, "pages_withheld": 37, "first_emergency_book": 160, "top3_emergency_book": 251, "p_mean": 0.437, "unknown_capped": 4}}
+  kw red_bare_ask 18
+  kw red_pages_withheld 18
+  kw red_ask_with_pages_no_answer 36
+  kw red_sure_non_emergency_first 42
+  kw red_sure_total 91
+  kw yellow_bare_ask 5
+hy {"red": {"n": 343, "actions": {"answer": 212, "buttons": 124, "compact buttons": 2, "ask": 4, "ask+pages": 1}, "pages_withheld": 4, "first_emergency_book": 119, "top3_emergency_book": 184, "p_mean": 0.633, "unknown_capped": 2}, "yellow": {"n": 104, "actions": {"buttons": 30, "answer": 71, "ask": 1, "ask+pages": 1, "compact buttons": 1}, "pages_withheld": 1, "first_emergency_book": 28, "top3_emergency_book": 48, "p_mean": 0.639, "unknown_capped": 2}, "green": {"n": 243, "actions": {"answer": 168, "buttons": 72, "compact buttons": 2, "ask+pages": 1}, "pages_withheld": 0, "first_emergency_book": 41, "top3_emergency_book": 85, "p_mean": 0.616, "unknown_capped": 0}, "all": {"n": 690, "actions": {"answer": 451, "buttons": 226, "compact buttons": 5, "ask": 5, "ask+pages": 3}, "pages_withheld": 5, "first_emergency_book": 188, "top3_emergency_book": 317, "p_mean": 0.628, "unknown_capped": 4}}
+  hy red_bare_ask 4
+  hy red_pages_withheld 4
+  hy red_ask_with_pages_no_answer 1
+  hy red_sure_non_emergency_first 110
+  hy red_sure_total 212
+  hy yellow_bare_ask 1
+typos {'typo': {'n': 55, 'fixed': 34, 'nothing to fix': 2, 'left as typed': 8, 'wrong word': 9, 'partly fixed': 2}, 'glued': {'n': 11, 'fixed': 8, 'wrong word': 3}, 'real-word-typo': {'n': 20, 'fixed': 3, 'nothing to fix': 1, 'wrong word': 4, 'left as typed': 11, 'partly fixed': 1}, 'all lines': {'n': 84, 'fixed': 45, 'nothing to fix': 3, 'left as typed': 19, 'wrong word': 15, 'partly fixed': 2}}
+plain {'kw': {'n': 144, 'red': 100, 'yellow': 43, 'green': 1, 'urgent_red': 89, 'urgent_yellow': 31, 'urgent_green': 0, 'body_inscope': 64, 'body_inscope_hit': 49, 'red_bare_ask': 4, 'red_withheld': 4, 'red_ask_pages': 17, 'red_first_emergency': 30}, 'hy': {'n': 144, 'red': 100, 'yellow': 43, 'green': 1, 'urgent_red': 89, 'urgent_yellow': 31, 'urgent_green': 0, 'body_inscope': 64, 'body_inscope_hit': 49, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 38}}
+typo {'kw': {'n': 55, 'red': 45, 'yellow': 8, 'green': 2, 'urgent_red': 35, 'urgent_yellow': 5, 'urgent_green': 0, 'body_inscope': 31, 'body_inscope_hit': 22, 'red_bare_ask': 1, 'red_withheld': 1, 'red_ask_pages': 1, 'red_first_emergency': 17}, 'hy': {'n': 55, 'red': 45, 'yellow': 8, 'green': 2, 'urgent_red': 35, 'urgent_yellow': 5, 'urgent_green': 0, 'body_inscope': 31, 'body_inscope_hit': 22, 'red_bare_ask': 2, 'red_withheld': 2, 'red_ask_pages': 1, 'red_first_emergency': 23}}
+glued {'kw': {'n': 11, 'red': 11, 'yellow': 0, 'green': 0, 'urgent_red': 10, 'urgent_yellow': 0, 'urgent_green': 0, 'body_inscope': 10, 'body_inscope_hit': 8, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 5}, 'hy': {'n': 11, 'red': 11, 'yellow': 0, 'green': 0, 'urgent_red': 10, 'urgent_yellow': 0, 'urgent_green': 0, 'body_inscope': 10, 'body_inscope_hit': 8, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 6}}
+real-word-typo {'kw': {'n': 20, 'red': 20, 'yellow': 0, 'green': 0, 'urgent_red': 16, 'urgent_yellow': 0, 'urgent_green': 0, 'body_inscope': 16, 'body_inscope_hit': 7, 'red_bare_ask': 2, 'red_withheld': 2, 'red_ask_pages': 0, 'red_first_emergency': 4}, 'hy': {'n': 20, 'red': 20, 'yellow': 0, 'green': 0, 'urgent_red': 16, 'urgent_yellow': 0, 'urgent_green': 0, 'body_inscope': 16, 'body_inscope_hit': 7, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 4}}
+slang {'kw': {'n': 69, 'red': 31, 'yellow': 10, 'green': 28, 'urgent_red': 25, 'urgent_yellow': 7, 'urgent_green': 21, 'body_inscope': 26, 'body_inscope_hit': 18, 'red_bare_ask': 3, 'red_withheld': 3, 'red_ask_pages': 5, 'red_first_emergency': 4}, 'hy': {'n': 69, 'red': 31, 'yellow': 10, 'green': 28, 'urgent_red': 25, 'urgent_yellow': 7, 'urgent_green': 21, 'body_inscope': 26, 'body_inscope_hit': 18, 'red_bare_ask': 1, 'red_withheld': 1, 'red_ask_pages': 0, 'red_first_emergency': 7}}
+non-native {'kw': {'n': 25, 'red': 21, 'yellow': 1, 'green': 3, 'urgent_red': 18, 'urgent_yellow': 1, 'urgent_green': 3, 'body_inscope': 16, 'body_inscope_hit': 8, 'red_bare_ask': 1, 'red_withheld': 1, 'red_ask_pages': 2, 'red_first_emergency': 4}, 'hy': {'n': 25, 'red': 21, 'yellow': 1, 'green': 3, 'urgent_red': 18, 'urgent_yellow': 1, 'urgent_green': 3, 'body_inscope': 16, 'body_inscope_hit': 8, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 6}}
+fragment {'kw': {'n': 93, 'red': 57, 'yellow': 13, 'green': 23, 'urgent_red': 44, 'urgent_yellow': 8, 'urgent_green': 11, 'body_inscope': 34, 'body_inscope_hit': 21, 'red_bare_ask': 3, 'red_withheld': 3, 'red_ask_pages': 2, 'red_first_emergency': 22}, 'hy': {'n': 93, 'red': 57, 'yellow': 13, 'green': 23, 'urgent_red': 44, 'urgent_yellow': 8, 'urgent_green': 11, 'body_inscope': 34, 'body_inscope_hit': 21, 'red_bare_ask': 3, 'red_withheld': 3, 'red_ask_pages': 1, 'red_first_emergency': 22}}
+misconception {'kw': {'n': 40, 'red': 24, 'yellow': 6, 'green': 10, 'urgent_red': 21, 'urgent_yellow': 6, 'urgent_green': 7, 'body_inscope': 14, 'body_inscope_hit': 8, 'red_bare_ask': 1, 'red_withheld': 1, 'red_ask_pages': 1, 'red_first_emergency': 7}, 'hy': {'n': 40, 'red': 24, 'yellow': 6, 'green': 10, 'urgent_red': 21, 'urgent_yellow': 6, 'urgent_green': 7, 'body_inscope': 14, 'body_inscope_hit': 8, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 11}}
+child {'kw': {'n': 60, 'red': 31, 'yellow': 12, 'green': 17, 'urgent_red': 25, 'urgent_yellow': 10, 'urgent_green': 9, 'body_inscope': 18, 'body_inscope_hit': 12, 'red_bare_ask': 2, 'red_withheld': 2, 'red_ask_pages': 4, 'red_first_emergency': 7}, 'hy': {'n': 60, 'red': 31, 'yellow': 12, 'green': 17, 'urgent_red': 25, 'urgent_yellow': 10, 'urgent_green': 9, 'body_inscope': 18, 'body_inscope_hit': 12, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 7}}
+baby {'kw': {'n': 38, 'red': 26, 'yellow': 4, 'green': 8, 'urgent_red': 26, 'urgent_yellow': 4, 'urgent_green': 6, 'body_inscope': 17, 'body_inscope_hit': 12, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 1, 'red_first_emergency': 5}, 'hy': {'n': 38, 'red': 26, 'yellow': 4, 'green': 8, 'urgent_red': 26, 'urgent_yellow': 4, 'urgent_green': 6, 'body_inscope': 17, 'body_inscope_hit': 12, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 1, 'red_first_emergency': 7}}
+elderly {'kw': {'n': 32, 'red': 17, 'yellow': 13, 'green': 2, 'urgent_red': 13, 'urgent_yellow': 10, 'urgent_green': 0, 'body_inscope': 13, 'body_inscope_hit': 3, 'red_bare_ask': 3, 'red_withheld': 3, 'red_ask_pages': 5, 'red_first_emergency': 4}, 'hy': {'n': 32, 'red': 17, 'yellow': 13, 'green': 2, 'urgent_red': 13, 'urgent_yellow': 10, 'urgent_green': 0, 'body_inscope': 13, 'body_inscope_hit': 3, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 2}}
+pregnancy {'kw': {'n': 24, 'red': 14, 'yellow': 7, 'green': 3, 'urgent_red': 13, 'urgent_yellow': 6, 'urgent_green': 2, 'body_inscope': 5, 'body_inscope_hit': 5, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 3, 'red_first_emergency': 1}, 'hy': {'n': 24, 'red': 14, 'yellow': 7, 'green': 3, 'urgent_red': 13, 'urgent_yellow': 6, 'urgent_green': 2, 'body_inscope': 5, 'body_inscope_hit': 5, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 2}}
+caps {'kw': {'n': 11, 'red': 8, 'yellow': 3, 'green': 0, 'urgent_red': 7, 'urgent_yellow': 3, 'urgent_green': 0, 'body_inscope': 8, 'body_inscope_hit': 6, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 1, 'red_first_emergency': 3}, 'hy': {'n': 11, 'red': 8, 'yellow': 3, 'green': 0, 'urgent_red': 7, 'urgent_yellow': 3, 'urgent_green': 0, 'body_inscope': 8, 'body_inscope_hit': 6, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 4}}
+rambling {'kw': {'n': 11, 'red': 9, 'yellow': 0, 'green': 2, 'urgent_red': 5, 'urgent_yellow': 0, 'urgent_green': 1, 'body_inscope': 6, 'body_inscope_hit': 2, 'red_bare_ask': 3, 'red_withheld': 3, 'red_ask_pages': 2, 'red_first_emergency': 3}, 'hy': {'n': 11, 'red': 9, 'yellow': 0, 'green': 2, 'urgent_red': 5, 'urgent_yellow': 0, 'urgent_green': 1, 'body_inscope': 6, 'body_inscope_hit': 2, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 2}}
+counterexample {'kw': {'n': 128, 'red': 0, 'yellow': 0, 'green': 128, 'urgent_red': 0, 'urgent_yellow': 0, 'urgent_green': 103, 'body_inscope': 0, 'body_inscope_hit': 0, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 0}, 'hy': {'n': 128, 'red': 0, 'yellow': 0, 'green': 128, 'urgent_red': 0, 'urgent_yellow': 0, 'urgent_green': 103, 'body_inscope': 0, 'body_inscope_hit': 0, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 0}}
+mild {'kw': {'n': 118, 'red': 0, 'yellow': 3, 'green': 115, 'urgent_red': 0, 'urgent_yellow': 1, 'urgent_green': 52, 'body_inscope': 10, 'body_inscope_hit': 8, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 0}, 'hy': {'n': 118, 'red': 0, 'yellow': 3, 'green': 115, 'urgent_red': 0, 'urgent_yellow': 1, 'urgent_green': 52, 'body_inscope': 10, 'body_inscope_hit': 8, 'red_bare_ask': 0, 'red_withheld': 0, 'red_ask_pages': 0, 'red_first_emergency': 0}}
+{'web-inspired': {'kw': {'n': 355, 'red': 202, 'yellow': 95, 'green': 58, 'urgent_red': 176, 'urgent_yellow': 73, 'urgent_green': 25, 'body_inscope': 115, 'body_inscope_hit': 80, 'red_bare_ask': 10, 'red_withheld': 10, 'red_ask_pages': 29, 'red_first_emergency': 54}, 'hy': {'n': 355, 'red': 202, 'yellow': 95, 'green': 58, 'urgent_red': 176, 'urgent_yellow': 73, 'urgent_green': 25, 'body_inscope': 115, 'body_inscope_hit': 80, 'red_bare_ask': 2, 'red_withheld': 2, 'red_ask_pages': 0, 'red_first_emergency': 75}}, 'invented': {'kw': {'n': 335, 'red': 141, 'yellow': 9, 'green': 185, 'urgent_red': 117, 'urgent_yellow': 6, 'urgent_green': 130, 'body_inscope': 121, 'body_inscope_hit': 78, 'red_bare_ask': 8, 'red_withheld': 8, 'red_ask_pages': 7, 'red_first_emergency': 40}, 'hy': {'n': 335, 'red': 141, 'yellow': 9, 'green': 185, 'urgent_red': 117, 'urgent_yellow': 6, 'urgent_green': 130, 'body_inscope': 121, 'body_inscope_hit': 78, 'red_bare_ask': 2, 'red_withheld': 2, 'red_ask_pages': 1, 'red_first_emergency': 44}}}
+== not_urgent_red 50
+   8 unconscious euphemisms (slumped, out cold, on the floor, won't answer, hard to rouse) | he turned a funny colour and slumped / old lady on the floor in the shop wont answer me / nooo she's grey and cold and not answering me pls / she isnt responsive at all
+   8 real-word autocorrect / real-word typo (breeding, breaking, sea sure, past out) | strock / poisend / she is breeding a lot from the leg / he past out
+   7 stroke words (face, arm, speech, one side, vision) | mum suddenly cant lift her right arm and talking funny / he sounds drunk but he hasnt been drinking and his smile is crooked / sudden blind in one eye like a curtain / so like i was at my cousins bbq and my uncle had a few beers and then he just kind of sat down weird and now hes sweating heaps and saying his arm feels heavy and everyone says its the heat but i dunno
+   6 misspelling the corrector left or bent | should i put a tournaquet on or just press / siezing / unconshus man / hemmorage
+   5 overdose / poisoning without the word | he took a whole box of paracetamol but he says he feels fine / let him sleep it off hes really drunk and cant stand / the child is drinking the cleaning water / over dose on xanax
+   2 agonal / noisy breathing (snoring, gurgling, stridor) | stridor croup barky cough 3am / she's gurgling
+   2 suicide / self-harm euphemisms | my friend texted goodbye and wont answer / killing myself tonight
+   2 limb / circulation (can't feel legs, tight cast) | SHE CANT FEEL HER LEGS / cast feels super tight toes going cold
+   1 severe headache | worst headache of my life came on like a thunderclap
+   1 drowning / submersion without the word | kid was under the bath water how long dont know coughing now
+   1 cold / heat exposure | should i rub his hands and give him brandy hes frozen
+   1 child/baby specific (red jelly poo) | my son wont stop crying and his tummy is hard and he pulls his legs up and theres red jelly poo
+   1 first-aid misconception (venom, finger sweep) | should i suck the venom out
+   1 eye injury | eye got hit by a firework cant see
+   1 colour words (grey, ash, funny colour) | she is not good, colour is like ash
+   1 other | 911
+   1 pregnancy / birth | leaking fluid 30 weeks
+   1 non-English | ma tête tourne et je vois flou soudain
+== not_urgent_yellow 25
+   10 yellow conditions with no urgent word (fracture, tooth, urine, infection, object) | my 2 yr old put a bead up her nose / cant pee at all since yesterday belly swollen / cat scratch on hand now swollen and red / mum dementia hasnt peed all day
+   3 bleeding wordings without blood/bleed (pouring, oozing, cut off, shot) | heavy period soaking pad every hour dizzy / nosebleed wont stop for 30 min / sliced palm deep can see white stuff
+   2 other | hlep / helo my son
+   2 misspelling the corrector left or bent | pnemonia / cellulitus red hot leg spreading
+   2 stroke words (face, arm, speech, one side, vision) | had a funny turn / my gran's come over all peculiar
+   1 overdose / poisoning without the word | took 2 extra panadol by mistake
+   1 cold / heat exposure | bit dizzy and headache in the heat drinking water now
+   1 pregnancy / birth | spotting at 7 weeks with cramps
+   1 unconscious euphemisms (slumped, out cold, on the floor, won't answer, hard to rouse) | my nan is on the floor and she cant get up but shes talking
+   1 suicide / self-harm euphemisms | i want to disappear forever
+   1 eye injury | something in my eye wont come out and its scratching
+== body_missed_inscope_red_yellow 76
+   16 unconscious euphemisms (slumped, out cold, on the floor, won't answer, hard to rouse) | grandpa fell over in the garden snoring loud cant wake him / he turned a funny colour and slumped / found him face down in the pond / old lady on the floor in the shop wont answer me
+   11 real-word autocorrect / real-word typo (breeding, breaking, sea sure, past out) | brest pain / cheat pain / chest pane / she is breeding a lot from the leg
+   9 chest pain / heart wordings (elephant, tight chest, heart racing) | i cant feel his heart beating / feels like an elephant sitting on my chest and im sweating / tight chest jaw ache feel sick 58 m / heart racing like crazy wont slow down feel faint
+   9 bleeding wordings without blood/bleed (pouring, oozing, cut off, shot) | i think his leg is broken bone sticking out / he got shot in the leg / heavy period soaking pad every hour dizzy / vomit looks like coffee grounds
+   8 misspelling the corrector left or bent | should i put a tournaquet on or just press / blu lip baby / siezing / unconshus man
+   7 seizure slang (fitting, shaking, eyes rolling, tongue) | shes fitting and wont stop been 6 minutes / he is shaking all over on the floor and foam from mouth / put something in his mouth so he doesnt swallow his tongue?? / my baby is hot and shaking and his eyes rolled back
+   3 CPR named, no body word (body_signs only) | how do i do cpr on a man / how many pushes for cpr baby / cpr on dog or person same?? my husband
+   2 overdose / poisoning without the word | he fell asleep drunk on his back and being sick / my nan swallowed her denture plate i think shes coughing
+   2 blue alone ("hes blue") | hes blue / it was a blue screen but now my brother is blue
+   2 other | we were hiking and my wife slipped on the rocks and hit her head she was out for maybe a minute and now shes awake but keeps asking the same questions over and over / the old man fall in the bath, he is cold and talk little
+   1 allergy / anaphylaxis words | throat closing up ate shrimp
+   1 child/baby specific (red jelly poo) | my son wont stop crying and his tummy is hard and he pulls his legs up and theres red jelly poo
+   1 breathing difficulty words (asthma, inhaler) | asthma attack inhaler not working
+   1 non-English | mi esposa no respira help
+   1 colour words (grey, ash, funny colour) | she is not good, colour is like ash
+   1 first-aid misconception (venom, finger sweep) | finger sweep babys mouth to get it out
+   1 agonal / noisy breathing (snoring, gurgling, stridor) | she's gurgling
+== red_withheld_kw 18
+   5 unconscious euphemisms (slumped, out cold, on the floor, won't answer, hard to rouse) | old lady on the floor in the shop wont answer me / my neighbour is old and lives alone, i havent seen her for 2 days, i looked through the window and shes on the kitchen floor and moving her hand a bit / grandma keeps falling asleep in the chair more than usual and is hard to rouse / he's out cold on the pavement after the fight
+   3 overdose / poisoning without the word | he took a whole box of paracetamol but he says he feels fine / let him sleep it off hes really drunk and cant stand / she is ok i think she just took 20 of her sleeping tablets to rest
+   3 real-word autocorrect / real-word typo (breeding, breaking, sea sure, past out) | he cant breed / my son is having a sea sure / she keeled over
+   2 stroke words (face, arm, speech, one side, vision) | ok so sorry if this is dumb but my dad keeps saying hes fine but he cant really say words right since lunch and his coffee keeps dribbling out the side of his mouth should i wait for my mum to get home / im fine dont worry just cant feel the left side of my body
+   1 severe headache | worst headache of my life came on like a thunderclap
+   1 child/baby specific (red jelly poo) | my son wont stop crying and his tummy is hard and he pulls his legs up and theres red jelly poo
+   1 colour words (grey, ash, funny colour) | she is not good, colour is like ash
+   1 other | 911
+   1 misspelling the corrector left or bent | hemmorage
+== red_withheld_hy 4
+   2 misspelling the corrector left or bent | hemmorage / sooo much bloooood
+   1 other | 911
+   1 unconscious euphemisms (slumped, out cold, on the floor, won't answer, hard to rouse) | he dropped like a stone in the middle of football
+== combined_red_yellow 126
+   17 unconscious euphemisms (slumped, out cold, on the floor, won't answer, hard to rouse) | grandpa fell over in the garden snoring loud cant wake him / he turned a funny colour and slumped / found him face down in the pond / old lady on the floor in the shop wont answer me
+   13 real-word autocorrect / real-word typo (breeding, breaking, sea sure, past out) | strock / poisend / brest pain / cheat pain
+   10 misspelling the corrector left or bent | should i put a tournaquet on or just press / blu lip baby / siezing / unconshus man
+   10 bleeding wordings without blood/bleed (pouring, oozing, cut off, shot) | i think his leg is broken bone sticking out / he got shot in the leg / heavy period soaking pad every hour dizzy / vomit looks like coffee grounds
+   10 yellow conditions with no urgent word (fracture, tooth, urine, infection, object) | my 2 yr old put a bead up her nose / cant pee at all since yesterday belly swollen / cat scratch on hand now swollen and red / mum dementia hasnt peed all day
+   9 chest pain / heart wordings (elephant, tight chest, heart racing) | i cant feel his heart beating / feels like an elephant sitting on my chest and im sweating / tight chest jaw ache feel sick 58 m / heart racing like crazy wont slow down feel faint
+   9 stroke words (face, arm, speech, one side, vision) | mum suddenly cant lift her right arm and talking funny / he sounds drunk but he hasnt been drinking and his smile is crooked / sudden blind in one eye like a curtain / so like i was at my cousins bbq and my uncle had a few beers and then he just kind of sat down weird and now hes sweating heaps and saying his arm feels heavy and everyone says its the heat but i dunno
+   8 overdose / poisoning without the word | he took a whole box of paracetamol but he says he feels fine / took 2 extra panadol by mistake / he fell asleep drunk on his back and being sick / let him sleep it off hes really drunk and cant stand
+   7 seizure slang (fitting, shaking, eyes rolling, tongue) | shes fitting and wont stop been 6 minutes / he is shaking all over on the floor and foam from mouth / put something in his mouth so he doesnt swallow his tongue?? / my baby is hot and shaking and his eyes rolled back
+   5 other | hlep / helo my son / 911 / we were hiking and my wife slipped on the rocks and hit her head she was out for maybe a minute and now shes awake but keeps asking the same questions over and over
+   3 CPR named, no body word (body_signs only) | how do i do cpr on a man / how many pushes for cpr baby / cpr on dog or person same?? my husband
+   3 suicide / self-harm euphemisms | my friend texted goodbye and wont answer / killing myself tonight / i want to disappear forever
+   2 cold / heat exposure | should i rub his hands and give him brandy hes frozen / bit dizzy and headache in the heat drinking water now
+   2 pregnancy / birth | spotting at 7 weeks with cramps / leaking fluid 30 weeks
+   2 agonal / noisy breathing (snoring, gurgling, stridor) | stridor croup barky cough 3am / she's gurgling
+   2 first-aid misconception (venom, finger sweep) | should i suck the venom out / finger sweep babys mouth to get it out
+   2 eye injury | eye got hit by a firework cant see / something in my eye wont come out and its scratching
+   2 non-English | mi esposa no respira help / ma tête tourne et je vois flou soudain
+   2 blue alone ("hes blue") | hes blue / it was a blue screen but now my brother is blue
+   2 limb / circulation (can't feel legs, tight cast) | SHE CANT FEEL HER LEGS / cast feels super tight toes going cold
+   1 severe headache | worst headache of my life came on like a thunderclap
+   1 allergy / anaphylaxis words | throat closing up ate shrimp
+   1 drowning / submersion without the word | kid was under the bath water how long dont know coughing now
+   1 child/baby specific (red jelly poo) | my son wont stop crying and his tummy is hard and he pulls his legs up and theres red jelly poo
+   1 breathing difficulty words (asthma, inhaler) | asthma attack inhaler not working
+   1 colour words (grey, ash, funny colour) | she is not good, colour is like ash
+urgent FP words [('burn', 9), ('bleeding', 9), ('blood', 7), ('cut', 6), ('baby', 6), ('head', 5), ('bleed', 5), ('heart', 5), ('dead', 5), ('blue', 5), ('stroke', 5), ('breathing', 4), ('ate', 4), ('breath', 4), ('pulse', 4), ('sting', 3), ('fell', 3), ('pregnant', 3), ('choking', 3), ('dying', 3), ('broken', 3), ('fit', 3), ('lips', 3), ('car', 3), ('burnt', 2), ('fever', 2), ('neck', 2), ('burned', 2), ('hurts', 2), ('bone', 2)]

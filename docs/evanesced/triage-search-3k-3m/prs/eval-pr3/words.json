@@ -1,0 +1,743 @@
+{
+ "triage clean": {
+  "n": 253,
+  "changed": 0,
+  "examples": []
+ },
+ "triage typos": {
+  "n": 109,
+  "changed": 100,
+  "examples": [
+   [
+    "my husbnd colapsed and isnt breating",
+    "my husband collapsed and isn't breathing"
+   ],
+   [
+    "he stoped breathin wat do i do",
+    "he stopped breathing wat do i do"
+   ],
+   [
+    "my sun isnt brething",
+    "my sun isn't breathing"
+   ],
+   [
+    "kid not breating lips blu",
+    "kid not breathing lips blu"
+   ],
+   [
+    "my bby is not breathng",
+    "my baby is not breathing"
+   ],
+   [
+    "infnt stoped breathing",
+    "infant stopped breathing"
+   ],
+   [
+    "hes chocking on food cant talk",
+    "he's choking on food can't talk"
+   ],
+   [
+    "somone chokin at diner",
+    "someone choking at diner"
+   ],
+   [
+    "baby chokeing on grape",
+    "baby choking on grape"
+   ],
+   [
+    "todler choking on coin",
+    "toddler choking on coin"
+   ],
+   [
+    "she is unconsious but breathing",
+    "she is unconscious but breathing"
+   ],
+   [
+    "he pased out wont wake up",
+    "he passed out won't wake up"
+   ],
+   [
+    "asma attack no inhaler",
+    "asthma attack no inhaler"
+   ],
+   [
+    "she cant breath wheezing bad",
+    "she can't breath wheezing bad"
+   ],
+   [
+    "throat sweling after bee sting",
+    "throat swelling after bee sting"
+   ],
+   [
+    "alergic reaction lips sweling",
+    "allergic reaction lips swelling"
+   ],
+   [
+    "smoke inhilation from house fire",
+    "smoke inhalation from house fire"
+   ],
+   [
+    "carbon monoxid poisoning",
+    "carbon monoxide poisoning"
+   ],
+   [
+    "hedache dizy generator inside",
+    "headache dizzy generator inside"
+   ],
+   [
+    "blod spurting from his leg wont stop",
+    "blood spurting from his leg won't stop"
+   ],
+   [
+    "bleding alot from arm",
+    "bleeding lot from arm"
+   ],
+   [
+    "bleeeding wont stop",
+    "bleeding won't stop"
+   ],
+   [
+    "his fingr got cut of",
+    "his finger got cut of"
+   ],
+   [
+    "stabed in the chest",
+    "stabbed in the chest"
+   ],
+   [
+    "stik stuck in his leg",
+    "stick stuck in his leg"
+   ],
+   [
+    "chest pian left arm",
+    "chest pain left arm"
+   ],
+   [
+    "dad having a hart attack",
+    "dad having a heart attack"
+   ],
+   [
+    "pale cold sweaty after acident",
+    "pale cold sweaty after accident"
+   ],
+   [
+    "dog atacked my child bleding bad",
+    "dog attacked my child bleeding bad"
+   ],
+   [
+    "her face is droping cant speek",
+    "her face is dropping can't seek"
+   ],
+   [
+    "sudden weaknes one side",
+    "sudden weakness one side"
+   ],
+   [
+    "hes having a siezure",
+    "he's having a seizure"
+   ],
+   [
+    "having a seazure",
+    "having a seizure"
+   ],
+   [
+    "baby high fevr shaking all over",
+    "baby high fever shaking all over"
+   ],
+   [
+    "hit his hed vomiting confussed",
+    "hit his head vomiting confused"
+   ],
+   [
+    "fell of the roof cant move legs",
+    "fell of the roof can't move legs"
+   ],
+   [
+    "diabetik shaking confused",
+    "diabetic shaking confused"
+   ],
+   [
+    "overdoes barely breathing",
+    "overdose barely breathing"
+   ],
+   [
+    "baby fever rash doesnt fade",
+    "baby fever rash doesn't fade"
+   ],
+   [
+    "frend says he wants to kill himslef",
+    "friend says he wants to kill himself"
+   ],
+   [
+    "my son neary drownd in the pool",
+    "my son near drowned in the pool"
+   ],
+   [
+    "pulled him out of the rver not breathin",
+    "pulled him out of the river not breathing"
+   ],
+   [
+    "shoked by a wire in flood water",
+    "shocked by a wire in flood water"
+   ],
+   [
+    "elecrtic shock fallen wire",
+    "electric shock fallen wire"
+   ],
+   [
+    "whole arm badly burnd",
+    "whole arm badly burn"
+   ],
+   [
+    "boiling water spiled on the baby",
+    "boiling water spilled on the baby"
+   ],
+   [
+    "burnt and not breething",
+    "burnt and not breathing"
+   ],
+   [
+    "hypothermai after falling in cold water",
+    "hypothermia after falling in cold water"
+   ],
+   [
+    "heat strok what to do",
+    "heat stroke what to do"
+   ],
+   [
+    "snak bit my leg",
+    "snake bit my leg"
+   ],
+   [
+    "biten by a ratlesnake",
+    "bite by a rattlesnake"
+   ],
+   [
+    "legs traped under fallen wall",
+    "legs trapped under fallen wall"
+   ],
+   [
+    "car crsh driver traped",
+    "car crash driver trapped"
+   ],
+   [
+    "splahsed bleach in my eye",
+    "splashed bleach in my eye"
+   ],
+   [
+    "todler drank bleech",
+    "toddler drank bleach"
+   ],
+   [
+    "kid swalowed drain cleaner",
+    "kid swallowed drain cleaner"
+   ],
+   [
+    "child swalowed lamp oil",
+    "child swallowed lamp oil"
+   ],
+   [
+    "kid ate a botle of pils",
+    "kid ate a bottle of pills"
+   ],
+   [
+    "ate wild mushroms vomiting",
+    "ate wild mushrooms vomiting"
+   ],
+   [
+    "the baby is comming now",
+    "the baby is coming now"
+   ],
+   [
+    "water broke i can see the hed",
+    "water broke i can see the head"
+   ],
+   [
+    "heavy bleding after giving birth",
+    "heavy bleeding after giving birth"
+   ],
+   [
+    "newbron not breathing",
+    "newborn not breathing"
+   ],
+   [
+    "pregant and bleeding",
+    "pregnant and bleeding"
+   ],
+   [
+    "fier in the house",
+    "fire in the house"
+   ],
+   [
+    "greese fire in the pan",
+    "grease fire in the pan"
+   ],
+   [
+    "oil in pan cought fire",
+    "oil in pan cough fire"
+   ],
+   [
+    "chimny fire",
+    "chimney fire"
+   ],
+   [
+    "i smel gas in the house",
+    "i smell gas in the house"
+   ],
+   [
+    "gas leek from stove",
+    "gas leak from stove"
+   ],
+   [
+    "wildfrie coming to our house",
+    "wildfire coming to our house"
+   ],
+   [
+    "car stuk in rising flood water",
+    "car stuck in rising flood water"
+   ],
+   [
+    "tsunammi warning",
+    "tsunami warning"
+   ],
+   [
+    "earthqauke happening",
+    "earthquake happening"
+   ],
+   [
+    "tornado comming where to hide",
+    "tornado coming where to hide"
+   ],
+   [
+    "some one is shoting in the mall",
+    "some one is shooting in the mall"
+   ],
+   [
+    "explotion people bleeding",
+    "explosion people bleeding"
+   ],
+   [
+    "nucelar explosion",
+    "nuclear explosion"
+   ],
+   [
+    "chemcial spill outside",
+    "chemical spill outside"
+   ],
+   [
+    "someones braking into my house",
+    "someone's braking into my house"
+   ],
+   [
+    "burnd my hand on the stove",
+    "burn my hand on the stove"
+   ],
+   [
+    "brunt my fingers campfire",
+    "burnt my fingers campfire"
+   ],
+   [
+    "cut my fingr with a knife",
+    "cut my finger with a knife"
+   ],
+   [
+    "twistd my ankel",
+    "twist my ankle"
+   ],
+   [
+    "i think my arm is brokn",
+    "i think my arm is broken"
+   ],
+   [
+    "brken leg",
+    "broken leg"
+   ],
+   [
+    "nosebled wont stop",
+    "nosebleed won't stop"
+   ],
+   [
+    "tooth nocked out",
+    "tooth nicked out"
+   ],
+   [
+    "stug by a bee",
+    "stung by a bee"
+   ],
+   [
+    "scorpoin sting on my foot",
+    "scorpion sting on my foot"
+   ],
+   [
+    "dog bit my hand smal wound",
+    "dog bit my hand small wound"
+   ],
+   [
+    "diarea for two days",
+    "diarrhea for two days"
+   ],
+   [
+    "drank creek water now diarrea",
+    "drank creek water now diarrhea"
+   ],
+   [
+    "my chlid keeps throwing up",
+    "my child keeps throwing up"
+   ],
+   [
+    "child has a fevor",
+    "child has a fever"
+   ],
+   [
+    "how do i purfy water",
+    "how do i purify water"
+   ],
+   [
+    "make watter safe to drink",
+    "make water safe to drink"
+   ],
+   [
+    "start a fier no matches",
+    "start a fire no matches"
+   ],
+   [
+    "how to use a fire extinguiser",
+    "how to use a fire extinguisher"
+   ],
+   [
+    "fire extingisher how to use",
+    "fire extinguisher how to use"
+   ]
+  ]
+ },
+ "154 clean": {
+  "n": 32,
+  "changed": 0,
+  "examples": []
+ },
+ "154 typos": {
+  "n": 32,
+  "changed": 32,
+  "examples": [
+   [
+    "burnd my hand tryng to lite a fire",
+    "burn my hand trying to lite a fire"
+   ],
+   [
+    "i brunt my fingrs lighting the campfier",
+    "i burnt my fingers lighting the campfire"
+   ],
+   [
+    "smoke inhalaton from lightin a fire inside",
+    "smoke inhalation from lighting a fire inside"
+   ],
+   [
+    "carbon monoxid from making a fire in the tnet",
+    "carbon monoxide from making a fire in the tent"
+   ],
+   [
+    "my cloths cought fire wile starting the fire",
+    "my cloths cough fire while starting the fire"
+   ],
+   [
+    "my kid fel into the fire wile we were makin a fire",
+    "my kid feel into the fire while we were making a fire"
+   ],
+   [
+    "treat watter in the lungs after drownin",
+    "treat water in the lungs after drowning"
+   ],
+   [
+    "how do i treat water blisers on a burn",
+    "how do i treat water blisters on a burn"
+   ],
+   [
+    "how do i treat water posioning",
+    "how do i treat water poisoning"
+   ],
+   [
+    "lite a fire to keep him warm with hypothrmia",
+    "lite a fire to keep him warm with hypothermia"
+   ],
+   [
+    "my sun neary drowned in the rainwater pool",
+    "my sun near drowned in the rainwater pool"
+   ],
+   [
+    "somone fell in the rainwater pool and isnt breathing",
+    "someone fell in the rainwater pool and isn't breathing"
+   ],
+   [
+    "he swalowed pool water and now hes coughing",
+    "he swallowed pool water and now he's coughing"
+   ],
+   [
+    "drank creek water now i have diarea",
+    "drank creek water now i have diarrhea"
+   ],
+   [
+    "my kid swallowd lamp oyl",
+    "my kid swallow lamp oyl"
+   ],
+   [
+    "scorpian sting on my foot",
+    "scorpion sting on my foot"
+   ],
+   [
+    "rash from posion ivy",
+    "rash from poison ivy"
+   ],
+   [
+    "snak bite while campin",
+    "snake bite while camping"
+   ],
+   [
+    "hypothermia after faling in cold watr",
+    "hypothermia after falling in cold water"
+   ],
+   [
+    "somone got shoked by a wire in the flood watter",
+    "someone got shocked by a wire in the flood water"
+   ],
+   [
+    "is it safe to put watr on a burn",
+    "is it safe to put water on a burn"
+   ],
+   [
+    "i burnt my hand on the camp stov",
+    "i burnt my hand on the camp stove"
+   ],
+   [
+    "how do i treat a burn from a camp fier",
+    "how do i treat a burn from a camp fire"
+   ],
+   [
+    "how do i light a campfrie",
+    "how do i light a campfire"
+   ],
+   [
+    "i need to start a fire but no matchs and no gas",
+    "i need to start a fire but no match and no gas"
+   ],
+   [
+    "how do i make the water safe to drik",
+    "how do i make the water safe to drink"
+   ],
+   [
+    "how do i purfy water from a creek",
+    "how do i purify water from a creek"
+   ],
+   [
+    "how to make the water safe for babys formla",
+    "how to make the water safe for baby formula"
+   ],
+   [
+    "make a fire escape plan for my famly",
+    "make a fire escape plan for my family"
+   ],
+   [
+    "what could make a fire spred faster",
+    "what could make a fire spread faster"
+   ],
+   [
+    "pour watter on a greese fire",
+    "pour water on a grease fire"
+   ],
+   [
+    "how do i treat water damge on the floor",
+    "how do i treat water damage on the floor"
+   ]
+  ]
+ },
+ "list1 english_guard=on": {
+  "lines": 690,
+  "lines_changed": 230,
+  "lines_bent": 3,
+  "lines_bent_not_slips": 0,
+  "words": [
+   "chocking->choking",
+   "overdoes->overdose"
+  ]
+ },
+ "list2 english_guard=on": {
+  "lines": 606,
+  "lines_changed": 136,
+  "lines_bent": 1,
+  "lines_bent_not_slips": 0,
+  "words": [
+   "chocking->choking"
+  ]
+ },
+ "list3 english_guard=on": {
+  "lines": 531,
+  "lines_changed": 146,
+  "lines_bent": 0,
+  "lines_bent_not_slips": 0,
+  "words": []
+ },
+ "list4 english_guard=on": {
+  "lines": 832,
+  "lines_changed": 186,
+  "lines_bent": 0,
+  "lines_bent_not_slips": 0,
+  "words": []
+ },
+ "list1 english_guard=off": {
+  "lines": 690,
+  "lines_changed": 248,
+  "lines_bent": 40,
+  "lines_bent_not_slips": 37,
+  "words": [
+   "blacked->blocked",
+   "bleating->beating",
+   "brandy->brand",
+   "breading->breeding",
+   "burped->burned",
+   "chapped->chopped",
+   "chocking->choking",
+   "cramp->camp",
+   "crunched->crunch",
+   "crusty->crust",
+   "dads->adds",
+   "dunno->dunne",
+   "eulogy->ecology",
+   "fairies->dairies",
+   "footballer->football",
+   "gash->gas",
+   "gasps->gaps",
+   "grans->grams",
+   "keeled->peeled",
+   "kinda->kind",
+   "mumbling->tumbling",
+   "overdoes->overdose",
+   "overdosed->overdose",
+   "peed->peer",
+   "poo->poor",
+   "puking->poking",
+   "rattly->rattle",
+   "seizes->sizes",
+   "snotty->spotty",
+   "sparkler->sparkle",
+   "spewing->sewing",
+   "squishy->squash",
+   "texted->tested",
+   "tingles->tangles",
+   "tingly->ingly",
+   "twinged->tinged",
+   "wee->were"
+  ]
+ },
+ "list2 english_guard=off": {
+  "lines": 606,
+  "lines_changed": 181,
+  "lines_bent": 49,
+  "lines_bent_not_slips": 48,
+  "words": [
+   "blacked->blocked",
+   "bloated->floated",
+   "catarrh->catarrhal",
+   "chapped->chopped",
+   "chocking->choking",
+   "chundered->countered",
+   "cramp->camp",
+   "crook->cook",
+   "crusty->crust",
+   "drummer->dimmer",
+   "dude->due",
+   "fella->fell",
+   "flack->flock",
+   "gapes->gaps",
+   "gasps->gaps",
+   "giddy->buddy",
+   "gurgle->gargle",
+   "invincible->invisible",
+   "jab->job",
+   "kebab->kerb",
+   "keeled->peeled",
+   "licked->locked",
+   "missus->misses",
+   "mornings->morning",
+   "nag->bag",
+   "paining->painting",
+   "peed->peer",
+   "poo->poor",
+   "pooed->pooled",
+   "privates->private",
+   "shivery->silvery",
+   "sizzler->simpler",
+   "sofa->soda",
+   "spewing->sewing",
+   "spits->spots",
+   "swam->swim",
+   "tingly->ingly",
+   "twinged->tinged",
+   "wheezy->wheeze",
+   "whisky->whiskey",
+   "wonky->wong"
+  ]
+ },
+ "list3 english_guard=off": {
+  "lines": 531,
+  "lines_changed": 179,
+  "lines_bent": 47,
+  "lines_bent_not_slips": 47,
+  "words": [
+   "baler->baker",
+   "blacked->blocked",
+   "brisket->basket",
+   "chundering->countering",
+   "cramp->camp",
+   "creaky->creamy",
+   "crook->cook",
+   "dads->adds",
+   "drowns->drown",
+   "drummer->dimmer",
+   "dude->due",
+   "fella->fell",
+   "flutters->flutter",
+   "ghosted->hosted",
+   "gored->gore",
+   "gunky->gunk",
+   "jab->job",
+   "keeling->keeping",
+   "kinda->kind",
+   "moaning->meaning",
+   "mumbling->tumbling",
+   "nothings->nothing",
+   "outta->kutta",
+   "paining->painting",
+   "peed->peer",
+   "poo->poor",
+   "pooed->pooled",
+   "rattly->rattle",
+   "reaper->reader",
+   "rumbles->crumbles",
+   "scours->scour",
+   "scratchy->scratch",
+   "sniffle->sniff",
+   "snore->sore",
+   "sofa->soda",
+   "sparkly->sparkle",
+   "surfer->suffer",
+   "swaddle->saddle",
+   "tingles->tangles",
+   "tingly->ingly",
+   "vaped->vated",
+   "wee->were",
+   "wheezy->wheeze",
+   "zapped->tapped"
+  ]
+ },
+ "list4 english_guard=off": {
+  "lines": 832,
+  "lines_changed": 189,
+  "lines_bent": 6,
+  "lines_bent_not_slips": 6,
+  "words": [
+   "bloated->floated",
+   "gash->gas",
+   "growling->growing",
+   "timelessness->homelessness"
+  ]
+ }
+}

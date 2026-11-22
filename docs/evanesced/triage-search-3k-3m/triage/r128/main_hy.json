@@ -1,0 +1,2142 @@
+{
+"code": "D:\\git\\lastbook\\.claude\\worktrees\\lessons-main",
+"data": "D:\\LastbookData",
+"mode": "hybrid",
+"semantic": "loaded",
+"chat": false,
+"rows": [
+{
+"set": "cases128",
+"id": "128.00.0",
+"q": "what is the best way to light a campfire",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.699,
+"useful": 3,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Campfires p.None",
+"How to start a fire p.None",
+"FM 31-70 Basic Cold Weather Manual - Historical p.38",
+"Opticalman 3 and 2 p.50",
+"Two Ways to Purify Water p.None",
+"FM 3-34.331 Topographic Surveying p.86",
+"Download the Airplane Flying Handbook — Airplane Flying Handbook (FAA-H-8083-3C) (full book) p.222",
+"USMC Summer Survival Course Handbook - Historical p.32"
+]
+},
+{
+"set": "cases128",
+"id": "128.00.1",
+"q": "how to start a fire",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.68,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"How to start a fire p.None",
+"Doing factory work at home p.4",
+"Army ATP 3-50.21 Survival (2018) p.125",
+"USMC Summer Survival Course Handbook - Historical p.34",
+"Fire p.4",
+"FM 21-76 U.S. Army Survival Manual - Historical p.201",
+"Practice Your Home Fire Escape Plan p.None",
+"FM 21-76 U.S. Army Survival Manual - Historical p.67"
+]
+},
+{
+"set": "cases128",
+"id": "128.00.2",
+"q": "make fire",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.672,
+"useful": 4,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"A Healthy Home p.14",
+"Fire p.4",
+"USMC Winter Survival Course Handbook - Historical p.35",
+"FM 21-76 U.S. Army Survival Manual - Historical p.201",
+"FM 21-76 U.S. Army Survival Manual - Historical p.157",
+"Fire p.6",
+"How to start a fire p.None",
+"Army ATP 3-50.21 Survival (2018) p.123"
+]
+},
+{
+"set": "cases128",
+"id": "128.00.3",
+"q": "fire tinder",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.628,
+"useful": 6,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"USMC Winter Survival Course Handbook - Historical p.48",
+"Army ATP 3-50.21 Survival (2018) p.121",
+"Army ATP 3-50.21 Survival (2018) p.126",
+"USMC Summer Survival Course Handbook - Historical p.47",
+"FM 21-76 U.S. Army Survival Manual - Historical p.70",
+"FM 21-76 U.S. Army Survival Manual - Historical p.67",
+"How to start a fire p.None",
+"USMC Winter Survival Course Handbook - Historical p.36"
+]
+},
+{
+"set": "cases128",
+"id": "128.00.t0",
+"q": "whats the best way to lite a campfire",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.704,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Campfires p.None",
+"FM 31-70 Basic Cold Weather Manual - Historical p.38",
+"Nuclear War Survival Skills, by Cresson Kearny p.88",
+"Before a WUI Fire p.None",
+"Where to find more information p.5",
+"How to Build a Fire || REI p.None",
+"Sesame Street Wildfires Activity Book p.2",
+"USMC Summer Survival Course Handbook - Historical p.32"
+]
+},
+{
+"set": "cases128",
+"id": "128.00.t1",
+"q": "how to strat a fire",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.667,
+"useful": 2,
+"first_ok": false,
+"top3_ok": false,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"NWCG Incident Response Pocket Guide (2025) p.140",
+"https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire p.9",
+"HP2-Strat-Plan-Release-June 2018 p.3",
+"USMC Winter Survival Course Handbook - Historical p.33",
+"Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.17",
+"FM 21-76 U.S. Army Survival Manual - Historical p.67",
+"Implementation Guidelines for Executive Order 13728 – Wildland-Urban Interface Federal Risk Management PDF p.3",
+"FM 21-76 U.S. Army Survival Manual - Historical p.64"
+]
+},
+{
+"set": "cases128",
+"id": "128.00.t2",
+"q": "make fier",
+"topic": "make fire (128)",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.667,
+"useful": 0,
+"first_ok": false,
+"top3_ok": false,
+"covered": false,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"A Manual of Dyeing and Dyeing Receipts, Comprising a System of Elementary Chemistry as Applied to Dyeing p.19",
+"Steelworker Volume 1 - Metals and Welding p.135",
+"NEETS Module 04 - Electrical Conductors Wiring Techniques and Schematic Reading p.42",
+"Journal of Civil Defense 2022, Vol. 57 I-2, pg 23, \"Emergency Communications (part 3)\" by Randall Smith p.13",
+"Cotton Spinning: Its Development, Principles, and Practice p.170",
+"Make a Plan p.None",
+"Cotton Spinning: Its Development, Principles, and Practice p.272",
+"Front Matter Credits, Table of Contents p.14"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.0",
+"q": "we have no fuel to boil water, how else can i make it safe",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.822,
+"useful": 6,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Refugees and displaced women p.5",
+"USAP Continental Field Manual 2027 - Field Gear p.3",
+"Hurricane Food, Water Safety, Power Outages and Floods p.2",
+"Modern Machine-Shop Practice - Volumes I and II p.None",
+"USMC Winter Survival Course Handbook - Historical p.18",
+"Are You Ready - Basic Preparedness p.29",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.29",
+"Common health problems p.10"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.1",
+"q": "can i drink the water without boiling it",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.647,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Water and Sanitation: Keys to Staying Healthy p.23",
+"Appropriate and Inappropriate Technology p.4",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.29",
+"Belly Pain, Diarrhea, and Worms p.24",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.28",
+"Technical note 5. Emergency treatment of drinking-water at the point of use p.2",
+"Protecting Community Water p.34",
+"Common health problems p.3"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.2",
+"q": "treat water with bleach",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.685,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Are You Ready - Basic Preparedness p.28",
+"Food and Water in an Emergency p.13",
+"GUIDE01 HomeCan rev0715 p.27",
+"Prevention of Disabilities p.7",
+"The Art of Paper-Making p.None",
+"Canning p.None",
+"Canning p.None",
+"Protecting Community Water p.29"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.3",
+"q": "treat water",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.654,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Food and Water in an Emergency p.13",
+"Health Problems from Unsafe Water p.3",
+"Protecting Community Water p.29",
+"Access to health care p.15",
+"Are You Ready - Basic Preparedness p.28",
+"How to keep children healthy p.11",
+"Sphere Handbook - Humanitarian Charter and Minimum Standards in Humanitarian Response p.136",
+"Belly Pain, Diarrhea, and Worms p.26"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.t0",
+"q": "we have no fuel to boil watter how else can i make it safe",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.684,
+"useful": 1,
+"first_ok": false,
+"top3_ok": false,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"USAP Continental Field Manual 2027 - Field Gear p.3",
+"Work p.6",
+"Nuclear War Survival Skills, by Cresson Kearny p.88",
+"Sphere Handbook - Humanitarian Charter and Minimum Standards in Humanitarian Response p.295",
+"USAP Continental Field Manual 2027 - Field Gear p.14",
+"TYM T194NH Tractor Operator Manual p.115",
+"Machinery Repairman p.55",
+"How to keep children healthy p.12"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.t1",
+"q": "can i drink the water with out boiling it",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.634,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Technical note 5. Emergency treatment of drinking-water at the point of use p.2",
+"Protecting Community Water p.34",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.26",
+"How to keep children healthy p.12",
+"Two Ways to Purify Water p.None",
+"Common health problems p.10",
+"Water and Sanitation: Keys to Staying Healthy p.23",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.30"
+]
+},
+{
+"set": "cases128",
+"id": "128.01.t2",
+"q": "treat watter with bleech",
+"topic": "water safe no fuel (128)",
+"colour": "green",
+"need": [
+"PURIFY"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.669,
+"useful": 3,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Food and Water in an Emergency p.13",
+"FM 21-76 U.S. Army Survival Manual - Historical p.107",
+"STIs and other infections of the genitals p.14",
+"Sexually Transmitted Infections p.30",
+"Wood Handbook - Wood as an Engineering Material p.421",
+"Are You Ready - Basic Preparedness p.28",
+"FAO Primary Animal Health Care Worker Manual - Chapter 3: Cattle, sheep, goats and buffalo p.None",
+"USMC Winter Survival Course Handbook - Historical p.48"
+]
+},
+{
+"set": "cases128",
+"id": "128.02.0",
+"q": "how do i cook food without electricity or gas",
+"topic": "cook without power (128)",
+"colour": "green",
+"need": [
+"COOKNOPOWER"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.685,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Power Outage p.1",
+"Steps to Build a Successful Family Emergency Plan p.None",
+"Journal of Civil Defense 2021, Vol. 56, I-2, pg 30, \"Emergency Communications (part 1)\" by Randall Smith p.5",
+"#WinterReady p.None",
+"Ways to preserve food p.None",
+"Emergency prepping supplies checklist: Beginner basics p.None",
+"The Principles of Leather Manufacture p.None",
+"Are You Ready - Basic Preparedness p.30"
+]
+},
+{
+"set": "cases128",
+"id": "128.02.t0",
+"q": "how do i cook food with out electricty or gas",
+"topic": "cook without power (128)",
+"colour": "green",
+"need": [
+"COOKNOPOWER"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.693,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"A Healthy Home p.17",
+"Work p.4",
+"Work p.3",
+"Food and Water in an Emergency p.8",
+"A Healthy Home p.13",
+"Nuclear War Survival Skills, by Cresson Kearny p.88",
+"Energy Saver Guide: Tips on Saving Money and Energy at Home p.33",
+"Good Food Makes Good Health p.5"
+]
+},
+{
+"set": "cases128",
+"id": "128.03.0",
+"q": "i ran out of baby formula, what can i feed my baby",
+"topic": "out of formula (128)",
+"colour": "green",
+"need": [
+"INFANTFEED"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.699,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.67",
+"Newborns Babies and Breastfeeding p.20",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.66",
+"Breastfeeding p.3",
+"Breastfeeding and HIV p.8",
+"Breastfeeding and HIV p.5",
+"Feeding p.3",
+"Newborns Babies and Breastfeeding p.19"
+]
+},
+{
+"set": "cases128",
+"id": "128.03.t0",
+"q": "i ran out of baby formla what can i feed my baby",
+"topic": "out of formula (128)",
+"colour": "green",
+"need": [
+"INFANTFEED"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.698,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Newborns Babies and Breastfeeding p.20",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.67",
+"Breastfeeding p.3",
+"Feeding p.3",
+"Breastfeeding and HIV p.8",
+"Breastfeeding p.15",
+"Newborns Babies and Breastfeeding p.19",
+"How to keep children healthy p.4"
+]
+},
+{
+"set": "cases128",
+"id": "128.04.0",
+"q": "no soap, how do i wash my hands",
+"topic": "no soap (128)",
+"colour": "green",
+"need": [
+"HANDWASH"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.684,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Health Problems from Unsafe Water p.15",
+"Technical note 10. Hygiene promotion in emergencies p.2",
+"International First Aid Resuscitation and Education Guidelines 2025 p.136",
+"How to keep children healthy p.16",
+"Access to safe water and toilets p.3",
+"International First Aid Resuscitation and Education Guidelines 2025 p.137",
+"Water and Sanitation: Keys to Staying Healthy p.4",
+"Health care skills p.2"
+]
+},
+{
+"set": "cases128",
+"id": "128.04.t0",
+"q": "no sope how do i wash my hands",
+"topic": "no soap (128)",
+"colour": "green",
+"need": [
+"HANDWASH"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.679,
+"useful": 6,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Water and Sanitation: Keys to Staying Healthy p.4",
+"Health Problems from Unsafe Water p.15",
+"How to keep children healthy p.16",
+"Technical note 10. Hygiene promotion in emergencies p.2",
+"International First Aid Resuscitation and Education Guidelines 2025 p.136",
+"International First Aid Resuscitation and Education Guidelines 2025 p.137",
+"Access to safe water and toilets p.3",
+"CERT Basic Training Participant Manual (2019) p.134"
+]
+},
+{
+"set": "cases128",
+"id": "128.05.0",
+"q": "how to keep warm without heating in winter",
+"topic": "keep warm no heating (128)",
+"colour": "green",
+"need": [
+"WARM",
+"HEATHOME"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.694,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Winter Storm p.2",
+"FEMA Full Suite of Hazard Information Sheets (2024) p.35",
+"#WinterReady p.None",
+"Winter Weather p.None",
+"Energy Saver Guide: Tips on Saving Money and Energy at Home p.14",
+"#WinterReady Social Media Toolkit p.None",
+"Advice on Emergency Preparedness - English p.6",
+"CERT Basic Training Hazard Annexes (2019) p.121"
+]
+},
+{
+"set": "cases128",
+"id": "128.05.t0",
+"q": "how to keep warm without heatting in winter",
+"topic": "keep warm no heating (128)",
+"colour": "green",
+"need": [
+"WARM",
+"HEATHOME"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.662,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Winter Storm p.2",
+"FM 21-76 U.S. Army Survival Manual - Historical p.148",
+"FEMA Full Suite of Hazard Information Sheets (2024) p.35",
+"#WinterReady p.None",
+"FM 31-70 Basic Cold Weather Manual - Historical p.10",
+"Winter Weather p.None",
+"Army ATP 3-50.21 Survival (2018) p.136",
+"Energy Saver Guide: Tips on Saving Money and Energy at Home p.14"
+]
+},
+{
+"set": "cases128",
+"id": "128.06.0",
+"q": "i don't have bandages, how do i stop the bleeding",
+"topic": "bleeding no bandages (128)",
+"colour": "red",
+"need": [
+"BLEED",
+"WOUND"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.686,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.259",
+"How to dress and bandage a wound p.None",
+"NEETS Module 19 - Technicians Handbook p.19",
+"First Aid in Armed Conflicts and Other Situations of Violence p.174",
+"Common survival myths among preppers p.None",
+"First Aid p.9",
+"NEETS Module 19 - Technicians Handbook p.15",
+"First Aid in Armed Conflicts and Other Situations of Violence p.175"
+]
+},
+{
+"set": "cases128",
+"id": "128.06.t0",
+"q": "i dont have bandages how do i stop the bleding",
+"topic": "bleeding no bandages (128)",
+"colour": "red",
+"need": [
+"BLEED",
+"WOUND"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.662,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.259",
+"First Aid p.9",
+"First Aid in Armed Conflicts and Other Situations of Violence p.174",
+"International First Aid Resuscitation and Education Guidelines 2025 p.257",
+"How to dress and bandage a wound p.None",
+"First Aid in Armed Conflicts and Other Situations of Violence p.175",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.169",
+"FM 21-76 U.S. Army Survival Manual - Historical p.24"
+]
+},
+{
+"set": "cases128",
+"id": "128.07.0",
+"q": "i have no compass, how do i find north",
+"topic": "north no compass (128)",
+"colour": "green",
+"need": [
+"NORTH"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.733,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Understanding Maps p.2",
+"Putting Conservation to Work - Map and Compass (1965) p.8",
+"How to use a compass and map p.None",
+"Wilderness Navigation p.2",
+"Putting Conservation to Work - Map and Compass (1965) p.7",
+"Army ATP 3-50.21 Survival (2018) p.171",
+"College Physics 2e p.159",
+"FM 21-76 U.S. Army Survival Manual - Historical p.194"
+]
+},
+{
+"set": "cases128",
+"id": "128.07.t0",
+"q": "i have no compas how do i find north",
+"topic": "north no compass (128)",
+"colour": "green",
+"need": [
+"NORTH"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.668,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"USMC Summer Survival Course Handbook - Historical p.61",
+"USMC Winter Survival Course Handbook - Historical p.63",
+"Putting Conservation to Work - Map and Compass (1965) p.6",
+"Army ATP 3-50.21 Survival (2018) p.165",
+"College Physics 2e p.159",
+"University Physics Volume 1 p.101",
+"Understanding Maps p.2",
+"Wilderness Navigation p.2"
+]
+},
+{
+"set": "cases128",
+"id": "128.08.0",
+"q": "no refrigerator, how do i keep food safe",
+"topic": "food no fridge (128)",
+"colour": "green",
+"need": [
+"FOODSPOIL"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.68,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Hurricane Food, Water Safety, Power Outages and Floods p.1",
+"FEMA Full Suite of Hazard Information Sheets (2024) p.23",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.27",
+"Are You Ready - Basic Preparedness p.29",
+"Power Outage p.2",
+"Freezing p.None",
+"Are You Ready Guide 2021 p.31",
+"#WinterReady p.None"
+]
+},
+{
+"set": "cases128",
+"id": "128.08.t0",
+"q": "no refridgerator how do i keep food safe",
+"topic": "food no fridge (128)",
+"colour": "green",
+"need": [
+"FOODSPOIL"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.676,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Hurricane Food, Water Safety, Power Outages and Floods p.1",
+"Hurricane Food, Water Safety, Power Outages and Floods p.2",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.27",
+"Are You Ready - Basic Preparedness p.29",
+"Water and Sanitation: Keys to Staying Healthy p.5",
+"Are You Ready - Basic Preparedness p.30",
+"How to keep children healthy p.18",
+"FEMA Full Suite of Hazard Information Sheets (2024) p.23"
+]
+},
+{
+"set": "cases128",
+"id": "128.09.0",
+"q": "my car battery is dead and i have no jumper cables",
+"topic": "car battery no cables (128)",
+"colour": "green",
+"need": [
+"CARBATT"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.662,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Honda Civic Sedan Owner Manual 2024 p.724",
+"Honda Civic Sedan Owner Manual 2024 p.725",
+"Toyota Camry Owner’s Manual OM06291U p.564",
+"Ford F-150 Owners Manual 2024 p.486",
+"Chevrolet Silverado1500 Owner’s Manual2024 p.411",
+"Toyota Camry Owner’s Manual OM06291U p.567",
+"Chevrolet Silverado1500 Owner’s Manual2024 p.409",
+"Kubota BX1880-AU BX2380-AU BX2680-AU Operator’s Manual p.45"
+]
+},
+{
+"set": "cases128",
+"id": "128.09.t0",
+"q": "my car batery is dead and i have no jumper cabels",
+"topic": "car battery no cables (128)",
+"colour": "green",
+"need": [
+"CARBATT"
+],
+"typo": true,
+"counter": true,
+"seconds": 0.658,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Honda Civic Sedan Owner Manual 2024 p.724",
+"Honda Civic Sedan Owner Manual 2024 p.725",
+"Toyota Camry Owner’s Manual OM06291U p.564",
+"Chevrolet Silverado1500 Owner’s Manual2024 p.411",
+"Ford F-150 Owners Manual 2024 p.486",
+"Toyota Camry Owner’s Manual OM06291U p.567",
+"Kubota BX1880-AU BX2380-AU BX2680-AU Operator’s Manual p.45",
+"Chevrolet Silverado1500 Owner’s Manual2024 p.412"
+]
+},
+{
+"set": "cases128",
+"id": "128.10.0",
+"q": "no internet or phone, how do i get emergency news",
+"topic": "emergency news no phone (128)",
+"colour": "green",
+"need": [
+"ALERT"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.671,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Power Resilience Guide (pdf) p.10",
+"Advice on Emergency Preparedness - English p.14",
+"Know Your Alerts and Warnings p.2",
+"Discussion thread for this article p.None",
+"https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire p.5",
+"Be Prepared, Guide p.7",
+"Beginner’s guide to amateur (ham) radio for preppers p.None",
+"CERT Basic Training Hazard Annexes (2019) p.77"
+]
+},
+{
+"set": "cases128",
+"id": "128.10.t0",
+"q": "no internet or phone how do i get emergancy news",
+"topic": "emergency news no phone (128)",
+"colour": "green",
+"need": [
+"ALERT"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.669,
+"useful": 6,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Advice on Emergency Preparedness - English p.14",
+"Introduction to Sociology 3e p.236",
+"Know Your Alerts and Warnings p.2",
+"Worldwide Marine Radiofacsimile Broadcast Schedules p.53",
+"https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire p.5",
+"Advice on Emergency Preparedness - English p.15",
+"CERT Basic Training Participant Manual (2019) p.25",
+"Know Your Alerts and Warnings p.4"
+]
+},
+{
+"set": "cases128",
+"id": "128.11.0",
+"q": "out of toilet paper, what can i use",
+"topic": "no toilet paper (128)",
+"colour": "green",
+"need": [
+"TPAPER"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.715,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Building Toilets p.32",
+"Utilitiesman Basic - pumps compressors and plumbing p.361",
+"A Children's Workshop for Making Toys p.9",
+"Nuclear War Survival Skills, by Cresson Kearny p.229",
+"Urine and Bowel Management: With Spinal Cord Injury and Spina Bifida (includes Urinary Infections) p.12",
+"Onsite Wastewater Treatment Systems Manual 2002 p.304",
+"Aviation Maintenance Technician Handbook - Airframe p.390",
+"The Art of Paper-Making p.None"
+]
+},
+{
+"set": "cases128",
+"id": "128.11.t0",
+"q": "out of toilet papper what can i use",
+"topic": "no toilet paper (128)",
+"colour": "green",
+"need": [
+"TPAPER"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.712,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Water and Sanitation: Keys to Staying Healthy p.14",
+"How to keep children healthy p.19",
+"Water and Sanitation: Keys to Staying Healthy p.9",
+"Building Toilets p.35",
+"Public Health Engineering in Precarious Situations p.191",
+"Building Toilets p.31",
+"Taking care of your body p.39",
+"Public Health Engineering in Precarious Situations p.227"
+]
+},
+{
+"set": "cases128",
+"id": "128.12.0",
+"q": "we ran out of insulin and the pharmacy is closed",
+"topic": "no insulin (128)",
+"colour": "yellow",
+"need": [
+"SUGAR"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.685,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Diabetes p.39",
+"Diabetes p.20",
+"INSULIN, BIPHASIC injectable p.None",
+"Clinical Nursing Skills — OpenStax p.487",
+"INSULIN injectable p.None",
+"MSF Essential Drugs p.430",
+"Ways to Get People Thinking and Acting Village Theater and Puppet Shows p.19",
+"Clinical Nursing Skills — OpenStax p.446"
+]
+},
+{
+"set": "cases128",
+"id": "128.12.t0",
+"q": "we ran out of insulen and the pharmacy is closed",
+"topic": "no insulin (128)",
+"colour": "yellow",
+"need": [
+"SUGAR"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.686,
+"useful": 0,
+"first_ok": false,
+"top3_ok": false,
+"covered": false,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Dust p.3",
+"Forests p.11",
+"Ways to Get People Thinking and Acting Village Theater and Puppet Shows p.19",
+"Entrepreneurship p.136",
+"Medicines for epilepsy and seizures p.4",
+"Public Health Engineering in Precarious Situations p.47",
+"MIT Thermodynamics and Kinetics — 3play pdf file p.11",
+"Family Emergency Communication Plan [English] p.2"
+]
+},
+{
+"set": "cases128",
+"id": "128.13.0",
+"q": "we have no running water, how do we flush the toilet",
+"topic": "flush no water (128)",
+"colour": "green",
+"need": [
+"FLUSH"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.653,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Water and Sanitation: Keys to Staying Healthy p.9",
+"Building Toilets p.2",
+"Building Toilets p.17",
+"Public Health Engineering in Precarious Situations p.191",
+"Public Health Engineering in Precarious Situations p.229",
+"Food and Water in an Emergency p.12",
+"Technical note 9. How much water is needed in emergencies p.3",
+"Onsite Wastewater Treatment Systems Manual 2002 p.99"
+]
+},
+{
+"set": "cases128",
+"id": "128.13.t0",
+"q": "we have no runing water how do we flush the toilet",
+"topic": "flush no water (128)",
+"colour": "green",
+"need": [
+"FLUSH"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.696,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Water and Sanitation: Keys to Staying Healthy p.9",
+"Building Toilets p.36",
+"Water and Sanitation: Keys to Staying Healthy p.8",
+"Building Toilets p.2",
+"Public Health Engineering in Precarious Situations p.229",
+"Public Health Engineering in Precarious Situations p.191",
+"UNICEF School-in-a-Box Education Kit Handbook - English (pdf, 2 MB) p.88",
+"How to keep children healthy p.19"
+]
+},
+{
+"set": "cases128",
+"id": "128.14.0",
+"q": "there is a building fire next door, what do we do",
+"topic": "building fire next door (128)",
+"colour": "red",
+"need": [
+"ESCAPE"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.714,
+"useful": 3,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Practice Your Home Fire Escape Plan p.None",
+"CERT Basic Training Participant Manual (2019) p.261",
+"Shelters, Shacks, and Shanties p.None",
+"Modern Machine-Shop Practice - Volumes I and II p.None",
+"Power Resilience Guide (pdf) p.64",
+"Home Fire Escape Plans p.None",
+"CERT Basic Training Hazard Annexes (2019) p.35",
+"Earthquake Safety at Home p.78"
+]
+},
+{
+"set": "cases128",
+"id": "128.14.t0",
+"q": "there is a bulding fire next door what do we do",
+"topic": "building fire next door (128)",
+"colour": "red",
+"need": [
+"ESCAPE"
+],
+"typo": true,
+"counter": true,
+"seconds": 0.676,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"CERT Basic Training Participant Manual (2019) p.173",
+"Creating a Community Wildfire Protection Plan [English PDF] p.8",
+"https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire p.8",
+"CERT Basic Training Hazard Annexes (2019) p.35",
+"CERT Basic Training Hazard Annexes (2019) p.36",
+"Home Fire Escape Plans p.None",
+"Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.24",
+"Protect people, pets and property from wildfire [English] p.1"
+]
+},
+{
+"set": "cases128",
+"id": "128.15.0",
+"q": "the fire started in the kitchen, how do i put it out",
+"topic": "kitchen fire (128)",
+"colour": "red",
+"need": [
+"GREASE",
+"EXTING"
+],
+"typo": false,
+"counter": true,
+"seconds": 1.271,
+"useful": 4,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Shelters, Shacks, and Shanties p.None",
+"Elements of Plumbing p.None",
+"Work p.6",
+"Starting a Garden: Seed Starting Basics p.None",
+"Doing factory work at home p.4",
+"Fire p.7",
+"Army ATP 3-50.21 Survival (2018) p.75",
+"Practice Your Home Fire Escape Plan p.None"
+]
+},
+{
+"set": "cases128",
+"id": "128.15.t0",
+"q": "the fire startd in the kitchen how do i put it out",
+"topic": "kitchen fire (128)",
+"colour": "red",
+"need": [
+"GREASE",
+"EXTING"
+],
+"typo": true,
+"counter": true,
+"seconds": 0.685,
+"useful": 4,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Doing factory work at home p.4",
+"Fire p.4",
+"A Healthy Home p.18",
+"Outdoor Fire Safety p.None",
+"CERT Basic Training Participant Manual (2019) p.173",
+"Creating a Community Wildfire Protection Plan [English PDF] p.8",
+"Work p.6",
+"Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.17"
+]
+},
+{
+"set": "cases128",
+"id": "128.16.0",
+"q": "how do i put out a fire",
+"topic": "put out a fire (128)",
+"colour": "red",
+"need": [
+"EXTING",
+"ESCAPE"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.661,
+"useful": 6,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Fire p.4",
+"Outdoor Fire Safety p.None",
+"Doing factory work at home p.4",
+"A Healthy Home p.18",
+"CERT Basic Training Participant Manual (2019) p.173",
+"Campfires p.None",
+"Practice Your Home Fire Escape Plan p.None",
+"Work p.6"
+]
+},
+{
+"set": "cases128",
+"id": "128.16.t0",
+"q": "how do i put out a fier",
+"topic": "put out a fire (128)",
+"colour": "red",
+"need": [
+"EXTING",
+"ESCAPE"
+],
+"typo": true,
+"counter": true,
+"seconds": 1.327,
+"useful": 1,
+"first_ok": false,
+"top3_ok": true,
+"covered": false,
+"context_share": 0.0,
+"wrong_sense_first": true,
+"titles": [
+"How To Start and Put Out a Campfire p.None",
+"Steelworker Volume 1 - Metals and Welding p.135",
+"Fire p.4",
+"Shelters, Shacks, and Shanties p.None",
+"Steelworker Volume 2 - Fabrication Rigging and Structures p.128",
+"Effects of Nuclear Weapons, by Samuel Glasstone and Philip J. Dolan p.65",
+"Encyclopedia of Needlework p.None",
+"A Children's Workshop for Making Toys p.8"
+]
+},
+{
+"set": "cases128",
+"id": "128.17.0",
+"q": "he has no pulse, what do i do",
+"topic": "no pulse (128)",
+"colour": "red",
+"need": [
+"CPR"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.647,
+"useful": 2,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"First Aid p.7",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.43",
+"Microbiology p.782",
+"First Aid p.43",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.81",
+"Role Playing p.9",
+"Army ATP 3-50.21 Survival (2018) p.21",
+"Nutrition for Nurses p.231"
+]
+},
+{
+"set": "cases128",
+"id": "128.17.t0",
+"q": "he has no puls what do i do",
+"topic": "no pulse (128)",
+"colour": "red",
+"need": [
+"CPR"
+],
+"typo": true,
+"counter": false,
+"seconds": 0.708,
+"useful": 0,
+"first_ok": false,
+"top3_ok": false,
+"covered": false,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"First Aid p.44",
+"UNICEF Early Childhood Development Kit Guidance p.52",
+"Social skills p.9",
+"First Aid in Armed Conflicts and Other Situations of Violence p.116",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.81",
+"First Aid p.43",
+"Fluid Power p.247",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.209"
+]
+},
+{
+"set": "cases128",
+"id": "128.18.0",
+"q": "how do i prevent a generator from starting a fire",
+"topic": "generator fire (128 review)",
+"colour": "green",
+"need": [
+"GENERATOR"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.655,
+"useful": 6,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Honda EU2200i Generator Owners Manual 2024 p.41",
+"Honda EU2200i Generator Owners Manual 2024 p.36",
+"USAP Continental Field Manual 2027 - Field Gear p.27",
+"Aviation Maintenance Technician Handbook - General p.42",
+"Winter Weather p.None",
+"USAP Continental Field Manual 2027 - Field Gear p.28",
+"Aviation Maintenance Technician Handbook - Powerplant p.473",
+"Aviation Maintenance Technician Handbook - Powerplant p.333"
+]
+},
+{
+"set": "cases128",
+"id": "128.18.t0",
+"q": "how do i prevent a genrator from starting a fire",
+"topic": "generator fire (128 review)",
+"colour": "green",
+"need": [
+"GENERATOR"
+],
+"typo": true,
+"counter": true,
+"seconds": 0.668,
+"useful": 0,
+"first_ok": false,
+"top3_ok": false,
+"covered": false,
+"context_share": 0.0,
+"wrong_sense_first": true,
+"titles": [
+"Outdoor Fire Safety p.None",
+"CERT Basic Training Hazard Annexes (2019) p.36",
+"FM 31-70 Basic Cold Weather Manual - Historical p.37",
+"Fire p.6",
+"Pre-Fire Planning to Help Communities Become More Fire Adapted [English PDF] p.2",
+"NWCG Incident Response Pocket Guide (2025) p.31",
+"Army ATP 3-50.21 Survival (2018) p.125",
+"Prevent Fires p.None"
+]
+},
+{
+"set": "cases128",
+"id": "128.19.0",
+"q": "how do i treat water intoxication",
+"topic": "water intoxication (128 review)",
+"colour": "yellow",
+"need": [
+"WATERINTOX"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.677,
+"useful": 3,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Food and Water in an Emergency p.13",
+"Access to health care p.15",
+"Protecting Community Water p.29",
+"Are You Ready - Basic Preparedness p.28",
+"Technical note 5. Emergency treatment of drinking-water at the point of use p.1",
+"Technical note 5. Emergency treatment of drinking-water at the point of use p.3",
+"Pesticides are Poison p.29",
+"Food and Water in an Emergency p.14"
+]
+},
+{
+"set": "cases128",
+"id": "128.19.t0",
+"q": "how do i treat water intoxicaton",
+"topic": "water intoxication (128 review)",
+"colour": "yellow",
+"need": [
+"WATERINTOX"
+],
+"typo": true,
+"counter": true,
+"seconds": 0.673,
+"useful": 2,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Food and Water in an Emergency p.13",
+"Access to health care p.15",
+"Are You Ready - Basic Preparedness p.28",
+"Protecting Community Water p.29",
+"FM 21-76 U.S. Army Survival Manual - Historical p.35",
+"Protecting Community Water p.37",
+"Pesticides are Poison p.29",
+"Health Problems from Unsafe Water p.3"
+]
+},
+{
+"set": "cases128",
+"id": "128.20.0",
+"q": "how do i make it safe to go back inside",
+"topic": "go back inside (128 test)",
+"colour": "green",
+"need": [
+"REENTRY"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.772,
+"useful": 1,
+"first_ok": false,
+"top3_ok": false,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Be Prepared, Guide p.9",
+"Practice Your Home Fire Escape Plan p.None",
+"Plan for Locations p.None",
+"Annual prep reviews: Why and how p.None",
+"CERT Basic Training Hazard Annexes (2019) p.17",
+"Be Prepared, Guide p.11",
+"When Thunder Roars, Go Indoors p.None",
+"Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.101"
+]
+},
+{
+"set": "cases128",
+"id": "128.20.t0",
+"q": "how do i make it safe to go back insde",
+"topic": "go back inside (128 test)",
+"colour": "green",
+"need": [
+"REENTRY"
+],
+"typo": true,
+"counter": true,
+"seconds": 0.7,
+"useful": 2,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Be Prepared, Guide p.9",
+"Practice Your Home Fire Escape Plan p.None",
+"Disaster Preparedness for Older Adults (2020) p.12",
+"Are You Ready Guide 2021 p.19",
+"Are You Ready Guide 2021 p.12",
+"Hurricane p.2",
+"Ending Gender-based Violence p.27",
+"Healthy Pregnancies and Safe Births p.33"
+]
+},
+{
+"set": "cases241",
+"id": "241.00",
+"q": "treat water in the lungs after drowning",
+"topic": "241: treat water in the lungs after drowning",
+"colour": "red",
+"need": [
+"DROWN",
+"CPR"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.702,
+"useful": 5,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"BEC Breathing p.None",
+"International First Aid Resuscitation and Education Guidelines 2025 p.222",
+"International First Aid Resuscitation and Education Guidelines 2025 p.215",
+"Caring for Children p.29",
+"A Boater’s Guide to the Federal Requirements for Recreational Boats p.42",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.89",
+"Nutrition for Nurses p.294",
+"Harm from Toxic Chemicals p.13"
+]
+},
+{
+"set": "cases241",
+"id": "241.01",
+"q": "someone fell in the rainwater pool and is not breathing",
+"topic": "241: someone fell in the rainwater pool and is not breathing",
+"colour": "red",
+"need": [
+"CPR",
+"DROWN"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.682,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.219",
+"International First Aid Resuscitation and Education Guidelines 2025 p.227",
+"BEC Breathing p.None",
+"How young children develop p.9",
+"Appendix A: Safety and Emergencies p.10",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.19",
+"FM 21-76 U.S. Army Survival Manual - Historical p.164",
+"FM 21-76 U.S. Army Survival Manual - Historical p.137"
+]
+},
+{
+"set": "cases241",
+"id": "241.02",
+"q": "my son nearly drowned in the rainwater pool",
+"topic": "241: my son nearly drowned in the rainwater pool",
+"colour": "red",
+"need": [
+"DROWN",
+"CPR"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.654,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.125,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.215",
+"International First Aid Resuscitation and Education Guidelines 2025 p.216",
+"Tropical Cyclone Flooding: An Inland Danger p.3",
+"How young children develop p.9",
+"Children as Health Workers p.19",
+"Caring for Children p.29",
+"BEC Breathing p.None",
+"Army ATP 3-50.21 Survival (2018) p.66"
+]
+},
+{
+"set": "cases241",
+"id": "241.03",
+"q": "i burnt my fingers lighting the campfire",
+"topic": "241: i burnt my fingers lighting the campfire",
+"colour": "yellow",
+"need": [
+"BURN"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.655,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.375,
+"wrong_sense_first": false,
+"titles": [
+"First Aid in Armed Conflicts and Other Situations of Violence p.217",
+"How to start a fire p.None",
+"Campfires p.None",
+"How to help a person having a seizure p.16",
+"First Aid in Armed Conflicts and Other Situations of Violence p.215",
+"How To Start and Put Out a Campfire p.None",
+"FM 31-70 Basic Cold Weather Manual - Historical p.16",
+"How To Start and Put Out a Campfire p.None"
+]
+},
+{
+"set": "cases241",
+"id": "241.04",
+"q": "burned my hand trying to light a fire",
+"topic": "241: burned my hand trying to light a fire",
+"colour": "yellow",
+"need": [
+"BURN"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.816,
+"useful": 6,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.25,
+"wrong_sense_first": false,
+"titles": [
+"How to start a fire p.None",
+"Fire p.8",
+"FM 21-76 U.S. Army Survival Manual - Historical p.67",
+"NWCG Incident Response Pocket Guide (2025) p.131",
+"Effects of Nuclear Weapons, by Samuel Glasstone and Philip J. Dolan p.564",
+"Effects of Nuclear Weapons, by Samuel Glasstone and Philip J. Dolan p.299",
+"FM 21-76 U.S. Army Survival Manual - Historical p.157",
+"Burns and Burn Disabilities p.2"
+]
+},
+{
+"set": "cases241",
+"id": "241.05",
+"q": "my clothes caught fire while starting the fire",
+"topic": "241: my clothes caught fire while starting the fire",
+"colour": "red",
+"need": [
+"CLOTHES",
+"BURN"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.791,
+"useful": 5,
+"first_ok": false,
+"top3_ok": true,
+"covered": false,
+"context_share": 0.125,
+"wrong_sense_first": false,
+"titles": [
+"Modern Machine-Shop Practice - Volumes I and II p.None",
+"USMC Summer Survival Course Handbook - Historical p.34",
+"Garment factories p.9",
+"Fire p.6",
+"https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire p.10",
+"Army ATP 3-50.21 Survival (2018) p.136",
+"Electricity p.3",
+"International First Aid Resuscitation and Education Guidelines 2025 p.289"
+]
+},
+{
+"set": "cases241",
+"id": "241.06",
+"q": "i burned my hand on the camp stove",
+"topic": "241: i burned my hand on the camp stove",
+"colour": "yellow",
+"need": [
+"BURN"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.682,
+"useful": 7,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.125,
+"wrong_sense_first": false,
+"titles": [
+"USAP Continental Field Manual 2027 - Field Gear p.3",
+"FM 31-70 Basic Cold Weather Manual - Historical p.57",
+"USAP Continental Field Manual 2027 - Field Gear p.6",
+"International First Aid Resuscitation and Education Guidelines 2025 p.289",
+"FM 31-70 Basic Cold Weather Manual - Historical p.41",
+"USAP Peninsula Field Manual 2026 - Field Camp Operations p.19",
+"Nuclear War Survival Skills, by Cresson Kearny p.88",
+"Nuclear War Survival Skills, by Cresson Kearny p.154"
+]
+},
+{
+"set": "cases241",
+"id": "241.07",
+"q": "my child swallowed lamp oil",
+"topic": "241: my child swallowed lamp oil",
+"colour": "red",
+"need": [
+"HYDROCARB"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.674,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.352",
+"Good Food Makes Good Health p.21",
+"International First Aid Resuscitation and Education Guidelines 2025 p.349",
+"Food First p.40",
+"Why children lose their hearing and what we can do p.9",
+"Where There Is No Doctor (2025) — 10 First aid p.29",
+"ART: Medicines for HIV p.10",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.144"
+]
+},
+{
+"set": "cases241",
+"id": "241.08",
+"q": "carbon monoxide from making a fire in the tent",
+"topic": "241: carbon monoxide from making a fire in the tent",
+"colour": "red",
+"need": [
+"CO"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.677,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.125,
+"wrong_sense_first": false,
+"titles": [
+"FM 21-76 U.S. Army Survival Manual - Historical p.153",
+"Nuclear War Survival Skills, by Cresson Kearny p.144",
+"USAP Peninsula Field Manual 2026 - Field Camp Operations p.19",
+"A Healthy Home p.7",
+"USAP Continental Field Manual 2027 - Field Camp Operations p.24",
+"Nuclear War Survival Skills, by Cresson Kearny p.70",
+"International First Aid Resuscitation and Education Guidelines 2025 p.353",
+"Outdoor Fire Safety p.None"
+]
+},
+{
+"set": "cases241",
+"id": "241.09",
+"q": "not responding to antibiotics",
+"topic": "241: not responding to antibiotics",
+"colour": "yellow",
+"need": [
+"INFECT"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.63,
+"useful": 6,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Aids for Learning to Use Medicines and Equipment p.10",
+"Microbiology p.899",
+"Aids for Learning to Use Medicines and Equipment p.8",
+"Medicines (Green pages) p.23",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.147",
+"First Aid p.61",
+"MSF Measles 2025 EN p.95",
+"First Aid p.12"
+]
+},
+{
+"set": "cases241",
+"id": "241.10",
+"q": "the pump is not responding",
+"topic": "241: the pump is not responding",
+"colour": "green",
+"need": [
+"PUMP"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.688,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Improving Pumping System Performance — Sourcebook for Industry 2nd edition p.94",
+"Utilitiesman Basic - pumps compressors and plumbing p.445",
+"Utilitiesman Basic - pumps compressors and plumbing p.434",
+"Improving Pumping System Performance — Sourcebook for Industry 2nd edition p.19",
+"UFM 3-230-02 O&M: Water Supply Systems p.83",
+"Introduction to Computer Science p.439",
+"Helicopter Flying Handbook — Helicopter Flying Handbook p.158",
+"NWCG Incident Response Pocket Guide (2025) p.108"
+]
+},
+{
+"set": "cases241",
+"id": "241.11",
+"q": "choking on smoke",
+"topic": "241: choking on smoke",
+"colour": "red",
+"need": [
+"SMOKEINH",
+"ESCAPE"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.684,
+"useful": 6,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"FM 21-76 U.S. Army Survival Manual - Historical p.20",
+"First Aid in Armed Conflicts and Other Situations of Violence p.160",
+"First Aid in Armed Conflicts and Other Situations of Violence p.167",
+"Army ATP 3-50.21 Survival (2018) p.23",
+"The Principles of Leather Manufacture p.None",
+"The Art of Glass-Blowing p.None",
+"BEC Quick Cards p.5",
+"First Aid Training: Choking p.None"
+]
+},
+{
+"set": "cases241",
+"id": "241.12",
+"q": "allergic reaction choking",
+"topic": "241: allergic reaction choking",
+"colour": "red",
+"need": [
+"ANAPH"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.632,
+"useful": 7,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.378",
+"CERT Basic Training Participant Manual (2019) p.116",
+"BEC Shock p.None",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.30",
+"International First Aid Resuscitation and Education Guidelines 2025 p.239",
+"BEC Breathing p.None",
+"BEC Quick Cards p.6",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.230"
+]
+},
+{
+"set": "cases241",
+"id": "241.13",
+"q": "how do i light a campfire",
+"topic": "241: how do i light a campfire",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.627,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Campfires p.None",
+"FM 31-70 Basic Cold Weather Manual - Historical p.38",
+"How to start a fire p.None",
+"USAP Continental Field Manual 2027 - Field Gear p.9",
+"Ten Essentials p.None",
+"College Physics 2e p.1451",
+"NEETS Module 03 - Circuit Protection Control and Measurement p.98",
+"FM 31-70 Basic Cold Weather Manual - Historical p.32"
+]
+},
+{
+"set": "cases241",
+"id": "241.14",
+"q": "how do i start a fire",
+"topic": "241: how do i start a fire",
+"colour": "green",
+"need": [
+"FIREMAKE"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.666,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"How to start a fire p.None",
+"Doing factory work at home p.4",
+"USMC Summer Survival Course Handbook - Historical p.34",
+"Fire p.4",
+"FM 21-76 U.S. Army Survival Manual - Historical p.67",
+"Army ATP 3-50.21 Survival (2018) p.125",
+"FM 21-76 U.S. Army Survival Manual - Historical p.201",
+"Home Fire Escape Plans p.None"
+]
+},
+{
+"set": "cases241",
+"id": "241.15",
+"q": "boil water",
+"topic": "241: boil water",
+"colour": "green",
+"need": [
+"BOIL",
+"PURIFY"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.668,
+"useful": 8,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Protecting Community Water p.34",
+"Appropriate and Inappropriate Technology p.4",
+"Appropriate and Inappropriate Technology p.3",
+"Water and Sanitation: Keys to Staying Healthy p.23",
+"Presto01755 01781 Pressure Canner Instruction Book p.24",
+"USMC Winter Survival Course Handbook - Historical p.18",
+"Preserving Food  Using Boiling Water Canners p.4",
+"Hurricane Food, Water Safety, Power Outages and Floods p.2"
+]
+},
+{
+"set": "cases241",
+"id": "241.16",
+"q": "make a fire escape plan for my family",
+"topic": "241: make a fire escape plan for my family",
+"colour": "green",
+"need": [
+"ESCAPE"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.704,
+"useful": 6,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Make A Plan p.None",
+"CERT Basic Training Hazard Annexes (2019) p.34",
+"Wildfire Safety one-pager p.1",
+"Be Prepared, Handout p.1",
+"Before a WUI Fire p.None",
+"Wildfire Safety Social Media Toolkit p.None",
+"Mult-Family Home escape routes p.1",
+"Practice Your Home Fire Escape Plan p.None"
+]
+},
+{
+"set": "cases241",
+"id": "241.17",
+"q": "what could make a fire spread faster",
+"topic": "241: what could make a fire spread faster",
+"colour": "green",
+"need": [
+"FIRESPREAD"
+],
+"typo": false,
+"counter": true,
+"seconds": 0.741,
+"useful": 5,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Modern Machine-Shop Practice - Volumes I and II p.None",
+"Common survival myths among preppers p.None",
+"Wood Handbook - Wood as an Engineering Material p.454",
+"Wood Handbook - Wood as an Engineering Material p.455",
+"防火区 p.2",
+"Rational reasons why you should be prepared p.None",
+"Effects of Nuclear Weapons, by Samuel Glasstone and Philip J. Dolan p.302",
+"A Healthy Home p.13"
+]
+},
+{
+"set": "cases241",
+"id": "241.18",
+"q": "trouble breathing",
+"topic": "241: trouble breathing",
+"colour": "red",
+"need": [
+"ASTHMA",
+"ANAPH"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.658,
+"useful": 5,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.235",
+"First Aid p.3",
+"Caring for Children p.21",
+"A Book for Midwives (2026) — 14 The first few hours after the birth p.9",
+"International First Aid Resuscitation and Education Guidelines 2025 p.232",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.88",
+"Basic Emergency Care - Approach to the Acutely Ill and Injured p.96",
+"BEC Breathing p.None"
+]
+},
+{
+"set": "cases241",
+"id": "241.19",
+"q": "someone fainted",
+"topic": "241: someone fainted",
+"colour": "yellow",
+"need": [
+"FAINT"
+],
+"typo": false,
+"counter": false,
+"seconds": 0.675,
+"useful": 6,
+"first_ok": true,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"International First Aid Resuscitation and Education Guidelines 2025 p.404",
+"International First Aid Resuscitation and Education Guidelines 2025 p.156",
+"Female genital cutting p.4",
+"NEETS Module 19 - Technicians Handbook p.10",
+"BEC Altered mental status p.None",
+"NEETS Module 19 - Technicians Handbook p.21",
+"FM 21-76 U.S. Army Survival Manual - Historical p.20",
+"CERT Basic Training Participant Manual (2019) p.105"
+]
+},
+{
+"set": "cases241",
+"id": "241.20",
+"q": "food went bad",
+"topic": "241: food went bad",
+"colour": "green",
+"need": [
+"FOODSPOIL"
+],
+"typo": false,
+"counter": false,
+"seconds": 1.276,
+"useful": 5,
+"first_ok": false,
+"top3_ok": true,
+"covered": true,
+"context_share": 0.0,
+"wrong_sense_first": false,
+"titles": [
+"Protecting Watersheds p.6",
+"Eating well for health p.6",
+"Microbiology p.519",
+"Staying healthy p.10",
+"Staying healthy p.9",
+"Jams & Jellies p.None",
+"Community Food Security p.8",
+"Unsafe Outdated Food Preservation Methods p.None"
+]
+}
+],
+"seconds": 53.2
+}

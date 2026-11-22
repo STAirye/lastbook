@@ -1,0 +1,73 @@
+[
+{
+ "model": "D:\\LastbookData-fork-test\\derived\\models\\bge-small-en-v1.5\\model.onnx",
+ "model_MB": 126.9,
+ "threads": 8,
+ "import_numpy_s": 0.127,
+ "import_onnxruntime_tokenizers_s": 0.138,
+ "session_and_tokenizer_load_s": 0.21,
+ "first_question_ms": 6.0,
+ "per_question_ms_median": 2.95,
+ "per_question_ms_p95": 4.14,
+ "per_question_ms_max": 13.63,
+ "rss_MB_start": 16,
+ "rss_MB_after_import": 50,
+ "rss_MB_after_load": 198,
+ "rss_MB_after_300": 201,
+ "example_vectors_bytes": 23808
+}
+,
+{
+ "model": "D:\\LastbookData-fork-test\\derived\\models\\bge-small-en-v1.5\\model.onnx",
+ "model_MB": 126.9,
+ "threads": 2,
+ "import_numpy_s": 0.127,
+ "import_onnxruntime_tokenizers_s": 0.13,
+ "session_and_tokenizer_load_s": 0.181,
+ "first_question_ms": 6.5,
+ "per_question_ms_median": 4.34,
+ "per_question_ms_p95": 6.8,
+ "per_question_ms_max": 10.58,
+ "rss_MB_start": 16,
+ "rss_MB_after_import": 50,
+ "rss_MB_after_load": 197,
+ "rss_MB_after_300": 200,
+ "example_vectors_bytes": 23808
+}
+,
+{
+ "model": "D:\\LastbookData-fork-test\\derived\\models\\bge-small-en-v1.5\\model.onnx",
+ "model_MB": 126.9,
+ "threads": 1,
+ "import_numpy_s": 0.13,
+ "import_onnxruntime_tokenizers_s": 0.117,
+ "session_and_tokenizer_load_s": 0.187,
+ "first_question_ms": 9.2,
+ "per_question_ms_median": 7.64,
+ "per_question_ms_p95": 10.93,
+ "per_question_ms_max": 19.16,
+ "rss_MB_start": 16,
+ "rss_MB_after_import": 50,
+ "rss_MB_after_load": 196,
+ "rss_MB_after_300": 199,
+ "example_vectors_bytes": 23808
+}
+,
+{
+ "model": "cache/int8/model.onnx",
+ "model_MB": 32.2,
+ "threads": 2,
+ "import_numpy_s": 0.139,
+ "import_onnxruntime_tokenizers_s": 0.128,
+ "session_and_tokenizer_load_s": 0.129,
+ "first_question_ms": 3.7,
+ "per_question_ms_median": 2.57,
+ "per_question_ms_p95": 3.95,
+ "per_question_ms_max": 6.68,
+ "rss_MB_start": 16,
+ "rss_MB_after_import": 50,
+ "rss_MB_after_load": 103,
+ "rss_MB_after_300": 106,
+ "example_vectors_bytes": 23808
+}
+]

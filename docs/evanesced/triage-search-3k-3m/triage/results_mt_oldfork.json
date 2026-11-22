@@ -1,0 +1,226 @@
+{
+ "hy latest": {
+  "follow": {
+   "n": 14,
+   "useful_mean": 3.57,
+   "first_ok": 0.429,
+   "covered": 0.643,
+   "cap_broken": 0,
+   "zero_useful": 5,
+   "wrong_sense_first": 0
+  },
+  "add": {
+   "n": 19,
+   "useful_mean": 3.05,
+   "first_ok": 0.316,
+   "covered": 0.632,
+   "cap_broken": 0,
+   "zero_useful": 4,
+   "wrong_sense_first": 0
+  },
+  "correct": {
+   "n": 14,
+   "useful_mean": 5.07,
+   "first_ok": 0.643,
+   "covered": 0.929,
+   "cap_broken": 1,
+   "zero_useful": 1,
+   "wrong_sense_first": 0
+  },
+  "new": {
+   "n": 5,
+   "useful_mean": 5.4,
+   "first_ok": 0.6,
+   "covered": 1.0,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "after_noise": {
+   "n": 12,
+   "useful_mean": 3.08,
+   "first_ok": 0.333,
+   "covered": 0.667,
+   "cap_broken": 0,
+   "zero_useful": 2,
+   "wrong_sense_first": 0
+  },
+  "all": {
+   "n": 52,
+   "useful_mean": 3.96,
+   "first_ok": 0.462,
+   "covered": 0.75,
+   "cap_broken": 1,
+   "zero_useful": 10,
+   "wrong_sense_first": 0
+  }
+ },
+ "hy fork": {
+  "follow": {
+   "n": 14,
+   "useful_mean": 5.14,
+   "first_ok": 0.857,
+   "covered": 1.0,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "add": {
+   "n": 19,
+   "useful_mean": 3.68,
+   "first_ok": 0.684,
+   "covered": 0.895,
+   "cap_broken": 0,
+   "zero_useful": 1,
+   "wrong_sense_first": 0
+  },
+  "correct": {
+   "n": 14,
+   "useful_mean": 4.29,
+   "first_ok": 0.286,
+   "covered": 0.929,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "new": {
+   "n": 5,
+   "useful_mean": 3.0,
+   "first_ok": 0.0,
+   "covered": 0.8,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "after_noise": {
+   "n": 12,
+   "useful_mean": 4.0,
+   "first_ok": 0.75,
+   "covered": 1.0,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "all": {
+   "n": 52,
+   "useful_mean": 4.17,
+   "first_ok": 0.558,
+   "covered": 0.923,
+   "cap_broken": 0,
+   "zero_useful": 1,
+   "wrong_sense_first": 0
+  }
+ },
+ "kw latest": {
+  "follow": {
+   "n": 14,
+   "useful_mean": 2.71,
+   "first_ok": 0.286,
+   "covered": 0.571,
+   "cap_broken": 0,
+   "zero_useful": 6,
+   "wrong_sense_first": 0
+  },
+  "add": {
+   "n": 19,
+   "useful_mean": 2.42,
+   "first_ok": 0.368,
+   "covered": 0.421,
+   "cap_broken": 0,
+   "zero_useful": 9,
+   "wrong_sense_first": 0
+  },
+  "correct": {
+   "n": 14,
+   "useful_mean": 4.43,
+   "first_ok": 0.571,
+   "covered": 0.714,
+   "cap_broken": 1,
+   "zero_useful": 3,
+   "wrong_sense_first": 0
+  },
+  "new": {
+   "n": 5,
+   "useful_mean": 4.4,
+   "first_ok": 0.6,
+   "covered": 0.8,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "after_noise": {
+   "n": 12,
+   "useful_mean": 2.58,
+   "first_ok": 0.333,
+   "covered": 0.583,
+   "cap_broken": 0,
+   "zero_useful": 5,
+   "wrong_sense_first": 0
+  },
+  "all": {
+   "n": 52,
+   "useful_mean": 3.23,
+   "first_ok": 0.423,
+   "covered": 0.577,
+   "cap_broken": 1,
+   "zero_useful": 18,
+   "wrong_sense_first": 0
+  }
+ },
+ "kw fork": {
+  "follow": {
+   "n": 14,
+   "useful_mean": 4.07,
+   "first_ok": 0.786,
+   "covered": 1.0,
+   "cap_broken": 0,
+   "zero_useful": 0,
+   "wrong_sense_first": 0
+  },
+  "add": {
+   "n": 19,
+   "useful_mean": 3.05,
+   "first_ok": 0.474,
+   "covered": 0.684,
+   "cap_broken": 0,
+   "zero_useful": 3,
+   "wrong_sense_first": 0
+  },
+  "correct": {
+   "n": 14,
+   "useful_mean": 3.64,
+   "first_ok": 0.357,
+   "covered": 0.857,
+   "cap_broken": 0,
+   "zero_useful": 2,
+   "wrong_sense_first": 0
+  },
+  "new": {
+   "n": 5,
+   "useful_mean": 2.4,
+   "first_ok": 0.0,
+   "covered": 0.6,
+   "cap_broken": 0,
+   "zero_useful": 1,
+   "wrong_sense_first": 0
+  },
+  "after_noise": {
+   "n": 12,
+   "useful_mean": 3.25,
+   "first_ok": 0.583,
+   "covered": 0.833,
+   "cap_broken": 0,
+   "zero_useful": 2,
+   "wrong_sense_first": 0
+  },
+  "all": {
+   "n": 52,
+   "useful_mean": 3.42,
+   "first_ok": 0.481,
+   "covered": 0.808,
+   "cap_broken": 0,
+   "zero_useful": 6,
+   "wrong_sense_first": 0
+  }
+ }
+}

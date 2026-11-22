@@ -1,0 +1,16 @@
+test_address_search rc=0 Ran 9 tests in 0.526s OK 
+test_bridge rc=0 Ran 168 tests in 50.334s OK 
+test_chat_steps rc=0 Ran 6 tests in 0.428s OK 
+test_confidence rc=0 Ran 23 tests in 1.448s OK 
+test_data_folder rc=0 Ran 19 tests in 0.161s OK (skipped=1) 
+test_libq rc=0 Ran 7 tests in 1.387s OK 
+test_long_pages rc=0 Ran 7 tests in 0.708s OK 
+test_setup rc=0 Ran 119 tests in 22.126s OK (skipped=2) 
+test_shell_macos rc=0 Ran 0 tests in 0.000s OK (skipped=1) 
+test_topic_search rc=0 Ran 9 tests in 0.282s OK 
+test_turn_hits rc=0 Ran 14 tests in 1.642s OK 
+test_typos rc=0 Ran 12 tests in 0.068s OK 
+test_update rc=0 Ran 9 tests in 2.576s OK 
+test_validate_topics rc=0 Ran 5 tests in 0.824s OK 
+test_what_ships rc=0 Ran 11 tests in 0.659s OK 
+DONE

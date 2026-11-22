@@ -1,0 +1,511 @@
+{
+ "index_rows": 337016,
+ "active": 337016,
+ "sample": 2000,
+ "A_onnx": {
+  "passages_per_s": 29.6,
+  "question_ms": 4.4,
+  "cos_vs_stored": {
+   "min": 0.99987,
+   "p1": 0.99991,
+   "median": 1.0,
+   "below_0.999": 0
+  }
+ },
+ "B_runner_gpu": {
+  "start_s": 0.31,
+  "passages_per_s": 119.0,
+  "question_ms": 6.7,
+  "cos_vs_stored": {
+   "min": 0.99883,
+   "p1": 0.99991,
+   "median": 1.0,
+   "below_0.999": 1
+  },
+  "cos_vs_A_passages": {
+   "min": 0.99886,
+   "p1": 1.0,
+   "median": 1.0,
+   "below_0.999": 1
+  },
+  "questions_same_best": 36,
+  "questions": 36,
+  "questions_shared_of_10_mean": 9.97,
+  "questions_cos_min": 1.0,
+  "per_question": [
+   {
+    "q": "burned my hand trying to light a fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "i burnt my fingers lighting the campfire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "smoke inhalation from lighting a fire indoors",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "carbon monoxide from making a fire in the tent",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my clothes caught fire while starting the fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my kid fell into the fire while we were making a fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "treat water in the lungs after drowning",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat water blisters on a burn",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat water poisoning",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "light a fire to keep him warm with hypothermia",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my son nearly drowned in the rainwater pool",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "someone fell in the rainwater pool and isn't breathing",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "he swallowed pool water and now he's coughing",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "drank creek water and now i have diarrhea",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my child swallowed lamp oil",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "scorpion sting on my foot",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "rash from poison ivy",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "snake bite while camping",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "hypothermia after falling in cold water",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "someone got shocked by a wire in the flood water",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "is it safe to put water on a burn",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "i burned my hand on the camp stove",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat a burn from a campfire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i light a campfire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "i need to start a fire but i have no matches and no gas",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i make the water safe to drink",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i purify water from a creek",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how to make the water safe for a baby's formula",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "make a fire escape plan for my family",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "what could make a fire spread faster",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "pour water on a grease fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat water damage on the floor",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how can i know if my can food has gone bad",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 9
+   },
+   {
+    "q": "someone is full of blood, it does not stop",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "Honda EU2200i oil change",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "burn and not breathing",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   }
+  ],
+  "ready_event": {
+   "ev": "ready",
+   "n_ctx": 512,
+   "desc": "bert 33M all F32",
+   "threads": 4,
+   "load_ms": 69,
+   "ram_free": 13596778496,
+   "swa_check": true
+  }
+ },
+ "B_runner_cpu": {
+  "start_s": 0.17,
+  "passages_per_s": 27.0,
+  "question_ms": 8.5,
+  "cos_vs_stored": {
+   "min": 0.99882,
+   "p1": 0.99991,
+   "median": 1.0,
+   "below_0.999": 1
+  },
+  "cos_vs_A_passages": {
+   "min": 0.99884,
+   "p1": 1.0,
+   "median": 1.0,
+   "below_0.999": 1
+  },
+  "questions_same_best": 36,
+  "questions": 36,
+  "questions_shared_of_10_mean": 9.97,
+  "questions_cos_min": 1.0,
+  "per_question": [
+   {
+    "q": "burned my hand trying to light a fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "i burnt my fingers lighting the campfire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "smoke inhalation from lighting a fire indoors",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "carbon monoxide from making a fire in the tent",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my clothes caught fire while starting the fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my kid fell into the fire while we were making a fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "treat water in the lungs after drowning",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat water blisters on a burn",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat water poisoning",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "light a fire to keep him warm with hypothermia",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my son nearly drowned in the rainwater pool",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "someone fell in the rainwater pool and isn't breathing",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "he swallowed pool water and now he's coughing",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "drank creek water and now i have diarrhea",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "my child swallowed lamp oil",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "scorpion sting on my foot",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "rash from poison ivy",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "snake bite while camping",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "hypothermia after falling in cold water",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "someone got shocked by a wire in the flood water",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "is it safe to put water on a burn",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "i burned my hand on the camp stove",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 9
+   },
+   {
+    "q": "how do i treat a burn from a campfire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i light a campfire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "i need to start a fire but i have no matches and no gas",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i make the water safe to drink",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i purify water from a creek",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how to make the water safe for a baby's formula",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "make a fire escape plan for my family",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "what could make a fire spread faster",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "pour water on a grease fire",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how do i treat water damage on the floor",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "how can i know if my can food has gone bad",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "someone is full of blood, it does not stop",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "Honda EU2200i oil change",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   },
+   {
+    "q": "burn and not breathing",
+    "cos_A_B": 1.0,
+    "same_best": true,
+    "shared_of_10": 10
+   }
+  ],
+  "ready_event": {
+   "ev": "ready",
+   "n_ctx": 512,
+   "desc": "bert 33M all F32",
+   "threads": 4,
+   "load_ms": 25,
+   "ram_free": 13738749952,
+   "swa_check": true
+  }
+ }
+}

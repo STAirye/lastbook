@@ -1,0 +1,35 @@
+test_address_search: Ran 35 tests in 1.288s  OK (expected failures=13) 
+test_battery: Ran 18 tests in 0.200s  FAILED (errors=1) 
+test_bridge: Ran 188 tests in 57.189s  OK (skipped=4) 
+test_cancellable_body: Ran 4 tests in 1.887s  OK 
+test_chat_steps: Ran 8 tests in 0.333s  OK 
+test_chat_tables: Ran 8 tests in 0.445s  OK 
+test_data_folder: Ran 22 tests in 0.264s  OK (skipped=1) 
+test_download_writes: Ran 6 tests in 0.999s  OK 
+test_encyclopedias: Ran 27 tests in 0.149s  OK 
+test_encyclopedias_real: Ran 4 tests in 0.000s  OK (skipped=4) 
+test_export_reading_catalog: Ran 5 tests in 0.037s  OK 
+test_i18n_catalogs: Ran 10 tests in 0.776s  OK 
+test_libq: Ran 7 tests in 1.743s  OK 
+test_library_extract: Ran 20 tests in 2.932s  OK 
+test_llm_local: Ran 4 tests in 0.019s  OK 
+test_local_ai_first_load_copy: Ran 3 tests in 0.002s  OK 
+test_long_pages: Ran 8 tests in 0.831s  OK 
+test_notes: Ran 8 tests in 0.169s  OK 
+test_page_tables: Ran 11 tests in 0.241s  OK 
+test_readable: Ran 6 tests in 0.174s  OK 
+test_reading_catalog_browse: Ran 2 tests in 0.010s  OK 
+test_retrieval: Ran 2 tests in 1.643s  OK 
+test_run_source_linux: Ran 3 tests in 0.000s  OK (skipped=3) 
+test_setup: Ran 187 tests in 42.788s  FAILED (failures=1, errors=2, skipped=3) 
+test_setup_stub: Ran 3 tests in 0.001s  OK 
+test_shell_macos: Ran 0 tests in 0.001s  OK (skipped=1) 
+test_topic_search: Ran 22 tests in 4.638s  OK 
+test_topic_search_emergency: Ran 5 tests in 0.098s  OK 
+test_typos: Ran 29 tests in 0.173s  OK 
+test_update: Ran 12 tests in 2.681s  OK 
+test_validate_topics: Ran 7 tests in 1.442s  OK 
+test_video_moments: Ran 2 tests in 0.125s  OK 
+test_video_transcripts: Ran 19 tests in 0.196s  OK 
+test_what_ships: Ran 12 tests in 0.819s  OK 
+test_wiki_routes: Ran 2 tests in 0.170s  OK 

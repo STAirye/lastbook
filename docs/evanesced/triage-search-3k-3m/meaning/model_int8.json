@@ -1,0 +1,44 @@
+{
+ "method": "centroid_cat: max cosine to a red category centroid minus max cosine to a non-red (yellow or look-alike) category centroid; red when > threshold",
+ "prefix": false,
+ "red_categories": [
+  "anaphylaxis",
+  "bleeding",
+  "burns",
+  "chest_pain",
+  "child_baby_elderly",
+  "childbirth",
+  "choking",
+  "diabetic",
+  "drowning",
+  "head_spine",
+  "non_native_slang",
+  "not_breathing",
+  "overdose_poisoning",
+  "seizure",
+  "sepsis",
+  "stroke",
+  "suicide",
+  "temperature",
+  "trauma_other",
+  "unconscious"
+ ],
+ "nonred_categories": [
+  "cooking_home",
+  "course_question",
+  "everyday_howto",
+  "figurative_dark_humour",
+  "idiom",
+  "lookalike_words",
+  "mild_symptom",
+  "nonsense_noise",
+  "sport_game",
+  "tech",
+  "yellow"
+ ],
+ "thresholds": {
+  "strict": 0.024351298809051514,
+  "wide": 0.006628692150115967
+ },
+ "threshold_rule": "out-of-fold (5-fold x3, examples only) score above which 5% / 10% of green examples fall"
+}

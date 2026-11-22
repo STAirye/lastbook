@@ -1,0 +1,19 @@
+code D:\git\lastbook\.claude\worktrees\search-rewrite sections D:\LastbookData-fork-test\derived\index\sections-ccd68a388e84.sqlite
+init 1.4s, semantic loaded, 337016 chunks
+vocab 33650 words in 0.79s
+
+searches 165, 120s
+
+First result right (%), hybrid, in-process  [n: follow 14, add 19, correct 14, new 5, after_noise 12, all 52]
+                                  follow         add     correct         new after_noise         all
+latest                                43          32          71          80          33          50
+turn_hits (empty replies)             43          32          57          80          25          46
+turn_hits (cited replies)             86          47          57          80          58          64
+
+Useful pages in the top 8 (mean)
+latest                              3.57        3.16        5.21         6.4        3.42        4.13
+turn_hits (empty replies)            5.5        4.68        5.36         4.6         5.5        5.08
+turn_hits (cited replies)            5.5        4.11        5.36         4.6         5.0        4.87
+
+route of the last message (label -> route), cited replies: {"add->danger": 3, "add->follow": 16, "correct->correct": 14, "follow->follow": 14, "new->danger": 5}
+exit 0

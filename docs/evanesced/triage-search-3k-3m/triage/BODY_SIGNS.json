@@ -1,0 +1,1042 @@
+{
+ "tables": {
+  "kw": {
+   "cases": {
+    "before": {
+     "n": 362,
+     "scored": 362,
+     "first_ok": 219,
+     "top3_ok": 289,
+     "useful": 1743,
+     "no_useful": 57,
+     "urgent": 311,
+     "answer": 198,
+     "buttons": 133,
+     "ask": 1,
+     "ask+pages": 30
+    },
+    "after": {
+     "n": 362,
+     "scored": 362,
+     "first_ok": 219,
+     "top3_ok": 289,
+     "useful": 1747,
+     "no_useful": 57,
+     "urgent": 311,
+     "answer": 199,
+     "buttons": 138,
+     "ask": 1,
+     "ask+pages": 24
+    }
+   },
+   "cases154": {
+    "before": {
+     "n": 64,
+     "scored": 64,
+     "first_ok": 40,
+     "top3_ok": 54,
+     "useful": 321,
+     "no_useful": 4,
+     "urgent": 56,
+     "answer": 28,
+     "buttons": 28,
+     "ask": 0,
+     "ask+pages": 8
+    },
+    "after": {
+     "n": 64,
+     "scored": 64,
+     "first_ok": 40,
+     "top3_ok": 54,
+     "useful": 325,
+     "no_useful": 4,
+     "urgent": 56,
+     "answer": 30,
+     "buttons": 28,
+     "ask": 0,
+     "ask+pages": 6
+    }
+   },
+   "cases128": {
+    "before": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 33,
+     "top3_ok": 44,
+     "useful": 256,
+     "no_useful": 5,
+     "urgent": 26,
+     "answer": 38,
+     "buttons": 9,
+     "ask": 3,
+     "ask+pages": 2
+    },
+    "after": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 35,
+     "top3_ok": 46,
+     "useful": 258,
+     "no_useful": 5,
+     "urgent": 27,
+     "answer": 37,
+     "buttons": 11,
+     "ask": 2,
+     "ask+pages": 2
+    }
+   },
+   "cases241": {
+    "before": {
+     "n": 21,
+     "scored": 21,
+     "first_ok": 12,
+     "top3_ok": 21,
+     "useful": 113,
+     "no_useful": 0,
+     "urgent": 16,
+     "answer": 12,
+     "buttons": 6,
+     "ask": 0,
+     "ask+pages": 3
+    },
+    "after": {
+     "n": 21,
+     "scored": 21,
+     "first_ok": 12,
+     "top3_ok": 21,
+     "useful": 115,
+     "no_useful": 0,
+     "urgent": 16,
+     "answer": 13,
+     "buttons": 5,
+     "ask": 0,
+     "ask+pages": 3
+    }
+   },
+   "cases_glued": {
+    "before": {
+     "n": 48,
+     "scored": 29,
+     "first_ok": 19,
+     "top3_ok": 25,
+     "useful": 145,
+     "no_useful": 4,
+     "urgent": 23,
+     "answer": 27,
+     "buttons": 8,
+     "ask": 11,
+     "ask+pages": 2
+    },
+    "after": {
+     "n": 48,
+     "scored": 29,
+     "first_ok": 20,
+     "top3_ok": 26,
+     "useful": 153,
+     "no_useful": 3,
+     "urgent": 24,
+     "answer": 28,
+     "buttons": 9,
+     "ask": 10,
+     "ask+pages": 1
+    }
+   },
+   "convos": {
+    "before": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 28,
+     "top3_ok": 40,
+     "useful": 203,
+     "no_useful": 4,
+     "urgent": 51,
+     "answer": 25,
+     "buttons": 27,
+     "ask": 0,
+     "ask+pages": 0
+    },
+    "after": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 28,
+     "top3_ok": 40,
+     "useful": 203,
+     "no_useful": 4,
+     "urgent": 51,
+     "answer": 25,
+     "buttons": 27,
+     "ask": 0,
+     "ask+pages": 0
+    }
+   },
+   "all": {
+    "before": {
+     "n": 599,
+     "scored": 580,
+     "first_ok": 351,
+     "top3_ok": 473,
+     "useful": 2781,
+     "no_useful": 74,
+     "urgent": 483,
+     "answer": 328,
+     "buttons": 211,
+     "ask": 15,
+     "ask+pages": 45
+    },
+    "after": {
+     "n": 599,
+     "scored": 580,
+     "first_ok": 354,
+     "top3_ok": 476,
+     "useful": 2801,
+     "no_useful": 73,
+     "urgent": 485,
+     "answer": 332,
+     "buttons": 218,
+     "ask": 13,
+     "ask+pages": 36
+    }
+   }
+  },
+  "hy": {
+   "cases": {
+    "before": {
+     "n": 362,
+     "scored": 362,
+     "first_ok": 275,
+     "top3_ok": 326,
+     "useful": 2077,
+     "no_useful": 13,
+     "urgent": 311,
+     "answer": 298,
+     "buttons": 64,
+     "ask": 0,
+     "ask+pages": 0
+    },
+    "after": {
+     "n": 362,
+     "scored": 362,
+     "first_ok": 274,
+     "top3_ok": 326,
+     "useful": 2077,
+     "no_useful": 13,
+     "urgent": 311,
+     "answer": 298,
+     "buttons": 64,
+     "ask": 0,
+     "ask+pages": 0
+    }
+   },
+   "cases154": {
+    "before": {
+     "n": 64,
+     "scored": 64,
+     "first_ok": 45,
+     "top3_ok": 57,
+     "useful": 358,
+     "no_useful": 4,
+     "urgent": 56,
+     "answer": 48,
+     "buttons": 16,
+     "ask": 0,
+     "ask+pages": 0
+    },
+    "after": {
+     "n": 64,
+     "scored": 64,
+     "first_ok": 43,
+     "top3_ok": 57,
+     "useful": 358,
+     "no_useful": 4,
+     "urgent": 56,
+     "answer": 48,
+     "buttons": 16,
+     "ask": 0,
+     "ask+pages": 0
+    }
+   },
+   "cases128": {
+    "before": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 43,
+     "top3_ok": 46,
+     "useful": 313,
+     "no_useful": 3,
+     "urgent": 26,
+     "answer": 52,
+     "buttons": 0,
+     "ask": 0,
+     "ask+pages": 0
+    },
+    "after": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 46,
+     "top3_ok": 49,
+     "useful": 319,
+     "no_useful": 0,
+     "urgent": 27,
+     "answer": 52,
+     "buttons": 0,
+     "ask": 0,
+     "ask+pages": 0
+    }
+   },
+   "cases241": {
+    "before": {
+     "n": 21,
+     "scored": 21,
+     "first_ok": 17,
+     "top3_ok": 21,
+     "useful": 120,
+     "no_useful": 0,
+     "urgent": 16,
+     "answer": 18,
+     "buttons": 3,
+     "ask": 0,
+     "ask+pages": 0
+    },
+    "after": {
+     "n": 21,
+     "scored": 21,
+     "first_ok": 16,
+     "top3_ok": 21,
+     "useful": 120,
+     "no_useful": 0,
+     "urgent": 16,
+     "answer": 18,
+     "buttons": 3,
+     "ask": 0,
+     "ask+pages": 0
+    }
+   },
+   "cases_glued": {
+    "before": {
+     "n": 48,
+     "scored": 29,
+     "first_ok": 22,
+     "top3_ok": 27,
+     "useful": 161,
+     "no_useful": 2,
+     "urgent": 23,
+     "answer": 30,
+     "buttons": 6,
+     "ask": 11,
+     "ask+pages": 1
+    },
+    "after": {
+     "n": 48,
+     "scored": 29,
+     "first_ok": 23,
+     "top3_ok": 28,
+     "useful": 166,
+     "no_useful": 1,
+     "urgent": 24,
+     "answer": 31,
+     "buttons": 6,
+     "ask": 10,
+     "ask+pages": 1
+    }
+   },
+   "convos": {
+    "before": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 33,
+     "top3_ok": 42,
+     "useful": 253,
+     "no_useful": 1,
+     "urgent": 51,
+     "answer": 44,
+     "buttons": 8,
+     "ask": 0,
+     "ask+pages": 0
+    },
+    "after": {
+     "n": 52,
+     "scored": 52,
+     "first_ok": 33,
+     "top3_ok": 42,
+     "useful": 253,
+     "no_useful": 1,
+     "urgent": 51,
+     "answer": 44,
+     "buttons": 8,
+     "ask": 0,
+     "ask+pages": 0
+    }
+   },
+   "all": {
+    "before": {
+     "n": 599,
+     "scored": 580,
+     "first_ok": 435,
+     "top3_ok": 519,
+     "useful": 3282,
+     "no_useful": 23,
+     "urgent": 483,
+     "answer": 490,
+     "buttons": 97,
+     "ask": 11,
+     "ask+pages": 1
+    },
+    "after": {
+     "n": 599,
+     "scored": 580,
+     "first_ok": 435,
+     "top3_ok": 523,
+     "useful": 3293,
+     "no_useful": 19,
+     "urgent": 485,
+     "answer": 491,
+     "buttons": 97,
+     "ask": 10,
+     "ask+pages": 1
+    }
+   }
+  }
+ },
+ "safety": {
+  "kw": {
+   "body_sign_questions": 107,
+   "body_bare_ask_before": [
+    [
+     "cases128",
+     "he has no puls what do i do"
+    ],
+    [
+     "cases_glued",
+     "mybbyisntbreathing"
+    ]
+   ],
+   "body_bare_ask_after": [],
+   "body_ask_pages_before": [
+    [
+     "cases",
+     "my sun isnt brething"
+    ],
+    [
+     "cases",
+     "deep cut on the arm bleeding a lot"
+    ],
+    [
+     "cases",
+     "knife wound to the chest and he is struggling to breathe"
+    ],
+    [
+     "cases",
+     "fell off the roof and can not move his legs"
+    ],
+    [
+     "cases",
+     "fell of the roof cant move legs"
+    ],
+    [
+     "cases",
+     "someone fell in the rainwater pool and isn't breathing"
+    ],
+    [
+     "cases154",
+     "someone fell in the rainwater pool and isn't breathing"
+    ],
+    [
+     "cases154",
+     "somone fell in the rainwater pool and isnt breathing"
+    ],
+    [
+     "cases_glued",
+     "hes chalking help"
+    ]
+   ],
+   "body_ask_pages_after": [],
+   "urgent_pages_lost": [],
+   "urgent_lost": [],
+   "urgent_gained": [
+    [
+     "cases128",
+     "he has no puls what do i do",
+     "red"
+    ],
+    [
+     "cases_glued",
+     "mybbyisntbreathing",
+     "red"
+    ]
+   ],
+   "red_not_urgent_after": [],
+   "red_bare_ask_after": []
+  },
+  "hy": {
+   "body_sign_questions": 107,
+   "body_bare_ask_before": [
+    [
+     "cases_glued",
+     "mybbyisntbreathing"
+    ]
+   ],
+   "body_bare_ask_after": [],
+   "body_ask_pages_before": [],
+   "body_ask_pages_after": [],
+   "urgent_pages_lost": [],
+   "urgent_lost": [],
+   "urgent_gained": [
+    [
+     "cases128",
+     "he has no puls what do i do",
+     "red"
+    ],
+    [
+     "cases_glued",
+     "mybbyisntbreathing",
+     "red"
+    ]
+   ],
+   "red_not_urgent_after": [],
+   "red_bare_ask_after": []
+  }
+ },
+ "changed": {
+  "kw": [
+   {
+    "set": "cases",
+    "id": "001.t0",
+    "q": "my sun isnt brething",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases",
+    "id": "011.1",
+    "q": "deep cut on the arm bleeding a lot",
+    "colour": "red",
+    "body": [
+     "bleeding"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases",
+    "id": "013.1",
+    "q": "knife wound to the chest and he is struggling to breathe",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases",
+    "id": "022.0",
+    "q": "fell off the roof and can not move his legs",
+    "colour": "red",
+    "body": [
+     "not moving"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases",
+    "id": "022.t0",
+    "q": "fell of the roof cant move legs",
+    "colour": "red",
+    "body": [
+     "not moving"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases",
+    "id": "027.2",
+    "q": "someone fell in the rainwater pool and isn't breathing",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases",
+    "id": "112.0",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "body": [],
+    "useful": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "answer"
+    ],
+    "first": [
+     "Army ATP 3-50.21 Survival (2018) p.124",
+     "Make a Family Emergency Plan p.1"
+    ]
+   },
+   {
+    "set": "cases154",
+    "id": "154.11",
+    "q": "someone fell in the rainwater pool and isn't breathing",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases154",
+    "id": "154.11t",
+    "q": "somone fell in the rainwater pool and isnt breathing",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   },
+   {
+    "set": "cases154",
+    "id": "154.28",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "body": [],
+    "useful": [
+     4,
+     6
+    ],
+    "action": [
+     "buttons",
+     "answer"
+    ],
+    "first": [
+     "Army ATP 3-50.21 Survival (2018) p.124",
+     "Make a Family Emergency Plan p.1"
+    ]
+   },
+   {
+    "set": "cases154",
+    "id": "154.28t",
+    "q": "make a fire escape plan for my famly",
+    "colour": "green",
+    "body": [],
+    "useful": [
+     4,
+     6
+    ],
+    "action": [
+     "buttons",
+     "answer"
+    ],
+    "first": [
+     "Army ATP 3-50.21 Survival (2018) p.124",
+     "Make a Family Emergency Plan p.1"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.17.t0",
+    "q": "he has no puls what do i do",
+    "colour": "red",
+    "body": [
+     "pulse"
+    ],
+    "action": [
+     "ask",
+     "answer"
+    ],
+    "danger": [
+     false,
+     true
+    ],
+    "searched": [
+     "he has no puls what do i do",
+     "he has no pulse what do i do"
+    ],
+    "first": [
+     "Fluid Power p.247",
+     "First Aid p.7"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.18.0",
+    "q": "how do i prevent a generator from starting a fire",
+    "colour": "green",
+    "body": [],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     2,
+     3
+    ],
+    "first": [
+     "USMC Winter Survival Course Handbook - Historical p.48",
+     "Aviation Maintenance Technician Handbook - General p.42"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.18.t0",
+    "q": "how do i prevent a genrator from starting a fire",
+    "colour": "green",
+    "body": [],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     2,
+     3
+    ],
+    "first": [
+     "USMC Winter Survival Course Handbook - Historical p.48",
+     "Aviation Maintenance Technician Handbook - General p.42"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.19.0",
+    "q": "how do i treat water intoxication",
+    "colour": "yellow",
+    "body": [],
+    "action": [
+     "answer",
+     "buttons"
+    ],
+    "first": [
+     "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "Microbiology p.1018"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.19.t0",
+    "q": "how do i treat water intoxicaton",
+    "colour": "yellow",
+    "body": [],
+    "action": [
+     "answer",
+     "buttons"
+    ],
+    "first": [
+     "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "Microbiology p.1018"
+    ]
+   },
+   {
+    "set": "cases241",
+    "id": "241.16",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "body": [],
+    "useful": [
+     4,
+     6
+    ],
+    "action": [
+     "buttons",
+     "answer"
+    ],
+    "first": [
+     "Army ATP 3-50.21 Survival (2018) p.124",
+     "Make a Family Emergency Plan p.1"
+    ]
+   },
+   {
+    "set": "cases_glued",
+    "id": "g.14",
+    "q": "mybbyisntbreathing",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     0,
+     8
+    ],
+    "action": [
+     "ask",
+     "answer"
+    ],
+    "danger": [
+     false,
+     true
+    ],
+    "searched": [
+     "mybbyisntbreathing",
+     "not breathing"
+    ],
+    "first": [
+     null,
+     "International First Aid Resuscitation and Education Guidelines 2025 p.152"
+    ]
+   },
+   {
+    "set": "cases_glued",
+    "id": "g.31",
+    "q": "hes chalking help",
+    "colour": "green",
+    "body": [
+     "choking"
+    ],
+    "action": [
+     "ask+pages",
+     "buttons"
+    ]
+   }
+  ],
+  "hy": [
+   {
+    "set": "cases",
+    "id": "112.0",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "body": [],
+    "first_ok": [
+     true,
+     false
+    ],
+    "first": [
+     "Mult-Family Home escape routes p.1",
+     "Make A Plan p.1"
+    ]
+   },
+   {
+    "set": "cases154",
+    "id": "154.28",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "body": [],
+    "first_ok": [
+     true,
+     false
+    ],
+    "first": [
+     "Mult-Family Home escape routes p.1",
+     "Make A Plan p.1"
+    ]
+   },
+   {
+    "set": "cases154",
+    "id": "154.28t",
+    "q": "make a fire escape plan for my famly",
+    "colour": "green",
+    "body": [],
+    "first_ok": [
+     true,
+     false
+    ],
+    "first": [
+     "Mult-Family Home escape routes p.1",
+     "Make A Plan p.1"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.17.t0",
+    "q": "he has no puls what do i do",
+    "colour": "red",
+    "body": [
+     "pulse"
+    ],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     0,
+     2
+    ],
+    "danger": [
+     false,
+     true
+    ],
+    "searched": [
+     "he has no puls what do i do",
+     "he has no pulse what do i do"
+    ],
+    "first": [
+     "First Aid p.44",
+     "First Aid p.7"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.18.0",
+    "q": "how do i prevent a generator from starting a fire",
+    "colour": "green",
+    "body": [],
+    "useful": [
+     8,
+     7
+    ],
+    "first": [
+     "Logistics Cluster — Complete Logistics Operational Guide p.369",
+     "Honda EU2200i Generator Owners Manual 2024 p.41"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.18.t0",
+    "q": "how do i prevent a genrator from starting a fire",
+    "colour": "green",
+    "body": [],
+    "useful": [
+     8,
+     7
+    ],
+    "first": [
+     "Logistics Cluster — Complete Logistics Operational Guide p.369",
+     "Honda EU2200i Generator Owners Manual 2024 p.41"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.19.0",
+    "q": "how do i treat water intoxication",
+    "colour": "yellow",
+    "body": [],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     0,
+     3
+    ],
+    "first": [
+     "Public Health Engineering in Precarious Situations p.108",
+     "Food and Water in an Emergency p.13"
+    ]
+   },
+   {
+    "set": "cases128",
+    "id": "128.19.t0",
+    "q": "how do i treat water intoxicaton",
+    "colour": "yellow",
+    "body": [],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     0,
+     3
+    ],
+    "first": [
+     "Public Health Engineering in Precarious Situations p.108",
+     "Food and Water in an Emergency p.13"
+    ]
+   },
+   {
+    "set": "cases241",
+    "id": "241.16",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "body": [],
+    "first_ok": [
+     true,
+     false
+    ],
+    "first": [
+     "Mult-Family Home escape routes p.1",
+     "Make A Plan p.1"
+    ]
+   },
+   {
+    "set": "cases_glued",
+    "id": "g.14",
+    "q": "mybbyisntbreathing",
+    "colour": "red",
+    "body": [
+     "breathing"
+    ],
+    "first_ok": [
+     false,
+     true
+    ],
+    "top3_ok": [
+     false,
+     true
+    ],
+    "useful": [
+     0,
+     5
+    ],
+    "action": [
+     "ask",
+     "answer"
+    ],
+    "danger": [
+     false,
+     true
+    ],
+    "searched": [
+     "mybbyisntbreathing",
+     "not breathing"
+    ],
+    "first": [
+     "Microbiology p.631",
+     "International First Aid Resuscitation and Education Guidelines 2025 p.152"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,18 @@
+code D:\git\lastbook\.claude\worktrees\glued-words-base sections D:\LastbookData-fork-test\derived\index\sections-ccd68a388e84.sqlite
+init 0.0s, semantic off, 0 chunks
+vocab 33650 words in 0.79s
+
+searches 165, 16s
+
+First result right (%), KEYWORD-ONLY, in-process  [n: follow 14, add 19, correct 14, new 5, after_noise 12, all 52]
+                                  follow         add     correct         new after_noise         all
+latest                                29          32          50          60          25          38
+turn_hits (empty replies)             29          32          57          60          25          40
+turn_hits (cited replies)             64          42          57          60          42          54
+
+Useful pages in the top 8 (mean)
+latest                              2.79        2.26        4.57         5.2        2.42        3.31
+turn_hits (empty replies)           4.36        3.58        4.71         3.4        3.75        4.08
+turn_hits (cited replies)           4.14        3.26        4.71         3.4         3.5         3.9
+
+route of the last message (label -> route), cited replies: {"add->danger": 3, "add->follow": 16, "correct->correct": 14, "follow->follow": 14, "new->danger": 5}

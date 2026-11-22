@@ -1,0 +1,24 @@
+local AI: your own model file; it thinks (hidden) before answering
+local AI: fit {"status": "fits", "ram_total": 34237374464, "device_bytes": 3931669152, "host_bytes": 2376105984, "needs": 5060460544, "model_bytes": 6307775136, "placement": [{"device": "RTX 3080 Ti", "bytes": 3931669152, "free": 11862298624}, {"device": "computer memory", "bytes": 2376105984}], "host_overrides": 0, "n_gpu_layers": -1, "fits": true}
+model file check: stopped 3.0 s
+local AI: ready {"ev": "ready", "n_ctx": 16384, "desc": "gemma4 E4B Q4_K - Medium", "threads": 8, "load_ms": 18861, "ram_free": 16663150592, "swa_check": true, "load_s": 19.7}
+model ready in 22.8 s
+50 7 s
+100 12 s
+150 18 s
+200 24 s
+250 30 s
+300 35 s
+350 41 s
+400 47 s
+450 52 s
+500 58 s
+550 61 s
+600 61 s
+650 61 s
+700 61 s
+750 61 s
+800 61 s
+{"lines": 832, "non-English by needs_english": 520, "got English words": 518, "seconds": 61}
+local AI: stopping (list 4 done)
+exit 0

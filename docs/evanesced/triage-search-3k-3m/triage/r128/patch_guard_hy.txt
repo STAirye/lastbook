@@ -1,0 +1,14 @@
+55:ch = [(k, v) for k, v in res.items() if v["base"] != v["patched"]]
+mode hy cases 499 changed 8
+first_ok base 380 patched 378
+useful base 2868 patched 2872
+cases make a fire escape plan for my family (1, 8, 'Mult-Family Home escape routes p.1') -> (0, 8, 'Make A Plan p.1')
+cases128 how do i prevent a generator from starting a fire (1, 8, 'Logistics Cluster — Complete Logistics Operational') -> (1, 7, 'Honda EU2200i Generator Owners Manual 2024 p.41')
+cases128 how do i prevent a genrator from starting a fire (1, 8, 'Logistics Cluster — Complete Logistics Operational') -> (1, 7, 'Honda EU2200i Generator Owners Manual 2024 p.41')
+cases128 how do i treat water intoxication (0, 0, 'Public Health Engineering in Precarious Situations') -> (1, 3, 'Food and Water in an Emergency p.13')
+cases128 how do i treat water intoxicaton (0, 0, 'Public Health Engineering in Precarious Situations') -> (1, 3, 'Food and Water in an Emergency p.13')
+cases241 make a fire escape plan for my family (1, 6, 'Mult-Family Home escape routes p.1') -> (0, 6, 'Make A Plan p.1')
+cases154 make a fire escape plan for my family (1, 6, 'Mult-Family Home escape routes p.1') -> (0, 6, 'Make A Plan p.1')
+cases154 make a fire escape plan for my famly (1, 6, 'Mult-Family Home escape routes p.1') -> (0, 6, 'Make A Plan p.1')
+
+[exited with code 0]

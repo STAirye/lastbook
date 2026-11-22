@@ -1,0 +1,7953 @@
+{
+ "arms": {
+  "base": "LASTBOOK_PHRASE_INJURY=0 LASTBOOK_PHRASE_RETRY=0",
+  "A": "injury exception",
+  "B": "retry without helpers",
+  "AB": "both"
+ },
+ "code": "fork/phrase-injury worktree (uncommitted at run time), base 9366f16",
+ "data": "D:/LastbookData-fork-test",
+ "tables": {
+  "kw_base": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 150,
+    "top3_ok": 199,
+    "useful_mean": 4.78,
+    "useful_sum": 1209,
+    "zero_useful": 39,
+    "covered": 195,
+    "wrong_sense": 5
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 66,
+    "top3_ok": 85,
+    "useful_mean": 4.72,
+    "useful_sum": 514,
+    "zero_useful": 20,
+    "covered": 81,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 14,
+    "top3_ok": 17,
+    "useful_mean": 4.82,
+    "useful_sum": 106,
+    "zero_useful": 3,
+    "covered": 19,
+    "wrong_sense": 5
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 58,
+    "top3_ok": 95,
+    "useful_mean": 4.11,
+    "useful_sum": 538,
+    "zero_useful": 27,
+    "covered": 88,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 38,
+    "top3_ok": 44,
+    "useful_mean": 5.02,
+    "useful_sum": 281,
+    "zero_useful": 9,
+    "covered": 45,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 40,
+    "top3_ok": 43,
+    "useful_mean": 6.45,
+    "useful_sum": 284,
+    "zero_useful": 0,
+    "covered": 43,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 17,
+    "top3_ok": 23,
+    "useful_mean": 4.31,
+    "useful_sum": 138,
+    "zero_useful": 4,
+    "covered": 25,
+    "wrong_sense": 0,
+    "u154": 144
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 18,
+    "top3_ok": 23,
+    "useful_mean": 4.56,
+    "useful_sum": 146,
+    "zero_useful": 3,
+    "covered": 25,
+    "wrong_sense": 0,
+    "u154": 152
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 5,
+    "top3_ok": 8,
+    "useful_mean": 2.77,
+    "useful_sum": 36,
+    "zero_useful": 3,
+    "covered": 8,
+    "wrong_sense": 0,
+    "u154": 37
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 8,
+    "top3_ok": 9,
+    "useful_mean": 5.36,
+    "useful_sum": 59,
+    "zero_useful": 1,
+    "covered": 9,
+    "wrong_sense": 0,
+    "u154": 59
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 4,
+    "top3_ok": 6,
+    "useful_mean": 5.38,
+    "useful_sum": 43,
+    "zero_useful": 0,
+    "covered": 8,
+    "wrong_sense": 0,
+    "u154": 48
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "hit his head and is vomiting and confused",
+     "hit his hed vomiting confussed",
+     "my friend says he wants to kill himself",
+     "frend says he wants to kill himslef",
+     "treat water in the lungs after drowning",
+     "biten by a ratlesnake",
+     "shoulder popped out",
+     "bad toothache and swollen face",
+     "my child keeps throwing up",
+     "my chlid keeps throwing up",
+     "fingers are white and numb from the cold",
+     "dust in my eye will not come out",
+     "my kids are scared after the earthquake",
+     "how can i know if my can food has gone bad",
+     "how do i purify water from a creek",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he is choking on food and cannot talk",
+     "hes chocking on food cant talk",
+     "he pased out wont wake up",
+     "she can't breathe, wheezing badly",
+     "she cant breath wheezing bad",
+     "he breathed in a lot of smoke and is coughing",
+     "carbon monoxide from making a fire in the tent",
+     "blood is spurting from his leg and won't stop",
+     "blod spurting from his leg wont stop",
+     "dad having a hart attack",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "diabetic and shaking, confused, sweating",
+     "diabetik shaking confused",
+     "stiff neck high fever and purple spots",
+     "my son neary drownd in the pool",
+     "her whole arm is badly burned",
+     "whole arm badly burnd",
+     "found him in the snow, cold and not shivering anymore",
+     "he was working in the sun and now he is confused and hot",
+     "snake bite while camping",
+     "car crsh driver traped",
+     "my toddler drank bleach",
+     "todler drank bleech",
+     "ate wild mushrooms and now vomiting",
+     "ate wild mushroms vomiting",
+     "she keeps bleeding after the baby came",
+     "pour water on a grease fire",
+     "fire on the hill, should we evacuate",
+     "our car is stuck in rising flood water",
+     "car stuk in rising flood water",
+     "tornado coming where do we hide",
+     "tornado comming where to hide",
+     "a bomb went off nearby",
+     "chemical spill outside, told to shelter in place",
+     "power lien fell on car",
+     "hurricane is here and the roof is coming off",
+     "is it safe to put water on a burn",
+     "dog bit my hand, small wound",
+     "dog bit my hand smal wound",
+     "itchy rash after touching a plant",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now diarrea",
+     "shivering and cold after getting wet",
+     "the cut is red, hot and has pus",
+     "use the water heater as emergency water",
+     "where to put a carbon monoxide detector",
+     "how to run a generator safely",
+     "where is the safest place in a house during a tornado",
+     "what to do during riots in the city",
+     "the engine keeps choking when it is cold",
+     "build an electric fence for goats",
+     "how to smoke fish to preserve it",
+     "how to use a burn barrel for trash",
+     "flooded engine will not start",
+     "i am drowning my tomato plants with too much water"
+    ],
+    "urgent_pages_lost": [
+     "tooth nocked out"
+    ],
+    "actions": {
+     "sure": 198,
+     "buttons": 134,
+     "buttons (compact)": 1,
+     "reply+pages": 28,
+     "reply, pages hidden": 1
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "treat water in the lungs after drowning",
+     "treat watter in the lungs after drownin",
+     "how do i purify water from a creek",
+     "how do i purfy water from a creek",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "smoke inhalation from lighting a fire indoors",
+     "smoke inhalaton from lightin a fire inside",
+     "carbon monoxide from making a fire in the tent",
+     "carbon monoxid from making a fire in the tnet",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now i have diarea",
+     "my kid swallowd lamp oyl",
+     "snake bite while camping",
+     "snak bite while campin",
+     "is it safe to put water on a burn",
+     "is it safe to put watr on a burn",
+     "how do i treat a burn from a campfire",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 26,
+     "buttons": 31,
+     "buttons (compact)": 0,
+     "reply+pages": 7,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "kw_A": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 153,
+    "top3_ok": 204,
+    "useful_mean": 4.86,
+    "useful_sum": 1229,
+    "zero_useful": 37,
+    "covered": 198,
+    "wrong_sense": 5
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 66,
+    "top3_ok": 85,
+    "useful_mean": 4.72,
+    "useful_sum": 514,
+    "zero_useful": 20,
+    "covered": 81,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 14,
+    "top3_ok": 17,
+    "useful_mean": 4.82,
+    "useful_sum": 106,
+    "zero_useful": 3,
+    "covered": 19,
+    "wrong_sense": 5
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 59,
+    "top3_ok": 97,
+    "useful_mean": 4.18,
+    "useful_sum": 547,
+    "zero_useful": 26,
+    "covered": 89,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 40,
+    "top3_ok": 47,
+    "useful_mean": 5.21,
+    "useful_sum": 292,
+    "zero_useful": 8,
+    "covered": 47,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 40,
+    "top3_ok": 43,
+    "useful_mean": 6.45,
+    "useful_sum": 284,
+    "zero_useful": 0,
+    "covered": 43,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 20,
+    "top3_ok": 28,
+    "useful_mean": 5.0,
+    "useful_sum": 160,
+    "zero_useful": 2,
+    "covered": 28,
+    "wrong_sense": 0,
+    "u154": 168
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 20,
+    "top3_ok": 26,
+    "useful_mean": 5.03,
+    "useful_sum": 161,
+    "zero_useful": 2,
+    "covered": 27,
+    "wrong_sense": 0,
+    "u154": 169
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 7,
+    "top3_ok": 12,
+    "useful_mean": 3.92,
+    "useful_sum": 51,
+    "zero_useful": 1,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 53
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 9,
+    "top3_ok": 10,
+    "useful_mean": 6.0,
+    "useful_sum": 66,
+    "zero_useful": 1,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 67
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 4,
+    "top3_ok": 6,
+    "useful_mean": 5.38,
+    "useful_sum": 43,
+    "zero_useful": 0,
+    "covered": 8,
+    "wrong_sense": 0,
+    "u154": 48
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "hit his head and is vomiting and confused",
+     "hit his hed vomiting confussed",
+     "my friend says he wants to kill himself",
+     "frend says he wants to kill himslef",
+     "biten by a ratlesnake",
+     "shoulder popped out",
+     "bad toothache and swollen face",
+     "my child keeps throwing up",
+     "my chlid keeps throwing up",
+     "fingers are white and numb from the cold",
+     "dust in my eye will not come out",
+     "my kids are scared after the earthquake",
+     "how can i know if my can food has gone bad",
+     "how do i purify water from a creek",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he is choking on food and cannot talk",
+     "hes chocking on food cant talk",
+     "he pased out wont wake up",
+     "she can't breathe, wheezing badly",
+     "she cant breath wheezing bad",
+     "he breathed in a lot of smoke and is coughing",
+     "blood is spurting from his leg and won't stop",
+     "blod spurting from his leg wont stop",
+     "dad having a hart attack",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "diabetic and shaking, confused, sweating",
+     "diabetik shaking confused",
+     "stiff neck high fever and purple spots",
+     "my son neary drownd in the pool",
+     "her whole arm is badly burned",
+     "whole arm badly burnd",
+     "found him in the snow, cold and not shivering anymore",
+     "he was working in the sun and now he is confused and hot",
+     "snake bite while camping",
+     "car crsh driver traped",
+     "my toddler drank bleach",
+     "todler drank bleech",
+     "ate wild mushrooms and now vomiting",
+     "ate wild mushroms vomiting",
+     "she keeps bleeding after the baby came",
+     "pour water on a grease fire",
+     "fire on the hill, should we evacuate",
+     "our car is stuck in rising flood water",
+     "car stuk in rising flood water",
+     "tornado coming where do we hide",
+     "tornado comming where to hide",
+     "a bomb went off nearby",
+     "chemical spill outside, told to shelter in place",
+     "power lien fell on car",
+     "hurricane is here and the roof is coming off",
+     "i burnt my fingers lighting the campfire",
+     "is it safe to put water on a burn",
+     "how do i treat water blisters on a burn",
+     "my kid fell into the fire while we were making a fire",
+     "dog bit my hand, small wound",
+     "dog bit my hand smal wound",
+     "itchy rash after touching a plant",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now diarrea",
+     "shivering and cold after getting wet",
+     "the cut is red, hot and has pus",
+     "use the water heater as emergency water",
+     "where to put a carbon monoxide detector",
+     "how to run a generator safely",
+     "where is the safest place in a house during a tornado",
+     "what to do during riots in the city",
+     "the engine keeps choking when it is cold",
+     "build an electric fence for goats",
+     "how to smoke fish to preserve it",
+     "how to use a burn barrel for trash",
+     "flooded engine will not start",
+     "i am drowning my tomato plants with too much water"
+    ],
+    "urgent_pages_lost": [
+     "tooth nocked out"
+    ],
+    "actions": {
+     "sure": 198,
+     "buttons": 133,
+     "buttons (compact)": 1,
+     "reply+pages": 29,
+     "reply, pages hidden": 1
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "how do i purify water from a creek",
+     "how do i purfy water from a creek",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "i burnt my fingers lighting the campfire",
+     "i brunt my fingrs lighting the campfier",
+     "my kid fell into the fire while we were making a fire",
+     "how do i treat water blisters on a burn",
+     "how do i treat water blisers on a burn",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now i have diarea",
+     "my kid swallowd lamp oyl",
+     "snake bite while camping",
+     "snak bite while campin",
+     "is it safe to put water on a burn",
+     "is it safe to put watr on a burn",
+     "how do i treat a burn from a campfire",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 28,
+     "buttons": 28,
+     "buttons (compact)": 0,
+     "reply+pages": 8,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "kw_B": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 153,
+    "top3_ok": 203,
+    "useful_mean": 4.87,
+    "useful_sum": 1233,
+    "zero_useful": 37,
+    "covered": 197,
+    "wrong_sense": 5
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 66,
+    "top3_ok": 85,
+    "useful_mean": 4.72,
+    "useful_sum": 514,
+    "zero_useful": 20,
+    "covered": 81,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 14,
+    "top3_ok": 17,
+    "useful_mean": 4.82,
+    "useful_sum": 106,
+    "zero_useful": 3,
+    "covered": 19,
+    "wrong_sense": 5
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 59,
+    "top3_ok": 97,
+    "useful_mean": 4.19,
+    "useful_sum": 549,
+    "zero_useful": 26,
+    "covered": 89,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 39,
+    "top3_ok": 46,
+    "useful_mean": 5.27,
+    "useful_sum": 295,
+    "zero_useful": 8,
+    "covered": 46,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 41,
+    "top3_ok": 43,
+    "useful_mean": 6.43,
+    "useful_sum": 283,
+    "zero_useful": 0,
+    "covered": 43,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 20,
+    "top3_ok": 27,
+    "useful_mean": 5.16,
+    "useful_sum": 165,
+    "zero_useful": 2,
+    "covered": 27,
+    "wrong_sense": 0,
+    "u154": 171
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 21,
+    "top3_ok": 26,
+    "useful_mean": 5.06,
+    "useful_sum": 162,
+    "zero_useful": 2,
+    "covered": 26,
+    "wrong_sense": 0,
+    "u154": 168
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 6,
+    "top3_ok": 11,
+    "useful_mean": 4.23,
+    "useful_sum": 55,
+    "zero_useful": 1,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 56
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 9,
+    "top3_ok": 10,
+    "useful_mean": 6.18,
+    "useful_sum": 68,
+    "zero_useful": 1,
+    "covered": 9,
+    "wrong_sense": 0,
+    "u154": 68
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 5,
+    "top3_ok": 6,
+    "useful_mean": 5.25,
+    "useful_sum": 42,
+    "zero_useful": 0,
+    "covered": 8,
+    "wrong_sense": 0,
+    "u154": 47
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "hit his head and is vomiting and confused",
+     "hit his hed vomiting confussed",
+     "my friend says he wants to kill himself",
+     "frend says he wants to kill himslef",
+     "biten by a ratlesnake",
+     "shoulder popped out",
+     "bad toothache and swollen face",
+     "my child keeps throwing up",
+     "my chlid keeps throwing up",
+     "fingers are white and numb from the cold",
+     "dust in my eye will not come out",
+     "my kids are scared after the earthquake",
+     "how can i know if my can food has gone bad",
+     "how do i purify water from a creek",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he is choking on food and cannot talk",
+     "hes chocking on food cant talk",
+     "he pased out wont wake up",
+     "she can't breathe, wheezing badly",
+     "she cant breath wheezing bad",
+     "he breathed in a lot of smoke and is coughing",
+     "carbon monoxide from making a fire in the tent",
+     "blood is spurting from his leg and won't stop",
+     "blod spurting from his leg wont stop",
+     "dad having a hart attack",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "diabetic and shaking, confused, sweating",
+     "diabetik shaking confused",
+     "stiff neck high fever and purple spots",
+     "treat water in the lungs after drowning",
+     "my son neary drownd in the pool",
+     "her whole arm is badly burned",
+     "whole arm badly burnd",
+     "found him in the snow, cold and not shivering anymore",
+     "he was working in the sun and now he is confused and hot",
+     "snake bite while camping",
+     "car crsh driver traped",
+     "my toddler drank bleach",
+     "todler drank bleech",
+     "ate wild mushrooms and now vomiting",
+     "ate wild mushroms vomiting",
+     "she keeps bleeding after the baby came",
+     "pour water on a grease fire",
+     "fire on the hill, should we evacuate",
+     "our car is stuck in rising flood water",
+     "car stuk in rising flood water",
+     "tornado coming where do we hide",
+     "tornado comming where to hide",
+     "a bomb went off nearby",
+     "chemical spill outside, told to shelter in place",
+     "power lien fell on car",
+     "hurricane is here and the roof is coming off",
+     "i burnt my fingers lighting the campfire",
+     "is it safe to put water on a burn",
+     "dog bit my hand, small wound",
+     "dog bit my hand smal wound",
+     "itchy rash after touching a plant",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now diarrea",
+     "shivering and cold after getting wet",
+     "the cut is red, hot and has pus",
+     "use the water heater as emergency water",
+     "where to put a carbon monoxide detector",
+     "how to run a generator safely",
+     "where is the safest place in a house during a tornado",
+     "what to do during riots in the city",
+     "the engine keeps choking when it is cold",
+     "build an electric fence for goats",
+     "how to smoke fish to preserve it",
+     "how to use a burn barrel for trash",
+     "flooded engine will not start",
+     "i am drowning my tomato plants with too much water"
+    ],
+    "urgent_pages_lost": [
+     "tooth nocked out"
+    ],
+    "actions": {
+     "sure": 199,
+     "buttons": 133,
+     "buttons (compact)": 1,
+     "reply+pages": 28,
+     "reply, pages hidden": 1
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "how do i purify water from a creek",
+     "how do i purfy water from a creek",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "i burnt my fingers lighting the campfire",
+     "i brunt my fingrs lighting the campfier",
+     "smoke inhalation from lighting a fire indoors",
+     "smoke inhalaton from lightin a fire inside",
+     "carbon monoxide from making a fire in the tent",
+     "carbon monoxid from making a fire in the tnet",
+     "treat water in the lungs after drowning",
+     "treat watter in the lungs after drownin",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now i have diarea",
+     "my kid swallowd lamp oyl",
+     "snake bite while camping",
+     "snak bite while campin",
+     "is it safe to put water on a burn",
+     "is it safe to put watr on a burn",
+     "how do i treat a burn from a campfire",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 27,
+     "buttons": 30,
+     "buttons (compact)": 0,
+     "reply+pages": 7,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "kw_AB": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 154,
+    "top3_ok": 204,
+    "useful_mean": 4.85,
+    "useful_sum": 1228,
+    "zero_useful": 37,
+    "covered": 198,
+    "wrong_sense": 5
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 66,
+    "top3_ok": 85,
+    "useful_mean": 4.72,
+    "useful_sum": 514,
+    "zero_useful": 20,
+    "covered": 81,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 14,
+    "top3_ok": 17,
+    "useful_mean": 4.82,
+    "useful_sum": 106,
+    "zero_useful": 3,
+    "covered": 19,
+    "wrong_sense": 5
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 59,
+    "top3_ok": 97,
+    "useful_mean": 4.18,
+    "useful_sum": 547,
+    "zero_useful": 26,
+    "covered": 89,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 40,
+    "top3_ok": 47,
+    "useful_mean": 5.21,
+    "useful_sum": 292,
+    "zero_useful": 8,
+    "covered": 47,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 41,
+    "top3_ok": 43,
+    "useful_mean": 6.43,
+    "useful_sum": 283,
+    "zero_useful": 0,
+    "covered": 43,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 21,
+    "top3_ok": 28,
+    "useful_mean": 4.97,
+    "useful_sum": 159,
+    "zero_useful": 2,
+    "covered": 28,
+    "wrong_sense": 0,
+    "u154": 167
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 21,
+    "top3_ok": 26,
+    "useful_mean": 4.97,
+    "useful_sum": 159,
+    "zero_useful": 2,
+    "covered": 27,
+    "wrong_sense": 0,
+    "u154": 167
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 7,
+    "top3_ok": 12,
+    "useful_mean": 3.92,
+    "useful_sum": 51,
+    "zero_useful": 1,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 53
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 9,
+    "top3_ok": 10,
+    "useful_mean": 6.0,
+    "useful_sum": 66,
+    "zero_useful": 1,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 67
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 5,
+    "top3_ok": 6,
+    "useful_mean": 5.25,
+    "useful_sum": 42,
+    "zero_useful": 0,
+    "covered": 8,
+    "wrong_sense": 0,
+    "u154": 47
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "hit his head and is vomiting and confused",
+     "hit his hed vomiting confussed",
+     "my friend says he wants to kill himself",
+     "frend says he wants to kill himslef",
+     "biten by a ratlesnake",
+     "shoulder popped out",
+     "bad toothache and swollen face",
+     "my child keeps throwing up",
+     "my chlid keeps throwing up",
+     "fingers are white and numb from the cold",
+     "dust in my eye will not come out",
+     "my kids are scared after the earthquake",
+     "how can i know if my can food has gone bad",
+     "how do i purify water from a creek",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he is choking on food and cannot talk",
+     "hes chocking on food cant talk",
+     "he pased out wont wake up",
+     "she can't breathe, wheezing badly",
+     "she cant breath wheezing bad",
+     "he breathed in a lot of smoke and is coughing",
+     "blood is spurting from his leg and won't stop",
+     "blod spurting from his leg wont stop",
+     "dad having a hart attack",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "diabetic and shaking, confused, sweating",
+     "diabetik shaking confused",
+     "stiff neck high fever and purple spots",
+     "my son neary drownd in the pool",
+     "her whole arm is badly burned",
+     "whole arm badly burnd",
+     "found him in the snow, cold and not shivering anymore",
+     "he was working in the sun and now he is confused and hot",
+     "snake bite while camping",
+     "car crsh driver traped",
+     "my toddler drank bleach",
+     "todler drank bleech",
+     "ate wild mushrooms and now vomiting",
+     "ate wild mushroms vomiting",
+     "she keeps bleeding after the baby came",
+     "pour water on a grease fire",
+     "fire on the hill, should we evacuate",
+     "our car is stuck in rising flood water",
+     "car stuk in rising flood water",
+     "tornado coming where do we hide",
+     "tornado comming where to hide",
+     "a bomb went off nearby",
+     "chemical spill outside, told to shelter in place",
+     "power lien fell on car",
+     "hurricane is here and the roof is coming off",
+     "i burnt my fingers lighting the campfire",
+     "is it safe to put water on a burn",
+     "how do i treat water blisters on a burn",
+     "my kid fell into the fire while we were making a fire",
+     "dog bit my hand, small wound",
+     "dog bit my hand smal wound",
+     "itchy rash after touching a plant",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now diarrea",
+     "shivering and cold after getting wet",
+     "the cut is red, hot and has pus",
+     "use the water heater as emergency water",
+     "where to put a carbon monoxide detector",
+     "how to run a generator safely",
+     "where is the safest place in a house during a tornado",
+     "what to do during riots in the city",
+     "the engine keeps choking when it is cold",
+     "build an electric fence for goats",
+     "how to smoke fish to preserve it",
+     "how to use a burn barrel for trash",
+     "flooded engine will not start",
+     "i am drowning my tomato plants with too much water"
+    ],
+    "urgent_pages_lost": [
+     "tooth nocked out"
+    ],
+    "actions": {
+     "sure": 199,
+     "buttons": 132,
+     "buttons (compact)": 1,
+     "reply+pages": 29,
+     "reply, pages hidden": 1
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "how do i purify water from a creek",
+     "how do i purfy water from a creek",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "i burnt my fingers lighting the campfire",
+     "i brunt my fingrs lighting the campfier",
+     "my kid fell into the fire while we were making a fire",
+     "how do i treat water blisters on a burn",
+     "how do i treat water blisers on a burn",
+     "drank creek water and now i have diarrhea",
+     "drank creek water now i have diarea",
+     "my kid swallowd lamp oyl",
+     "snake bite while camping",
+     "snak bite while campin",
+     "is it safe to put water on a burn",
+     "is it safe to put watr on a burn",
+     "how do i treat a burn from a campfire",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 30,
+     "buttons": 26,
+     "buttons (compact)": 0,
+     "reply+pages": 8,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "hy_base": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 192,
+    "top3_ok": 227,
+    "useful_mean": 5.81,
+    "useful_sum": 1469,
+    "zero_useful": 8,
+    "covered": 234,
+    "wrong_sense": 2
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 84,
+    "top3_ok": 98,
+    "useful_mean": 5.57,
+    "useful_sum": 607,
+    "zero_useful": 5,
+    "covered": 97,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 17,
+    "top3_ok": 21,
+    "useful_mean": 6.05,
+    "useful_sum": 133,
+    "zero_useful": 0,
+    "covered": 22,
+    "wrong_sense": 2
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 91,
+    "top3_ok": 112,
+    "useful_mean": 5.26,
+    "useful_sum": 689,
+    "zero_useful": 8,
+    "covered": 112,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 44,
+    "top3_ok": 50,
+    "useful_mean": 5.95,
+    "useful_sum": 333,
+    "zero_useful": 0,
+    "covered": 56,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 40,
+    "top3_ok": 44,
+    "useful_mean": 7.14,
+    "useful_sum": 314,
+    "zero_useful": 0,
+    "covered": 44,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 23,
+    "top3_ok": 28,
+    "useful_mean": 5.59,
+    "useful_sum": 179,
+    "zero_useful": 2,
+    "covered": 29,
+    "wrong_sense": 0,
+    "u154": 186
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 22,
+    "top3_ok": 28,
+    "useful_mean": 5.5,
+    "useful_sum": 176,
+    "zero_useful": 2,
+    "covered": 28,
+    "wrong_sense": 0,
+    "u154": 183
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 8,
+    "top3_ok": 10,
+    "useful_mean": 4.85,
+    "useful_sum": 63,
+    "zero_useful": 1,
+    "covered": 11,
+    "wrong_sense": 0,
+    "u154": 65
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 6.36,
+    "useful_sum": 70,
+    "zero_useful": 0,
+    "covered": 11,
+    "wrong_sense": 0,
+    "u154": 71
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 7,
+    "top3_ok": 7,
+    "useful_mean": 5.75,
+    "useful_sum": 46,
+    "zero_useful": 1,
+    "covered": 7,
+    "wrong_sense": 0,
+    "u154": 50
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "a stick is stuck in his leg",
+     "stik stuck in his leg",
+     "he is pale cold and sweaty after the accident",
+     "took too many pain pills, will not wake",
+     "someone got shocked by a wire in the flood water",
+     "shoked by a wire in flood water",
+     "boiling water spilled on the baby",
+     "boiling water spiled on the baby",
+     "someone trapped under rubble after the earthquake",
+     "the oil in the pan caught fire",
+     "a power line fell on our car",
+     "mud is sliding down the hill toward the houses",
+     "twisted my ankle hiking",
+     "i think my arm is broken",
+     "i think my arm is brokn",
+     "light a fire to keep him warm with hypothermia",
+     "i can not stop shaking after the storm",
+     "my kids are scared after the earthquake",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he stoped breathin wat do i do",
+     "she cant breath wheezing bad",
+     "peanut allergy can not breathe",
+     "he breathed in a lot of smoke and is coughing",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "my son nearly drowned in the rainwater pool",
+     "fell thru the ice",
+     "he touched a power line and collapsed",
+     "her whole arm is badly burned",
+     "found him in the snow, cold and not shivering anymore",
+     "motorcycle accident he is not moving",
+     "my toddler drank bleach",
+     "kid swallowed drain cleaner",
+     "todler drank bleech",
+     "kid swalowed drain cleaner",
+     "my child swallowed lamp oil",
+     "child swalowed lamp oil",
+     "fire in the house and kids are upstairs",
+     "pour water on a grease fire",
+     "oil in pan cought fire",
+     "chimney fire roaring sound",
+     "water is coming into the car",
+     "someone is shooting in the mall",
+     "some one is shoting in the mall",
+     "a bomb went off nearby",
+     "someone is breaking into my house",
+     "burnd my hand on the stove",
+     "brunt my fingers campfire",
+     "broken leg no ambulance",
+     "kid bumped his head, he seems fine",
+     "the engine keeps choking when it is cold",
+     "the shock absorbers on the truck are broken"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 298,
+     "buttons": 64,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "light a fire to keep him warm with hypothermia",
+     "someone got shocked by a wire in the flood water",
+     "somone got shoked by a wire in the flood watter",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "smoke inhalation from lighting a fire indoors",
+     "smoke inhalaton from lightin a fire inside",
+     "my son nearly drowned in the rainwater pool",
+     "my child swallowed lamp oil",
+     "my kid swallowd lamp oyl",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 48,
+     "buttons": 16,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "hy_A": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 191,
+    "top3_ok": 228,
+    "useful_mean": 5.81,
+    "useful_sum": 1470,
+    "zero_useful": 8,
+    "covered": 233,
+    "wrong_sense": 2
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 84,
+    "top3_ok": 98,
+    "useful_mean": 5.57,
+    "useful_sum": 607,
+    "zero_useful": 5,
+    "covered": 97,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 17,
+    "top3_ok": 21,
+    "useful_mean": 6.05,
+    "useful_sum": 133,
+    "zero_useful": 0,
+    "covered": 22,
+    "wrong_sense": 2
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 91,
+    "top3_ok": 112,
+    "useful_mean": 5.26,
+    "useful_sum": 689,
+    "zero_useful": 8,
+    "covered": 112,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 43,
+    "top3_ok": 51,
+    "useful_mean": 5.96,
+    "useful_sum": 334,
+    "zero_useful": 0,
+    "covered": 55,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 40,
+    "top3_ok": 44,
+    "useful_mean": 7.14,
+    "useful_sum": 314,
+    "zero_useful": 0,
+    "covered": 44,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 23,
+    "top3_ok": 29,
+    "useful_mean": 5.66,
+    "useful_sum": 181,
+    "zero_useful": 2,
+    "covered": 28,
+    "wrong_sense": 0,
+    "u154": 189
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 22,
+    "top3_ok": 28,
+    "useful_mean": 5.53,
+    "useful_sum": 177,
+    "zero_useful": 2,
+    "covered": 27,
+    "wrong_sense": 0,
+    "u154": 184
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 4.92,
+    "useful_sum": 64,
+    "zero_useful": 1,
+    "covered": 11,
+    "wrong_sense": 0,
+    "u154": 67
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 6.45,
+    "useful_sum": 71,
+    "zero_useful": 0,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 72
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 7,
+    "top3_ok": 7,
+    "useful_mean": 5.75,
+    "useful_sum": 46,
+    "zero_useful": 1,
+    "covered": 7,
+    "wrong_sense": 0,
+    "u154": 50
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "a stick is stuck in his leg",
+     "stik stuck in his leg",
+     "he is pale cold and sweaty after the accident",
+     "took too many pain pills, will not wake",
+     "someone got shocked by a wire in the flood water",
+     "shoked by a wire in flood water",
+     "boiling water spilled on the baby",
+     "boiling water spiled on the baby",
+     "someone trapped under rubble after the earthquake",
+     "the oil in the pan caught fire",
+     "a power line fell on our car",
+     "mud is sliding down the hill toward the houses",
+     "twisted my ankle hiking",
+     "i think my arm is broken",
+     "i think my arm is brokn",
+     "i can not stop shaking after the storm",
+     "my kids are scared after the earthquake",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he stoped breathin wat do i do",
+     "she cant breath wheezing bad",
+     "peanut allergy can not breathe",
+     "he breathed in a lot of smoke and is coughing",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "my son nearly drowned in the rainwater pool",
+     "fell thru the ice",
+     "he touched a power line and collapsed",
+     "her whole arm is badly burned",
+     "found him in the snow, cold and not shivering anymore",
+     "motorcycle accident he is not moving",
+     "my toddler drank bleach",
+     "kid swallowed drain cleaner",
+     "todler drank bleech",
+     "kid swalowed drain cleaner",
+     "my child swallowed lamp oil",
+     "child swalowed lamp oil",
+     "fire in the house and kids are upstairs",
+     "pour water on a grease fire",
+     "oil in pan cought fire",
+     "chimney fire roaring sound",
+     "water is coming into the car",
+     "someone is shooting in the mall",
+     "some one is shoting in the mall",
+     "a bomb went off nearby",
+     "someone is breaking into my house",
+     "burnd my hand on the stove",
+     "brunt my fingers campfire",
+     "broken leg no ambulance",
+     "kid bumped his head, he seems fine",
+     "the engine keeps choking when it is cold",
+     "the shock absorbers on the truck are broken"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 298,
+     "buttons": 64,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "someone got shocked by a wire in the flood water",
+     "somone got shoked by a wire in the flood watter",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "smoke inhalation from lighting a fire indoors",
+     "smoke inhalaton from lightin a fire inside",
+     "my son nearly drowned in the rainwater pool",
+     "my child swallowed lamp oil",
+     "my kid swallowd lamp oyl",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 48,
+     "buttons": 16,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "hy_B": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 192,
+    "top3_ok": 228,
+    "useful_mean": 5.82,
+    "useful_sum": 1472,
+    "zero_useful": 8,
+    "covered": 234,
+    "wrong_sense": 2
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 84,
+    "top3_ok": 98,
+    "useful_mean": 5.57,
+    "useful_sum": 607,
+    "zero_useful": 5,
+    "covered": 97,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 17,
+    "top3_ok": 21,
+    "useful_mean": 6.05,
+    "useful_sum": 133,
+    "zero_useful": 0,
+    "covered": 22,
+    "wrong_sense": 2
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 91,
+    "top3_ok": 112,
+    "useful_mean": 5.27,
+    "useful_sum": 691,
+    "zero_useful": 8,
+    "covered": 112,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 44,
+    "top3_ok": 51,
+    "useful_mean": 6.02,
+    "useful_sum": 337,
+    "zero_useful": 0,
+    "covered": 56,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 40,
+    "top3_ok": 44,
+    "useful_mean": 7.07,
+    "useful_sum": 311,
+    "zero_useful": 0,
+    "covered": 44,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 23,
+    "top3_ok": 29,
+    "useful_mean": 5.72,
+    "useful_sum": 183,
+    "zero_useful": 2,
+    "covered": 29,
+    "wrong_sense": 0,
+    "u154": 190
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 21,
+    "top3_ok": 28,
+    "useful_mean": 5.41,
+    "useful_sum": 173,
+    "zero_useful": 3,
+    "covered": 26,
+    "wrong_sense": 0,
+    "u154": 180
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 5.15,
+    "useful_sum": 67,
+    "zero_useful": 1,
+    "covered": 11,
+    "wrong_sense": 0,
+    "u154": 69
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 6.64,
+    "useful_sum": 73,
+    "zero_useful": 0,
+    "covered": 11,
+    "wrong_sense": 0,
+    "u154": 74
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 7,
+    "top3_ok": 7,
+    "useful_mean": 5.38,
+    "useful_sum": 43,
+    "zero_useful": 1,
+    "covered": 7,
+    "wrong_sense": 0,
+    "u154": 47
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "a stick is stuck in his leg",
+     "stik stuck in his leg",
+     "he is pale cold and sweaty after the accident",
+     "took too many pain pills, will not wake",
+     "someone got shocked by a wire in the flood water",
+     "shoked by a wire in flood water",
+     "boiling water spilled on the baby",
+     "boiling water spiled on the baby",
+     "someone trapped under rubble after the earthquake",
+     "the oil in the pan caught fire",
+     "a power line fell on our car",
+     "mud is sliding down the hill toward the houses",
+     "twisted my ankle hiking",
+     "i think my arm is broken",
+     "i think my arm is brokn",
+     "i can not stop shaking after the storm",
+     "my kids are scared after the earthquake",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he stoped breathin wat do i do",
+     "she cant breath wheezing bad",
+     "peanut allergy can not breathe",
+     "he breathed in a lot of smoke and is coughing",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "my son nearly drowned in the rainwater pool",
+     "fell thru the ice",
+     "he touched a power line and collapsed",
+     "her whole arm is badly burned",
+     "found him in the snow, cold and not shivering anymore",
+     "motorcycle accident he is not moving",
+     "my toddler drank bleach",
+     "kid swallowed drain cleaner",
+     "todler drank bleech",
+     "kid swalowed drain cleaner",
+     "my child swallowed lamp oil",
+     "child swalowed lamp oil",
+     "fire in the house and kids are upstairs",
+     "pour water on a grease fire",
+     "oil in pan cought fire",
+     "chimney fire roaring sound",
+     "water is coming into the car",
+     "someone is shooting in the mall",
+     "some one is shoting in the mall",
+     "a bomb went off nearby",
+     "someone is breaking into my house",
+     "burned my hand trying to light a fire",
+     "burnd my hand on the stove",
+     "brunt my fingers campfire",
+     "broken leg no ambulance",
+     "kid bumped his head, he seems fine",
+     "the engine keeps choking when it is cold",
+     "the shock absorbers on the truck are broken"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 297,
+     "buttons": 65,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "someone got shocked by a wire in the flood water",
+     "somone got shoked by a wire in the flood watter",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burned my hand trying to light a fire",
+     "burnd my hand tryng to lite a fire",
+     "smoke inhalation from lighting a fire indoors",
+     "smoke inhalaton from lightin a fire inside",
+     "my son nearly drowned in the rainwater pool",
+     "my child swallowed lamp oil",
+     "my kid swallowd lamp oyl",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 47,
+     "buttons": 17,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "hy_AB": {
+   "cases_clean": {
+    "n": 253,
+    "first_ok": 191,
+    "top3_ok": 228,
+    "useful_mean": 5.8,
+    "useful_sum": 1467,
+    "zero_useful": 8,
+    "covered": 233,
+    "wrong_sense": 2
+   },
+   "cases_typo": {
+    "n": 109,
+    "first_ok": 84,
+    "top3_ok": 98,
+    "useful_mean": 5.57,
+    "useful_sum": 607,
+    "zero_useful": 5,
+    "covered": 97,
+    "wrong_sense": 0
+   },
+   "cases_counter": {
+    "n": 22,
+    "first_ok": 17,
+    "top3_ok": 21,
+    "useful_mean": 6.05,
+    "useful_sum": 133,
+    "zero_useful": 0,
+    "covered": 22,
+    "wrong_sense": 2
+   },
+   "cases_red": {
+    "n": 131,
+    "first_ok": 91,
+    "top3_ok": 112,
+    "useful_mean": 5.26,
+    "useful_sum": 689,
+    "zero_useful": 8,
+    "covered": 112,
+    "wrong_sense": 0
+   },
+   "cases_yellow": {
+    "n": 56,
+    "first_ok": 43,
+    "top3_ok": 51,
+    "useful_mean": 5.96,
+    "useful_sum": 334,
+    "zero_useful": 0,
+    "covered": 55,
+    "wrong_sense": 0
+   },
+   "cases_green": {
+    "n": 44,
+    "first_ok": 40,
+    "top3_ok": 44,
+    "useful_mean": 7.07,
+    "useful_sum": 311,
+    "zero_useful": 0,
+    "covered": 44,
+    "wrong_sense": 0
+   },
+   "c154_clean": {
+    "n": 32,
+    "first_ok": 23,
+    "top3_ok": 29,
+    "useful_mean": 5.56,
+    "useful_sum": 178,
+    "zero_useful": 2,
+    "covered": 28,
+    "wrong_sense": 0,
+    "u154": 186
+   },
+   "c154_typo": {
+    "n": 32,
+    "first_ok": 22,
+    "top3_ok": 28,
+    "useful_mean": 5.41,
+    "useful_sum": 173,
+    "zero_useful": 3,
+    "covered": 26,
+    "wrong_sense": 0,
+    "u154": 180
+   },
+   "c154_red": {
+    "n": 13,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 4.92,
+    "useful_sum": 64,
+    "zero_useful": 1,
+    "covered": 11,
+    "wrong_sense": 0,
+    "u154": 67
+   },
+   "c154_yellow": {
+    "n": 11,
+    "first_ok": 8,
+    "top3_ok": 11,
+    "useful_mean": 6.45,
+    "useful_sum": 71,
+    "zero_useful": 0,
+    "covered": 10,
+    "wrong_sense": 0,
+    "u154": 72
+   },
+   "c154_green": {
+    "n": 8,
+    "first_ok": 7,
+    "top3_ok": 7,
+    "useful_mean": 5.38,
+    "useful_sum": 43,
+    "zero_useful": 1,
+    "covered": 7,
+    "wrong_sense": 0,
+    "u154": 47
+   },
+   "conf_cases": {
+    "confident_miss": [
+     "my son isn't breathing",
+     "kid not breathing and lips are blue",
+     "a stick is stuck in his leg",
+     "stik stuck in his leg",
+     "he is pale cold and sweaty after the accident",
+     "took too many pain pills, will not wake",
+     "someone got shocked by a wire in the flood water",
+     "shoked by a wire in flood water",
+     "boiling water spilled on the baby",
+     "boiling water spiled on the baby",
+     "someone trapped under rubble after the earthquake",
+     "the oil in the pan caught fire",
+     "a power line fell on our car",
+     "mud is sliding down the hill toward the houses",
+     "twisted my ankle hiking",
+     "i think my arm is broken",
+     "i think my arm is brokn",
+     "i can not stop shaking after the storm",
+     "my kids are scared after the earthquake",
+     "how to cut firewood safely"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "he stoped breathin wat do i do",
+     "she cant breath wheezing bad",
+     "peanut allergy can not breathe",
+     "he breathed in a lot of smoke and is coughing",
+     "dog attacked my child and she is bleeding badly",
+     "dog atacked my child bleding bad",
+     "my son nearly drowned in the rainwater pool",
+     "fell thru the ice",
+     "he touched a power line and collapsed",
+     "her whole arm is badly burned",
+     "found him in the snow, cold and not shivering anymore",
+     "motorcycle accident he is not moving",
+     "my toddler drank bleach",
+     "kid swallowed drain cleaner",
+     "todler drank bleech",
+     "kid swalowed drain cleaner",
+     "my child swallowed lamp oil",
+     "child swalowed lamp oil",
+     "fire in the house and kids are upstairs",
+     "pour water on a grease fire",
+     "oil in pan cought fire",
+     "chimney fire roaring sound",
+     "water is coming into the car",
+     "someone is shooting in the mall",
+     "some one is shoting in the mall",
+     "a bomb went off nearby",
+     "someone is breaking into my house",
+     "burnd my hand on the stove",
+     "brunt my fingers campfire",
+     "broken leg no ambulance",
+     "kid bumped his head, he seems fine",
+     "the engine keeps choking when it is cold",
+     "the shock absorbers on the truck are broken"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 298,
+     "buttons": 64,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   },
+   "conf_c154": {
+    "confident_miss": [
+     "someone got shocked by a wire in the flood water",
+     "somone got shoked by a wire in the flood watter",
+     "how do i treat water damage on the floor",
+     "how do i treat water damge on the floor"
+    ],
+    "first_right_but_buttons_or_reply": [
+     "burnd my hand tryng to lite a fire",
+     "smoke inhalation from lighting a fire indoors",
+     "smoke inhalaton from lightin a fire inside",
+     "my son nearly drowned in the rainwater pool",
+     "my child swallowed lamp oil",
+     "my kid swallowd lamp oyl",
+     "pour water on a grease fire",
+     "pour watter on a greese fire"
+    ],
+    "urgent_pages_lost": [],
+    "actions": {
+     "sure": 48,
+     "buttons": 16,
+     "buttons (compact)": 0,
+     "reply+pages": 0,
+     "reply, pages hidden": 0
+    }
+   }
+  },
+  "key": {
+   "carbon monoxide from making a fire in the tent": {
+    "kw_base": "3F",
+    "kw_A": "8F",
+    "kw_B": "8F",
+    "kw_AB": "8F",
+    "hy_base": "7F",
+    "hy_A": "7F",
+    "hy_B": "6F",
+    "hy_AB": "7F"
+   },
+   "treat water in the lungs after drowning": {
+    "kw_base": "0 (none in 3)",
+    "kw_A": "4F",
+    "kw_B": "5F",
+    "kw_AB": "4F",
+    "hy_base": "2",
+    "hy_A": "4",
+    "hy_B": "5",
+    "hy_AB": "4"
+   },
+   "light a fire to keep him warm with hypothermia": {
+    "kw_base": "0 (none in 3)",
+    "kw_A": "4",
+    "kw_B": "4",
+    "kw_AB": "4",
+    "hy_base": "3 (none in 3)",
+    "hy_A": "4",
+    "hy_B": "5",
+    "hy_AB": "4"
+   },
+   "how do i light a campfire": {
+    "kw_base": "8F",
+    "kw_A": "8F",
+    "kw_B": "8F",
+    "kw_AB": "8F",
+    "hy_base": "6F",
+    "hy_A": "6F",
+    "hy_B": "6F",
+    "hy_AB": "6F"
+   },
+   "i need to start a fire but i have no matches and no gas": {
+    "kw_base": "7F",
+    "kw_A": "7F",
+    "kw_B": "2F",
+    "kw_AB": "2F",
+    "hy_base": "7F",
+    "hy_A": "7F",
+    "hy_B": "4F",
+    "hy_AB": "4F"
+   },
+   "how do i make the water safe to drink": {
+    "kw_base": "8F",
+    "kw_A": "8F",
+    "kw_B": "8F",
+    "kw_AB": "8F",
+    "hy_base": "8F",
+    "hy_A": "8F",
+    "hy_B": "8F",
+    "hy_AB": "8F"
+   },
+   "how do i purify water from a creek": {
+    "kw_base": "1 (none in 3)",
+    "kw_A": "1 (none in 3)",
+    "kw_B": "1 (none in 3)",
+    "kw_AB": "1 (none in 3)",
+    "hy_base": "5F",
+    "hy_A": "5F",
+    "hy_B": "5F",
+    "hy_AB": "5F"
+   },
+   "how to make the water safe for a baby's formula": {
+    "kw_base": "8F",
+    "kw_A": "8F",
+    "kw_B": "8F",
+    "kw_AB": "8F",
+    "hy_base": "8F",
+    "hy_A": "8F",
+    "hy_B": "8F",
+    "hy_AB": "8F"
+   },
+   "how do i treat water damage on the floor": {
+    "kw_base": "8 (none in 3)",
+    "kw_A": "8 (none in 3)",
+    "kw_B": "8 (none in 3)",
+    "kw_AB": "8 (none in 3)",
+    "hy_base": "5 (none in 3)",
+    "hy_A": "5 (none in 3)",
+    "hy_B": "5 (none in 3)",
+    "hy_AB": "5 (none in 3)"
+   }
+  }
+ },
+ "changed": {
+  "kw_A": [
+   {
+    "src": "cases",
+    "id": "010.0",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.531,
+     0.828
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Outdoor Fire Safety"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "027.0",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.726,
+     0.622
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "Basic Emergency Care - Approach to the Acutely Ill and Injured"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "033.2",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.458,
+     0.53
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.1",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "reply+pages"
+    ],
+    "p": [
+     0.388,
+     0.114
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Trail Maintenance and Construction Notebook"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.2",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.583
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "068.0",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.689,
+     0.457
+    ],
+    "title1": [
+     "First Aid",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "069.0",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.371,
+     0.541
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "084.0",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.601,
+     0.73
+    ],
+    "title1": [
+     "Index",
+     "First Aid"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "089.0",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.401,
+     0.593
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Are You Ready Guide 2021"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "0",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     6
+    ],
+    "u154": [
+     2,
+     6
+    ],
+    "action": [
+     "buttons",
+     "reply+pages"
+    ],
+    "p": [
+     0.388,
+     0.114
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Trail Maintenance and Construction Notebook"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     3,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.583
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1t",
+    "q": "i brunt my fingrs lighting the campfier",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     3,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.583
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2",
+    "q": "smoke inhalation from lighting a fire indoors",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     4,
+     6
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.577,
+     0.729
+    ],
+    "title1": [
+     "Wildfire Resources List",
+     "Wildfire Resources List"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2t",
+    "q": "smoke inhalaton from lightin a fire inside",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.537,
+     0.707
+    ],
+    "title1": [
+     "Wildfire Resources List",
+     "Wildfire Resources List"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     3,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.531,
+     0.828
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Outdoor Fire Safety"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3t",
+    "q": "carbon monoxid from making a fire in the tnet",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     3,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.531,
+     0.828
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Outdoor Fire Safety"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     1,
+     2
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.458,
+     0.53
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4t",
+    "q": "my cloths cought fire wile starting the fire",
+    "colour": "red",
+    "verdict": "mixed",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     2,
+     2
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.456,
+     0.53
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     1,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.371,
+     0.541
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.726,
+     0.622
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "Basic Emergency Care - Approach to the Acutely Ill and Injured"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6t",
+    "q": "treat watter in the lungs after drownin",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.726,
+     0.622
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "Basic Emergency Care - Approach to the Acutely Ill and Injured"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     8,
+     8
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.689,
+     0.457
+    ],
+    "title1": [
+     "First Aid",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7t",
+    "q": "how do i treat water blisers on a burn",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     8,
+     8
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.689,
+     0.457
+    ],
+    "title1": [
+     "First Aid",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     6,
+     8
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.601,
+     0.73
+    ],
+    "title1": [
+     "Index",
+     "First Aid"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8t",
+    "q": "how do i treat water posioning",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     6,
+     8
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.601,
+     0.73
+    ],
+    "title1": [
+     "Index",
+     "First Aid"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "9",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.401,
+     0.593
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Are You Ready Guide 2021"
+    ]
+   }
+  ],
+  "kw_B": [
+   {
+    "src": "cases",
+    "id": "010.0",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.531,
+     0.531
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "027.0",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.726,
+     0.585
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "International First Aid Resuscitation and Education Guidelines 2025"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "033.2",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     2
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.458,
+     0.771
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "International First Aid Resuscitation and Education Guidelines 2025"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.1",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.388,
+     0.25
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Trail Maintenance and Construction Notebook"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.2",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.52
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "A Healthy Home"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "069.0",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     1,
+     2
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.371,
+     0.275
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "UNICEF Early Childhood Development Kit Guidance"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "089.0",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.401,
+     0.35
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "108.1",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     2
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.67,
+     0.67
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "112.0",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.358,
+     0.689
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Single Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "0",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     7
+    ],
+    "u154": [
+     2,
+     7
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.388,
+     0.25
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Trail Maintenance and Construction Notebook"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     7
+    ],
+    "u154": [
+     3,
+     7
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.52
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "A Healthy Home"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1t",
+    "q": "i brunt my fingrs lighting the campfier",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     7
+    ],
+    "u154": [
+     3,
+     7
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.52
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "A Healthy Home"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2",
+    "q": "smoke inhalation from lighting a fire indoors",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     7
+    ],
+    "u154": [
+     4,
+     7
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.577,
+     0.478
+    ],
+    "title1": [
+     "Wildfire Resources List",
+     "Wildfires"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2t",
+    "q": "smoke inhalaton from lightin a fire inside",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     7
+    ],
+    "u154": [
+     4,
+     7
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.537,
+     0.448
+    ],
+    "title1": [
+     "Wildfire Resources List",
+     "Wildfires"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     3,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.531,
+     0.531
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3t",
+    "q": "carbon monoxid from making a fire in the tnet",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     3,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.531,
+     0.531
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     2
+    ],
+    "u154": [
+     1,
+     2
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.458,
+     0.771
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "International First Aid Resuscitation and Education Guidelines 2025"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4t",
+    "q": "my cloths cought fire wile starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     2,
+     3
+    ],
+    "u154": [
+     2,
+     3
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.456,
+     0.518
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "CERT Basic Training Hazard Annexes (2019)"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     1,
+     2
+    ],
+    "u154": [
+     1,
+     2
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.371,
+     0.275
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "UNICEF Early Childhood Development Kit Guidance"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5t",
+    "q": "my kid fel into the fire wile we were makin a fire",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     1,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.369,
+     0.259
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "UNICEF Early Childhood Development Kit Guidance"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     5
+    ],
+    "u154": [
+     0,
+     5
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.726,
+     0.585
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "International First Aid Resuscitation and Education Guidelines 2025"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6t",
+    "q": "treat watter in the lungs after drownin",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     5
+    ],
+    "u154": [
+     0,
+     5
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.726,
+     0.585
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "International First Aid Resuscitation and Education Guidelines 2025"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "9",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.401,
+     0.35
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     2
+    ],
+    "u154": [
+     7,
+     2
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.67,
+     0.67
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24t",
+    "q": "i need to start a fire but no matchs and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     1
+    ],
+    "u154": [
+     7,
+     1
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.887,
+     0.887
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.358,
+     0.689
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Single Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28t",
+    "q": "make a fire escape plan for my famly",
+    "colour": "green",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.358,
+     0.689
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Single Family Home escape routes"
+    ]
+   }
+  ],
+  "kw_AB": [
+   {
+    "src": "cases",
+    "id": "010.0",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.531,
+     0.828
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Outdoor Fire Safety"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "027.0",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.726,
+     0.622
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "Basic Emergency Care - Approach to the Acutely Ill and Injured"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "033.2",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.458,
+     0.53
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.1",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "reply+pages"
+    ],
+    "p": [
+     0.388,
+     0.114
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Trail Maintenance and Construction Notebook"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.2",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.583
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "068.0",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.689,
+     0.457
+    ],
+    "title1": [
+     "First Aid",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "069.0",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.371,
+     0.541
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "084.0",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.601,
+     0.73
+    ],
+    "title1": [
+     "Index",
+     "First Aid"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "089.0",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.401,
+     0.593
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Are You Ready Guide 2021"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "108.1",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     2
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.67,
+     0.67
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "112.0",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.358,
+     0.689
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Single Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "0",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     6
+    ],
+    "u154": [
+     2,
+     6
+    ],
+    "action": [
+     "buttons",
+     "reply+pages"
+    ],
+    "p": [
+     0.388,
+     0.114
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Trail Maintenance and Construction Notebook"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     3,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.583
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1t",
+    "q": "i brunt my fingrs lighting the campfier",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     3,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.52,
+     0.583
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2",
+    "q": "smoke inhalation from lighting a fire indoors",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     4,
+     6
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.577,
+     0.729
+    ],
+    "title1": [
+     "Wildfire Resources List",
+     "Wildfire Resources List"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2t",
+    "q": "smoke inhalaton from lightin a fire inside",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.537,
+     0.707
+    ],
+    "title1": [
+     "Wildfire Resources List",
+     "Wildfire Resources List"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     3,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.531,
+     0.828
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Outdoor Fire Safety"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3t",
+    "q": "carbon monoxid from making a fire in the tnet",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     3,
+     8
+    ],
+    "u154": [
+     3,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.531,
+     0.828
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Outdoor Fire Safety"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     1,
+     2
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.458,
+     0.53
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4t",
+    "q": "my cloths cought fire wile starting the fire",
+    "colour": "red",
+    "verdict": "mixed",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     2,
+     2
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.456,
+     0.53
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     1,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.371,
+     0.541
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Home Builders Guide to Construction in Wildfire Zones FEMA P-754"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5t",
+    "q": "my kid fel into the fire wile we were makin a fire",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     1,
+     1
+    ],
+    "u154": [
+     1,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.369,
+     0.259
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "UNICEF Early Childhood Development Kit Guidance"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.726,
+     0.622
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "Basic Emergency Care - Approach to the Acutely Ill and Injured"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6t",
+    "q": "treat watter in the lungs after drownin",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.726,
+     0.622
+    ],
+    "title1": [
+     "Technical note 5. Emergency treatment of drinking-water at the point of use",
+     "Basic Emergency Care - Approach to the Acutely Ill and Injured"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     8,
+     8
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.689,
+     0.457
+    ],
+    "title1": [
+     "First Aid",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7t",
+    "q": "how do i treat water blisers on a burn",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     8,
+     8
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.689,
+     0.457
+    ],
+    "title1": [
+     "First Aid",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     6,
+     8
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.601,
+     0.73
+    ],
+    "title1": [
+     "Index",
+     "First Aid"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8t",
+    "q": "how do i treat water posioning",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     6,
+     8
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.601,
+     0.73
+    ],
+    "title1": [
+     "Index",
+     "First Aid"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "9",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     0,
+     4
+    ],
+    "u154": [
+     0,
+     4
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.401,
+     0.593
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "Are You Ready Guide 2021"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     2
+    ],
+    "u154": [
+     7,
+     2
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.67,
+     0.67
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24t",
+    "q": "i need to start a fire but no matchs and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     1
+    ],
+    "u154": [
+     7,
+     1
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.887,
+     0.887
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.358,
+     0.689
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Single Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28t",
+    "q": "make a fire escape plan for my famly",
+    "colour": "green",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     8
+    ],
+    "u154": [
+     4,
+     8
+    ],
+    "action": [
+     "buttons",
+     "sure"
+    ],
+    "p": [
+     0.358,
+     0.689
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Single Family Home escape routes"
+    ]
+   }
+  ],
+  "hy_A": [
+   {
+    "src": "cases",
+    "id": "010.0",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.783
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "027.0",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.7
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "033.2",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.544,
+     0.544
+    ],
+    "title1": [
+     "Garment factories",
+     "USMC Summer Survival Course Handbook - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.1",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.616,
+     0.706
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.2",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.792
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "068.0",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.824,
+     0.818
+    ],
+    "title1": [
+     "Fire",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "069.0",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.562,
+     0.562
+    ],
+    "title1": [
+     "CERT Basic Training Hazard Annexes (2019)",
+     "CERT Basic Training Hazard Annexes (2019)"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "084.0",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.952,
+     0.855
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Pesticides are Poison"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "089.0",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.663,
+     0.601
+    ],
+    "title1": [
+     "FM 31-70 Basic Cold Weather Manual - Historical",
+     "FM 31-70 Basic Cold Weather Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "0",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     4,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.616,
+     0.706
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     5
+    ],
+    "u154": [
+     5,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.792
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1t",
+    "q": "i brunt my fingrs lighting the campfier",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     5
+    ],
+    "u154": [
+     5,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.792
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2",
+    "q": "smoke inhalation from lighting a fire indoors",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     7,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.471,
+     0.471
+    ],
+    "title1": [
+     "A Healthy Home",
+     "A Healthy Home"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2t",
+    "q": "smoke inhalaton from lightin a fire inside",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     7,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.488,
+     0.488
+    ],
+    "title1": [
+     "Wildfires",
+     "Work"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.783
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3t",
+    "q": "carbon monoxid from making a fire in the tnet",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.783
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     4
+    ],
+    "u154": [
+     6,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.544,
+     0.544
+    ],
+    "title1": [
+     "Garment factories",
+     "USMC Summer Survival Course Handbook - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4t",
+    "q": "my cloths cought fire wile starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     5
+    ],
+    "u154": [
+     6,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.488,
+     0.389
+    ],
+    "title1": [
+     "Doing factory work at home",
+     "USMC Summer Survival Course Handbook - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     2,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.562,
+     0.562
+    ],
+    "title1": [
+     "CERT Basic Training Hazard Annexes (2019)",
+     "CERT Basic Training Hazard Annexes (2019)"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     4
+    ],
+    "u154": [
+     2,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.7
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6t",
+    "q": "treat watter in the lungs after drownin",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     4
+    ],
+    "u154": [
+     2,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.7
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     7
+    ],
+    "u154": [
+     8,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.824,
+     0.818
+    ],
+    "title1": [
+     "Fire",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7t",
+    "q": "how do i treat water blisers on a burn",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     7
+    ],
+    "u154": [
+     8,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.824,
+     0.818
+    ],
+    "title1": [
+     "Fire",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.952,
+     0.855
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Pesticides are Poison"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8t",
+    "q": "how do i treat water posioning",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.952,
+     0.855
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Pesticides are Poison"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "9",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     4
+    ],
+    "u154": [
+     3,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.663,
+     0.601
+    ],
+    "title1": [
+     "FM 31-70 Basic Cold Weather Manual - Historical",
+     "FM 31-70 Basic Cold Weather Manual - Historical"
+    ]
+   }
+  ],
+  "hy_B": [
+   {
+    "src": "cases",
+    "id": "010.0",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.798
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "027.0",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.729
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "033.2",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.544,
+     0.544
+    ],
+    "title1": [
+     "Garment factories",
+     "Garment factories"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.1",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.616,
+     0.482
+    ],
+    "title1": [
+     "How to start a fire",
+     "Fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.2",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "mixed",
+    "first": [
+     1,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.612
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "069.0",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.562,
+     0.419
+    ],
+    "title1": [
+     "CERT Basic Training Hazard Annexes (2019)",
+     "Safety"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "089.0",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.663,
+     0.693
+    ],
+    "title1": [
+     "FM 31-70 Basic Cold Weather Manual - Historical",
+     "FM 31-70 Basic Cold Weather Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "108.1",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.835,
+     0.63
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "112.0",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.898
+    ],
+    "title1": [
+     "Mult-Family Home escape routes",
+     "Mult-Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "0",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     4,
+     6
+    ],
+    "action": [
+     "sure",
+     "buttons"
+    ],
+    "p": [
+     0.616,
+     0.482
+    ],
+    "title1": [
+     "How to start a fire",
+     "Fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "mixed",
+    "first": [
+     1,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     6
+    ],
+    "u154": [
+     5,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.612
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1t",
+    "q": "i brunt my fingrs lighting the campfier",
+    "colour": "yellow",
+    "verdict": "mixed",
+    "first": [
+     1,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     6
+    ],
+    "u154": [
+     5,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.612
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2",
+    "q": "smoke inhalation from lighting a fire indoors",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     7,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.471,
+     0.506
+    ],
+    "title1": [
+     "A Healthy Home",
+     "A Healthy Home"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2t",
+    "q": "smoke inhalaton from lightin a fire inside",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     7,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.488,
+     0.488
+    ],
+    "title1": [
+     "Wildfires",
+     "Wildfires"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     6
+    ],
+    "u154": [
+     7,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.798
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3t",
+    "q": "carbon monoxid from making a fire in the tnet",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     6
+    ],
+    "u154": [
+     7,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.798
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     6
+    ],
+    "u154": [
+     6,
+     6
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.544,
+     0.544
+    ],
+    "title1": [
+     "Garment factories",
+     "Garment factories"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4t",
+    "q": "my cloths cought fire wile starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     3
+    ],
+    "u154": [
+     6,
+     3
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.488,
+     0.488
+    ],
+    "title1": [
+     "Doing factory work at home",
+     "Doing factory work at home"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     2,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.562,
+     0.419
+    ],
+    "title1": [
+     "CERT Basic Training Hazard Annexes (2019)",
+     "Safety"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5t",
+    "q": "my kid fel into the fire wile we were makin a fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     1,
+     0
+    ],
+    "u154": [
+     1,
+     0
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.422,
+     0.522
+    ],
+    "title1": [
+     "UNICEF School-in-a-Box Education Kit Handbook - English (pdf, 2 MB)",
+     "UNICEF Early Childhood Development Kit Guidance"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     5
+    ],
+    "u154": [
+     2,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.729
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6t",
+    "q": "treat watter in the lungs after drownin",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     5
+    ],
+    "u154": [
+     2,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.729
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "9",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     5
+    ],
+    "u154": [
+     3,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.663,
+     0.693
+    ],
+    "title1": [
+     "FM 31-70 Basic Cold Weather Manual - Historical",
+     "FM 31-70 Basic Cold Weather Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     4
+    ],
+    "u154": [
+     7,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.835,
+     0.63
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24t",
+    "q": "i need to start a fire but no matchs and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     1
+    ],
+    "u154": [
+     4,
+     1
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.722
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     6
+    ],
+    "u154": [
+     6,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.898
+    ],
+    "title1": [
+     "Mult-Family Home escape routes",
+     "Mult-Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28t",
+    "q": "make a fire escape plan for my famly",
+    "colour": "green",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     6
+    ],
+    "u154": [
+     6,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.898
+    ],
+    "title1": [
+     "Mult-Family Home escape routes",
+     "Mult-Family Home escape routes"
+    ]
+   }
+  ],
+  "hy_AB": [
+   {
+    "src": "cases",
+    "id": "010.0",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.783
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "027.0",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.7
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "033.2",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.544,
+     0.544
+    ],
+    "title1": [
+     "Garment factories",
+     "USMC Summer Survival Course Handbook - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.1",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.616,
+     0.706
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "067.2",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     5
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.792
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "068.0",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.824,
+     0.818
+    ],
+    "title1": [
+     "Fire",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "069.0",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.562,
+     0.562
+    ],
+    "title1": [
+     "CERT Basic Training Hazard Annexes (2019)",
+     "CERT Basic Training Hazard Annexes (2019)"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "084.0",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.952,
+     0.855
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Pesticides are Poison"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "089.0",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.663,
+     0.601
+    ],
+    "title1": [
+     "FM 31-70 Basic Cold Weather Manual - Historical",
+     "FM 31-70 Basic Cold Weather Manual - Historical"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "108.1",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     4
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.835,
+     0.63
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "cases",
+    "id": "112.0",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     8
+    ],
+    "u154": [
+     null,
+     null
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.898
+    ],
+    "title1": [
+     "Mult-Family Home escape routes",
+     "Mult-Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "0",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     6
+    ],
+    "u154": [
+     4,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.616,
+     0.706
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     5
+    ],
+    "u154": [
+     5,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.792
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "1t",
+    "q": "i brunt my fingrs lighting the campfier",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     5,
+     5
+    ],
+    "u154": [
+     5,
+     5
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.682,
+     0.792
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "First Aid in Armed Conflicts and Other Situations of Violence"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2",
+    "q": "smoke inhalation from lighting a fire indoors",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     7,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.471,
+     0.471
+    ],
+    "title1": [
+     "A Healthy Home",
+     "A Healthy Home"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "2t",
+    "q": "smoke inhalaton from lightin a fire inside",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     8
+    ],
+    "u154": [
+     7,
+     8
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.488,
+     0.488
+    ],
+    "title1": [
+     "Wildfires",
+     "Work"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.783
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "3t",
+    "q": "carbon monoxid from making a fire in the tnet",
+    "colour": "red",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.75,
+     0.783
+    ],
+    "title1": [
+     "FM 21-76 U.S. Army Survival Manual - Historical",
+     "FM 21-76 U.S. Army Survival Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     4
+    ],
+    "u154": [
+     6,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.544,
+     0.544
+    ],
+    "title1": [
+     "Garment factories",
+     "USMC Summer Survival Course Handbook - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "4t",
+    "q": "my cloths cought fire wile starting the fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     5
+    ],
+    "u154": [
+     6,
+     5
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.488,
+     0.389
+    ],
+    "title1": [
+     "Doing factory work at home",
+     "USMC Summer Survival Course Handbook - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5",
+    "q": "my kid fell into the fire while we were making a fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     2,
+     1
+    ],
+    "u154": [
+     2,
+     1
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.562,
+     0.562
+    ],
+    "title1": [
+     "CERT Basic Training Hazard Annexes (2019)",
+     "CERT Basic Training Hazard Annexes (2019)"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "5t",
+    "q": "my kid fel into the fire wile we were makin a fire",
+    "colour": "red",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     0
+    ],
+    "useful": [
+     1,
+     0
+    ],
+    "u154": [
+     1,
+     0
+    ],
+    "action": [
+     "buttons",
+     "buttons"
+    ],
+    "p": [
+     0.422,
+     0.522
+    ],
+    "title1": [
+     "UNICEF School-in-a-Box Education Kit Handbook - English (pdf, 2 MB)",
+     "UNICEF Early Childhood Development Kit Guidance"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     4
+    ],
+    "u154": [
+     2,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.7
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "6t",
+    "q": "treat watter in the lungs after drownin",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     2,
+     4
+    ],
+    "u154": [
+     2,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.671,
+     0.7
+    ],
+    "title1": [
+     "Public Health Engineering in Precarious Situations",
+     "BEC Breathing"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7",
+    "q": "how do i treat water blisters on a burn",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     7
+    ],
+    "u154": [
+     8,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.824,
+     0.818
+    ],
+    "title1": [
+     "Fire",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "7t",
+    "q": "how do i treat water blisers on a burn",
+    "colour": "yellow",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     8,
+     7
+    ],
+    "u154": [
+     8,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.824,
+     0.818
+    ],
+    "title1": [
+     "Fire",
+     "Appendix A: Safety and Emergencies"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8",
+    "q": "how do i treat water poisoning",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.952,
+     0.855
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Pesticides are Poison"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "8t",
+    "q": "how do i treat water posioning",
+    "colour": "yellow",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     7
+    ],
+    "u154": [
+     7,
+     7
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.952,
+     0.855
+    ],
+    "title1": [
+     "Army ATP 3-50.21 Survival (2018)",
+     "Pesticides are Poison"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "9",
+    "q": "light a fire to keep him warm with hypothermia",
+    "colour": "red",
+    "verdict": "better",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     0,
+     1
+    ],
+    "useful": [
+     3,
+     4
+    ],
+    "u154": [
+     3,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.663,
+     0.601
+    ],
+    "title1": [
+     "FM 31-70 Basic Cold Weather Manual - Historical",
+     "FM 31-70 Basic Cold Weather Manual - Historical"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24",
+    "q": "i need to start a fire but i have no matches and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     7,
+     4
+    ],
+    "u154": [
+     7,
+     4
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.835,
+     0.63
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "24t",
+    "q": "i need to start a fire but no matchs and no gas",
+    "colour": "green",
+    "verdict": "worse",
+    "first": [
+     0,
+     0
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     4,
+     1
+    ],
+    "u154": [
+     4,
+     1
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.722
+    ],
+    "title1": [
+     "How to start a fire",
+     "How to start a fire"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     6
+    ],
+    "u154": [
+     6,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.898
+    ],
+    "title1": [
+     "Mult-Family Home escape routes",
+     "Mult-Family Home escape routes"
+    ]
+   },
+   {
+    "src": "c154",
+    "id": "28t",
+    "q": "make a fire escape plan for my famly",
+    "colour": "green",
+    "verdict": "same",
+    "first": [
+     1,
+     1
+    ],
+    "top3": [
+     1,
+     1
+    ],
+    "useful": [
+     6,
+     6
+    ],
+    "u154": [
+     6,
+     6
+    ],
+    "action": [
+     "sure",
+     "sure"
+    ],
+    "p": [
+     0.853,
+     0.898
+    ],
+    "title1": [
+     "Mult-Family Home escape routes",
+     "Mult-Family Home escape routes"
+    ]
+   }
+  ]
+ }
+}

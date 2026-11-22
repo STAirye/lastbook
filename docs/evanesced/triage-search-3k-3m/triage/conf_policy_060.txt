@@ -1,0 +1,21 @@
+thresholds: buttons < 0.6, unsure < 0.25
+
+== keyword: module vs stored features, max |dp| 0.0005
+  answer              180 (50%)  first right 146  a useful page 168  red  89 (first right 65)
+  buttons             157 (43%)  first right  65  a useful page 120  red 108 (first right 38)
+  ask + pages          25 (7%)  first right   5  a useful page  15  red  21 (first right 3)
+  ask, pages hidden     0 (0%)  first right   0  a useful page   0  red   0 (first right 0)
+  conversations (52), committed coefficients, better of own and joined search:
+    answer          25  first right 13  routes ['correct', 'danger', 'follow']
+    buttons         24  first right 13  routes ['correct', 'danger', 'follow']
+    below unsure     3  first right 2  routes ['follow']
+
+== hybrid: module vs stored features, max |dp| 0.0005
+  answer              296 (82%)  first right 241  a useful page 291  red 165 (first right 129)
+  buttons              65 (18%)  first right  34  a useful page  57  red  52 (first right 26)
+  ask + pages           1 (0%)  first right   1  a useful page   1  red   1 (first right 1)
+  ask, pages hidden     0 (0%)  first right   0  a useful page   0  red   0 (first right 0)
+  conversations (52), committed coefficients, better of own and joined search:
+    answer          44  first right 28  routes ['correct', 'danger', 'follow']
+    buttons          8  first right 5  routes ['correct', 'danger', 'follow']
+    below unsure     0  first right 0  routes []

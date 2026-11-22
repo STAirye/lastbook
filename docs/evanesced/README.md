@@ -47,7 +47,7 @@ Encyclopedia articles back in Chat's first results: whether they need the long-p
 searches are now shown apart), and the vector-index prototype (dev toggle, not pursued).
 
 Traps: every script puts `D:\git\lastbook` and `D:\git\lastbook\.claude\drafts\triage` on `sys.path` (the second for
-the test questions' `cases.py`, still in the untracked drafts until the search-as-triage batch is archived), and reads
+the test questions' `cases.py`, now archived at `triage-search-3k-3m/triage/cases.py`; put it back at that drafts path to run these), and reads
 the library from `D:\LastbookData\library-data`. They ran against the fork as it was then: `e2e.py` calls
 `assistant.merge_first`, which no longer exists, and `merge_chat.py` measured the merge inside `assistant.chat`, which
 no longer merges (both changed in add0b9b).
@@ -79,3 +79,114 @@ The built indexes are not here (488 MB): on the fork's development PC they are i
 `build.py` and `tools/wiki_vectors_rows.py` rebuild them. The CPU-only build time in RESULTS.md (2.9 h for MDWiki, so
 about 6 h for the three) was measured with torch on all cores in batches; the runner, one text at a time, would take
 several times longer.
+
+### `triage-search-3k-3m/` (FORK.md §3k–3m, 2026-11-17 to 2026-11-22)
+
+The triage-based search engine: the 362-question test set and its scorer, the long-page sections, typo correction and
+glued words, conversations, search confidence, body signs, the four held-out lists, the meaning-based red check, and the
+staging of all of it as upstream issue Immortal-Protocols/lastbook#401 and PRs #402–#409 (PR 1 #402 holds the test set
+and scorer as `tools/search_eval/` and the methods as `docs/TRIAGE-SEARCH.md`, on branch `triage/1-search-eval`; the
+lists there may be reformatted copies of the ones here). Posted 2026-11-22; the PR texts are public. The subfolders
+keep the drafts' own folder names (`triage/`, `independent/` … `prs/`); `root/` holds what sat at the top of the drafts.
+The Linux build is its own batch, `linux-build-3m/`, below.
+
+**What is not here** (rule: big regenerable dumps, models, caches, binaries):
+- Every per-question run dump over 400 KB (`runs/*.json`, `triage/results_*.json`, `triage/conf_*.json`,
+  `triage/rab/ab_*.json`, `triage/body/*.json`, `triage/r154/*.json`, `prs/eval*/{kw,hy}-*.json`, `snap-*.json`), about
+  150 MB. The `.log`, `report.txt`, scored `results.json` and `.md` files beside them are kept, and the FORK.md numbers
+  come from those. To regenerate a dump, run the folder's `*_eval.py` / `run*.py` as its docstring says
+  (`set LASTBOOK_CODE=<checkout>`, `set LASTBOOK_DATA=D:\LastbookData-fork-test`, `TH_KW=1` for keyword-only) on the
+  commit the RESULTS file names; `score.py` needs a test server for HTTP runs. `triage/RESULTS_154.json` equals
+  `triage/r154/analysis.json` (made by `analyze154.py`).
+- `meaning/`: the GGUF files (f32 / f16 / q8_0; the shipped q8_0 is in `D:\LastbookData\derived\models\meaning-red\` and
+  published as `STAirye/lastbook-meaning-red` on Hugging Face), `cache/` (ONNX int8 model, tokenizer, embedding `.npy`),
+  `model*.npz` (centroids; rebuilt by `evaluate.py`), `gguf/probe.exe`. The originals stay in the untracked
+  `.claude/drafts/meaning/` on the fork's development PC.
+- `prs/rendered/` (duplicates of the texts) and `prs/eval/sections/*.sqlite` (74 MB sections index, built by
+  `prs/eval/build_sections.py`).
+- `live-test*.log` (personal data), `TODO.md`, the emergency-numbers drafts and `pr-395-reply-*` (other work), and the
+  drafts' `__pycache__`.
+
+**Traps.**
+- Absolute paths everywhere: `D:\git\lastbook`, `D:\git\lastbook\.claude\drafts\triage` (put on `sys.path` by
+  `conf_everyday.py`, `patch_guard_check.py`, `turnhits_eval.py` and others, for `cases.py`, `convos.py`, `score.py`:
+  they now live in `triage-search-3k-3m/triage/`), `D:\LastbookData` and `D:\LastbookData-fork-test` (a test copy of the
+  library, read only). These are kept as they were.
+- Scripts that import another folder: `independent2/analyze2.py` and `independent3/analyze3.py` import
+  `heldout-fixes/compare.py`; `independent2/eval2.py` and later are copies of `heldout-fixes/heldout_eval.py` (their
+  docstrings still say `indep_eval.py`); `contractions/firsts.py` does `sys.path.insert(0, 'independent2')` and expects to
+  run from the drafts root; `triage/mt_oldfork.py` imports `multiturn.py`; the encyclopedias batch imports `cases.py`.
+  Several docstrings and `independent4/recover.py` say `.claude/drafts/<folder>/`: that is now
+  `docs/evanesced/triage-search-3k-3m/<folder>/`.
+- They tested code that was a worktree then and is gone: `.claude/worktrees/{search-before, phrase-injury,
+  search-confidence, everyday-buttons, heldout-fixes, meaning-check}` (and the body-signs and glued-words branches the
+  RESULTS files name), and commits named in the RESULTS files (256d52f, 4ea2d9f, 9712522, 19c2db2, 51c7a4f, c7795b5).
+  Check out the commit, not the branch name; branches `triage/1..8` on STAirye/lastbook are the clean versions.
+- They call functions of those commits (`assistant.turn_hits`, `assistant.is_danger`, `engine.typos`, `engine.confidence`,
+  `engine.meaning_red`, `server.PHRASES`, `retrieval.AVAILABLE`) that moved or changed later; `meaning/*` also needs
+  onnxruntime and a `lastbook-llm.exe` from a scratch `work-meaning` build that is not kept.
+- `prs/post.py` pushes branches and opens issues and PRs on GitHub (a run without `--go` is a dry run that writes
+  `rendered/`). The issue and PRs are already posted (`post_state.json`: issue 401, PRs 402–409). Do not run it again. It
+  also calls `.claude/tracker/track.py`.
+- Blind lists: `independent/phrases.jsonl` (list 1), `independent2/` (list 2), `independent3/` (list 3) and
+  `independent4/phrases_mixed.jsonl` (list 4, with the raw model output in `raw/` and `rejected_mixed.txt`) are the
+  originals. Lists were read only after their runs; list 4's lines were not read for this archive (scanned by program).
+- `prs/eval-pr3/README.txt` and `prs/eval/kw-after.log` mention a session scratchpad; the sections file they point at
+  was not kept (see above).
+- Texts in `root/` and `prs/` are the drafts, not always the posted versions: they still carry `{ISSUE}` / `{PR1}`
+  placeholders, `.claude/drafts/...` and `<drafts>` paths, which `post.py` fills or upstream could not see.
+- `root/issue-local-ai-startup.md` and `root/issue-chat-scroll.md` were posted as #323 and #324 (from the live test).
+  They hold no personal data; the first names the owner's CPU and GPU, which is public in #323.
+- `root/upstream-search-methods.md` (§12 and line 189) says some tuning scripts, kept in a session scratchpad, were "not
+  archived: not recorded": they are not in this batch either.
+
+| Folder / script | What it did | Output, and where the numbers went |
+|---|---|---|
+| `triage/cases.py`, `score.py`, `kwserver.py` | the 159-topic / 362-question test set (253 clean, 22 counterexamples, 109 typo) and its scorer over `/api/retrieve`; keyword-only server | `triage/RESULTS.md`; FORK.md 3k; became `tools/search_eval/` in PR 1 (#402) |
+| `triage/build_split.py`, `compare.py`, `COMPARE_long_pages.md`, `COMPARE_rewrite.md`, `score_rewrite.log` | whole-book pages: length penalty (26 → 19) against the section split (26 → 4) | FORK.md 3k, PR 2 (#403) |
+| `triage/typofix.py`, `cases_glued.py`, `glued_eval.py`, `glued_compare.py`, `glued/` | no-model typo correction against the library's words; glued words and gibberish, before/after | FORK.md 3k (99 of 109 typo questions changed, 0 of 253 clean; 20 of 24 glued split), PR 3 (#404) |
+| `triage/convos.py`, `multiturn.py`, `mt_oldfork.py`, `turnhits_eval.py`, `MULTITURN.md`, `turnhits_*.txt` | the 52 conversations scored on the last message, several strategies | FORK.md 3k conversations table, PR 8 (#409) |
+| `triage/conf_*.py`, `conf_*.txt`, `conf_*oof*.json`, `conf_top3_coef.json`, `CONFIDENCE.md`, `unit_conf_*.txt` | the search-confidence model: signals, grouped CV, calibration, thresholds 0.60 / 0.25, chat policy | FORK.md 3l, PR 5 (#406) |
+| `triage/cases128.py`, `cases154.py`, `cases241.py`, `run154.py`, `run_sets.py`, `analyze154.py`, `analyze_sets.py`, `RESULTS_154.md`, `LESSONS_154.md/.json`, `r128/`, `r154/` | #128's, #154's and #241's questions labelled for the scorer and run through every version | FORK.md 3h–3k; `root/issue-search-tiers.md`, `root/comment-154-on-167.md` |
+| `triage/ab_phrases_run.py`, `ab_phrases_analyze.py`, `AB_PHRASES.md/.json`, `rab/ab_tables.md` | four-arm A/B of the fire/water phrase fixes inside injury questions | FORK.md 3h ("Later bug: the phrases inside injury questions": first right 150 → 153, #154's count 144 → 168) |
+| `triage/body_eval.py`, `body_analyze.py`, `BODY_SIGNS.md/.json`, `patch_guard_check.py`, `urgent_check.py` | body signs and phrase exceptions, before/after on every set | FORK.md 3k/3l, PR 7 (#408) |
+| `triage/run_unit.sh`, `unit_*.txt`, `forktest_index_before.txt` | unit-test runs per commit; listing of the test data folder's index files | notes only |
+| `independent/` (list 1), `independent2/` (list 2, 606 lines), `independent3/` (list 3, 531), `independent4/` (list 4, Qwen3.5-9B, Spanish and mixed) | blind held-out lists: `*_eval.py` runs, `analyze*.py` scores, `RESULTS.md`, `runs/report.txt`, `results.json`; list 4's `PROMPTS.md`, `recover.py` (cleans messy model output without reading it) and `english4.py` (English search words made once with the local model) | FORK.md 3l (lists 1, 2), 3m (list 3), 3i and Open (list 4: red 27% → 96%); PR 1 as `lists/list1..4.jsonl` |
+| `heldout-fixes/` | fixes made from list 1 (4ea2d9f → 19c2db2): `heldout_eval.py`, `insample_eval.py`, `compare.py` | FORK.md 3k/3l; list 1 is in-sample afterwards |
+| `contractions/` | n't / 's / 've forms put back before correction, before vs after on lists 1, 2 and in-sample | FORK.md 3k "Contractions without the apostrophe" |
+| `meaning/` | the meaning-based red check: examples written before any list was opened, cross-validation, evaluation, runner (GGUF q8_0) against ONNX int8, cost; `hf/` model card and licence | `meaning/RESULTS.md`, `LLAMACPP_*.md`; FORK.md 3m; HF `STAirye/lastbook-meaning-red` |
+| `urgent-mapping/` | the fork's urgency rules mapped onto #167's `urgent` field, measured on the lists | `RESULTS.md`, `measure_out.json`, `proposed_urgent.json`; PR 7 (#408) |
+| `prs/` | `BRIEF.md`, the texts `0-issue.md`, `1..8-*.md`, `post.py`, `post_state.json`; `eval/` (PR 2) and `eval-pr3/` (PR 3) scripts and `.log` outputs | issue #401, PRs #402–#409 |
+| `root/check_search_tiers.py` and its two result files | #154's 32 questions, top 8 on two servers | FORK.md 3h |
+| `root/ab_embed.py`, `ab_embed_results.json`, `report-2026-11-18-hybrid-and-embed-ab.md` | bge-small vectors from onnxruntime against the runner's `--embed`; the overnight hybrid-index report | FORK.md 3m (runner `--embed`), PR 6 (#407) |
+| `root/upstream-*.md` | the proposal summary, the methods and formulas, the first summary | the text behind #401 and `docs/TRIAGE-SEARCH.md` |
+
+**Personal-data replacements.** Every other file is byte for byte the draft. Every file was scanned (JSON, logs and
+the blind lists included, by program) for the owner's first and last name, `gmail`, e-mail addresses, user-folder paths,
+tokens (`hf_`, `ghp_`, bearer), and home addresses; nothing else was found.
+- `<scratchpad>`: `prs/eval/kw-after.log` line 1 (a session scratchpad under the user folder) and
+  `triage/mt_oldfork.py` line 11 (`<scratchpad>/vocab.json`, the typo vocabulary cache; `typofix.py` builds one).
+- `<user>`: `triage/forktest_index_before.txt`, the file-owner column of an `ls -la` (7 lines).
+- `<owner>`: `triage/CONFIDENCE.md` ("Decided by <owner>") and `independent4/recover.py` (a docstring line).
+- Kept: the alias STAirye, `noreply@...` addresses, `/home/tester` (a test user inside the Linux container).
+
+### `linux-build-3m/` (FORK.md §3m Open "Linux, 2026-11-21", and PR 6, 2026-11-22)
+
+A separate batch: it has its own purpose (build and check the runner and the `.deb` on Linux, in Docker
+`debian:13-slim`) and its own dates. `inside.sh` builds `lastbook-llm` and the `.deb` from a clean clone mounted at
+`/src` and checks `--embed`; `inside2.sh` reuses the runner and builds the `.deb`; `inside3.sh` builds PR 6's tree
+(`pr6.tar`) and compares its `--embed` with the fork's; `smoke_deb.sh` installs the `.deb` in a fresh container and
+plays a generated video.
+
+| File | What it is |
+|---|---|
+| `inside.sh`, `inside2.sh`, `inside3.sh`, `smoke_deb.sh` | the scripts above |
+| `run.log`, `run2.log`, `run3.log`, `smoke.log`, `app-build.log`, `cmake-linux.log`, `build-pr6.log` | their short logs (runner builds, the `.deb` scan, the smoke test) |
+| `embed*.out`, `embed*.out.err` | `--embed` replies and loader messages: unit vectors of 384 (PR 6 against the fork's build) |
+| `shots/` | seven 1360x900 screenshots of the installed app in the container: the setup screen, Videos, a generated test-pattern video. They show Lastbook's own screens and no personal data. Four are byte-identical (`library-home`, `library-map`, `library-videos`, `videos-page`) |
+
+Not archived: the `.deb` (31 MB), `bin-linux/` (the runner build), `pr6.tar`, `model/`, `packs-manifest-v1.json`,
+`apt*.log` and `build-linux.log` (56 KB, regenerable with `inside.sh`). Traps: `/src`, `/out` and `/w` are bind mounts
+(a clean clone of `D:\git\lastbook`, `D:\git\lastbook\derived\linux-build`, a scratch folder) set by a `docker run` command
+that was not saved; `inside*.sh` strip CRs with `sed` and need the meaning-red GGUF from `derived/models/meaning-red`.
+`derived/` is git-ignored in the repo.

@@ -1,0 +1,5069 @@
+{
+ "sets": {
+  "independent": {
+   "red": {
+    "n": 343,
+    "a": 9,
+    "b": 49,
+    "c": 340,
+    "d": 340,
+    "e": 49,
+    "f": 340,
+    "c_danger_signs": 59,
+    "c_urgent_typed": 314,
+    "c_urgent_typo_fixed": 340,
+    "b_only_not_c": 0,
+    "c_only_not_b": 291
+   },
+   "yellow": {
+    "n": 104,
+    "a": 0,
+    "b": 2,
+    "c": 98,
+    "d": 98,
+    "e": 2,
+    "f": 98,
+    "c_danger_signs": 9,
+    "c_urgent_typed": 94,
+    "c_urgent_typo_fixed": 98,
+    "b_only_not_c": 0,
+    "c_only_not_b": 96
+   },
+   "green": {
+    "n": 243,
+    "a": 2,
+    "b": 19,
+    "c": 76,
+    "d": 90,
+    "e": 5,
+    "f": 76,
+    "c_danger_signs": 5,
+    "c_urgent_typed": 76,
+    "c_urgent_typo_fixed": 76,
+    "b_only_not_c": 14,
+    "c_only_not_b": 71
+   }
+  },
+  "independent2": {
+   "red": {
+    "n": 249,
+    "a": 8,
+    "b": 43,
+    "c": 230,
+    "d": 231,
+    "e": 43,
+    "f": 231,
+    "c_danger_signs": 44,
+    "c_urgent_typed": 223,
+    "c_urgent_typo_fixed": 230,
+    "b_only_not_c": 1,
+    "c_only_not_b": 188
+   },
+   "yellow": {
+    "n": 111,
+    "a": 0,
+    "b": 1,
+    "c": 85,
+    "d": 85,
+    "e": 1,
+    "f": 85,
+    "c_danger_signs": 4,
+    "c_urgent_typed": 85,
+    "c_urgent_typo_fixed": 85,
+    "b_only_not_c": 0,
+    "c_only_not_b": 84
+   },
+   "green": {
+    "n": 246,
+    "a": 3,
+    "b": 28,
+    "c": 127,
+    "d": 133,
+    "e": 22,
+    "f": 127,
+    "c_danger_signs": 23,
+    "c_urgent_typed": 126,
+    "c_urgent_typo_fixed": 127,
+    "b_only_not_c": 6,
+    "c_only_not_b": 105
+   }
+  },
+  "independent3": {
+   "red": {
+    "n": 199,
+    "a": 3,
+    "b": 20,
+    "c": 173,
+    "d": 173,
+    "e": 20,
+    "f": 173,
+    "c_danger_signs": 26,
+    "c_urgent_typed": 169,
+    "c_urgent_typo_fixed": 173,
+    "b_only_not_c": 0,
+    "c_only_not_b": 153
+   },
+   "green": {
+    "n": 254,
+    "a": 3,
+    "b": 32,
+    "c": 154,
+    "d": 156,
+    "e": 30,
+    "f": 154,
+    "c_danger_signs": 31,
+    "c_urgent_typed": 153,
+    "c_urgent_typo_fixed": 154,
+    "b_only_not_c": 2,
+    "c_only_not_b": 124
+   },
+   "yellow": {
+    "n": 78,
+    "a": 0,
+    "b": 2,
+    "c": 55,
+    "d": 55,
+    "e": 2,
+    "f": 55,
+    "c_danger_signs": 4,
+    "c_urgent_typed": 55,
+    "c_urgent_typo_fixed": 55,
+    "b_only_not_c": 0,
+    "c_only_not_b": 53
+   }
+  },
+  "triage": {
+   "red": {
+    "n": 218,
+    "a": 14,
+    "b": 53,
+    "c": 218,
+    "d": 218,
+    "e": 53,
+    "f": 218,
+    "c_danger_signs": 50,
+    "c_urgent_typed": 205,
+    "c_urgent_typo_fixed": 218,
+    "b_only_not_c": 0,
+    "c_only_not_b": 165
+   },
+   "yellow": {
+    "n": 74,
+    "a": 0,
+    "b": 1,
+    "c": 59,
+    "d": 59,
+    "e": 1,
+    "f": 59,
+    "c_danger_signs": 1,
+    "c_urgent_typed": 54,
+    "c_urgent_typo_fixed": 59,
+    "b_only_not_c": 0,
+    "c_only_not_b": 58
+   },
+   "green": {
+    "n": 70,
+    "a": 0,
+    "b": 1,
+    "c": 38,
+    "d": 38,
+    "e": 1,
+    "f": 38,
+    "c_danger_signs": 2,
+    "c_urgent_typed": 37,
+    "c_urgent_typo_fixed": 38,
+    "b_only_not_c": 0,
+    "c_only_not_b": 37
+   }
+  }
+ },
+ "phrase_counts": {
+  "current": 5,
+  "proposed": 117,
+  "proposed_per_choice": {
+   "hurt/breathing": 22,
+   "hurt/bleeding": 12,
+   "hurt/burn": 4,
+   "hurt/allergy": 9,
+   "hurt/poison": 9,
+   "hurt/sudden": 13,
+   "hurt/heatcold": 3,
+   "hurt/snakebite": 5,
+   "disaster/home-fire": 8,
+   "disaster/earthquake-now": 3,
+   "disaster/tsunami": 2,
+   "disaster/tornado": 2,
+   "power/gas": 5,
+   "shelter/co": 4,
+   "health/mind": 10,
+   "health/pregnant": 6
+  }
+ },
+ "per_phrase_hits": {
+  "heart attack": {
+   "red": 7,
+   "yellow": 0,
+   "green": 11
+  },
+  "is choking": {
+   "red": 4,
+   "yellow": 0,
+   "green": 10
+  },
+  "cpr": {
+   "red": 6,
+   "yellow": 0,
+   "green": 8
+  },
+  "seizure": {
+   "red": 7,
+   "yellow": 1,
+   "green": 7
+  },
+  "drowning": {
+   "red": 3,
+   "yellow": 0,
+   "green": 7
+  },
+  "not breathing": {
+   "red": 21,
+   "yellow": 0,
+   "green": 5
+  },
+  "passed out": {
+   "red": 8,
+   "yellow": 1,
+   "green": 4
+  },
+  "collapsed": {
+   "red": 14,
+   "yellow": 0,
+   "green": 4
+  },
+  "overdose": {
+   "red": 3,
+   "yellow": 0,
+   "green": 3
+  },
+  "heart stopped": {
+   "red": 0,
+   "yellow": 0,
+   "green": 3
+  },
+  "isnt breathing": {
+   "red": 3,
+   "yellow": 0,
+   "green": 2
+  },
+  "cardiac arrest": {
+   "red": 0,
+   "yellow": 0,
+   "green": 2
+  },
+  "drowned": {
+   "red": 1,
+   "yellow": 0,
+   "green": 2
+  },
+  "wont wake up": {
+   "red": 10,
+   "yellow": 0,
+   "green": 1
+  },
+  "no pulse": {
+   "red": 3,
+   "yellow": 0,
+   "green": 1
+  },
+  "having a fit": {
+   "red": 3,
+   "yellow": 0,
+   "green": 1
+  },
+  "overdosed": {
+   "red": 1,
+   "yellow": 0,
+   "green": 1
+  },
+  "heat stroke": {
+   "red": 1,
+   "yellow": 0,
+   "green": 1
+  },
+  "bleeding out": {
+   "red": 1,
+   "yellow": 0,
+   "green": 1
+  },
+  "anaphylaxis": {
+   "red": 0,
+   "yellow": 0,
+   "green": 1
+  },
+  "unconscious": {
+   "red": 3,
+   "yellow": 0,
+   "green": 1
+  },
+  "having a stroke": {
+   "red": 2,
+   "yellow": 0,
+   "green": 1
+  },
+  "isn't breathing": {
+   "red": 3,
+   "yellow": 0,
+   "green": 1
+  },
+  "heatstroke": {
+   "red": 0,
+   "yellow": 0,
+   "green": 1
+  },
+  "seizures": {
+   "red": 0,
+   "yellow": 0,
+   "green": 1
+  },
+  "baby is choking": {
+   "red": 1,
+   "yellow": 0,
+   "green": 1
+  },
+  "want to die": {
+   "red": 0,
+   "yellow": 0,
+   "green": 1
+  },
+  "bleeding after birth": {
+   "red": 0,
+   "yellow": 0,
+   "green": 1
+  },
+  "water broke": {
+   "red": 3,
+   "yellow": 1,
+   "green": 0
+  },
+  "hurt myself": {
+   "red": 0,
+   "yellow": 1,
+   "green": 0
+  },
+  "bleeding a lot": {
+   "red": 1,
+   "yellow": 1,
+   "green": 0
+  },
+  "hypothermia": {
+   "red": 1,
+   "yellow": 1,
+   "green": 0
+  },
+  "blood everywhere": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "not waking up": {
+   "red": 4,
+   "yellow": 0,
+   "green": 0
+  },
+  "chest pain": {
+   "red": 6,
+   "yellow": 0,
+   "green": 0
+  },
+  "throat closing": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "drank bleach": {
+   "red": 3,
+   "yellow": 0,
+   "green": 0
+  },
+  "stopped breathing": {
+   "red": 4,
+   "yellow": 0,
+   "green": 0
+  },
+  "snake bit": {
+   "red": 2,
+   "yellow": 0,
+   "green": 0
+  },
+  "snake bite": {
+   "red": 2,
+   "yellow": 0,
+   "green": 0
+  },
+  "wants to die": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "in labour": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "baby is coming": {
+   "red": 3,
+   "yellow": 0,
+   "green": 0
+  },
+  "throat is swelling": {
+   "red": 2,
+   "yellow": 0,
+   "green": 0
+  },
+  "killing myself": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "having a seizure": {
+   "red": 4,
+   "yellow": 0,
+   "green": 0
+  },
+  "lots of blood": {
+   "red": 2,
+   "yellow": 0,
+   "green": 0
+  },
+  "had a stroke": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "bleeding wont stop": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "throat is closing": {
+   "red": 3,
+   "yellow": 0,
+   "green": 0
+  },
+  "tongue swelling": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "wont stop bleeding": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "bitten by a snake": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "swallowed bleach": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "house fire": {
+   "red": 3,
+   "yellow": 0,
+   "green": 0
+  },
+  "he is choking": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "throat swelling": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "carbon monoxide poisoning": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "bleeding badly": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "caught fire": {
+   "red": 4,
+   "yellow": 0,
+   "green": 0
+  },
+  "heavy bleeding": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "giving birth": {
+   "red": 2,
+   "yellow": 0,
+   "green": 0
+  },
+  "house is on fire": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "fire in the house": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "smell gas": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "gas leak": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "tsunami warning": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "ground is shaking": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "tornado coming": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  },
+  "tornado warning": {
+   "red": 1,
+   "yellow": 0,
+   "green": 0
+  }
+ },
+ "examples": {
+  "green_flagged_by_b": [
+   [
+    "independent: my cat is not breathing properly",
+    [
+     "not breathing"
+    ]
+   ],
+   [
+    "independent: the battery is choking on the cold",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent: my engine is choking",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent: my heart stopped when i saw the bill lol",
+    [
+     "heart stopped"
+    ]
+   ],
+   [
+    "independent: my sourdough starter isnt breathing",
+    [
+     "isnt breathing"
+    ]
+   ],
+   [
+    "independent: having a fit about the parking ticket",
+    [
+     "having a fit"
+    ]
+   ],
+   [
+    "independent: seizure of assets by the bank",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent: he collapsed into laughter",
+    [
+     "collapsed"
+    ]
+   ],
+   [
+    "independent: the tent collapsed in the wind",
+    [
+     "collapsed"
+    ]
+   ],
+   [
+    "independent: the kids are drowning in homework",
+    [
+     "drowning"
+    ]
+   ],
+   [
+    "independent: drowning in emails",
+    [
+     "drowning"
+    ]
+   ],
+   [
+    "independent: overdosed on netflix this weekend",
+    [
+     "overdosed"
+    ]
+   ],
+   [
+    "independent: passed out of the academy",
+    [
+     "passed out"
+    ]
+   ],
+   [
+    "independent: cpr certification near me",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent: how many compressions in cpr for my first aid exam",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent: heat stroke on my tomato plants",
+    [
+     "heat stroke"
+    ]
+   ],
+   [
+    "independent: my character is bleeding out in the game how to heal",
+    [
+     "bleeding out"
+    ]
+   ],
+   [
+    "independent: what is a seizure",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent: what does anaphylaxis mean",
+    [
+     "anaphylaxis"
+    ]
+   ],
+   [
+    "independent2: laptop has a heart attack every time i open chrome",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent2: my wifi is choking every evening",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent2: python process killed, no pulse from the heartbeat endpoint",
+    [
+     "no pulse"
+    ]
+   ],
+   [
+    "independent2: the dough isn't breathing should i let it rest longer",
+    [
+     "isn't breathing"
+    ]
+   ],
+   [
+    "independent2: my plant is choking, leaves going yellow",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent2: the basil collapsed overnight",
+    [
+     "collapsed"
+    ]
+   ],
+   [
+    "independent2: my cake collapsed in the middle",
+    [
+     "collapsed"
+    ]
+   ],
+   [
+    "independent2: i nearly had a heart attack when i saw the bill",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent2: my heart stopped when she said yes",
+    [
+     "heart stopped"
+    ]
+   ],
+   [
+    "independent2: minecraft how to stop drowning underwater",
+    [
+     "drowning"
+    ]
+   ],
+   [
+    "independent2: my sims baby is not breathing?? glitch",
+    [
+     "not breathing"
+    ]
+   ],
+   [
+    "independent2: cpr on the zombie in the game doesn't work",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent2: best seizure scene in a movie ever?",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent2: band name ideas: Cardiac Arrest or Blue Lips?",
+    [
+     "cardiac arrest"
+    ]
+   ],
+   [
+    "independent2: my boss is having a stroke over the deadline",
+    [
+     "having a stroke"
+    ]
+   ],
+   [
+    "independent2: heatstroke cocktail recipe",
+    [
+     "heatstroke"
+    ]
+   ],
+   [
+    "independent2: my hamster isnt breathing",
+    [
+     "isnt breathing"
+    ]
+   ],
+   [
+    "independent2: my dog had a seizure, vet number?",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent2: what is the ratio for cpr compressions for my course quiz",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent2: i drowned my chips in vinegar",
+    [
+     "drowned"
+    ]
+   ],
+   [
+    "independent2: drowning in emails today",
+    [
+     "drowning"
+    ]
+   ],
+   [
+    "independent2: my teenager is giving me a heart attack with her driving",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent2: legit passed out on the couch after the party sleep was amazing",
+    [
+     "passed out"
+    ]
+   ],
+   [
+    "independent2: seizure warning in video game settings flashing lights off",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent2: he took an overdose of my patience",
+    [
+     "overdose"
+    ]
+   ],
+   [
+    "independent2: the kettle is choking and spitting",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent2: HEART ATTACK GRILL menu",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent2: seizure of assets by the bank",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent3: ewe is choking on a turnip",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent3: play the song by heart attack and the dead cats",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: left arm tingles when i sleep on it am i having a heart attack",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: wah my boss shiok until heart attack lah",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: my epileptic daughter had one of her usual seizures, 1 min, now sleeping it off on her side",
+    [
+     "seizures"
+    ]
+   ],
+   [
+    "independent3: laptop overheating and the fan is choking",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent3: server crashed and is not responding, need cpr lol",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent3: my sims baby is choking how do i save it",
+    [
+     "is choking",
+     "baby is choking"
+    ]
+   ],
+   [
+    "independent3: best build for overdose damage in the new patch",
+    [
+     "overdose"
+    ]
+   ],
+   [
+    "independent3: chords for heart attack by demi lovato",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: lyrics meaning of an overdose song",
+    [
+     "overdose"
+    ]
+   ],
+   [
+    "independent3: drummer passed out from exhaustion in the music video, its staged right",
+    [
+     "passed out"
+    ]
+   ],
+   [
+    "independent3: my cat is choking on a hairball",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent3: dog had a seizure, what do i do",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent3: hamster not breathing i think its dead",
+    [
+     "not breathing"
+    ]
+   ],
+   [
+    "independent3: fish floating upside down, is it drowning",
+    [
+     "drowning"
+    ]
+   ],
+   [
+    "independent3: bit of a heart attack when i saw the gas bill",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: drowning in paperwork this week",
+    [
+     "drowning"
+    ]
+   ],
+   [
+    "independent3: laughed so hard i nearly passed out",
+    [
+     "passed out"
+    ]
+   ],
+   [
+    "independent3: my heart stopped when she said yes",
+    [
+     "heart stopped"
+    ]
+   ],
+   [
+    "independent3: ratio of compressions to breaths for adult cpr",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent3: practice scenario: casualty is unconscious and not breathing, what first",
+    [
+     "not breathing",
+     "unconscious"
+    ]
+   ],
+   [
+    "independent3: difference between heart attack and cardiac arrest for my nursing essay",
+    [
+     "cardiac arrest",
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: staying alive song for cpr tempo",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent3: my grandson gave me a heart attack hiding behind the door",
+    [
+     "heart attack"
+    ]
+   ],
+   [
+    "independent3: she ghosted me and i want to die lmaooo",
+    [
+     "want to die"
+    ]
+   ],
+   [
+    "independent3: lambing season, ewe bleeding after birth",
+    [
+     "bleeding after birth"
+    ]
+   ],
+   [
+    "independent3: calf not breathing after birth, how to get it going",
+    [
+     "not breathing"
+    ]
+   ],
+   [
+    "independent3: the mixer drum is choking on dry mix",
+    [
+     "is choking"
+    ]
+   ],
+   [
+    "independent3: I nearly drowned laughing at that video",
+    [
+     "drowned"
+    ]
+   ],
+   [
+    "independent3: the cpr dummy's lungs dont inflate",
+    [
+     "cpr"
+    ]
+   ],
+   [
+    "independent3: kid fell asleep on the coach and wont wake up lol hes snoring",
+    [
+     "wont wake up"
+    ]
+   ],
+   [
+    "triage: i am drowning my tomato plants with too much water",
+    [
+     "drowning"
+    ]
+   ]
+  ],
+  "yellow_flagged_by_b": [
+   [
+    "independent: my epileptic flatmate had her usual seizure 1 min shes coming round",
+    [
+     "seizure"
+    ]
+   ],
+   [
+    "independent: water broke green colour",
+    [
+     "water broke"
+    ]
+   ],
+   [
+    "independent2: my 14 yo passed out after standing a long time, fine now",
+    [
+     "passed out"
+    ]
+   ],
+   [
+    "independent3: feeling really low lately, no plans to hurt myself just flat",
+    [
+     "hurt myself"
+    ]
+   ],
+   [
+    "independent3: chopped the end of my finger with the mandoline, bleeding a lot but slowing with pressure",
+    [
+     "bleeding a lot"
+    ]
+   ],
+   [
+    "triage: light a fire to keep him warm with hypothermia",
+    [
+     "hypothermia"
+    ]
+   ]
+  ],
+  "red_missed_by_d": [
+   "independent: 911",
+   "independent: myboyiscoking",
+   "independent: ma tête tourne et je vois flou soudain",
+   "independent2: stoke symptoms my dad",
+   "independent2: my mate chainsawed his thigh its pumping",
+   "independent2: my brother is ODing",
+   "independent2: found an old man outside in the snow, barely awake, skin icy",
+   "independent2: acid splashed in her eyes at work",
+   "independent2: my son says voices are telling him to jump",
+   "independent2: cant do this no more. took everything in the cabinet",
+   "independent2: unalive myself tonight how many",
+   "independent2: anna flack sis",
+   "independent2: my mate is having a turn, can't get a word out of him",
+   "independent2: my missus is having a do and she's grey",
+   "independent2: something wrong with grandma she just staring and drooling",
+   "independent2: narcan how",
+   "independent2: compressions how fast",
+   "independent2: child has croup and making squeaky noise even when calm",
+   "independent2: my poo is black and tarry and i feel a bit lightheaded",
+   "independent2: my bp is very high 200 and my vision is going blurry",
+   "independent2: mum's speech went weird for 5 mins then back to normal",
+   "independent3: splashed sheep dip in me eye stings like hell",
+   "independent3: mum floor cold wont",
+   "independent3: pool. kid. bottom",
+   "independent3: he just went down. eyes open. nothing",
+   "independent3: guy in the rip looking like hes climbing a ladder",
+   "independent3: my friend is having a sees your",
+   "independent3: how do I do see PR on a child",
+   "independent3: probably nothing but my vision went black in one eye for a couple mins this morning",
+   "independent3: bit of a headache. worst one ive ever had tbh came on all at once while lifting",
+   "independent3: just a scratch from the chainsaw, went a bit deep, can see something white",
+   "independent3: funnel web in me boot bit me toe, mouth tingling",
+   "independent3: my mother is having giddiness since morning and BP machine showing 210/120",
+   "independent3: feel like an elephant is sitting on me",
+   "independent3: toddler chewed a laundry pod, foam in mouth, coughing",
+   "independent3: everyone would be better off if i just wasnt here anymore",
+   "independent3: ive written the notes and given my cat to my sister",
+   "independent3: how many of my sertraline would it take",
+   "independent3: standing on the bridge",
+   "independent3: unalive myself",
+   "independent3: kms fr this time",
+   "independent3: grandad found on the floor this morning, cold to touch, been there all night, awake but muddled",
+   "independent3: had my chemo tuesday temp is 38.2 now",
+   "independent3: lawnmower blade took the top of my toe off. found the bit.",
+   "independent3: flashing lights and a curtain coming down over my vision",
+   "independent3: mums legs suddenly gave way and she says she cant feel them",
+   "independent3: found my son with a bag of nos canisters and hes twitching"
+  ],
+  "red_only_fork": [
+   "independent: HESNOTBREATHING",
+   "independent: she isnt braething what do i do",
+   "independent: he is breathing but its like gasps every few seconds and his eyes are open staring",
+   "independent: grandpa fell over in the garden snoring loud cant wake him",
+   "independent: help blood",
+   "independent: cut his arm on glass blood is spurting out",
+   "independent: SHE CUT HER LEG WITH THE CHAINSAW SO MUCH BLOOD",
+   "independent: bleeing from head wont stop",
+   "independent: blood soaking through the towel ive been pressing 10 min",
+   "independent: should i put a tournaquet on or just press",
+   "independent: choking",
+   "independent: chocking cant breath",
+   "independent: baby choking on something not crying turning red",
+   "independent: she choked on steak at dinner and now shes holding her throat no sound",
+   "independent: he swallowed a coin i think he coughing alot but breathing",
+   "independent: toddler swallowed a button battery",
+   "independent: my kid ate one of those little round batteries from the remote",
+   "independent: lips blue",
+   "independent: her lips are going bluey grey and shes breathing funny",
+   "independent: babys lips r purple and hes floppy",
+   "independent: he turned a funny colour and slumped",
+   "independent: gone grey and clammy clutching his chest",
+   "independent: cant find a puls on her neck",
+   "independent: i cant feel his heart beating",
+   "independent: no hartbeat what do",
+   "independent: baby limp and wont feed",
+   "independent: my newborn is really floppy and sleepy cant wake her properly",
+   "independent: he went limp in my arms",
+   "independent: shes fitting and wont stop been 6 minutes",
+   "independent: he is shaking all over on the floor and foam from mouth",
+   "independent: put something in his mouth so he doesnt swallow his tongue??",
+   "independent: hold her down while she seizes?",
+   "independent: my baby is hot and shaking and his eyes rolled back",
+   "independent: crushing pain in my chest going down my left arm",
+   "independent: feels like an elephant sitting on my chest and im sweating",
+   "independent: tight chest jaw ache feel sick 58 m",
+   "independent: my wife says shes got indigestion but shes pale and sweaty and short of breath",
+   "independent: sharp pain in chest when i breath in, had a long flight yesterday",
+   "independent: heart racing like crazy wont slow down feel faint",
+   "independent: face droopy one side",
+   "independent: dads face is drooping and his words are coming out all wrong",
+   "independent: mum suddenly cant lift her right arm and talking funny",
+   "independent: he sounds drunk but he hasnt been drinking and his smile is crooked",
+   "independent: slured speach and dizzy all of a suddon",
+   "independent: worst headache of my life came on like a thunderclap",
+   "independent: grandma confused all of a sudden doesnt know who i am",
+   "independent: lips swelling up after peanuts",
+   "independent: stung by a bee now hes wheezing and covered in hives",
+   "independent: where do i stab the epipen",
+   "independent: used the epi pen shes better now do we still need to go hospital",
+   "independent: tongue feels huge and itchy after new medicine",
+   "independent: spilled boiling water on my toddler chest skin peeling",
+   "independent: fire in kitchen he breathed smoke and his voice is hoarse soot in nose",
+   "independent: electric shock from the socket and now hes not moving",
+   "independent: acid on his face from a battery",
+   "independent: kid was under the bath water how long dont know coughing now",
+   "independent: found him face down in the pond",
+   "independent: make him throw up the bleach?",
+   "independent: she ate some of grans pills dont know how many",
+   "independent: toddler drank from the dishwasher pod",
+   "independent: he took a whole box of paracetamol but he says he feels fine",
+   "independent: friend took something at the party now shes not responding and breathing slow",
+   "independent: how do i use narcan hes turning blue",
+   "independent: give him milk he drank petrol",
+   "independent: whole family has headache and dizzy and the dog is sleepy heater on",
+   "independent: he drank antifreeze thinking it was juice",
+   "independent: ate a mushroom from the garden and now vomiting",
+   "independent: found old man on the bench freezing shivering mumbling",
+   "independent: she stopped shivering but shes still ice cold and sleepy",
+   "independent: should i rub his hands and give him brandy hes frozen",
+   "independent: he was working in the sun now confused and not sweating hot skin",
+   "independent: kid left in car in sun now really red and floppy",
+   "independent: i think his leg is broken bone sticking out",
+   "independent: should i pop the bone back in",
+   "independent: fell off ladder hit head now being sick",
+   "independent: banged his head and now hes really sleepy and confused",
+   "independent: clear fluid coming out of his nose after he hit his head",
+   "independent: car crash neck hurts cant feel legs",
+   "independent: baby coming now cant get to hospital",
+   "independent: my wife is pushing the head is out what do i do",
+   "independent: 33 weeks pregnant and bleeding bright red",
+   "independent: pregnant bad headache and seeing flashing lights swollen face",
+   "independent: baby hasnt moved all day 36 weeks",
+   "independent: gave birth an hour ago bleeding loads soaking pads",
+   "independent: pregnant and one sided stabbing pain and shoulder tip pain feel faint",
+   "independent: babby not braething",
+   "independent: baby breathing really fast and sucking in under ribs",
+   "independent: 3 week old baby has fever 38.5",
+   "independent: rash that doesnt go away when i press a glass on it and hes got fever",
+   "independent: purple spots and stiff neck and light hurts her eyes",
+   "independent: baby soft spot sunken and no wet nappy since morning",
+   "independent: baby shaken by my partner and now hes sleepy and being sick",
+   "independent: kid fell from 2nd floor window",
+   "independent: my son wont stop crying and his tummy is hard and he pulls his legs up and theres red jelly poo",
+   "independent: my grandpa is very confused and his sugar is 2.1",
+   "independent: diabetic shaky sweaty and acting drunk",
+   "independent: give her sugar she is unconsious diabetic",
+   "independent: asthma attack inhaler not working",
+   "independent: cant finish sentences breathing so hard",
+   "independent: she is wheezing and her ribs are sucking in and she can only say one word",
+   "independent: cant catch his breath",
+   "independent: breathing like a fish out of water",
+   "independent: hes breathing really weird like hes snoring but awake?",
+   "independent: stridor croup barky cough 3am",
+   "independent: stabbed in stomach",
+   "independent: knife wound chest bubbling",
+   "independent: should i pull the knife out",
+   "independent: he got shot in the leg",
+   "independent: should i suck the venom out",
+   "independent: throwing up blood",
+   "independent: vomit looks like coffee grounds",
+   "independent: poo is black and sticky and i feel faint",
+   "independent: sudden pain in testicle swollen 14 year old",
+   "independent: coughing up blood",
+   "independent: my friend texted goodbye and wont answer",
+   "independent: i cut myself deep and it wont stop",
+   "independent: feel like im dying heart pounding first time ever",
+   "independent: eye got hit by a firework cant see",
+   "independent: sudden blind in one eye like a curtain",
+   "independent: he was hit by a car but he got up and walked",
+   "independent: crush injury hand in machine",
+   "independent: finger cut off",
+   "independent: put the finger in ice water?",
+   "independent: hes been in the cold water and now hes shivering and blue lips",
+   "independent: old lady on the floor in the shop wont answer me",
+   "independent: dad has sepsis before and now shivering fever confused fast breathing",
+   "independent: skin mottled cold hands fever wont stop shivering",
+   "independent: he fell asleep drunk on his back and being sick",
+   "independent: let him sleep it off hes really drunk and cant stand",
+   "independent: coffee and cold shower to sober her up she wont wake",
+   "independent: he got stung in the mouth by a wasp in his drink",
+   "independent: i think im having a heart atack",
+   "independent: im havin a strok i think",
+   "independent: breathin weird",
+   "independent: cant breath",
+   "independent: she cant breathe properly and her lips are going white",
+   "independent: mi esposa no respira help",
+   "independent: my husband he fall and no speak no move",
+   "independent: baby very hot and not eat and sleep sleep all time",
+   "independent: my mother she have pain in heart very strong and sweat",
+   "independent: he is make blood from mouth plenty",
+   "independent: the child is drinking the cleaning water",
+   "independent: he is fainted and is shaking his body much",
+   "independent: pls help my brother fell from moto, leg is broke and much blood",
+   "independent: she is not good, colour is like ash",
+   "independent: my father the sugar he is low low, he no answer",
+   "independent: he has very hard breath and make noise like whistle",
+   "independent: what to do man is down in street not breath",
+   "independent: plz plz plz help shes not moving",
+   "independent: ambulence how",
+   "independent: hes blue",
+   "independent: blu lip baby",
+   "independent: noo breath",
+   "independent: sezure",
+   "independent: siezing",
+   "independent: anaphalaxis",
+   "independent: anafilactic shock",
+   "independent: unconcious",
+   "independent: unconshus man",
+   "independent: hemmorage",
+   "independent: asma attack",
+   "independent: hart attack",
+   "independent: strock",
+   "independent: cholking",
+   "independent: drowing",
+   "independent: overdoes",
+   "independent: over dose on xanax",
+   "independent: poisend",
+   "independent: brest pain",
+   "independent: cheat pain",
+   "independent: chest pane",
+   "independent: hes bleating badly",
+   "independent: she is breeding a lot from the leg",
+   "independent: he past out",
+   "independent: my baby is chocking on milk",
+   "independent: he cant breed",
+   "independent: hes not braking",
+   "independent: she is not breaking",
+   "independent: he is not breading",
+   "independent: my son is having a sea sure",
+   "independent: seasure wont stop",
+   "independent: stroke symptons face dropping",
+   "independent: his face is dropping",
+   "independent: he is bluding from the hed",
+   "independent: wont stop bleding from wrist",
+   "independent: pulse is week and fast",
+   "independent: her heart is beating really slow like 30",
+   "independent: my dad has a pacemaker and is dizzy and pulse 35",
+   "independent: hes having a heart attach",
+   "independent: I THINK SHES DEAD",
+   "independent: HE FELL DOWN THE STAIRS AND HES NOT MOVING",
+   "independent: WHAT DO I DO HES CHOKING",
+   "independent: SHE CANT FEEL HER LEGS",
+   "independent: HELP ME HES SHAKING AND HIS EYES ARE ROLLING",
+   "independent: nooo she's grey and cold and not answering me pls",
+   "independent: hesss not breeeathing",
+   "independent: pleaseeee helpppp my babyy",
+   "independent: sooo much bloooood",
+   "independent: cant wkae him up",
+   "independent: hes not reponding",
+   "independent: she isnt responsive at all",
+   "independent: nto breathign",
+   "independent: chokign",
+   "independent: bledding alot",
+   "independent: my sons lips r blue n he wont wake",
+   "independent: kid aint breathin",
+   "independent: cantbreathe",
+   "independent: babynotbreathing",
+   "independent: blueslipsandshaking",
+   "independent: helpheswontwakeup",
+   "independent: chestpainleftarm",
+   "independent: sheshavingafit",
+   "independent: nopulsenobreath",
+   "independent: bloodwontstop",
+   "independent: facedroopingslurring",
+   "independent: he swallowed his tongue",
+   "independent: pour water on his face to wake him up",
+   "independent: slap her to wake her up she fainted and wont come round",
+   "independent: give her salt water to make her sick she ate pills",
+   "independent: heimlich on a baby",
+   "independent: should i hit him on the back hes choking and coughing hard",
+   "independent: give him water to wash it down he's choking",
+   "independent: finger sweep babys mouth to get it out",
+   "independent: so like i was at my cousins bbq and my uncle had a few beers and then he just kind of sat down weird and now hes sweating heaps and saying his arm feels heavy and everyone says its the heat but i dunno",
+   "independent: ok so sorry if this is dumb but my dad keeps saying hes fine but he cant really say words right since lunch and his coffee keeps dribbling out the side of his mouth should i wait for my mum to get home",
+   "independent: my daughter is 4 and she had a cold for a few days which was fine but tonight shes breathing really fast and her tummy is going in and out a lot and she doesnt want her cartoons which isnt like her at all",
+   "independent: i dont know if this is anything but my 80 yo mum has been a bit off today not eating, mixing up words, tonight she seems really drowsy and her wee smells strong",
+   "independent: idk whats happening my boyfriend took something at a festival and hes super hot and his jaw is clenching and hes not making sense anymore and his heart is going so fast",
+   "independent: we were hiking and my wife slipped on the rocks and hit her head she was out for maybe a minute and now shes awake but keeps asking the same questions over and over",
+   "independent: my neighbour is old and lives alone, i havent seen her for 2 days, i looked through the window and shes on the kitchen floor and moving her hand a bit",
+   "independent: sorry for spelling im shaking my mate fell off the roof hes awake but screaming his back and cant move his legs",
+   "independent: dying to know how to stop this bleeding its everywhere",
+   "independent: bad breath and now he cant breathe at all",
+   "independent: he was laughing so hard he choked and now he cant breathe",
+   "independent: i was joking about dying but actually my chest really hurts and my arm is numb",
+   "independent: it was a blue screen but now my brother is blue",
+   "independent: the dog is fine but my son got bitten on the neck and its pouring",
+   "independent: not an emergency but my 2yo swallowed a magnet",
+   "independent: lol my grandpa just fell and now cant talk properly",
+   "independent: im fine dont worry just cant feel the left side of my body",
+   "independent: my husband says not to fuss hes just a bit grey and breathless",
+   "independent: she is ok i think she just took 20 of her sleeping tablets to rest",
+   "independent: sore throat and now cant swallow spit drooling high fever",
+   "independent: grandma keeps falling asleep in the chair more than usual and is hard to rouse",
+   "independent: baby crying nonstop for 3 hours high pitched",
+   "independent: baby got a bump on head and a squishy swelling",
+   "independent: baby is grunting with every breath",
+   "independent: infant pale and cold hands and wont settle",
+   "independent: toddler drank a bit of hand sanitiser",
+   "independent: my child ate a whole bottle of gummy vitamins with iron",
+   "independent: my kid drank a mouthful of lamp oil coughing",
+   "independent: leaking fluid 30 weeks",
+   "independent: he says his chest hurts like a band and his jaw, he's diabetic so maybe its sugar",
+   "independent: pain in back between shoulders tearing feeling",
+   "independent: calf swollen and painful one side and now short of breath",
+   "independent: type 1 diabetic vomiting and breathing deep and fast fruity breath",
+   "independent: worst tummy pain ever and hard as a board",
+   "independent: paint thinner splashed in my eyes burning",
+   "independent: rash all over after starting new tablets and blisters in mouth",
+   "independent: headache with fever and neck stiff 19 yo uni",
+   "independent: hes conscious again after the fit but cant move his arm",
+   "independent: dizzy room spinning vomiting cant walk straight",
+   "independent: he is no breathe good, the face is going blue colour",
+   "independent: sorry my english, my son eat the pills of grandmother",
+   "independent: my wife pregnant 8 month, much water coming",
+   "independent: the old man fall in the bath, he is cold and talk little",
+   "independent: please how stop blood from leg the cut is big",
+   "independent: my friend have allergy and now the face is big and he breath hard",
+   "independent: my wife is fainting and i am alone with kids what i do",
+   "independent: my nan swallowed her denture plate i think shes coughing",
+   "independent: mommy fell and theres blood on her head and she wont talk to me",
+   "independent: im 10 and my mom is shaking on the floor",
+   "independent: cast feels super tight toes going cold",
+   "independent: burning smell and he got electrocuted on the train line",
+   "independent: my arm is suddenly dead and my face feels weird",
+   "independent: he's out cold on the pavement after the fight",
+   "independent: she keeled over",
+   "independent: he dropped like a stone in the middle of football",
+   "independent: he's gone all floppy and grey",
+   "independent: shes away with the fairies and talking gibberish",
+   "independent: puking blood mate",
+   "independent: hes spewing and cant hold his head up",
+   "independent: she's got the shakes and is burning up after chemo",
+   "independent: my chest feels tight kinda since this morning and it's getting worse i'm 45 and smoke",
+   "independent: im having trouble breathing since i ate at the restaurant my tongue tingles",
+   "independent: he's breathing but only like 4 times a minute",
+   "independent: hes breathing i think his chest moves a bit but he doesnt respond",
+   "independent: she's gurgling",
+   "independent: fell through ice on the lake got him out",
+   "independent: hes trapped under the car",
+   "independent: stung by jellyfish and cant breathe",
+   "independent2: hes breathing but like only every now n then big gulps",
+   "independent2: she's breathing just barely, sort of a gurgle",
+   "independent2: grandma went limp in her chair eyes open but not there",
+   "independent2: babys lips r going blue",
+   "independent2: choking cant talk hands on throat",
+   "independent2: chokig help",
+   "independent2: she swallowed a button battery i think the flat round one",
+   "independent2: he was eating steak n now he's making no sound just pointing at his neck",
+   "independent2: cant feel a heartbeat on mum",
+   "independent2: is it normal for someone to go grey and stop answering",
+   "independent2: his face is gray and hes sweating buckets and says his chest feels crushed",
+   "independent2: feels like an elephant sitting on my chest",
+   "independent2: tight chest n cant catch breath n feel sick",
+   "independent2: my husband has bad indigestion that wont go away and hes clammy and grey",
+   "independent2: chest hurts should i just take a rennie and lie down? its prob gas",
+   "independent2: her face is dropping on one side and shes talking funny",
+   "independent2: mums mouth gone crooked n she cant lift her arm",
+   "independent2: grandpa suddenly speaking gibberish and dropped his cup",
+   "independent2: worst headache of my life came on like a thunderclap",
+   "independent2: my wife says she can't see out of half her eye and her leg is numb",
+   "independent2: he had a strike i think arm floppy",
+   "independent2: is fitting and wont stop been 6 min",
+   "independent2: should i put a spoon in his mouth so he doesnt swallow his tongue hes seizing",
+   "independent2: sezure cant breath after",
+   "independent2: she keeps having siezures one after another not waking in between",
+   "independent2: my bf is jerking and his eyes rolled back, he's never done this before",
+   "independent2: toddler had febrile fit lips went blue, now sleepy",
+   "independent2: my child is convulsing hot to touch",
+   "independent2: there is so much blood its everywhere he cut his leg on glass",
+   "independent2: blood spurting from his arm with each heart beat",
+   "independent2: blooding alot from head",
+   "independent2: he got stabbed in the stomach theres a knife still in it should i pull it out",
+   "independent2: she's vomitting blood like coffee grounds and fainted",
+   "independent2: coughing up loads of bright red blood",
+   "independent2: nosebleed 45 mins on warfarin wont stop",
+   "independent2: anafalactic shock what do i do",
+   "independent2: used the epipen hes still wheezy and blotchy",
+   "independent2: should i give benadryl instead of the epi pen she's having trouble breathing after shrimp",
+   "independent2: face blowing up like a balloon after new antibiotic",
+   "independent2: my kid ate a cashew and hes all hives and coughing and floppy",
+   "independent2: toddler was face down in the bath for a minute, she's crying now but coughing loads",
+   "independent2: pulled my mate out of the surf hes vomiting water and confused",
+   "independent2: my 2yo drank something from under the sink",
+   "independent2: she took a whole bottle of paracetamol an hour ago but says shes fine",
+   "independent2: he took a bunch of pills idk what kind and hes really sleepy",
+   "independent2: friend took too much molly and is burning up and twitching",
+   "independent2: he's gouching out and wont come round",
+   "independent2: just let him sleep it off right? he's been sick in his sleep",
+   "independent2: grandad took his heart pills twice by accident now dizzy and slow pulse",
+   "independent2: my dog ate grapes AND my daughter ate my iron tablets",
+   "independent2: we have the gas heater on and everyone has a headache and feels sick and sleepy",
+   "independent2: he's freezing cold, stopped shivering and talking nonsense",
+   "independent2: should i rub his hands fast and give whisky to warm him hes hypothermic",
+   "independent2: she stopped sweating, red hot skin and confused after the marathon",
+   "independent2: baby was left in hot car shes floppy and red",
+   "independent2: kid is burned bad boiling water pulled kettle on himself",
+   "independent2: should i put butter on the burn its big and blistering on her whole arm",
+   "independent2: fire in the kitchen his face is burnt and voice is hoarse",
+   "independent2: he touched the power line and is lying there",
+   "independent2: fell off the roof and cant feel his legs",
+   "independent2: motorbike crash, his neck hurts, should we take the helmet off",
+   "independent2: banged her head and now shes throwing up and very sleepy",
+   "independent2: hit his head on the kerb clear fluid coming out his nose",
+   "independent2: nan fell, hit her head, on blood thinners, seems ok just a bit muddled",
+   "independent2: bone sticking out of his leg",
+   "independent2: thigh bent the wrong way after the tackle and hes going pale",
+   "independent2: pelvis crushed under the car",
+   "independent2: she's hot, shivering like mad, blotchy skin and says she feels like she's dying",
+   "independent2: dad had a uti now hes confused and hasnt peed all day",
+   "independent2: the cut on his hand has red lines going up his arm and hes feverish and dizzy",
+   "independent2: my baby has a rash that doesnt go away when i press a glass on it",
+   "independent2: purple spots and stiff neck and light hurts her eyes",
+   "independent2: menengitis rash on my son? tiny red pin pricks wont fade, hes floppy",
+   "independent2: newborn 5 weeks old temp 38.4",
+   "independent2: baby is grunting with each breath and sucking in under the ribs",
+   "independent2: my baby wont feed and is really floppy and hard to wake",
+   "independent2: babby has soft spot sunken and no wet nappy since morning",
+   "independent2: my baby fell off the bed and now one pupil is bigger",
+   "independent2: i shook my baby to stop the crying and now hes not right",
+   "independent2: type 1 friend acting drunk but hasnt drunk anything, sweaty and shaky",
+   "independent2: she's diabetic, breathing fast and deep, breath smells like nail polish remover",
+   "independent2: my sugar is 31 and i keep throwing up",
+   "independent2: asthma attack inhaler not working cant talk in sentences",
+   "independent2: my daughter's asthma is bad and she's gone quiet and tired",
+   "independent2: wheezing so bad ribs sucking in, used 10 puffs",
+   "independent2: he just said goodbye and hes on the bridge",
+   "independent2: i have the pills in my hand i dont want to be here anymore",
+   "independent2: she's 34 weeks pregnant bleeding heavy and belly is hard as a rock",
+   "independent2: pregnant bad headache seeing flashing lights swollen face",
+   "independent2: I'm 7 weeks pregnant and have stabbing pain one side and shoulder tip pain and feel faint",
+   "independent2: gave birth an hour ago and the blood is just pouring",
+   "independent2: the cord came out first before the baby",
+   "independent2: baby born not crying not pink",
+   "independent2: my waters broke and baby hasnt moved all day",
+   "independent2: mum keeled over in the shower and shes not answering",
+   "independent2: fella just went down outside the pub and hes not right, eyes rolling",
+   "independent2: my nan has gone all floppy and cold and clammy",
+   "independent2: he blacked out and hit the table and he's still out cold",
+   "independent2: she konked out and isnt waking",
+   "independent2: my wife is not responding i shook her",
+   "independent2: my father fell down and not getting up, eyes are white",
+   "independent2: please my sister is having convulsion and her body is very hot, they said use onion",
+   "independent2: my baby is shaking and eyes turning, somebody said put spoon and give palm oil",
+   "independent2: mi hijo no respira bien and his lips purple",
+   "independent2: my mother she cannot breathe, she is making sound like whistle",
+   "independent2: the old lady next door is on the floor, been there since last night by the look of it",
+   "independent2: not breathin",
+   "independent2: notbreathing",
+   "independent2: cantbreathe",
+   "independent2: heartattack",
+   "independent2: babyblue",
+   "independent2: he'snotbreathingwhatdoido",
+   "independent2: pleeeeease help my baby wont wake uppp",
+   "independent2: helpppp hes blue",
+   "independent2: hes nit breathing",
+   "independent2: shes not breaking",
+   "independent2: he is chocking on fold",
+   "independent2: my son swallowed a coin and now he's drooling and can't swallow",
+   "independent2: my wife's having a heart a tack",
+   "independent2: she has a seasure",
+   "independent2: she's bleeding from her know is and wont stop",
+   "independent2: im on my own and my heart is racing 200 and i feel like im going to pass out",
+   "independent2: sorry to bother, lovely evening here, the kids are fine, just wondering, my husband has been on the floor for a bit and is making odd snoring noises, is that ok?",
+   "independent2: hi i was going to ask about recipes but my nan just fell over and isnt talking",
+   "independent2: ok so long story, we were at the beach all day and then got burgers and on the way home my little brother said his throat felt weird and now his lips are huge and he sounds wheezy",
+   "independent2: been a long week tbh, work's been mad, anyway my chest has been tight for 40 mins and now my left arm aches and im sweating",
+   "independent2: quick question about my phone bill, also my dad just went really pale and sat down and says he can't see properly and his face feels numb",
+   "independent2: lol this is prob nothing but my roommate took like 6 xanax and drank and i cant wake him",
+   "independent2: ive got a bit of a cough and a cold and um the baby next to me in the cot has gone a weird colour",
+   "independent2: my son was stung by something and now he's really pale and dizzy and itchy everywhere",
+   "independent2: should i suck out the snake venom",
+   "independent2: redback bit my kid and she's sweating and crying with pain",
+   "independent2: dad's gone all funny, slurring and droopy",
+   "independent2: the bloke's gone blue in the lips mate",
+   "independent2: he's crook as, can't stand up and going in and out",
+   "independent2: elderly dad on floor confused cold incontinent",
+   "independent2: my 90 yr old mother suddenly can't swallow her spit and her voice is gone",
+   "independent2: just had a bad fall at the station, my hip, cant move my leg and its turned out",
+   "independent2: the kid fell from the monkey bars and his arm looks like an S and his hand is cold and white",
+   "independent2: she was hit by a car, she says she's fine but her belly is going hard",
+   "independent2: he fell off his bike onto the handlebars and now hes pale and his tummy hurts more and more",
+   "independent2: sudden tearing pain in my back like ripping and my legs feel weird",
+   "independent2: cant breathe after long flight, calf swollen, coughing blood",
+   "independent2: my belly is swollen and rock hard and i havent pooed in days and im vomiting green",
+   "independent2: baby throwing up green",
+   "independent2: my son's testicle is suddenly really painful and swollen and he's being sick",
+   "independent2: im being followed by someone and i got stabbed",
+   "independent2: he got shot in the leg",
+   "independent2: my mom's breathing is like hee-haw, long pauses then gasps, she's on hospice??",
+   "independent2: im 16 weeks and i'm passing big clots and cramping like labour",
+   "independent2: my friend is having a panic attack i think but she is 50 and clutching her chest",
+   "independent2: my husband is asleep and i can't wake him, he took his sleeping pills and some wine",
+   "independent2: fentynal",
+   "independent2: she was electrocuted by the hairdryer in the bath",
+   "independent2: my kid inhaled a magnet. actually two magnets swallowed",
+   "independent2: my child licked the inside of a laundry pod and now coughing and drowsy",
+   "independent2: 4yr old ate grandma's pills off the floor, blood pressure ones",
+   "independent2: toddler drank lamp oil coughing and gagging",
+   "independent2: someone at the party drank antifreeze thinking it was a drink",
+   "independent2: he ate wild mushrooms 6 hours ago now vomiting and diarrhoea",
+   "independent2: my son has dengue fever day 4 and now tummy pain and gums bleeding",
+   "independent2: back pain and now i cant control my bladder and numb between my legs",
+   "independent2: cast feels too tight fingers going purple and tingly",
+   "independent2: my elderly mum has stopped eating and drinking for 2 days, very sleepy",
+   "independent2: my knee is hot red swollen and i have a fever",
+   "independent2: the dog bit my son on the neck and its pouring blood",
+   "independent2: playing fortnite and my brother just fell off his chair and is shaking",
+   "independent2: we were baking and my son touched the oven and now the whole palm is white and doesn't hurt",
+   "independent2: mi esposa se desmayó and wont wake",
+   "independent2: my mom is having a sugar attack shaking sweating",
+   "independent2: she drank 2 bottles of cough syrup",
+   "independent2: my son has a temp and won't bend his neck to look at his toes",
+   "independent2: my friend took ket and is lying on the floor not answering",
+   "independent2: had a few beers and fell, cant remember anything, big cut on head",
+   "independent2: the old man at the bus stop is breathing really loud and won't answer",
+   "independent2: my sons got a hi temperature and a rash that looks like bruises",
+   "independent2: my mother is having trouble breathing and her lips are blew",
+   "independent2: my dad has chess pain",
+   "independent2: my wife has a sizzler and wont stop shaking",
+   "independent2: baby is chalking on milk",
+   "independent2: the diabetic man is hippo, confused",
+   "independent2: SHE IS BLEEDING SO MUCH FROM HER LEG PLEASE",
+   "independent2: MY SON ATE PEANUT FACE SWELLING",
+   "independent2: chestpainandleftarm",
+   "independent2: babyhasfeverandpurplespots",
+   "independent2: kidswallowedbattery",
+   "independent2: so my sister in law was visiting from Manila and we were cooking adobo and laughing and then she said she felt weird, like her heart was flipping, and then she just slid down the wall and now she's breathing kind of strange and not answering",
+   "independent2: ok i dont want to overreact and my husband says im being dramatic, and it's probably the flu going round, but our 9 month old has been really sleepy all day, barely fed, and now her hands and feet are cold and blotchy even though she's burning hot",
+   "independent3: my friend took like 6 of her moms pills and now shes rlly sleepy and wont answer me",
+   "independent3: omg omg he hit his head on the trampoline thing and hes throwing up now",
+   "independent3: bestie said she cant do this anymore and sent me a pic of her pills lined up",
+   "independent3: my lil bro swallowed one of those button batteries from the remote",
+   "independent3: back from 12hr shift chest feels tight and my left arm is heavy prob just tired",
+   "independent3: coworker on nights found slumped at the desk, breathing like every 10 secs, gurgly",
+   "independent3: warehouse forklift pinned guys leg for a while, just got it off, leg is cold n white",
+   "independent3: MY HIP HURTS AFTER I FELL AND MY LEG LOOKS SHORTER",
+   "independent3: wife talking funny cant find her words face droopy one side",
+   "independent3: Dear sir my sister has gone very confused and hot and is not making water since yesterday",
+   "independent3: skin on his legs all blotchy purple and hes breathing fast never seen him this ill",
+   "independent3: my chest is tight but its probably the cold air",
+   "independent3: grandson put my pills in his mouth the little pink ones i think he swallowed 2",
+   "independent3: tractor rolled on the slope, dads under it, conscious but cant feel his legs",
+   "independent3: got gored by the bull in the thigh blood pumping out",
+   "independent3: lad went in the slurry pit after the dog hes not come up",
+   "independent3: sprayed weedkiller without mask now dizzy sweating drooling and pupils tiny",
+   "independent3: hand caught in the baler, two fingers mangled, wrapped in a rag, bleeding slowing",
+   "independent3: mate fell off the scaffold 2 storeys landed on his back hes awake moaning dont move him?",
+   "independent3: got cement in my eye flushing it but its burning",
+   "independent3: sparky got zapped off the board, hes up and talking but his hand has a burn hole",
+   "independent3: trench caved in on young fella up to his chest",
+   "independent3: been working in this heat all day stopped sweating and feel all confused",
+   "independent3: back hurts after lifting dont think its anything but my legs are numb and i cant hold my pee",
+   "independent3: baby 6 weeks hot 38.4 under arm wont feed",
+   "independent3: newborn making grunting noise every breath and her belly sucks in under ribs",
+   "independent3: baby went floppy and blue for a few secs during feed now seems ok??",
+   "independent3: rash on baby doesnt fade when i press the glass on it",
+   "independent3: soft spot on top of babys head is sunken and no wet diaper since morning",
+   "independent3: baby threw up green",
+   "independent3: my baby is screaming nonstop for 3 hours i cant do this i want to shake her",
+   "independent3: had baby 5 days ago bleeding through a pad every half hour and feel faint",
+   "independent3: thinking baby would be better off with someone else and me gone",
+   "independent3: help please my friend no breathe good, face blue, eat fish",
+   "independent3: where is hospital? my wife fall, much blood from head",
+   "independent3: man on beach not move, I take from water, no breath",
+   "independent3: my husband eat peanut sauce, he allergy, lips big, he say throat close",
+   "independent3: high mountain, my friend head pain, walk like drunk, confuse",
+   "independent3: shes passd out in the toilet cant wake her shes been sick all over hersef",
+   "independent3: smashed my hand thru the window theres glass in it and bleedin like mad",
+   "independent3: he's on the floor fitting and frothing been drinking all day",
+   "independent3: blood. lots. his leg. car",
+   "independent3: hanging. i cut him down. hes",
+   "independent3: fire burn whole arm skin peeling off",
+   "independent3: stabbed belly holding towel its soaked",
+   "independent3: baby not",
+   "independent3: year 8 student on trip says her epipen is in her bag on the coach and her throat is itchy after the cake",
+   "independent3: boy on the trip is diabetic, he's gone all sweaty and grumpy and isn't making sense",
+   "independent3: one of the girls has had her asthma pump 10 times and still cant talk in sentences",
+   "independent3: swimmer at deep end head back mouth at water not waving just bobbing",
+   "independent3: pulled a kid out, coughing a lot, says chest hurts, he's breathing fast",
+   "independent3: diver hit the shallow end with his head, floating face down",
+   "independent3: he can't tell me whats wrong but hes holding his belly and hasn't pooed in 6 days, now vomiting",
+   "independent3: spinal injured client, pounding headache, face flushed and sweaty, blood pressure 200",
+   "independent3: his choking on his sandwitch agan, cant cough",
+   "independent3: my sun has a fever and a stif neck and the lite hurts his eyes",
+   "independent3: my dad has chest pane and is sweting",
+   "independent3: i think im haveing a alergic reaktion my face is sweling",
+   "independent3: my nan has a weekness down her left side and slured talking",
+   "independent3: he is fitting and wont stop its been over five minits",
+   "independent3: she's diabetic and having a hippo",
+   "independent3: need an epi pen tonight brother is anna flat tick",
+   "independent3: slightly short of breath, calf has been swollen since the flight, no biggie",
+   "independent3: poo was black and tarry, feel a bit lightheaded, probably the iron tablets",
+   "independent3: dont want to make a fuss but my heart has been going 180 for an hour",
+   "independent3: probably being dramatic but i feel like something terrible is about to happen and my chest is weird",
+   "independent3: ma da's took a turn, he's awfy grey an clammy, says his chest is sair",
+   "independent3: mate's crook as, been spewin all arvo and now he's not makin sense",
+   "independent3: got bitten by a brown snake on the ankle, two little marks, feel ok",
+   "independent3: my father sugar is gone down to 40 he is sweating and blabbering",
+   "independent3: child is having loose motions since 2 days and vomiting, not passing urine",
+   "independent3: my brother drank the pesticide after fight with family he is vomiting",
+   "independent3: my sister is having fits and her eyes are rolling, she is pregnant 8 months",
+   "independent3: the pikin no dey breathe well, him chest dey go in and out fast",
+   "independent3: your man's after keeling over at the bar, he's out cold",
+   "independent3: eish my bru just got hit by a taxi, his leg is skew and bleeding",
+   "independent3: the oke was swimming at the dam and went under, we got him out, he is vomiting water",
+   "independent3: y'all my uncle is fixin to pass out, he's real sweaty and talkin outta his head",
+   "independent3: momma's sugar is high, she's got the shakes and her breath smells fruity",
+   "independent3: fell through the ice on the pond, pulled him out, he's shivering hard and his lips are purple eh",
+   "independent3: my ah ma fall down at void deck, cannot get up, she say hip pain",
+   "independent3: my mate's gone a funny colour and he's struggling to get his breath after the gym",
+   "independent3: my wife says it's just indigestion but she's been grey and being sick for an hour and her jaw aches",
+   "independent3: so tired i can barely lift the kettle and theres this weird ache across my back, 64F diabetic",
+   "independent3: heartburn that doesnt go away with gaviscon and im sweating buckets",
+   "independent3: toddler drank some dishwasher liquid should i make him sick or give milk",
+   "independent3: pulled the knife out of his leg now its pouring",
+   "independent3: bee sting, scraping the stinger with a card, now hes wheezy and covered in hives",
+   "independent3: my uncle got snakebit, should i suck out the venom and tie it tight",
+   "independent3: dropped some molly and now hes boiling hot jaw clenching wont stop moving",
+   "independent3: my mate drank about 4 litres of water after the pills and is now confused and throwing up",
+   "independent3: gf took some g and shes asleep and wont wake, breathing snory",
+   "independent3: he's been on a bender with the coke 2 days, chest is crushing and hes grey",
+   "independent3: narcan given 2 mins ago still blue",
+   "independent3: my son took a bunch of xannies and is slurring",
+   "independent3: took 20 paracetamol last night feel fine now so its ok?",
+   "independent3: grandad took his dad's old heart pills and the new ones together, pulse is like 38",
+   "independent3: kid ate one of grandma's gummies, the weed ones, he's super sleepy",
+   "independent3: just want to sleep and not wake up",
+   "independent3: my brother is screaming at things that arent there and has a knife",
+   "independent3: waters broke and i can see the head, im at home alone",
+   "independent3: 34 wks, bad headache, seeing sparkly lights, feet and face puffy",
+   "independent3: babys not moved all day, usually kicks loads",
+   "independent3: 7 weeks pregnant sharp pain one side and shoulder tip pain, feel faint",
+   "independent3: baby born in the car, not crying, cord round neck",
+   "independent3: he's choking on a grape and going purple, cant make a sound",
+   "independent3: toddler drooling cant swallow sitting forward high fever",
+   "independent3: old man in the park lying there, eyes closed, i shook him, nothing, chest not moving",
+   "independent3: she is breathing but only just, kind of a snore every now and then",
+   "independent3: dad on the couch rattling sound in his throat cant rouse him",
+   "independent3: struck by lightning on the golf course, awake, burns on his feet",
+   "independent3: boiling water off the stove onto her chest, 2yo, skin gone white and wet",
+   "independent3: all of us have headaches and feel sick and the dog is sleepy too, heater on all night",
+   "independent3: mixed bleach and the other cleaner and now im coughing and my chest burns",
+   "independent3: drain cleaner splashed in my eye",
+   "independent3: hiking, friend wont stop shivering, now stopped shivering and is mumbling and stumbling",
+   "independent3: left the baby in the car for maybe 20 min its 30 degrees out, shes red and limp",
+   "independent3: came off the bike over the bars, neck hurts, tingling down both arms",
+   "independent3: hit head yesterday fine at the time, now drowsy and one pupil bigger",
+   "independent3: clear fluid dripping from his nose after he hit his head",
+   "independent3: type 1, sugar reading HI, vomiting, breathing deep and fast",
+   "independent3: my dad wont take his insulin and is just lying on the sofa breathing weird and smells like nail polish",
+   "independent3: inhaler not working, lips going grey, cant talk",
+   "independent3: my mum's 89 and since tuesday shes off her food, sleepy and seeing people who arent there",
+   "independent3: cut on foot from the beach 3 days ago, now red streaks up leg and shaking chills",
+   "independent3: my husbands wee is dark and hardly any and he's shaking so bad his teeth chatter, kidney infection again",
+   "independent3: sorry long message, been meaning to ask about my knee which has been creaky, also my dad came round and he's slumped in the chair now and his mouth looks odd, anyway the knee",
+   "independent3: we were having a lovely dinner, lasagne, and then my sister in law said her tongue felt big, she's allergic to shellfish but there wasnt any, now she's wheezing",
+   "independent3: blood spurting from wrist in time with heartbeat",
+   "independent3: vomiting blood bright red, a lot",
+   "independent3: balls suddenly really painful one side, 15yo, started an hour ago",
+   "independent3: bad pain in my belly going through to my back, im 70 and feel faint",
+   "independent3: tearing pain in chest going to back, worst ever",
+   "independent3: his face went droopy for 10 mins then came back, hes fine now",
+   "independent3: hes awake after the fit but cant move his right arm",
+   "independent3: baby had a fever then shook all over for about a minute, now sleepy",
+   "independent3: hearing voices telling me to hurt my mum",
+   "independent3: ex husband outside with a bat, my arm is broken i think",
+   "independent3: he squeezed my neck til i blacked out last night, i feel ok now",
+   "independent3: my belly hurts after the car crash, seatbelt bruise across it, feel faint",
+   "independent3: fell off ladder onto ribs, every breath hurts and getting more breathless",
+   "independent3: wall fell on my sons legs, got it off after maybe an hour, hes going quiet",
+   "independent3: acid thrown in his face, skin burning",
+   "independent3: my friend took 3 bars and drank, now hes breathing really slow",
+   "independent3: vaped a lean cart thing and drank lean, he wont wake properly",
+   "independent3: pray help, my mother very old fall stairs, no talk, eyes open",
+   "independent3: HELP HELP BABY CHOKING",
+   "independent3: WHERE DO I PRESS ON THE CHEST",
+   "independent3: dadfelldownstairsnotmoving",
+   "independent3: cantbreathechesttight",
+   "independent3: babyhotandfloppy",
+   "independent3: bloodeverywhere",
+   "independent3: heoverdosedonheroin",
+   "triage: my husbnd colapsed and isnt breating",
+   "triage: he stoped breathin wat do i do",
+   "triage: my sun isnt brething",
+   "triage: kid not breating lips blu",
+   "triage: my bby is not breathng",
+   "triage: infnt stoped breathing",
+   "triage: someone choking at dinner",
+   "triage: hes chocking on food cant talk",
+   "triage: somone chokin at diner",
+   "triage: toddler choking on a coin",
+   "triage: baby chokeing on grape",
+   "triage: todler choking on coin",
+   "triage: she is unconsious but breathing",
+   "triage: asthma attack and no inhaler",
+   "triage: she can't breathe, wheezing badly",
+   "triage: asma attack no inhaler",
+   "triage: she cant breath wheezing bad",
+   "triage: allergic reaction and her lips are swelling",
+   "triage: peanut allergy can not breathe",
+   "triage: throat sweling after bee sting",
+   "triage: alergic reaction lips sweling",
+   "triage: he breathed in a lot of smoke and is coughing",
+   "triage: headache and dizzy after running the generator inside",
+   "triage: carbon monoxid poisoning",
+   "triage: hedache dizy generator inside",
+   "triage: carbon monoxide from making a fire in the tent",
+   "triage: blood is spurting from his leg and won't stop",
+   "triage: someone is full of blood, it does not stop",
+   "triage: blod spurting from his leg wont stop",
+   "triage: bleding alot from arm",
+   "triage: bleeeding wont stop",
+   "triage: his finger got cut off",
+   "triage: chainsaw cut his leg badly",
+   "triage: his fingr got cut of",
+   "triage: chainsaw cut his leg bad",
+   "triage: stabbed in the chest",
+   "triage: knife wound to the chest and he is struggling to breathe",
+   "triage: stabed in the chest",
+   "triage: a stick is stuck in his leg",
+   "triage: nail went through her foot and is still in",
+   "triage: stik stuck in his leg",
+   "triage: chest pian left arm",
+   "triage: dad having a hart attack",
+   "triage: he is pale cold and sweaty after the accident",
+   "triage: signs of shock after bleeding",
+   "triage: pale cold sweaty after acident",
+   "triage: dog atacked my child bleding bad",
+   "triage: her face is drooping and she can not speak properly",
+   "triage: sudden weakness on one side of the body",
+   "triage: her face is droping cant speek",
+   "triage: sudden weaknes one side",
+   "triage: she is shaking and foaming at the mouth",
+   "triage: hes having a siezure",
+   "triage: having a seazure",
+   "triage: my baby has a high fever and is shaking all over",
+   "triage: baby high fevr shaking all over",
+   "triage: hit his head and is vomiting and confused",
+   "triage: fell and hit her head now very sleepy",
+   "triage: hit his hed vomiting confussed",
+   "triage: fell off the roof and can not move his legs",
+   "triage: neck hurts after a fall, numb arms",
+   "triage: fell of the roof cant move legs",
+   "triage: diabetic and shaking, confused, sweating",
+   "triage: my diabetic son is not making sense",
+   "triage: diabetik shaking confused",
+   "triage: took too many pain pills, will not wake",
+   "triage: overdoes barely breathing",
+   "triage: baby has fever and a rash that does not fade",
+   "triage: stiff neck high fever and purple spots",
+   "triage: baby fever rash doesnt fade",
+   "triage: my friend says he wants to kill himself",
+   "triage: i do not want to live anymore",
+   "triage: frend says he wants to kill himslef",
+   "triage: my son neary drownd in the pool",
+   "triage: pulled him out of the rver not breathin",
+   "triage: he fell through the ice on the lake",
+   "triage: friend fell through thin ice",
+   "triage: fell thru the ice",
+   "triage: someone got shocked by a wire in the flood water",
+   "triage: electric shock from a fallen wire",
+   "triage: shoked by a wire in flood water",
+   "triage: elecrtic shock fallen wire",
+   "triage: my friend was struck by lightning",
+   "triage: struck by lightening",
+   "triage: her whole arm is badly burned",
+   "triage: boiling water spilled on the baby",
+   "triage: whole arm badly burnd",
+   "triage: boiling water spiled on the baby",
+   "triage: burnt and not breething",
+   "triage: his shirt is on fire",
+   "triage: found him in the snow, cold and not shivering anymore",
+   "triage: hypothermai after falling in cold water",
+   "triage: he was working in the sun and now he is confused and hot",
+   "triage: heat strok what to do",
+   "triage: bitten by a rattlesnake",
+   "triage: snak bit my leg",
+   "triage: biten by a ratlesnake",
+   "triage: his legs are trapped under a fallen wall",
+   "triage: someone trapped under rubble after the earthquake",
+   "triage: legs traped under fallen wall",
+   "triage: car crash, the driver is trapped and bleeding",
+   "triage: motorcycle accident he is not moving",
+   "triage: car crsh driver traped",
+   "triage: splashed bleach in my eye",
+   "triage: chemical in my eyes and it burns",
+   "triage: splahsed bleach in my eye",
+   "triage: friend buried in an avalanche",
+   "triage: kid swallowed drain cleaner",
+   "triage: todler drank bleech",
+   "triage: kid swalowed drain cleaner",
+   "triage: my child swallowed lamp oil",
+   "triage: kid drank kerosene",
+   "triage: child swalowed lamp oil",
+   "triage: my kid ate a bottle of pills",
+   "triage: toddler got into grandma's medicine",
+   "triage: kid ate a botle of pils",
+   "triage: ate wild mushrooms and now vomiting",
+   "triage: ate wild mushroms vomiting",
+   "triage: the baby is comming now",
+   "triage: she keeps bleeding after the baby came",
+   "triage: pregnant and bleeding with bad pain",
+   "triage: pregant and bleeding",
+   "triage: my hose is on fire",
+   "triage: fier in the house",
+   "triage: grease fire in the pan",
+   "triage: pour water on a grease fire",
+   "triage: greese fire in the pan",
+   "triage: oil in pan cought fire",
+   "triage: the outlet is sparking and smoking",
+   "triage: electrical fire in the wall",
+   "triage: outlet sparkling and smoking",
+   "triage: chimney fire roaring sound",
+   "triage: chimny fire",
+   "triage: i smel gas in the house",
+   "triage: gas leek from stove",
+   "triage: wildfire is coming toward our house",
+   "triage: fire on the hill, should we evacuate",
+   "triage: wildfrie coming to our house",
+   "triage: our car is stuck in rising flood water",
+   "triage: water is coming into the car",
+   "triage: car stuk in rising flood water",
+   "triage: the sea pulled back after the earthquake",
+   "triage: tsunammi warning",
+   "triage: earthquake happening what do i do",
+   "triage: earthqauke happening",
+   "triage: tornado comming where to hide",
+   "triage: someone is shooting in the mall",
+   "triage: active shooter at school",
+   "triage: some one is shoting in the mall",
+   "triage: explosion and people are bleeding",
+   "triage: a bomb went off nearby",
+   "triage: explotion people bleeding",
+   "triage: nuclear explosion what do i do",
+   "triage: radiation fallout coming",
+   "triage: nucelar explosion",
+   "triage: chemical spill outside, told to shelter in place",
+   "triage: toxic gas cloud near the factory",
+   "triage: chemcial spill outside",
+   "triage: a power line fell on our car",
+   "triage: downed power line in the yard",
+   "triage: power lien fell on car",
+   "triage: someone is breaking into my house",
+   "triage: someones braking into my house",
+   "triage: mud is sliding down the hill toward the houses",
+   "triage: hurricane is here and the roof is coming off"
+  ],
+  "red_only_b": [
+   "independent2: his throat is closing after peanuts"
+  ]
+ },
+ "node_check_disagreements": 0,
+ "inventory": {
+  "assistant.DANGER": {
+   "heart attack": {
+    "plain word/phrase": 1
+   },
+   "passed out": {
+    "regex with optional/alternative words": 2
+   },
+   "not breathing": {
+    "stem (word\\w*)": 1,
+    "plain word/phrase": 3
+   },
+   "choking": {
+    "regex with optional/alternative words": 1
+   },
+   "unconscious": {
+    "plain word/phrase": 3,
+    "regex with optional/alternative words": 1
+   },
+   "cpr": {
+    "stem (word\\w*)": 1,
+    "plain word/phrase": 1
+   },
+   "bleeding a lot": {
+    "regex with optional/alternative words": 1,
+    "stem (word\\w*)": 1,
+    "plain word/phrase": 4
+   },
+   "seizure": {
+    "regex with optional/alternative words": 1,
+    "stem (word\\w*)": 1,
+    "plain word/phrase": 1
+   },
+   "chest pain": {
+    "regex with optional/alternative words": 2
+   },
+   "on fire": {
+    "plain word/phrase": 3
+   },
+   "smell gas": {
+    "regex with optional/alternative words": 1,
+    "plain word/phrase": 1
+   },
+   "snake bit": {
+    "regex with optional/alternative words": 1,
+    "plain word/phrase": 1,
+    "window (words in between)": 1
+   },
+   "poison": {
+    "window (words in between)": 1,
+    "regex with optional/alternative words": 1
+   },
+   "stuck in water": {
+    "regex with optional/alternative words": 1,
+    "stem (word\\w*)": 1
+   },
+   "trapped": {
+    "stem (word\\w*)": 1,
+    "regex with optional/alternative words": 2
+   }
+  },
+  "confidence.URGENT": {
+   "not breathing / airway": {
+    "stem (word\\w*)": 5,
+    "plain word/phrase": 2
+   },
+   "choking": {
+    "stem (word\\w*)": 1
+   },
+   "unconscious / collapse / not responding": {
+    "plain word/phrase": 6,
+    "stem (word\\w*)": 7,
+    "regex with optional/alternative words": 7
+   },
+   "cardiac / pulse / CPR": {
+    "plain word/phrase": 4,
+    "stem (word\\w*)": 1
+   },
+   "bleeding / wounds": {
+    "stem (word\\w*)": 14,
+    "plain word/phrase": 5,
+    "regex with optional/alternative words": 1
+   },
+   "drowning / water / flood": {
+    "stem (word\\w*)": 3,
+    "plain word/phrase": 5,
+    "regex with optional/alternative words": 2
+   },
+   "electric / lightning": {
+    "stem (word\\w*)": 2,
+    "plain word/phrase": 2
+   },
+   "other": {
+    "plain word/phrase": 7,
+    "regex with optional/alternative words": 5
+   },
+   "burns / fire / smoke": {
+    "stem (word\\w*)": 7,
+    "plain word/phrase": 1,
+    "regex with optional/alternative words": 1
+   },
+   "gas / CO / fumes": {
+    "plain word/phrase": 3,
+    "regex with optional/alternative words": 1
+   },
+   "disaster / violence": {
+    "plain word/phrase": 10,
+    "stem (word\\w*)": 2,
+    "regex with optional/alternative words": 1
+   },
+   "head / spine / fall / crush / trapped": {
+    "plain word/phrase": 15,
+    "regex with optional/alternative words": 2,
+    "stem (word\\w*)": 1
+   },
+   "overdose / poisoning": {
+    "stem (word\\w*)": 7,
+    "plain word/phrase": 15,
+    "regex with optional/alternative words": 8
+   },
+   "anaphylaxis / allergy / asthma": {
+    "plain word/phrase": 4,
+    "stem (word\\w*)": 5,
+    "regex with optional/alternative words": 1
+   },
+   "generic distress (help, pain, pale, sweaty, weak, ...)": {
+    "plain word/phrase": 18,
+    "stem (word\\w*)": 6,
+    "regex with optional/alternative words": 7
+   },
+   "seizure / fit": {
+    "stem (word\\w*)": 5,
+    "plain word/phrase": 4
+   },
+   "stroke": {
+    "plain word/phrase": 4,
+    "stem (word\\w*)": 3,
+    "regex with optional/alternative words": 18,
+    "window (words in between)": 1
+   },
+   "chest pain": {
+    "plain word/phrase": 1
+   },
+   "pregnancy / birth / newborn": {
+    "plain word/phrase": 5,
+    "stem (word\\w*)": 2,
+    "regex with optional/alternative words": 1
+   },
+   "suicide / self-harm": {
+    "stem (word\\w*)": 2,
+    "regex with optional/alternative words": 8,
+    "plain word/phrase": 5
+   },
+   "hypothermia / heat / cold": {
+    "stem (word\\w*)": 2,
+    "plain word/phrase": 1
+   },
+   "injury / fracture / eye / teeth": {
+    "plain word/phrase": 6,
+    "stem (word\\w*)": 5,
+    "regex with optional/alternative words": 2,
+    "window (words in between)": 1
+   },
+   "infection / sepsis / swelling": {
+    "regex with optional/alternative words": 2,
+    "stem (word\\w*)": 1,
+    "plain word/phrase": 2
+   }
+  },
+  "confidence.BODY_PHRASES": {
+   "blue": {
+    "regex with optional/alternative words": 3
+   },
+   "unconscious": {
+    "regex with optional/alternative words": 9,
+    "stem (word\\w*)": 5
+   },
+   "chest pain": {
+    "window (words in between)": 2,
+    "regex with optional/alternative words": 3
+   },
+   "not moving": {
+    "regex with optional/alternative words": 2
+   },
+   "seizure": {
+    "regex with optional/alternative words": 7
+   },
+   "cold and clammy": {
+    "regex with optional/alternative words": 2
+   },
+   "bleeding": {
+    "regex with optional/alternative words": 3,
+    "window (words in between)": 1
+   },
+   "pulse": {
+    "regex with optional/alternative words": 3
+   },
+   "breathing": {
+    "window (words in between)": 2,
+    "regex with optional/alternative words": 1,
+    "stem (word\\w*)": 1
+   }
+  },
+  "confidence.BODY_WORDS": {
+   "pulse": {
+    "plain word/phrase": 3
+   },
+   "breathing": {
+    "plain word/phrase": 5
+   },
+   "unconscious": {
+    "plain word/phrase": 3
+   },
+   "choking": {
+    "plain word/phrase": 4
+   },
+   "bleeding": {
+    "plain word/phrase": 3
+   },
+   "seizure": {
+    "plain word/phrase": 4
+   },
+   "cold and clammy": {
+    "plain word/phrase": 1
+   }
+  },
+  "confidence.BODY_GLUED": {
+   "breathing": {
+    "glued stem": 2
+   },
+   "pulse": {
+    "glued stem": 3
+   },
+   "bleeding": {
+    "glued stem": 2
+   },
+   "choking": {
+    "glued stem": 1
+   },
+   "seizure": {
+    "glued stem": 2
+   },
+   "unconscious": {
+    "glued stem": 4
+   },
+   "chest pain": {
+    "glued stem": 1
+   },
+   "not moving": {
+    "glued stem": 1
+   },
+   "blue": {
+    "glued stem": 1
+   }
+  },
+  "confidence.NOT_URGENT (suppresses)": {
+   "idioms": {
+    "regex": 72
+   }
+  }
+ },
+ "inventory_typo_tables": {
+  "typos.SLIPS": 5,
+  "typos.PHRASE_SLIPS": 12,
+  "typos.APOSTROPHES": 47
+ },
+ "inventory_alternatives": [
+  [
+   "assistant.DANGER",
+   "heart attack",
+   "plain word/phrase",
+   "heart attack"
+  ],
+  [
+   "assistant.DANGER",
+   "passed out",
+   "regex with optional/alternative words",
+   "(passed|blacked) out"
+  ],
+  [
+   "assistant.DANGER",
+   "passed out",
+   "regex with optional/alternative words",
+   "faint(ed|ing)"
+  ],
+  [
+   "assistant.DANGER",
+   "not breathing",
+   "stem (word\\w*)",
+   "can'?t breathe"
+  ],
+  [
+   "assistant.DANGER",
+   "not breathing",
+   "plain word/phrase",
+   "cannot breathe"
+  ],
+  [
+   "assistant.DANGER",
+   "not breathing",
+   "plain word/phrase",
+   "not breathing"
+  ],
+  [
+   "assistant.DANGER",
+   "not breathing",
+   "plain word/phrase",
+   "stopped breathing"
+  ],
+  [
+   "assistant.DANGER",
+   "choking",
+   "regex with optional/alternative words",
+   "\\bchok(e|es|ed|ing)\\b"
+  ],
+  [
+   "assistant.DANGER",
+   "unconscious",
+   "plain word/phrase",
+   "unconscious"
+  ],
+  [
+   "assistant.DANGER",
+   "unconscious",
+   "plain word/phrase",
+   "unresponsive"
+  ],
+  [
+   "assistant.DANGER",
+   "unconscious",
+   "regex with optional/alternative words",
+   "won'?t wake( up)?"
+  ],
+  [
+   "assistant.DANGER",
+   "unconscious",
+   "plain word/phrase",
+   "collapsed"
+  ],
+  [
+   "assistant.DANGER",
+   "cpr",
+   "stem (word\\w*)",
+   "\\bcpr\\b"
+  ],
+  [
+   "assistant.DANGER",
+   "cpr",
+   "plain word/phrase",
+   "no pulse"
+  ],
+  [
+   "assistant.DANGER",
+   "bleeding a lot",
+   "regex with optional/alternative words",
+   "bleeding (a lot|badly|heavily|everywhere)"
+  ],
+  [
+   "assistant.DANGER",
+   "bleeding a lot",
+   "stem (word\\w*)",
+   "won'?t stop bleeding"
+  ],
+  [
+   "assistant.DANGER",
+   "bleeding a lot",
+   "plain word/phrase",
+   "heavy bleeding"
+  ],
+  [
+   "assistant.DANGER",
+   "bleeding a lot",
+   "plain word/phrase",
+   "lots of blood"
+  ],
+  [
+   "assistant.DANGER",
+   "bleeding a lot",
+   "plain word/phrase",
+   "blood everywhere"
+  ],
+  [
+   "assistant.DANGER",
+   "bleeding a lot",
+   "plain word/phrase",
+   "spurting"
+  ],
+  [
+   "assistant.DANGER",
+   "seizure",
+   "regex with optional/alternative words",
+   "seizures?"
+  ],
+  [
+   "assistant.DANGER",
+   "seizure",
+   "stem (word\\w*)",
+   "convuls\\w*"
+  ],
+  [
+   "assistant.DANGER",
+   "seizure",
+   "plain word/phrase",
+   "fitting"
+  ],
+  [
+   "assistant.DANGER",
+   "chest pain",
+   "regex with optional/alternative words",
+   "chest pains?"
+  ],
+  [
+   "assistant.DANGER",
+   "chest pain",
+   "regex with optional/alternative words",
+   "pain in (his|her|my|the) chest"
+  ],
+  [
+   "assistant.DANGER",
+   "on fire",
+   "plain word/phrase",
+   "on fire"
+  ],
+  [
+   "assistant.DANGER",
+   "on fire",
+   "plain word/phrase",
+   "caught fire"
+  ],
+  [
+   "assistant.DANGER",
+   "on fire",
+   "plain word/phrase",
+   "in flames"
+  ],
+  [
+   "assistant.DANGER",
+   "smell gas",
+   "regex with optional/alternative words",
+   "smell(s|ing)? (of )?gas"
+  ],
+  [
+   "assistant.DANGER",
+   "smell gas",
+   "plain word/phrase",
+   "gas leak"
+  ],
+  [
+   "assistant.DANGER",
+   "snake bit",
+   "regex with optional/alternative words",
+   "snake ?bit(e|ten)?"
+  ],
+  [
+   "assistant.DANGER",
+   "snake bit",
+   "plain word/phrase",
+   "bitten by a snake"
+  ],
+  [
+   "assistant.DANGER",
+   "snake bit",
+   "window (words in between)",
+   "snake .{0,12}\\bbit\\b"
+  ],
+  [
+   "assistant.DANGER",
+   "poison",
+   "window (words in between)",
+   "(swallow\\w*|drank|drunk|drink\\w*|ate|eaten|ingest\\w*) .{0,30}(bleach|poison\\w*|pills|tablets|medicine|detergent|cleaner|chemicals?|kerosene|paraffin|petrol|gasoline|antifreeze|lye|drain cleaner|rat poison|pesticide|weed ?killer)"
+  ],
+  [
+   "assistant.DANGER",
+   "poison",
+   "regex with optional/alternative words",
+   "poison(ed|ing)"
+  ],
+  [
+   "assistant.DANGER",
+   "stuck in water",
+   "regex with optional/alternative words",
+   "(stuck|trapped|swept( away)?|drowning) (in|into|by) (the )?(water|river|flood\\w*|pool|sea|current)"
+  ],
+  [
+   "assistant.DANGER",
+   "stuck in water",
+   "stem (word\\w*)",
+   "\\bdrowning\\b"
+  ],
+  [
+   "assistant.DANGER",
+   "trapped",
+   "stem (word\\w*)",
+   "\\btrapped\\b"
+  ],
+  [
+   "assistant.DANGER",
+   "trapped",
+   "regex with optional/alternative words",
+   "pinned (under|down)"
+  ],
+  [
+   "assistant.DANGER",
+   "trapped",
+   "regex with optional/alternative words",
+   "buried (under|alive)"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "stem (word\\w*)",
+   "breath\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "choking",
+   "stem (word\\w*)",
+   "chok\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "plain word/phrase",
+   "unconscious"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "plain word/phrase",
+   "unresponsive"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "collaps\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "pass(ed)? out"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "faint\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "plain word/phrase",
+   "wake"
+  ],
+  [
+   "confidence.URGENT",
+   "cardiac / pulse / CPR",
+   "plain word/phrase",
+   "pulse"
+  ],
+  [
+   "confidence.URGENT",
+   "cardiac / pulse / CPR",
+   "plain word/phrase",
+   "cpr"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "bleed\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "blood\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "spurt\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "wound\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "stab\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "plain word/phrase",
+   "shot"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "shoot\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "gun\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "plain word/phrase",
+   "knife"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "impal\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "amputat\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "plain word/phrase",
+   "severed"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "cut\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "stem (word\\w*)",
+   "drown\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "plain word/phrase",
+   "swept"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "plain word/phrase",
+   "current"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "stem (word\\w*)",
+   "flood\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "plain word/phrase",
+   "ice"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "stem (word\\w*)",
+   "submerg\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "plain word/phrase",
+   "sinking"
+  ],
+  [
+   "confidence.URGENT",
+   "electric / lightning",
+   "stem (word\\w*)",
+   "electr\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "electric / lightning",
+   "stem (word\\w*)",
+   "shock\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "electric / lightning",
+   "plain word/phrase",
+   "lightning"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "lightening"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "struck"
+  ],
+  [
+   "confidence.URGENT",
+   "electric / lightning",
+   "plain word/phrase",
+   "live wire"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "regex with optional/alternative words",
+   "power ?lines?"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "burn\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "scald\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "plain word/phrase",
+   "fire"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "regex with optional/alternative words",
+   "flames?"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "smok\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "spark\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "wildfire\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "gas / CO / fumes",
+   "plain word/phrase",
+   "gas"
+  ],
+  [
+   "confidence.URGENT",
+   "gas / CO / fumes",
+   "regex with optional/alternative words",
+   "fumes?"
+  ],
+  [
+   "confidence.URGENT",
+   "gas / CO / fumes",
+   "plain word/phrase",
+   "carbon monoxide"
+  ],
+  [
+   "confidence.URGENT",
+   "gas / CO / fumes",
+   "plain word/phrase",
+   "generator"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "explo\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "radiation"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "fallout"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "nuclear"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "poison\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "swallow\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "drank"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "ate"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "pills?"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "medicine\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "medication\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "overdos\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "bleach"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "chemicals?"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "kerosene"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "bitten"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "bite"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "snake"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "plain word/phrase",
+   "sting"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "plain word/phrase",
+   "stung"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "stem (word\\w*)",
+   "allerg\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "stem (word\\w*)",
+   "swell\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "stem (word\\w*)",
+   "anaphyla\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "plain word/phrase",
+   "asthma"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "stem (word\\w*)",
+   "wheez\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "regex with optional/alternative words",
+   "lips?"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "blue"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "stem (word\\w*)",
+   "seizure\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "stem (word\\w*)",
+   "convuls\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "plain word/phrase",
+   "fit"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "plain word/phrase",
+   "shaking"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "plain word/phrase",
+   "foaming"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "plain word/phrase",
+   "stroke"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "stem (word\\w*)",
+   "droop\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "stem (word\\w*)",
+   "slurr\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "plain word/phrase",
+   "speak"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "plain word/phrase",
+   "face"
+  ],
+  [
+   "confidence.URGENT",
+   "chest pain",
+   "plain word/phrase",
+   "chest"
+  ],
+  [
+   "confidence.URGENT",
+   "cardiac / pulse / CPR",
+   "plain word/phrase",
+   "heart"
+  ],
+  [
+   "confidence.URGENT",
+   "cardiac / pulse / CPR",
+   "plain word/phrase",
+   "cardiac"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "stem (word\\w*)",
+   "diabet\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "sugar"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "stem (word\\w*)",
+   "confus\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "not making sense"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "fell"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "regex with optional/alternative words",
+   "fall(en)?"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "roof"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "can'?t move"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "plain word/phrase",
+   "cannot move"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "plain word/phrase",
+   "not moving"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "paralys\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "neck"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "spine"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "spinal"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "head"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "skull"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "trapped"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "pinned"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "stem (word\\w*)",
+   "crush\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "rubble"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "buried"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "landslide"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "mud"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "plain word/phrase",
+   "avalanche"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "earthquake"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "tsunami"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "tornado"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "hurricane"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "regex with optional/alternative words",
+   "labou?r"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "plain word/phrase",
+   "birth"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "plain word/phrase",
+   "water broke"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "stem (word\\w*)",
+   "pregnan\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "plain word/phrase",
+   "contractions"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "plain word/phrase",
+   "newborn"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "plain word/phrase",
+   "baby"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "plain word/phrase",
+   "infant"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "stem (word\\w*)",
+   "miscarr\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "stem (word\\w*)",
+   "suicid\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "kill (him|her|my|them|your)sel\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "stem (word\\w*)",
+   "self.harm"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "plain word/phrase",
+   "live anymore"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "end (it|my life)"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "stem (word\\w*)",
+   "attack\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "intruder"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "regex with optional/alternative words",
+   "break(ing)?"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "braking"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "stem (word\\w*)",
+   "riot\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "hostage"
+  ],
+  [
+   "confidence.URGENT",
+   "disaster / violence",
+   "plain word/phrase",
+   "bomb"
+  ],
+  [
+   "confidence.URGENT",
+   "hypothermia / heat / cold",
+   "stem (word\\w*)",
+   "hypotherm\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "hypothermia / heat / cold",
+   "plain word/phrase",
+   "frostbite"
+  ],
+  [
+   "confidence.URGENT",
+   "hypothermia / heat / cold",
+   "stem (word\\w*)",
+   "shiver\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "heat ?stroke"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "plain word/phrase",
+   "stuck"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "plain word/phrase",
+   "nail"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "pale"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "sweaty"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "stem (word\\w*)",
+   "accident\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "stem (word\\w*)",
+   "injur\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "stem (word\\w*)",
+   "hurt\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "pain"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "pains"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "painful"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "painkiller\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "stem (word\\w*)",
+   "weak\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "numb"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "plain word/phrase",
+   "broken"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "stem (word\\w*)",
+   "fractur\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "plain word/phrase",
+   "bone"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "sleepy"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "drowsy"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "stem (word\\w*)",
+   "vomit\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "stem (word\\w*)",
+   "fever\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "rash"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "plain word/phrase",
+   "car"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "stem (word\\w*)",
+   "crash\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "plain word/phrase",
+   "vehicle"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "ambulance"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "hospital"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "emergency"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "dying"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "dead"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "help"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "stem (word\\w*)",
+   "seiz\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "stem (word\\w*)",
+   "siez\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "plain word/phrase",
+   "fitting"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "kill\\w* (him|her|my|them|your|our)sel\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "tablets?"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "capsules?"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "regex with optional/alternative words",
+   "over ?dos\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "paracetamol"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "acetaminophen"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "tylenol"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "panadol"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "ibuprofen"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "aspirin"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "stem (word\\w*)",
+   "opioid\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "heroin"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "fentanyl"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "xanax"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "plain word/phrase",
+   "valium"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "slump\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "keel\\w* over"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "puk(e|ed|es|ing)"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "throw(ing|n)? up"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "stem (word\\w*)",
+   "spew\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "plain word/phrase",
+   "out cold"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "rous(e|ed|able)"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "stem (word\\w*)",
+   "unrous\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "stem (word\\w*)",
+   "gurgl\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "stem (word\\w*)",
+   "gasp\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "plain word/phrase",
+   "agonal"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "plain word/phrase",
+   "stridor"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "thunderclap"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "stem (word\\w*)",
+   "slurr\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "gush\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "cardiac / pulse / CPR",
+   "stem (word\\w*)",
+   "palpitat\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "seizure / fit",
+   "stem (word\\w*)",
+   "froth\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "plain word/phrase",
+   "tourniquet"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "hemorrhag\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "haemorrhag\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "plain word/phrase",
+   "anaphylactic"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "regex with optional/alternative words",
+   "epi ?pen"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "stem (word\\w*)",
+   "suffocat\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "not breathing / airway",
+   "stem (word\\w*)",
+   "strangl\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "hang(ed|ing)? (him|her|my|them)sel\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "plain word/phrase",
+   "goodbye"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "disappear (forever|for good)"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "plain word/phrase",
+   "want to disappear"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "better off (dead|without)"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "plain word/phrase",
+   "no reason to live"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "(want|wants|wanted|wanna|going|gonna) to die"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "regex with optional/alternative words",
+   "take my (own )?life"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "plain word/phrase",
+   "ending it"
+  ],
+  [
+   "confidence.URGENT",
+   "suicide / self-harm",
+   "plain word/phrase",
+   "end it all"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "regex with optional/alternative words",
+   "(pouring|squirting|pumping|soaking|soaked|dripping) (out|from|blood|everywhere|through|all over|a pad|pads|the (pad|towel|bandage|sheets?))"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "crooked (smile|face|mouth)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(smile|face|mouth) (is |looks |gone |went )?(crooked|lopsided|droopy)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(dribbl\\w*|drool\\w*) (out |down )?(of |from )?(the )?(side|corner) of"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "eyes? (are |were |keep |kept |keeps )?roll\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "(won'?t|wont|not|isn'?t|isnt|doesn'?t|doesnt|can'?t|cant|cannot|stopped|hard to) (answer\\w*|respon\\w*|react\\w*|rous\\w*|com(e|ing) (round|to)|open (his|her|their) eyes|wak(e|ing)|stop)"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "(dropped|went down|fell down|collapsed) like a (stone|rock|sack|log|tree)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "face ?down"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "(lying|lay|laid|collapsed|fallen|fell|found (him|her|them)|is|was|been|still|he'?s|she'?s|hes|shes|lady|man|woman|guy|person|someone|somebody|grandma|grandpa|gran|nan|nana|mum|dad|mom|him|her) on the (floor|ground|pavement|road|street|kitchen floor|bathroom floor)"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "(took|taken|swallowed|had|ate|eaten|downed|drank) (a |the |his |her |my )?(whole|entire|full) (box|bottle|packet|pack|strip|tub|jar|sheet|blister|pot)"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "(sleep|sleeping) it off"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "(really|very|so|too) drunk"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(worst|sudden|severe|blinding|exploding) (\\w+ )?headache"
+  ],
+  [
+   "confidence.URGENT",
+   "other",
+   "regex with optional/alternative words",
+   "(funny|strange|weird|odd) turn"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "plain word/phrase",
+   "came over all"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "window (words in between)",
+   "(talk|talking|speak|speaking|say|saying|words?) (\\w+ ){0,4}(funny|strange|weird|wrong|right|jumbled|muddled|gibberish|nonsense|properly|slurred)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "mixing up (his |her |my )?words"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "(can'?t|cant|cannot|couldn'?t) (lift|raise|move|feel|use) (his|her|my|their|the|one|an?) ?(left |right )?(arms?|legs?|hands?|feet|toes|side|face|body)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(one|left|right) side of (his|her|my|their|the) (face|body|mouth)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(blind|can'?t see|lost (the )?(sight|vision)) in (one|his|her|my|the) (left |right )?eye"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "colou?r (is |was )?(like )?(ash|grey|gray|white|purple)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(grey|gray|ashen|mottled) (and|skin|face|lips|colou?r)"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "(gone|went|turned|turning|looks?|is|was) (grey|gray|ashen|mottled)"
+  ],
+  [
+   "confidence.URGENT",
+   "anaphylaxis / allergy / asthma",
+   "stem (word\\w*)",
+   "venom\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "burns / fire / smoke",
+   "stem (word\\w*)",
+   "firework\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "plain word/phrase",
+   "sweating"
+  ],
+  [
+   "confidence.URGENT",
+   "infection / sepsis / swelling",
+   "regex with optional/alternative words",
+   "swollen and (hot|red)"
+  ],
+  [
+   "confidence.URGENT",
+   "infection / sepsis / swelling",
+   "regex with optional/alternative words",
+   "(red|hot) and swollen"
+  ],
+  [
+   "confidence.URGENT",
+   "infection / sepsis / swelling",
+   "stem (word\\w*)",
+   "cellulit\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "infection / sepsis / swelling",
+   "plain word/phrase",
+   "sepsis"
+  ],
+  [
+   "confidence.URGENT",
+   "infection / sepsis / swelling",
+   "plain word/phrase",
+   "septic"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "stem (word\\w*)",
+   "gash\\w*"
+  ],
+  [
+   "confidence.URGENT",
+   "unconscious / collapse / not responding",
+   "regex with optional/alternative words",
+   "sliced (my|his|her|open|deep)"
+  ],
+  [
+   "confidence.URGENT",
+   "bleeding / wounds",
+   "plain word/phrase",
+   "deep cut"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "regex with optional/alternative words",
+   "leaking (fluid|water)"
+  ],
+  [
+   "confidence.URGENT",
+   "drowning / water / flood",
+   "regex with optional/alternative words",
+   "under (the )?(bath |pool |sea |river |lake )?water"
+  ],
+  [
+   "confidence.URGENT",
+   "pregnancy / birth / newborn",
+   "regex with optional/alternative words",
+   "(he'?s|she'?s|hes|shes|is|was|baby|feels?|kid) (frozen|freezing)"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "(can'?t|cant|cannot|couldn'?t) (stand|walk|put weight|pee|wee|urinate)"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "hasn'?t (peed|weed)"
+  ],
+  [
+   "confidence.URGENT",
+   "generic distress (help, pain, pale, sweaty, weak, ...)",
+   "regex with optional/alternative words",
+   "no (wee|pee|urine)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "broke (my|his|her|ur|your|their) (\\w+ )?(arm|leg|nose|wrist|ankle|finger|toe|bone|hip|back|neck|ribs?|jaw)"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "regex with optional/alternative words",
+   "(knocked out|lost) (a |his |her |my )?(tooth|teeth)"
+  ],
+  [
+   "confidence.URGENT",
+   "head / spine / fall / crush / trapped",
+   "regex with optional/alternative words",
+   "(tooth|teeth) (knocked|came|fell) out"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "in (my|his|her|their) eye"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(hit|poked|stabbed|scratched|splashed) in the eye"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "eyes? (got |was |were )?(hit|poked|stabbed|cut|splashed)"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "regex with optional/alternative words",
+   "(up|in|into) (his|her|my|their|the) (nose|ear)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "(arms?|legs?|side) (feels |feel |is |went |gone )?(heavy|dead|funny)"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "toes (going|gone|turning|are) (cold|blue|white|numb)"
+  ],
+  [
+   "confidence.URGENT",
+   "injury / fracture / eye / teeth",
+   "window (words in between)",
+   "cast (\\w+ ){0,2}tight"
+  ],
+  [
+   "confidence.URGENT",
+   "stroke",
+   "regex with optional/alternative words",
+   "c(a|o)me over all"
+  ],
+  [
+   "confidence.URGENT",
+   "overdose / poisoning",
+   "regex with optional/alternative words",
+   "(drink\\w*|drank|swallow\\w*|ate|eaten) (the |some |a )?(cleaning|washing|laundry|dishwasher)"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "blue",
+   "regex with optional/alternative words",
+   "\\b(lips?|skin|face|fingers|he|she|baby) (is |are |was |were |look |looks |gone |going |turned |turning )*(blue|grey|gray)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "blue",
+   "regex with optional/alternative words",
+   "\\b(turn(ed|ing)?|gone|going|went) (blue|grey|gray)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "blue",
+   "regex with optional/alternative words",
+   "\\bblue (lips?|skin|face)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\b(passed|blacked) out\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\bwon'?t wake( up)?\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "stem (word\\w*)",
+   "\\bnot waking\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "stem (word\\w*)",
+   "\\bfainted\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\b(can'?t|cant|cannot|couldn'?t) wake (him|her|them|up)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\bhard to (rouse|wake)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "stem (word\\w*)",
+   "\\bunrous\\w*"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\b(won'?t|wont|not|isn'?t|isnt|doesn'?t|doesnt|stopped) (respon\\w*|react\\w*|rous\\w*|com(e|ing) (round|to)|open(ing)? (his|her|their) eyes)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\b(won'?t|wont|not|isn'?t|isnt|doesn'?t|doesnt) answer(ing)? (me|us|when|at all)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "stem (word\\w*)",
+   "\\bout cold\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "stem (word\\w*)",
+   "\\bkeel\\w* over\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\bslump(ed|ing)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\b(dropped|went down|fell down|collapsed) like a (stone|rock|sack|log|tree)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "unconscious",
+   "regex with optional/alternative words",
+   "\\bface ?down (in|on)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "chest pain",
+   "window (words in between)",
+   "\\bchest\\b.{0,20}\\b(pain\\w*|hurts?|hurting|tight\\w*|pressure|crushing)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "chest pain",
+   "regex with optional/alternative words",
+   "\\b(pain|pressure) in (his|her|my|the) chest\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "chest pain",
+   "window (words in between)",
+   "\\belephant\\b.{0,25}\\bchest\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "chest pain",
+   "regex with optional/alternative words",
+   "\\b(tight|heavy|crushing|squeezing|tightness in (his|her|my|the)) chest\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "chest pain",
+   "regex with optional/alternative words",
+   "\\b(pain|hurts?|hurting|ache) in (his|her|my|the) heart\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "not moving",
+   "regex with optional/alternative words",
+   "\\b(not|isn'?t|stopped|won'?t|can'?t|cannot) mov(e|ing)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "not moving",
+   "regex with optional/alternative words",
+   "\\b(limp|floppy)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\b(having|had|has|is|was|keeps?) (a )?fit(s|ting)?\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\b(he'?s|she'?s|hes|shes|they'?re|been|started|still|keeps?|baby|child|kid|son|daughter) fitting\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\bfitting (and|for|again|won'?t|wont)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\beyes (are |were |keep |kept |keeps )?(rolling|rolled)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\b(shaking|jerking|twitching) (all over|uncontrollabl\\w*|and (won'?t|wont|can'?t|cant) stop|on the floor)"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\b(foam\\w*|froth\\w*) (at|from) (the|his|her) mouth\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "seizure",
+   "regex with optional/alternative words",
+   "\\bseiz(ing|ed|es)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "cold and clammy",
+   "regex with optional/alternative words",
+   "\\bcold and (wet|clammy|sweaty)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "cold and clammy",
+   "regex with optional/alternative words",
+   "\\b(wet|sweaty) and cold\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "bleeding",
+   "regex with optional/alternative words",
+   "\\b(pouring|gushing|spurting|squirting|pumping|soaking|soaked) (out|from|blood|everywhere|through|all over|a pad|pads|the (pad|towel|bandage|sheets?))\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "bleeding",
+   "window (words in between)",
+   "\\b(cut|wound|gash|nosebleed|nose|it|that) .{0,25}(won'?t|wont|doesn'?t|doesnt|will not|not) stop( bleeding| oozing| pouring)?\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "bleeding",
+   "regex with optional/alternative words",
+   "\\bwon'?t stop (oozing|pouring|dripping|gushing)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "bleeding",
+   "regex with optional/alternative words",
+   "\\bsoaking (a |the |through )?(pads?|towels?|bandages?)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "pulse",
+   "regex with optional/alternative words",
+   "\\b(heart|pulse) (is |was |keeps |been )?(beating |going )?(really |very |so |too |super )?(fast|slow|hard|weird|funny|irregular|skipping|fluttering|racing|pounding|thumping|stopped)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "pulse",
+   "regex with optional/alternative words",
+   "\\b(heart|pulse) racing\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "pulse",
+   "regex with optional/alternative words",
+   "\\b(can'?t|cant|cannot|couldn'?t) (feel|find|hear) (his|her|a|the|their|my) (heart\\w*|pulse)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "breathing",
+   "window (words in between)",
+   "\\b(snoring|gurgling|gasping|rattling)\\b.{0,40}\\b(won'?t|wont|can'?t|cant|not|doesn'?t|doesnt) (wake|respond|answer)"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "breathing",
+   "window (words in between)",
+   "\\b(collapsed|unconscious|on the floor|fell)\\b.{0,40}\\b(snoring|gurgling|gasping)\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "breathing",
+   "regex with optional/alternative words",
+   "\\b(she'?s|he'?s|shes|hes|is|baby is) gurgling\\b"
+  ],
+  [
+   "confidence.BODY_PHRASES",
+   "breathing",
+   "stem (word\\w*)",
+   "\\bagonal\\b"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "pulse",
+   "plain word/phrase",
+   "pulse"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "pulse",
+   "plain word/phrase",
+   "heartbeat"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "breathing",
+   "plain word/phrase",
+   "breathing"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "breathing",
+   "plain word/phrase",
+   "breathe"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "breathing",
+   "plain word/phrase",
+   "breath"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "breathing",
+   "plain word/phrase",
+   "breathes"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "breathing",
+   "plain word/phrase",
+   "breathed"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "unconscious",
+   "plain word/phrase",
+   "unconscious"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "unconscious",
+   "plain word/phrase",
+   "unresponsive"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "unconscious",
+   "plain word/phrase",
+   "collapsed"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "choking",
+   "plain word/phrase",
+   "choking"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "choking",
+   "plain word/phrase",
+   "choke"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "choking",
+   "plain word/phrase",
+   "choked"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "bleeding",
+   "plain word/phrase",
+   "bleeding"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "bleeding",
+   "plain word/phrase",
+   "bleed"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "bleeding",
+   "plain word/phrase",
+   "blood"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "seizure",
+   "plain word/phrase",
+   "seizure"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "seizure",
+   "plain word/phrase",
+   "seizures"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "seizure",
+   "plain word/phrase",
+   "convulsing"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "seizure",
+   "plain word/phrase",
+   "convulsions"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "cold and clammy",
+   "plain word/phrase",
+   "clammy"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "pulse",
+   "plain word/phrase",
+   "cpr"
+  ],
+  [
+   "confidence.BODY_WORDS",
+   "choking",
+   "plain word/phrase",
+   "heimlich"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "breathing",
+   "glued stem",
+   "(not|isnt|cant|stopped|wont)breath"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "breathing",
+   "glued stem",
+   "breath"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "pulse",
+   "glued stem",
+   "nopulse"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "pulse",
+   "glued stem",
+   "pulse"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "pulse",
+   "glued stem",
+   "heartbeat"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "bleeding",
+   "glued stem",
+   "bleed"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "bleeding",
+   "glued stem",
+   "blood"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "choking",
+   "glued stem",
+   "chok"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "seizure",
+   "glued stem",
+   "seizur"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "seizure",
+   "glued stem",
+   "convuls"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "unconscious",
+   "glued stem",
+   "unconscious"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "unconscious",
+   "glued stem",
+   "unrespons"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "unconscious",
+   "glued stem",
+   "coll?aps"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "unconscious",
+   "glued stem",
+   "passedout"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "chest pain",
+   "glued stem",
+   "chestpain"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "not moving",
+   "glued stem",
+   "notmoving"
+  ],
+  [
+   "confidence.BODY_GLUED",
+   "blue",
+   "glued stem",
+   "(isblue|turningblue|bluelips|lipsblue|lipsareblue)"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbleed(ing)? (the |my |a )?(brakes?|radiators?|valves?|area)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbleeding edge\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bcolou?rs? bleed\\w*"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbleed in print\\w*"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bblood (orange|oranges|moon|brothers?|sausages?|pudding|bank|drive|donor|donation)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(first|fake) blood\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbloody (hell|typical|annoying|ridiculous)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(bad|fresh|morning) breath\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbreath of fresh air\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbreathing (exercises?|space|room)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\blet (the |it )?(wine|dough) breathe\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(fabrics?|material|shoes?|clothes|clothing|jacket) (that )?breath(e|es|able)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bpulses?(?= (lentils|beans|recipes?|setting|button|mode))"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bpulse of the (city|nation|market|music|night|times)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bheart of (the matter|palm|gold|stone)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(broke|broken|breaks?|breaking) (my |his |her |your |their )?heart\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bheart ?(break|broken|breaking|breaker)\\w*"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bstroke of (luck|genius|midnight)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbrush ?strokes?\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(two|four|2|4)[ -]stroke\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(breast|back)stroke\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bstroke (a|the|my|his|her) (cat|dog|kitten|puppy|hair|beard)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(have|having|had|throw|throwing|threw) a (hissy )?fit (about|when|if|over)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(doesn'?t|don'?t|didn'?t|doesnt|dont|didnt) fit\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(song|track|tune|beat|album|outfit) is (fire|sick)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bburn (a|the) (cd|dvd|disc|disk)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bsick burn\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bburning question\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bcalories? burn\\w*"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bburn(ed|t|ing|s)? (calories|fat|money|bridges)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bdrown\\w* in (homework|emails?|work|debt|paperwork|bills)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bdrown (the|it) in\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bpoisoned apple\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bdying to (know|see|try|hear|meet)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(phone|battery|laptop|ipad|torch|remote|car battery) (is |was |has |just )?(dead|died)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bdead battery\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bchoked up (at|when|during|over|about|a bit)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(team|we|they) choked in the (final|game|match|semi\\w*)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(engine|motor|carb\\w*) (is |was |keeps )?chok\\w*"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bchoke (on|of) (a|the|my) (motor\\w*|bike|car|engine)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bblue screen\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bfeel(ing)? blue\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bchest of drawers\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bchest (day|press|fly|workout)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbone broth\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bskull and bones\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bcut and paste\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bthe cut of\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbudget cuts?\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bbreak a leg\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(car|van|bike|washing machine) (broke|broken|has broken) down\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\blabou?r (day|party|market|costs?)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bcontractions in (english|grammar)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bpregnant (with (flavou?r|meaning)|pause)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(heat ?stroke|frost) on (my |the )?(plants?|tomato\\w*|garden)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bsugar (rush|free|cane|beet|syrup)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bhead is spinning with\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bfell flat\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(android|ipad|samsung|drawing) tablets?\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bkilling it\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bseiz\\w* (of )?(assets|property|goods)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bseize the (day|moment|opportunity|chance)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(engine|motor|bolt|nut|screw) (has )?seized\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bcollapsed (into|in) (laughter|tears|giggles)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(tent|cake|souffle|market|economy|deal|talks) (has )?collapsed\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(stock|market|app|computer|game|laptop|server) (crash\\w*|keeps crashing)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bstock market crash\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bheartbeat monitoring\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(bass|drum) ?line is the heartbeat\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bpassed out of the (academy|college|school)\\b"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\bout cold after (a |my )?(long|night|shift)\\w*"
+  ],
+  [
+   "confidence.NOT_URGENT (suppresses)",
+   "idioms",
+   "regex",
+   "\\b(choking hazards?|overdos\\w* on (netflix|tv|television|coffee|caffeine|chocolate|sugar|youtube|tiktok|games?|series|shows?)|(lips?|hands?|tongue|teeth|mouth|fingers?) (are |is |look |looks |went |gone )?(blue|purple|green|black|red) from (the |a |my )?(slushie|slush|blueberr\\w*|berr\\w*|ice lolly|lolly|lollipop|sweets?|candy|food colou?ring|dye|ink|paint|marker|pen|juice|drink)|lipstick|black pudding|(dough|code|ink|paint|colou?rs?|dye|fabric|shirt|wash|print\\w*) (is |are )?bleed\\w*|(sourdough|starter|dough|wine|fabric|soil|plant|engine) (\\w+ )?(is |isn'?t |isnt |not )?breath\\w*|(battery|engine|motor|plant|weeds?) (is |are |was )?chok\\w*|heart stopped when|(plants?|flowers?|leaves|lettuce|seedlings?) (\\w+ ){0,3}(floppy|limp)|(toast|dinner|rice|cake|pizza|bread|sauce) (is |was )?burn\\w*|drown (the |it |them )?(\\w+ )?in (dressing|sauce|gravy|butter|oil|syrup|ketchup)|(quit|quitting|stop|stopping|give up|giving up) smoking|(practi[cs]e|practi[cs]ing|training|course|class|certification|certificate|exam|test) (\\w+ ){0,3}(cpr|heimlich|first aid)|(cpr|first aid|heimlich) (certification|certificate|course|class|training|exam|test)s?|on a (dummy|manikin|mannequin|doll))\\b"
+  ]
+ ],
+ "totals": {
+  "red": {
+   "n": 1009,
+   "a": 34,
+   "b": 165,
+   "c": 961,
+   "d": 962,
+   "e": 165,
+   "f": 962,
+   "c_danger_signs": 179,
+   "c_urgent_typed": 911,
+   "c_urgent_typo_fixed": 961,
+   "b_only_not_c": 1,
+   "c_only_not_b": 797
+  },
+  "yellow": {
+   "n": 367,
+   "a": 0,
+   "b": 6,
+   "c": 297,
+   "d": 297,
+   "e": 6,
+   "f": 297,
+   "c_danger_signs": 18,
+   "c_urgent_typed": 288,
+   "c_urgent_typo_fixed": 297,
+   "b_only_not_c": 0,
+   "c_only_not_b": 291
+  },
+  "green": {
+   "n": 813,
+   "a": 8,
+   "b": 80,
+   "c": 395,
+   "d": 417,
+   "e": 58,
+   "f": 395,
+   "c_danger_signs": 61,
+   "c_urgent_typed": 392,
+   "c_urgent_typo_fixed": 395,
+   "b_only_not_c": 22,
+   "c_only_not_b": 337
+  }
+ }
+}

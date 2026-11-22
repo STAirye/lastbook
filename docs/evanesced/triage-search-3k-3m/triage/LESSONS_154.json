@@ -1,0 +1,4413 @@
+{
+ "versions": {
+  "main": "upstream main 4fd221e, D:\\LastbookData",
+  "new": "fork/phrase-injury fe635e7, D:\\LastbookData-fork-test"
+ },
+ "tables": {
+  "aggregates": {
+   "cases128:main_kw": {
+    "clean": {
+     "n": 27,
+     "first_ok": 16,
+     "top3_ok": 23,
+     "any_useful": 24,
+     "useful_sum": 120,
+     "covered": 23,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "typo": {
+     "n": 25,
+     "first_ok": 13,
+     "top3_ok": 16,
+     "any_useful": 18,
+     "useful_sum": 90,
+     "covered": 16,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    },
+    "red": {
+     "n": 2,
+     "first_ok": 1,
+     "top3_ok": 1,
+     "any_useful": 1,
+     "useful_sum": 7,
+     "covered": 1,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "yellow": {
+     "n": 1,
+     "first_ok": 1,
+     "top3_ok": 1,
+     "any_useful": 1,
+     "useful_sum": 5,
+     "covered": 1,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "green": {
+     "n": 17,
+     "first_ok": 11,
+     "top3_ok": 15,
+     "any_useful": 16,
+     "useful_sum": 89,
+     "covered": 16,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "counter": {
+     "n": 7,
+     "first_ok": 3,
+     "top3_ok": 6,
+     "any_useful": 6,
+     "useful_sum": 19,
+     "covered": 5,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "typo_partners": {
+     "n": 25,
+     "first_ok": 14,
+     "top3_ok": 23,
+     "any_useful": 23,
+     "useful_sum": 101,
+     "covered": 22,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    }
+   },
+   "cases128:main_hy": {
+    "clean": {
+     "n": 27,
+     "first_ok": 24,
+     "top3_ok": 26,
+     "any_useful": 27,
+     "useful_sum": 160,
+     "covered": 27,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "typo": {
+     "n": 25,
+     "first_ok": 15,
+     "top3_ok": 19,
+     "any_useful": 21,
+     "useful_sum": 118,
+     "covered": 20,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    },
+    "red": {
+     "n": 2,
+     "first_ok": 2,
+     "top3_ok": 2,
+     "any_useful": 2,
+     "useful_sum": 10,
+     "covered": 2,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "yellow": {
+     "n": 1,
+     "first_ok": 1,
+     "top3_ok": 1,
+     "any_useful": 1,
+     "useful_sum": 7,
+     "covered": 1,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "green": {
+     "n": 17,
+     "first_ok": 15,
+     "top3_ok": 17,
+     "any_useful": 17,
+     "useful_sum": 112,
+     "covered": 17,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "counter": {
+     "n": 7,
+     "first_ok": 6,
+     "top3_ok": 6,
+     "any_useful": 7,
+     "useful_sum": 31,
+     "covered": 7,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "typo_partners": {
+     "n": 25,
+     "first_ok": 24,
+     "top3_ok": 24,
+     "any_useful": 25,
+     "useful_sum": 143,
+     "covered": 25,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    }
+   },
+   "cases128:new_kw": {
+    "clean": {
+     "n": 27,
+     "first_ok": 18,
+     "top3_ok": 23,
+     "any_useful": 25,
+     "useful_sum": 142,
+     "covered": 24,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    },
+    "typo": {
+     "n": 25,
+     "first_ok": 15,
+     "top3_ok": 21,
+     "any_useful": 22,
+     "useful_sum": 114,
+     "covered": 21,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    },
+    "red": {
+     "n": 2,
+     "first_ok": 1,
+     "top3_ok": 1,
+     "any_useful": 1,
+     "useful_sum": 7,
+     "covered": 1,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "yellow": {
+     "n": 1,
+     "first_ok": 1,
+     "top3_ok": 1,
+     "any_useful": 1,
+     "useful_sum": 4,
+     "covered": 1,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "green": {
+     "n": 17,
+     "first_ok": 14,
+     "top3_ok": 16,
+     "any_useful": 17,
+     "useful_sum": 113,
+     "covered": 17,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "counter": {
+     "n": 7,
+     "first_ok": 2,
+     "top3_ok": 5,
+     "any_useful": 6,
+     "useful_sum": 18,
+     "covered": 5,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    },
+    "typo_partners": {
+     "n": 25,
+     "first_ok": 16,
+     "top3_ok": 21,
+     "any_useful": 23,
+     "useful_sum": 118,
+     "covered": 22,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    }
+   },
+   "cases128:new_hy": {
+    "clean": {
+     "n": 27,
+     "first_ok": 23,
+     "top3_ok": 25,
+     "any_useful": 26,
+     "useful_sum": 167,
+     "covered": 26,
+     "wrong_sense_first": 1,
+     "cap_broken": 0
+    },
+    "typo": {
+     "n": 25,
+     "first_ok": 20,
+     "top3_ok": 21,
+     "any_useful": 23,
+     "useful_sum": 146,
+     "covered": 23,
+     "wrong_sense_first": 1,
+     "cap_broken": 0
+    },
+    "red": {
+     "n": 2,
+     "first_ok": 2,
+     "top3_ok": 2,
+     "any_useful": 2,
+     "useful_sum": 10,
+     "covered": 2,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "yellow": {
+     "n": 1,
+     "first_ok": 0,
+     "top3_ok": 1,
+     "any_useful": 1,
+     "useful_sum": 6,
+     "covered": 1,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "green": {
+     "n": 17,
+     "first_ok": 16,
+     "top3_ok": 17,
+     "any_useful": 17,
+     "useful_sum": 120,
+     "covered": 17,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "counter": {
+     "n": 7,
+     "first_ok": 5,
+     "top3_ok": 5,
+     "any_useful": 6,
+     "useful_sum": 31,
+     "covered": 6,
+     "wrong_sense_first": 1,
+     "cap_broken": 0
+    },
+    "typo_partners": {
+     "n": 25,
+     "first_ok": 22,
+     "top3_ok": 23,
+     "any_useful": 24,
+     "useful_sum": 151,
+     "covered": 24,
+     "wrong_sense_first": 1,
+     "cap_broken": 0
+    }
+   },
+   "cases241:main_kw": {
+    "clean": {
+     "n": 21,
+     "first_ok": 12,
+     "top3_ok": 20,
+     "any_useful": 21,
+     "useful_sum": 101,
+     "covered": 19,
+     "wrong_sense_first": 2,
+     "cap_broken": 1
+    },
+    "emergency": {
+     "n": 9,
+     "first_ok": 5,
+     "top3_ok": 9,
+     "any_useful": 9,
+     "useful_sum": 39,
+     "covered": 8,
+     "wrong_sense_first": 0,
+     "cap_broken": 1
+    },
+    "counter241": {
+     "n": 12,
+     "first_ok": 7,
+     "top3_ok": 11,
+     "any_useful": 12,
+     "useful_sum": 62,
+     "covered": 11,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    }
+   },
+   "cases241:main_hy": {
+    "clean": {
+     "n": 21,
+     "first_ok": 14,
+     "top3_ok": 21,
+     "any_useful": 21,
+     "useful_sum": 121,
+     "covered": 20,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "emergency": {
+     "n": 9,
+     "first_ok": 5,
+     "top3_ok": 9,
+     "any_useful": 9,
+     "useful_sum": 50,
+     "covered": 8,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "counter241": {
+     "n": 12,
+     "first_ok": 9,
+     "top3_ok": 12,
+     "any_useful": 12,
+     "useful_sum": 71,
+     "covered": 12,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    }
+   },
+   "cases241:new_kw": {
+    "clean": {
+     "n": 21,
+     "first_ok": 12,
+     "top3_ok": 21,
+     "any_useful": 21,
+     "useful_sum": 113,
+     "covered": 19,
+     "wrong_sense_first": 2,
+     "cap_broken": 1
+    },
+    "emergency": {
+     "n": 9,
+     "first_ok": 5,
+     "top3_ok": 9,
+     "any_useful": 9,
+     "useful_sum": 41,
+     "covered": 8,
+     "wrong_sense_first": 0,
+     "cap_broken": 1
+    },
+    "counter241": {
+     "n": 12,
+     "first_ok": 7,
+     "top3_ok": 12,
+     "any_useful": 12,
+     "useful_sum": 72,
+     "covered": 11,
+     "wrong_sense_first": 2,
+     "cap_broken": 0
+    }
+   },
+   "cases241:new_hy": {
+    "clean": {
+     "n": 21,
+     "first_ok": 17,
+     "top3_ok": 21,
+     "any_useful": 21,
+     "useful_sum": 120,
+     "covered": 19,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "emergency": {
+     "n": 9,
+     "first_ok": 5,
+     "top3_ok": 9,
+     "any_useful": 9,
+     "useful_sum": 48,
+     "covered": 8,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    },
+    "counter241": {
+     "n": 12,
+     "first_ok": 12,
+     "top3_ok": 12,
+     "any_useful": 12,
+     "useful_sum": 72,
+     "covered": 11,
+     "wrong_sense_first": 0,
+     "cap_broken": 0
+    }
+   }
+  },
+  "confidence_new": {
+   "cases128:kw": {
+    "n": 52,
+    "first_ok": 33,
+    "auc_first": 0.669,
+    "auc_top3": 0.639,
+    "brier": 0.232,
+    "mean_p": 0.659,
+    "levels": {
+     "everyday/buttons": 2,
+     "everyday/sure": 21,
+     "everyday/unsure": 3,
+     "urgent/buttons": 7,
+     "urgent/sure": 17,
+     "urgent/unsure": 2
+    },
+    "wrong_first_but_sure": [
+     [
+      "how to strat a fire",
+      0.928
+     ],
+     [
+      "no internet or phone, how do i get emergency news",
+      0.774
+     ],
+     [
+      "no internet or phone how do i get emergancy news",
+      0.774
+     ],
+     [
+      "the fire started in the kitchen, how do i put it out",
+      0.65
+     ],
+     [
+      "the fire startd in the kitchen how do i put it out",
+      0.752
+     ],
+     [
+      "how do i put out a fire",
+      0.964
+     ],
+     [
+      "how do i put out a fier",
+      0.964
+     ],
+     [
+      "he has no pulse, what do i do",
+      0.677
+     ],
+     [
+      "how do i treat water intoxication",
+      0.662
+     ],
+     [
+      "how do i treat water intoxicaton",
+      0.662
+     ]
+    ],
+    "right_first_but_not_sure": [
+     [
+      "whats the best way to lite a campfire",
+      0.249,
+      "unsure"
+     ],
+     [
+      "my car battery is dead and i have no jumper cables",
+      0.55,
+      "buttons"
+     ],
+     [
+      "my car batery is dead and i have no jumper cabels",
+      0.55,
+      "buttons"
+     ],
+     [
+      "we ran out of insulin and the pharmacy is closed",
+      0.288,
+      "buttons"
+     ],
+     [
+      "we ran out of insulen and the pharmacy is closed",
+      0.288,
+      "buttons"
+     ]
+    ],
+    "red_not_urgent": [
+     "he has no puls what do i do"
+    ],
+    "green_urgent": [
+     "how to start a fire",
+     "make fire",
+     "fire tinder",
+     "how to strat a fire",
+     "make fier",
+     "treat water with bleach",
+     "treat watter with bleech",
+     "how do i cook food without electricity or gas",
+     "how do i cook food with out electricty or gas",
+     "i ran out of baby formula, what can i feed my baby",
+     "i ran out of baby formla what can i feed my baby",
+     "my car battery is dead and i have no jumper cables",
+     "my car batery is dead and i have no jumper cabels",
+     "no internet or phone, how do i get emergency news",
+     "no internet or phone how do i get emergancy news",
+     "how do i prevent a generator from starting a fire",
+     "how do i prevent a genrator from starting a fire"
+    ]
+   },
+   "cases241:kw": {
+    "n": 21,
+    "first_ok": 12,
+    "auc_first": 0.926,
+    "auc_top3": null,
+    "brier": 0.124,
+    "mean_p": 0.606,
+    "levels": {
+     "everyday/sure": 5,
+     "urgent/buttons": 6,
+     "urgent/sure": 7,
+     "urgent/unsure": 3
+    },
+    "wrong_first_but_sure": [
+     [
+      "the pump is not responding",
+      0.409
+     ],
+     [
+      "trouble breathing",
+      0.685
+     ]
+    ],
+    "right_first_but_not_sure": [
+     [
+      "someone fell in the rainwater pool and is not breathing",
+      0.54,
+      "buttons"
+     ],
+     [
+      "i burnt my fingers lighting the campfire",
+      0.583,
+      "buttons"
+     ]
+    ],
+    "red_not_urgent": [],
+    "green_urgent": [
+     "how do i start a fire",
+     "make a fire escape plan for my family",
+     "what could make a fire spread faster"
+    ]
+   },
+   "cases128:hy": {
+    "n": 52,
+    "first_ok": 43,
+    "auc_first": 0.786,
+    "auc_top3": 0.775,
+    "brier": 0.124,
+    "mean_p": 0.813,
+    "levels": {
+     "everyday/sure": 26,
+     "urgent/sure": 26
+    },
+    "wrong_first_but_sure": [
+     [
+      "fire tinder",
+      0.949
+     ],
+     [
+      "how to strat a fire",
+      0.682
+     ],
+     [
+      "we ran out of insulin and the pharmacy is closed",
+      0.432
+     ],
+     [
+      "we ran out of insulen and the pharmacy is closed",
+      0.432
+     ],
+     [
+      "he has no puls what do i do",
+      0.648
+     ],
+     [
+      "how do i treat water intoxication",
+      0.674
+     ],
+     [
+      "how do i treat water intoxicaton",
+      0.674
+     ],
+     [
+      "how do i make it safe to go back inside",
+      0.82
+     ],
+     [
+      "how do i make it safe to go back insde",
+      0.82
+     ]
+    ],
+    "right_first_but_not_sure": [],
+    "red_not_urgent": [
+     "he has no puls what do i do"
+    ],
+    "green_urgent": [
+     "how to start a fire",
+     "make fire",
+     "fire tinder",
+     "how to strat a fire",
+     "make fier",
+     "treat water with bleach",
+     "treat watter with bleech",
+     "how do i cook food without electricity or gas",
+     "how do i cook food with out electricty or gas",
+     "i ran out of baby formula, what can i feed my baby",
+     "i ran out of baby formla what can i feed my baby",
+     "my car battery is dead and i have no jumper cables",
+     "my car batery is dead and i have no jumper cabels",
+     "no internet or phone, how do i get emergency news",
+     "no internet or phone how do i get emergancy news",
+     "how do i prevent a generator from starting a fire",
+     "how do i prevent a genrator from starting a fire"
+    ]
+   },
+   "cases241:hy": {
+    "n": 21,
+    "first_ok": 17,
+    "auc_first": 0.853,
+    "auc_top3": null,
+    "brier": 0.126,
+    "mean_p": 0.789,
+    "levels": {
+     "everyday/sure": 5,
+     "urgent/buttons": 3,
+     "urgent/sure": 13
+    },
+    "wrong_first_but_sure": [
+     [
+      "treat water in the lungs after drowning",
+      0.7
+     ],
+     [
+      "burned my hand trying to light a fire",
+      0.706
+     ],
+     [
+      "i burned my hand on the camp stove",
+      0.703
+     ]
+    ],
+    "right_first_but_not_sure": [
+     [
+      "my son nearly drowned in the rainwater pool",
+      0.532,
+      "buttons"
+     ],
+     [
+      "my child swallowed lamp oil",
+      0.594,
+      "buttons"
+     ]
+    ],
+    "red_not_urgent": [],
+    "green_urgent": [
+     "how do i start a fire",
+     "make a fire escape plan for my family",
+     "what could make a fire spread faster"
+    ]
+   }
+  },
+  "label_agreement_241": {
+   "n": 12,
+   "same_colour": 12,
+   "same_need0": 10,
+   "differ": [
+    {
+     "q": "someone fell in the rainwater pool and is not breathing",
+     "mine": [
+      "red",
+      [
+       "CPR",
+       "DROWN"
+      ]
+     ],
+     "earlier": [
+      "cases.py",
+      "red",
+      [
+       "DROWN",
+       "CPR"
+      ]
+     ],
+     "same_colour": true,
+     "same_need0": false
+    },
+    {
+     "q": "what could make a fire spread faster",
+     "mine": [
+      "green",
+      [
+       "FIRESPREAD"
+      ]
+     ],
+     "earlier": [
+      "cases.py",
+      "green",
+      [
+       "ESCAPE",
+       "WILDFIRE",
+       "FIREDRILL"
+      ]
+     ],
+     "same_colour": true,
+     "same_need0": false
+    }
+   ]
+  }
+ },
+ "per_question": {
+  "cases128": [
+   {
+    "id": "128.00.0",
+    "q": "what is the best way to light a campfire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Campfires p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Campfires p.None"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "USMC Winter Survival Course Handbook - Historical p.35",
+     "p": 0.349,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Campfires p.1",
+     "p": 0.874,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.00.1",
+    "q": "how to start a fire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.None"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.971,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.971,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.00.2",
+    "q": "make fire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire p.6"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "A Healthy Home p.14"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.124",
+     "p": 0.912,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.992,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.00.3",
+    "q": "fire tinder",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.124"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "USMC Winter Survival Course Handbook - Historical p.48"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.124",
+     "p": 0.867,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "USMC Winter Survival Course Handbook - Historical p.48",
+     "p": 0.949,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.00.t0",
+    "q": "whats the best way to lite a campfire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Campfires p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Campfires p.None"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Campfires p.1",
+     "p": 0.249,
+     "level": "unsure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Campfires p.1",
+     "p": 0.519,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.00.t1",
+    "q": "how to strat a fire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "HP2-Strat-Plan-Release-June 2018 p.3"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "NWCG Incident Response Pocket Guide (2025) p.140"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "HP2-Strat-Plan-Release-June 2018 p.3",
+     "p": 0.928,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "NWCG Incident Response Pocket Guide (2025) p.140",
+     "p": 0.682,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.00.t2",
+    "q": "make fier",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Steelworker Volume 1 - Metals and Welding p.135"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "A Manual of Dyeing and Dyeing Receipts, Comprising a System of Elementary Chemistry as Applied to Dyeing p.19"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.124",
+     "p": 0.912,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.992,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.0",
+    "q": "we have no fuel to boil water, how else can i make it safe",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "The Dyeing of Cotton Fabrics p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Refugees and displaced women p.5"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "How to keep children healthy p.12",
+     "p": 0.371,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Refugees and displaced women p.5",
+     "p": 0.518,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.1",
+    "q": "can i drink the water without boiling it",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Technical note 5. Emergency treatment of drinking-water at the point of use p.2"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.23"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Technical note 5. Emergency treatment of drinking-water at the point of use p.2",
+     "p": 0.859,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.23",
+     "p": 0.982,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.2",
+    "q": "treat water with bleach",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "UFM 3-240-03 O&M: Wastewater Treatment p.40"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Are You Ready - Basic Preparedness p.28"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "p": 0.973,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.23",
+     "p": 0.966,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.3",
+    "q": "treat water",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Protecting Community Water p.37"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Food and Water in an Emergency p.13"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "p": 0.995,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Public Health Engineering in Precarious Situations p.108",
+     "p": 0.941,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.t0",
+    "q": "we have no fuel to boil watter how else can i make it safe",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "How to keep children healthy p.12"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "USAP Continental Field Manual 2027 - Field Gear p.3"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "How to keep children healthy p.12",
+     "p": 0.371,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.2",
+     "p": 0.61,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.t1",
+    "q": "can i drink the water with out boiling it",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Technical note 5. Emergency treatment of drinking-water at the point of use p.2"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Technical note 5. Emergency treatment of drinking-water at the point of use p.2"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Technical note 5. Emergency treatment of drinking-water at the point of use p.2",
+     "p": 0.65,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Technical note 5. Emergency treatment of drinking-water at the point of use p.2",
+     "p": 0.852,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.01.t2",
+    "q": "treat watter with bleech",
+    "colour": "green",
+    "need": [
+     "PURIFY"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "STIs and other infections of the genitals p.14"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Food and Water in an Emergency p.13"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "p": 0.973,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.23",
+     "p": 0.966,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.02.0",
+    "q": "how do i cook food without electricity or gas",
+    "colour": "green",
+    "need": [
+     "COOKNOPOWER"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Energy Saver Guide: Tips on Saving Money and Energy at Home p.30"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Power Outage p.1"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Energy Saver Guide: Tips on Saving Money and Energy at Home p.30",
+     "p": 0.476,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Ways to preserve food p.3",
+     "p": 0.945,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.02.t0",
+    "q": "how do i cook food with out electricty or gas",
+    "colour": "green",
+    "need": [
+     "COOKNOPOWER"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Living well with epilepsy p.27"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "A Healthy Home p.17"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Floods, the Awesome Power p.12",
+     "p": 0.606,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Steps to Build a Successful Family Emergency Plan p.1",
+     "p": 0.724,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.03.0",
+    "q": "i ran out of baby formula, what can i feed my baby",
+    "colour": "green",
+    "need": [
+     "INFANTFEED"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Psychology 2e p.309"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.67"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Psychology 2e p.309",
+     "p": 0.369,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.67",
+     "p": 0.806,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.03.t0",
+    "q": "i ran out of baby formla what can i feed my baby",
+    "colour": "green",
+    "need": [
+     "INFANTFEED"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Psychology 2e p.309"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Newborns Babies and Breastfeeding p.20"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Psychology 2e p.309",
+     "p": 0.369,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Nuclear Detonation Preparedness - Communicating in the Immediate Aftermath (2024) p.67",
+     "p": 0.829,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.04.0",
+    "q": "no soap, how do i wash my hands",
+    "colour": "green",
+    "need": [
+     "HANDWASH"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.136"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Health Problems from Unsafe Water p.15"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.136",
+     "p": 0.905,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Health Problems from Unsafe Water p.15",
+     "p": 0.886,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.04.t0",
+    "q": "no sope how do i wash my hands",
+    "colour": "green",
+    "need": [
+     "HANDWASH"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.136"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.4"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Trail Maintenance and Construction Notebook p.1",
+     "p": 0.216,
+     "level": "unsure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.4",
+     "p": 0.73,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.05.0",
+    "q": "how to keep warm without heating in winter",
+    "colour": "green",
+    "need": [
+     "WARM",
+     "HEATHOME"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2",
+     "p": 0.858,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2",
+     "p": 0.945,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.05.t0",
+    "q": "how to keep warm without heatting in winter",
+    "colour": "green",
+    "need": [
+     "WARM",
+     "HEATHOME"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "FM 31-70 Basic Cold Weather Manual - Historical p.10"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2",
+     "p": 0.858,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Winter Storm p.2",
+     "p": 0.945,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.06.0",
+    "q": "i don't have bandages, how do i stop the bleeding",
+    "colour": "red",
+    "need": [
+     "BLEED",
+     "WOUND"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "How to use Direct Pressure to Control Life-Threatening Bleeding p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.259"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "How to use Direct Pressure to Control Life-Threatening Bleeding p.None",
+     "p": 0.744,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.259",
+     "p": 0.94,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.06.t0",
+    "q": "i dont have bandages how do i stop the bleding",
+    "colour": "red",
+    "need": [
+     "BLEED",
+     "WOUND"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Homemade Casting Materials p.1"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.259"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "How to use Direct Pressure to Control Life-Threatening Bleeding p.None",
+     "p": 0.744,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.259",
+     "p": 0.946,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.07.0",
+    "q": "i have no compass, how do i find north",
+    "colour": "green",
+    "need": [
+     "NORTH"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Putting Conservation to Work - Map and Compass (1965) p.8"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Understanding Maps p.2"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Putting Conservation to Work - Map and Compass (1965) p.8",
+     "p": 0.918,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Understanding Maps p.2",
+     "p": 0.895,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.07.t0",
+    "q": "i have no compas how do i find north",
+    "colour": "green",
+    "need": [
+     "NORTH"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Putting Conservation to Work - Map and Compass (1965) p.6"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "USMC Summer Survival Course Handbook - Historical p.61"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Putting Conservation to Work - Map and Compass (1965) p.6",
+     "p": 0.496,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "USMC Summer Survival Course Handbook - Historical p.61",
+     "p": 0.397,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.08.0",
+    "q": "no refrigerator, how do i keep food safe",
+    "colour": "green",
+    "need": [
+     "FOODSPOIL"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1",
+     "p": 0.827,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1",
+     "p": 0.983,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.08.t0",
+    "q": "no refridgerator how do i keep food safe",
+    "colour": "green",
+    "need": [
+     "FOODSPOIL"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1",
+     "p": 0.827,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Hurricane Food, Water Safety, Power Outages and Floods p.1",
+     "p": 0.93,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.09.0",
+    "q": "my car battery is dead and i have no jumper cables",
+    "colour": "green",
+    "need": [
+     "CARBATT"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Recommended Battery Cables p.1"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724",
+     "p": 0.55,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724",
+     "p": 0.861,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.09.t0",
+    "q": "my car batery is dead and i have no jumper cabels",
+    "colour": "green",
+    "need": [
+     "CARBATT"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724",
+     "p": 0.55,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Honda Civic Sedan Owner Manual 2024 p.724",
+     "p": 0.861,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.10.0",
+    "q": "no internet or phone, how do i get emergency news",
+    "colour": "green",
+    "need": [
+     "ALERT"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Emergency Phone List - for refrigerator p.1"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Power Resilience Guide (pdf) p.10"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Emergency Phone List - for refrigerator p.1",
+     "p": 0.774,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Power Resilience Guide (pdf) p.10",
+     "p": 0.687,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.10.t0",
+    "q": "no internet or phone how do i get emergancy news",
+    "colour": "green",
+    "need": [
+     "ALERT"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Introduction to Sociology 3e p.237"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Advice on Emergency Preparedness - English p.14"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Emergency Phone List - for refrigerator p.1",
+     "p": 0.774,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Power Resilience Guide (pdf) p.10",
+     "p": 0.694,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.11.0",
+    "q": "out of toilet paper, what can i use",
+    "colour": "green",
+    "need": [
+     "TPAPER"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Building Toilets p.32"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Building Toilets p.32"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Building Toilets p.32",
+     "p": 0.759,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Building Toilets p.32",
+     "p": 0.779,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.11.t0",
+    "q": "out of toilet papper what can i use",
+    "colour": "green",
+    "need": [
+     "TPAPER"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Technical note 14. Technical options for excreta disposal in emergencies p.3"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.14"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Building Toilets p.32",
+     "p": 0.759,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Building Toilets p.32",
+     "p": 0.786,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.12.0",
+    "q": "we ran out of insulin and the pharmacy is closed",
+    "colour": "yellow",
+    "need": [
+     "SUGAR"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Diabetes p.21"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Diabetes p.39"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Diabetes p.21",
+     "p": 0.288,
+     "level": "buttons",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Discussion thread for this article p.11",
+     "p": 0.432,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.12.t0",
+    "q": "we ran out of insulen and the pharmacy is closed",
+    "colour": "yellow",
+    "need": [
+     "SUGAR"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Public Health Engineering in Precarious Situations p.47"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Dust p.3"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Diabetes p.21",
+     "p": 0.288,
+     "level": "buttons",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Discussion thread for this article p.11",
+     "p": 0.432,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.13.0",
+    "q": "we have no running water, how do we flush the toilet",
+    "colour": "green",
+    "need": [
+     "FLUSH"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9",
+     "p": 0.972,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9",
+     "p": 0.989,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.13.t0",
+    "q": "we have no runing water how do we flush the toilet",
+    "colour": "green",
+    "need": [
+     "FLUSH"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Technical note 14. Technical options for excreta disposal in emergencies p.3"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9",
+     "p": 0.972,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Water and Sanitation: Keys to Staying Healthy p.9",
+     "p": 0.99,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.14.0",
+    "q": "there is a building fire next door, what do we do",
+    "colour": "red",
+    "need": [
+     "ESCAPE"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Power Resilience Guide (pdf) p.64"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Practice Your Home Fire Escape Plan p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Power Resilience Guide (pdf) p.64",
+     "p": 0.229,
+     "level": "unsure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Practice Your Home Fire Escape Plan p.1",
+     "p": 0.854,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.14.t0",
+    "q": "there is a bulding fire next door what do we do",
+    "colour": "red",
+    "need": [
+     "ESCAPE"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "CERT Basic Training Participant Manual (2019) p.173"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Power Resilience Guide (pdf) p.64",
+     "p": 0.229,
+     "level": "unsure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Practice Your Home Fire Escape Plan p.1",
+     "p": 0.873,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.15.0",
+    "q": "the fire started in the kitchen, how do i put it out",
+    "colour": "red",
+    "need": [
+     "GREASE",
+     "EXTING"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Starting a Garden: Seed Starting Basics p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Shelters, Shacks, and Shanties p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.1",
+     "p": 0.65,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Doing factory work at home p.4",
+     "p": 0.634,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.15.t0",
+    "q": "the fire startd in the kitchen how do i put it out",
+    "colour": "red",
+    "need": [
+     "GREASE",
+     "EXTING"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Doing factory work at home p.4"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.1",
+     "p": 0.752,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Doing factory work at home p.4",
+     "p": 0.687,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.16.0",
+    "q": "how do i put out a fire",
+    "colour": "red",
+    "need": [
+     "EXTING",
+     "ESCAPE"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Fire p.4"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.1",
+     "p": 0.964,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Fire p.4",
+     "p": 0.979,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.16.t0",
+    "q": "how do i put out a fier",
+    "colour": "red",
+    "need": [
+     "EXTING",
+     "ESCAPE"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 1,
+     "title1": "How To Start and Put Out a Campfire p.None"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 1,
+     "title1": "How To Start and Put Out a Campfire p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.1",
+     "p": 0.964,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Fire p.4",
+     "p": 0.979,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.17.0",
+    "q": "he has no pulse, what do i do",
+    "colour": "red",
+    "need": [
+     "CPR"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "First Aid p.7"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "First Aid p.7"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "First Aid p.7",
+     "p": 0.677,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "First Aid p.7",
+     "p": 0.965,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.17.t0",
+    "q": "he has no puls what do i do",
+    "colour": "red",
+    "need": [
+     "CPR"
+    ],
+    "typo": true,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Fluid Power p.247"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "First Aid p.44"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Fluid Power p.247",
+     "p": 0.222,
+     "level": "unsure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "First Aid p.44",
+     "p": 0.648,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.18.0",
+    "q": "how do i prevent a generator from starting a fire",
+    "colour": "green",
+    "need": [
+     "GENERATOR"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Aviation Maintenance Technician Handbook - General p.42"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Honda EU2200i Generator Owners Manual 2024 p.41"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 2,
+     "wrong_sense": 1,
+     "title1": "USMC Winter Survival Course Handbook - Historical p.48",
+     "p": 0.482,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Logistics Cluster — Complete Logistics Operational Guide p.369",
+     "p": 0.718,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.18.t0",
+    "q": "how do i prevent a genrator from starting a fire",
+    "colour": "green",
+    "need": [
+     "GENERATOR"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Prevent Fires p.None"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 1,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 2,
+     "wrong_sense": 1,
+     "title1": "USMC Winter Survival Course Handbook - Historical p.48",
+     "p": 0.482,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Logistics Cluster — Complete Logistics Operational Guide p.369",
+     "p": 0.718,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.19.0",
+    "q": "how do i treat water intoxication",
+    "colour": "yellow",
+    "need": [
+     "WATERINTOX"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 0,
+     "title1": "Microbiology p.1018"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "Food and Water in an Emergency p.13"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 1,
+     "title1": "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "p": 0.662,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 1,
+     "title1": "Public Health Engineering in Precarious Situations p.108",
+     "p": 0.674,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.19.t0",
+    "q": "how do i treat water intoxicaton",
+    "colour": "yellow",
+    "need": [
+     "WATERINTOX"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 1,
+     "title1": "Protecting Community Water p.37"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Food and Water in an Emergency p.13"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 1,
+     "title1": "Onsite Wastewater Treatment Systems Manual 2002 p.242",
+     "p": 0.662,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 0,
+     "wrong_sense": 1,
+     "title1": "Public Health Engineering in Precarious Situations p.108",
+     "p": 0.674,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.20.0",
+    "q": "how do i make it safe to go back inside",
+    "colour": "green",
+    "need": [
+     "REENTRY"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9",
+     "p": 0.503,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9",
+     "p": 0.82,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "128.20.t0",
+    "q": "how do i make it safe to go back insde",
+    "colour": "green",
+    "need": [
+     "REENTRY"
+    ],
+    "typo": true,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9",
+     "p": 0.503,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 0,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Be Prepared, Guide p.9",
+     "p": 0.82,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   }
+  ],
+  "cases241": [
+   {
+    "id": "241.00",
+    "q": "treat water in the lungs after drowning",
+    "colour": "red",
+    "need": [
+     "DROWN",
+     "CPR"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Basic Emergency Care - Approach to the Acutely Ill and Injured p.89"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "BEC Breathing p.None"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Basic Emergency Care - Approach to the Acutely Ill and Injured p.89",
+     "p": 0.622,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "BEC Breathing p.None",
+     "p": 0.7,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.01",
+    "q": "someone fell in the rainwater pool and is not breathing",
+    "colour": "red",
+    "need": [
+     "CPR",
+     "DROWN"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.238"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.219"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.238",
+     "p": 0.54,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.219",
+     "p": 0.78,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.02",
+    "q": "my son nearly drowned in the rainwater pool",
+    "colour": "red",
+    "need": [
+     "DROWN",
+     "CPR"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.66"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.215"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.66",
+     "p": 0.21,
+     "level": "unsure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.215",
+     "p": 0.532,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.03",
+    "q": "i burnt my fingers lighting the campfire",
+    "colour": "yellow",
+    "need": [
+     "BURN"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "First Aid in Armed Conflicts and Other Situations of Violence p.217"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "First Aid in Armed Conflicts and Other Situations of Violence p.217"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "First Aid in Armed Conflicts and Other Situations of Violence p.217",
+     "p": 0.583,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "First Aid in Armed Conflicts and Other Situations of Violence p.217",
+     "p": 0.792,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.04",
+    "q": "burned my hand trying to light a fire",
+    "colour": "yellow",
+    "need": [
+     "BURN"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Trail Maintenance and Construction Notebook p.1"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Trail Maintenance and Construction Notebook p.1",
+     "p": 0.114,
+     "level": "unsure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.706,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.05",
+    "q": "my clothes caught fire while starting the fire",
+    "colour": "red",
+    "need": [
+     "CLOTHES",
+     "BURN"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.17"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Modern Machine-Shop Practice - Volumes I and II p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 1,
+     "wrong_sense": 0,
+     "title1": "Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.17",
+     "p": 0.53,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "USMC Summer Survival Course Handbook - Historical p.34",
+     "p": 0.544,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.06",
+    "q": "i burned my hand on the camp stove",
+    "colour": "yellow",
+    "need": [
+     "BURN"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "A Healthy Home p.12"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "USAP Continental Field Manual 2027 - Field Gear p.3"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "A Healthy Home p.12",
+     "p": 0.621,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "USAP Continental Field Manual 2027 - Field Gear p.3",
+     "p": 0.703,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.07",
+    "q": "my child swallowed lamp oil",
+    "colour": "red",
+    "need": [
+     "HYDROCARB"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "TYM T194NH Tractor Operator Manual p.55"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.352"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "TYM T194NH Tractor Operator Manual p.55",
+     "p": 0.348,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.352",
+     "p": 0.594,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.08",
+    "q": "carbon monoxide from making a fire in the tent",
+    "colour": "red",
+    "need": [
+     "CO"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "FM 21-76 U.S. Army Survival Manual - Historical p.153"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Outdoor Fire Safety p.1",
+     "p": 0.828,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "FM 21-76 U.S. Army Survival Manual - Historical p.153",
+     "p": 0.783,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.09",
+    "q": "not responding to antibiotics",
+    "colour": "yellow",
+    "need": [
+     "INFECT"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Microbiology p.899"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Aids for Learning to Use Medicines and Equipment p.10"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Microbiology p.899",
+     "p": 0.494,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Aids for Learning to Use Medicines and Equipment p.10",
+     "p": 0.812,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.10",
+    "q": "the pump is not responding",
+    "colour": "green",
+    "need": [
+     "PUMP"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Introduction to Computer Science p.439"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Improving Pumping System Performance — Sourcebook for Industry 2nd edition p.94"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Introduction to Computer Science p.439",
+     "p": 0.409,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "Improving Pumping System Performance — Sourcebook for Industry 2nd edition p.94",
+     "p": 0.734,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.11",
+    "q": "choking on smoke",
+    "colour": "red",
+    "need": [
+     "SMOKEINH",
+     "ESCAPE"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 1,
+     "title1": "BEC Quick Cards p.5"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "FM 21-76 U.S. Army Survival Manual - Historical p.20"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 1,
+     "title1": "BEC Quick Cards p.5",
+     "p": 0.575,
+     "level": "buttons",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "FM 21-76 U.S. Army Survival Manual - Historical p.20",
+     "p": 0.766,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.12",
+    "q": "allergic reaction choking",
+    "colour": "red",
+    "need": [
+     "ANAPH"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Basic Emergency Care - Approach to the Acutely Ill and Injured p.26"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.378"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Basic Emergency Care - Approach to the Acutely Ill and Injured p.26",
+     "p": 0.935,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 7,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.378",
+     "p": 0.942,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.13",
+    "q": "how do i light a campfire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Campfires p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Campfires p.None"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.124",
+     "p": 0.912,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "FM 21-76 U.S. Army Survival Manual - Historical p.67",
+     "p": 0.981,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.14",
+    "q": "how do i start a fire",
+    "colour": "green",
+    "need": [
+     "FIREMAKE"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 0,
+     "useful": 1,
+     "wrong_sense": 1,
+     "title1": "Outdoor Fire Safety p.None"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.None"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.971,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "How to start a fire p.1",
+     "p": 0.969,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.15",
+    "q": "boil water",
+    "colour": "green",
+    "need": [
+     "BOIL",
+     "PURIFY"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Preserving Food  Using Boiling Water Canners p.4"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Protecting Community Water p.34"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Preserving Food  Using Boiling Water Canners p.4",
+     "p": 0.896,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Protecting Community Water p.34",
+     "p": 0.983,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.16",
+    "q": "make a fire escape plan for my family",
+    "colour": "green",
+    "need": [
+     "ESCAPE"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Make a Family Emergency Plan p.None"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Make A Plan p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 1,
+     "title1": "Army ATP 3-50.21 Survival (2018) p.124",
+     "p": 0.358,
+     "level": "buttons",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Mult-Family Home escape routes p.1",
+     "p": 0.853,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.17",
+    "q": "what could make a fire spread faster",
+    "colour": "green",
+    "need": [
+     "FIRESPREAD"
+    ],
+    "typo": false,
+    "counter": true,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 2,
+     "wrong_sense": 0,
+     "title1": "Rational reasons why you should be prepared p.None"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Modern Machine-Shop Practice - Volumes I and II p.None"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 4,
+     "wrong_sense": 0,
+     "title1": "Home Builders Guide to Construction in Wildfire Zones FEMA P-754 p.19",
+     "p": 0.226,
+     "level": "unsure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Effects of Nuclear Weapons, by Samuel Glasstone and Philip J. Dolan p.302",
+     "p": 0.628,
+     "level": "sure",
+     "danger": true,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.18",
+    "q": "trouble breathing",
+    "colour": "red",
+    "need": [
+     "ASTHMA",
+     "ANAPH"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.368"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.235"
+    },
+    "new_kw": {
+     "first": 0,
+     "top3": 1,
+     "useful": 3,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.368",
+     "p": 0.685,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.235",
+     "p": 0.912,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.19",
+    "q": "someone fainted",
+    "colour": "yellow",
+    "need": [
+     "FAINT"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.404"
+    },
+    "main_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.404"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.404",
+     "p": 0.938,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "International First Aid Resuscitation and Education Guidelines 2025 p.404",
+     "p": 0.929,
+     "level": "sure",
+     "danger": true,
+     "injury": true,
+     "route": "first",
+     "same_hits": true
+    }
+   },
+   {
+    "id": "241.20",
+    "q": "food went bad",
+    "colour": "green",
+    "need": [
+     "FOODSPOIL"
+    ],
+    "typo": false,
+    "counter": false,
+    "main_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Microbiology p.519"
+    },
+    "main_hy": {
+     "first": 0,
+     "top3": 1,
+     "useful": 5,
+     "wrong_sense": 0,
+     "title1": "Protecting Watersheds p.6"
+    },
+    "new_kw": {
+     "first": 1,
+     "top3": 1,
+     "useful": 8,
+     "wrong_sense": 0,
+     "title1": "Microbiology p.519",
+     "p": 0.922,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    },
+    "new_hy": {
+     "first": 1,
+     "top3": 1,
+     "useful": 6,
+     "wrong_sense": 0,
+     "title1": "Canning p.2",
+     "p": 0.927,
+     "level": "sure",
+     "danger": false,
+     "injury": false,
+     "route": "first",
+     "same_hits": true
+    }
+   }
+  ]
+ }
+}

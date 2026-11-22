@@ -1,0 +1,283 @@
+{
+ "threshold": 0.006628692150115967,
+ "runs": {
+  "f32/cpu": {
+   "cos32_min": 0.9999988079071045,
+   "cos32_mean": 0.9999992251396179,
+   "cos8_min": 0.9639692306518555,
+   "cos8_mean": 0.9819674491882324,
+   "score_maxdiff32": 0.00018924474716186523,
+   "dis32": [],
+   "dis8": [
+    "grandpa face drooping and slurred speach"
+   ],
+   "tokmis": [],
+   "ms_median": 4.594,
+   "ms_max": 6.366,
+   "load": [
+    "LOADED 136 ms n_embd=384"
+   ],
+   "wall": 0.41,
+   "peak_mb": [
+    121,
+    65
+   ],
+   "fired": 24,
+   "fired32": 24,
+   "fired8": 23
+  },
+  "f32/gpu": {
+   "cos32_min": 0.9999972581863403,
+   "cos32_mean": 0.9999984502792358,
+   "cos8_min": 0.9640797972679138,
+   "cos8_mean": 0.9819723963737488,
+   "score_maxdiff32": 0.0003362894058227539,
+   "dis32": [],
+   "dis8": [
+    "grandpa face drooping and slurred speach"
+   ],
+   "tokmis": [],
+   "ms_median": 8.614,
+   "ms_max": 976.676,
+   "load": [
+    "LOADED 237 ms n_embd=384"
+   ],
+   "wall": 4.33,
+   "peak_mb": [
+    157,
+    187
+   ],
+   "fired": 24,
+   "fired32": 24,
+   "fired8": 23
+  },
+  "f16/cpu": {
+   "cos32_min": 0.9999987483024597,
+   "cos32_mean": 0.9999992251396179,
+   "cos8_min": 0.9639884829521179,
+   "cos8_mean": 0.9819689989089966,
+   "score_maxdiff32": 0.00019925832748413086,
+   "dis32": [],
+   "dis8": [
+    "grandpa face drooping and slurred speach"
+   ],
+   "tokmis": [],
+   "ms_median": 5.252,
+   "ms_max": 7.786,
+   "load": [
+    "LOADED 135 ms n_embd=384"
+   ],
+   "wall": 0.37,
+   "peak_mb": [
+    80,
+    65
+   ],
+   "fired": 24,
+   "fired32": 24,
+   "fired8": 23
+  },
+  "f16/gpu": {
+   "cos32_min": 0.9999972581863403,
+   "cos32_mean": 0.9999984502792358,
+   "cos8_min": 0.9640797972679138,
+   "cos8_mean": 0.9819723963737488,
+   "score_maxdiff32": 0.0003362894058227539,
+   "dis32": [],
+   "dis8": [
+    "grandpa face drooping and slurred speach"
+   ],
+   "tokmis": [],
+   "ms_median": 11.993,
+   "ms_max": 10613.675,
+   "load": [
+    "LOADED 206 ms n_embd=384"
+   ],
+   "wall": 23.49,
+   "peak_mb": [
+    124,
+    279
+   ],
+   "fired": 24,
+   "fired32": 24,
+   "fired8": 23
+  },
+  "q8_0/cpu": {
+   "cos32_min": 0.9998055100440979,
+   "cos32_mean": 0.999842643737793,
+   "cos8_min": 0.9640162587165833,
+   "cos8_mean": 0.981803297996521,
+   "score_maxdiff32": 0.0023960471153259277,
+   "dis32": [],
+   "dis8": [
+    "grandpa face drooping and slurred speach"
+   ],
+   "tokmis": [],
+   "ms_median": 4.276,
+   "ms_max": 6.507,
+   "load": [
+    "LOADED 144 ms n_embd=384"
+   ],
+   "wall": 0.35,
+   "peak_mb": [
+    61,
+    65
+   ],
+   "fired": 24,
+   "fired32": 24,
+   "fired8": 23
+  },
+  "q8_0/gpu": {
+   "cos32_min": 0.9998070001602173,
+   "cos32_mean": 0.9999046325683594,
+   "cos8_min": 0.9640864729881287,
+   "cos8_mean": 0.9818399548530579,
+   "score_maxdiff32": 0.001216292381286621,
+   "dis32": [],
+   "dis8": [
+    "grandpa face drooping and slurred speach"
+   ],
+   "tokmis": [],
+   "ms_median": 9.775,
+   "ms_max": 938.775,
+   "load": [
+    "LOADED 222 ms n_embd=384"
+   ],
+   "wall": 3.89,
+   "peak_mb": [
+    92,
+    140
+   ],
+   "fired": 24,
+   "fired32": 24,
+   "fired8": 23
+  }
+ },
+ "int8_vs_fp32": [
+  0.9640507698059082,
+  0.9819957613945007
+ ],
+ "edge_q8_0cpu": [
+  [
+   "",
+   2,
+   2,
+   0.9992470741271973
+  ],
+  [
+   " ",
+   2,
+   2,
+   0.9992470741271973
+  ],
+  [
+   "word word word word word word word word ",
+   320,
+   320,
+   0.9996974468231201
+  ],
+  [
+   "🔥🔥 help 😱 my house is on fire 🔥",
+   11,
+   11,
+   0.9998181462287903
+  ],
+  [
+   "mi hijo no respira",
+   9,
+   9,
+   0.9997901916503906
+  ],
+  [
+   "我的孩子不呼吸了",
+   10,
+   10,
+   0.9993616938591003
+  ],
+  [
+   "он не дышит",
+   11,
+   11,
+   0.9997077584266663
+  ],
+  [
+   "a\\nb\\nc",
+   5,
+   5,
+   0.999529242515564
+  ],
+  [
+   "​",
+   2,
+   2,
+   0.9992470741271973
+  ],
+  [
+   "%s %d {} \"quotes\" \\ backslash",
+   14,
+   14,
+   0.9998234510421753
+  ]
+ ],
+ "edge_f16gpu": [
+  [
+   "",
+   2,
+   2,
+   0.9999992847442627
+  ],
+  [
+   " ",
+   2,
+   2,
+   0.9999992847442627
+  ],
+  [
+   "word word word word word word word word ",
+   320,
+   320,
+   0.9999949336051941
+  ],
+  [
+   "🔥🔥 help 😱 my house is on fire 🔥",
+   11,
+   11,
+   0.9999980330467224
+  ],
+  [
+   "mi hijo no respira",
+   9,
+   9,
+   0.9999977350234985
+  ],
+  [
+   "我的孩子不呼吸了",
+   10,
+   10,
+   0.9999862313270569
+  ],
+  [
+   "он не дышит",
+   11,
+   11,
+   0.999995231628418
+  ],
+  [
+   "a\\nb\\nc",
+   5,
+   5,
+   0.9999978542327881
+  ],
+  [
+   "​",
+   2,
+   2,
+   0.9999992847442627
+  ],
+  [
+   "%s %d {} \"quotes\" \\ backslash",
+   14,
+   14,
+   0.9999971985816956
+  ]
+ ]
+}

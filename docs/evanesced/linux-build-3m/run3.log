@@ -1,0 +1,10 @@
+== 0s apt
+== 30s build
+-rwxr-xr-x 1 root root   948320 Nov 22 04:55 libggml-cpu-x64.so
+-rwxr-xr-x 1 root root  1533888 Nov 22 04:55 libggml-cpu-zen4.so
+-rwxr-xr-x 1 root root 40582848 Nov 22 04:55 libggml-vulkan.so
+-rwxr-xr-x 1 root root    43504 Nov 22 04:55 libggml.so.0
+-rwxr-xr-x 1 root root  4582536 Nov 22 04:55 libllama.so.0
+== 190s run-pr6
+== 198s run-fork
+== 207s done

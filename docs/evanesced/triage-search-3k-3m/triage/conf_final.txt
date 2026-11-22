@@ -1,0 +1,137 @@
+
+==================== keyword: 362 questions, first right 60%, a useful page in top 8 84%
+signals: ['cover1', 'title1', 'kw_top_per_idf', 'idf_mean', 'strict', 'emerg1'], L2 C=0.3
+grouped-CV AUC, first right: 0.775 (sd over repeats 0.008); on averaged OOF 0.778
+  red only: 0.754 (n=218); clean: 0.770; typos: 0.795
+same model against "a useful page in top 8": AUC 0.720; a model fitted for it: 0.692
+Brier 0.187 (always the base rate: 0.241)
+
+calibration (out-of-fold): band | n | mean predicted | actual first right
+  0.00-0.25 | 25 | 0.21 | 0.2
+  0.25-0.50 | 107 | 0.37 | 0.36
+  0.50-0.75 | 113 | 0.62 | 0.65
+  0.75-1.00 | 117 | 0.87 | 0.85
+deciles:
+  0.11-0.27 | 37 | 0.22 | 0.19
+  0.27-0.35 | 35 | 0.32 | 0.54
+  0.35-0.43 | 36 | 0.39 | 0.25
+  0.43-0.52 | 37 | 0.48 | 0.27
+  0.52-0.60 | 35 | 0.55 | 0.66
+  0.60-0.68 | 37 | 0.64 | 0.76
+  0.68-0.76 | 36 | 0.73 | 0.69
+  0.76-0.83 | 36 | 0.8 | 0.78
+  0.83-0.91 | 36 | 0.88 | 0.94
+  0.91-1.00 | 37 | 0.96 | 0.89
+
+threshold table (out-of-fold probabilities; red = red topics, counterexamples out; danger = assistant.danger_signs)
+| cut | below | first right but below (false alarm) | first wrong but at/above (slip) | useful>0 but below | red below | red right but below | red wrong at/above | danger-sign right but below |
+|---|---|---|---|---|---|---|---|---|
+| 0.10 | 0 (0%) | 0 of 216 | 146 of 146 | 0 of 303 | 0 of 218 | 0 of 106 | 112 of 112 | 0 of 46 |
+| 0.15 | 3 (1%) | 0 of 216 | 143 of 146 | 1 of 303 | 3 of 218 | 0 of 106 | 109 of 112 | 0 of 46 |
+| 0.20 | 9 (2%) | 1 of 216 | 138 of 146 | 6 of 303 | 8 of 218 | 0 of 106 | 104 of 112 | 1 of 46 |
+| 0.25 | 25 (7%) | 5 of 216 | 126 of 146 | 15 of 303 | 21 of 218 | 3 of 106 | 94 of 112 | 1 of 46 |
+| 0.30 | 45 (12%) | 11 of 216 | 112 of 146 | 31 of 303 | 36 of 218 | 6 of 106 | 82 of 112 | 2 of 46 |
+| 0.35 | 71 (20%) | 26 of 216 | 101 of 146 | 52 of 303 | 55 of 218 | 17 of 106 | 74 of 112 | 6 of 46 |
+| 0.40 | 96 (27%) | 29 of 216 | 79 of 146 | 69 of 303 | 75 of 218 | 19 of 106 | 56 of 112 | 7 of 46 |
+| 0.50 | 132 (36%) | 43 of 216 | 57 of 146 | 95 of 303 | 98 of 218 | 28 of 106 | 42 of 112 | 11 of 46 |
+| 0.60 | 182 (50%) | 70 of 216 | 34 of 146 | 135 of 303 | 129 of 218 | 41 of 106 | 24 of 112 | 17 of 46 |
+| 0.70 | 225 (62%) | 103 of 216 | 24 of 146 | 173 of 303 | 146 of 218 | 54 of 106 | 20 of 112 | 27 of 46 |
+| 0.75 | 245 (68%) | 116 of 216 | 17 of 146 | 191 of 303 | 155 of 218 | 59 of 106 | 16 of 112 | 27 of 46 |
+| 0.80 | 272 (75%) | 137 of 216 | 11 of 146 | 215 of 303 | 169 of 218 | 67 of 106 | 10 of 112 | 30 of 46 |
+| 0.85 | 298 (82%) | 157 of 216 | 5 of 146 | 240 of 303 | 185 of 218 | 78 of 106 | 5 of 112 | 35 of 46 |
+
+standardised coefficients (fit on all; size = weight per standard deviation):
+  cover1           +0.713
+  title1           +0.513
+  kw_top_per_idf   +0.494
+  emerg1           +0.398
+  idf_mean         +0.270
+  strict           +0.085
+raw coefficients: {"bias": -3.6222, "cover1": 2.6573, "title1": 2.3746, "kw_top_per_idf": 0.4326, "idf_mean": 0.2656, "strict": 0.0508, "emerg1": 0.8878}
+in-sample AUC (overstates): 0.801
+
+conversations (n=52, last message first right 54%), in-sample coefficients:
+  own search         AUC 0.430; below .25: 6 (right 4); below .75: 42 (right 23)
+  joined search      AUC 0.568; below .25: 10 (right 4); below .75: 44 (right 23)
+  better of the two  AUC 0.443; below .25: 3 (right 2); below .75: 38 (right 22)
+
+==================== hybrid: 362 questions, first right 76%, a useful page in top 8 96%
+signals: ['cos1', 'cos_drop', 'overlap', 'all1', 'title1', 'docs', 'strict', 'emerg1'], L2 C=0.3
+grouped-CV AUC, first right: 0.737 (sd over repeats 0.016); on averaged OOF 0.743
+  red only: 0.697 (n=218); clean: 0.764; typos: 0.702
+same model against "a useful page in top 8": AUC 0.815; a model fitted for it: 0.819
+Brier 0.159 (always the base rate: 0.181)
+
+calibration (out-of-fold): band | n | mean predicted | actual first right
+  0.00-0.25 | 1 | 0.23 | 1.0
+  0.25-0.50 | 26 | 0.41 | 0.46
+  0.50-0.75 | 139 | 0.65 | 0.62
+  0.75-1.00 | 196 | 0.89 | 0.9
+deciles:
+  0.23-0.54 | 37 | 0.44 | 0.51
+  0.54-0.62 | 36 | 0.57 | 0.58
+  0.62-0.69 | 36 | 0.65 | 0.67
+  0.69-0.73 | 36 | 0.71 | 0.47
+  0.73-0.77 | 36 | 0.75 | 0.83
+  0.77-0.82 | 36 | 0.8 | 0.94
+  0.82-0.87 | 36 | 0.85 | 0.86
+  0.87-0.93 | 36 | 0.9 | 0.86
+  0.93-0.98 | 36 | 0.96 | 0.94
+  0.98-1.00 | 37 | 0.99 | 0.95
+
+threshold table (out-of-fold probabilities; red = red topics, counterexamples out; danger = assistant.danger_signs)
+| cut | below | first right but below (false alarm) | first wrong but at/above (slip) | useful>0 but below | red below | red right but below | red wrong at/above | danger-sign right but below |
+|---|---|---|---|---|---|---|---|---|
+| 0.10 | 0 (0%) | 0 of 276 | 86 of 86 | 0 of 349 | 0 of 218 | 0 of 156 | 62 of 62 | 0 of 64 |
+| 0.15 | 0 (0%) | 0 of 276 | 86 of 86 | 0 of 349 | 0 of 218 | 0 of 156 | 62 of 62 | 0 of 64 |
+| 0.20 | 0 (0%) | 0 of 276 | 86 of 86 | 0 of 349 | 0 of 218 | 0 of 156 | 62 of 62 | 0 of 64 |
+| 0.25 | 1 (0%) | 1 of 276 | 86 of 86 | 1 of 349 | 1 of 218 | 1 of 156 | 62 of 62 | 0 of 64 |
+| 0.30 | 3 (1%) | 2 of 276 | 85 of 86 | 3 of 349 | 3 of 218 | 2 of 156 | 61 of 62 | 0 of 64 |
+| 0.35 | 6 (2%) | 2 of 276 | 82 of 86 | 5 of 349 | 6 of 218 | 2 of 156 | 58 of 62 | 0 of 64 |
+| 0.40 | 11 (3%) | 5 of 276 | 80 of 86 | 10 of 349 | 10 of 218 | 4 of 156 | 56 of 62 | 2 of 64 |
+| 0.50 | 27 (7%) | 13 of 276 | 72 of 86 | 24 of 349 | 24 of 218 | 11 of 156 | 49 of 62 | 3 of 64 |
+| 0.60 | 66 (18%) | 35 of 276 | 55 of 86 | 58 of 349 | 53 of 218 | 27 of 156 | 36 of 62 | 8 of 64 |
+| 0.70 | 119 (33%) | 69 of 276 | 36 of 86 | 110 of 349 | 89 of 218 | 52 of 156 | 25 of 62 | 18 of 64 |
+| 0.75 | 166 (46%) | 99 of 276 | 19 of 86 | 154 of 349 | 122 of 218 | 74 of 156 | 14 of 62 | 25 of 64 |
+| 0.80 | 198 (55%) | 127 of 276 | 15 of 86 | 185 of 349 | 142 of 218 | 91 of 156 | 11 of 62 | 33 of 64 |
+| 0.85 | 240 (66%) | 166 of 276 | 12 of 86 | 227 of 349 | 159 of 218 | 106 of 156 | 9 of 62 | 44 of 64 |
+
+standardised coefficients (fit on all; size = weight per standard deviation):
+  all1             +0.580
+  cos1             +0.466
+  title1           +0.379
+  docs             -0.365
+  strict           +0.334
+  emerg1           +0.264
+  cos_drop         -0.220
+  overlap          +0.199
+raw coefficients: {"bias": -2.7284, "cos1": 8.565, "cos_drop": -12.2606, "overlap": 1.1072, "all1": 1.4529, "title1": 2.0129, "docs": -3.2324, "strict": 0.2002, "emerg1": 0.5764}
+in-sample AUC (overstates): 0.791
+
+conversations (n=52, last message first right 63%), in-sample coefficients:
+  own search         AUC 0.579; below .25: 0 (right 0); below .75: 27 (right 15)
+  joined search      AUC 0.707; below .25: 0 (right 0); below .75: 22 (right 10)
+  better of the two  AUC 0.648; below .25: 0 (right 0); below .75: 16 (right 6)
+
+MODELS = {
+ "keyword": {
+  "bias": -3.6222,
+  "cover1": 2.6573,
+  "title1": 2.3746,
+  "kw_top_per_idf": 0.4326,
+  "idf_mean": 0.2656,
+  "strict": 0.0508,
+  "emerg1": 0.8878
+ },
+ "hybrid": {
+  "bias": -2.7284,
+  "cos1": 8.565,
+  "cos_drop": -12.2606,
+  "overlap": 1.1072,
+  "all1": 1.4529,
+  "title1": 2.0129,
+  "docs": -3.2324,
+  "strict": 0.2002,
+  "emerg1": 0.5764
+ }
+}
