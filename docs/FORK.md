@@ -932,6 +932,9 @@ a test server and checks the amount (3j); it needs the model.
 
 ## Open
 
+- **Upstream proposal (3k–3m):** posted 2026-11-22 as issue Immortal-Protocols/lastbook#401 and PRs #402–#409 (PR 1 is the test
+  set, scorer and `docs/TRIAGE-SEARCH.md`, branch `triage/1-search-eval`; PRs 2–8 are drafts, branches `triage/*` on the fork). The scripts,
+  notes and results behind 3k–3m are in `docs/evanesced/triage-search-3k-3m/`; the Linux build checks in `docs/evanesced/linux-build-3m/`.
 - **Encyclopedias (3n):** shown apart from the library, by the keyword picker. The vector index stays a dev toggle and is
   not pursued (690 MB of memory for 3 files, growing with every pack, a GPU build per file). The encyclopedia group
   under the answer has been seen in the window once ("how do i purify water"); real answers still need reading by a person.
