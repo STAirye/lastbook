@@ -1,0 +1,1093 @@
+{
+ "_about": "Held-out short-word searches for the guide-search rule (#333). Drafted 2026-11-24 by Claude from the guide vocabulary only, BEFORE any arm was run on them, and frozen by SHA-256 in REPORT.md. Neither vb12341's guide PRs nor the prototype rule were tuned on them. NEEDS INDEPENDENT REVIEW: the same author wrote the rule and these answers, so a second reader should check each 'right' list blind to results. 'trap' = a short word in the search starts an unrelated longer guide word; 'keep' = a short or partly typed word whose longer guide word is the right one (the prefix matching must keep working). Answers use the same notation as reference.json. Six drafted searches already in the existing tests or the #333 probe list were dropped before any run (listed in _dropped_before_any_run).",
+ "trap": [
+  {
+   "q": "pet ate chocolate",
+   "short": "pet",
+   "right": [
+    "hurt/poison"
+   ],
+   "why": "a pet swallowed something toxic"
+  },
+  {
+   "q": "pets in a hurricane",
+   "short": "pet",
+   "right": [
+    "disaster/hurricane",
+    "food/special"
+   ],
+   "why": "evacuating with pets"
+  },
+  {
+   "q": "pan fire",
+   "short": "pan",
+   "right": [
+    "disaster/home-fire",
+    "hurt/burn"
+   ],
+   "why": "a kitchen fire"
+  },
+  {
+   "q": "old man fell",
+   "short": "old",
+   "right": [
+    "hurt/bone",
+    "hurt/head"
+   ],
+   "why": "a fall injury"
+  },
+  {
+   "q": "man down",
+   "short": "man",
+   "right": [
+    "hurt/check",
+    "hurt/breathing"
+   ],
+   "why": "a collapsed person"
+  },
+  {
+   "q": "car crash",
+   "short": "car",
+   "right": [
+    "hurt/head",
+    "hurt/check"
+   ],
+   "why": "the head-injury hint names car crash"
+  },
+  {
+   "q": "car wont start",
+   "short": "car",
+   "right": [
+    "repair/engine",
+    "power/batteries-solar"
+   ],
+   "why": "engine will not start, or a flat car battery"
+  },
+  {
+   "q": "ear ache",
+   "short": "ear",
+   "right": [
+    "health/start",
+    "NONE"
+   ],
+   "why": "no ear choice"
+  },
+  {
+   "q": "ear bleeding",
+   "short": "ear",
+   "right": [
+    "hurt/head",
+    "hurt/bleeding"
+   ],
+   "why": "blood from the ear after a blow, or bleeding"
+  },
+  {
+   "q": "rat in kitchen",
+   "short": "rat",
+   "right": [
+    "sanitation/garbage"
+   ],
+   "why": "the garbage choice names rats"
+  },
+  {
+   "q": "rats in the attic",
+   "short": "rat",
+   "right": [
+    "sanitation/garbage"
+   ],
+   "why": "the garbage choice names rats"
+  },
+  {
+   "q": "bats in the attic",
+   "short": "bat",
+   "right": [
+    "hurt/animal-bite",
+    "NONE"
+   ],
+   "why": "rabies exposure; no pest choice for bats"
+  },
+  {
+   "q": "war zone",
+   "short": "war",
+   "right": [
+    "disaster/explosion",
+    "disaster/nuclear-explosion"
+   ],
+   "why": "bombing or war"
+  },
+  {
+   "q": "civil war",
+   "short": "war",
+   "right": [
+    "disaster/explosion",
+    "disaster/nuclear-explosion",
+    "NONE"
+   ],
+   "why": "bombing or war"
+  },
+  {
+   "q": "lice",
+   "short": "lice",
+   "right": [
+    "sanitation/spread",
+    "health/start",
+    "NONE"
+   ],
+   "why": "no lice choice"
+  },
+  {
+   "q": "pain in chest",
+   "short": "pain",
+   "right": [
+    "hurt/sudden"
+   ],
+   "why": "chest pain choice"
+  },
+  {
+   "q": "tooth pain",
+   "short": "pain",
+   "right": [
+    "health/teeth"
+   ],
+   "why": "toothache"
+  },
+  {
+   "q": "pain killer",
+   "short": "pain",
+   "right": [
+    "health/medicine"
+   ],
+   "why": "a medicine question"
+  },
+  {
+   "q": "fall down stairs",
+   "short": "fall",
+   "right": [
+    "hurt/bone",
+    "hurt/head"
+   ],
+   "why": "a fall injury"
+  },
+  {
+   "q": "slip and fall",
+   "short": "fall",
+   "right": [
+    "hurt/bone",
+    "hurt/head"
+   ],
+   "why": "a fall injury"
+  },
+  {
+   "q": "fall season planting",
+   "short": "fall",
+   "right": [
+    "grow/when-to-plant"
+   ],
+   "why": "autumn planting"
+  },
+  {
+   "q": "baby fell off bed",
+   "short": "bed",
+   "right": [
+    "hurt/head",
+    "hurt/bone"
+   ],
+   "why": "a fall injury"
+  },
+  {
+   "q": "out of water",
+   "short": "out",
+   "right": [
+    "water/outside",
+    "water/inhome",
+    "water/unsafe"
+   ],
+   "why": "finding water"
+  },
+  {
+   "q": "out of food",
+   "short": "out",
+   "right": [
+    "food/lowfood"
+   ],
+   "why": "food running low"
+  },
+  {
+   "q": "out of medicine",
+   "short": "out",
+   "right": [
+    "health/chronic",
+    "health/medicine"
+   ],
+   "why": "running low on prescriptions"
+  },
+  {
+   "q": "high blood sugar",
+   "short": "high",
+   "right": [
+    "health/chronic",
+    "hurt/sudden"
+   ],
+   "why": "diabetes"
+  },
+  {
+   "q": "high winds",
+   "short": "high",
+   "right": [
+    "disaster/hurricane",
+    "disaster/tornado"
+   ],
+   "why": "a wind storm"
+  },
+  {
+   "q": "high water",
+   "short": "high",
+   "right": [
+    "disaster/flood"
+   ],
+   "why": "flooding"
+  },
+  {
+   "q": "loo roll",
+   "short": "loo",
+   "right": [
+    "sanitation/noflush",
+    "sanitation/latrine",
+    "NONE"
+   ],
+   "why": "toilet supplies"
+  },
+  {
+   "q": "the loo is blocked",
+   "short": "loo",
+   "right": [
+    "sanitation/noflush",
+    "repair/plumbing"
+   ],
+   "why": "a blocked toilet"
+  },
+  {
+   "q": "gas station",
+   "short": "gas",
+   "right": [
+    "NONE",
+    "power/generator"
+   ],
+   "why": "fuel; no guide covers petrol stations"
+  },
+  {
+   "q": "gas in stomach",
+   "short": "gas",
+   "right": [
+    "hurt/diarrhea",
+    "health/start",
+    "NONE"
+   ],
+   "why": "a stomach complaint"
+  },
+  {
+   "q": "sun burn",
+   "short": "sun",
+   "right": [
+    "hurt/burn"
+   ],
+   "why": "a burn"
+  },
+  {
+   "q": "too hot",
+   "short": "too",
+   "right": [
+    "shelter/heat",
+    "hurt/heatcold"
+   ],
+   "why": "heat"
+  },
+  {
+   "q": "too cold",
+   "short": "too",
+   "right": [
+    "shelter/cold",
+    "hurt/heatcold"
+   ],
+   "why": "cold"
+  },
+  {
+   "q": "pot plants",
+   "short": "pot",
+   "right": [
+    "grow/small-space"
+   ],
+   "why": "container growing"
+  },
+  {
+   "q": "pot of water",
+   "short": "pot",
+   "right": [
+    "water/boil"
+   ],
+   "why": "boiling water"
+  },
+  {
+   "q": "sea level",
+   "short": "sea",
+   "right": [
+    "land/coast",
+    "disaster/tsunami",
+    "disaster/flood"
+   ],
+   "why": "coastal risk"
+  },
+  {
+   "q": "sea sick",
+   "short": "sea",
+   "right": [
+    "NONE",
+    "hurt/diarrhea"
+   ],
+   "why": "motion sickness, vomiting"
+  },
+  {
+   "q": "wild animals",
+   "short": "wild",
+   "right": [
+    "hurt/animal-bite",
+    "NONE"
+   ],
+   "why": "animal danger, not wildfire"
+  },
+  {
+   "q": "work injury",
+   "short": "work",
+   "right": [
+    "hurt/check",
+    "hurt/"
+   ],
+   "why": "first aid"
+  },
+  {
+   "q": "wood stove",
+   "short": "wood",
+   "right": [
+    "shelter/co",
+    "food/cook"
+   ],
+   "why": "indoor heating or cooking"
+  },
+  {
+   "q": "ant bite",
+   "short": "ant",
+   "right": [
+    "hurt/sting"
+   ],
+   "why": "insect bite"
+  },
+  {
+   "q": "ants in the kitchen",
+   "short": "ant",
+   "right": [
+    "sanitation/garbage",
+    "NONE"
+   ],
+   "why": "pests near food waste"
+  },
+  {
+   "q": "dent in car",
+   "short": "dent",
+   "right": [
+    "NONE"
+   ],
+   "why": "no guide covers bodywork"
+  },
+  {
+   "q": "sew a wound",
+   "short": "sew",
+   "right": [
+    "hurt/closing",
+    "hurt/bleeding"
+   ],
+   "why": "closing a wound"
+  },
+  {
+   "q": "sewing kit",
+   "short": "sew",
+   "right": [
+    "NONE",
+    "hurt/closing"
+   ],
+   "why": "no sewing guide; stitches at most"
+  },
+  {
+   "q": "trap a rabbit",
+   "short": "trap",
+   "right": [
+    "NONE"
+   ],
+   "why": "no hunting guide"
+  },
+  {
+   "q": "run from fire",
+   "short": "run",
+   "right": [
+    "disaster/home-fire",
+    "disaster/wildfire"
+   ],
+   "why": "escaping a fire"
+  },
+  {
+   "q": "north star",
+   "short": "star",
+   "right": [
+    "comms/navigate"
+   ],
+   "why": "navigation"
+  },
+  {
+   "q": "sore throat",
+   "short": "sore",
+   "right": [
+    "health/start"
+   ],
+   "why": "a sick person"
+  },
+  {
+   "q": "cold sore",
+   "short": "sore",
+   "right": [
+    "health/start",
+    "NONE"
+   ],
+   "why": "a minor illness"
+  },
+  {
+   "q": "how long to heal a cut",
+   "short": "heal",
+   "right": [
+    "hurt/closing",
+    "hurt/bleeding"
+   ],
+   "why": "wound care"
+  },
+  {
+   "q": "hung over",
+   "short": "hung",
+   "right": [
+    "NONE",
+    "hurt/diarrhea"
+   ],
+   "why": "no hangover guide"
+  },
+  {
+   "q": "live wire",
+   "short": "live",
+   "right": [
+    "shelter/damaged",
+    "hurt/burn"
+   ],
+   "why": "downed lines or electrocution"
+  },
+  {
+   "q": "wash clothes",
+   "short": "wash",
+   "right": [
+    "sanitation/hands",
+    "NONE"
+   ],
+   "why": "hygiene with little water"
+  },
+  {
+   "q": "cave shelter",
+   "short": "cave",
+   "right": [
+    "shelter/outdoors"
+   ],
+   "why": "outdoor shelter"
+  },
+  {
+   "q": "dam burst",
+   "short": "dam",
+   "right": [
+    "disaster/flood"
+   ],
+   "why": "flooding"
+  },
+  {
+   "q": "bear attack",
+   "short": "bear",
+   "right": [
+    "hurt/animal-bite"
+   ],
+   "why": "animal attack"
+  },
+  {
+   "q": "power pole down",
+   "short": "pole",
+   "right": [
+    "shelter/damaged",
+    "power/first-hours"
+   ],
+   "why": "downed lines"
+  },
+  {
+   "q": "back injury",
+   "short": "back",
+   "right": [
+    "hurt/head"
+   ],
+   "why": "the spine choice"
+  },
+  {
+   "q": "lower back pain",
+   "short": "back",
+   "right": [
+    "health/start",
+    "hurt/head"
+   ],
+   "why": "pain, or a back injury"
+  },
+  {
+   "q": "flu symptoms",
+   "short": "flu",
+   "right": [
+    "health/start"
+   ],
+   "why": "the hint names flu"
+  },
+  {
+   "q": "the flu",
+   "short": "flu",
+   "right": [
+    "health/start"
+   ],
+   "why": "the hint names flu"
+  },
+  {
+   "q": "flu shot",
+   "short": "flu",
+   "right": [
+    "health/medicine",
+    "health/start"
+   ],
+   "why": "a medicine question"
+  },
+  {
+   "q": "mold in house",
+   "short": "mold",
+   "right": [
+    "sanitation/floodmess",
+    "NONE"
+   ],
+   "why": "damp after water damage"
+  },
+  {
+   "q": "roof leak",
+   "short": "leak",
+   "right": [
+    "shelter/damaged"
+   ],
+   "why": "a damaged home"
+  }
+ ],
+ "keep": [
+  {
+   "q": "evacuat",
+   "short": "evacuat",
+   "right": [
+    "disaster/wildfire",
+    "disaster/hurricane",
+    "disaster/no-car",
+    "disaster/"
+   ],
+   "why": "half typed: evacuate"
+  },
+  {
+   "q": "earthq",
+   "short": "earthq",
+   "right": [
+    "disaster/earthquake-now"
+   ],
+   "why": "half typed: earthquake"
+  },
+  {
+   "q": "hypoth",
+   "short": "hypoth",
+   "right": [
+    "hurt/heatcold",
+    "shelter/cold"
+   ],
+   "why": "half typed: hypothermia"
+  },
+  {
+   "q": "tornad",
+   "short": "tornad",
+   "right": [
+    "disaster/tornado"
+   ],
+   "why": "half typed: tornado"
+  },
+  {
+   "q": "bleed",
+   "short": "bleed",
+   "right": [
+    "hurt/bleeding"
+   ],
+   "why": "bleed / bleeding"
+  },
+  {
+   "q": "drown",
+   "short": "drown",
+   "right": [
+    "hurt/breathing"
+   ],
+   "why": "drown / drowning"
+  },
+  {
+   "q": "vomit",
+   "short": "vomit",
+   "right": [
+    "hurt/diarrhea",
+    "sanitation/diarrhea"
+   ],
+   "why": "vomit / vomiting"
+  },
+  {
+   "q": "dehydrat",
+   "short": "dehydrat",
+   "right": [
+    "hurt/diarrhea"
+   ],
+   "why": "half typed: dehydration"
+  },
+  {
+   "q": "frostbit",
+   "short": "frostbit",
+   "right": [
+    "hurt/heatcold"
+   ],
+   "why": "half typed: frostbite"
+  },
+  {
+   "q": "electrocut",
+   "short": "electrocut",
+   "right": [
+    "hurt/burn"
+   ],
+   "why": "half typed: electrocuted"
+  },
+  {
+   "q": "concuss",
+   "short": "concuss",
+   "right": [
+    "hurt/head"
+   ],
+   "why": "half typed: concussion"
+  },
+  {
+   "q": "pregnan",
+   "short": "pregnan",
+   "right": [
+    "health/pregnant"
+   ],
+   "why": "half typed: pregnant"
+  },
+  {
+   "q": "diabet",
+   "short": "diabet",
+   "right": [
+    "health/chronic",
+    "hurt/sudden"
+   ],
+   "why": "half typed: diabetes"
+  },
+  {
+   "q": "generat",
+   "short": "generat",
+   "right": [
+    "power/generator"
+   ],
+   "why": "half typed: generator"
+  },
+  {
+   "q": "refrig",
+   "short": "refrig",
+   "right": [
+    "food/outage"
+   ],
+   "why": "half typed: refrigerator"
+  },
+  {
+   "q": "sanit",
+   "short": "sanit",
+   "right": [
+    "sanitation/hands",
+    "sanitation/"
+   ],
+   "why": "half typed: sanitizer / sanitation"
+  },
+  {
+   "q": "flooding basement",
+   "short": "flood",
+   "right": [
+    "sanitation/floodmess",
+    "disaster/flood"
+   ],
+   "why": "flood in the house"
+  },
+  {
+   "q": "snake bit me",
+   "short": "bit",
+   "right": [
+    "hurt/snakebite"
+   ],
+   "why": "snakebite"
+  },
+  {
+   "q": "dog bit my son",
+   "short": "bit",
+   "right": [
+    "hurt/animal-bite"
+   ],
+   "why": "dog bite"
+  },
+  {
+   "q": "cooked food left out",
+   "short": "cook",
+   "right": [
+    "food/throwout",
+    "food/outage"
+   ],
+   "why": "is it still safe"
+  },
+  {
+   "q": "storms coming",
+   "short": "storm",
+   "right": [
+    "disaster/hurricane",
+    "disaster/thunderstorm",
+    "disaster/flood"
+   ],
+   "why": "an approaching storm"
+  },
+  {
+   "q": "charging phone",
+   "short": "charg",
+   "right": [
+    "power/batteries-solar"
+   ],
+   "why": "phone charging"
+  },
+  {
+   "q": "solar charge",
+   "short": "charg",
+   "right": [
+    "power/batteries-solar"
+   ],
+   "why": "solar charging"
+  },
+  {
+   "q": "fridge broke",
+   "short": "fridge",
+   "right": [
+    "food/outage"
+   ],
+   "why": "food in a dead fridge"
+  },
+  {
+   "q": "sprained ankle",
+   "short": "sprain",
+   "right": [
+    "hurt/bone"
+   ],
+   "why": "sprain"
+  },
+  {
+   "q": "twisted knee",
+   "short": "twist",
+   "right": [
+    "hurt/bone"
+   ],
+   "why": "twisted joint"
+  },
+  {
+   "q": "bruised",
+   "short": "bruise",
+   "right": [
+    "hurt/bone"
+   ],
+   "why": "bruise"
+  },
+  {
+   "q": "burns on hands",
+   "short": "burn",
+   "right": [
+    "hurt/burn"
+   ],
+   "why": "burns"
+  },
+  {
+   "q": "choking baby",
+   "short": "chok",
+   "right": [
+    "hurt/breathing"
+   ],
+   "why": "choking"
+  },
+  {
+   "q": "toothach",
+   "short": "toothach",
+   "right": [
+    "health/teeth"
+   ],
+   "why": "half typed: toothache"
+  },
+  {
+   "q": "allerg",
+   "short": "allerg",
+   "right": [
+    "hurt/allergy"
+   ],
+   "why": "half typed: allergy"
+  },
+  {
+   "q": "antibiot",
+   "short": "antibiot",
+   "right": [
+    "health/medicine"
+   ],
+   "why": "half typed: antibiotic"
+  },
+  {
+   "q": "seizing",
+   "short": "seiz",
+   "right": [
+    "hurt/sudden"
+   ],
+   "why": "a seizure"
+  },
+  {
+   "q": "heat wav",
+   "short": "wav",
+   "right": [
+    "shelter/heat"
+   ],
+   "why": "half typed: heat wave"
+  },
+  {
+   "q": "power out",
+   "short": "out",
+   "right": [
+    "power/first-hours",
+    "power/long-outage"
+   ],
+   "why": "the power is out"
+  },
+  {
+   "q": "blackou",
+   "short": "blackou",
+   "right": [
+    "power/first-hours",
+    "power/",
+    "food/outage"
+   ],
+   "why": "half typed: blackout"
+  },
+  {
+   "q": "no electric",
+   "short": "electric",
+   "right": [
+    "power/first-hours",
+    "power/long-outage"
+   ],
+   "why": "no electricity"
+  },
+  {
+   "q": "water purification",
+   "short": "purif",
+   "right": [
+    "water/filter"
+   ],
+   "why": "the hint names purification tablets"
+  },
+  {
+   "q": "boiling water burn",
+   "short": "boil",
+   "right": [
+    "hurt/burn"
+   ],
+   "why": "a scald"
+  },
+  {
+   "q": "cooking with gas",
+   "short": "cook",
+   "right": [
+    "food/cook"
+   ],
+   "why": "cooking without power"
+  },
+  {
+   "q": "carbon monox",
+   "short": "monox",
+   "right": [
+    "shelter/co"
+   ],
+   "why": "half typed: carbon monoxide"
+  },
+  {
+   "q": "wildfir",
+   "short": "wildfir",
+   "right": [
+    "disaster/wildfire"
+   ],
+   "why": "half typed: wildfire"
+  },
+  {
+   "q": "mosquito bites",
+   "short": "bite",
+   "right": [
+    "hurt/sting"
+   ],
+   "why": "insect bites"
+  },
+  {
+   "q": "lightning strike",
+   "short": "lightning",
+   "right": [
+    "disaster/thunderstorm"
+   ],
+   "why": "lightning"
+  },
+  {
+   "q": "tsunam",
+   "short": "tsunam",
+   "right": [
+    "disaster/tsunami"
+   ],
+   "why": "half typed: tsunami"
+  },
+  {
+   "q": "avalan",
+   "short": "avalan",
+   "right": [
+    "disaster/avalanche"
+   ],
+   "why": "half typed: avalanche"
+  },
+  {
+   "q": "volcan",
+   "short": "volcan",
+   "right": [
+    "disaster/volcano"
+   ],
+   "why": "half typed: volcano"
+  },
+  {
+   "q": "landsl",
+   "short": "landsl",
+   "right": [
+    "disaster/landslide"
+   ],
+   "why": "half typed: landslide"
+  },
+  {
+   "q": "falling rocks",
+   "short": "fall",
+   "right": [
+    "disaster/landslide"
+   ],
+   "why": "rockfall"
+  },
+  {
+   "q": "insul",
+   "short": "insul",
+   "right": [
+    "health/chronic"
+   ],
+   "why": "half typed: insulin"
+  },
+  {
+   "q": "oxyg",
+   "short": "oxyg",
+   "right": [
+    "power/medical"
+   ],
+   "why": "half typed: oxygen"
+  },
+  {
+   "q": "wheelch",
+   "short": "wheelch",
+   "right": [
+    "health/care",
+    "power/medical"
+   ],
+   "why": "half typed: wheelchair"
+  },
+  {
+   "q": "pickl",
+   "short": "pickl",
+   "right": [
+    "preserve/",
+    "preserve/method",
+    "preserve/nopower"
+   ],
+   "why": "half typed: pickling"
+  },
+  {
+   "q": "ferment",
+   "short": "ferment",
+   "right": [
+    "preserve/nopower",
+    "preserve/"
+   ],
+   "why": "ferment / fermenting"
+  },
+  {
+   "q": "weld",
+   "short": "weld",
+   "right": [
+    "repair/weld"
+   ],
+   "why": "weld / welding"
+  },
+  {
+   "q": "tap dripping",
+   "short": "drip",
+   "right": [
+    "repair/plumbing"
+   ],
+   "why": "a dripping tap"
+  },
+  {
+   "q": "toilet running",
+   "short": "run",
+   "right": [
+    "repair/plumbing"
+   ],
+   "why": "the toilet keeps running"
+  },
+  {
+   "q": "radiat",
+   "short": "radiat",
+   "right": [
+    "disaster/shelter-in-place",
+    "disaster/nuclear-explosion",
+    "disaster/"
+   ],
+   "why": "half typed: radiation"
+  },
+  {
+   "q": "tornado warn",
+   "short": "warn",
+   "right": [
+    "disaster/tornado"
+   ],
+   "why": "half typed: warning"
+  }
+ ],
+ "_dropped_before_any_run": [
+  "back pain",
+  "bat bite",
+  "electric shock",
+  "faint",
+  "fallout shelter",
+  "purif"
+ ]
+}

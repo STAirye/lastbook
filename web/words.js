@@ -90,6 +90,38 @@
     return (w, stop) => !NO_SPACES.test(w) && forms(w).some(f => have.has(f) && !(stop && stop.has(f)));
   }
 
+  // How much one search word counts in one piece of text (#333). A search word still matches the start of a guide
+  // word, as before, but how much that counts depends on what follows it:
+  //   - nothing, or only an ending (ENDINGS: burn/burns, cook/cooking, dry/drying, broke/broken, electric/electricity): 1;
+  //   - anything else (pain/paint, fall/fallout, rat/rattlesnake): half. A whole word elsewhere now outranks it, and
+  //     a half-typed word ("freez", "gen", "shel") still finds its guide.
+  // PART is that half for the last word of the search (the one still being typed), PART_ANY for the others; the
+  // prototype measured 0 to 1 for each and kept 0.5 for both (#333 benchmark). Two search words written as one guide
+  // word count 1 each ("load shedding": loadshedding). Scripts without spaces match anywhere, as before. STEMS (off)
+  // would also let a longer search word find a shorter guide word ("waters": water) on the first pass; off, that
+  // stays with the second pass (word forms), as before.
+  const PART = 0.5, PART_ANY = 0.5, STEMS = false, JOIN = true;
+  const ENDINGS = new Set(['s', 'es', 'd', 'ed', 'n', 'en', 'ing', 'er', 'ers', 'y', 'ies', 'ion', 'ions', 'al', 'ity', 'ness']);
+  function scorer(text) {
+    const words = splitWords(text), whole = fold(text), have = new Set(words), stems = new Set(words.flatMap(forms));
+    return (w, last, stop) => {
+      if (NO_SPACES.test(w)) return whole.includes(w) ? 1 : 0;
+      if (have.has(w) || (STEMS && forms(w).some(f => stems.has(f) && !(stop && stop.has(f))))) return 1;
+      let part = 0;
+      for (const h of words) if (h.startsWith(w)) {
+        if (ENDINGS.has(h.slice(w.length)) || forms(h).includes(w)) return 1;
+        part = last ? PART : PART_ANY;
+      }
+      return part;
+    };
+  }
+  // Each search word's weight in one piece of text: words is the search's words, last the index of the one being
+  // typed (-1 when the search ends in a word that was dropped).
+  function weights(score, words, last, stop) {
+    const one = (i, j) => JOIN && j >= 0 && j < words.length && score(words[Math.min(i, j)] + words[Math.max(i, j)], false, stop) === 1;
+    return words.map((w, i) => Math.max(score(w, i === last, stop), one(i, i - 1) || one(i, i + 1) ? 1 : 0));
+  }
+
   // Topic search, scored as before: a word found in a topic's title, short line or keywords counts 1,
   // a word found in one of its choices counts 1.5; topics within 60% of the best score, top 3.
   // A choice's "urgent" phrases ("not breathing") pick that choice for its topic whenever the search names one,
@@ -103,8 +135,8 @@
     if (!m) {
       const shown = (t.choices || []).filter(c => !c.goto);
       const hay = [t.title, t.short, ...(t.keywords || [])].join(' '), text = c => c.label + ' ' + (c.hint || '');
-      m = { hay: matcher(hay), hayForm: formMatcher(hay),
-            choices: shown.map(c => ({ c, has: matcher(text(c)), hasForm: formMatcher(text(c)) })),
+      m = { hay: scorer(hay), hayForm: formMatcher(hay),
+            choices: shown.map(c => ({ c, has: scorer(text(c)), hasForm: formMatcher(text(c)) })),
             urgent: shown.filter(c => c.urgent).map(c => ({ c, phrases: c.urgent.map(splitWords).filter(p => p.length) })),
             phrases: shown.filter(c => c.phrases || c.weak).map(c => ({ c,
               phrases: wordLists(c.phrases), weak: wordLists(c.weak), who: wordLists(c.who),
@@ -175,10 +207,14 @@
     const words = queryWords(q, stop);
     if (!words.length || !topics) return [];
     const all = splitWords(q);
+    const last = all.length && all[all.length - 1] === words[words.length - 1] ? words.length - 1 : -1;
+    const sum = ws => ws.reduce((a, b) => a + b, 0);
     const score = byForm => {
       const out = [], also = new Set(), found = new Map(), phrased = new Set();
+      // Weights of the search's words in a text: 1 or 0 by word form on the second pass, else as scorer says.
+      const wt = (byForm ? f => words.map(w => f(w, stop) ? 1 : 0) : f => weights(f, words, last, stop));
       for (const t of topics) {
-        const m = topicMatchers(t), hay = byForm ? w => m.hayForm(w, stop) : m.hay;
+        const m = topicMatchers(t);
         const named = byForm ? new Map() : new Map(m.phrases.map(x => {
           const { hit, also: more } = namedWords(all, words, x, stop);
           more.forEach(w => also.add(w));
@@ -186,12 +222,13 @@
           return [x.c, hit];
         }));
         const inNamed = w => [...named.values()].some(ws => ws.includes(w));
-        const s = words.filter(w => hay(w) || inNamed(w)).length;
+        const hw = wt(byForm ? m.hayForm : m.hay);
+        const s = sum(words.map((w, i) => inNamed(w) ? 1 : hw[i]));
         let best = null, bs = 0, bf = [];
         for (const { c, has, hasForm } of m.choices) {
-          const match = byForm ? w => hasForm(w, stop) : has;
-          const ws = named.get(c) || [], f = words.filter(w => match(w) || ws.includes(w));
-          if (f.length > bs || (ws.length && f.length === bs)) { bs = f.length; best = c; bf = f }
+          const ws = named.get(c) || [], cw = wt(byForm ? hasForm : has).map((x, i) => ws.includes(words[i]) ? 1 : x);
+          const fs = sum(cw), f = words.filter((_, i) => cw[i] > 0);
+          if (fs > bs || (ws.length && fs === bs)) { bs = fs; best = c; bf = f }
         }
         found.set(t, bf);
         const u = m.urgent.find(x => x.phrases.some(p => names(all, p)));
