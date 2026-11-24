@@ -603,7 +603,7 @@ class Setup:
         if model not in got['models']:
             return {'code': 'not_listed', 'error': f'The server at {got["address"]} no longer lists {str(model)[:model_server.MAX_ID]}. List its models again.'}
         self._choose_server(got['base'], model)
-        return {'custom_model': custom, 'model_server': self.model_server()}
+        return {'model_server': self.model_server()}
 
     def stop_server(self):
         self._choose_server(None, None)

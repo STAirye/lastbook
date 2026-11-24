@@ -1261,7 +1261,7 @@ class AssistantChosenServer(unittest.TestCase):
         names, system = seen[0]
         self.assertIn('search_library', names)
         self.assertNotIn('view_page', names)
-        self.assertEqual(system, assistant.SYSTEM_TEXT_ONLY)
+        self.assertEqual(system, assistant.SYSTEM_TEXT_ONLY + assistant.TABLE_RULE)   # fork: the table rule too (FORK.md 3j)
         self.local.ensure_running.assert_not_called()
 
 class AssistantHTTPMessages(unittest.TestCase):
