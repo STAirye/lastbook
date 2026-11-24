@@ -142,7 +142,7 @@ def vtt_windows(path, span=45):
         cues.append(cur)
     out, start, buf, last = [], None, [], ''
     for t, txt in cues:
-        if txt.startswith(last) and last:
+        if last and txt.startswith(last) and not txt[len(last):len(last) + 1].strip():  # a repeat ends at a word: "So" is not the start of "Some people"
             txt = txt[len(last):].strip()
         last = txt or last
         if not txt:

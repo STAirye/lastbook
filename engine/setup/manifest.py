@@ -24,6 +24,7 @@ def _from(url, hosts, allowed):
     import urllib.parse
     return (urllib.parse.urlsplit(url).hostname or '').lower() in hosts
 NAME = re.compile(r'^[A-Za-z0-9][A-Za-z0-9._-]{0,120}$')
+MAX_PACK_PART = 256 * 1024 * 1024
 
 
 def bundled_paths():
@@ -38,7 +39,24 @@ def _int(v):
     return isinstance(v, int) and not isinstance(v, bool) and v >= 0
 
 
-def validate(m, allowed=None):
+def _pack_parts(parts, files, allowed):
+    if not isinstance(parts, list) or len(parts) < 2 or len(files) != 1 or files[0]['kind'] != 'zip':
+        return None
+    names, clean = set(), []
+    for part in parts:
+        if not isinstance(part, dict):
+            return None
+        name, size, digest, url = part.get('name'), part.get('size'), part.get('sha256'), part.get('url')
+        if not (isinstance(name, str) and NAME.fullmatch(name) and name.endswith('.bin') and name.lower() not in names
+                and name.lower() != files[0]['name'].lower() and _int(size) and 0 < size <= MAX_PACK_PART
+                and isinstance(digest, str) and SHA.fullmatch(digest) and isinstance(url, str) and _from(url, LIBRARY_HOSTS, allowed)):
+            return None
+        names.add(name.lower())
+        clean.append({'name': name, 'url': url, 'size': size, 'sha256': digest})
+    return clean if sum(p['size'] for p in clean) == files[0]['size'] else None
+
+
+def validate(m, allowed=None, *, bundled=False):
     """The manifest, cleaned to the fields setup uses, or None if anything in it is wrong."""
     if not isinstance(m, dict) or m.get('version') != 1:
         return None
@@ -58,11 +76,16 @@ def validate(m, allowed=None):
         available = bool(p.get('available')) and bool(files)
         if available and not _int(p.get('installed_bytes')):
             return None
-        packs.append({'id': p['id'], 'title': str(p.get('title') or p['id']), 'summary': str(p.get('summary') or ''),
+        entry = {'id': p['id'], 'title': str(p.get('title') or p['id']), 'summary': str(p.get('summary') or ''),
                       'records': p.get('records') if _int(p.get('records')) else None, 'revision': revision,
                       'installed_bytes': p.get('installed_bytes') if _int(p.get('installed_bytes')) else None,
                       'download_bytes': sum(f['size'] for f in files), 'available': available, 'files': files,
-                      'map': p['map'] if isinstance(p.get('map'), str) and NAME.match(p['map']) and p['map'] != 'base' else None})
+                 'map': p['map'] if isinstance(p.get('map'), str) and NAME.match(p['map']) and p['map'] != 'base' else None}
+        if bundled and 'parts' in p:
+            entry['parts'] = _pack_parts(p['parts'], files, allowed)
+            if entry['parts'] is None:
+                return None
+        packs.append(entry)
     collections = {}
     for key in ('maps', 'address_indexes'):
         entries = []
@@ -98,7 +121,7 @@ def validate(m, allowed=None):
 def load_bundled(paths=None):
     for p in paths or bundled_paths():
         try:
-            m = validate(json.loads(Path(p).read_text(encoding='utf-8')))
+            m = validate(json.loads(Path(p).read_text(encoding='utf-8')), bundled=True)
         except (OSError, ValueError):
             continue
         if m:
@@ -165,7 +188,7 @@ class Manifest:
     def public(self):
         strip = lambda f: {k: v for k, v in f.items() if k != 'url'}
         return {'source': self.source, 'published': self.current['published'],
-                'packs': [{**p, 'files': [strip(f) for f in p['files']]} for p in self.current['packs']],
+                'packs': [{**{k: v for k, v in p.items() if k != 'parts'}, 'files': [strip(f) for f in p['files']]} for p in self.current['packs']],
                 'models': [strip(m) for m in self.current['models']],
                 'maps': [{**x, 'files': [strip(f) for f in x['files']]} for x in self.current.get('maps', [])],
                 'address_indexes': [{**x, 'files': [strip(f) for f in x['files']]} for x in self.current.get('address_indexes', [])]}

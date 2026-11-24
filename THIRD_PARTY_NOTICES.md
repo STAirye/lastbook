@@ -42,6 +42,7 @@ Versions are the pins in `packaging/requirements*.txt`, `packaging/llm/*.sh`, `p
 | llama.cpp and ggml, in `lastbook-llm` (optional local AI runner) | tag b12032 (dde879bc) | MIT (Copyright the ggml authors) | https://github.com/ggml-org/llama.cpp | Checked: `LICENSE`; it ships beside the runner as `LICENSE-llama.cpp.txt` |
 | nlohmann/json, used by llama.cpp's `common/` | as vendored in b12032 | MIT | https://github.com/nlohmann/json | Checked: `licenses/LICENSE-jsonhpp` |
 | fork: BAAI bge-small-en-v1.5 as a GGUF file (q8_0), read by `lastbook-llm --embed` for the meaning check of `engine/meaning_red.py`; bundled beside the runner (`llm/meaning-red/`) when the build finds it, else downloaded by setup with the local AI model | converted from the fp32 copy hybrid search uses, by `tools/meaning_red_model.py` (llama.cpp's `convert_hf_to_gguf.py`, then `llama-quantize`); SHA-256 in `engine/data/meaning_red_manifest.json` | MIT, per the model card | https://huggingface.co/BAAI/bge-small-en-v1.5 (the fork's copy: the Hugging Face repo in the manifest) | Upstream: the model card states MIT; the text ships as `engine/data/meaning_red_LICENSE.txt` |
+| Sparkle 2 (`Sparkle.framework`, Mac builds with Update now only: `docs/UPDATE-NOW-MAC.md`) | 2.10.1, pinned in `packaging/sparkle.lock.json` | MIT; its bundled components are listed in its `LICENSE` | https://sparkle-project.org | Its `LICENSE` ships as `Contents/Resources/LICENSE-Sparkle.txt` in Update now builds; not in the default build |
 | LLVM libc++, libunwind, OpenMP runtime (`libc++.dll`, `libunwind.dll`, `libomp.dll`, Windows runner) | llvm-mingw 20261020 | Apache-2.0 WITH LLVM-exception | https://github.com/mstorsjo/llvm-mingw | Checked: ships as `LICENSE-llvm-mingw.txt` |
 
 Build-only tools (uv, CMake, Ninja, glslc/shaderc, Vulkan and SPIR-V headers, pyinstaller-hooks-contrib, altgraph,
@@ -54,6 +55,17 @@ allow. The Vulkan loader (`vulkan-1.dll`) comes with the graphics driver and is 
 |---|---|---|---|---|
 | Gemma 4 26B A4B instruct, GGUF quantization by Unsloth (`gemma-4-26B-A4B-it-UD-Q4_K_M.gguf`) | revision pinned in `llm_local.py` | Apache-2.0, per the model card | https://huggingface.co/unsloth (Google's Gemma 4 release) | Upstream: check the model card and its licence file before release |
 | BAAI bge-small-en-v1.5 (ONNX), meaning-based search | as pinned | MIT, per the model card | https://huggingface.co/BAAI/bge-small-en-v1.5 | Upstream: the local copy has no licence file beside it |
+
+## Development and test tools (not bundled, not downloaded by the apps)
+
+These are used only to run optional tests from a checkout. They are not in any package, are not required to build or
+run Lastbook, and the build's package scan rejects test code. All of them work offline once installed.
+
+| Component | Used by | Licence | Source | Checked |
+|---|---|---|---|---|
+| Playwright for Python (`pip install playwright`; the wheel carries its own Node.js driver). Run it against a Chromium you already have, so no browser download is needed | `app/tests/i18n_browser.py` | Apache-2.0 | https://github.com/microsoft/playwright-python | Checked: package metadata of 1.65.2 (`License-Expression: Apache-2.0`) |
+| pyatspi (Ubuntu package `python3-pyatspi`, part of at-spi2) | `app/tests/linux_i18n_smoke.py`, `app/tests/linux_at.py` | LGPL-2.0-or-later | https://gitlab.gnome.org/GNOME/at-spi2-core | Upstream |
+| xdotool (Ubuntu package `xdotool`) | `app/tests/linux_i18n_smoke.py` | BSD-3-Clause | https://github.com/jordansissel/xdotool | Upstream |
 
 ## iPad development preview (`mobile/ipad/`)
 

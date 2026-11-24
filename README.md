@@ -13,7 +13,7 @@
 | Local AI model | Only the published Gemma 4 26B A4B file (exact SHA-256) | That file, or **your own Gemma 4 GGUF** (E2B, E4B, any quant), used from where it is |
 | Chat and search | As released | Tuned so a small Gemma 4 answers well: hidden thinking, follow-up sources, tables read by row, everyday wording, typos, questions in Spanish, how sure the search is |
 
-Everything else (library, guides, offline rules, the no-port bridge) is upstream as of Lastbook 1.1.14 (commit `dd9bff8`).
+Everything else (library, guides, offline rules, the no-port bridge) is upstream as of Lastbook 1.1.17 (commit `332dda6`).
 Design notes, what is and isn't checked, and how to switch back: [docs/FORK.md](docs/FORK.md).
 
 ## Run this fork

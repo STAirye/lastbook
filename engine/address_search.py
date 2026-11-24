@@ -76,21 +76,21 @@ def _parts(query, states=True):
             state = code
             remainder = remainder[:-count]
             break
-    return number, normalize(' '.join(remainder)).split(), state, postcode
+    return number, normalize(' '.join(remainder)).split(), state, postcode, remainder
 
 
 def _readings(query):
-    """The ways to read a query, likeliest first, as (number, words, state, postcode, town).
+    """The ways to read a query, likeliest first, as (number, words, state, postcode, plain, town).
     Words at the end that name a state can also be the street's own ending ('12 Oak Ct', '500 4th St NE') or a town
     ('Washington'), so the query is read both ways. The second reading stays narrow, so that a state that is not installed
     still finds nothing: a two-letter code is tried only as part of the street (town ''), and a state's name only as a town
     of exactly that name (town 'whole'). '100 Main St IN' does not find Inglewood, nor 'Maple Ave Kansas' Kansas City."""
-    number, words, state, postcode = _parts(query)
+    number, words, state, postcode, plain = _parts(query)
     if not state:
-        return [(number, words, state, postcode, 'starts')]
+        return [(number, words, state, postcode, plain, 'starts')]
     typed = _parts(query, states=False)
     code = len(typed[1]) == len(words) + 1 and typed[1][-1].upper() in STATE_CODES
-    by_state, as_typed = (number, words, state, postcode, 'starts'), (*typed, '' if code else 'whole')
+    by_state, as_typed = (number, words, state, postcode, plain, 'starts'), (*typed, '' if code else 'whole')
     return [as_typed, by_state] if code and typed[1][-1] in STREET_ENDINGS else [by_state, as_typed]
 
 
@@ -105,7 +105,7 @@ def find_addresses(query, geo_directory, limit=8, near=None):
     return []
 
 
-def _lookup(number, words, state, postcode, town, geo_directory, limit, near):
+def _lookup(number, words, state, postcode, plain, town, geo_directory, limit, near):
     if not words:
         return []
     geo_directory = Path(geo_directory)
@@ -138,13 +138,31 @@ def _lookup(number, words, state, postcode, town, geo_directory, limit, near):
                     conditions.append('zip = ?')
                     parameters.append(postcode)
                 if city:
-                    conditions.append('lower(city) = ?' if town == 'whole' else 'lower(city) LIKE ?')
-                    parameters.append(city if town == 'whole' else city + '%')
+                    # normalize() keeps a word's first letter (north->n, saint->st, mount->mt) and only strips
+                    # punctuation, so this cheap SQL prefilter never drops a row the Python city check would keep.
+                    conditions.append('lower(substr(city,1,1)) = ?')
+                    parameters.append(city[0])
+                # The city is compared in Python, after normalize() on both sides: the query's "north", "saint" and
+                # punctuation must meet the stored "North Hollywood", "Saint Paul" and "St. Louis" in the same form.
                 sql = ('SELECT num,street,city,state,zip,lat,lon,norm FROM addr WHERE '
-                       + ' AND '.join(conditions) + ' ORDER BY length(norm),norm LIMIT ?')
+                       + ' AND '.join(conditions) + ' ORDER BY length(norm),norm')
+                if not city:
+                    sql += ' LIMIT ?'
+                    parameters.append(limit * 3)
+                plain_city = ' '.join(plain[count:])   # normalize() maps word for word, so the split lines up
+                match = str.__eq__ if town == 'whole' else str.startswith   # 'whole': a state's name read as a town of just that name
                 for connection in connections:
+                    # Rows the city check drops must not use up the limit, so read on until enough pass it.
+                    kept = 0
                     try:
-                        rows.extend(connection.execute(sql, [*parameters, limit * 3]).fetchall())
+                        for row in connection.execute(sql, parameters):
+                            stored = row[2] or ''
+                            if city and not (match(normalize(stored), city) or match(stored.lower(), plain_city)):
+                                continue
+                            rows.append(row)
+                            kept += 1
+                            if kept == limit * 3:
+                                break
                     except sqlite3.Error:
                         continue
             if rows:

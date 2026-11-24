@@ -144,6 +144,16 @@ class VideoTranscripts(unittest.TestCase):
             with self.subTest(route=route):
                 self.assertEqual(text, spoken)
 
+    def test_short_cue_is_not_cut_from_the_next_cues_first_word(self):
+        # "So" then "Some people…" is two cues, not a rolling repeat: only a repeat that ends at a word is dropped.
+        for short, following in (('So', 'Some people boil the water before they pour it through the filter.'),
+                                 ('the', 'then you tighten the bandage above the wound and note the time')):
+            data = ('WEBVTT\n\n00:01.000 --> 00:02.000\n' + short +
+                    '\n\n00:02.000 --> 00:06.000\n' + following + '\n').encode()
+            for route, text in self.texts(data).items():
+                with self.subTest(short=short, route=route):
+                    self.assertEqual(text, short + ' ' + following)
+
     def test_empty_or_metadata_only_track_has_no_transcript(self):
         for data in (b'', b'WEBVTT\n\n', b'WEBVTT\n\nNOTE\nEditor notes only.\n'):
             for route, text in self.texts(data).items():

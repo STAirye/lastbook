@@ -8,6 +8,23 @@ from unittest.mock import patch
 from engine.address_search import find_addresses, is_address_query, normalize
 
 
+class CountingConnection:
+    """Wraps a sqlite3 connection and records how many rows each query's cursor hands back to Python."""
+
+    def __init__(self, connection, fetched):
+        self.connection = connection
+        self.fetched = fetched
+
+    def execute(self, sql, parameters=()):
+        self.fetched.append(0)
+        for row in self.connection.execute(sql, parameters):
+            self.fetched[-1] += 1
+            yield row
+
+    def close(self):
+        self.connection.close()
+
+
 class AddressSearchTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -25,7 +42,11 @@ class AddressSearchTests(unittest.TestCase):
             ('12', 'Oak Court', 'Example', 'CA', '90001', 34.02, -118.02),
             ('100', 'Main Street', 'Inglewood', 'CA', '90301', 33.96, -118.35),
             ('100', 'Main Street', 'Newport Beach', 'CA', '92661', 33.60, -117.90),
+            ('123', 'Main Street', 'North Hollywood', 'CA', '91601', 34.16, -118.37),
+            ('123', 'North Main Street', 'North Hollywood', 'CA', '91601', 34.17, -118.38),
         ])
+        self.write_state('MN', [('10', 'Oak Avenue', 'Saint Paul', 'MN', '55101', 44.95, -93.09)])
+        self.write_state('MO', [('10', 'Oak Avenue', 'St. Louis', 'MO', '63101', 38.63, -90.20)])
 
     def tearDown(self):
         self.temp.cleanup()
@@ -106,6 +127,27 @@ class AddressSearchTests(unittest.TestCase):
         result = find_addresses('21 ninth st Example CA', self.geo)
         self.assertEqual(result[0]['name'], '21 W 9 ST')
 
+    def test_city_with_direction_or_saint_matches_stored_title_case(self):
+        result = find_addresses('123 Main St North Hollywood', self.geo)
+        self.assertIn('123 Main Street', [row['name'] for row in result])
+        result = find_addresses('123 North Main Street North Hollywood CA', self.geo)
+        self.assertEqual(result[0]['name'], '123 North Main Street')
+        self.assertEqual(find_addresses('123 Main St Hollywood North', self.geo), [])
+        for query in ('10 Oak Ave Saint Paul MN', '10 Oak Ave St Paul MN', '10 Oak Ave Saint Paul'):
+            with self.subTest(query=query):
+                result = find_addresses(query, self.geo)
+                self.assertEqual(len(result), 1)
+                self.assertEqual(result[0]['name'], '10 Oak Avenue')
+                self.assertEqual(result[0]['detail'], 'Saint Paul, MN, 55101')
+
+    def test_city_punctuation_is_ignored(self):
+        for query in ('10 Oak Ave St Louis MO', '10 Oak Ave Saint Louis MO', '10 Oak Ave St. Louis MO'):
+            with self.subTest(query=query):
+                result = find_addresses(query, self.geo)
+                self.assertEqual(len(result), 1)
+                self.assertEqual(result[0]['detail'], 'St. Louis, MO, 63101')
+        self.assertEqual(find_addresses('10 Oak Ave Saint Louis Park MO', self.geo), [])
+
     def test_plain_zip_remains_place_query(self):
         self.assertFalse(is_address_query('48375'))
         self.assertFalse(is_address_query('Novi MI'))
@@ -123,6 +165,49 @@ class AddressSearchTests(unittest.TestCase):
         finally:
             db.close()      # as in write_state: the `with` form does not close, and Windows will not remove an open file
         self.assertEqual(find_addresses('23001 Maple Ave Kansas City MO', empty)[0]['lat'], 39.0997)
+
+    def test_null_city_row_does_not_break_city_query(self):
+        self.write_state('OH', [
+            ('5', 'Elm Street', None, 'OH', '43001', 40.0, -83.0),
+            ('5', 'Elm Street', 'Columbus', 'OH', '43215', 39.96, -83.0),
+        ])
+        result = find_addresses('5 elm Columbus OH', self.geo)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]['detail'], 'Columbus, OH, 43215')
+
+    def test_city_query_fetches_only_rows_it_can_keep(self):
+        # Same number and street in other cities: only the first-letter prefilter should keep them out of Python.
+        self.write_state('IL', [('100', 'Main Street', 'Springfield', 'IL', '62701', 39.80, -89.64)])
+        self.write_state('NV', [('100', 'Main Street', 'Boston', 'NV', '89501', 39.5, -119.8)] * 300)
+        fetched = []
+        real_connect = sqlite3.connect
+        with patch('engine.address_search.sqlite3.connect',
+                   side_effect=lambda *args, **kwargs: CountingConnection(real_connect(*args, **kwargs), fetched)):
+            result = find_addresses('100 main springfield', self.geo)
+        self.assertEqual(result[0]['detail'], 'Springfield, IL, 62701')
+        self.assertLessEqual(sum(fetched), 10)
+
+    def test_city_match_is_not_crowded_out_by_same_first_letter_rows(self):
+        self.write_state('IL', [('100', 'Main Street', 'Sparks', 'IL', '62702', 39.5, -119.7)] * 160
+                         + [('100', 'Main Street', 'Springfield', 'IL', '62701', 39.80, -89.64)])
+        result = find_addresses('100 Main Street Springfield IL', self.geo)
+        self.assertEqual([row['detail'] for row in result], ['Springfield, IL, 62701'])
+
+    def test_city_query_stops_reading_once_it_has_enough_matches(self):
+        self.write_state('IL', [('100', 'Main Street', 'Springfield', 'IL', '62701', 39.80, -89.64)] * 300)
+        fetched = []
+        real_connect = sqlite3.connect
+        with patch('engine.address_search.sqlite3.connect',
+                   side_effect=lambda *args, **kwargs: CountingConnection(real_connect(*args, **kwargs), fetched)):
+            result = find_addresses('100 main springfield', self.geo)
+        self.assertEqual(result[0]['detail'], 'Springfield, IL, 62701')
+        self.assertLessEqual(max(fetched), 8 * 3)
+
+    def test_partial_city_prefix_matches_direction_and_saint_cities(self):
+        result = find_addresses('123 Main St Nort CA', self.geo)
+        self.assertEqual(result[0]['detail'], 'North Hollywood, CA, 91601')
+        result = find_addresses('10 Oak Ave Sain MN', self.geo)
+        self.assertEqual(result[0]['detail'], 'Saint Paul, MN, 55101')
 
     def test_app_route_preserves_address_number(self):
         import server
@@ -345,15 +430,12 @@ class OntarioAddressTests(unittest.TestCase):
         """Canada writes unit 4 at number 120 as "4-120"; today "4-120" is read as the house number."""
         self.assertFinds('4-120 Exemplar St E', '120 Exemplar Street East', 44.10)
 
-    @unittest.expectedFailure
     def test_city_with_ste(self):
-        """The query's city is normalized ("ste marie"), the stored one is not ("ste. marie"). #196 compares both
-        normalized."""
+        """The query's city is normalized ("ste marie"), the stored one is not ("ste. marie"): both are compared normalized."""
         for query in ('45 Exemplar Rd Sault Ste Marie', '45 Exemplar Rd Sault Ste. Marie'):
             with self.subTest(query=query):
                 self.assertFinds(query, '45 Exemplar Road', 46.50)
 
-    @unittest.expectedFailure
     def test_city_with_st(self):
         for query in ('46 Exemplar Rd St Catharines', '46 Exemplar Rd St. Catharines', '46 Exemplar Rd Saint Catharines'):
             with self.subTest(query=query):

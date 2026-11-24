@@ -12,8 +12,8 @@ Several sessions build this at once. This file is the interface between them. Ch
 - **The one way out.** Setup's downloader is the only code in Lastbook that may reach the internet, and only when the person
   starts or resumes a download. It fetches over HTTPS only from hosts in `ALLOWED_HOSTS` (below), with no proxy taken from
   the system, and follows a redirect only to another allowed host. Everything else stays as it is: the windows block all web
-  loads, the assistant talks to loopback or pipes only, and nothing is sent anywhere (no telemetry, no update check at
-  startup). The owner authorized this route on 2026-11-12 for the first-run install. It replaces "downloads happen outside
+  loads, the assistant talks to loopback or pipes only, and nothing is sent anywhere (no telemetry; no update check at
+  startup unless the person turned on "Notify me about app updates", see `updates` below). The owner authorized this route on 2026-11-12 for the first-run install. It replaces "downloads happen outside
   the app" for library packs and the model, and nothing more.
 - **No blanket memory floor.** The local AI is offered when the measured fit says it fits (`llm_local.judge`, about 18 GB
   of memory for model and context, plus a 2.5 GiB reserve). It is not offered below that, and the screen says why in plain words.
@@ -64,11 +64,16 @@ Packs may be split into several files later; setup downloads all `files` of a pa
 
 `ALLOWED_HOSTS`: `downloads.lastbook.org`, the bucket's current `*.r2.dev` host (until the domain is live), `huggingface.co`,
 and the hosts Hugging Face redirects model downloads to (`cas-bridge.xethub.hf.co`, `*.hf.co`; on 2026-11-12 the model resolved to `us.aws.cdn.hf.co`). R2 ignores If-Range, so the downloader compares the ETag itself.
+A new ETag on a resume does not by itself start the file over, because the same file uploaded again gets one: three 1 MiB
+stretches of what is on disk (start, middle, end) are fetched again and compared. If they are the server's, the download
+carries on under the new ETag, and the SHA-256 at the end still judges the whole file; if a byte differs, it starts over.
+If a stretch cannot be fetched, that is a broken or busy connection like any other, and the partial file is kept (#208).
 A file of `PARALLEL_MIN` (512 MiB) or more is fetched over `CONNECTIONS` (8) connections at once, each with a closed Range
 for one `PIECE` (16 MiB). One connection to `downloads.lastbook.org` gave about 2 MB/s and 8 about 13 MB/s (2026-11-17).
 Pieces are handed out in order, at most `AHEAD` (16) past the first unfinished one. The run of finished pieces from byte 0 is
 hashed as it completes, read back from the disk, so the SHA-256 is ready when the last piece lands. Every 206 must carry the
-first one's ETag and total size: another ETag starts the file over (twice: it goes on over one connection), another size
+first one's ETag and total size: another ETag is checked as above against the hashed run (the same bytes: the run is kept and
+the pieces carry on; other bytes: the file starts over; a second new ETag: it goes on over one connection), another size
 fails as `checksum`, and a 200 to a Range goes on over one connection from the hashed run. The exact list is a constant in
 `engine/setup/download.py`, and the package scan checks that it is the only module that opens connections.
 
@@ -96,9 +101,12 @@ fails as `checksum`, and a 200 to a Range goes on over one connection from the h
   Downloads, Documents and Desktop are not searched. A file is used only after its size and SHA-256 match the manifest.
 - Chat's local AI looks for the model only in the open library's `models/` and the library folder itself, and in
   `LASTBOOK_MODEL_DIR` when that is set (`llm_local.py` `places`). *Look again* searches those again.
-- If the local AI download stops with a network error before gaining any bytes, the Stopped card also offers **Choose AI
-  model file**. Choosing the published model file resumes that same job, keeping any finished library or map steps. Its
-  size and SHA-256 are checked as usual; a file that does not match is left alone and is not used.
+- If the local AI download stops as `unreachable` (also after an earlier try got part of it), or with a network error before
+  gaining any bytes, the Stopped card also
+  offers **Choose AI model file**. Choosing the published model file resumes that same job, keeping any finished library or
+  map steps. Its size and SHA-256 are checked as usual; a file that does not match is left alone and is not used. An
+  `unreachable` stop also shows the file's name, exact size, address and SHA-256, so it can be fetched on another network
+  or computer (#254).
 
 ## Engine interface: `/api/setup/*`
 
@@ -107,7 +115,7 @@ are served by `engine/setup/api.py` alone. In normal mode `server.py` hands `/ap
 
 | Request | Answer |
 |---|---|
-| `GET /api/setup/state` | `{mode: "first-run" or "manage", hardware, manifest: {source: "bundled" or "fetched", packs, models}, current: {folder, pack, model} or null, found: [...], recommend: {pack, ai, why}, job}` |
+| `GET /api/setup/state` | `{mode: "first-run" or "manage", hardware, manifest: {source: "bundled" or "fetched", packs, models}, current: {folder, pack, model, cloud_only, cloud_counting} or null (cloud_only: `{files, folders, bytes, examples}` of the library that are only in iCloud, counted from metadata in the background; null until counted and on other systems. cloud_counting: true only while a Mac counts, so the page knows when to ask again), found: [...], recommend: {pack, ai, why}, job}` |
 | `POST /api/setup/start` `{pack, ai: true or false, folder?}` | the new `job`, or `{error, need_bytes, free_bytes}` |
 | `GET /api/setup/job` | `job` |
 | `POST /api/setup/pause`, `/resume`, `/cancel`, `/retry` | `job` |
@@ -117,6 +125,11 @@ are served by `engine/setup/api.py` alone. In normal mode `server.py` hands `/ap
 | `POST /api/setup/start` `{copy_to}` | manage mode: copies the open library to `<copy_to>/LastbookData` for someone with no internet (#114): the files in `pack-manifest.tsv` (or a state map's `map-set.json`) and the manifest, each written as `.partial`, read back from the drive, and renamed only when what the drive gives back has the right SHA-256; then `START-HERE.txt` beside it (`START-HERE (Lastbook).txt` if the drive already has someone else's). Refused with `code: "fat"` on a FAT drive when a file is 4 GB or more; room is counted in the drive's clusters; a file whose real path leads outside the library refuses the copy. Nothing is downloaded and nothing of the person's own is copied. Item `kind: "copy"`, state `copying`; `result: {files, bytes, folder, start_here}`; cancel keeps what is copied, and copying to the same place again carries on |
 | `POST /api/setup/delete-old` `{path}` | deletes a `LastbookData.old-*` setup moved aside itself (listed in `current.old`): `{ok, deleting}` |
 | `POST /api/setup/remove-ai` | manage mode: deletes `LastbookData/models/<file>` (the library stays): `{ok, freed_bytes}` |
+| `POST /api/setup/server-models` `{address}` | the models of a model server on this computer (#78): `{base, address, models}` from its `/v1/models`, or `{error, code}`: `not_here` (not a loopback address; nothing is asked), `no_answer`, `needs_key` (401 or 403: no key is sent yet), `no_list`, `no_models`. The one request made before a choice, and only when the person presses *List models* |
+| `POST /api/setup/use-server` `{address, model}` | lists the models again and saves the choice in `setup.json` (`model_server: {base, model}`): `{model_server: {address, model}}`, or `not_listed`. While a server is chosen, Chat uses it instead of the local AI (text only, no `view_page`); the local AI file stays. In manage mode the open library switches at once; a choice made in first-run setup counts when the library opens. `SURVIVAL_MODEL_BASE` set at start wins over the saved choice until the person chooses again |
+| `POST /api/setup/stop-server` | forgets the choice: `{model_server: null}`; Chat goes back to the local AI |
+| `GET /api/setup/updates` | "Notify me about app updates" (engine/update.py `Notices`): `{supported, notify, available, checking}`. `supported: false` outside the desktop app |
+| `POST /api/setup/updates` `{notify: true\|false}` | sets it, from the person's own checkbox only (Setup's choose screen, Settings). Off clears any saved notice at once. Starts no check. Error `code`: `save`, `unsupported`, `bad_request` |
 | `POST /api/setup/start` `{repair: true, ai}` | manage mode: re-checks every file against the library's `pack-manifest.tsv` and the model's SHA-256 (items `verifying`); fetches again only what is wrong (the pack: downloaded and switched to like an upgrade; the model: replaced in place). All well: `done`, nothing downloaded |
 
 Added by setup-backend on 2026-11-12: `pick` (answers `{path, free_bytes, disk}` or `{path: null, cancelled: true}`), `delete-old`, `remove-ai` and repair above; `hardware.disks[].name` (Macintosh HD, "Data (D:)"); `current.old` (old libraries kept after an upgrade);
@@ -138,7 +151,7 @@ item that stopped mid-run has `paused_from` (`downloading`, `verifying`, `unpack
 `bytes_done`/`bytes_total` describe that step: unpacked bytes of the installed size for `unpacking`, the whole file for a found item. States in order: `waiting`, `downloading`, `paused`, `verifying`, `unpacking`,
 `activating`, `done`, or `failed` (with `error`: a plain sentence and a `code`: `no_space`, `network`, `server` (the download
 server kept answering 5xx or 429 for 40 minutes, so the internet itself was up), `checksum`, `unpack`,
-`activate`, `cancelled`, and `found_mismatch`: a file already on this computer (`use`) did not match its published SHA-256; the error carries `file`, the file is left untouched and no longer offered, and `retry` downloads it instead). The job lives in the app's own settings folder (`<settings>/setup/job.json`, with a staged switch in `<settings>/setup/pending.json`; never in `LastbookData.setup`, whose contents are not obeyed: audit E3), so a restart picks it up as `paused` and resumes
+`unreachable` (the connection kept breaking on a host that never answered this download: a network that blocks or resets it, or no internet; the error carries `host`, and the file's published `name`, `size`, `url` and `sha256`), `activate`, `check` (a Check now, `start {check: true}`, could not read a file; it downloads and changes nothing), `cancelled`, and `found_mismatch`: a file already on this computer (`use`) did not match its published SHA-256; the error carries `file`, the file is left untouched and no longer offered, and `retry` downloads it instead). The job lives in the app's own settings folder (`<settings>/setup/job.json`, with a staged switch in `<settings>/setup/pending.json`; never in `LastbookData.setup`, whose contents are not obeyed: audit E3), so a restart picks it up as `paused` and resumes
 with HTTP Range from the bytes already on disk. While downloading, a broken connection is retried six times over about 90 seconds.
 A server that answers 5xx or 429 is waited on longer (5 s rising to 5 minutes, or its `Retry-After` up to 10 minutes, and
 40 minutes in all without progress). While such a wait is ahead, the item has `retry_in_s`, the seconds until the next try.

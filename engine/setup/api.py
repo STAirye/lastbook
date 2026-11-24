@@ -21,6 +21,7 @@ import uuid
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
+from .. import model_server
 from . import download, hardware, install
 from .manifest import Manifest
 
@@ -35,6 +36,7 @@ ACTIVE = ('waiting', 'downloading', 'verifying', 'unpacking', 'activating', 'cop
 # with "Choose a library zip…" still installs. web/setup.js has the matching switch.
 MAPS = False
 FAT_MAX = 4 * 2 ** 30 - 1        # the largest file FAT32 can hold
+CLOUD_RECHECK_S = 600             # how long a count of the library's iCloud-only files is kept before the next one (#362)
 COPY_MARK = '.lastbook-copy-in-progress'   # in a copy's LastbookData until it is complete: copying there again carries on
 START_HERE = """Lastbook: an offline survival library
 
@@ -188,7 +190,8 @@ class _Item:
 
 class Setup:
     def __init__(self, mode, settings_dir, default_parent, current=None, manifest=None, allowed=None, context=None,
-                 on_finish=None, pick_folder=None, look_for_libraries=None, home=None, llm_local=None, default_why=None):
+                 on_finish=None, pick_folder=None, look_for_libraries=None, home=None, llm_local=None, default_why=None,
+                 on_model_server=None):
         """mode: 'first-run' or 'manage'. current: the open library (manage). on_finish(folder): the app opens that library
         (it relaunches). pick_folder(): a folder the person chose, or None. look_for_libraries(): LastbookData folders found."""
         self.mode, self.current = mode, Path(current) if current else None
@@ -197,13 +200,16 @@ class Setup:
         self.allowed, self.context = allowed, context
         self.on_finish, self.pick_folder, self.look_for_libraries = on_finish, pick_folder, look_for_libraries
         self.default_why = default_why     # why the default folder is not the usual one (a long Windows user folder), for the screen
+        self.on_model_server = on_model_server   # (base, model) or (None, None): the open library's assistant switches at once (manage)
         self._llm = llm_local
         self.lock = threading.RLock()
+        self.choice_lock = threading.Lock()    # one model-server choice at a time: saved and switched in the same order (two windows)
         self.job, self.control, self.thread = None, None, None
         self.sources = {}          # file name -> a file already on this computer the person chose with `use`
         self.ai_measure, self.measuring = None, False
         self.deleting = set()
         self.rejected = {}         # path -> (size, mtime) of a file already here that failed its SHA-256: not offered or used again
+        self.cloud, self.cloud_thread = None, None   # (folder, time, hardware.cloud_only) of the open library, counted in the background
         self.job = self._load_job()
 
     # ------------------------------------------------------------------------------------------------- saved state --
@@ -282,10 +288,28 @@ class Setup:
         names = ([f['name'] for f in pack['files']] if pack else []) + ([f['name'] for f in mp['files']] if mp else []) + ([f['name'] for f in addresses['files']] if addresses else []) + ([model['file']] if model else [])
         sources = {n: str(v) for n, v in (plan.get('sources') or {}).items()
                    if n in names and isinstance(v, str) and Path(v).name == n and Path(v).is_file()}
-        switch = bool(plan.get('switch')) and pack is not None
+        check_only = bool(plan.get('check_only'))
+        if check_only:            # Check now stays read-only after a restart: nothing to fetch, switch or take from elsewhere
+            if mp or addresses or not plan.get('repair') or target != self.current:
+                return None
+            sources = {}
+        switch = bool(plan.get('switch')) and pack is not None and not check_only
         clean = {'pack': pack, 'model': model, 'map': mp, 'addresses': addresses, 'parent': str(parent), 'target': str(target), 'work': str(work),
                  'sources': sources, 'explicit': bool(plan.get('explicit')), 'retried': {}, 'switch': switch, 'repair': bool(plan.get('repair')),
-                 'thin_map': thin}
+                 'thin_map': thin, 'check_only': check_only}
+        if check_only and job['state'] != 'done':
+            # Not finished: the check starts again from the installed files. What it saw before the restart is not trusted (a
+            # file may have changed since), so nothing it found, and no item it had finished, is carried over.
+            job['check'] = True
+            for it in items:
+                it.update(state='waiting', bytes_done=0, rate_bps=0, eta_s=None, error=None)
+                it.pop('paused_from', None)
+            job['plan'] = clean
+            return job
+        if plan.get('repair'):    # what a finished step found, for the result: the model's check, and the state map's
+            for k in ('model_ok', 'map_damaged'):
+                if isinstance(plan.get(k), bool):
+                    clean[k] = plan[k]
         if isinstance(plan.get('damaged'), list):
             clean['damaged'] = [str(x) for x in plan['damaged']]
         if plan.get('map_new'):
@@ -310,6 +334,8 @@ class Setup:
         if was == 'unpacking' and plan.get('pack'):
             total = plan['pack']['installed_bytes']
             return min(_tree_size(Path(plan['work']) / 'unpack'), total), total
+        if plan.get('check_only'):
+            return 0, it['bytes_total']                     # a check starts again; downloads of other jobs are not its progress
         if it.get('source') == 'found':
             return it['bytes_total'], it['bytes_total']     # nothing to download: the file is already on this computer
         return self._on_disk(plan, it), it['bytes_total']
@@ -374,7 +400,29 @@ class Setup:
         cm = self.custom_model()
         if cm and os.path.isfile(cm):
             model = 'custom'     # fork: the AI uses the person's own file, whether or not the published one is here too
-        return {'folder': str(self.current), 'pack': pack, 'content_revision': revision, 'map_bytes': install.map_bytes(self.current), 'model': model, 'map': install.map_name(self.current), 'address_indexes': self.address_indexes(), 'old': self._settings().get('old', [])}
+        return {'folder': str(self.current), 'pack': pack, 'content_revision': revision, 'map_bytes': install.map_bytes(self.current), 'model': model, 'map': install.map_name(self.current), 'address_indexes': self.address_indexes(), 'old': self._settings().get('old', []),
+                'checked': self._settings().get('checks', {}).get(str(self.current)),   # the last full check of this library (Check now, Repair)
+                **self._cloud_only()}
+
+    def _cloud_only(self):
+        """What of the open library is only in iCloud (#362): {'cloud_only': the count or None, 'cloud_counting': True while a first
+        count runs}. A large library takes a moment, so the count runs in the background and is kept for CLOUD_RECHECK_S; the page
+        asks again only while cloud_counting is True. Other systems cannot tell: None and False, and nothing is started."""
+        if sys.platform != 'darwin':
+            return {'cloud_only': None, 'cloud_counting': False}
+        folder = str(self.current)
+        with self.lock:
+            kept = self.cloud if self.cloud and self.cloud[0] == folder else None
+            if kept and time.time() - kept[1] < CLOUD_RECHECK_S:
+                return {'cloud_only': kept[2], 'cloud_counting': False}
+            if not (self.cloud_thread and self.cloud_thread.is_alive()):
+                def count():
+                    r = hardware.cloud_only(folder)
+                    with self.lock:
+                        self.cloud = (folder, time.time(), r)
+                self.cloud_thread = threading.Thread(target=count, daemon=True)
+                self.cloud_thread.start()
+            return {'cloud_only': kept[2], 'cloud_counting': False} if kept else {'cloud_only': None, 'cloud_counting': True}
 
     def address_indexes(self):
         if not self.current:
@@ -536,7 +584,43 @@ class Setup:
             except OSError:
                 custom = {'path': cm, 'name': Path(cm).name, 'size': None, 'here': False}
         return {'mode': self.mode, 'hardware': hw, 'manifest': self.manifest.public(), 'current': self.current_info(),
-                'found': self.found(), 'recommend': self.recommend(hw), 'job': self.public_job(), 'custom_model': custom}
+                'found': self.found(), 'recommend': self.recommend(hw), 'job': self.public_job(), 'custom_model': custom, 'model_server': self.model_server()}
+
+    # ------------------------------------------------------------------------- a model server on this computer (#78) --
+    def model_server(self):
+        """The server the person chose, as Setup shows it ({'address', 'model'}), or None. Asks the server nothing."""
+        got = saved_model_server(self.settings_dir)
+        return {'address': model_server.shown(got[0]), 'model': got[1]} if got else None
+
+    def server_models(self, address):
+        """The models of the server at the address the person typed: the one request Setup makes to it before a choice."""
+        return model_server.list_models(address)
+
+    def use_server(self, address, model):
+        got = model_server.list_models(address)
+        if got.get('error'):
+            return got
+        if model not in got['models']:
+            return {'code': 'not_listed', 'error': f'The server at {got["address"]} no longer lists {str(model)[:model_server.MAX_ID]}. List its models again.'}
+        self._choose_server(got['base'], model)
+        return {'custom_model': custom, 'model_server': self.model_server()}
+
+    def stop_server(self):
+        self._choose_server(None, None)
+        return {'model_server': None}
+
+    def _choose_server(self, base, model):
+        """Save the choice and switch the open library's assistant as one step, so the last choice to finish wins in both."""
+        with self.choice_lock:
+            with self.lock:
+                s = self._settings()
+                if base:
+                    s['model_server'] = {'base': base, 'model': model}
+                else:
+                    s.pop('model_server', None)
+                self._save_settings(s)
+            if self.on_model_server:
+                self.on_model_server(base, model)
 
     def public_job(self):
         with self.lock:
@@ -557,13 +641,13 @@ class Setup:
             return p.parent if p.name == DATA_NAME else p
         return self.current.parent if self.current else self.default_parent
 
-    def start(self, pack_id=None, ai=False, folder=None, sources=None, explicit=False, repair=False, map_id=None, address_id=None, thin_map=False, copy_to=None):
+    def start(self, pack_id=None, ai=False, folder=None, sources=None, explicit=False, repair=False, map_id=None, address_id=None, thin_map=False, copy_to=None, check=False):
         """thin_map (fork): after unpacking, replace the pack's detailed map (California, the whole US) with the world base map.
         Without a pack, in manage mode: do that to the open library."""
         if copy_to:
             return self._start_copy(copy_to)
-        if repair:
-            return self._start_repair(ai)
+        if repair or check:
+            return self._start_repair(ai, check_only=check)
         with self.lock:
             if self.job and self.job['state'] in ACTIVE + ('paused',):
                 return {'error': 'A download is already under way. Pause or cancel it first.', 'code': 'busy'}
@@ -676,19 +760,26 @@ class Setup:
             self._run()
             return self.public_job()
 
-    def _start_repair(self, ai):
+    def _start_repair(self, ai, check_only=False):
         """Re-check the open library's files (pack-manifest.tsv) and the model's SHA-256. What is wrong is fetched again: the pack is
-        downloaded and switched to as in an upgrade, the model replaced in place. Nothing is downloaded if all is well."""
+        downloaded and switched to as in an upgrade, the model replaced in place. Nothing is downloaded if all is well.
+        check_only (Check now): the same check, and nothing is ever downloaded or changed; the result is kept (current_info 'checked')
+        and the job's 'result' says what is damaged, so the person can choose Repair."""
         with self.lock:
             if self.job and self.job['state'] in ACTIVE + ('paused',):
                 return {'error': 'A download is already under way. Pause or cancel it first.', 'code': 'busy'}
             cur = self.current_info()
             if self.mode != 'manage' or not cur:
-                return {'error': 'There is no library to repair yet.', 'code': 'nothing'}
+                return {'error': 'There is no library to check yet.' if check_only else 'There is no library to repair yet.', 'code': 'nothing'}
             pack = self.manifest.pack(cur['pack']) if cur['pack'] else None
             if not pack or not pack['available']:
-                return {'error': 'Lastbook cannot tell which library this is, so it cannot repair it. Download a library instead.', 'code': 'unavailable'}
-            model = self.manifest.model() if (ai or cur['model']) and cur['model'] != 'custom' else None   # fork: never fetch the published model over the person's own
+                return {'error': f'Lastbook cannot tell which library this is, so it cannot {"check" if check_only else "repair"} it. Download a library instead.', 'code': 'unavailable'}
+            # A model file in models/ is checked (and repaired) whatever its size: current_info() names a model only when its size
+            # already matches, so a model one byte short would otherwise be skipped and the library called clean. A check looks only
+            # at what is installed; a truly absent model stays "not installed".
+            m = self.manifest.model()
+            present = bool(m) and (self.current / 'models' / m['file']).is_file()
+            model = m if (present if check_only else ((ai or present) and cur['model'] != 'custom')) else None   # fork: never fetch the published model over the person's own
             parent, target = self.current.parent, self.current
             work = _work_for(target)
             srcs = {f['name']: f['path'] for f in self.found() if f.get('size_ok') and f['kind'] in ('pack', 'model', 'map')}
@@ -697,12 +788,10 @@ class Setup:
             if model:
                 items.append({'id': model['id'], 'kind': 'model', 'title': model['title'], 'state': 'waiting', 'bytes_done': 0,
                               'bytes_total': model['size'], 'rate_bps': 0, 'eta_s': None, 'error': None})
-            mp = None
-            if _separate_map(target):
-                try:                 # a state map's files come from its own download, not the pack's: the pack check skips them
-                    install.check_map(target)
-                except install.Refused as e:
-                    print('setup: repair:', e.message, flush=True)
+            mp, map_damaged = None, False
+            if _separate_map(target) and not check_only:     # Check now checks the map in its worker, so a resumed check does it again
+                map_damaged = _map_damaged(target, 'repair')
+                if map_damaged:                               # Repair fetches the map again
                     mp = self.manifest.map(cur['map'])
                     if not mp or not mp['available']:
                         return {'error': f'The {cur["map"]} map in this library is damaged, and this version does not offer it to download again. '
@@ -712,13 +801,15 @@ class Setup:
                                          'bytes_total': mp['download_bytes'], 'rate_bps': 0, 'eta_s': None, 'error': None})
             names = [f['name'] for f in pack['files']] + ([model['file']] if model else []) + ([f['name'] for f in mp['files']] if mp else [])
             self.job = {'id': uuid.uuid4().hex[:12], 'state': 'waiting', 'items': items, 'error': None, 'started': _now(), 'folder': str(target),
-                        'repair': True,
+                        'repair': True, 'check': check_only,
                         'plan': {'pack': pack, 'model': model, 'map': mp, 'parent': str(parent), 'target': str(target), 'work': str(work),
-                                 'sources': {k: v for k, v in srcs.items() if k in names}, 'explicit': False, 'retried': {},
-                                 'switch': True, 'repair': True}}
-            s = self._settings()
-            s['work'] = str(work)
-            self._save_settings(s)
+                                 'sources': {} if check_only else {k: v for k, v in srcs.items() if k in names}, 'explicit': False, 'retried': {},
+                                 'switch': not check_only, 'repair': True, 'check_only': check_only}}
+            if not check_only:
+                self.job['plan']['map_damaged'] = map_damaged
+                s = self._settings()      # Check now writes nothing beside the library, and leaves the work folder (and any
+                s['work'] = str(work)     # download resumable there) to the job it belongs to
+                self._save_settings(s)
             _tag_sources(self.job)
             self._save_job()
             self._run()
@@ -956,7 +1047,15 @@ class Setup:
                 self.control.stop('cancelled')
         self._join()
         with self.lock:
-            if job.get('copy') and job['state'] != 'done':   # what is copied stays on the drive: copying there again carries on
+            if job['plan'].get('check_only'):     # a check made nothing: no work folder, download or staged update is its to clear
+                if job['state'] != 'done':
+                    job['state'] = 'failed'
+                    job['error'] = {'code': 'cancelled', 'message': 'Cancelled. Nothing was changed.'}
+                    for it in job['items']:
+                        if it['state'] != 'done':
+                            it['state'] = 'failed'
+                    self._save_job()
+            elif job.get('copy') and job['state'] != 'done':   # what is copied stays on the drive: copying there again carries on
                 part = job['plan'].pop('partial', None)
                 if part:
                     try:
@@ -1060,13 +1159,17 @@ class Setup:
         m = self.manifest.model()
         if m and name == m['file']:
             if p.stat().st_size != m['size']:
-                return {'error': f'That file is {_gb(p.stat().st_size)}, not the {_gb(m["size"])} of the model. The download may not have finished.', 'code': 'size'}
+                return {'error': f'That file is {p.stat().st_size:,} bytes, not the {m["size"]:,} of the model. The download may not have finished.', 'code': 'size'}   # exact: a nearly finished 17 GB download rounds to the same GB
             self.sources[name] = str(p)
             with self.lock:
                 job = self.job
-                if (job and job['state'] == 'failed' and (job['error'] or {}).get('code') == 'network'
+                code = (job['error'] or {}).get('code') if job else None
+                # The same cases setup.js offers Choose AI model file for: a stop as 'unreachable' (also with part of the model
+                # already downloaded, from an earlier try), or a 'network' stop before any byte of it came.
+                if (job and job['state'] == 'failed' and code in ('network', 'unreachable')
                         and (job['plan'].get('model') or {}).get('file') == name
-                        and any(it['kind'] == 'model' and it['state'] == 'failed' and not it['bytes_done'] for it in job['items'])):
+                        and any(it['kind'] == 'model' and it['state'] == 'failed' and (code == 'unreachable' or not it['bytes_done'])
+                                for it in job['items'])):
                     job['plan']['sources'][name] = str(p)
                     job['plan']['verified'] = [n for n in job['plan'].get('verified', []) if n != name]
                     job['plan']['explicit'] = True
@@ -1141,6 +1244,8 @@ class Setup:
             job = self.job
             if not job or job['state'] != 'done':
                 return {'error': 'Setup has not finished yet.', 'code': 'not_done'}
+            if job.get('check'):      # a check changed nothing: there is nothing to restart into
+                return {'error': 'A check changes nothing, so there is nothing to open.', 'code': 'nothing'}
             if job.get('copy'):       # a copy went to a drive: there is no library here to switch to
                 return {'error': 'A copy has no library to open here. It is on the drive.', 'code': 'nothing'}
             plan = job['plan']
@@ -1242,8 +1347,10 @@ class Setup:
         it = None
         try:
             work = Path(plan['work'])
-            if not plan.get('copy'):     # a copy writes only to its drive
+            if not plan.get('copy') and not plan.get('check_only'):     # a copy writes only to its drive, a check nothing at all
                 (work / 'downloads').mkdir(parents=True, exist_ok=True)
+            elif plan.get('check_only') and 'map_damaged' not in plan:   # Check now: a state map against its map-set.json, from the files as they are now
+                plan['map_damaged'] = _separate_map(Path(plan['target'])) and _map_damaged(Path(plan['target']), 'check')
             for it in job['items']:
                 if it['state'] == 'done':
                     continue
@@ -1257,6 +1364,8 @@ class Setup:
                     self._do_addresses(it, plan, work, control)
                 elif it['kind'] == 'thin':
                     self._do_thin(it, plan, work, control)
+                elif plan.get('check_only'):
+                    self._check_model(it, plan, control)
                 else:
                     self._do_model(it, plan, work, control)
                 with self.lock:
@@ -1276,7 +1385,10 @@ class Setup:
         except install.Refused as e:
             self._fail(it, e.code, e.message)
         except OSError as e:
-            if plan.get('copy'):        # the drive, not the internet: a copy downloads nothing
+            if plan.get('check_only'):  # a file it could not read, not the internet: a check downloads nothing
+                traceback.print_exc()
+                self._fail(it, 'check', f'Lastbook could not read one of the files it was checking ({type(e).__name__}: {e.strerror or e}).')
+            elif plan.get('copy'):      # the drive, not the internet: a copy downloads nothing
                 traceback.print_exc()
                 if download.disk_full(e):
                     self._fail(it, 'no_space', 'The drive filled up. What was copied is kept: use a larger drive, or free some space and copy again to the same place.')
@@ -1338,13 +1450,20 @@ class Setup:
                     raise download.Failed('checksum', f'{name} did not match its published checksum twice. The file on the server may be damaged; try again later.')
                 plan['retried'][name] = tries + 1
                 print(f'setup: {name} failed its checksum; downloading it once more', flush=True)
+            except download.Failed as e:
+                if e.code == 'unreachable':       # what the person needs to get the file another way, then choose it (use)
+                    e.extra.update(name=name, size=f['size'], url=f['url'], sha256=f['sha256'])
+                raise
 
     def _do_pack(self, it, plan, work, control):
         pack = plan['pack']
         if plan.get('repair') and 'damaged' not in plan:
             bad = self._check_library(it, Path(plan['target']), control)
             plan['damaged'] = bad
-            print(f'setup: repair found {len(bad)} damaged or missing files', flush=True)
+            print(f'setup: {"check" if plan.get("check_only") else "repair"} found {len(bad)} damaged or missing files', flush=True)
+            if plan.get('check_only'):     # Check now: report, never download
+                plan['switch'] = False
+                return
             if not bad:
                 plan['switch'] = False
                 return
@@ -1466,6 +1585,17 @@ class Setup:
             if ours:
                 os.unlink(path)
 
+    def _check_model(self, it, plan, control):
+        """Check now: the installed model file against its published size and SHA-256, where it is. Nothing is fetched or moved."""
+        m = plan['model']
+        p = Path(plan['target']) / 'models' / m['file']
+        tracker = _Item(it)
+        self._set(it, 'verifying', bytes_done=0, bytes_total=m['size'])
+        ok = p.is_file() and p.stat().st_size == m['size']
+        if ok:
+            ok = _sha256(p, control, lambda d, t: tracker.progress(d, t, 'verifying')) == m['sha256']
+        plan['model_ok'] = ok
+
     def _do_model(self, it, plan, work, control):
         m = plan['model']
         path, ours = self._get_file(it, {'name': m['file'], 'url': m['url'], 'size': m['size'], 'sha256': m['sha256']}, plan, work, control, 0)
@@ -1481,6 +1611,8 @@ class Setup:
             os.replace(tmp, dest)
         plan['model_file'] = str(Path(plan['target']) / 'models' / m['file']) if plan['switch'] else str(dest)
         plan['model_sha256'] = m['sha256']           # what _get_file just matched: the streamed or re-read hash equalled this
+        if plan.get('repair'):
+            plan['model_ok'] = not ours              # Repair downloaded it only if the installed one was damaged or missing
         if not plan['switch'] and self.current:      # the library open now: the AI can use it at once
             self._mark_checked(dest, m['sha256'])
         self._meaning_red(lib, control)
@@ -1522,6 +1654,16 @@ class Setup:
                 install.stage_switch(_pending_file(self.settings_dir), lib, plan['target'], plan.get('model_file'), model_sha256=plan.get('model_sha256'))
             elif plan.get('map_new'):
                 install.stage_switch(_pending_file(self.settings_dir), plan['map_new'], plan['target'], kind='map')
+            if plan.get('repair') and 'damaged' in plan:   # a full check ran (Check now, or Repair's first step): keep when, and what it found
+                map_ok = False if plan.get('map_damaged') else None              # a state map's files are checked against map-set.json (#88)
+                bad = len(plan['damaged']) + (plan.get('model_ok') is False) + (map_ok is False)   # the model and the map count as damaged too
+                result = {'at': _now(), 'damaged': bad, 'model_ok': plan.get('model_ok'), 'map_ok': map_ok,
+                          'repaired': bool(bad) and not plan.get('check_only'),
+                          'pack_replaced': bool(plan['damaged']) and bool(plan.get('switch'))}   # the whole pack again, the old kept aside
+                self.job['result'] = result
+                s = self._settings()
+                s.setdefault('checks', {})[plan['target']] = result
+                self._save_settings(s)
             self.job['state'] = 'done'
             for it in self.job['items']:
                 it['rate_bps'], it['eta_s'] = 0, None
@@ -1557,6 +1699,16 @@ def _merge_json(path, values):
 def _thin_item():
     return {'id': 'base', 'kind': 'thin', 'title': 'Remove the detailed map', 'state': 'waiting', 'bytes_done': 0,
             'bytes_total': 0, 'rate_bps': 0, 'eta_s': None, 'error': None}
+
+
+def _map_damaged(target, what):
+    """True when the library's state map does not match its map-set.json (it came from its own download, not the pack's)."""
+    try:
+        install.check_map(target)
+        return False
+    except install.Refused as e:
+        print(f'setup: {what}:', e.message, flush=True)
+        return True
 
 
 def _tag_sources(job):
@@ -1623,23 +1775,7 @@ def _tree_size(p):
                 pass
     return n
 
-
-def _separate_map(lib):
-    """Does the library hold a map set installed apart from its pack (a state map), rather than the pack's own (All's whole US)?
-    The pack's own set is named by pack.json's `map`, and its map-set.json is listed in pack-manifest.tsv with its other files,
-    so they are checked and fetched with the pack. Ownership never depends on map-set.json's contents being whole: a damaged one
-    of the pack's own then shows up as a damaged pack file."""
-    lib = Path(lib)
-    d = install.map_set(lib)
-    if not d:
-        return False
-    try:
-        own = json.loads((lib / 'pack.json').read_text(encoding='utf-8')).get('map')
-        listed = any(line.split('\t', 1)[0] == 'map-set.json'
-                     for line in (lib / 'pack-manifest.tsv').read_text(encoding='utf-8').splitlines()[1:])
-    except (OSError, ValueError, AttributeError):
-        return True
-    return not (listed and d.get('name') == own)
+_separate_map = install.has_separate_map
 
 
 # ------------------------------------------------------------------------------------------------ startup and the app --
@@ -1717,7 +1853,7 @@ def opened(settings_dir, data, note):
             job = json.loads(_job_file(settings_dir).read_text(encoding='utf-8'))
         except (OSError, ValueError):
             job = None
-        if note or (isinstance(job, dict) and job.get('state') == 'done'):
+        if note or (isinstance(job, dict) and job.get('state') == 'done' and not job.get('check')):   # a check installed nothing
             shutil.rmtree(work, ignore_errors=True)
             s.pop('work', None)
             try:
@@ -1730,6 +1866,26 @@ def opened(settings_dir, data, note):
         install._write_json(settings_dir / 'setup.json', s)
     except OSError:
         pass
+
+
+def saved_model_server(settings_dir):
+    """(base, model) of the model server chosen in Setup, or None: nothing chosen, or a setup.json that no longer holds a loopback address."""
+    try:
+        got = json.loads((Path(settings_dir) / 'setup.json').read_text(encoding='utf-8')).get('model_server')
+        base, model = model_server.loopback_base(got['base']), got['model']
+    except (OSError, ValueError, AttributeError, KeyError, TypeError):
+        return None
+    return (base, model) if isinstance(model, str) and 0 < len(model) <= model_server.MAX_ID else None
+
+
+def follow_model_server(use):
+    """The open library's assistant follows the server chosen in Setup: use(base, model) now with the saved one, and on each
+    new choice. A server named when starting Lastbook (SURVIVAL_MODEL_BASE) wins over the saved one until the person chooses again."""
+    s = SETUP or _default()
+    s.on_model_server = use
+    chosen = saved_model_server(s.settings_dir)
+    if chosen and 'SURVIVAL_MODEL_BASE' not in os.environ:
+        use(*chosen)
 
 
 SETUP = None
@@ -1758,7 +1914,7 @@ def _default():
 ROUTES = {
     ('GET', 'state'): lambda s, b: s.state(),
     ('GET', 'job'): lambda s, b: s.public_job(),
-    ('POST', 'start'): lambda s, b: s.start(b.get('pack'), bool(b.get('ai')), b.get('folder'), repair=bool(b.get('repair')), map_id=b.get('map') or None, address_id=b.get('address_id') or None, thin_map=b.get('thin_map') is True, copy_to=b.get('copy_to') or None),
+    ('POST', 'start'): lambda s, b: s.start(b.get('pack'), bool(b.get('ai')), b.get('folder'), repair=bool(b.get('repair')), map_id=b.get('map') or None, address_id=b.get('address_id') or None, thin_map=b.get('thin_map') is True, copy_to=b.get('copy_to') or None, check=b.get('check') is True),
     ('POST', 'pause'): lambda s, b: s.pause(),
     ('POST', 'resume'): lambda s, b: s.resume(),
     ('POST', 'cancel'): lambda s, b: s.cancel(),
@@ -1769,7 +1925,28 @@ ROUTES = {
     ('POST', 'delete-old'): lambda s, b: s.delete_old(b.get('path')),
     ('POST', 'remove-ai'): lambda s, b: s.remove_ai(),
     ('POST', 'clear-custom'): lambda s, b: s.clear_custom_model(),     # fork: back to the published model file
+    ('POST', 'server-models'): lambda s, b: s.server_models(b.get('address')),
+    ('POST', 'use-server'): lambda s, b: s.use_server(b.get('address'), b.get('model')),
+    ('POST', 'stop-server'): lambda s, b: s.stop_server(),
+    ('GET', 'updates'): lambda s, b: _updates(),
+    ('POST', 'updates'): lambda s, b: _set_update_notice(b.get('notify')),
 }
+
+
+def _updates():
+    """The desktop app exposes this preference in Setup and Settings."""
+    from engine import update
+    n = update.NOTICES
+    return dict(n.notice(), supported=True) if n else {'supported': False, 'notify': False}
+
+
+def _set_update_notice(notify):
+    from engine import update
+    if not isinstance(notify, bool):
+        return {'error': 'notify is true or false.', 'code': 'bad_request'}
+    if update.NOTICES is None:
+        return {'error': 'App updates are set in the desktop app.', 'code': 'unsupported'}
+    return dict(update.NOTICES.set_notify(notify), supported=True)
 
 
 def _send_json(h, obj, status=200):

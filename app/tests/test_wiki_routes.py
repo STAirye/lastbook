@@ -57,7 +57,9 @@ class WikiRoutes(unittest.TestCase):
     self.assertEqual(row['replaced'],row['lastSaved']['href']+'?from=%23%2Fask')
     self.assertEqual(unquote(row['framePath']),'/zim/'+expected)
     tags=Tags();tags.feed(row['card']+row['iframe'])
-    self.assertEqual(set(next(a for n,a in tags.tags if n=='a')),{'class','href','id'})
+    card_attrs=next(a for n,a in tags.tags if n=='a')
+    self.assertEqual(set(card_attrs),{'class','href','id','data-type'})
+    self.assertEqual(card_attrs['data-type'],'wiki')
     self.assertEqual(set(next(a for n,a in tags.tags if n=='iframe')),{'class','id','title','src'})
  def test_malformed_encodings_are_not_silently_reinterpreted(self):
   app=(ROOT/'web/app.js').read_text(encoding='utf-8');parse=app[app.index('function parse()'):app.index('// The sidebar row')]
