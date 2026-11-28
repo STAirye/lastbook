@@ -1,0 +1,1227 @@
+{
+ "code": "before-226802c",
+ "log": [
+  {
+   "step": "build in progress: first search right after start",
+   "files": [
+    "sections-ccd68a388e84.sqlite.12308.18660.tmp"
+   ],
+   "grease fire in a pan": {
+    "seconds": 4.12,
+    "n": 30,
+    "mode": "some words",
+    "top": [
+     {
+      "id": "3c0e90a41f5c85",
+      "title": "Home Builders Guide to Construction in Wildfire Zones FEMA P-754",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 17,
+        "snippet": "Occurrence of Wildland/Urban Interface <mark>Fires</mark> Wildland/urban interface <mark>fires</mark> are a threat across the United States. According to the Na"
+       },
+       {
+        "page": 16,
+        "snippet": " Introduction to <mark>Wildfire</mark> Damage Wildland/Urban Interface <mark>Fire</mark> Hazards A <mark>wildfire</mark> is an uncontrolled <mark>fire</mark> th"
+       },
+       {
+        "page": 143,
+        "snippet": " … and how those characteristics can potentially affect <mark>fire</mark> behavior. The term is applied generally within the context of wildland <mark>fires</ma"
+       }
+      ]
+     },
+     {
+      "id": "2848f4bffb8109",
+      "title": "https://www.ready.gov/sites/default/files/2020-07/how-to-prepare-for-a-wildfire",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 6,
+        "snippet": " … Always have a <mark>fire</mark> extinguisher or hose nearby. -- Learn how you and your family can prevent a <mark>wildfire</mark> by using <mark>fire</mark> "
+       },
+       {
+        "page": 8,
+        "snippet": " … Find out if your community has a Community <mark>Wildfire</mark> Protection Plan or is a <mark>Fire</mark> Adapted Community. Work with others to discuss way"
+       },
+       {
+        "page": 13,
+        "snippet": " … If you would like more information, the following resources RESOURCES may be helpful. -- <mark>Fire</mark> Adapted Community: www.fireadapted.org -- Forests "
+       }
+      ]
+     },
+     {
+      "id": "72f1a6339c20d6",
+      "title": "Implementation Guidelines for Executive Order 13728 – Wildland-Urban Interface Federal Risk Management PDF",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 3,
+        "snippet": " … Forest Service 1 (USFS) and the Department of the Interior (DOI) to suppress the <mark>fires</mark>—a record amount. Over the last decade, the <mark>fire</ma"
+       },
+       {
+        "page": 25,
+        "snippet": " … In an attempt to offer resources for assessing the <mark>wildfire</mark> hazard potential we offer the following tools: • The <mark>Wildfire</mark> Hazard Po"
+       },
+       {
+        "page": 12,
+        "snippet": " … Chapter 6, <mark>Fire</mark> Protection Requirements, establishes the minimum requirements to mitigate the risk of <mark>wildfire</mark>. Whether a building "
+       }
+      ]
+     },
+     {
+      "id": "f06e2abcfd6149",
+      "title": "NWCG Incident Response Pocket Guide (2025)",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 19,
+        "snippet": " Common Denominators of <mark>Fire</mark> Behavior on Tragedy <mark>Fires</mark> There are five major common denominators of <mark>fire</mark> behavior on fatal"
+       },
+       {
+        "page": 66,
+        "snippet": " … Interpretations <mark>Fire</mark> Rate of Flame Behavior Spread Tactical Interpretation Length Class Very low, 0 to 2 Not spreading. Limited &lt;1’ smolderin"
+       },
+       {
+        "page": 53,
+        "snippet": " … Rapidly Changing <mark>Fire</mark> Behavior Indicators • Smoldering <mark>fires</mark> pick up • Trees begin to torch • Firewhirls beginning • Leaning or she"
+       }
+      ]
+     },
+     {
+      "id": "9681a68ebd07f5",
+      "title": "CERT Basic Training Hazard Annexes (2019)",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 36,
+        "snippet": " … Wildfires <mark>Wildfire</mark> Preparedness Some of the strategies for <mark>wildfire</mark> preparedness are the same as for <mark>fires</mark> in the home"
+       },
+       {
+        "page": 33,
+        "snippet": " … Children playing with <mark>fire</mark> account for 25 percent of the <mark>fires</mark> that kill young children in the United States every year. <mark>Fire"
+       },
+       {
+        "page": 37,
+        "snippet": " … If a <mark>wildfire</mark> is approaching your home or business, authorities will never advise you to stay and fight the <mark>fire</mark>. During a <mark>Wi"
+       }
+      ]
+     },
+     {
+      "id": "2cb4103e2a5219",
+      "title": "Outdoor Fire Safety",
+      "kind": "html",
+      "hits": [
+       {
+        "page": null,
+        "snippet": " … from wildland urban interface <mark>fires</mark>. View <mark>wildfire</mark> materials 2 New Apps Can Raise <mark>Wildfire</mark> Risk Awareness in Your Comm"
+       }
+      ]
+     },
+     {
+      "id": "ed5bac0a81b009",
+      "title": "CERT Basic Training Participant Manual (2019)",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 164,
+        "snippet": " … These three elements, called the <mark>fire</mark> triangle, create a chemical exothermic reaction, which is <mark>fire</mark>. Image 6.1: <mark>Fire</mark> "
+       },
+       {
+        "page": 169,
+        "snippet": " … The label contains vital information about the type(s) of <mark>fire</mark> for which the extinguisher is appropriate. Extinguishers appropriate for Class A "
+       },
+       {
+        "page": 162,
+        "snippet": " … Role of CERTs CERTs play a very important role in <mark>fire</mark> and utility safety by supporting the following actions. • Extinguishing small <mark>fires"
+       }
+      ]
+     },
+     {
+      "id": "med-d89ff0a047db2cc5",
+      "title": "Fire",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 4,
+        "snippet": " … electrical, chemical, or <mark>grease</mark> <mark>fires</mark>. Make sure all workers know how to use a <mark>fire</mark> extinguisher. When you use a <mark"
+       },
+       {
+        "page": 8,
+        "snippet": " Prevent <mark>fires</mark> while working at home 217 First aid for burns For any burn, take off clothing and jewelry near the burned skin and put the burned ar"
+       },
+       {
+        "page": 2,
+        "snippet": " … been developed around preventing <mark>fires</mark> more than around any other workplace danger. Even if the authorities in your region will not enforce <mar"
+       }
+      ]
+     }
+    ],
+    "opened": {
+     "id": "2cb4103e2a5219",
+     "doc_sections": null,
+     "page": 1,
+     "pages": 1,
+     "chars": 5254,
+     "text_head": "Outdoor Fire Safety\nOffline library\n· U.S. Fire Administration · Captured 2026-10-26\nOriginal source\nSkip to main content\nAn official website of the United States government\nHere's how you know\nOfficial websites use .gov\nA\n.gov\nwebsite belongs to an official government organization in the United Sta",
+     "seconds": 0.01
+    }
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 27,
+    "mode": "all words",
+    "top": [
+     {
+      "id": "ed5bac0a81b009",
+      "title": "CERT Basic Training Participant Manual (2019)",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 169,
+        "snippet": " … <mark>Fire</mark> Safety and Utility Controls Participant Manual <mark>Fire</mark> Type Extinguishing Agent Extinguishing Method Combustible Metals • Special"
+       },
+       {
+        "page": 168,
+        "snippet": " … <mark>Fire</mark> Extinguishers Portable <mark>fire</mark> extinguishers are invaluable for putting out small <mark>fires</mark>. A well-prepared home should"
+       },
+       {
+        "page": 179,
+        "snippet": " … Common locations in the community can include: • Industrial locations, such as a warehouse, rail yard, or shipyard; • Household locations, including under <m"
+       }
+      ]
+     },
+     {
+      "id": "med-33b8ac20ff0173b2",
+      "title": "Doing factory work at home",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 4,
+        "snippet": " … If a <mark>fire</mark> does start in your home, be prepared to put it out: Eliminate one of the things <mark>fire</mark> needs to burn. <mark>Fires</mark> ne"
+       }
+      ]
+     },
+     {
+      "id": "med-2e83e22162a9a006",
+      "title": "International First Aid Resuscitation and Education Guidelines 2025",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 298,
+        "snippet": " … admitted for burns were due to <mark>kitchen</mark> accidents, mostly of women and girls whose clothes caught <mark>fire</mark> while working in the <mark>ki"
+       },
+       {
+        "page": 46,
+        "snippet": " … It should link to external responders such as <mark>fire</mark> and ambulance services and align with national legal requirements. A comprehensive health ris"
+       }
+      ]
+     },
+     {
+      "id": "255b448d041a65",
+      "title": "Be Prepared, Guide",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 8,
+        "snippet": " Preparing for Emergencies Home <mark>Fire</mark> Safety Before • Install smoke alarms on every level of your home, in every bedroom and sleeping area. Test smo"
+       }
+      ]
+     },
+     {
+      "id": "operations-4dab9dec35465ce6",
+      "title": "Logistics Cluster — Complete Logistics Operational Guide",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 557,
+        "snippet": " … F <mark>Kitchen</mark> Grade (Cooking oil or fat) The only extinguisher type that should be used on <mark>fires</mark> caused by liquid and gaseous fuel are "
+       },
+       {
+        "page": 350,
+        "snippet": " … <mark>Kitchen</mark> Grade (Cooking oil or fat) Electrical <mark>fires</mark> need to be put out by a non-conductive substance, unlike the water or foam foun"
+       },
+       {
+        "page": 190,
+        "snippet": " American European UK Australian/Asian Fuel/Heat Source Class D Class D Class D Class D Combustible metals Class K Class F Class F Class F <mark>Kitchen</mark> "
+       }
+      ]
+     },
+     {
+      "id": "5cd0b4e41cc479",
+      "title": "Earthquake Safety at Home",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 22,
+        "snippet": "The following are low-cost tasks to reduce your risk: • Install child-proof latches to <mark>kitchen</mark> cabinets above • Secure or restrain hot water heater"
+       }
+      ]
+     },
+     {
+      "id": "med-541208f58c311d73",
+      "title": "Living well with epilepsy",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 27,
+        "snippet": " … Pay attention to <mark>fire</mark> and burn safety. Avoid cooking on open <mark>fires</mark>. On a hot stove, turn handles of pots and pans to the side when "
+       }
+      ]
+     },
+     {
+      "id": "69e8e98c48259c32",
+      "title": "UNICEF School-in-a-Box Education Kit Handbook - English (pdf, 2 MB)",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 94,
+        "snippet": " … case of a <mark>fire</mark>? • \u0007As soon as they hear the <mark>fire</mark> drill, walk to the nearest exit without rushing or pushing other children <mark>Fi"
+       }
+      ]
+     }
+    ],
+    "opened": {
+     "id": "50c7998ebce227",
+     "doc_sections": 14,
+     "page": 3,
+     "pages": 14,
+     "chars": 4689,
+     "text_head": "Heirlooms is a tough one. It’s not practical to carry lots of stuff because there’s a good chance you’ll be strapped for time/weight/space already even excluding the “nice to haves”. A few pictures or a small token is likely the baseline, and if it’s a situation where you have some time to pack the ",
+     "seconds": 0.0
+    }
+   },
+   "lathe chuck": {
+    "seconds": 0.04,
+    "n": 17,
+    "mode": "all words",
+    "top": [
+     {
+      "id": "equipment-696f68fb3fa34682",
+      "title": "Grizzly G0765 Benchtop Metal Lathe Owner Manual",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 14,
+        "snippet": " … Never attempt to If the workpiece is too large to safely clamp with slow or stop the <mark>lathe</mark> <mark>chuck</mark> by hand, and always the <mark>chuc"
+       },
+       {
+        "page": 27,
+        "snippet": " … 1 To install the <mark>chuck</mark>: 1. DISCONNECT <mark>LATHE</mark> FROM POWER! 2. Use an appropriate device to protect ways dur- Lock Washer ing installat"
+       },
+       {
+        "page": 26,
+        "snippet": " <mark>Chuck</mark> &amp; Faceplate Installation &amp; Mounting Removal Device This <mark>lathe</mark> is equipped with an intrinsic backplate Place a piece of "
+       }
+      ]
+     },
+     {
+      "id": "manual-5d1d395895895f3c",
+      "title": "South Bend SB1007 Heavy10 Gearhead Lathe Owner’s Manual",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 15,
+        "snippet": " … If the workpiece is too large to to slow or stop the <mark>lathe</mark> <mark>chuck</mark> by hand, safely clamp with the <mark>chuck</mark>, use a faceplate"
+       },
+       {
+        "page": 31,
+        "snippet": " … A dropped <mark>chuck</mark> can cause amputation, serious crushing injuries, or property damage. To install <mark>chuck</mark>: Always use a lifting, suppor"
+       },
+       {
+        "page": 32,
+        "snippet": " … Verify that <mark>chuck</mark> fits spindle properly by <mark>chuck</mark> seats evenly against spindle. checking for any gaps between mating surfaces. 6. Wh"
+       }
+      ]
+     },
+     {
+      "id": "eng-72bf443f33aa0fbf",
+      "title": "Opticalman 3 and 2",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 206,
+        "snippet": " … the <mark>chuck</mark> wrench is turned. This <mark>chuck</mark> is easier and faster to operate than the four-jaw type, but The four-jaw independent <mark>l"
+       },
+       {
+        "page": 216,
+        "snippet": " … Always use a block of wood to cover <mark>LATHE</mark> OPERATION the ways when installing or removing a <mark>chuck</mark>. If a <mark>chuck</mark> is to be "
+       },
+       {
+        "page": 217,
+        "snippet": " … Never operate a <mark>lathe</mark> until you remove the <mark>chuck</mark> wrench.) Be sure the end of the stock is resting on the face of the <mark>chuck</m"
+       }
+      ]
+     },
+     {
+      "id": "eng-ed1d4ef069fdb4d0",
+      "title": "Machinist - TC 9-524",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 133,
+        "snippet": "TC 9-524 When removing chucks from the <mark>lathe</mark>, always use a wooden not run true because of poor bearing surfaces. A correctly <mark>chuck</mark> blo"
+       },
+       {
+        "page": 221,
+        "snippet": " … The work may be held in the <mark>lathe</mark> <mark>chuck</mark> or Stock held in the <mark>lathe</mark> <mark>chuck</mark> or between centers can be betwee"
+       },
+       {
+        "page": 172,
+        "snippet": " TC 9-524 The work will rotate when tapping using <mark>lathe</mark> power. Use a The workpiece is mounted in a <mark>chuck</mark> at the headstock very slow sp"
+       }
+      ]
+     },
+     {
+      "id": "eng-bf541a1af196373d",
+      "title": "Machinery Repairman",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 139,
+        "snippet": " 28.306 Figure 6-24.—Drill <mark>chuck</mark>. Figure 6-23.—Rubber flex collet <mark>chuck</mark>. <mark>LATHE</mark> CENTERS Drill chucks are used to hold cent"
+       },
+       {
+        "page": 153,
+        "snippet": " … FOUR-JAW INDEPENDENT <mark>CHUCK</mark>.— Figure 6-51 shows a rough casting mounted in a four-jaw independent <mark>lathe</mark> <mark>chuck</mark> on the sp"
+       },
+       {
+        "page": 99,
+        "snippet": " … Mount the floating <mark>chuck</mark> in the <mark>lathe</mark> tailstock 1. Place the work to be drilled in the <mark>lathe</mark> <mark>chuck</mark>. spind"
+       }
+      ]
+     },
+     {
+      "id": "eng-cc45c31a68f597a7",
+      "title": "Utilitiesman Basic - pumps compressors and plumbing",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 292,
+        "snippet": " … If this condition does not exist, the valve must be reseated in a <mark>lathe</mark> and the inside flange bored true. Before placing the <mark>chuck</mark> "
+       }
+      ]
+     },
+     {
+      "id": "chain-7f81daaaacca23e8",
+      "title": "Treadle Lathe - Author Supplement",
+      "kind": "pdf",
+      "hits": [
+       {
+        "page": 10,
+        "snippet": " Make Your Own Treadle <mark>Lathe</mark> -- Source Links -- (Links verified: March 3, 2020) Sources of <mark>Lathe</mark> Components If you follow my current r"
+       }
+      ]
+     },
+     {
+      "id": "mfg-616438dc1cf505ac",
+      "title": "The Lathe and Its Uses",
+      "kind": "html",
+      "hits": [
+       {
+        "page": 32,
+        "snippet": " … in the <mark>lathe</mark>, may also be thus seized, and one portion faced up and rounded so as to allow of being fixed on a face <mark>chuck</mark> by glue …"
+       },
+       {
+        "page": 9,
+        "snippet": " … The die <mark>chuck</mark> ( Fig. 27 ) is accurately self-centering, and although somewhat expensive, is a valuable addition to the <mark>lathe</mark>. This "
+       },
+       {
+        "page": 117,
+        "snippet": " … The whole of the preceding patterns were executed by the wood being chucked in the <mark>lathe</mark> in the usual ordinary way without any particular <mark>"
+       }
+      ]
+     }
+    ],
+    "opened": {
+     "id": "mfg-616438dc1cf505ac",
+     "doc_sections": 122,
+     "page": 32,
+     "pages": 122,
+     "chars": 4986,
+     "text_head": "Bergeron, speaking of the barrel stave chucks already alluded to, prefers the encircling rings plain and not screwed. He gives the following reason:—\"If a piece of work entered in such a chuck does not run quite truly, a tap on the ring in the proper place will, by closing the sawgates more in that ",
+     "seconds": 0.0
+    }
+   },
+   "t": 4.2
+  },
+  {
+   "step": "damaged: long/section tables readable",
+   "long_rows": 351
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.03,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 0.0
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 2.1
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 4.1
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 6.2
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 8.2
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 10.2
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 12.2
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 14.2
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 16.3
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 18.3
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 20.3
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 22.3
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 24.4
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.03,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 26.4
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 28.5
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 30.5
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 32.5
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 34.5
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 36.6
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 38.6
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 40.6
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 42.6
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 44.7
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 46.7
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 48.7
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 50.7
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 52.8
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.03,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 54.8
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 56.8
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.03,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.01,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 58.9
+  },
+  {
+   "step": "damaged cache: search after restart",
+   "files": [
+    "sections-ccd68a388e84.sqlite"
+   ],
+   "grease fire in a pan": {
+    "seconds": 0.02,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "kitchen fires": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "lathe chuck": {
+    "seconds": 0.0,
+    "n": 0,
+    "mode": "all words",
+    "top": []
+   },
+   "t": 60.9
+  }
+ ]
+}
