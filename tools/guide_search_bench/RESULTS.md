@@ -1,6 +1,49 @@
-# Results (rerun 2026-11-24, main 4cb8a20, with #455 in arm B)
+# Results
 
-The command in `README.md`. Arms: A = main; B = main + #322, #326, #327, #328, #330, #331, #332, #335, #338, #339,
+## Rerun 2026-11-27, main 51658f5 (after #322, #326, #327, #330, #331, #332, #335, #430, #432, #455 merged)
+
+```
+python3 -B tools/guide_search_bench/bench.py --units --out bench.json A=origin/main B=origin/main+328+338+339 \
+  C=origin/main@web/words.js D=origin/main+328+338+339@web/words.js \
+  A347=origin/main+347 C347=origin/main+347@web/words.js
+```
+
+Arms: A = main; B = main + the guide PRs still open (#328, #338, #339; all clean); C = main + this branch's
+`web/words.js` (main's `web/words.js` has not changed since 4cb8a20, so the rule applies as it is); D = B + C; A347
+and C347 = main + #347's tests, without and with the rule.
+
+| set | A | B | C | D | C vs A (A only : C only) | D vs B |
+|---|---|---|---|---|---|---|
+| #430's 17 false matches | 11 | 12 | 12 | 13 | 0 : 1, p = 1 | 0 : 1, p = 1 |
+| other #333 / #432 searches (24) | 13 | 13 | 16 | 16 | 0 : 3, p = 0.25 | 0 : 3, p = 0.25 |
+| held-out traps (67) | 21 | 21 | 25 | 25 | 1 : 5, p = 0.22 (clustered 0.375) | 1 : 5, p = 0.22 |
+| held-out useful prefixes (59) | 49 | 49 | 49 | 49 | no change | no change |
+
+- **#430's rows.** The merged guide PRs fix 11 of 17. The rule adds `war` only, and #328 adds `want to die`.
+  Still wrong in every arm: `ear infection`, `head lice`, `bat in house` and `car stuck in snow`. Under the rule,
+  `head lice` and `bat in house` leave their unrelated guide, but not for a right one.
+- **Other searches.** The rule adds `ear pain`, `bat` and `mold after flood`.
+- **Held-out traps.** The rule fixes `ear bleeding`, `war zone`, `civil war`, `loo roll` and `the loo is blocked`,
+  and loses `pot plants` (now the wild-plants choice). The same gain holds on top of B.
+- **Controls.** Main's test assertions that fail under the rule:
+  - `volcanic ash` and `fires after an earthquake`: real losses, unchanged.
+  - `generator gas can storage` and `bleeding won't stop after a chainsaw accident`: pinned emergency baselines
+    move, unchanged.
+  - `ice pack`: new. Main now pins it to the suspicious-package choice ("pack" starts "package"); the rule gives the
+    packing choice. Both are wrong by reference.json (sprain or heat illness), so it is not counted as a loss.
+  - B and D also fail `test_context_never_holds_a_life_threat` on #328's context entry `live`; B's own suite passes.
+- **#347's tests.** They pass on main. Under the rule, all 11 of its useful prefix searches hold (`cook`, `warm`,
+  `dry`, `air con`, `car battery` …). Its known-misses check fails for 6 of the 7 listed searches: `want to die`,
+  `ear infection`, `ear pain`, `head lice`, `bat in house` and `war` no longer open the unrelated choice. That is the
+  change the list is meant to flag, but only `war` lands on a right answer. `out of diapers` does not move.
+
+So on current main the rule's case is the held-out traps (5 : 1) and `war`, against the same two control losses.
+A narrower revision would need to keep those gains, fix `volcanic ash` and `fires after an earthquake`, and leave
+`ice pack` as main pins it.
+
+## Rerun 2026-11-24, main 4cb8a20, with #455 in arm B
+
+The command in `README.md` at that commit. Arms: A = main; B = main + #322, #326, #327, #328, #330, #331, #332, #335, #338, #339,
 #432, #455 (all clean); C = main + this branch's `web/words.js`; D = B + C. Count = searches whose first result is
 right. p = exact McNemar on the discordant pairs (in brackets: clustered by short word, exact).
 

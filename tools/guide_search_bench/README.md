@@ -13,10 +13,13 @@ From the repository root, with `origin` pointing at Immortal-Protocols/lastbook 
 git fetch origin main
 python3 -B tools/guide_search_bench/bench.py --units --out bench.json \
   A=origin/main \
-  B=origin/main+322+326+327+328+330+331+332+335+338+339+432+455 \
+  B=origin/main+328+338+339 \
   C=origin/main@web/words.js \
-  D=origin/main+322+326+327+328+330+331+332+335+338+339+432+455@web/words.js
+  D=origin/main+328+338+339@web/words.js
 ```
+
+On main 4cb8a20, arm B was `+322+326+327+328+330+331+332+335+338+339+432+455`. Most of those are merged now, so
+B lists only the guide PRs still open. `RESULTS.md` has both runs.
 
 - `A` is main.
 - `B` is main with the listed guide PRs merged in that order, in a temporary worktree. Every merge must be clean.
