@@ -1,0 +1,39 @@
+{
+ "system": {
+  "os": "Windows 10",
+  "machine": "AMD64",
+  "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "logical_cores": 16,
+  "python": "3.14.10",
+  "onnxruntime": "onnxruntime-gpu 1.32.0",
+  "offered": [
+   "TensorrtExecutionProvider",
+   "CUDAExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "gpu": "RTX 3080 Ti",
+  "passages": 2000,
+  "index_passages": 338910,
+  "batch": 48
+ },
+ "layers": [
+  {
+   "layer": "cpu",
+   "provider": "CPUExecutionProvider",
+   "passages_per_s": 21.7,
+   "model_step_estimate_min": 260.6
+  },
+  {
+   "layer": "cuda",
+   "provider": "CUDAExecutionProvider",
+   "passages_per_s": 712.2,
+   "model_step_estimate_min": 7.9,
+   "cos_min": 0.9999997615814209,
+   "cos_p1": 0.9999998211860657,
+   "cos_median": 0.9999999403953552,
+   "max_abs_diff": 0.00012791156768798828,
+   "nearest_same": 0.9915,
+   "top10_overlap": 0.999
+  }
+ ]
+}

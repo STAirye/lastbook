@@ -1,0 +1,26 @@
+{
+ "system": {
+  "os": "Windows 10",
+  "machine": "AMD64",
+  "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "logical_cores": 16,
+  "python": "3.14.10",
+  "onnxruntime": "onnxruntime 1.32.0",
+  "offered": [
+   "AzureExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "gpu": "RTX 3080 Ti",
+  "passages": 2000,
+  "index_passages": 338910,
+  "batch": 48
+ },
+ "layers": [
+  {
+   "layer": "cpu",
+   "provider": "CPUExecutionProvider",
+   "passages_per_s": 21.8,
+   "model_step_estimate_min": 258.7
+  }
+ ]
+}

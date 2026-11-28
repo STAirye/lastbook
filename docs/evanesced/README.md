@@ -190,3 +190,42 @@ Not archived: the `.deb` (31 MB), `bin-linux/` (the runner build), `pr6.tar`, `m
 (a clean clone of `D:\git\lastbook`, `D:\git\lastbook\derived\linux-build`, a scratch folder) set by a `docker run` command
 that was not saved; `inside*.sh` strip CRs with `sed` and need the meaning-red GGUF from `derived/models/meaning-red`.
 `derived/` is git-ignored in the repo.
+
+### `gpu-index-build-510/` (upstream PR Immortal-Protocols/lastbook#510, 2026-11-25 to 2026-11-27)
+
+The GPU build of the meaning index: `python retrieval.py` tries CUDA (onnxruntime-gpu), then DirectML
+(onnxruntime-directml), then the CPU, and `tools/embed_bench.py` measures the layers on any computer. This is upstream
+work, not a fork change, so it has no FORK.md section; the code is on branch `gpu/index-builder` (commits da435ea,
+b972946, c6aeaf0, 9dcd6ae). **Archived while #510 was still open** (asked for on 2026-11-27, to keep the scripts safe),
+not after it closed as rule 1 says. The CPU-vs-GPU timed full builds and the 3,258-question comparison came earlier, from
+PR 1's evaluation (`tools/search_eval/baseline-files.md` upstream), not from this batch.
+
+| File | What it did | Output |
+|---|---|---|
+| `smoke.py` | 480 passages through `retrieval.Embedder` with CUDA and with `LASTBOOK_EMBED_DEVICE=cpu`: 730 vs 24 passages/s, lowest cosine 0.99999976; also against the stored index vectors | printed |
+| `smoke_nopreload.py` | the same without calling `preload_dlls()` itself, to show the branch's own preload finds the CUDA libraries: 715 vs 26 passages/s | printed |
+| `vk.py` | 3,000 passages (every 112th active chunk) with onnxruntime CPU/CUDA or the runner's `--embed` mode (CPU or Vulkan): the 20 / 629 / 25–32 / 188 passages/s table | `v_<mode>.npy`, `ids.npy` (not archived) |
+| `cmpvk.py` | cosines of those vectors against onnxruntime CPU, 10-nearest overlap, runner vs `tokenizers` token counts on 400 passages | printed |
+| `dml.py` | the same 3,000 passages with DirectML (batch 16/48/128): 242 / 320 / 356 passages/s, lowest cosine 0.9999998 | `v_dml<batch>.npy` (not archived) |
+| `RESULTS-directml.md` | the DirectML write-up | |
+| `bench/*.json` | `tools/embed_bench.py` runs: `global` (CPU only), `cuda`, `dml` (the PR's three-layer table), `cuda2` (first whole-build estimate, rest 72.6 min), `cuda3` + `cuda3.txt` (after the immutable fix; rest 68.5 min, whole build CUDA 76 min against 65 timed) | |
+| `bench/before.txt`, `after.txt` | the index folder listed before and after `cuda3`: identical, so the tool wrote nothing. **Changed on archiving:** the file owner (the Windows user name) is replaced with `<user>` | |
+| `prs/gpu-builder.md` | the PR text as drafted (title on line 1); `prs/pr510-body.md` is the body as last posted (with the checklist); `prs/gpu-builder.v1-cuda-only.md` the CUDA-only version before DirectML | |
+
+Found on the way, and recorded in `.claude/drafts/TODO.md`: no test or check of a built meaning index exists upstream;
+packs never ship the index (no model ships, so the vectors could not be used); the runner layer (Vulkan on Linux,
+Metal on a Mac) is parked until someone with that hardware can test it.
+
+Traps:
+- The scripts use absolute paths: the branch at `D:\git\lastbook-pr\gpu-builder`, the data folder
+  `D:\LastbookData-main-index` (read only), onnxruntime-gpu installed with `pip --target` into
+  `D:\git\lastbook\.claude\drafts\prs\eval-pr1-main\ortgpu`, and the runner and q8_0 GGUF under `D:\git\lastbook\derived\`.
+  `smoke*.py` also put a nonexistent `D:\git\lastbook-pr\eval-pr1-ortgpu` on the path (harmless).
+- `smoke*.py`, `vk.py` and `dml.py` need `LASTBOOK_DATA` set to the data folder, or `retrieval` finds no model.
+- `vk.py` and `cmpvk.py` call `retrieval.Embedder(gpu=True)` and `preload_dlls()` as the branch was on 2026-11-25; the
+  runner binary they used predates the final #407 (its `ready` message has no pooling or dimension).
+- The first `embed_bench.py` runs (`global`, `cuda`, `dml`, `cuda2`) opened the index with `mode=ro`, which on a WAL
+  database created and touched `semantic.sqlite-wal` and `-shm` in the read-only data folder (the listings show them).
+  They held no data and were deleted on 2026-11-27 after `quick_check` passed; the tool now reads with `immutable=1`.
+- Not archived: the `.npy` vectors (37 MB), `ortdml/` (onnxruntime-directml, 72 MB) and the `ortgpu/` wheels. They stay
+  in `D:\git\lastbook\.claude\drafts\gpu-builder\` and `...\prs\eval-pr1-main\`; the scripts regenerate the vectors.

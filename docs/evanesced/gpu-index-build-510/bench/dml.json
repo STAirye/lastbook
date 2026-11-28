@@ -1,0 +1,38 @@
+{
+ "system": {
+  "os": "Windows 10",
+  "machine": "AMD64",
+  "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "logical_cores": 16,
+  "python": "3.14.10",
+  "onnxruntime": "onnxruntime-directml 1.24.4",
+  "offered": [
+   "DmlExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "gpu": "RTX 3080 Ti",
+  "passages": 2000,
+  "index_passages": 338910,
+  "batch": 48
+ },
+ "layers": [
+  {
+   "layer": "cpu",
+   "provider": "CPUExecutionProvider",
+   "passages_per_s": 21.1,
+   "model_step_estimate_min": 267.4
+  },
+  {
+   "layer": "directml",
+   "provider": "DmlExecutionProvider",
+   "passages_per_s": 281.1,
+   "model_step_estimate_min": 20.1,
+   "cos_min": 0.9999997615814209,
+   "cos_p1": 0.9999998807907104,
+   "cos_median": 1.0,
+   "max_abs_diff": 2.980232238769531e-07,
+   "nearest_same": 0.995,
+   "top10_overlap": 0.9999
+  }
+ ]
+}

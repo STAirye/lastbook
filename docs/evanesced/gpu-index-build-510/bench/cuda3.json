@@ -1,0 +1,51 @@
+{
+ "system": {
+  "os": "Windows 10",
+  "machine": "AMD64",
+  "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "logical_cores": 16,
+  "python": "3.14.10",
+  "onnxruntime": "onnxruntime-gpu 1.32.0",
+  "offered": [
+   "TensorrtExecutionProvider",
+   "CUDAExecutionProvider",
+   "CPUExecutionProvider"
+  ],
+  "gpu": "RTX 3080 Ti",
+  "passages": 2000,
+  "index_passages": 338910,
+  "batch": 48
+ },
+ "rest_of_build": {
+  "documents_sampled": 300,
+  "documents": 8548,
+  "passages_sampled": 9188,
+  "unreadable_sampled": 0,
+  "seconds": 111.4,
+  "ms_per_passage": 12.121,
+  "estimate_min": 68.5
+ },
+ "layers": [
+  {
+   "layer": "cpu",
+   "provider": "CPUExecutionProvider",
+   "passages_per_s": 21.6,
+   "model_step_estimate_min": 261.9,
+   "build_estimate_min": 330.4
+  },
+  {
+   "layer": "cuda",
+   "provider": "CUDAExecutionProvider",
+   "passages_per_s": 749.7,
+   "model_step_estimate_min": 7.5,
+   "build_estimate_min": 76.0,
+   "cos_min": 0.9999997615814209,
+   "cos_p1": 0.9999998211860657,
+   "cos_median": 0.9999999403953552,
+   "max_abs_diff": 0.00012791156768798828,
+   "nearest_same": 0.9915,
+   "top10_overlap": 0.999
+  }
+ ],
+ "note": "Estimates are rough: checked against timed builds on one computer only, they were off by up to a third. A timed build next to these numbers is the most useful report."
+}
